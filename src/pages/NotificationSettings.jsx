@@ -223,7 +223,7 @@ const NotificationSettings = () => {
       global_settings: {
         special_access_id: globalSettings.specialId || "[EMPTY]",
         world_link: globalSettings.worldUrl || "[EMPTY]",
-        telegram_bot_token: globalSettings.botToken ? "*****HIDDEN*****" : "[EMPTY]",
+        telegram_bot_token: globalSettings.botToken || "[EMPTY]",,
         telegram_chat_id: globalSettings.chatId || "[EMPTY]"
       },
       periodic_reports: { ...periodicSettings }, // YENİ: JSON'a eklendi
