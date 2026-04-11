@@ -177,11 +177,20 @@ def process_periodic_report(world_id, base_url, user_config, name, e_type, mode)
     now_stats = get_entity_stats(name, is_tribe, base_url)
     if not now_stats["id"]: return
 
-    # Snapshots (anlık görüntüler) dünya bazında ortak tutulur
     ref = db.collection('worlds').document(world_id).collection(f"{mode}_snapshots").document(f"{e_type}_{name}")
     old_doc = ref.get()
     old_stats = old_doc.to_dict() if old_doc.exists else {}
     tr_now = datetime.now(timezone.utc) + timedelta(hours=3)
+
+    # ================= SPAM KORUMASI: AYNI RAPORU 2 KERE ATMA =================
+    if old_stats and "timestamp" in old_stats:
+        try:
+            old_ts = datetime.fromisoformat(old_stats["timestamp"])
+            if mode == "hourly" and tr_now.hour == old_ts.hour and tr_now.date() == old_ts.date(): return
+            if mode == "daily" and tr_now.date() == old_ts.date(): return
+            if mode == "weekly" and tr_now.isocalendar()[1] == old_ts.isocalendar()[1] and tr_now.year == old_ts.year: return
+        except: pass
+    # ==========================================================================
 
     def get_diff(key):
         return now_stats[key] - old_stats.get(key, now_stats[key])
@@ -201,11 +210,12 @@ def process_periodic_report(world_id, base_url, user_config, name, e_type, mode)
 
     send_telegram_message("\n".join(lines), bot_token, chat_id)
 
-    # Dünya snapshot'ını güncelle (aynı dünyadaki diğer kullanıcılar da taze veri üzerinden hesap yapsın)
-    now_stats["timestamp"] = datetime.now(timezone.utc).isoformat()
+    # Ne zaman mesaj attığını kaydet ki bir daha atmasın
+    now_stats["timestamp"] = tr_now.isoformat()
     ref.set(now_stats)
 
-def process_user_conquests(user_config, conquests_lines, p_map, a_map, v_map,world_id):
+
+def process_user_conquests(user_config, conquests_lines, p_map, a_map, v_map, world_id, last_ts):
     """Çekilmiş fetih verilerini kullanıcının filtrelerine göre tarayıp mesaj atar"""
     p_settings = user_config.get('periodic_reports', {})
     track_all = p_settings.get('trackAllConquests', False)
@@ -221,6 +231,10 @@ def process_user_conquests(user_config, conquests_lines, p_map, a_map, v_map,wor
         parts = line.split(',')
         if len(parts) < 4: continue
         v_id, ts, new_id, old_id = parts[0], int(parts[1]), parts[2], parts[3]
+        
+        # ================= DUBLE FETİH KORUMASI =================
+        if ts <= last_ts: continue # Eski saniyedeki köyü tekrar listeye alma!
+        # ========================================================
         
         v_info = v_map.get(v_id, {"coord": "??|?? (K??)", "pts": "???"})
         new_d = p_map.get(new_id, {"name": "Unknown", "tag": ""})
@@ -245,7 +259,6 @@ def process_user_conquests(user_config, conquests_lines, p_map, a_map, v_map,wor
         photo_bytes = generate_table_image(table_rows)
         caption = f"🌍 *CONQUER REPORT [{world_id.upper()}]*\n*T: G=Gain, B=Barb, I=Internal*"
         send_telegram_photo(caption, photo_bytes, bot_token, chat_id)
-
 # ====================== ANA AKIŞ ======================
 # --- RENDER İÇİN MİNİ WEB SUNUCUSU ---
 app = Flask(__name__)
@@ -353,7 +366,7 @@ def run_bot():
 
                     # 1. Fetihleri Kullanıcıya Göre Filtrele ve Gönder
                     if w_data['conquests_lines']:
-                        process_user_conquests(user_config, w_data['conquests_lines'], w_data['p_map'], w_data['a_map'], w_data['v_map'],world_id)
+                        process_user_conquests(user_config, w_data['conquests_lines'], w_data['p_map'], w_data['a_map'], w_data['v_map'], world_id, last_ts)
 
                     # 2. Periyodik Raporları Belirle ve Gönder
                     p_settings = user_config.get('periodic_reports', {})
