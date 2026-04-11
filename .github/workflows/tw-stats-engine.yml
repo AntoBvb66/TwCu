@@ -8,10 +8,7 @@ on:
 jobs:
   run-engine:
     runs-on: ubuntu-latest
-    env:
-      # Node.js uyarısını susturmak ve 24 sürümünü kullanmak için
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
+    
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -24,12 +21,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Pillow ve Firebase için gerekli paketler
           pip install requests firebase-admin Pillow 
 
       - name: Run Stats Engine
         env:
           FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python twcu_reports.py
