@@ -1,0 +1,952 @@
+{
+  "menu": {
+    "title": "TW Cobre",
+    "stats": "Statistici Live",
+    "visitsTitle": "Vizitatori Totali",
+    "mapsTitle": "Hărți Generate",
+    "opsTitle": "Operațiuni Planificate",
+    "simsTitle": "Simulări Rulate",
+    "visits": "Vizite",
+    "maps": "Hărți",
+    "developer": "Dezvoltator",
+    "items": {
+      "buildingTimes": "Calculator Timpuri Construcții",
+      "mapAnalysis": "Analiză Continent & Hartă",
+      "mapGenerator": "Generator Hartă",
+      "productionData": "Calculator Producție",
+      "coinMinter": "Planificator Monede de Aur",
+      "buildingPlanner": "Planificator Construcții (Coada)",
+      "unitCalculator": "Calculator Producție Trupe",
+      "churchPlanner": "Planificator Biserică",
+      "opPlanner": "Planificator Operațiuni Individuale",
+      "clanOp": "Planificator Operațiuni Trib",
+      "clanTroop": "Planificator Operațiuni Trib (Avansat)",
+      "fastSupport": "Planificator Sprijin Rapid",
+      "scavengingPlanner": "Calculator Timpuri Jaf"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Bine ai venit la TW Cobre",
+      "subtitle": "Victoria este ascunsă în detalii și planificare impecabilă. Economisește timp în călătoria ta Tribal Wars și concepe strategii care vor duce tribul tău la victorie. Alege un instrument pentru a începe."
+    },
+    "tools": {
+      "opPlanner": {
+        "title": "Planificator Operațiuni Personal",
+        "desc": "Potrivește satele sursă și țintă pentru a pregăti un șablon de operațiune perfect (BBCode)."
+      },
+      "buildingPlanner": {
+        "title": "Planificator Construcții",
+        "desc": "Proiectează planul de construcții al satului tău pas cu pas cu simulare avansată a cozii."
+      },
+      "unitCalculator": {
+        "title": "Calculator Producție Trupe",
+        "desc": "Calculează timpii de producție ai unităților pentru Han, Ecurie și Atelier, inclusiv bonusurile."
+      },
+      "mapGenerator": {
+        "title": "Generator Hartă",
+        "desc": "Generează hărți dinamice colorate și actualizate ale lumii pentru forumurile clanului."
+      },
+      "mapAnalysis": {
+        "title": "Analiză Continent",
+        "desc": "Analizează dominațiile continentale ale clanurilor și jucătorilor pe harta lumii."
+      },
+      "productionData": {
+        "title": "Calculator Producție",
+        "desc": "Optimizează ratele de producție ale minelor, capacitățile de depozitare și timpii de umplere."
+      },
+      "coinMinter": {
+        "title": "Planificator Monede de Aur",
+        "desc": "Calculează cel mai ideal sat pentru a bate monede de aur."
+      },
+      "churchPlanner": {
+        "title": "Planificator Biserică",
+        "desc": "Optimizează zonele de acoperire ale bisericilor pe hartă cu un algoritm care economisește populație."
+      },
+      "buildingTimes": {
+        "title": "Calculator Timpuri Construcții",
+        "desc": "Calculează și compară timpii de construcție ai clădirilor la diferite niveluri, până la secundă."
+      },
+      "clanOp": {
+        "title": "Planificator Operațiuni Trib",
+        "desc": "Analizează toate satele clanului și fă alocări inteligente. Distribuie ordine personalizate BBCode membrilor cu informații pe hartă."
+      },
+      "clanTroop": {
+        "title": "Planificator Operațiuni Trib (Cu Trupe)",
+        "desc": "Analizează toate trupele clanului și fă alocări inteligente. Distribuie ordine personalizate BBCode membrilor cu informații pe hartă."
+      },
+      "fastSupport": {
+        "title": "Găsitor Sprijin Rapid",
+        "desc": "Creează o cerere de sprijin pentru a primi suport rapid."
+      },
+      "scavengingPlanner": {
+        "title": "Calculator Timpuri Jaf",
+        "desc": "Compară timpii de jaf în detaliu."
+      }
+    }
+  },
+  "footer": {
+    "text1": "Instrumente Avansate de Planificare pentru Tribal Wars",
+    "text2": "© 2026 TW Cobre | Dezvoltator: ",
+    "links": {
+      "about": "Despre",
+      "privacy": "Confidențialitate & GDPR"
+    }
+  },
+  "aboutPage": {
+    "title": "Despre",
+    "p1": "Salut, sunt Anto Bvb 66.",
+    "p2": "TW Cobre este un panou tactic de elită și un centru de comandă dezvoltat independent pentru a procesa date brute de la jucătorii Clans (Tribal Wars) și pentru a-i ajuta să obțină superioritate strategică.",
+    "p3": "De la planificarea operațiunilor până la analiza de curățare, toate modulele sunt proiectate pentru a rezolva calcule care ar dura unui jucător ore în secunde. Victoria este ascunsă în detalii!"
+  ,"contactTitle": "Raportare Erori și Contact",
+    "contactDesc": "Îmi puteți trimite direct prin e-mail erorile, omisiunile sau sugestiile de dezvoltare pe care le întâlniți pe site-ul nostru.",
+    "emailButton": "Trimite e-mail"},
+  "privacyPage": {
+    "title": "Politica de Confidențialitate și KVKK",
+    "p1": "TW Cobre respectă confidențialitatea utilizatorilor la cel mai înalt nivel. În conformitate cu legile de protecție a datelor (GDPR) și standardele internaționale, politica noastră de procesare a datelor este următoarea:",
+    "items": {
+      "i1": "Securitate Cont: TW Cobre NU solicită, stochează sau găzduiește parola contului tău Tribal Wars, e-mailul sau informații personale de sesiune pe serverele sale.",
+      "i2": "Stocare Locală: Setările tale (viteza lumii, numărul trupelor, coordonatele satelor etc.) sunt stocate doar în browserul propriului dispozitiv (Stocare Locală / Stocare de Sesiune) astfel încât să nu se piardă când reîncarci pagina.",
+      "i3": "Preluare Date Externe: Modulele de hartă și analiză procesează date generale ale lumii furnizate public de Tribal Wars în timp real. Această operațiune are loc o dată pe oră. În conformitate cu regulile jocului, aceste date conțin doar informații generale despre sate și jucători și nu includ datele tale personale.",
+      "i4": "Statistici: Contoarele de vizitatori și generare hartă de pe site-ul nostru sunt doar date numerice; nu sunt asociate cu adresa ta IP sau identitatea ta."
+    },
+    "p2": "Prin utilizarea TW Cobre, ești de acord că datele tale sunt procesate în siguranță pe dispozitivul tău și că confidențialitatea ta este protejată."
+  },
+  "buildingPlanner": {
+    "title": "🏗️ Planificator Clădiri TW (Simulare Coada)",
+    "worldSpeed": "Viteza Lumii:",
+    "mineSpeed": "Factor Producție Resurse:",
+    "btn": {
+      "import": "📥 Încarcă Coada de Construcții",
+      "export": "📤 Exportă Coada de Construcții",
+      "clear": "🗑️ Golire",
+      "addQueue": "Încarcă",
+      "copyBoard": "Copiază în Clipboard",
+      "close": "Închide",
+      "delete": "Șterge"
+    },
+    "modal": {
+      "importTitle": "📥 LiPește Coada de Construcții Copiată din Joc",
+      "exportTitle": "📤 Rezultatul Cozii Tale (Poți copia)",
+      "importPlaceholder": "Sediu +1 (Nivel 1)\n10 puncte\n...",
+      "success": "✅ Succes! {{count}} clădiri adăugate în coadă.",
+      "error": "❌ Nu s-a găsit un șablon valid. Verifică textul copiat.",
+      "copied": "Copiat!",
+      "exportPrefix": "Coada de construcții",
+      "levelLabel": "Nivel",
+      "pointsLabel": "Puncte"
+    },
+    "levelsTitle": "🏠 Nivelurile Inițiale ale Clădirilor (Ascunde / Afișează)",
+    "analysis": {
+      "title": "⏳ Analiză Cozi și Timpuri de Așteptare (Afișează/Ascunde)",
+      "withWait": "⏳ Timp cu așteptare resurse:",
+      "withoutWait": "⚡ Timp fără așteptare resurse:",
+      "bottleneckTitle": "🚨 Etape unde coada încetinește:",
+      "wood": "Lemn",
+      "clay": "Argilă",
+      "iron": "Fier",
+      "order": "Ordine",
+      "level": "Nivel",
+      "waitingFor": "Așteaptă",
+      "waitingSuffix": "resurse.",
+      "missing": "Cantități lipsă",
+      "perfect": "🎉 Grozav! Nu există timp de așteptare pentru resurse în această coadă. Construcțiile vor continua neîntrerupt."
+    },
+    "summary": {
+      "title": "Sumar Coada (Clic pe Clădiri pentru a Adăuga)",
+      "max": "La Nivel Maxim",
+      "add": "Adaugă în Coada"
+    },
+    "columnsToggle": "👁️ Ascunde / Afișează Coloanele Tabelului",
+    "columns": {
+      "order": "Ordine",
+      "expectedWait": "Așteptare Estimată",
+      "building": "Clădire",
+      "level": "Nivel",
+      "buildTime": "Timp Construcție",
+      "startTime": "Timp Început",
+      "endTime": "Timp Final",
+      "points": "Puncte",
+      "cost": "Cost (Lemn/Argilă/Fier)",
+      "resWait": "Timp Așteptare Resurse",
+      "currentStorage": "Depozitare Curentă",
+      "hourlyProd": "Producție Orară",
+      "pop": "Populație",
+      "storage": "Depozit",
+      "desc": "Descriere",
+      "action": "Acțiune"
+    },
+    "status": {
+      "storageFull": "∞ (Depozit Plin)",
+      "storageLimit": "Depozit Insuficient!",
+      "requirement": "Cerere",
+      "waitingRes": "Aștept pentru resurse.",
+      "farmLimit": "Fermă Insuficientă!",
+      "maxLevel": "Nivel Maxim!"
+    },
+    "fastAdd": {
+      "placeholder": "Tastează sau selectează...",
+      "modeActive": "Mod Tastatură Activ:",
+      "info": "Poți adăuga rapid tastând numele clădirii și apăsând Enter.",
+      "dragTitle": "Trage pentru a schimba ordinea"
+    },
+    "daysShort": "z",
+    "buildings": {
+      "hq": "Sediu",
+      "barracks": "Han",
+      "stable": "Ecurie",
+      "workshop": "Atelier",
+      "first_church": "Prima Biserică",
+      "church": "Biserică",
+      "watchtower": "Turn de Veghe",
+      "academy": "Academie",
+      "smithy": "Fierărie",
+      "rally": "Punct de Adunare",
+      "statue": "Statuie",
+      "market": "Piață",
+      "wood": "Tabără Lemn",
+      "clay": "Carieră Argilă",
+      "iron": "Mină Fier",
+      "farm": "Fermă",
+      "ware": "Depozit",
+      "hiding": "Ascunzătoare",
+      "wall": "Zid"
+    }
+  },
+  "buildingTimes": {
+    "title": "⏱️ Comparare Timpuri Construcții",
+    "worldSpeed": "Viteza Lumii:",
+    "panel1": "Plan A (Referință)",
+    "panel2": "Plan B (Comparare)",
+    "hqLevel": "Nivel Sediu:",
+    "buildingToUpgrade": "Clădire de Upgradat:",
+    "currentLevel": "Nivel Curent:",
+    "targetLevel": "Nivel Țintă:",
+    "totalTime": "Timp Total:",
+    "comparisonResult": "⚡ Rezultat Comparare:",
+    "panel2Faster": "Planul B va termina cu {{time}} mai repede decât Planul A!",
+    "panel1Faster": "Planul A va termina cu {{time}} mai repede decât Planul B!",
+    "tableTitle": "📊 Tabel Timpuri Niveluri Toate Clădirile",
+    "tableHqLevel": "Nivel Sediu în Tabel:",
+    "level": "Nivel",
+    "dragTitle": "Trage pentru a schimba poziția",
+    "tip": "Sfat: Poți trage și plasa anteturile (de ex. 'Han') stânga sau dreapta pentru a schimba ordinea coloanelor.",
+    "time": {
+      "day": "z",
+      "hour": "ore",
+      "minute": "min",
+      "second": "sec",
+      "zero": "0 sec"
+    },
+    "buildings": [
+      "Sediu (HQ)",
+      "Han",
+      "Ecurie",
+      "Atelier",
+      "Prima Biserică",
+      "Biserică",
+      "Turn de Veghe",
+      "Academie",
+      "Fierărie",
+      "Punct de Adunare",
+      "Statuie",
+      "Piață",
+      "Tabără Lemn",
+      "Carieră Argilă",
+      "Mină Fier",
+      "Fermă",
+      "Depozit",
+      "Ascunzătoare",
+      "Nobil",
+      "Monedă de Aur",
+      "Zid"
+    ]
+  },
+  "scavenging": {
+    "title": "Calculator Jaf",
+    "settings": {
+      "title": "🌍 Setări Lume și Producție",
+      "worldSpeed": "Viteza Lumii:",
+      "mineSpeed": "Factor Producție Resurse:",
+      "woodLevel": "Nivel Tabără Lemn:",
+      "clayLevel": "Nivel Carieră Argilă:",
+      "ironLevel": "Nivel Mină Fier:",
+      "worldConstant": "Constantă Lume:",
+      "resHourly": "Producție Resurse:"
+    },
+    "production": {
+      "perMin": "/ min",
+      "perHour": "/ ora",
+      "perDay": "/ zi"
+    },
+    "troops": {
+      "title": "⚔️ Număr Trupe și Steag",
+      "carryFlag": "Steag Capacitate Transport (%):",
+      "resFlag": "Steag Producție Resurse (%):",
+      "totalCap": "Capacitate Jaf (Fără Steag):",
+      "totalCapFlag": "Capacitate Totală (Steag Transport):",
+      "totalRes": "Producție Resurse (Fără Steag):",
+      "totalResFlag": "Producție Resurse (Steag Resurse):"
+    },
+    "results": {
+      "title": "🏆 Clasament Strategii Cele Mai Profitabile",
+      "chartTitle": "📊 Grafic Comparare Strategii (Top 10)",
+      "totalDaily": "Total Zilnic",
+      "scavenge": "Jaf",
+      "resource": "Producție",
+      "perMin": "min",
+      "perHour": "oră",
+      "perDay": "zi",
+      "maxTrip": "Timpul Călătoriei Cea Mai Lungă",
+      "dayShort": "/zi",
+      "hourShort": "/h",
+      "minShort": "/m",
+      "modes": {
+        "eqTime": "Timp Egal",
+        "eqCap": "Capacitate Egală"
+      },
+      "flags": {
+        "none": "Fără Steag",
+        "carry": "Steag Transport",
+        "res": "Steag Resurse"
+      },
+      "options": {
+        "c1234": "1-2-3-4 Deblocat",
+        "c123": "1-2-3 Deblocat",
+        "c234": "2-3-4 Deblocat",
+        "c12": "1-2 Deblocat",
+        "c23": "2-3 Deblocat"
+      }
+    },
+    "reference": {
+      "title": "📈 Prag de Rentabilitate (Tabel Referință Capacitate)",
+      "info": "Nu au fost introduse trupe. Tabelul de mai jos arată lootul zilnic estimat pentru strategiile Timp Egal vs Capacitate Egală la diferite nivele de capacitate (presupunând că 1-2-3-4 este deblocat).",
+      "cap": "Capacitate Exemplu",
+      "eqTimeDaily": "Timp Egal (Zilnic)",
+      "eqCapDaily": "Capacitate Egală (Zilnic)",
+      "winner": "Tactică Avantajoasă"
+    },
+    "chart": {
+      "title": "📈 Curba Lootului Zilnic după Capacitate (Timp Egal & Fără Steag)",
+      "worldConstantInfo": "Generat pe baza Constantei Lumii ({{constant}}).",
+      "unlocked": "Deblocat",
+      "infoTitle": "💡 Puncte Critice de Cotitură (Rentabilitate)",
+      "be1": "🔸 După capacitatea {{cap}}: tactica 1-2-3-4 depășește 2-3-4 și devine mai profitabilă.",
+      "be2": "🔸 După capacitatea {{cap}}: tactica 1-2-3 depășește 2-3."
+    }
+  },
+  "churchPlanner": {
+    "title": "⛪ Planificator Biserică Optim",
+    "dataInput": "Introducere Date",
+    "allVillagesCoords": "Toate Coordonatele Satelor Tale:",
+    "villagesPlaceholder": "510|621, 510|622 (Extrage și din text)",
+    "existingChurchesLabel": "Biserici Existente (Opțional):",
+    "existingChurchesPlaceholder": "ex: 506|496 3 (X|Y Nivel)",
+    "includeFirstChurch": "Include Prima Biserică?",
+    "calculateBtn": "⚙️ Calculează Plan Optim",
+    "alertNoVillage": "Te rugăm să introduci cel puțin o coordonată de sat!",
+    "resultsTitle": "Rezultate ({{count}} Biserici)",
+    "existing": "Existente",
+    "firstChurch": "Prima Biserică",
+    "normalChurch": "Biserică Normală",
+    "lvl": "Nivel",
+    "coversVillages": "Sate Acoperite",
+    "warningUncovered": "⚠️ Atenție: {{count}} sate rămân neprotejate.",
+    "coveredVillage": "Sat Acoperit",
+    "uncoveredVillage": "Sat Neprotejat"
+  },
+  "clanOp": {
+    "title": "🛡️ Planificator Operațiuni Trib",
+    "step1": {
+      "title": "1. Găsește Satele Tribului Tău",
+      "clearAll": "🧹 Șterge Toate Datele",
+      "worldUrl": "URL Lume",
+      "clanTag": "Tag Trib",
+      "runIntel": "Găsește Sate",
+      "status": {
+        "gathering": "Colectez informații: Scanare jucători și sate din lume...",
+        "notFound": "❌ Tribul nu a fost găsit! Verifică tagul.",
+        "success": "✅ Succes! ID Trib: {{clanId}} | Membri: {{memberCount}} | Total Sate: {{villageCount}}",
+        "error": "❌ Eroare: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Sate Țintă",
+      "snobLimit": "Limită Distanță Nobil:",
+      "placeholder": "Lipește coordonatele țintă aici...",
+      "foundTargets": "Ținte Găsite: {{count}}"
+    },
+    "step3": {
+      "title": "3. Centru Atribuire Inteligentă & Hartă",
+      "arrivalTime": "Timp Sosire Țintă:",
+      "targetsTitle": "Țintele Tale (Clic pentru a Selecta)",
+      "points": "Puncte",
+      "p": "P",
+      "distance": "Distanță:"
+    },
+    "manualAssign": {
+      "title": "👤 Alocare Liberă Jucător",
+      "selectPlayer": "-- Selectează Jucător --",
+      "assignBtn": "Atribuie",
+      "info": "*Adaugă doar o sarcină cu un timp de sosire la ținta selectată de mai sus. Satele jucătorului vor apărea și ele în albastru pe hartă."
+    },
+    "tabs": {
+      "closest10": "Cele Mai Apropiate 10 Sate",
+      "furthest10": "Cele Mai Îndepărtate 10 Sate",
+      "selectPlayer": "Selectează Jucător"
+    },
+    "suggestions": {
+      "noVillages": "Nu există sate de afișat.",
+      "kami": "Trimite Nuke",
+      "snob": "Trimite Nobil",
+      "fake": "Trimite Fake",
+      "show": "Arată",
+      "hide": "Ascunde"
+    },
+    "queue": {
+      "title": "Coada Operațiunilor ({{count}} Ordine)",
+      "clear": "Șterge Toată Coada",
+      "delete": "Șterge",
+      "enemy": "Inamic (Țintă)"
+    },
+    "bbcode": {
+      "title": "📋 Șablon BBCode pentru Notepad",
+      "copyAll": "Copiază Tot",
+      "selectCols": "Selectează Coloane:",
+      "ordersFor": "--- ORDINE PENTRU {{player}} ---",
+      "attack": "Atac",
+      "viewTarget": "Vezi Ținta",
+      "unknown": "NECUNOSCUT"
+    },
+    "alerts": {
+      "confirmClear": "Toate planurile, țintele și satele ascunse (cu excepția informațiilor din Pasul 1 despre Lume/Trib) vor fi șterse. Ești sigur?",
+      "cleared": "🧹 Toate datele au fost șterse!",
+      "enterTribeTag": "Te rugăm să introduci Tagul Tribului!",
+      "selectTarget": "Te rugăm să selectezi o țintă.",
+      "selectTargetLeft": "Te rugăm să selectezi o țintă din stânga.",
+      "selectPlayer": "Te rugăm să selectezi un jucător din listă.",
+      "snobLimitExceeded": "⚠️ Atenție: distanța selectată ({{dist}}) depășește limita ta de nobili ({{limit}})!",
+      "orderAdded": "✅ Ordine Adăugată!",
+      "manualAdded": "✅ Alocare Liberă Adăugată!",
+      "confirmClearQueue": "Ești sigur că vrei să ștergi întreaga coadă?",
+      "queueCleared": "🗑️ Coada a fost ștearsă!",
+      "copied": "Copiat!"
+    },
+    "columns": {
+      "no": "Nr",
+      "player": "Jucător",
+      "source": "Sursă",
+      "target": "Țintă",
+      "departure": "Timp Plecare",
+      "arrival": "Timp Sosire",
+      "unit": "Unitate",
+      "distance": "Distanță",
+      "travelTime": "Timp Călătorie",
+      "attackLink": "Link Acțiune"
+    },
+    "units": {
+      "spear": "Lancier",
+      "sword": "Spadasin",
+      "axe": "Luptător cu Topor",
+      "spy": "Spion",
+      "light": "Cavalerie Ușoară",
+      "heavy": "Cavalerie Greu",
+      "ram": "Berbec",
+      "catapult": "Catapultă",
+      "knight": "Paladin",
+      "snob": "Nobil",
+      "archer": "Arcaș",
+      "marcher": "Călăreț",
+      "militia": "Militie"
+    },
+    "shortUnits": {
+      "ram": "Nuke",
+      "snob": "Nobil",
+      "catapult": "Fake",
+      "spy": "Spion"
+    }
+  },
+  "clanTroop": {
+    "title": "🦅 Planificator Operațiuni Trib (Avansat)",
+    "step1": {
+      "title": "1. Găsește Satele Tribului Tău",
+      "clear": "🧹 Șterge Datele",
+      "worldUrl": "URL Lume",
+      "clanTag": "Tag Trib",
+      "run": "Găsește Sate",
+      "gathering": "Colectez informații...",
+      "notFound": "❌ Tribul nu a fost găsit!",
+      "success": "✅ Succes! ID Trib: {{clanId}} | Total Sate: {{villageCount}}",
+      "error": "❌ Eroare: {{msg}}"
+    },
+    "step2": {
+      "title": "2. Sate Țintă",
+      "snobLimit": "Limită Distanță Nobil:",
+      "placeholder": "Lipește coordonatele țintă aici..."
+    },
+    "stepTroop": {
+      "title": "🛡️ Introdu Datele Trupelor (Copiere/Lipire)",
+      "placeholder": "Lipește datele trupelor din privire generală (tabel) sau format CSV (475|494,48,0,0...)...",
+      "detected": "Informații Detectate: {{count}} Sate",
+      "summaryTitle": "📊 Rezumate Profil Jucător",
+      "idle": " (Inactiv: {{count}})",
+      "depleted": " (Epuizat)"
+    },
+    "step3": {
+      "title": "📍 Centru Atribuire Inteligentă & Hartă",
+      "arrivalTime": "Timp Sosire Țintă:",
+      "targetsTitle": "Țintele Tale (Clic pentru a Selecta)",
+      "distance": "Distanță:"
+    },
+    "tabs": {
+      "closest": "Cele Mai Apropiate 10 sate",
+      "furthest": "Cele Mai Îndepărtate 10 sate",
+      "player": "Selectează Jucător",
+      "selectPlayer": "-- Selectează Jucător --"
+    },
+    "suggestions": {
+      "noVillages": "Nu s-au găsit sate.",
+      "kami": "Trimite Nuke",
+      "snob": "Trimite Nobil",
+      "fake": "Trimite Fake",
+      "show": "Arată",
+      "hide": "Ascunde",
+      "noIntel": " (Fără Informații)"
+    },
+    "queue": {
+      "title": "Coada Operațiunilor ({{count}} Ordine)",
+      "clear": "Șterge Toată Coada",
+      "delete": "Șterge"
+    },
+    "bbcode": {
+      "title": "📋 Șablon BBCode pentru Notepad",
+      "copyAll": "Copiază Tot",
+      "ordersFor": "--- ORDINE PENTRU {{player}} ---",
+      "attack": "Atac",
+      "unknown": "NECUNOSCUT"
+    },
+    "alerts": {
+      "confirmClear": "Toate planurile inclusiv informațiile vor fi șterse. Ești sigur?",
+      "cleared": "🧹 Datele au fost șterse!",
+      "enterTribeTag": "Te rugăm să introduci Tagul Tribului!",
+      "selectTarget": "Te rugăm să selectezi o țintă.",
+      "snobLimitExceeded": "⚠️ Atenție: Limita de nobil ({{limit}}) a fost depășită! Să adaugi oricum?",
+      "orderAdded": "✅ Ordine Adăugată!",
+      "confirmClearQueue": "Ești sigur că vrei să ștergi întreaga coadă?",
+      "queueCleared": "🗑️ Coada a fost ștearsă!",
+      "copied": "Copiat!"
+    },
+    "columns": {
+      "no": "Nr",
+      "player": "Jucător",
+      "source": "Sursă",
+      "target": "Țintă",
+      "departure": "Plecare",
+      "arrival": "Sosire",
+      "unit": "Unitate",
+      "distance": "Distanță",
+      "travelTime": "Călătorie",
+      "attackLink": "Acțiune"
+    },
+    "units": {
+      "spear": "Lancier",
+      "sword": "Sabie",
+      "axe": "Topor",
+      "spy": "Spion",
+      "light": "Ușor",
+      "heavy": "Greu",
+      "ram": "Berbec",
+      "catapult": "Catapultă",
+      "knight": "Paladin",
+      "snob": "Nobil"
+    },
+    "profiles": {
+      "quarter": "Un sfert",
+      "half": "Jumătate",
+      "threeQuarters": "3 Sferturi",
+      "full": "Plin",
+      "kami": "Nuke",
+      "sav": "Def",
+      "empty": "Nou/Vid"
+    }
+  },
+  "coinMinter": {
+    "title": "💰 Planificator Monede de Aur (Hub)",
+    "dataInput": "Introducere Date",
+    "allVillagesCoords": "Toate Coordonatele Satelor Tale:",
+    "villagesPlaceholder": "510|621, 510|622 (Extrage și din text)",
+    "hubCountLabel": "Câte Sate Hub?",
+    "calculateBtn": "⚙️ Găsește cele Mai Bune Huburi",
+    "resultsTitle": "🎯 Huburi Planificate ({{count}})",
+    "hubCardHeader": "Hub:",
+    "hubCardSub": "Va primi resurse de la {{count}} sate",
+    "hubCardBody": "Sate care trimit resurse:",
+    "onlySelf": "Doar el...",
+    "mapInfoTitle": "Info Hartă:",
+    "mapInfoCenter": "Punct Mare Alb:",
+    "mapInfoCenterDesc": "Sate Hub (Bătut Monede)",
+    "mapInfoSender": "Puncte Colorate:",
+    "mapInfoSenderDesc": "Sate care trimit resurse",
+    "mapInfoLines": "Linii:",
+    "mapInfoLinesDesc": "Direcția Fluxului de Resurse",
+    "alerts": {
+      "noVillage": "Te rugăm să introduci cel puțin o coordonată de sat!",
+      "invalidHubCount": "Numărul de huburi nu poate depăși numărul de sate și trebuie să fie mai mare decât 0."
+    }
+  },
+  "fastSupport": {
+    "title": "🛡️ Centru Planificare Sprijin Rapid",
+    "step1": {
+      "title": "1. Găsește Satele Tribului Tău",
+      "worldUrl": "URL Lume",
+      "clanTag": "Tag Trib",
+      "updateBtn": "Actualizează Satele",
+      "status": {
+        "scanning": "Scanare sate trib...",
+        "notFound": "❌ Tribul nu a fost găsit! Verifică abreviația.",
+        "success": "✅ Succes! Total Sate de Sprijin: {{count}}",
+        "error": "❌ Eroare: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Ținta de Apărat & Timp",
+      "targetCoord": "Coordonată Țintă",
+      "targetPlaceholder": "ex: 564|554",
+      "arrivalTime": "Timp Sosire Țintă",
+      "slowestUnit": "Viteza Cea Mai Lentă a Unității"
+    },
+    "results": {
+      "title": "Sprijinuri Disponibile ({{count}})",
+      "allTribe": "Întreg Tribul",
+      "noVillages": "Nu s-au găsit sate care să poată ajunge la această țintă la timpul selectat!",
+      "mapTarget": "🛡️ Țintă"
+    },
+    "bbcode": {
+      "title": "📋 Apel Forum (BBCode)",
+      "copyAll": "Copiază Tot",
+      "target": "🎯 Țintă:",
+      "arrivalTime": "⏱️ Timp Sosire:",
+      "unitSpeed": "🛡️ Viteza Unității:",
+      "sendSupport": "Trimite Sprijin",
+      "supportLink": "🛡️ Trimite Sprijin"
+    },
+    "alerts": {
+      "enterTribeTag": "Te rugăm să introduci Tagul Tribului!",
+      "copied": "Copiat!"
+    },
+    "columns": {
+      "player": "Jucător",
+      "source": "Sursă",
+      "distance": "Distanță",
+      "time": "Timp",
+      "departure": "Timp Plecare"
+    },
+    "units": {
+      "spear": "Lancier",
+      "sword": "Sabie",
+      "archer": "Arcaș",
+      "spy": "Spion",
+      "heavy": "Greu",
+      "catapult": "Catapultă",
+      "knight": "Paladin"
+    }
+  },
+  "mapAnalysis": {
+    "title": "Analiză Continent & Hartă",
+    "bypassActive": "🕵️ Bypass Activ",
+    "bypassAlertOn": "🕵️ MOD SECRET ACTIV: timpul de așteptare de 1 oră ocolit! Date noi vor fi preluate de fiecare dată.",
+    "bypassAlertOff": "🔒 MOD SECRET INACTIV: protecție cache de 1 oră activată.",
+    "enterWorldUrl": "Te rugăm să introduci un URL al lumii!",
+    "fetchError": "Eroare la preluarea datelor. Asigură-te că linkul este corect.\nEroare: {{error}}",
+    "clearConfirm": "Toate datele, arhivele și istoricul teleportărilor vor fi șterse. Ești sigur?",
+    "status": {
+      "waiting": "Aștept datele...",
+      "cached": "Încărcat din cache! (Ultimele date: {{time}})",
+      "downloading": "Descărc date de pe server... (Poate dura 10-15 secunde)",
+      "analyzing": "Descărcare completă, se analizează...",
+      "empty": "Nu s-au găsit date de procesat!",
+      "success": "SUCCES: {{villages}} sate, {{players}} jucători încărcați.",
+      "cleared": "Stocarea a fost complet ștearsă."
+    },
+    "timeMsg": {
+      "cached": "⏳ Afișez date din cache. Ultima preluare: {{time}}",
+      "new": "⏳ Date noi preluate. Aștept următoarea preluare pentru a detecta teleportările...",
+      "diff": "Interval de timp: au trecut {{hours}} ore și {{mins}} minute de la analiza precedentă."
+    },
+    "sections": {
+      "autoFetch": "1. Preluare automată date (Recomandat)",
+      "worldUrlLabel": "URL Lume (ex: https://en136.tribalwars.net):",
+      "downloadBtn": "🌍 Descarcă și Procesează Datele",
+      "archive": "2. Arhiva de Date",
+      "selectArchive": "-- Selectează Arhiva --",
+      "loadBtn": "📂 Încarcă",
+      "saveBtn": "💾 Arhivează Ceva",
+      "manual": "3. Introducere Manuală Date (Dacă apare Eroare)",
+      "processManualBtn": "⚙️ Procesează Date Manuale",
+      "clearStorageBtn": "🗑️ Resetează Stocarea"
+    },
+    "teleports": {
+      "title": "🚀 Detecții Teleport ({{count}})",
+      "showAllBtn": "🗺️ Arată Toate pe Hartă",
+      "continentTitle": "Teleportări către Continentul {{cont}} ({{count}} jucători)",
+      "old": "Veche:",
+      "new": "Nou:",
+      "showBtn": "📍 Arată",
+      "none": "Nu s-au detectat teleportări sau a doua preluare nu a fost încă făcută.",
+      "info": "* Sistemul colectează date la prima analiză. În analizele ulterioare, detectează satele care și-au schimbat coordonatele și continuă să le listeze istoric până sunt șterse.",
+      "datePrefix": "🗓️"
+    },
+    "analysis": {
+      "title": "🌍 Analiză Continent",
+      "player": "Jucător:",
+      "barbarian": "Barbar:",
+      "villages": "sate",
+      "noTribe": "Fără Trib",
+      "farmRatio": "🎯 Barbari per Jucător:"
+    },
+    "map": {
+      "title": "Vizualizare Hartă",
+      "gray": "Gri:",
+      "oldPos": "Poziție Veche",
+      "red": "Roșu:",
+      "newPos": "Poziție Nouă",
+      "closeBtn": "Închide"
+    },
+    "barbarian": "Barbar"
+  },
+  "opPlanner": {
+    "title": "⚔️ Planificator Operațiuni Individuale",
+    "step1": {
+      "title": "1. Conexiune Date",
+      "clearData": "Șterge Toate Datele",
+      "worldUrl": "URL Lume:",
+      "playerName": "Numele Tău de Jucător:",
+      "fetchBtn": "Preia / Reîmprospătează Date"
+    },
+    "step2": {
+      "title": "2. Satele Tale Sursă & Selectare Unități ({{count}})",
+      "info": "Poți selecta toate unitățile care vor fi trimise din sat. Motorul de potrivire se alimentează de aici.",
+      "village": "Sat",
+      "unitSelection": "Selectare Unități (Pot fi selectate mai multe)"
+    },
+    "step3": {
+      "title": "3. Sate Țintă",
+      "maxSnobDist": "Limită Maximă Distanță Nobil:",
+      "placeholder": "Lipește coordonatele țintă aici (de ex. 586|441, 587|442 în text este OK)",
+      "detectedTargets": "Ținte Detectate: {{count}}",
+      "mapLegend": {
+        "target": "Țintă",
+        "spearLight": "Lancier/Ușor",
+        "ramKami": "Berbec/Nuke",
+        "snob": "Nobil",
+        "spy": "Spion"
+      }
+    },
+    "step4": {
+      "title": "4. Motor Planificare & Potrivire Timp",
+      "modeArrival": "Știu Timpul Sosirii Țintei",
+      "modeDeparture": "Știu Timpul Plecării Sătului",
+      "dateTime": "Data & Ora:",
+      "sourceVillage": "Sat Sursă:",
+      "allSourcesUsed": "Toate Sursele Folosite",
+      "unitToSend": "Unitate de Trim",
+      "selectSourceFirst": "Selectează mai întâi Sursa",
+      "noUnitsLeft": "Nu Mai Sunt Unități",
+      "target": "Țintă:",
+      "calcAndAddBtn": "➕ CALCULEAZĂ ȘI ADAUGĂ"
+    },
+    "queue": {
+      "title": "Coada Operațiunilor ({{count}} Ordine)",
+      "clearQueue": "Șterge Întreaga Coadă",
+      "delete": "Șterge"
+    },
+    "bbcode": {
+      "title": "📋 Șablon BBCode pentru Notepad",
+      "copyAll": "Copiază Tot",
+      "selectCols": "Selectează Coloane:",
+      "attack": "Atac",
+      "unknown": "NECUNOSCUT"
+    },
+    "status": {
+      "cached": "Date încărcate din cache. (Apasă butonul de 13 ori pentru reîmprospătare forțată)",
+      "fetching": "Se preiau date de pe server... Te rugăm așteaptă.",
+      "playerNotFound": "Jucătorul nu a fost găsit! Asigură-te că ai tastat corect numele.",
+      "success": "Succes! Jucător găsit și {{count}} sate listate.",
+      "error": "Eroare: {{msg}}"
+    },
+    "alerts": {
+      "enterWorldUrl": "Te rugăm să introduci un URL al lumii!",
+      "enterPlayerName": "Te rugăm să introduci numele tău de jucător!",
+      "confirmClear": "Toate planurile, sursele și țintele (cu excepția Pasului 1) vor fi șterse. Ești sigur?",
+      "selectMatch": "Te rugăm să selectezi Sursa, Ținta și Unitatea pentru potrivire.",
+      "snobLimitExceeded": "⚠️ Atenție: distanța selectată ({{dist}} unități) depășește limita maximă pentru nobil ({{limit}})!",
+      "confirmClearQueue": "Ești sigur că vrei să ștergi întreaga coadă?",
+      "copied": "Copiat!"
+    },
+    "columns": {
+      "no": "Nr",
+      "source": "Sat Sursă",
+      "target": "Țintă",
+      "departure": "Timp Plecare",
+      "arrival": "Timp Sosire",
+      "unit": "Unitate",
+      "distance": "Distanță",
+      "travelTime": "Timp Călătorie",
+      "attackLink": "Link Acțiune"
+    },
+    "units": {
+      "spear": "Lancier",
+      "sword": "Spadasin",
+      "axe": "Luptător cu Topor",
+      "spy": "Spion",
+      "light": "Cavalerie Ușoară",
+      "heavy": "Cavalerie Greu",
+      "ram": "Berbec",
+      "catapult": "Catapultă",
+      "knight": "Paladin",
+      "snob": "Nobil"
+    }
+  },
+  "productionData": {
+    "title": "Planificator Producție",
+    "worldSpeed": "Viteza Lumii:",
+    "mineSpeed": "Factor Producție Resurse:",
+    "totalFactor": "Multiplicator Total: {{speed}}x",
+    "empireProdTitle": "👑 Producție Totală ({{count}} Sate)",
+    "hourlyProd": "⏳ Producție Orară Totală",
+    "dailyProd": "📅 Producție Zilnică Totală",
+    "resources": {
+      "wood": "Lemn:",
+      "clay": "Argilă:",
+      "iron": "Fier:"
+    },
+    "villageManagement": "Gestionarea Satelor",
+    "resetBtn": "Resetare",
+    "newVillageBtn": "+ Sat Nou",
+    "villageNamePrefix": "Sat",
+    "bonus": {
+      "label": "Bonus:",
+      "none": "Niciunul",
+      "all": "Toate Resursele",
+      "wood": "Doar Lemn",
+      "clay": "Doar Argilă",
+      "iron": "Doar Fier"
+    },
+    "lvl": "Nivel",
+    "clearConfirm": "Dorești să resetezi toate satele?",
+    "referenceTable": {
+      "title": "📚 Tabel Info Nivel (Bazat pe 0% Bonus)",
+      "hide": "Ascunde",
+      "show": "Arată",
+      "cols": {
+        "level": "Nivel",
+        "hourly": "Prod Orar ({{speed}}x)",
+        "storage": "Capacitate Depozit",
+        "farm": "Capacitate Fermă"
+      },
+      "perHour": "/ oră"
+    }
+  },
+  "unitCalculator": {
+    "title": "Calculator Producție Trupe",
+    "settings": {
+      "basic": "🌍 Setări de Bază",
+      "worldSpeed": "Viteza Lumii:",
+      "barracksLevel": "Nivel Han (Max 25):",
+      "stableLevel": "Nivel Ecurie (Max 20):",
+      "workshopLevel": "Nivel Atelier (Max 15):",
+      "speedBonus": "⚡ Bonusuri Viteză (%)",
+      "barracksBonus": "Bonus Obiect han:",
+      "stableBonus": "Bonus Obiect ecurie:",
+      "workshopBonus": "Bonus Obiect atelier:",
+      "flagRecruit": "Steag Recrutare:",
+      "costBonus": "💰 Cost & Extra (%)",
+      "massRecruit": "Bonus Recrutare Masivă:",
+      "costReduction": "Reducere Cost Resurse:",
+      "resetBtn": "🗑️ Resetează Cantitățile"
+    },
+    "table": {
+      "unit": "Unitate",
+      "count": "Cantitate de produs",
+      "wood": "Lemn",
+      "clay": "Argilă",
+      "iron": "Fier",
+      "pop": "Populație",
+      "time": "Timp Producție"
+    },
+    "summary": {
+      "costTitle": "Cost Total",
+      "woodReq": "Lemn Necesare:",
+      "clayReq": "Argilă Necesare:",
+      "ironReq": "Fier Necesare:",
+      "totalPop": "Populație Totală:",
+      "queueTitle": "Timpuri Coada de Construcții",
+      "barracksTotal": "Total Han:",
+      "stableTotal": "Total Ecurie:",
+      "workshopTotal": "Total Atelier:"
+    },
+    "time": {
+      "day": "z",
+      "hour": "h",
+      "minute": "m",
+      "second": "s",
+      "none": "-"
+    },
+    "units": {
+      "spear": "Lancier",
+      "sword": "Spadasin",
+      "axe": "Luptător cu Topor",
+      "archer": "Arcaș",
+      "spy": "Spion",
+      "lc": "Cavalerie Ușoară",
+      "ma": "Arcaș Călare",
+      "hc": "Cavalerie Greu",
+      "ram": "Berbec",
+      "cat": "Catapultă"
+    }
+  },
+  "mapGenerator": {
+    "title": "Generator Hartă Avansat",
+    "worldUrl": "URL Lume:",
+    "fetchBtn": "Preia / Reîmprospătează Date",
+    "generateBtn": "🗺️ GENEREAZĂ HARTA",
+    "status": {
+      "noUrl": "Te rugăm să introduci un URL al lumii!",
+      "cached": "Încărcat din cache! (Ultima actualizare: {{time}})",
+      "fetching": "Se preiau date de pe server...",
+      "success": "Date preluate cu succes!",
+      "error": "Eroare: {{msg}}"
+    },
+    "settings": {
+      "title": "Setări Hartă",
+      "zoom": "Zoom %",
+      "center": "Centru (X|Y)",
+      "markersOnly": "Doar Marcaje",
+      "showAbandons": "Arată Barbare",
+      "largerMarkers": "Marcaje Mai Mari",
+      "bgColor": "Culoare Fundal",
+      "dullBg": "Fundal Șters",
+      "showGrid": "Grilă Continent",
+      "showContinentNums": "Numere Continent"
+    },
+    "players": {
+      "title": "Marcaje Jucători",
+      "searchPlaceholder": "Caută și Adaugă Jucător...",
+      "points": "Puncte",
+      "selectTop25": "Selectează Top 25",
+      "selectTop50": "Selectează Top 50",
+      "clearSelection": "Șterge Seleciarea",
+      "noPlayers": "Niciun jucător selectat încă.",
+      "deleteBtn": "Șterge"
+    },
+    "tribes": {
+      "title": "Marcaje Tribe",
+      "searchPlaceholder": "Caută Trib (Nume sau Tag)...",
+      "selectAll": "Selectează Tot",
+      "clearSelection": "Șterge Seleciarea",
+      "selectTop25": "Selectează Doar Top 25",
+      "noData": "Nu s-au preluat încă date.",
+      "deleteBtn": "Șterge"
+    }
+  }
+}

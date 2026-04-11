@@ -1,0 +1,324 @@
+/* src/App.css */
+
+/* --- TEMEL AYARLAR --- */
+body {
+    margin: 0;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    background-color: #f4e4bc; 
+    color: #412202; 
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+.main-content {
+    flex: 1; 
+    padding: 20px;
+    overflow-y: auto; 
+    background-color: #fff6d9; 
+    border-left: 2px solid #603000; 
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- ANA SAYFA (HOME) TASARIMI --- */
+.home-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 100%;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.home-hero {
+    text-align: center;
+    background: linear-gradient(135deg, #fcf8f2 0%, #eaddbd 100%);
+    border: 2px solid #c89666;
+    border-bottom: 4px solid #814c11;
+    border-radius: 12px;
+    padding: 40px 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+.home-title {
+    color: #5a3a18;
+    margin: 0 0 15px 0;
+    font-size: 32px;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+}
+
+.home-subtitle {
+    color: #664928;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+/* --- İÇERİK IZGARASI (GRID) --- */
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+    padding-bottom: 30px;
+}
+
+/* --- KART TASARIMLARI --- */
+.home-card {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #e0c8a0;
+    border-left: 5px solid #b87333; /* TW Cobre (Bakır) Vurgusu */
+    border-radius: 10px;
+    padding: 20px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+}
+
+.home-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(184, 115, 51, 0.15);
+    border-color: #b87333;
+    background: #fdfbf7;
+}
+
+/* --- ŞIK İKON KUTULARI (MADALYON) --- */
+.home-card-icon {
+    font-size: 32px;
+    margin-right: 18px;
+    background: linear-gradient(135deg, #fff6d9 0%, #e8cd9c 100%);
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px; 
+    border: 2px solid #c89666;
+    box-shadow: 2px 4px 8px rgba(0,0,0,0.1), inset 0px 2px 4px rgba(255,255,255,0.8);
+    flex-shrink: 0;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.home-card:hover .home-card-icon {
+    transform: scale(1.08) rotate(-5deg);
+    border-color: #8b0000;
+}
+
+.home-card-content h3 {
+    margin: 0 0 6px 0;
+    color: #8b0000; 
+    font-size: 17px;
+}
+
+.home-card-content p {
+    margin: 0;
+    font-size: 13px;
+    color: #666;
+    line-height: 1.4;
+}
+
+.home-card-arrow {
+    margin-left: auto;
+    font-size: 24px;
+    color: #dcb589;
+    transition: transform 0.3s ease, color 0.3s ease;
+    padding-left: 10px;
+}
+
+.home-card:hover .home-card-arrow {
+    color: #8b0000;
+    transform: translateX(6px);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- RESPONSIVE (EKRAN UYUMLULUĞU) --- */
+
+/* TABLET (1024px ve altı) */
+@media screen and (max-width: 1024px) {
+    .home-grid {
+        grid-template-columns: repeat(2, 1fr); /* Tablette 2 sütuna zorla */
+    }
+}
+
+/* MOBİL (768px ve altı) */
+@media screen and (max-width: 768px) {
+    .app-container {
+        flex-direction: column; 
+    }
+    
+    .main-content {
+        border-left: none;
+       padding: 80px 15px 15px 15px;
+    }
+
+    .home-hero {
+        padding: 25px 15px;
+        margin-bottom: 25px;
+    }
+
+    .home-title {
+        font-size: 24px;
+    }
+
+    .home-subtitle {
+        font-size: 14px;
+    }
+
+    .home-grid {
+        grid-template-columns: 1fr; /* Mobilde tek sütun alt alta */
+        gap: 15px;
+    }
+
+    .home-card {
+        padding: 15px;
+    }
+
+    .home-card-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        border-radius: 10px;
+        margin-right: 15px;
+    }
+}
+
+.global-footer {
+    margin-top: auto; /* Sayfanın en altına iter */
+    background: linear-gradient(to bottom, #2a1908, #1a0f07);
+    border-top: 3px solid #603000;
+    border-radius: 12px 12px 0 0;
+    padding: 20px 0;
+    color: #aaa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+}
+
+/* --- KÜRESEL İSTATİSTİK ÇUBUĞU (BÜYÜK 4'LÜ) --- */
+.app-global-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto; 
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #2a1908 0%, #1a0f07 100%); /* Premium koyu arka plan */
+    border: 2px solid #603000;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 2px 5px rgba(255,255,255,0.05);
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: help; /* Fareyle üzerine gelince soru işareti/bilgi çıkar */
+    transition: transform 0.2s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-3px); /* Hafifçe yukarı zıplama efekti */
+}
+
+.stat-icon {
+    font-size: 22px;
+    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.8));
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: 900;
+    color: #eaddbd;
+    letter-spacing: 0.5px;
+}
+
+.stat-divider {
+    width: 2px;
+    height: 30px;
+    background: linear-gradient(to bottom, transparent, #814c11, transparent);
+    margin: 0 20px;
+}
+
+/* --- MOBİL UYUM --- */
+@media (max-width: 768px) {
+    .app-global-stats {
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 15px;
+        border-radius: 8px;
+    }
+    
+    .stat-divider {
+        display: none; /* Mobilde ayraç çizgilerini gizle */
+    }
+    
+    .stat-item {
+        flex: 1 1 40%; /* Mobilde 2x2 ızgara şeklinde dizer */
+        justify-content: center;
+    }
+}
+
+
+/* Linkler Bloğu */
+.footer-links {
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.footer-links a {
+    color: #dcb589;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: #f0c042;
+    text-decoration: underline;
+}
+
+/* Copyright Bloğu */
+.footer-copyright {
+    text-align: center;
+    font-size: 12px;
+    color: #777;
+    border-top: 1px dashed #4a2a10;
+    width: 80%;
+    padding-top: 15px;
+}
+
+.footer-copyright p {
+    margin: 4px 0;
+}
+
+/* Mobilde boşluk bırakma kuralı aynen kalıyor */
+@media (max-width: 768px) {
+    .global-footer {
+        padding-bottom: 90px;
+        margin-top: 30px;
+        border-radius: 0;
+    }
+    .footer-links {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}

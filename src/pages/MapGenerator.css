@@ -1,0 +1,35 @@
+.map-gen-container { padding: 20px; background: linear-gradient(145deg, #1e150d, #2a1908); color: #eaddbd; border-radius: 8px; border: 2px solid #814c11; }
+.map-gen-header { color: #f0c042; border-bottom: 1px solid #603000; padding-bottom: 10px; margin-bottom: 20px; }
+.map-gen-grid { display: grid; grid-template-columns: 350px 1fr; gap: 20px; }
+@media (max-width: 900px) { .map-gen-grid { grid-template-columns: 1fr; } }
+.mg-box { background: rgba(0,0,0,0.4); border: 1px solid #603000; padding: 15px; border-radius: 6px; margin-bottom: 15px; }
+.mg-box h3 { margin-top: 0; color: #f0c042; border-bottom: 1px dashed #603000; padding-bottom: 5px; }
+.mg-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.mg-table td { padding: 6px 0; vertical-align: middle; }
+
+.mg-input, .mg-select { background: #111; border: 1px solid #814c11; color: #f0c042; padding: 5px 8px; border-radius: 4px; width: 100%; box-sizing: border-box; }
+.mg-input:focus { outline: none; border-color: #f0c042; }
+.mg-input-small { width: 60px; text-align: center; display: inline-block;}
+.mg-color { padding: 0; width: 30px; height: 30px; border: 1px solid #814c11; cursor: pointer; }
+
+.mg-btn { background: linear-gradient(to bottom, #d9b972, #c19c4d); color: #4a2500; border: 1px solid #814c11; padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.2s; width: 100%; font-size: 12px;}
+.mg-btn:hover { background: #e3d5b3; }
+.mg-btn-danger { background: #800000; color: #fff; border-color:#4d0000; padding: 4px 8px;}
+.mg-btn-danger:hover { background: #cc0000; }
+
+/* Oyuncu Otomatik Tamamlama */
+.player-item-wrapper { position: relative; margin-bottom: 8px; }
+.player-item { display: flex; align-items: center; gap: 5px; }
+.autocomplete-list { position: absolute; top: 100%; left: 0; right: 40px; background: #1a1a1a; border: 1px solid #f0c042; z-index: 10; max-height: 150px; overflow-y: auto; list-style: none; padding: 0; margin: 0; border-radius: 0 0 4px 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.5);}
+.autocomplete-list li { padding: 8px 10px; cursor: pointer; color: #eaddbd; font-size: 13px; border-bottom: 1px solid #333;}
+.autocomplete-list li:hover { background: #603000; color: #fff; }
+
+/* Klan Listesi */
+.tribe-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 10px; }
+.tribe-list { max-height: 250px; overflow-y: auto; border: 1px solid #603000; padding: 5px; background: #111; }
+.tribe-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; font-size: 13px; border-bottom: 1px solid #222; padding-bottom: 4px;}
+.tribe-item:last-child { border-bottom: none; }
+.tribe-tag { font-weight: bold; color: #f0c042; width: 45px; display: inline-block;}
+
+.mg-canvas-container { text-align: center; background: #000; border: 2px solid #814c11; overflow: auto; position: relative; border-radius: 4px; max-height: 800px;}
+canvas { display: block; margin: 0 auto; }

@@ -1,0 +1,295 @@
+/* =========================================
+   OP PLANNER & HARİTA OLUŞTURUCU 
+   PREMIUM TW COBRE TASARIMI
+   ========================================= */
+
+/* --- ANA KONTEYNER --- */
+.op-container { 
+    padding: 25px; 
+    background: linear-gradient(145deg, #1e150d 0%, #110904 100%); 
+    color: #eaddbd; 
+    border-radius: 10px; 
+    border: 1px solid #5c3516; 
+    width: 96%; /* EKRANI DAHA GENİŞ KAPLAMASI İÇİN YENİ EKLENDİ */
+    max-width: 1600px; /* 1200px'den 1600px'e çıkarıldı */
+    margin: 20px auto 40px auto; /* Üstten 20px boşluk bırakıp ortalar */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+    box-sizing: border-box;
+    animation: fadeIn 0.4s ease-in-out;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- BAŞLIK --- */
+.op-header { 
+    color: #f0c042; 
+    border-bottom: 3px solid #814c11; 
+    padding-bottom: 12px; 
+    margin-top: 0;
+    margin-bottom: 25px; 
+    font-size: 26px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+/* --- ANA IZGARA (BİLGİSAYAR) --- */
+.op-main-grid { 
+    display: grid; 
+    grid-template-columns: 460px 1fr;   /* Sol panel sabit 460px, sağ panel kalan alanı alır */
+    gap: 25px; 
+    align-items: start;
+}
+
+/* --- KUTULAR (PANELLER) --- */
+.op-box { 
+    background: rgba(0,0,0,0.4); 
+    border: 1px solid #4a2a10; 
+    padding: 20px; 
+    border-radius: 8px; 
+    margin-bottom: 20px; 
+    box-shadow: inset 0 1px 3px rgba(255,255,255,0.05);
+    transition: all 0.3s ease;
+}
+
+.op-box:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5), inset 0 1px 3px rgba(255,255,255,0.05);
+    border-color: #603000;
+}
+
+.op-box h3 { 
+    margin-top: 0; 
+    color: #f0c042; 
+    font-size: 16px;
+    border-bottom: 1px dashed #814c11; 
+    padding-bottom: 8px; 
+    margin-bottom: 15px; 
+}
+
+/* --- FORM ELEMANLARI --- */
+.op-input, .op-datetime-input, .op-textarea { 
+    background: rgba(0,0,0,0.6); 
+    border: 1px solid #814c11; 
+    color: #f0c042; 
+    padding: 8px 10px; 
+    border-radius: 4px; 
+    width: 100%; 
+    box-sizing: border-box; 
+    font-size: 13px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.op-textarea {
+    resize: vertical;
+    min-height: 60px;
+    margin-top: 10px;
+}
+
+.op-input:focus, .op-datetime-input:focus, .op-textarea:focus { 
+    outline: none; 
+    border-color: #f0c042; 
+    background: rgba(0,0,0,0.8);
+    box-shadow: 0 0 8px rgba(240, 192, 66, 0.3);
+}
+
+/* --- BUTONLAR --- */
+.op-btn { 
+    background: linear-gradient(to bottom, #d9b972 0%, #c19c4d 100%); 
+    color: #311800; 
+    border: 1px solid #814c11; 
+    padding: 10px 15px; 
+    border-radius: 6px; 
+    font-weight: 800; 
+    cursor: pointer; 
+    transition: all 0.2s ease; 
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.op-btn:hover { 
+    background: linear-gradient(to bottom, #e3d5b3 0%, #d9b972 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+}
+
+.op-btn:active { transform: translateY(0); }
+
+.op-btn-danger { 
+    background: #d9534f; 
+    color: #fff; 
+    border: 1px solid #c9302c; 
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+.op-btn-danger:hover { background: #c9302c; }
+
+/* --- TABLOLAR --- */
+.op-table-wrapper {
+    overflow-x: auto;
+}
+.op-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    font-size: 13px; 
+    background: rgba(0,0,0,0.3);
+}
+
+.op-table th {
+    background: #1a0f05;
+    color: #f0c042;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid #5c3516;
+}
+
+.op-table td { 
+    padding: 8px; 
+    vertical-align: middle; 
+    color: #eaddbd;
+    border-bottom: 1px solid #2a1908;
+}
+
+.op-table tbody tr:hover {
+    background: rgba(240, 192, 66, 0.05);
+}
+
+/* --- BİRİM İKONLARI VE LİSTELERİ --- */
+.op-unit-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.op-unit-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    opacity: 0.3;
+    filter: grayscale(100%);
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.op-unit-icon:hover {
+    opacity: 0.8;
+    filter: grayscale(0%);
+}
+
+.op-unit-icon.active {
+    opacity: 1;
+    filter: grayscale(0%);
+    background: rgba(240, 192, 66, 0.2);
+    border-color: #f0c042;
+    transform: scale(1.15);
+}
+
+/* HARİTA ALANI - Düzeltilmiş ve daha kompakt */
+.op-map-container { 
+    text-align: center; 
+    background: #0a0a0a; 
+    border: 2px solid #5c3516; 
+    overflow: hidden; 
+    position: relative; 
+    border-radius: 10px; 
+    height: 420px;           /* Biraz daha yüksek, daha güzel durur */
+    max-height: 420px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.85);
+    margin-top: 12px;
+}
+
+.op-map-container canvas { 
+    display: block; 
+    width: 100%;
+    height: 100%; 
+    object-fit: contain;     
+}
+
+.op-main-grid > div:first-child .op-box {
+    max-width: 460px;
+}
+
+/* --- DİĞER YARDIMCI YAPILAR --- */
+.op-flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+    margin-bottom: 15px;
+}
+.op-flex-wrap > div {
+    flex: 1;
+    min-width: 150px;
+}
+
+.op-time-mode {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    background: rgba(0,0,0,0.4);
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #4a2a10;
+    margin-bottom: 15px;
+}
+.op-time-mode label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    color: #eaddbd;
+    font-weight: bold;
+}
+
+/* =========================================
+   CİHAZ UYUM (RESPONSIVE) AYARLARI
+   ========================================= */
+
+/* TABLET (1024px ve altı) */
+@media (max-width: 1024px) {
+    .op-main-grid { 
+       grid-template-columns: 380px 1fr;
+        gap: 20px; 
+    }
+}
+
+/* MOBİL TELEFON (768px ve altı) */
+@media (max-width: 768px) {
+    .op-container { 
+        padding: 15px; 
+        padding-bottom: 80px !important; 
+        width: 100%; /* Mobilde tam ekran */
+        margin: 0; 
+        border-radius: 0;
+    }
+    
+    .op-header { 
+        font-size: 22px; 
+        text-align: center; 
+    }
+
+    .op-main-grid { 
+        grid-template-columns: 1fr; 
+    }
+
+    .op-box { padding: 15px; }
+
+    .op-input, .op-datetime-input, .op-btn { 
+        padding: 12px 10px; 
+        font-size: 15px; 
+    }
+    
+    .op-flex-wrap > div { min-width: 100%; }
+
+    .op-map-container {
+        max-height: 500px; 
+    }
+}

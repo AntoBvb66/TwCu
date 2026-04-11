@@ -1,0 +1,292 @@
+.prod-container {
+    padding: 20px; 
+    background: linear-gradient(145deg, #1a1a1a, #2a1908);
+    color: #eaddbd; 
+    border-radius: 8px; 
+    border: 2px solid #814c11; 
+    margin-bottom: 40px;
+}
+
+.prod-header { 
+    color: #f0c042; 
+    border-bottom: 1px solid #603000; 
+    padding-bottom: 10px; 
+    margin-bottom: 20px; 
+    margin-top: 0;
+}
+
+/* Gelişmiş Ayarlar */
+.prod-settings {
+    background: rgba(0,0,0,0.5); 
+    border: 1px solid #603000; 
+    padding: 15px; 
+    border-radius: 6px; 
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.prod-settings label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #dcb589;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.prod-input {
+    background: #111; 
+    border: 1px solid #814c11; 
+    color: #f0c042; 
+    padding: 6px 10px; 
+    border-radius: 4px; 
+    font-weight: bold;
+    width: 80px;
+    text-align: center;
+}
+
+/* İmparatorluk Toplamları Panosu */
+.prod-totals-board {
+    background: linear-gradient(to right, #2a1908, #3c240c);
+    border: 2px solid #dcb589;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.prod-totals-board h2 {
+    margin: 0 0 15px 0;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.prod-totals-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.prod-total-card {
+    background: #111;
+    border: 1px solid #603000;
+    border-radius: 6px;
+    padding: 15px;
+    text-align: center;
+}
+
+.prod-total-card h4 {
+    margin: 0 0 15px 0;
+    color: #f0c042;
+    border-bottom: 1px dashed #603000;
+    padding-bottom: 5px;
+}
+
+.prod-res-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.prod-res-icon { width: 20px; height: 20px; vertical-align: middle; margin-right: 8px; }
+.text-wood { color: #dcb589; }
+.text-clay { color: #d9534f; }
+.text-iron { color: #a9a9a9; }
+
+/* Köy Listesi */
+.prod-village-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.prod-village-row {
+    background: #1e150d;
+    border: 1px solid #4a2a10;
+    border-left: 4px solid #f0c042;
+    border-radius: 4px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    transition: 0.2s;
+}
+
+.prod-village-row:hover {
+    background: #2a1908;
+    border-color: #814c11;
+}
+
+.prod-village-name input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed #814c11;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    width: 150px;
+}
+
+.prod-village-name input:focus { outline: none; border-bottom-color: #f0c042; }
+
+.prod-mines-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.prod-mine-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #111;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #3c240c;
+}
+
+.prod-select {
+    background: #2a1908;
+    color: #f0c042;
+    border: 1px solid #814c11;
+    border-radius: 3px;
+    padding: 2px 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.prod-mine-output {
+    font-size: 12px;
+    color: #aaa;
+    min-width: 60px;
+    text-align: right;
+}
+
+/* Butonlar */
+.prod-btn {
+    background: linear-gradient(to bottom, #5cb85c, #4cae4c);
+    color: white;
+    border: 1px solid #398439;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+.prod-btn:hover { background: #449d44; }
+
+.prod-btn-del {
+    background: #d9534f;
+    color: white;
+    border: 1px solid #d43f3a;
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.prod-btn-del:hover { background: #c9302c; }
+.prod-btn-clear { background: transparent; color: #d9534f; border: 1px solid #d9534f; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold;}
+.prod-btn-clear:hover { background: #d9534f; color: #fff;}
+
+@media (max-width: 768px) {
+    .prod-totals-grid { grid-template-columns: 1fr; }
+    .prod-village-row { flex-direction: column; align-items: flex-start; }
+    .prod-mines-container { flex-direction: column; width: 100%; gap: 10px;}
+    .prod-mine-group { justify-content: space-between; }
+    .prod-village-row > button { width: 100%; }
+}
+
+/* REFERANS TABLOSU STİLLERİ */
+.prod-table-wrapper { 
+    overflow-x: auto; 
+    background: #1e150d; 
+    border-radius: 6px; 
+    border: 1px solid #603000; 
+    margin-top: 40px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+.prod-table-header {
+    background: #2a1908;
+    padding: 15px;
+    border-bottom: 2px solid #814c11;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.prod-table-header h3 { margin: 0; color: #f0c042; }
+
+.prod-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    font-size: 13px; 
+    text-align: center; 
+    color: #eaddbd; 
+}
+.prod-table th, .prod-table td { 
+    border: 1px solid #4a2a10; 
+    padding: 8px; 
+}
+.prod-table th { 
+    background-color: #3c240c; 
+    color: #f0c042; 
+    position: sticky; 
+    top: 0;
+}
+.prod-table tbody tr:nth-child(even) { background-color: #2a1908; }
+.prod-table tbody tr:hover { background-color: #4a2a10; cursor: default; }
+
+.prod-lvl-badge {
+    background: #603000;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* BONUS SEÇİM ALANI */
+.prod-bonus-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: rgba(240, 192, 66, 0.05);
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px dashed #814c11;
+}
+
+.prod-bonus-label {
+    font-size: 11px;
+    color: #f0c042;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.prod-bonus-select {
+    background: #111;
+    color: #fff;
+    border: 1px solid #603000;
+    font-size: 12px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* Mobil Uyumluluk Güncellemesi */
+@media (max-width: 768px) {
+    .prod-bonus-container {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

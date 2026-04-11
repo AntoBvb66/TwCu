@@ -1,0 +1,73 @@
+.map-analysis-container {
+    background: linear-gradient(145deg, #1e150d, #2a1908);
+    border: 2px solid #814c11;
+    border-radius: 8px;
+    padding: 20px;
+    color: #eaddbd;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.map-analysis-container h1, .map-analysis-container h3 {
+    color: #f0c042;
+    text-shadow: 0 0 5px rgba(240, 192, 66, 0.3);
+    border-bottom: 1px solid #603000;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.ma-box {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid #603000;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.ma-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+@media (max-width: 768px) { .ma-grid { grid-template-columns: 1fr; } }
+
+.ma-input, .ma-select, .ma-textarea {
+    width: 100%;
+    background: #111;
+    border: 1px solid #814c11;
+    border-radius: 4px;
+    color: #f0c042;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.ma-textarea { height: 80px; resize: vertical; }
+
+.ma-btn {
+    background: linear-gradient(to bottom, #d9b972, #c19c4d);
+    color: #4a2500;
+    border: 1px solid #814c11;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: 0.2s;
+}
+.ma-btn:hover { background: #e3d5b3; }
+.ma-btn-primary { background: linear-gradient(to bottom, #0088cc, #005580); color: white; border-color: #00334d; }
+.ma-btn-primary:hover { background: #00aaff; }
+.ma-btn-danger { background: linear-gradient(to bottom, #cc0000, #800000); color: white; border-color: #4d0000; }
+.ma-btn-danger:hover { background: #ff3333; }
+
+.ma-status { text-align: center; padding: 10px; border-radius: 4px; margin-bottom: 15px; font-weight: bold; }
+.status-empty { background: #4a1515; color: #ff9999; }
+.status-loading { background: #605000; color: #ffe680; animation: pulse 1.5s infinite; }
+.status-ready { background: #154a15; color: #99ff99; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+
+.teleport-list { list-style: none; padding: 0; margin: 0; }
+.teleport-item { background: rgba(255, 0, 0, 0.1); border-left: 3px solid #ff4444; padding: 8px; margin-bottom: 5px; font-size: 13px; display: flex; justify-content: space-between; align-items: center;}
+.teleport-time { font-size: 14px; color: #00ccff; margin-bottom: 10px; font-weight: bold; }
+
+canvas { background: white; max-width: 100%; height: auto; border-radius: 4px; }

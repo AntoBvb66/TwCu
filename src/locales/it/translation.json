@@ -1,0 +1,859 @@
+{
+  "menu": {
+    "title": "TW Cobre",
+    "stats": "Statistiche Live",
+    "visitsTitle": "Visitatori Totali",
+    "mapsTitle": "Mappe Generate",
+    "opsTitle": "Operazioni Pianificate",
+    "simsTitle": "Simulazioni Eseguite",
+    "visits": "Visite",
+    "maps": "Mappe",
+    "developer": "Sviluppatore",
+    "items": {
+      "buildingTimes": "Calcolatore Tempi di Costruzione",
+      "mapAnalysis": "Analisi Continente e Mappa",
+      "mapGenerator": "Generatore di Mappe",
+      "productionData": "Calcolatore di Produzione",
+      "coinMinter": "Pianificatore Monete d'Oro",
+      "buildingPlanner": "Pianificatore di Costruzione (Coda)",
+      "unitCalculator": "Calcolatore Produzione Truppe",
+      "churchPlanner": "Pianificatore Chiesa",
+      "opPlanner": "Pianificatore Operazione Individuale",
+      "clanOp": "Pianificatore Operazione Tribù",
+      "clanTroop": "Pianificatore Operazione Tribù (Avanzato)",
+      "fastSupport": "Pianificazione Supporto Rapido",
+      "scavengingPlanner": "Calcolatore Tempi Saccheggio"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Benvenuti in TW Cobre",
+      "subtitle": "La vittoria è nascosta nei dettagli e nella pianificazione impeccabile. Risparmia tempo nel tuo viaggio in Tribal Wars e elabora piani strategici che porteranno la tua tribù alla vittoria. Scegli uno strumento per iniziare."
+    },
+    "tools": {
+      "opPlanner": { "title": "Pianificatore Operazione Personale", "desc": "Abbina villaggi di origine e destinazione per preparare un modello di operazione impeccabile (BBCode)." },
+      "buildingPlanner": { "title": "Pianificatore di Costruzione", "desc": "Progetta il piano di costruzione del tuo villaggio passo dopo passo con simulazione di coda avanzata." },
+      "unitCalculator": { "title": "Calcolatore Produzione Truppe", "desc": "Calcola i tempi di produzione delle unità per Caserma, Stalla e Officina, inclusi i bonus." },
+      "mapGenerator": { "title": "Generatore di Mappe", "desc": "Genera mappe mondiali dinamiche colorate aggiornate per i forum delle tribù." },
+      "mapAnalysis": { "title": "Analisi Continente", "desc": "Analizza le dominanze delle tribù e dei giocatori sulla mappa mondiale." },
+      "productionData": { "title": "Calcolatore di Produzione", "desc": "Ottimizza i tassi di produzione mineraria, capacità di stoccaggio e tempi di riempimento." },
+      "coinMinter": { "title": "Pianificatore Monete d'Oro", "desc": "Calcola il villaggio ideale per coniare Monete d'Oro." },
+      "churchPlanner": { "title": "Pianificatore Chiesa", "desc": "Ottimizza le aree di copertura della tua chiesa sulla mappa con un algoritmo che salva la popolazione." },
+      "buildingTimes": { "title": "Calcolatore Tempi di Costruzione", "desc": "Calcola e confronta i tempi di costruzione degli edifici a diversi livelli fino al secondo." },
+      "clanOp": { "title": "Pianificatore Operazione Tribù", "desc": "Analizza tutti i villaggi della tribù e fai assegnazioni intelligenti. Distribuisci ordini BBCode personalizzati ai membri con intelligence dello staff supportata dalla mappa." },
+      "clanTroop": { "title": "Pianificatore Operazione Tribù (Con Truppe)", "desc": "Analizza tutte le truppe della tribù e fai assegnazioni intelligenti. Distribuisci ordini BBCode personalizzati ai membri con intelligence dello staff supportata dalla mappa." },
+      "fastSupport": { "title": "Trova Supporto Rapido", "desc": "Crea una richiesta di supporto per ottenere supporto rapido." },
+      "scavengingPlanner": { "title": "Calcolatore Tempi Saccheggio", "desc": "Confronta i tempi di saccheggio in dettaglio." }
+    }
+  },
+  "footer": {
+    "text1": "Strumenti di Pianificazione Avanzata per Tribal Wars",
+    "text2": "© 2026 TW Cobre | Sviluppatore: ",
+    "links": {
+      "about": "Informazioni",
+      "privacy": "Privacy e GDPR"
+    }
+  },
+  "aboutPage": {
+    "title": "Informazioni",
+    "p1": "Ciao, sono Anto Bvb 66.",
+    "p2": "TW Cobre è un pannello tattico e centro di comando elitario sviluppato indipendentemente per elaborare dati grezzi dai giocatori delle Tribù (Tribal Wars) e aiutarli a ottenere superiorità strategica.",
+    "p3": "Dalla pianificazione delle operazioni all'analisi delle pulizie, tutti i moduli sono progettati per risolvere calcoli che richiederebbero ore a un giocatore in secondi. La vittoria è nascosta nei dettagli!"
+  ,"contactTitle": "Segnalazione Errori e Contatti",
+    "contactDesc": "Puoi inviarmi direttamente via e-mail errori, omissioni o suggerimenti di sviluppo che riscontri sul nostro sito.",
+    "emailButton": "Invia un'e-mail"},
+  "privacyPage": {
+    "title": "Informativa sulla Privacy e KVKK",
+    "p1": "TW Cobre rispetta la privacy degli utenti al massimo livello. In conformità con le leggi sulla protezione dei dati (GDPR) e gli standard internazionali, la nostra politica di elaborazione dei dati è la seguente:",
+    "items": {
+      "i1": "Sicurezza Account: TW Cobre NON richiede, memorizza o ospita la password dell'account Tribal Wars, l'email o le informazioni di sessione personali sui suoi server.",
+      "i2": "Archiviazione Locale: Le tue impostazioni (velocità mondiale, conteggi delle truppe, coordinate dei villaggi, ecc.) sono memorizzate solo nel browser del tuo dispositivo (Local Storage / Session Storage) in modo che non vadano perse quando aggiorni la pagina.",
+      "i3": "Recupero Dati Esterni: I moduli mappa e analisi elaborano dati generali del mondo forniti pubblicamente da Tribal Wars in tempo reale. Questa operazione avviene una volta all'ora. In conformità con le regole del gioco, questi dati contengono solo informazioni generali sui villaggi e sui giocatori e non includono i tuoi dati personali.",
+      "i4": "Statistiche: I contatori di visitatori e generazione mappe sul nostro sito sono solo dati numerici; non sono abbinati al tuo indirizzo IP o identità."
+    },
+    "p2": "Utilizzando TW Cobre, accetti che i tuoi dati siano elaborati in modo sicuro sul tuo dispositivo e che la tua privacy sia protetta."
+  },
+  "buildingPlanner": {
+    "title": "🏗️ Pianificatore Costruzioni TW (Simulazione Coda)",
+    "worldSpeed": "Velocità Mondo:",
+    "mineSpeed": "Fattore Produzione Risorse:",
+    "btn": {
+      "import": "📥 Carica Coda Costruzioni",
+      "export": "📤 Esporta Coda Costruzioni",
+      "clear": "🗑️ Cancella",
+      "addQueue": "Carica",
+      "copyBoard": "Copia negli Appunti",
+      "close": "Chiudi",
+      "delete": "Elimina"
+    },
+    "modal": {
+      "importTitle": "📥 Incolla la Coda Costruzioni Copiata dal Gioco",
+      "exportTitle": "📤 Output della Tua Coda (Puoi Copiarlo)",
+      "importPlaceholder": "Quartier Generale +1 (Livello 1)\n10 punti\n...",
+      "success": "✅ Successo! {{count}} edifici aggiunti alla coda.",
+      "error": "❌ Nessun modello valido trovato. Controlla il testo copiato.",
+      "copied": "Copiato!",
+      "exportPrefix": "Coda costruzioni",
+      "levelLabel": "Livello",
+      "pointsLabel": "Punti"
+    },
+    "levelsTitle": "🏠 Livelli Edifici Iniziali (Nascondi / Mostra)",
+    "analysis": {
+      "title": "⏳ Analisi Coda e Tempi di Attesa (Mostra/Nascondi)",
+      "withWait": "⏳ Tempo con attesa risorse:",
+      "withoutWait": "⚡ Tempo senza attesa risorse:",
+      "bottleneckTitle": "🚨 Passi in cui la coda rallenta:",
+      "wood": "Legno",
+      "clay": "Argilla",
+      "iron": "Ferro",
+      "order": "Ordine",
+      "level": "Livello",
+      "waitingFor": "In Attesa",
+      "waitingSuffix": "per risorse.",
+      "missing": "Quantità Mancanti",
+      "perfect": "🎉 Ottimo! Non c'è tempo di attesa per le risorse in questa coda. Le costruzioni continueranno senza interruzioni."
+    },
+    "summary": {
+      "title": "Riepilogo Coda (Clicca Edifici per Aggiungere)",
+      "max": "Al Livello Massimo",
+      "add": "Aggiungi alla Coda"
+    },
+    "columnsToggle": "👁️ Nascondi / Mostra Colonne Tabella",
+    "columns": {
+      "order": "Ordine",
+      "expectedWait": "Attesa Previsto",
+      "building": "Edificio",
+      "level": "Livello",
+      "buildTime": "Tempo Costruzione",
+      "startTime": "Ora Inizio",
+      "endTime": "Ora Fine",
+      "points": "Punti",
+      "cost": "Costo (Legno/Argilla/Ferro)",
+      "resWait": "Tempo Attesa Risorse",
+      "currentStorage": "Stoccaggio Attuale",
+      "hourlyProd": "Produzione Oraria",
+      "pop": "Popolazione",
+      "storage": "Stoccaggio",
+      "desc": "Descrizione",
+      "action": "Azione"
+    },
+    "status": {
+      "storageFull": "∞ (Stoccaggio Pieno)",
+      "storageLimit": "Capacità di Stoccaggio Insufficiente!",
+      "requirement": "Requisito",
+      "waitingRes": "In Attesa di Risorse.",
+      "farmLimit": "Fattoria Insufficiente!",
+      "maxLevel": "Livello Massimo!"
+    },
+    "fastAdd": {
+      "placeholder": "Digita o seleziona...",
+      "modeActive": "Modalità Tastiera Attiva:",
+      "info": "Puoi aggiungere rapidamente digitando il nome dell'edificio e premendo Invio.",
+      "dragTitle": "Trascina per Cambiare Ordine"
+    },
+    "daysShort": "g",
+    "buildings": {
+      "hq": "Quartier Generale",
+      "barracks": "Caserma",
+      "stable": "Stalla",
+      "workshop": "Officina",
+      "first_church": "Prima Chiesa",
+      "church": "Chiesa",
+      "watchtower": "Torre di Guardia",
+      "academy": "Accademia",
+      "smithy": "Fucina",
+      "rally": "Punto di Raduno",
+      "statue": "Statua",
+      "market": "Mercato",
+      "wood": "Campo di Taglio",
+      "clay": "Cava d'Argilla",
+      "iron": "Miniera di Ferro",
+      "farm": "Fattoria",
+      "ware": "Magazzino",
+      "hiding": "Nascondiglio",
+      "wall": "Muro"
+    }
+  },
+  "buildingTimes": {
+    "title": "⏱️ Confronto Tempi Costruzione",
+    "worldSpeed": "Velocità Mondo:",
+    "panel1": "Piano A (Riferimento)",
+    "panel2": "Piano B (Confronto)",
+    "hqLevel": "Livello Quartier Generale:",
+    "buildingToUpgrade": "Edificio da Aggiornare:",
+    "currentLevel": "Livello Attuale:",
+    "targetLevel": "Livello Obiettivo:",
+    "totalTime": "Tempo Totale:",
+    "comparisonResult": "⚡ Risultato Confronto:",
+    "panel2Faster": "Il Piano B finirà {{time}} prima del Piano A!",
+    "panel1Faster": "Il Piano A finirà {{time}} prima del Piano B!",
+    "tableTitle": "📊 Tabella Tempi Livelli Tutti Edifici",
+    "tableHqLevel": "Livello Quartier Generale Tabella:",
+    "level": "Livello",
+    "dragTitle": "Trascina per Cambiare Posizione",
+    "tip": "Suggerimento: Puoi trascinare e rilasciare le intestazioni (ad es., 'Caserma') a sinistra o destra per cambiare l'ordine delle colonne.",
+    "time": {
+      "day": "g",
+      "hour": "ore",
+      "minute": "min",
+      "second": "sec",
+      "zero": "0 sec"
+    },
+    "buildings": [
+      "Quartier Generale (QG)", "Caserma", "Stalla", "Officina", "Prima Chiesa", "Chiesa",
+      "Torre di Guardia", "Accademia", "Fucina", "Punto di Raduno", "Statua", "Mercato",
+      "Campo di Taglio", "Cava d'Argilla", "Miniera di Ferro", "Fattoria", "Magazzino", "Nascondiglio",
+      "Nobile", "Moneta d'Oro", "Muro"
+    ]
+  },
+  "scavenging": {
+    "title": "Calcolatore Saccheggio",
+    "settings": {
+      "title": "🌍 Impostazioni Mondo e Produzione",
+      "worldSpeed": "Velocità Mondo:",
+      "mineSpeed": "Fattore Produzione Risorse:",
+      "woodLevel": "Livello Campo di Taglio:",
+      "clayLevel": "Livello Cava d'Argilla:",
+      "ironLevel": "Livello Miniera di Ferro:",
+      "worldConstant": "Costante Mondo:",
+      "resHourly": "Produzione Risorse:"
+    },
+    "production": {
+      "perMin": "/ min",
+      "perHour": "/ ora",
+      "perDay": "/ giorno"
+    },
+    "troops": {
+      "title": "⚔️ Conteggi Truppe e Bandiera",
+      "carryFlag": "Bandiera Capacità Trasporto (%):",
+      "resFlag": "Bandiera Produzione Risorse (%):",
+      "totalCap": "Capacità Saccheggio (Senza Bandiera):",
+      "totalCapFlag": "Capacità Totale (Bandiera Trasporto):",
+      "totalRes": "Produzione Risorse (Senza Bandiera):",
+      "totalResFlag": "Produzione Risorse (Bandiera Risorse):"
+    },
+    "results": {
+      "title": "🏆 Classifica Strategie Più Profittevoli",
+      "chartTitle": "📊 Grafico Confronto Strategie (Top 10)",
+      "totalDaily": "Totale Giornaliero",
+      "scavenge": "Saccheggio",
+      "resource": "Produzione",
+      "perMin": "min",
+      "perHour": "ora",
+      "perDay": "giorno",
+      "maxTrip": "Tempo Viaggio Più Lungo",
+      "dayShort": "/g",
+      "hourShort": "/o",
+      "minShort": "/m",
+      "modes": {
+        "eqTime": "Tempo Uguale",
+        "eqCap": "Capacità Uguale"
+      },
+      "flags": {
+        "none": "Nessuna Bandiera",
+        "carry": "Bandiera Trasporto",
+        "res": "Bandiera Risorse"
+      },
+      "options": {
+        "c1234": "1-2-3-4 Sbloccate",
+        "c123": "1-2-3 Sbloccate",
+        "c234": "2-3-4 Sbloccate",
+        "c12": "1-2 Sbloccate",
+        "c23": "2-3 Sbloccate"
+      }
+    },
+    "reference": {
+      "title": "📈 Punto di Pareggio (Tabella Riferimento Capacità)",
+      "info": "Nessuna truppa inserita. La tabella sottostante mostra il bottino giornaliero stimato per le strategie Tempo Uguale vs Capacità Uguale a varie capacità (assumendo 1-2-3-4 sbloccate).",
+      "cap": "Capacità Campione",
+      "eqTimeDaily": "Tempo Uguale (Giornaliero)",
+      "eqCapDaily": "Cap. Uguale (Giornaliero)",
+      "winner": "Tattica Vantaggiosa"
+    },
+    "chart": {
+      "title": "📈 Curva Bottino Giornaliero per Capacità (Tempo Uguale e Senza Bandiera)",
+      "worldConstantInfo": "Generato basato sulla Costante Mondo ({{constant}}).",
+      "unlocked": "Sbloccate",
+      "infoTitle": "💡 Punti di Inversione Critici (Pareggio)",
+      "be1": "🔸 Dopo {{cap}} Capacità: la tattica 1-2-3-4 supera 2-3-4 e diventa più profittevole.",
+      "be2": "🔸 Dopo {{cap}} Capacità: la tattica 1-2-3 supera 2-3."
+    }
+  },
+  "churchPlanner": {
+    "title": "⛪ Pianificatore Chiesa Ottimale",
+    "dataInput": "Inserimento Dati",
+    "allVillagesCoords": "Coordinate Tutti i Tuoi Villaggi:",
+    "villagesPlaceholder": "510|621, 510|622 (Estrae anche dal testo)",
+    "existingChurchesLabel": "Chiese Esistenti (Opzionale):",
+    "existingChurchesPlaceholder": "es., 506|496 3 (X|Y Livello)",
+    "includeFirstChurch": "Includi Prima Chiesa?",
+    "calculateBtn": "⚙️ Calcola Piano Ottimale",
+    "alertNoVillage": "Inserisci almeno una coordinata di villaggio!",
+    "resultsTitle": "Risultati ({{count}} Chiese)",
+    "existing": "Esistente",
+    "firstChurch": "Prima Chiesa",
+    "normalChurch": "Chiesa Normale",
+    "lvl": "Liv",
+    "coversVillages": "Villaggi Coperti",
+    "warningUncovered": "⚠️ Avviso: {{count}} villaggi sono lasciati senza protezione.",
+    "coveredVillage": "Villaggio Coperto",
+    "uncoveredVillage": "Villaggio Senza Protezione"
+  },
+  "clanOp": {
+    "title": "🛡️ Pianificatore Operazione Tribù",
+    "step1": {
+      "title": "1. Trova i Villaggi della Tua Tribù",
+      "clearAll": "🧹 Cancella Tutti i Dati",
+      "worldUrl": "URL Mondo",
+      "clanTag": "Tag Tribù",
+      "runIntel": "Trova Villaggi",
+      "status": {
+        "gathering": "Raccolta informazioni: Scansione di tutti i giocatori e villaggi del mondo...",
+        "notFound": "❌ Tribù non trovata! Controlla il tag.",
+        "success": "✅ Successo! ID Tribù: {{clanId}} | Membri: {{memberCount}} | Villaggi Totali: {{villageCount}}",
+        "error": "❌ Errore: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Villaggi Obiettivo",
+      "snobLimit": "Limite Distanza Nobile:",
+      "placeholder": "Incolla le coordinate obiettivo qui...",
+      "foundTargets": "Obiettivi Trovati: {{count}}"
+    },
+    "step3": {
+      "title": "3. Centro Assegnazione Intelligente e Mappa",
+      "arrivalTime": "Ora Arrivo Obiettivo:",
+      "targetsTitle": "I Tuoi Obiettivi (Clicca per Selezionare)",
+      "points": "Punti",
+      "p": "P",
+      "distance": "Distanza:"
+    },
+    "manualAssign": {
+      "title": "👤 Assegnazione Giocatore Libero",
+      "selectPlayer": "-- Seleziona Giocatore --",
+      "assignBtn": "Assegna",
+      "info": "*Aggiunge solo un compito con un'ora di arrivo all'obiettivo selezionato sopra. I villaggi del giocatore appariranno anche in blu sulla mappa."
+    },
+    "tabs": {
+      "closest10": "10 Villaggi Più Vicini",
+      "furthest10": "10 Villaggi Più Lontani",
+      "selectPlayer": "Seleziona Giocatore"
+    },
+    "suggestions": {
+      "noVillages": "Nessun villaggio da visualizzare.",
+      "kami": "Invia Nuke",
+      "snob": "Invia Nobile",
+      "fake": "Invia Fake",
+      "show": "Rendi Visibile",
+      "hide": "Nascondi"
+    },
+    "queue": {
+      "title": "Coda Operazione ({{count}} Ordini)",
+      "clear": "Cancella Intera Coda",
+      "delete": "Elimina",
+      "enemy": "Nemico (Obiettivo)"
+    },
+    "bbcode": {
+      "title": "📋 Modello BBCode per Blocco Note",
+      "copyAll": "Copia Tutto",
+      "selectCols": "Seleziona Colonne:",
+      "ordersFor": "--- ORDINI PER {{player}} ---",
+      "attack": "Attacco",
+      "viewTarget": "Visualizza Obiettivo",
+      "unknown": "SCONOSCIUTO"
+    },
+    "alerts": {
+      "confirmClear": "Tutti i piani, obiettivi e villaggi nascosti (eccetto le informazioni del Passo 1 Mondo/Tribù) saranno eliminati. Sei sicuro?",
+      "cleared": "🧹 Tutti i dati cancellati!",
+      "enterTribeTag": "Inserisci il Tag Tribù!",
+      "selectTarget": "Seleziona un obiettivo.",
+      "selectTargetLeft": "Seleziona un obiettivo a sinistra.",
+      "selectPlayer": "Seleziona un giocatore dall'elenco.",
+      "snobLimitExceeded": "⚠️ Avviso: La distanza selezionata ({{dist}}) supera il limite nobile impostato ({{limit}})!",
+      "orderAdded": "✅ Ordine Aggiunto!",
+      "manualAdded": "✅ Assegnazione Libera Aggiunta!",
+      "confirmClearQueue": "Sei sicuro di voler cancellare l'intera coda?",
+      "queueCleared": "🗑️ Coda Cancellata!",
+      "copied": "Copiato!"
+    },
+    "columns": {
+      "no": "No",
+      "player": "Giocatore",
+      "source": "Origine",
+      "target": "Obiettivo",
+      "departure": "Ora Partenza",
+      "arrival": "Ora Arrivo",
+      "unit": "Unità",
+      "distance": "Distanza",
+      "travelTime": "Tempo Viaggio",
+      "attackLink": "Link Azione"
+    },
+    "units": {
+      "spear": "Lanciere", "sword": "Spadaccino", "axe": "Asciere", "spy": "Esploratore",
+      "light": "Cavalleria Leggera", "heavy": "Cavalleria Pesante", "ram": "Ariete", "catapult": "Catapulta",
+      "knight": "Paladino", "snob": "Nobile", "archer": "Arciere", "marcher": "Arciere a Cavallo", "militia": "Milizia"
+    },
+    "shortUnits": {
+      "ram": "Nuke",
+      "snob": "Nobile",
+      "catapult": "Fake",
+      "spy": "Esploratore"
+    }
+  },
+  "clanTroop": {
+    "title": "🦅 Pianificatore Operazione Tribù (Avanzato)",
+    "step1": {
+      "title": "1. Trova i Villaggi della Tua Tribù",
+      "clear": "🧹 Cancella Dati",
+      "worldUrl": "URL Mondo",
+      "clanTag": "Tag Tribù",
+      "run": "Trova Villaggi",
+      "gathering": "Raccolta informazioni...",
+      "notFound": "❌ Tribù non trovata!",
+      "success": "✅ Successo! ID Tribù: {{clanId}} | Villaggi Totali: {{villageCount}}",
+      "error": "❌ Errore: {{msg}}"
+    },
+    "step2": {
+      "title": "2. Villaggi Obiettivo",
+      "snobLimit": "Limite Distanza Nobile:",
+      "placeholder": "Incolla le coordinate obiettivo qui..."
+    },
+    "stepTroop": {
+      "title": "🛡️ Inserisci Dati Truppe (Copia/Incolla)",
+      "placeholder": "Incolla i dati truppe dalla panoramica truppe (tabella) o formato CSV (475|494,48,0,0...)...",
+      "detected": "Intelligence Rilevata: {{count}} Villaggi",
+      "summaryTitle": "📊 Riepiloghi Profili Giocatore",
+      "idle": " (Inattivo: {{count}})",
+      "depleted": " (Esaurito)"
+    },
+    "step3": {
+      "title": "📍 Centro Assegnazione Intelligente e Mappa",
+      "arrivalTime": "Ora Arrivo Obiettivo:",
+      "targetsTitle": "I Tuoi Obiettivi (Clicca per Selezionare)",
+      "distance": "Distanza:"
+    },
+    "tabs": {
+      "closest": "10 villaggi più vicini",
+      "furthest": "10 villaggi più lontani",
+      "player": "Seleziona Giocatore",
+      "selectPlayer": "-- Seleziona Giocatore --"
+    },
+    "suggestions": {
+      "noVillages": "Nessun villaggio trovato.",
+      "kami": "Invia Nuke",
+      "snob": "Invia Nobile",
+      "fake": "Invia Fake",
+      "show": "Rendi Visibile",
+      "hide": "Nascondi",
+      "noIntel": " (Nessuna Intelligence)"
+    },
+    "queue": {
+      "title": "Coda Operazione ({{count}} Ordini)",
+      "clear": "Cancella Intera Coda",
+      "delete": "Elimina"
+    },
+    "bbcode": {
+      "title": "📋 Modello BBCode per Blocco Note",
+      "copyAll": "Copia Tutto",
+      "ordersFor": "--- ORDINI PER {{player}} ---",
+      "attack": "Attacco",
+      "unknown": "SCONOSCIUTO"
+    },
+    "alerts": {
+      "confirmClear": "Tutti i piani inclusa l'intelligence saranno eliminati. Sei sicuro?",
+      "cleared": "🧹 Dati cancellati!",
+      "enterTribeTag": "Inserisci il Tag Tribù!",
+      "selectTarget": "Seleziona un obiettivo.",
+      "snobLimitExceeded": "⚠️ Avviso: Limite nobile ({{limit}}) superato! Aggiungere comunque?",
+      "orderAdded": "✅ Ordine Aggiunto!",
+      "confirmClearQueue": "Sei sicuro di voler cancellare l'intera coda?",
+      "queueCleared": "🗑️ Coda Cancellata!",
+      "copied": "Copiato!"
+    },
+    "columns": {
+      "no": "No",
+      "player": "Giocatore",
+      "source": "Origine",
+      "target": "Obiettivo",
+      "departure": "Partenza",
+      "arrival": "Arrivo",
+      "unit": "Unità",
+      "distance": "Distanza",
+      "travelTime": "Viaggio",
+      "attackLink": "Azione"
+    },
+    "units": {
+      "spear": "Lancia", "sword": "Spada", "axe": "Ascia", "spy": "Esploratore",
+      "light": "Leggera", "heavy": "Pesante", "ram": "Ariete", "catapult": "Cat",
+      "knight": "Paladino", "snob": "Nobile"
+    },
+    "profiles": {
+      "quarter": "Quarto",
+      "half": "Metà",
+      "threeQuarters": "Tre Quarti",
+      "full": "Pieno",
+      "kami": "Nuke",
+      "sav": "Dif",
+      "empty": "Nuovo/Vuoto"
+    }
+  },
+  "coinMinter": {
+    "title": "💰 Pianificatore Monete d'Oro (Hub)",
+    "dataInput": "Inserimento Dati",
+    "allVillagesCoords": "Coordinate Tutti i Tuoi Villaggi:",
+    "villagesPlaceholder": "510|621, 510|622 (Estrae anche dal testo)",
+    "hubCountLabel": "Quanti Villaggi Hub?",
+    "calculateBtn": "⚙️ Trova Migliori Hub",
+    "resultsTitle": "🎯 Hub Pianificati ({{count}})",
+    "hubCardHeader": "Hub:",
+    "hubCardSub": "Riceverà Risorse da {{count}} Villaggi",
+    "hubCardBody": "Villaggi che Inviando Risorse:",
+    "onlySelf": "Solo se stesso...",
+    "mapInfoTitle": "Info Mappa:",
+    "mapInfoCenter": "Punto Bianco Grande:",
+    "mapInfoCenterDesc": "Villaggi Hub (Coniatura Monete)",
+    "mapInfoSender": "Punti Colorati:",
+    "mapInfoSenderDesc": "Villaggi che Inviando Risorse",
+    "mapInfoLines": "Linee:",
+    "mapInfoLinesDesc": "Direzione Flusso Risorse",
+    "alerts": {
+      "noVillage": "Inserisci almeno una coordinata di villaggio!",
+      "invalidHubCount": "Il conteggio hub non può superare il conteggio villaggi e deve essere maggiore di 0."
+    }
+  },
+  "fastSupport": {
+    "title": "🛡️ Centro Pianificazione Supporto Rapido",
+    "step1": {
+      "title": "1. Trova i Villaggi della Tua Tribù",
+      "worldUrl": "URL Mondo",
+      "clanTag": "Tag Tribù",
+      "updateBtn": "Aggiorna Villaggi",
+      "status": {
+        "scanning": "Scansione villaggi tribù...",
+        "notFound": "❌ Tribù non trovata! Controlla l'abbreviazione.",
+        "success": "✅ Successo! Villaggi Supporto Totali: {{count}}",
+        "error": "❌ Errore: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Obiettivo da Difendere e Tempo",
+      "targetCoord": "Coordinata Obiettivo",
+      "targetPlaceholder": "es., 564|554",
+      "arrivalTime": "Ora Arrivo Obiettivo",
+      "slowestUnit": "Velocità Unità Più Lenta"
+    },
+    "results": {
+      "title": "Supporti Disponibili ({{count}})",
+      "allTribe": "Intera Tribù",
+      "noVillages": "Nessun villaggio trovato che possa raggiungere questo obiettivo al tempo selezionato!",
+      "mapTarget": "🛡️ Obiettivo"
+    },
+    "bbcode": {
+      "title": "📋 Chiamata Forum (BBCode)",
+      "copyAll": "Copia Tutto",
+      "target": "🎯 Obiettivo:",
+      "arrivalTime": "⏱️ Ora Arrivo:",
+      "unitSpeed": "🛡️ Velocità Unità:",
+      "sendSupport": "Invia Supporto",
+      "supportLink": "🛡️ Invia Supporto"
+    },
+    "alerts": {
+      "enterTribeTag": "Inserisci il Tag Tribù!",
+      "copied": "Copiato!"
+    },
+    "columns": {
+      "player": "Giocatore",
+      "source": "Origine",
+      "distance": "Distanza",
+      "time": "Tempo",
+      "departure": "Ora Partenza"
+    },
+    "units": {
+      "spear": "Lancia", "sword": "Spada", "archer": "Arciere", "spy": "Esploratore", "heavy": "Pesante", "catapult": "Catapulta", "knight": "Paladino"
+    }
+  },
+  "mapAnalysis": {
+    "title": "Analisi Continente e Mappa",
+    "bypassActive": "🕵️ Bypass Attivo",
+    "bypassAlertOn": "🕵️ MODALITÀ SEGRETA ATTIVA: Tempo di attesa di 1 ora bypassato! Verranno recuperati dati freschi ogni volta.",
+    "bypassAlertOff": "🔒 MODALITÀ SEGRETA NON ATTIVA: Protezione cache di 1 ora abilitata.",
+    "enterWorldUrl": "Inserisci un URL mondo!",
+    "fetchError": "Errore nel recupero dati. Assicurati che il link sia corretto.\nErrore: {{error}}",
+    "clearConfirm": "Tutti i dati, archivi e cronologia teletrasporto saranno eliminati. Sei sicuro?",
+    "status": {
+      "waiting": "In attesa di dati...",
+      "cached": "Caricato dalla cache! (Dati ultimi: {{time}})",
+      "downloading": "Download dati dal server... (Potrebbe richiedere 10-15 sec)",
+      "analyzing": "Download completato, analisi...",
+      "empty": "Nessun dato da elaborare!",
+      "success": "SUCCESSO: {{villages}} villaggi, {{players}} giocatori caricati.",
+      "cleared": "Archiviazione completamente cancellata."
+    },
+    "timeMsg": {
+      "cached": "⏳ Mostra dati cache. Ultimo recupero: {{time}}",
+      "new": "⏳ Dati nuovi recuperati. Attendi il prossimo recupero per rilevare teletrasporti...",
+      "diff": "Intervallo Tempo: Sono passati {{hours}} ore {{mins}} minuti dall'analisi precedente."
+    },
+    "sections": {
+      "autoFetch": "1. Recupero Automatico Dati (Consigliato)",
+      "worldUrlLabel": "URL Mondo (es., https://en136.tribalwars.net):",
+      "downloadBtn": "🌍 Scarica ed Elabora Dati",
+      "archive": "2. Archivio Dati",
+      "selectArchive": "-- Seleziona Archivio --",
+      "loadBtn": "📂 Carica",
+      "saveBtn": "💾 Archivia Attuale",
+      "manual": "3. Inserimento Dati Manuale (Se Errore)",
+      "processManualBtn": "⚙️ Elabora Dati Manuali",
+      "clearStorageBtn": "🗑️ Resetta Archiviazione"
+    },
+    "teleports": {
+      "title": "🚀 Rilevamenti Teletrasporto ({{count}})",
+      "showAllBtn": "🗺️ Mostra Tutto sulla Mappa",
+      "continentTitle": "Teletrasporti al Continente {{cont}} ({{count}} giocatori)",
+      "old": "Vecchio:",
+      "new": "Nuovo:",
+      "showBtn": "📍 Mostra",
+      "none": "Nessun teletrasporto rilevato o il secondo recupero non è stato ancora fatto.",
+      "info": "* Il sistema raccoglie dati sulla prima analisi. Nelle analisi successive, rileva villaggi che hanno cambiato coordinate e continua a elencarli storicamente fino alla cancellazione.",
+      "datePrefix": "🗓️"
+    },
+    "analysis": {
+      "title": "🌍 Analisi Continente",
+      "player": "Giocatore:",
+      "barbarian": "Barbaro:",
+      "villages": "villaggi",
+      "noTribe": "Nessuna Tribù",
+      "farmRatio": "🎯 Barbari per Giocatore:"
+    },
+    "map": {
+      "title": "Vista Mappa",
+      "gray": "Grigio:",
+      "oldPos": "Posizione Vecchia",
+      "red": "Rosso:",
+      "newPos": "Posizione Nuova",
+      "closeBtn": "Chiudi"
+    },
+    "barbarian": "Barbaro"
+  },
+  "opPlanner": {
+    "title": "⚔️ Pianificatore Operazione Individuale",
+    "step1": {
+      "title": "1. Connessione Dati",
+      "clearData": "Cancella Tutti i Dati",
+      "worldUrl": "URL Mondo:",
+      "playerName": "Il Tuo Nome Giocatore:",
+      "fetchBtn": "Recupera / Aggiorna Dati"
+    },
+    "step2": {
+      "title": "2. Tuoi Villaggi Origine e Selezione Unità ({{count}})",
+      "info": "Puoi selezionare tutte le unità che saranno inviate dal villaggio. Il motore di abbinamento si alimenta da qui.",
+      "village": "Villaggio",
+      "unitSelection": "Selezione Unità (Più possono essere selezionate)"
+    },
+    "step3": {
+      "title": "3. Villaggi Obiettivo",
+      "maxSnobDist": "Limite Distanza Nobile Max:",
+      "placeholder": "Incolla le coordinate obiettivo qui (es., 586|441, 587|442 dentro il testo va bene)",
+      "detectedTargets": "Obiettivi Rilevati: {{count}}",
+      "mapLegend": {
+        "target": "Obiettivo",
+        "spearLight": "Lancia/Leggero",
+        "ramKami": "Ariete/Nuke",
+        "snob": "Nobile",
+        "spy": "Esploratore"
+      }
+    },
+    "step4": {
+      "title": "4. Pianificazione e Motore Abbinamento Tempo",
+      "modeArrival": "Conosco l'Ora Arrivo Obiettivo",
+      "modeDeparture": "Conosco l'Ora Partenza Villaggio",
+      "dateTime": "Data e Ora:",
+      "sourceVillage": "Villaggio Origine:",
+      "allSourcesUsed": "Tutte le Origini Usate",
+      "unitToSend": "Unità da Inviare:",
+      "selectSourceFirst": "Seleziona Origine Prima",
+      "noUnitsLeft": "Nessuna Unità Rimanente",
+      "target": "Obiettivo:",
+      "calcAndAddBtn": "➕ CALCOLA E AGGIUNGI"
+    },
+    "queue": {
+      "title": "Coda Operazione ({{count}} Ordini)",
+      "clearQueue": "Cancella Intera Coda",
+      "delete": "Elimina"
+    },
+    "bbcode": {
+      "title": "📋 Modello BBCode per Blocco Note",
+      "copyAll": "Copia Tutto",
+      "selectCols": "Seleziona Colonne:",
+      "attack": "Attacco",
+      "unknown": "SCONOSCIUTO"
+    },
+    "status": {
+      "cached": "Dati caricati dalla cache. (Clicca il pulsante 13 volte per forzare l'aggiornamento)",
+      "fetching": "Recupero dati dal server... Attendi.",
+      "playerNotFound": "Giocatore non trovato! Assicurati di aver digitato il nome correttamente.",
+      "success": "Successo! Giocatore trovato e {{count}} villaggi elencati.",
+      "error": "Errore: {{msg}}"
+    },
+    "alerts": {
+      "enterWorldUrl": "Inserisci un URL mondo!",
+      "enterPlayerName": "Inserisci il tuo nome giocatore!",
+      "confirmClear": "Tutti i piani, origini e obiettivi (eccetto Passo 1) saranno eliminati. Sei sicuro?",
+      "selectMatch": "Seleziona Origine, Obiettivo e Unità per abbinamento.",
+      "snobLimitExceeded": "⚠️ Avviso: La distanza selezionata ({{dist}} unità) supera il limite distanza nobile massima ({{limit}})!",
+      "confirmClearQueue": "Sei sicuro di voler cancellare l'intera coda?",
+      "copied": "Copiato!"
+    },
+    "columns": {
+      "no": "No",
+      "source": "Villaggio Origine",
+      "target": "Obiettivo",
+      "departure": "Ora Partenza",
+      "arrival": "Ora Arrivo",
+      "unit": "Unità",
+      "distance": "Distanza",
+      "travelTime": "Tempo Viaggio",
+      "attackLink": "Link Azione"
+    },
+    "units": {
+      "spear": "Lanciere", "sword": "Spadaccino", "axe": "Asciere", "spy": "Esploratore",
+      "light": "Cavalleria Leggera", "heavy": "Cavalleria Pesante", "ram": "Ariete", "catapult": "Catapulta",
+      "knight": "Paladino", "snob": "Nobile", "archer": "Arciere", "marcher": "Arciere a Cavallo", "militia": "Milizia"
+    }
+  },
+  "productionData": {
+    "title": "Pianificatore Produzione",
+    "worldSpeed": "Velocità Mondo:",
+    "mineSpeed": "Fattore Produzione Risorse:",
+    "totalFactor": "Moltiplicatore Totale: {{speed}}x",
+    "empireProdTitle": "👑 Produzione Generale ({{count}} Villaggi)",
+    "hourlyProd": "⏳ Produzione Oraria Totale",
+    "dailyProd": "📅 Produzione Giornaliera Totale",
+    "resources": {
+      "wood": "Legno:",
+      "clay": "Argilla:",
+      "iron": "Ferro:"
+    },
+    "villageManagement": "Gestione Villaggio",
+    "resetBtn": "Ripristina",
+    "newVillageBtn": "+ Nuovo Villaggio",
+    "villageNamePrefix": "Villaggio",
+    "bonus": {
+      "label": "Bonus:",
+      "none": "Nessuno",
+      "all": "Tutte le Risorse",
+      "wood": "Solo Legno",
+      "clay": "Solo Argilla",
+      "iron": "Solo Ferro"
+    },
+    "lvl": "Liv",
+    "clearConfirm": "Vuoi ripristinare tutti i villaggi?",
+    "referenceTable": {
+      "title": "📚 Tabella Info Livello (0% Bonus Basato)",
+      "hide": "Nascondi",
+      "show": "Mostra",
+      "cols": {
+        "level": "Liv",
+        "hourly": "Prod Oraria ({{speed}}x)",
+        "storage": "Capacità Stoccaggio",
+        "farm": "Capacità Fattoria"
+      },
+      "perHour": "/ ora"
+    }
+  },
+  "unitCalculator": {
+    "title": "Calcolatore Produzione Truppe",
+    "settings": {
+      "basic": "🌍 Impostazioni Base",
+      "worldSpeed": "Velocità Mondo:",
+      "barracksLevel": "Livello Caserma (Max 25):",
+      "stableLevel": "Livello Stalla (Max 20):",
+      "workshopLevel": "Livello Officina (Max 15):",
+      "speedBonus": "⚡ Bonus Velocità (%)",
+      "barracksBonus": "Bonus Oggetto Caserma:",
+      "stableBonus": "Bonus Oggetto Stalla:",
+      "workshopBonus": "Bonus Oggetto Officina:",
+      "flagRecruit": "Bandiera Reclutamento:",
+      "costBonus": "💰 Costo e Extra (%)",
+      "massRecruit": "Bonus Reclutamento di Massa:",
+      "costReduction": "Riduzione Risorse (Costo):",
+      "resetBtn": "🗑️ Ripristina Conti"
+    },
+    "table": {
+      "unit": "Unità",
+      "count": "Quantità da Produrre",
+      "wood": "Legno",
+      "clay": "Argilla",
+      "iron": "Ferro",
+      "pop": "Popolazione",
+      "time": "Tempo Produzione"
+    },
+    "summary": {
+      "costTitle": "Costo Generale",
+      "woodReq": "Legno Richiesto:",
+      "clayReq": "Argilla Richiesta:",
+      "ironReq": "Ferro Richiesto:",
+      "totalPop": "Popolazione Totale:",
+      "queueTitle": "Tempi Coda Costruzione",
+      "barracksTotal": "Totale Caserma:",
+      "stableTotal": "Totale Stalla:",
+      "workshopTotal": "Totale Officina:"
+    },
+    "time": {
+      "day": "g",
+      "hour": "o",
+      "minute": "m",
+      "second": "s",
+      "none": "-"
+    },
+    "units": {
+      "spear": "Lanciere", "sword": "Spadaccino", "axe": "Asciere", "archer": "Arciere",
+      "spy": "Esploratore", "lc": "Cavalleria Leggera", "ma": "Arciere Montato", "hc": "Cavalleria Pesante",
+      "ram": "Ariete", "cat": "Catapulta"
+    }
+  },
+  "mapGenerator": {
+    "title": "Generatore Mappa Avanzato",
+    "worldUrl": "URL Mondo:",
+    "fetchBtn": "Recupera / Aggiorna Dati",
+    "generateBtn": "🗺️ GENERA MAPPA",
+    "status": {
+      "noUrl": "Inserisci un URL mondo!",
+      "cached": "Caricato dalla cache! (Ultimo aggiornamento: {{time}})",
+      "fetching": "Recupero dati dal server...",
+      "success": "Dati recuperati con successo!",
+      "error": "Errore: {{msg}}"
+    },
+    "settings": {
+      "title": "Impostazioni Mappa",
+      "zoom": "Zoom %",
+      "center": "Centro (X|Y)",
+      "markersOnly": "Solo Marcatori",
+      "showAbandons": "Mostra Barbari",
+      "largerMarkers": "Marcatori Più Grandi",
+      "bgColor": "Colore Sfondo",
+      "dullBg": "Sfondo Opaco",
+      "showGrid": "Griglia Continente",
+      "showContinentNums": "Numeri Continente"
+    },
+    "players": {
+      "title": "Marcatori Giocatore",
+      "searchPlaceholder": "Cerca e Aggiungi Giocatore...",
+      "points": "Punti",
+      "selectTop25": "Seleziona Top 25",
+      "selectTop50": "Seleziona Top 50",
+      "clearSelection": "Cancella Selezione",
+      "noPlayers": "Nessun giocatore selezionato ancora.",
+      "deleteBtn": "Elimina"
+    },
+    "tribes": {
+      "title": "Marcatori Tribù",
+      "searchPlaceholder": "Cerca Tribù (Nome o Tag)...",
+      "selectAll": "Seleziona Tutto",
+      "clearSelection": "Cancella Selezione",
+      "selectTop25": "Seleziona Solo Top 25",
+      "noData": "Nessun dato recuperato ancora.",
+      "deleteBtn": "Elimina"
+    }
+  }
+}

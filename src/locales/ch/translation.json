@@ -1,0 +1,860 @@
+{
+  "menu": {
+    "title": "TW Cobre",
+    "stats": "Live Statistike",
+    "visitsTitle": "Total Bsücher",
+    "mapsTitle": "Generierti Karten",
+    "opsTitle": "Geplanti Operatione",
+    "simsTitle": "Durchgführti Simulatione",
+    "visits": "Bsücher",
+    "maps": "Karten",
+    "developer": "Entwickler",
+    "items": {
+      "buildingTimes": "Bauziite-Rechner",
+      "mapAnalysis": "Kontinent- & Karten-Analyse",
+      "mapGenerator": "Karten-Generator",
+      "productionData": "Produktions-Rechner",
+      "coinMinter": "Goldmünz-Planer",
+      "buildingPlanner": "Bau-Planer (Queue)",
+      "unitCalculator": "Truppe-Produktions-Rechner",
+      "churchPlanner": "Kirche-Planer",
+      "opPlanner": "Individuelle Op-Planer",
+      "clanOp": "Stamm-Operations-Planer",
+      "clanTroop": "Stamm-Operations-Planer (Erweitert)",
+      "fastSupport": "Schnell-Support-Planung",
+      "scavengingPlanner": "Plünderziite-Rechner"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Willkomme bi TW Cobre",
+      "subtitle": "Der Sieg isch verborge i de Details und em perfekte Plan. Spar Ziit i dinnere Tribal Wars-Räis und erstell strategischi Plän, wo dinnere Stamm zum Sieg füere. Wähl e Tool us, zum Aafange."
+    },
+    "tools": {
+      "opPlanner": { "title": "Persönliche Operations-Planer", "desc": "Pass Quell- und Ziel-Dörfer a, zum e perfekte Operations-Vorlag erstelle (BBCode)." },
+      "buildingPlanner": { "title": "Bau-Planer", "desc": "Design din Dorf-Bauplan Schritt für Schritt mit erweiterte Queue-Simulation." },
+      "unitCalculator": { "title": "Truppe-Produktions-Rechner", "desc": "Berech Truppe-Produktionsziite für Kasern, Stall und Wärkstatt, inklusive Bonusse." },
+      "mapGenerator": { "title": "Karten-Generator", "desc": "Generier aktuelli, gfärbti dynamischi Weltkarte für Stamm-Foren." },
+      "mapAnalysis": { "title": "Kontinent-Analyse", "desc": "Analysier Stamm- und Spieler-Kontinent-Dominanze uf de Weltkart." },
+      "productionData": { "title": "Produktions-Rechner", "desc": "Optimier Mine-Produktionsrate, Speicher-Kapazitäte und Füllziite." },
+      "coinMinter": { "title": "Goldmünz-Planer", "desc": "Find das ideale Dorf für Goldmünz-Prägung." },
+      "churchPlanner": { "title": "Kirche-Planer", "desc": "Optimier dini Kirchen-Abdeckung uf de Kart mit ere Bevölkerung-sparende Algorithmus." },
+      "buildingTimes": { "title": "Bauziite-Rechner", "desc": "Berech und verglich Bauziite für verschideni Level bis uf d Sekund." },
+      "clanOp": { "title": "Stamm-Operations-Planer", "desc": "Analysier alli Stamm-Dörfer und mach intelligenti Zuweisunge. Verteilt personalisiert BBCode-Befehl a d Mitglieder mit kart-unterstützte Staff-Intelligence." },
+      "clanTroop": { "title": "Stamm-Operations-Planer (mit Truppe)", "desc": "Analysier alli Stamm-Truppe und mach intelligenti Zuweisunge. Verteilt personalisiert BBCode-Befehl a d Mitglieder mit kart-unterstützte Staff-Intelligence." },
+      "fastSupport": { "title": "Schnell-Support-Finder", "desc": "Erstell e Support-Aaforderung, zum schnäll Support z bekomme." },
+      "scavengingPlanner": { "title": "Plünderziite-Rechner", "desc": "Verglich Plünderziite im Detail." }
+    }
+  },
+  "footer": {
+    "text1": "Erweiterte Planungs-Tools für Tribal Wars",
+    "text2": "© 2026 TW Cobre | Entwickler: ",
+    "links": {
+      "about": "Über",
+      "privacy": "Datenschutz & GDPR"
+    }
+  },
+  "aboutPage": {
+    "title": "Über",
+    "p1": "Hallo, ich bin Anto Bvb 66.",
+    "p2": "TW Cobre isch e elite Taktik-Panel und Kommando-Zentrale, entwickelt für d Verarbeitung vo Rohdate vo Clan (Tribal Wars) Spieler und hilft ihne, strategischi Überlegenheit z erlange.",
+    "p3": "Vo Operations-Planung bis Räumungs-Analyse, alli Modul sind so designet, dass si Berechnunge löse, wo e Spieler Stunde bruuche würd, i Sekunde. Der Sieg isch i de Details verborge!"
+  ,"contactTitle": "Fehler-Meldig & Kontakt",
+  "contactDesc": "Du chasch mer direkt e E-Mail schicke, wenn du e Fehler gfundä hesch, öppis fehlt oder du e Verbesserigsvorschlag hesch.",
+  "emailButton": "E-Mail sende"
+  },
+  "privacyPage": {
+    "title": "Datenschutz-Richtlinie und KVKK",
+    "p1": "TW Cobre respektiert d Benutzer-Datenschutz am höchste. I Übereinstimmung mit Datenschutz-Gsetz (GDPR) und internationale Standards isch unsri Datums-Verarbeitungs-Richtlinie wie folgt:",
+    "items": {
+      "i1": "Konto-Sicherheit: TW Cobre verlangt NIE, speichert oder hostet din Tribal Wars-Konto-Passwort, E-Mail oder persönlichi Session-Information uf sinere Server.",
+      "i2": "Lokali Speicherung: Dini Setting (Welt-Gschwindigkeit, Truppe-Zähle, Dorf-Koordinate, etc.) werde nur i dinnere eigene Browser (Local Storage / Session Storage) gspeichert, damit si nöd verlore gehn, wenn du d Syte neu ladisch.",
+      "i3": "Externi Date-Zugriff: D Karten- und Analyse-Modul verarbeite allgemeini Welt-Date, öffentlich bereitgstellt vo Tribal Wars i Echtziit. Die Operation passiert eimol pro Stund. I Übereinstimmung mit Spiel-Regle, enthalte die Date nur allgemeini Dorf- und Spieler-Information und nöd dini persönlichi Date.",
+      "i4": "Statistike: Bsücher- und Karten-Generierungs-Zähler uf unsri Syte sind nur numerischi Date; si werde nöd mit dinnere IP-Adress oder Identität verknüpft."
+    },
+    "p2": "Mit em Benutze vo TW Cobre stimmsch du zue, dass dini Date sicher uf dinnere Gerät verarbeitet werde und dass din Datenschutz gschützt isch."
+  },
+  "buildingPlanner": {
+    "title": "🏗️ TW Bau-Planer (Queue-Simulation)",
+    "worldSpeed": "Welt-Gschwindigkeit:",
+    "mineSpeed": "Ressource-Produktions-Faktor:",
+    "btn": {
+      "import": "📥 Bau-Queue lade",
+      "export": "📤 Bau-Queue exportiere",
+      "clear": "🗑️ Lösche",
+      "addQueue": "Lade",
+      "copyBoard": "I d Zwischenablage kopiere",
+      "close": "Schliesse",
+      "delete": "Lösche"
+    },
+    "modal": {
+      "importTitle": "📥 Füeg d kopierti Bau-Queue vom Spiel ii",
+      "exportTitle": "📤 Dini Queue-Ausgab (Du chasch kopiere)",
+      "importPlaceholder": "Hauptquartier +1 (Level 1)\n10 Punkte\n...",
+      "success": "✅ Erfolg! {{count}} Gebäude zuegfüegt zur Queue.",
+      "error": "❌ Kei gültigi Vorlag gfunde. Bitte überprüef din kopierti Text.",
+      "copied": "Kopiert!",
+      "exportPrefix": "Bau-Queue",
+      "levelLabel": "Level",
+      "pointsLabel": "Punkte"
+    },
+    "levelsTitle": "🏠 Aktuelli Gebäude-Level (Zeig / Versteck)",
+    "analysis": {
+      "title": "⏳ Queue-Analyse und Wartziite (Zeig/Hide)",
+      "withWait": "⏳ Ziit mit Ressource-Wart: {{time}}",
+      "withoutWait": "⚡ Ziit ohni Ressource-Wart: {{time}}",
+      "bottleneckTitle": "🚨 Schritt, wo d Queue verlangsamt:",
+      "wood": "Holz",
+      "clay": "Lehm",
+      "iron": "Eise",
+      "order": "Ordnung",
+      "level": "Level",
+      "waitingFor": "Wart uf",
+      "waitingSuffix": "für Ressource.",
+      "missing": "Fehlendi Beträg",
+      "perfect": "🎉 Super! Es git kei Ressource-Wartziit i dere Queue. D Bau werde ohni Unterbruch wiitergehn."
+    },
+    "summary": {
+      "title": "Queue-Zusammenfassung (Klick Gebäude zum Zuefüege)",
+      "max": "Am maximale Level",
+      "add": "Zuefüege zur Queue"
+    },
+    "columnsToggle": "👁️ Tabellen-Spalte Zeig / Versteck",
+    "columns": {
+      "order": "Ordnung",
+      "expectedWait": "Erwarteti Wart",
+      "building": "Gebäude",
+      "level": "Level",
+      "buildTime": "Bauziit",
+      "startTime": "Startziit",
+      "endTime": "Endziit",
+      "points": "Punkte",
+      "cost": "Koste (Holz/Lehm/Eise)",
+      "resWait": "Ressource-Wartziit",
+      "currentStorage": "Aktuelli Speicher",
+      "hourlyProd": "Stündlichi Produktion",
+      "pop": "Bevölkerung",
+      "storage": "Speicher",
+      "desc": "Beschribung",
+      "action": "Aktion"
+    },
+    "status": {
+      "storageFull": "∞ (Speicher voll)",
+      "storageLimit": "Unzureichendi Speicher!",
+      "requirement": "Voraussetzung",
+      "waitingRes": "Wart uf Ressource.",
+      "farmLimit": "Unzureichendi Farm!",
+      "maxLevel": "Max Level!"
+    },
+    "fastAdd": {
+      "placeholder": "Tippe oder wähl...",
+      "modeActive": "Tastatur-Modus aktiv:",
+      "info": "Du chasch schnell zuefüege, indem du de Gebäude-Name tippsch und Enter drücksch.",
+      "dragTitle": "Zieh zum Ordnung ändere"
+    },
+    "daysShort": "d",
+    "buildings": {
+      "hq": "Hauptquartier",
+      "barracks": "Kasern",
+      "stable": "Stall",
+      "workshop": "Wärkstatt",
+      "first_church": "Ersti Kirche",
+      "church": "Kirche",
+      "watchtower": "Wachturm",
+      "academy": "Akademie",
+      "smithy": "Schmied",
+      "rally": "Sammelplatz",
+      "statue": "Statue",
+      "market": "Markt",
+      "wood": "Holzfäller",
+      "clay": "Lehmgrueb",
+      "iron": "Eisegrueb",
+      "farm": "Farm",
+      "ware": "Speicher",
+      "hiding": "Versteck",
+      "wall": "Muur"
+    }
+  },
+  "buildingTimes": {
+    "title": "⏱️ Bauziite-Vergleich",
+    "worldSpeed": "Welt-Gschwindigkeit:",
+    "panel1": "Plan A (Referenz)",
+    "panel2": "Plan B (Vergleich)",
+    "hqLevel": "Hauptquartier-Level:",
+    "buildingToUpgrade": "Gebäude zum Ufbau:",
+    "currentLevel": "Aktuelli Level:",
+    "targetLevel": "Ziel-Level:",
+    "totalTime": "Total Ziit:",
+    "comparisonResult": "⚡ Vergleichs-Ergebnis:",
+    "panel2Faster": "Plan B wird {{time}} schneller fertig als Plan A!",
+    "panel1Faster": "Plan A wird {{time}} schneller fertig als Plan B!",
+    "tableTitle": "📊 Alli Gebäude Level-Ziite-Tabell",
+    "tableHqLevel": "Tabell HQ-Level:",
+    "level": "Level",
+    "dragTitle": "Zieh zum Position ändere",
+    "tip": "Tipp: Du chasch d Header (z.B. 'Kasern') links oder rechts zieh, zum Spalte-Ordnung z ändere.",
+    "time": {
+      "day": "d",
+      "hour": "Std",
+      "minute": "Min",
+      "second": "Sek",
+      "zero": "0 Sek"
+    },
+    "buildings": [
+      "Hauptquartier (HQ)", "Kasern", "Stall", "Wärkstatt", "Ersti Kirche", "Kirche",
+      "Wachturm", "Akademie", "Schmied", "Sammelplatz", "Statue", "Markt",
+      "Holzfäller", "Lehmgrueb", "Eisegrueb", "Farm", "Speicher", "Versteck",
+      "Adliger", "Goldmünz", "Muur"
+    ]
+  },
+  "scavenging": {
+    "title": "Plünder-Rechner",
+    "settings": {
+      "title": "🌍 Welt- und Produktions-Setting",
+      "worldSpeed": "Welt-Gschwindigkeit:",
+      "mineSpeed": "Ressource-Produktions-Faktor:",
+      "woodLevel": "Holzfäller-Level:",
+      "clayLevel": "Lehmgrueb-Level:",
+      "ironLevel": "Eisegrueb-Level:",
+      "worldConstant": "Welt-Konstant:",
+      "resHourly": "Ressource-Produktion:"
+    },
+    "production": {
+      "perMin": "/ Min",
+      "perHour": "/ Std",
+      "perDay": "/ Tag"
+    },
+    "troops": {
+      "title": "⚔️ Truppe-Zähle und Flagge",
+      "carryFlag": "Tragkapazität-Flagge (%):",
+      "resFlag": "Ressource-Produktions-Flagge (%):",
+      "totalCap": "Plünder-Kapazität (Ohni Flagge):",
+      "totalCapFlag": "Total Kapazität (Trag-Flagge):",
+      "totalRes": "Ressource-Produktion (Ohni Flagge):",
+      "totalResFlag": "Ressource-Produktion (Res-Flagge):"
+    },
+    "results": {
+      "title": "🏆 Meist profitable Strategie-Ranking",
+      "chartTitle": "📊 Strategie-Vergleichs-Chart (Top 10)",
+      "totalDaily": "Total täglich",
+      "scavenge": "Plünder",
+      "resource": "Produktion",
+      "perMin": "min",
+      "perHour": "std",
+      "perDay": "tag",
+      "maxTrip": "Längsti Trip-Ziit",
+      "dayShort": "/d",
+      "hourShort": "/h",
+      "minShort": "/m",
+      "modes": {
+        "eqTime": "Gleichi Ziit",
+        "eqCap": "Gleichi Kapazität"
+      },
+      "flags": {
+        "none": "Kei Flagge",
+        "carry": "Trag-Flagge",
+        "res": "Res-Flagge"
+      },
+      "options": {
+        "c1234": "1-2-3-4 Freigschaltet",
+        "c123": "1-2-3 Freigschaltet",
+        "c234": "2-3-4 Freigschaltet",
+        "c12": "1-2 Freigschaltet",
+        "c23": "2-3 Freigschaltet"
+      }
+    },
+    "reference": {
+      "title": "📈 Break-Even-Punkt (Kapazität-Referenz-Tabell)",
+      "info": "Kei Truppe agäh. D Tabell unten zeigt gschätzt täglichi Beut für Gleichi Ziit vs Gleichi Kapazität Strategie bi verschidene Kapazität-Level (annahmend 1-2-3-4 freigschaltet).",
+      "cap": "Beispiel-Kapazität",
+      "eqTimeDaily": "Gleichi Ziit (Täglich)",
+      "eqCapDaily": "Gleichi Kap. (Täglich)",
+      "winner": "Vorteilhafte Taktik"
+    },
+    "chart": {
+      "title": "📈 Tägliche Beut-Kurve no Kapazität (Gleichi Ziit & Ohni Flagge)",
+      "worldConstantInfo": "Generiert basierend uf Welt-Konstant ({{constant}}).",
+      "unlocked": "Freigschaltet",
+      "infoTitle": "💡 Kritische Umkehr-Punkt (Break-Even)",
+      "be1": "🔸 Nach {{cap}} Kapazität: 1-2-3-4 Taktik überholt 2-3-4 und wird profitabler.",
+      "be2": "🔸 Nach {{cap}} Kapazität: 1-2-3 Taktik überholt 2-3."
+    }
+  },
+  "churchPlanner": {
+    "title": "⛪ Optimum Kirche-Planer",
+    "dataInput": "Date-Iigab",
+    "allVillagesCoords": "Alli dini Dorf-Koordinate:",
+    "villagesPlaceholder": "510|621, 510|622 (Extrahiert us Text au)",
+    "existingChurchesLabel": "Bestehendi Kirche (Optional):",
+    "existingChurchesPlaceholder": "z.B., 506|496 3 (X|Y Level)",
+    "includeFirstChurch": "Ersti Kirche inkludere?",
+    "calculateBtn": "⚙️ Optimal Plan berechne",
+    "alertNoVillage": "Bitte gib mindestens ei Dorf-Koordinat ii!",
+    "resultsTitle": "Ergebnis ({{count}} Kirche)",
+    "existing": "Bestehend",
+    "firstChurch": "Ersti Kirche",
+    "normalChurch": "Normal Kirche",
+    "lvl": "Lvl",
+    "coversVillages": "Abgedeckti Dörfer",
+    "warningUncovered": "⚠️ Warnig: {{count}} Dörfer sind ungschützt.",
+    "coveredVillage": "Abgedeckt Dorf",
+    "uncoveredVillage": "Ungschützt Dorf"
+  },
+  "clanOp": {
+    "title": "🛡️ Stamm-Operations-Planer",
+    "step1": {
+      "title": "1. Find dini Stamm-Dörfer",
+      "clearAll": "🧹 Alli Date lösche",
+      "worldUrl": "Welt-URL",
+      "clanTag": "Stamm-Tag",
+      "runIntel": "Dörfer finde",
+      "status": {
+        "gathering": "Information sammele: Alli Welt-Spieler und Dörfer scanne...",
+        "notFound": "❌ Stamm nöd gfunde! Überprüef de Tag.",
+        "success": "✅ Erfolg! Stamm-ID: {{clanId}} | Mitglieder: {{memberCount}} | Total Dörfer: {{villageCount}}",
+        "error": "❌ Fehler: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Ziel-Dörfer",
+      "snobLimit": "Adliger Distanz-Limit:",
+      "placeholder": "Ziel-Koordinate do ii füege...",
+      "foundTargets": "Gfundeni Ziele: {{count}}"
+    },
+    "step3": {
+      "title": "3. Intelligent Zuweisung Zentrum & Kart",
+      "arrivalTime": "Ziel-Ankunftsziit:",
+      "targetsTitle": "Dini Ziele (Klick zum Wäle)",
+      "points": "Punkte",
+      "p": "P",
+      "distance": "Distanz:"
+    },
+    "manualAssign": {
+      "title": "👤 Freii Spieler-Zuweisung",
+      "selectPlayer": "-- Spieler wäle --",
+      "assignBtn": "Zuweise",
+      "info": "*Füegt nur e Aufgab mit ere Ankunftsziit zum obe gwählte Ziel zue. D Spieler-Dörfer erschine au blau uf de Kart."
+    },
+    "tabs": {
+      "closest10": "Nächsti 10 Dörfer",
+      "furthest10": "Weitesti 10 Dörfer",
+      "selectPlayer": "Spieler wäle"
+    },
+    "suggestions": {
+      "noVillages": "Kei Dörfer zum Zeige.",
+      "kami": "Nuke schicke",
+      "snob": "Adlige schicke",
+      "fake": "Fake schicke",
+      "show": "Sichtbar mache",
+      "hide": "Verstecke"
+    },
+    "queue": {
+      "title": "Operations-Queue ({{count}} Befehl)",
+      "clear": "Ganz Queue lösche",
+      "delete": "Lösche",
+      "enemy": "Feind (Ziel)"
+    },
+    "bbcode": {
+      "title": "📋 BBCode-Vorlag für Notizblock",
+      "copyAll": "Alli kopiere",
+      "selectCols": "Spalte wäle:",
+      "ordersFor": "--- BEFEHL FÜR {{player}} ---",
+      "attack": "Angriff",
+      "viewTarget": "Ziel aaluege",
+      "unknown": "UNBEKANNT"
+    },
+    "alerts": {
+      "confirmClear": "Alli Plän, Ziele und versteckti Dörfer (usser Schritt 1 Welt/Stamm Info) werde glöscht. Bisch sicher?",
+      "cleared": "🧹 Alli Date glöscht!",
+      "enterTribeTag": "Bitte Stamm-Tag ii füege!",
+      "selectTarget": "Bitte e Ziel wäle.",
+      "selectTargetLeft": "Bitte e Ziel links wäle.",
+      "selectPlayer": "Bitte e Spieler us de List wäle.",
+      "snobLimitExceeded": "⚠️ Warnig: D gwählti Distanz ({{dist}}) überschreitet din gsetzt Adlige-Limit ({{limit}})!",
+      "orderAdded": "✅ Befehl zuegfüegt!",
+      "manualAdded": "✅ Freii Zuweisung zuegfüegt!",
+      "confirmClearQueue": "Bisch sicher, dass du d ganz Queue lösche wottsch?",
+      "queueCleared": "🗑️ Queue glöscht!",
+      "copied": "Kopiert!"
+    },
+    "columns": {
+      "no": "Nr",
+      "player": "Spieler",
+      "source": "Quell",
+      "target": "Ziel",
+      "departure": "Abgangsziit",
+      "arrival": "Ankunftsziit",
+      "unit": "Einheit",
+      "distance": "Distanz",
+      "travelTime": "Reiseziit",
+      "attackLink": "Aktion-Link"
+    },
+    "units": {
+      "spear": "Speerträger", "sword": "Schwertkämpfer", "axe": "Axtkämpfer", "spy": "Späher",
+      "light": "Leichte Kavallerie", "heavy": "Schwere Kavallerie", "ram": "Ram", "catapult": "Katapult",
+      "knight": "Paladin", "snob": "Adliger", "archer": "Bogenschütze", "marcher": "Marschierer", "militia": "Miliz"
+    },
+    "shortUnits": {
+      "ram": "Nuke",
+      "snob": "Adlige",
+      "catapult": "Fake",
+      "spy": "Späher"
+    }
+  },
+  "clanTroop": {
+    "title": "🦅 Stamm-Operations-Planer (Erweitert)",
+    "step1": {
+      "title": "1. Find dini Stamm-Dörfer",
+      "clear": "🧹 Date lösche",
+      "worldUrl": "Welt-URL",
+      "clanTag": "Stamm-Tag",
+      "run": "Dörfer finde",
+      "gathering": "Information sammele...",
+      "notFound": "❌ Stamm nöd gfunde!",
+      "success": "✅ Erfolg! Stamm-ID: {{clanId}} | Total Dörfer: {{villageCount}}",
+      "error": "❌ Fehler: {{msg}}"
+    },
+    "step2": {
+      "title": "2. Ziel-Dörfer",
+      "snobLimit": "Adliger Distanz-Limit:",
+      "placeholder": "Ziel-Koordinate do ii füege..."
+    },
+    "stepTroop": {
+      "title": "🛡️ Truppe-Date ii füege (Kopier/Einfüge)",
+      "placeholder": "Füeg Truppe-Date us Truppe-Übersicht (Tabell) oder CSV-Format ii (475|494,48,0,0...)...",
+      "detected": "Intelligence detektiert: {{count}} Dörfer",
+      "summaryTitle": "📊 Spieler-Profil-Zusammenfassung",
+      "idle": " (Idle: {{count}})",
+      "depleted": " (Erschöpft)"
+    },
+    "step3": {
+      "title": "📍 Intelligent Zuweisung Zentrum & Kart",
+      "arrivalTime": "Ziel-Ankunftsziit:",
+      "targetsTitle": "Dini Ziele (Klick zum Wäle)",
+      "distance": "Distanz:"
+    },
+    "tabs": {
+      "closest": "Nächsti 10 Dörfer",
+      "furthest": "Weitesti 10 Dörfer",
+      "player": "Spieler wäle",
+      "selectPlayer": "-- Spieler wäle --"
+    },
+    "suggestions": {
+      "noVillages": "Kei Dörfer gfunde.",
+      "kami": "Nuke schicke",
+      "snob": "Adlige schicke",
+      "fake": "Fake schicke",
+      "show": "Sichtbar mache",
+      "hide": "Verstecke",
+      "noIntel": " (Kei Intelligence)"
+    },
+    "queue": {
+      "title": "Operations-Queue ({{count}} Befehl)",
+      "clear": "Ganz Queue lösche",
+      "delete": "Lösche"
+    },
+    "bbcode": {
+      "title": "📋 BBCode-Vorlag für Notizblock",
+      "copyAll": "Alli kopiere",
+      "ordersFor": "--- BEFEHL FÜR {{player}} ---",
+      "attack": "Angriff",
+      "unknown": "UNBEKANNT"
+    },
+    "alerts": {
+      "confirmClear": "Alli Plän inklusive Intelligence werde glöscht. Bisch sicher?",
+      "cleared": "🧹 Date glöscht!",
+      "enterTribeTag": "Bitte Stamm-Tag ii füege!",
+      "selectTarget": "Bitte e Ziel wäle.",
+      "snobLimitExceeded": "⚠️ Warnig: Adlige-Limit ({{limit}}) überschritte! Trotzdem zuefüege?",
+      "orderAdded": "✅ Befehl zuegfüegt!",
+      "confirmClearQueue": "Bisch sicher, dass du d ganz Queue lösche wottsch?",
+      "queueCleared": "🗑️ Queue glöscht!",
+      "copied": "Kopiert!"
+    },
+    "columns": {
+      "no": "Nr",
+      "player": "Spieler",
+      "source": "Quell",
+      "target": "Ziel",
+      "departure": "Abgang",
+      "arrival": "Ankunft",
+      "unit": "Einheit",
+      "distance": "Distanz",
+      "travelTime": "Reise",
+      "attackLink": "Aktion"
+    },
+    "units": {
+      "spear": "Speer", "sword": "Schwert", "axe": "Axt", "spy": "Späher",
+      "light": "Leicht", "heavy": "Schwer", "ram": "Ram", "catapult": "Kat",
+      "knight": "Paladin", "snob": "Adlige"
+    },
+    "profiles": {
+      "quarter": "Viertel",
+      "half": "Halb",
+      "threeQuarters": "3-Viertel",
+      "full": "Voll",
+      "kami": "Nuke",
+      "sav": "Def",
+      "empty": "Neu/Leer"
+    }
+  },
+  "coinMinter": {
+    "title": "💰 Goldmünz (Hub) Planer",
+    "dataInput": "Date-Iigab",
+    "allVillagesCoords": "Alli dini Dorf-Koordinate:",
+    "villagesPlaceholder": "510|621, 510|622 (Extrahiert us Text au)",
+    "hubCountLabel": "Wieviel Hub-Dörfer?",
+    "calculateBtn": "⚙️ Bsti Hub finde",
+    "resultsTitle": "🎯 Geplanti Hub ({{count}})",
+    "hubCardHeader": "Hub:",
+    "hubCardSub": "Wird Ressource vo {{count}} Dörfer bekomme",
+    "hubCardBody": "Dörfer, wo Ressource schicke:",
+    "onlySelf": "Nur sich selbst...",
+    "mapInfoTitle": "Karten-Info:",
+    "mapInfoCenter": "Grossi Weiss Punkt:",
+    "mapInfoCenterDesc": "Hub-Dörfer (Münz präge)",
+    "mapInfoSender": "Gfärbti Punkt:",
+    "mapInfoSenderDesc": "Dörfer, wo Ressource schicke",
+    "mapInfoLines": "Linie:",
+    "mapInfoLinesDesc": "Ressource-Fluss-Richtung",
+    "alerts": {
+      "noVillage": "Bitte gib mindestens ei Dorf-Koordinat ii!",
+      "invalidHubCount": "Hub-Zahl cha nöd d Dorf-Zahl überschreite und muess grösser als 0 si."
+    }
+  },
+  "fastSupport": {
+    "title": "🛡️ Schnell-Support-Planungs-Zentrum",
+    "step1": {
+      "title": "1. Find dini Stamm-Dörfer",
+      "worldUrl": "Welt-URL",
+      "clanTag": "Stamm-Tag",
+      "updateBtn": "Dörfer aktualisiere",
+      "status": {
+        "scanning": "Stamm-Dörfer scanne...",
+        "notFound": "❌ Stamm nöd gfunde! Überprüef d Abkürzung.",
+        "success": "✅ Erfolg! Total Support-Dörfer: {{count}}",
+        "error": "❌ Fehler: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Ziel zum Verteidige & Ziit",
+      "targetCoord": "Ziel-Koordinat",
+      "targetPlaceholder": "z.B., 564|554",
+      "arrivalTime": "Ziel-Ankunftsziit",
+      "slowestUnit": "Langsamsti Einheit-Gschwindigkeit"
+    },
+    "results": {
+      "title": "Verfüegbar Support ({{count}})",
+      "allTribe": "Ganze Stamm",
+      "noVillages": "Kei Dörfer gfunde, wo zu dem Ziitpunkt zum Ziel chönnte!",
+      "mapTarget": "🛡️ Ziel"
+    },
+    "bbcode": {
+      "title": "📋 Forum-Aufruf (BBCode)",
+      "copyAll": "Alli kopiere",
+      "target": "🎯 Ziel:",
+      "arrivalTime": "⏱️ Ankunftsziit:",
+      "unitSpeed": "🛡️ Einheit-Gschwindigkeit:",
+      "sendSupport": "Support schicke",
+      "supportLink": "🛡️ Support schicke"
+    },
+    "alerts": {
+      "enterTribeTag": "Bitte Stamm-Tag ii füege!",
+      "copied": "Kopiert!"
+    },
+    "columns": {
+      "player": "Spieler",
+      "source": "Quell",
+      "distance": "Distanz",
+      "time": "Ziit",
+      "departure": "Abgangsziit"
+    },
+    "units": {
+      "spear": "Speer", "sword": "Schwert", "archer": "Bogenschütze", "spy": "Späher", "heavy": "Schwer", "catapult": "Katapult", "knight": "Paladin"
+    }
+  },
+  "mapAnalysis": {
+    "title": "Kontinent & Karten-Analyse",
+    "bypassActive": "🕵️ Bypass aktiv",
+    "bypassAlertOn": "🕵️ GEHEIM-MODUS AKTIV: 1-Stund Wartziit bypassed! Frisch Date werde jedes Mal abgrüeft.",
+    "bypassAlertOff": "🔒 GEHEIM-MODUS INAKTIV: 1-Stund Cache-Schutz aktiviert.",
+    "enterWorldUrl": "Bitte e Welt-URL ii füege!",
+    "fetchError": "Fehler bim Date abgrüefe. Sicher, dass d Link richtig isch.\nFehler: {{error}}",
+    "clearConfirm": "Alli Date, Archive und Teleport-Historie werde glöscht. Bisch sicher?",
+    "status": {
+      "waiting": "Wart uf Date...",
+      "cached": "Us Cache glade! (Letschte Date: {{time}})",
+      "downloading": "Date vom Server abelade... (Cha 10-15 Sek nehme)",
+      "analyzing": "Abelade fertig, analysiere...",
+      "empty": "Kei Date zum Verarbeite gfunde!",
+      "success": "ERFOLG: {{villages}} Dörfer, {{players}} Spieler glade.",
+      "cleared": "Speicher komplett glöscht."
+    },
+    "timeMsg": {
+      "cached": "⏳ Zeigt Cache-Date. Letschte Abgrüef: {{time}}",
+      "new": "⏳ Neu Date abgrüeft. Wart uf nächsti Abgrüef zum Teleport detektiere...",
+      "diff": "Ziit-Intervall: {{hours}} Stunde {{mins}} Minute sind vergange seit de letschte Analyse."
+    },
+    "sections": {
+      "autoFetch": "1. Auto Date abgrüefe (Empfohle)",
+      "worldUrlLabel": "Welt-URL (z.B., https://en136.tribalwars.net):",
+      "downloadBtn": "🌍 Date abelade und verarbeite",
+      "archive": "2. Date-Archiv",
+      "selectArchive": "-- Archiv wäle --",
+      "loadBtn": "📂 Lade",
+      "saveBtn": "💾 Aktuell archiviere",
+      "manual": "3. Manuell Date-Iigab (Wenn Fehler)",
+      "processManualBtn": "⚙️ Manuell Date verarbeite",
+      "clearStorageBtn": "🗑️ Speicher zrücksetze"
+    },
+    "teleports": {
+      "title": "🚀 Teleport-Detektiere ({{count}})",
+      "showAllBtn": "🗺️ Alli uf Kart zeige",
+      "continentTitle": "Teleport zum Kontinent {{cont}} ({{count}} Spieler)",
+      "old": "Alt:",
+      "new": "Neu:",
+      "showBtn": "📍 Zeige",
+      "none": "Kei Teleport detektiert oder d zweit Abgrüef isch no nöd passiert.",
+      "info": "* S System sammelt Date bim erschte Analyse. I de nachfolgende Analysen detektiert s Dörfer, wo Koordinate gänderet hän, und listet si historisch uf, bis glöscht.",
+      "datePrefix": "🗓️"
+    },
+    "analysis": {
+      "title": "🌍 Kontinent-Analyse",
+      "player": "Spieler:",
+      "barbarian": "Barbar:",
+      "villages": "Dörfer",
+      "noTribe": "Kei Stamm",
+      "farmRatio": "🎯 Barbar pro Spieler:"
+    },
+    "map": {
+      "title": "Karten-Ansicht",
+      "gray": "Grau:",
+      "oldPos": "Alti Position",
+      "red": "Rot:",
+      "newPos": "Neui Position",
+      "closeBtn": "Schliesse"
+    },
+    "barbarian": "Barbar"
+  },
+  "opPlanner": {
+    "title": "⚔️ Individuelle Operations-Planer",
+    "step1": {
+      "title": "1. Date-Verbindung",
+      "clearData": "Alli Date lösche",
+      "worldUrl": "Welt-URL:",
+      "playerName": "Din Spieler-Name:",
+      "fetchBtn": "Date abgrüefe / Aktualisiere"
+    },
+    "step2": {
+      "title": "2. Dini Quell-Dörfer & Einheit-Wahl ({{count}})",
+      "info": "Du chasch alli Einheit wäle, wo us em Dorf gschickt werde. D Matching-Engine ernährt sich do.",
+      "village": "Dorf",
+      "unitSelection": "Einheit-Wahl (Mehreri chönne gwählt werde)"
+    },
+    "step3": {
+      "title": "3. Ziel-Dörfer",
+      "maxSnobDist": "Max Adlige Distanz-Limit:",
+      "placeholder": "Ziel-Koordinate do ii füege (z.B., 586|441, 587|442 i Text isch au fine)",
+      "detectedTargets": "Detektierti Ziele: {{count}}",
+      "mapLegend": {
+        "target": "Ziel",
+        "spearLight": "Speer/Leicht",
+        "ramKami": "Ram/Nuke",
+        "snob": "Adlige",
+        "spy": "Späher"
+      }
+    },
+    "step4": {
+      "title": "4. Planung & Ziit-Matching-Engine",
+      "modeArrival": "Ich weiss d Ziel-Ankunftsziit",
+      "modeDeparture": "Ich weiss d Dorf-Abgangsziit",
+      "dateTime": "Datum & Ziit:",
+      "sourceVillage": "Quell-Dorf:",
+      "allSourcesUsed": "Alli Quelle verwendet",
+      "unitToSend": "Einheit zum Schicke:",
+      "selectSourceFirst": "Zerscht Quell wäle",
+      "noUnitsLeft": "Kei Einheit meh",
+      "target": "Ziel:",
+      "calcAndAddBtn": "➕ BERECHNE UND ZUEFÜEGE"
+    },
+    "queue": {
+      "title": "Operations-Queue ({{count}} Befehl)",
+      "clearQueue": "Ganz Queue lösche",
+      "delete": "Lösche"
+    },
+    "bbcode": {
+      "title": "📋 BBCode-Vorlag für Notizblock",
+      "copyAll": "Alli kopiere",
+      "selectCols": "Spalte wäle:",
+      "attack": "Angriff",
+      "unknown": "UNBEKANNT"
+    },
+    "status": {
+      "cached": "Date us Cache glade. (Drück 13 Mol uf de Knopf zum Force Refresh)",
+      "fetching": "Date vom Server abgrüefe... Bitte wart.",
+      "playerNotFound": "Spieler nöd gfunde! Sicher, dass du de Name richtig gschribe häsch.",
+      "success": "Erfolg! Spieler gfunde und {{count}} Dörfer glistet.",
+      "error": "Fehler: {{msg}}"
+    },
+    "alerts": {
+      "enterWorldUrl": "Bitte e Welt-URL ii füege!",
+      "enterPlayerName": "Bitte din Spieler-Name ii füege!",
+      "confirmClear": "Alli Plän, Quelle und Ziele (usser Schritt 1) werde glöscht. Bisch sicher?",
+      "selectMatch": "Bitte Quell, Ziel und Einheit für Matching wäle.",
+      "snobLimitExceeded": "⚠️ Warnig: D gwählti Distanz ({{dist}} Einheit) überschreitet s maximale Adlige Distanz-Limit ({{limit}})!",
+      "confirmClearQueue": "Bisch sicher, dass du d ganz Queue lösche wottsch?",
+      "copied": "Kopiert!"
+    },
+    "columns": {
+      "no": "Nr",
+      "source": "Quell-Dorf",
+      "target": "Ziel",
+      "departure": "Abgangsziit",
+      "arrival": "Ankunftsziit",
+      "unit": "Einheit",
+      "distance": "Distanz",
+      "travelTime": "Reiseziit",
+      "attackLink": "Aktion-Link"
+    },
+    "units": {
+      "spear": "Speerträger", "sword": "Schwertkämpfer", "axe": "Axtkämpfer", "spy": "Späher",
+      "light": "Leichte Kavallerie", "heavy": "Schwere Kavallerie", "ram": "Ram", "catapult": "Katapult",
+      "knight": "Paladin", "snob": "Adliger", "archer": "Bogenschütze", "marcher": "Marschierer", "militia": "Miliz"
+    }
+  },
+  "productionData": {
+    "title": "Produktions-Planer",
+    "worldSpeed": "Welt-Gschwindigkeit:",
+    "mineSpeed": "Ressource-Produktions-Faktor:",
+    "totalFactor": "Total Multiplikator: {{speed}}x",
+    "empireProdTitle": "👑 Gesamti Produktion ({{count}} Dörfer)",
+    "hourlyProd": "⏳ Total Stündlichi Produktion",
+    "dailyProd": "📅 Total Tägliche Produktion",
+    "resources": {
+      "wood": "Holz:",
+      "clay": "Lehm:",
+      "iron": "Eise:"
+    },
+    "villageManagement": "Dorf-Verwaltung",
+    "resetBtn": "Zrücksetze",
+    "newVillageBtn": "+ Neu Dorf",
+    "villageNamePrefix": "Dorf",
+    "bonus": {
+      "label": "Bonus:",
+      "none": "Kei",
+      "all": "Alli Ressource",
+      "wood": "Nur Holz",
+      "clay": "Nur Lehm",
+      "iron": "Nur Eise"
+    },
+    "lvl": "Lvl",
+    "clearConfirm": "Wottsch alli Dörfer zrücksetze?",
+    "referenceTable": {
+      "title": "📚 Level-Info-Tabell (0% Bonus basierend)",
+      "hide": "Verstecke",
+      "show": "Zeige",
+      "cols": {
+        "level": "Lvl",
+        "hourly": "Stündlichi Prod ({{speed}}x)",
+        "storage": "Speicher-Kapazität",
+        "farm": "Farm-Kapazität"
+      },
+      "perHour": "/ Std"
+    }
+  },
+  "unitCalculator": {
+    "title": "Truppe-Produktions-Rechner",
+    "settings": {
+      "basic": "🌍 Grund-Setting",
+      "worldSpeed": "Welt-Gschwindigkeit:",
+      "barracksLevel": "Kasern-Level (Max 25):",
+      "stableLevel": "Stall-Level (Max 20):",
+      "workshopLevel": "Wärkstatt-Level (Max 15):",
+      "speedBonus": "⚡ Gschwindigkeits-Bonusse (%)",
+      "barracksBonus": "Kasern-Item-Bonus:",
+      "stableBonus": "Stall-Item-Bonus:",
+      "workshopBonus": "Wärkstatt-Item-Bonus:",
+      "flagRecruit": "Rekrutierungs-Flagge:",
+      "costBonus": "💰 Kost & Extra (%)",
+      "massRecruit": "Massen-Rekrutierungs-Bonus:",
+      "costReduction": "Ressource-Reduktion (Kost):",
+      "resetBtn": "🗑️ Zähle zrücksetze"
+    },
+    "table": {
+      "unit": "Einheit",
+      "count": "Betrag zum Produziere",
+      "wood": "Holz",
+      "clay": "Lehm",
+      "iron": "Eise",
+      "pop": "Bevölkerung",
+      "time": "Produktions-Ziit"
+    },
+    "summary": {
+      "costTitle": "Gesamti Kost",
+      "woodReq": "Holz erforderlich:",
+      "clayReq": "Lehm erforderlich:",
+      "ironReq": "Eise erforderlich:",
+      "totalPop": "Total Bevölkerung:",
+      "queueTitle": "Bau-Queue-Ziite",
+      "barracksTotal": "Kasern Total:",
+      "stableTotal": "Stall Total:",
+      "workshopTotal": "Wärkstatt Total:"
+    },
+    "time": {
+      "day": "d",
+      "hour": "h",
+      "minute": "m",
+      "second": "s",
+      "none": "-"
+    },
+    "units": {
+      "spear": "Speerträger", "sword": "Schwertkämpfer", "axe": "Axtkämpfer", "archer": "Bogenschütze",
+      "spy": "Späher", "lc": "Leichte Kavallerie", "ma": "Berittene Bogenschütze", "hc": "Schwere Kavallerie",
+      "ram": "Ram", "cat": "Katapult"
+    }
+  },
+  "mapGenerator": {
+    "title": "Erweiterte Karten-Generator",
+    "worldUrl": "Welt-URL:",
+    "fetchBtn": "Date abgrüefe / Aktualisiere",
+    "generateBtn": "🗺️ KARTE GENERIERE",
+    "status": {
+      "noUrl": "Bitte e Welt-URL ii füege!",
+      "cached": "Us Cache glade! (Letschte Update: {{time}})",
+      "fetching": "Date vom Server abgrüefe...",
+      "success": "Date erfolgreich abgrüeft!",
+      "error": "Fehler: {{msg}}"
+    },
+    "settings": {
+      "title": "Karten-Setting",
+      "zoom": "Zoom %",
+      "center": "Zentrum (X|Y)",
+      "markersOnly": "Nur Marker",
+      "showAbandons": "Barbar zeige",
+      "largerMarkers": "Grösseri Marker",
+      "bgColor": "Hintergrund-Farb",
+      "dullBg": "Dunkle Hintergrund",
+      "showGrid": "Kontinent-Gitter",
+      "showContinentNums": "Kontinent-Nummere"
+    },
+    "players": {
+      "title": "Spieler-Marker",
+      "searchPlaceholder": "Spieler suche und zuefüege...",
+      "points": "Punkte",
+      "selectTop25": "Top 25 wäle",
+      "selectTop50": "Top 50 wäle",
+      "clearSelection": "Auswahl lösche",
+      "noPlayers": "Noch kei Spieler gwählt.",
+      "deleteBtn": "Lösche"
+    },
+    "tribes": {
+      "title": "Stamm-Marker",
+      "searchPlaceholder": "Stamm suche (Name oder Tag)...",
+      "selectAll": "Alli wäle",
+      "clearSelection": "Auswahl lösche",
+      "selectTop25": "Nur Top 25 wäle",
+      "noData": "Noch kei Date abgrüeft.",
+      "deleteBtn": "Lösche"
+    }
+  }
+}

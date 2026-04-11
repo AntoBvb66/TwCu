@@ -1,0 +1,916 @@
+{
+  "menu": {
+    "title": "TW Cobre",
+    "stats": "Live-statistikk",
+    "visitsTitle": "Totale besøkende",
+    "mapsTitle": "Kart generert",
+    "opsTitle": "Planlagte operasjoner",
+    "simsTitle": "Simuleringer kjørt",
+    "visits": "Besøk",
+    "maps": "Kart",
+    "developer": "Utvikler",
+    "items": {
+      "buildingTimes": "Byggetidskalkulator",
+      "mapAnalysis": "Kontinent- & kartanalyse",
+      "mapGenerator": "Kartgenerator",
+      "productionData": "Produksjonskalkulator",
+      "coinMinter": "Myntplanlegger",
+      "buildingPlanner": "Bygningsplanlegger (kø)",
+      "unitCalculator": "Troppeproduksjonskalk",
+      "churchPlanner": "Kirkplanlegger",
+      "opPlanner": "Individuell operasjonsplanlegger",
+      "clanOp": "Stammeoperasjonsplanlegger",
+      "clanTroop": "Stammeoperasjonsplanlegger (avansert)",
+      "fastSupport": "Rask støtteplanlegging",
+      "scavengingPlanner": "Plundringstidskalkulator"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Velkommen til TW Cobre",
+      "subtitle": "Seieren ligger i detaljene og feilfri planlegging. Spar tid i Tribal Wars-reisen og utarbeid strategiske planer som fører stammen din til seier. Velg et verktøy for å komme i gang."
+    },
+    "tools": {
+      "opPlanner": { "title": "Personlig operasjonsplanlegger", "desc": "Match kilde- og målbyer for å forberede en feilfri operasjonsmal (BBCode)." },
+      "buildingPlanner": { "title": "Bygningsplanlegger", "desc": "Design byggekøen i landsbyen din steg for steg med avansert simulasjon." },
+      "unitCalculator": { "title": "Troppeproduksjonskalkulator", "desc": "Beregn produksjonstid for tropper i barakker, stall og verksted, inkludert bonuser." },
+      "mapGenerator": { "title": "Kartgenerator", "desc": "Generer oppdaterte, fargede dynamiske verdenskart for stammefora." },
+      "mapAnalysis": { "title": "Kontinentanalyse", "desc": "Analyser kontinents- og kartdominans for klaner og spillere." },
+      "productionData": { "title": "Produksjonskalkulator", "desc": "Optimaliser gruveproduksjon, lagringskapasitet og fyltider." },
+      "coinMinter": { "title": "Gullmyntplanlegger", "desc": "Beregn den mest ideelle landsbyen for å prege gullmynter." },
+      "churchPlanner": { "title": "Kirkplanlegger", "desc": "Optimaliser kirkedekning på kartet med en befolkningsbesparende algoritme." },
+      "buildingTimes": { "title": "Byggetidskalkulator", "desc": "Beregn og sammenlign byggetider for nivåoppgraderinger ned til sekunder." },
+      "clanOp": { "title": "Stammeoperasjonsplanlegger", "desc": "Analyser alle klanlandsbyer og lag smarte oppdrag. Del personlige BBCode-ordrer til medlemmer med kartstøttet etterretning." },
+      "clanTroop": { "title": "Stammeoperasjonsplanlegger (med tropper)", "desc": "Analyser alle klantropper og lag smarte oppdrag. Del personlige BBCode-ordrer til medlemmer med kartstøttet etterretning." },
+      "fastSupport": { "title": "Rask støttefinner", "desc": "Lag en støtteforespørsel for å få rask støtte." },
+      "scavengingPlanner": { "title": "Plundringstidskalkulator", "desc": "Sammenlign plundringstider i detalj." }
+    }
+  },
+  "footer": {
+    "text1": "Avanserte planleggingsverktøy for Tribal Wars",
+    "text2": "© 2026 TW Cobre | Utvikler: ",
+    "links": {
+      "about": "Om oss",
+      "privacy": "Personvern & GDPR"
+    }
+  },
+  "aboutPage": {
+    "title": "Om",
+    "p1": "Hei, jeg er Anto Bvb 66.",
+    "p2": "TW Cobre er et elite taktisk panel og kommandosenter utviklet uavhengig for å behandle rådata fra Clans (Tribal Wars)-spillere og hjelpe dem å oppnå strategisk overlegenhet.",
+    "p3": "Fra operasjonsplanlegging til oppryddingsanalyse er alle moduler designet for å løse beregninger som ellers ville tatt en spiller timer på sekunder. Seieren ligger i detaljene!"
+  ,"contactTitle": "Feilrapportering og Kontakt",
+    "contactDesc": "Du kan sende feil, mangler eller utviklingsforslag du finner på nettstedet vårt direkte til meg via e-post.",
+    "emailButton": "Send e-post"},
+  "privacyPage": {
+    "title": "Personvernregler og KVKK",
+    "p1": "TW Cobre respekterer brukerens personvern på høyeste nivå. I samsvar med databeskyttelseslover (GDPR) og internasjonale standarder er vår databehandlingspolicy som følger:",
+    "items": {
+      "i1": "Kontosikkerhet: TW Cobre ber ALDRI om, lagrer eller hoster Tribal Wars-kontopassordet ditt, e-postadressen din eller personlig sesjonsinformasjon på sine servere.",
+      "i2": "Lokal lagring: Dine innstillinger (verdenhastighet, troppeantall, landsbykoordinater osv.) lagres kun i nettleseren på din egen enhet (Local Storage / Session Storage), slik at de ikke går tapt når du oppdaterer siden.",
+      "i3": "Ekstern datahenting: Kart- og analysetjenestene behandler generelle verdensdata som Tribal Wars offentliggjør i sanntid. Denne operasjonen skjer en gang i timen. I henhold til spillreglene inneholder disse dataene kun generell landsby- og spillerinformasjon, og inkluderer ikke dine personlige data.",
+      "i4": "Statistikk: Besøks- og kartgenereringstellere på nettstedet vårt er kun numeriske data; de kobles ikke til IP-adressen din eller identiteten din."
+    },
+    "p2": "Ved å bruke TW Cobre godtar du at dataene dine behandles sikkert på din enhet og at ditt personvern er beskyttet."
+  },
+  "buildingPlanner": {
+    "title": "🏗️ TW Bygningsplanlegger (kø-simulering)",
+    "worldSpeed": "Verdenhastighet:",
+    "mineSpeed": "Ressursproduksjonsfaktor:",
+    "btn": {
+      "import": "📥 Last inn byggekø",
+      "export": "📤 Eksporter byggekø",
+      "clear": "🗑️ Tøm",
+      "addQueue": "Last inn",
+      "copyBoard": "Kopier til utklippstavle",
+      "close": "Lukk",
+      "delete": "Slett"
+    },
+    "modal": {
+      "importTitle": "📥 Lim inn byggekø kopiert fra spillet",
+      "exportTitle": "📤 Ditt køutdata (du kan kopiere)",
+      "importPlaceholder": "Hovedkvarter +1 (nivå 1)\n10 poeng\n...",
+      "success": "✅ Suksess! {{count}} bygninger lagt til i køen.",
+      "error": "❌ Ingen gyldig mal funnet. Vennligst sjekk den kopierte teksten.",
+      "copied": "Kopiert!",
+      "exportPrefix": "Byggekø",
+      "levelLabel": "Nivå",
+      "pointsLabel": "Poeng"
+    },
+    "levelsTitle": "🏠 Startnivåer for bygninger (Skjul / Vis)",
+    "analysis": {
+      "title": "⏳ Køanalyse og ventetider (Vis / Skjul)",
+      "withWait": "⏳ Tid med ressursventing:",
+      "withoutWait": "⚡ Tid uten ressursventing:",
+      "bottleneckTitle": "🚨 Steg der køen bremser:",
+      "wood": "Tre",
+      "clay": "Leire",
+      "iron": "Jern",
+      "order": "Rekkefølge",
+      "level": "Nivå",
+      "waitingFor": "Venter",
+      "waitingSuffix": "på ressurser.",
+      "missing": "Mangler beløp",
+      "perfect": "🎉 Flott! Det er ingen ventetid på ressurser i denne køen. Konstruksjonene vil fortsette uavbrutt."
+    },
+    "summary": {
+      "title": "Køoppsummering (klikk på bygninger for å legge til)",
+      "max": "På maksimalt nivå",
+      "add": "Legg til i kø"
+    },
+    "columnsToggle": "👁️ Skjul / vis tabellkolonner",
+    "columns": {
+      "order": "Rekkefølge",
+      "expectedWait": "Forventet ventetid",
+      "building": "Bygning",
+      "level": "Nivå",
+      "buildTime": "Byggetid",
+      "startTime": "Starttid",
+      "endTime": "Sluttid",
+      "points": "Poeng",
+      "cost": "Kostnad (Tre/Leire/Jern)",
+      "resWait": "Ressursventetid",
+      "currentStorage": "Nåværende lager",
+      "hourlyProd": "Timeproduksjon",
+      "pop": "Befolkning",
+      "storage": "Lagring",
+      "desc": "Beskrivelse",
+      "action": "Handling"
+    },
+    "status": {
+      "storageFull": "∞ (Lager fullt)",
+      "storageLimit": "Utilstrekkelig lager!",
+      "requirement": "Krav",
+      "waitingRes": "Venter på ressurser.",
+      "farmLimit": "Utilstrekkelig gård!",
+      "maxLevel": "Maksnivå!"
+    },
+    "fastAdd": {
+      "placeholder": "Skriv eller velg...",
+      "modeActive": "Tastaturmodus aktiv:",
+      "info": "Du kan raskt legge til ved å skrive bygningens navn og trykke Enter.",
+      "dragTitle": "Dra for å endre rekkefølge"
+    },
+    "daysShort": "d",
+    "buildings": {
+      "hq": "Hovedkvarter",
+      "barracks": "Barakker",
+      "stable": "Stall",
+      "workshop": "Verksted",
+      "first_church": "Første kirke",
+      "church": "Kirke",
+      "watchtower": "Vakttårn",
+      "academy": "Akademi",
+      "smithy": "Smie",
+      "rally": "Samleplass",
+      "statue": "Statue",
+      "market": "Marked",
+      "wood": "Tømmerleir",
+      "clay": "Leiregrav",
+      "iron": "Jernverk",
+      "farm": "Gård",
+      "ware": "Lager",
+      "hiding": "Skjulested",
+      "wall": "Mur"
+    }
+  },
+  "buildingTimes": {
+    "title": "⏱️ Byggetidsammenligning",
+    "worldSpeed": "Verdenhastighet:",
+    "panel1": "Plan A (Referanse)",
+    "panel2": "Plan B (Sammenligning)",
+    "hqLevel": "Hovedkvartersnivå:",
+    "buildingToUpgrade": "Bygning som skal oppgraderes:",
+    "currentLevel": "Nåværende nivå:",
+    "targetLevel": "Mål nivå:",
+    "totalTime": "Total tid:",
+    "comparisonResult": "⚡ Sammenligningsresultat:",
+    "panel2Faster": "Plan B blir ferdig {{time}} raskere enn Plan A!",
+    "panel1Faster": "Plan A blir ferdig {{time}} raskere enn Plan B!",
+    "tableTitle": "📊 Tidsoversikt for alle bygninger",
+    "tableHqLevel": "Tabell HQ-nivå:",
+    "level": "Nivå",
+    "dragTitle": "Dra for å endre posisjon",
+    "tip": "Tips: Du kan dra og slippe kolonneoverskrifter (f.eks. 'Barakker') til venstre eller høyre for å endre kolonnerekke.",
+    "time": {
+      "day": "d",
+      "hour": "t",
+      "minute": "min",
+      "second": "sek",
+      "zero": "0 sek"
+    },
+    "buildings": [
+      "Hovedkvarter (HQ)",
+      "Barakker",
+      "Stall",
+      "Verksted",
+      "Første kirke",
+      "Kirke",
+      "Vakttårn",
+      "Akademi",
+      "Smie",
+      "Samleplass",
+      "Statue",
+      "Marked",
+      "Tømmerleir",
+      "Leiregrav",
+      "Jernverk",
+      "Gård",
+      "Lager",
+      "Skjulested",
+      "Adelsmann",
+      "Gullmynt",
+      "Mur"
+    ]
+  },
+  "scavenging": {
+    "title": "Plundringskalkulator",
+    "settings": {
+      "title": "🌍 Verden- og produksjonsinnstillinger",
+      "worldSpeed": "Verdenhastighet:",
+      "mineSpeed": "Ressursproduksjonsfaktor:",
+      "woodLevel": "Tømmerleirnivå:",
+      "clayLevel": "Leiregravnivå:",
+      "ironLevel": "Jernverknivå:",
+      "worldConstant": "Verdenskonstant:",
+      "resHourly": "Ressursproduksjon:"
+    },
+    "production": {
+      "perMin": "/ min",
+      "perHour": "/ time",
+      "perDay": "/ dag"
+    },
+    "troops": {
+      "title": "⚔️ Troppeantall og flagg",
+      "carryFlag": "Bærekapasitetsflagg (%):",
+      "resFlag": "Ressursproduksjonsflagg (%):",
+      "totalCap": "Plundringskapasitet (ingen flagg):",
+      "totalCapFlag": "Total kapasitet (bæreflagg):",
+      "totalRes": "Ressursproduksjon (ingen flagg):",
+      "totalResFlag": "Ressursproduksjon (res-flagg):"
+    },
+    "results": {
+      "title": "🏆 Rangering av mest lønnsomme strategier",
+      "chartTitle": "📊 Strategisammenligningsdiagram (Topp 10)",
+      "totalDaily": "Total daglig",
+      "scavenge": "Plundring",
+      "resource": "Ressurs",
+      "perMin": "min",
+      "perHour": "time",
+      "perDay": "dag",
+      "maxTrip": "Lengste turtid",
+      "dayShort": "/d",
+      "hourShort": "/h",
+      "minShort": "/m",
+      "modes": {
+        "eqTime": "Lik tid",
+        "eqCap": "Lik kapasitet"
+      },
+      "flags": {
+        "none": "Ingen flagg",
+        "carry": "Bæreflagg",
+        "res": "Ressursflagg"
+      },
+      "options": {
+        "c1234": "1-2-3-4 låst opp",
+        "c123": "1-2-3 låst opp",
+        "c234": "2-3-4 låst opp",
+        "c12": "1-2 låst opp",
+        "c23": "2-3 låst opp"
+      }
+    },
+    "reference": {
+      "title": "📈 Break-even-punkt (kapasitetsreferansetabell)",
+      "info": "Ingen tropper lagt inn. Tabellen under viser estimert daglig loot for Lik Tid vs Lik Kapasitet strategier ved ulike kapasitetsnivåer (antar 1-2-3-4 låst opp).",
+      "cap": "Eksempelkapasitet",
+      "eqTimeDaily": "Lik tid (daglig)",
+      "eqCapDaily": "Lik kap. (daglig)",
+      "winner": "Fordelaktig taktikk"
+    },
+    "chart": {
+      "title": "📈 Daglig lootkurve etter kapasitet (Lik tid & ingen flagg)",
+      "worldConstantInfo": "Generert basert på verdenskonstanten ({{constant}}).",
+      "unlocked": "Låst opp",
+      "infoTitle": "💡 Kritiske vendepunkter (break-even)",
+      "be1": "🔸 Etter {{cap}} kapasitet: 1-2-3-4 taktikken går forbi 2-3-4 og blir mer lønnsom.",
+      "be2": "🔸 Etter {{cap}} kapasitet: 1-2-3 taktikken går forbi 2-3."
+    }
+  },
+  "churchPlanner": {
+    "title": "⛪ Optimal kirkplanlegger",
+    "dataInput": "Dataregistrering",
+    "allVillagesCoords": "Alle landsbykoordinatene dine:",
+    "villagesPlaceholder": "510|621, 510|622 (henter også fra tekst)",
+    "existingChurchesLabel": "Eksisterende kirker (valgfritt):",
+    "existingChurchesPlaceholder": "f.eks. 506|496 3 (X|Y nivå)",
+    "includeFirstChurch": "Inkluder første kirke?",
+    "calculateBtn": "⚙️ Beregn optimal plan",
+    "alertNoVillage": "Vennligst skriv inn minst én landsbykoordinat!",
+    "resultsTitle": "Resultater ({{count}} kirker)",
+    "existing": "Eksisterende",
+    "firstChurch": "Første kirke",
+    "normalChurch": "Normal kirke",
+    "lvl": "Nivå",
+    "coversVillages": "Dekker landsbyer",
+    "warningUncovered": "⚠️ Advarsel: {{count}} landsbyer er ubeskyttet.",
+    "coveredVillage": "Dekket landsby",
+    "uncoveredVillage": "Ubeskyttet landsby"
+  },
+  "clanOp": {
+    "title": "🛡️ Stammeoperasjonsplanlegger",
+    "step1": {
+      "title": "1. Finn stammenes landsbyer",
+      "clearAll": "🧹 Fjern alle data",
+      "worldUrl": "Verdens-URL",
+      "clanTag": "Stammetagg",
+      "runIntel": "Finn landsbyer",
+      "status": {
+        "gathering": "Samler informasjon: skanner alle verdens spillere og landsbyer...",
+        "notFound": "❌ Stamme ikke funnet! Sjekk taggen.",
+        "success": "✅ Suksess! Stamme-ID: {{clanId}} | Medlemmer: {{memberCount}} | Totalt antall landsbyer: {{villageCount}}",
+        "error": "❌ Feil: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Mållandsbyer",
+      "snobLimit": "Adelsmannsavstandgrense:",
+      "placeholder": "Lim inn målkoordinater her...",
+      "foundTargets": "Mål funnet: {{count}}"
+    },
+    "step3": {
+      "title": "3. Smart oppgave- og kartsentral",
+      "arrivalTime": "Målankomsttid:",
+      "targetsTitle": "Dine mål (klikk for å velge)",
+      "points": "Poeng",
+      "p": "P",
+      "distance": "Avstand:"
+    },
+    "manualAssign": {
+      "title": "👤 Fri spilleroppgave",
+      "selectPlayer": "-- Velg spiller --",
+      "assignBtn": "Tildel",
+      "info": "*Legger kun til en oppgave med ankomsttid til det valgte målet ovenfor. Spillerens landsbyer vises også i blått på kartet."
+    },
+    "tabs": {
+      "closest10": "10 nærmeste landsbyer",
+      "furthest10": "10 fjerneste landsbyer",
+      "selectPlayer": "Velg spiller"
+    },
+    "suggestions": {
+      "noVillages": "Ingen landsbyer å vise.",
+      "kami": "Send nuke",
+      "snob": "Send adelsmann",
+      "fake": "Send fake",
+      "show": "Gjør synlig",
+      "hide": "Skjul"
+    },
+    "queue": {
+      "title": "Operasjonskø ({{count}} ordre)",
+      "clear": "Tøm hele køen",
+      "delete": "Slett",
+      "enemy": "Fiende (mål)"
+    },
+    "bbcode": {
+      "title": "📋 BBCode-mal for notatblokk",
+      "copyAll": "Kopier alt",
+      "selectCols": "Velg kolonner:",
+      "ordersFor": "--- ORDRE FOR {{player}} ---",
+      "attack": "Angrep",
+      "viewTarget": "Vis mål",
+      "unknown": "UKJENT"
+    },
+    "alerts": {
+      "confirmClear": "Alle planer, mål og skjulte landsbyer (unntatt trinn 1 Verdens/Stamme-informasjon) vil bli slettet. Er du sikker?",
+      "cleared": "🧹 Alle data slettet!",
+      "enterTribeTag": "Vennligst skriv inn stammetaggen!",
+      "selectTarget": "Vennligst velg et mål.",
+      "selectTargetLeft": "Vennligst velg et mål fra venstre.",
+      "selectPlayer": "Vennligst velg en spiller fra listen.",
+      "snobLimitExceeded": "⚠️ Advarsel: Valgt avstand ({{dist}}) overskrider din angitte adelsmannsgrense ({{limit}})!",
+      "orderAdded": "✅ Ordre lagt til!",
+      "manualAdded": "✅ Fri oppgave lagt til!",
+      "confirmClearQueue": "Er du sikker på at du vil tømme hele køen?",
+      "queueCleared": "🗑️ Kø tømt!",
+      "copied": "Kopiert!"
+    },
+    "columns": {
+      "no": "Nr.",
+      "player": "Spiller",
+      "source": "Kilde",
+      "target": "Mål",
+      "departure": "Avreisetid",
+      "arrival": "Ankomst",
+      "unit": "Enhet",
+      "distance": "Avstand",
+      "travelTime": "Reisetid",
+      "attackLink": "Handlingslenke"
+    },
+    "units": {
+      "spear": "Spydkriger",
+      "sword": "Sverdmann",
+      "axe": "Øksemann",
+      "spy": "Speider",
+      "light": "Lett kavalleri",
+      "heavy": "Tung kavalleri",
+      "ram": "Ramme",
+      "catapult": "Katapult",
+      "knight": "Paladin",
+      "snob": "Adelsmann",
+      "archer": "Bueskytter",
+      "marcher": "Marsjerer",
+      "militia": "Milits"
+    },
+    "shortUnits": {
+      "ram": "Nuke",
+      "snob": "Adelsmann",
+      "catapult": "Fake",
+      "spy": "Speider"
+    }
+  },
+  "clanTroop": {
+    "title": "🦅 Stammeoperasjonsplanlegger (avansert)",
+    "step1": {
+      "title": "1. Finn stammenes landsbyer",
+      "clear": "🧹 Tøm data",
+      "worldUrl": "Verdens-URL",
+      "clanTag": "Stammetagg",
+      "run": "Finn landsbyer",
+      "gathering": "Samler informasjon...",
+      "notFound": "❌ Stamme ikke funnet!",
+      "success": "✅ Suksess! Stamme-ID: {{clanId}} | Totalt antall landsbyer: {{villageCount}}",
+      "error": "❌ Feil: {{msg}}"
+    },
+    "step2": {
+      "title": "2. Mållandsbyer",
+      "snobLimit": "Adelsmannsavstandgrense:",
+      "placeholder": "Lim inn målkoordinater her..."
+    },
+    "stepTroop": {
+      "title": "🛡️ Skriv inn troppedata (kopier/lim inn)",
+      "placeholder": "Lim inn troppedata fra troppoversikten (tabell) eller CSV-format (475|494,48,0,0...)...",
+      "detected": "Etterretning oppdaget: {{count}} landsbyer",
+      "summaryTitle": "📊 Oppsummering av spillerprofiler",
+      "idle": " (Ledig: {{count}})",
+      "depleted": " (Uttømt)"
+    },
+    "step3": {
+      "title": "📍 Smart oppgave- og kartsentral",
+      "arrivalTime": "Målankomsttid:",
+      "targetsTitle": "Dine mål (klikk for å velge)",
+      "distance": "Avstand:"
+    },
+    "tabs": {
+      "closest": "10 nærmeste landsbyer",
+      "furthest": "10 fjerneste landsbyer",
+      "player": "Velg spiller",
+      "selectPlayer": "-- Velg spiller --"
+    },
+    "suggestions": {
+      "noVillages": "Ingen landsbyer funnet.",
+      "kami": "Send nuke",
+      "snob": "Send adelsmann",
+      "fake": "Send fake",
+      "show": "Gjør synlig",
+      "hide": "Skjul",
+      "noIntel": " (Ingen etterretning)"
+    },
+    "queue": {
+      "title": "Operasjonskø ({{count}} ordre)",
+      "clear": "Tøm hele køen",
+      "delete": "Slett"
+    },
+    "bbcode": {
+      "title": "📋 BBCode-mal for notatblokk",
+      "copyAll": "Kopier alt",
+      "ordersFor": "--- ORDRE FOR {{player}} ---",
+      "attack": "Angrep",
+      "unknown": "UKJENT"
+    },
+    "alerts": {
+      "confirmClear": "Alle planer inkludert etterretning vil bli slettet. Er du sikker?",
+      "cleared": "🧹 Data tømt!",
+      "enterTribeTag": "Vennligst skriv inn stammetaggen!",
+      "selectTarget": "Vennligst velg et mål.",
+      "snobLimitExceeded": "⚠️ Advarsel: Adelsmannsgrensen ({{limit}}) er overskredet! Legge til likevel?",
+      "orderAdded": "✅ Ordre lagt til!",
+      "confirmClearQueue": "Er du sikker på at du vil tømme hele køen?",
+      "queueCleared": "🗑️ Kø tømt!",
+      "copied": "Kopiert!"
+    },
+    "columns": {
+      "no": "Nr.",
+      "player": "Spiller",
+      "source": "Kilde",
+      "target": "Mål",
+      "departure": "Avreise",
+      "arrival": "Ankomst",
+      "unit": "Enhet",
+      "distance": "Avstand",
+      "travelTime": "Reise",
+      "attackLink": "Handling"
+    },
+    "units": {
+      "spear": "Spyd",
+      "sword": "Sverd",
+      "axe": "Øks",
+      "spy": "Speider",
+      "light": "Lett",
+      "heavy": "Tung",
+      "ram": "Ramme",
+      "catapult": "Kat",
+      "knight": "Paladin",
+      "snob": "Adelsmann"
+    },
+    "profiles": {
+      "quarter": "Kvart",
+      "half": "Halv",
+      "threeQuarters": "3-Quart",
+      "full": "Full",
+      "kami": "Nuke",
+      "sav": "Forsvar",
+      "empty": "Ny/Tom"
+    }
+  },
+  "coinMinter": {
+    "title": "💰 Gullmyntplanlegger",
+    "dataInput": "Dataregistrering",
+    "allVillagesCoords": "Alle landsbykoordinatene dine:",
+    "villagesPlaceholder": "510|621, 510|622 (henter også fra tekst)",
+    "hubCountLabel": "Hvor mange hub-landsbyer?",
+    "calculateBtn": "⚙️ Finn beste huber",
+    "resultsTitle": "🎯 Planlagte huber ({{count}})",
+    "hubCardHeader": "Hub:",
+    "hubCardSub": "Vil motta ressurser fra {{count}} landsbyer",
+    "hubCardBody": "Landsbyer som sender ressurser:",
+    "onlySelf": "Kun seg selv...",
+    "mapInfoTitle": "Kartinformasjon:",
+    "mapInfoCenter": "Stor hvit prikk:",
+    "mapInfoCenterDesc": "Hub-landsbyer (preger mynter)",
+    "mapInfoSender": "Fargede prikker:",
+    "mapInfoSenderDesc": "Landsbyer som sender ressurser",
+    "mapInfoLines": "Linjer:",
+    "mapInfoLinesDesc": "Ressursflytretning",
+    "alerts": {
+      "noVillage": "Vennligst skriv inn minst én landsbykoordinat!",
+      "invalidHubCount": "Antall huber kan ikke overstige antall landsbyer og må være større enn 0."
+    }
+  },
+  "fastSupport": {
+    "title": "🛡️ Rask støtteplanleggingssenter",
+    "step1": {
+      "title": "1. Finn stammenes landsbyer",
+      "worldUrl": "Verdens-URL",
+      "clanTag": "Stammetagg",
+      "updateBtn": "Oppdater landsbyer",
+      "status": {
+        "scanning": "Skanner stammes landsbyer...",
+        "notFound": "❌ Stamme ikke funnet! Sjekk forkortelsen.",
+        "success": "✅ Suksess! Totalt antall støttebyer: {{count}}",
+        "error": "❌ Feil: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Mål for forsvar & tid",
+      "targetCoord": "Målkoordinat",
+      "targetPlaceholder": "f.eks. 564|554",
+      "arrivalTime": "Målankomsttid",
+      "slowestUnit": "Sakteeste enhetshastighet"
+    },
+    "results": {
+      "title": "Tilgjengelige støtter ({{count}})",
+      "allTribe": "Hele stammen",
+      "noVillages": "Ingen landsbyer funnet som kan nå dette målet på valgt tid!",
+      "mapTarget": "🛡️ Mål"
+    },
+    "bbcode": {
+      "title": "📋 Forumkall (BBCode)",
+      "copyAll": "Kopier alt",
+      "target": "🎯 Mål:",
+      "arrivalTime": "⏱️ Ankomsttid:",
+      "unitSpeed": "🛡️ Enhetshastighet:",
+      "sendSupport": "Send støtte",
+      "supportLink": "🛡️ Send støtte"
+    },
+    "alerts": {
+      "enterTribeTag": "Vennligst skriv inn stammetaggen!",
+      "copied": "Kopiert!"
+    },
+    "columns": {
+      "player": "Spiller",
+      "source": "Kilde",
+      "distance": "Avstand",
+      "time": "Tid",
+      "departure": "Avreisetid"
+    },
+    "units": {
+      "spear": "Spyd",
+      "sword": "Sverd",
+      "archer": "Bueskytter",
+      "spy": "Speider",
+      "heavy": "Tung",
+      "catapult": "Katapult",
+      "knight": "Paladin"
+    }
+  },
+  "mapAnalysis": {
+    "title": "Kontinent- og kartanalyse",
+    "bypassActive": "🕵️ Omgåelse aktiv",
+    "bypassAlertOn": "🕵️ HEMMELIG MODUS AKTIV: 1-times ventetid omgått! Ny data vil hentes hver gang.",
+    "bypassAlertOff": "🔒 HEMMELIG MODUS INAKTIV: 1-times cachebeskyttelse aktivert.",
+    "enterWorldUrl": "Vennligst skriv inn en verdens-URL!",
+    "fetchError": "Feil ved henting av data. Kontroller at lenken er korrekt.\nFeil: {{error}}",
+    "clearConfirm": "Alle data, arkiver og teleporthistorikk vil bli slettet. Er du sikker?",
+    "status": {
+      "waiting": "Venter på data...",
+      "cached": "Lastes fra cache! (Siste data: {{time}})",
+      "downloading": "Laster ned data fra serveren... (Dette kan ta 10-15 sekunder)",
+      "analyzing": "Nedlasting fullført, analyserer...",
+      "empty": "Ingen data funnet å behandle!",
+      "success": "SUKSESS: {{villages}} landsbyer, {{players}} spillere lastet.",
+      "cleared": "Lagring fullstendig slettet."
+    },
+    "timeMsg": {
+      "cached": "⏳ Viser hurtigbufferdata. Siste henting: {{time}}",
+      "new": "⏳ Ny data hentet. Venter på neste analyse for å oppdage teleporter...",
+      "diff": "Tidsintervall: {{hours}} timer {{mins}} minutter har gått siden forrige analyse."
+    },
+    "sections": {
+      "autoFetch": "1. Auto-hent data (anbefalt)",
+      "worldUrlLabel": "Verdens-URL (f.eks. https://en136.tribalwars.net):",
+      "downloadBtn": "🌍 Last ned og behandle data",
+      "archive": "2. Dataarkiv",
+      "selectArchive": "-- Velg arkiv --",
+      "loadBtn": "📂 Last",
+      "saveBtn": "💾 Arkiver nåværende",
+      "manual": "3. Manuell dataregistrering (ved feil)",
+      "processManualBtn": "⚙️ Behandle manuelle data",
+      "clearStorageBtn": "🗑️ Nullstill lagring"
+    },
+    "teleports": {
+      "title": "🚀 Teleportdeteksjoner ({{count}})",
+      "showAllBtn": "🗺️ Vis alle på kart",
+      "continentTitle": "Teleporter til kontinent {{cont}} ({{count}} spillere)",
+      "old": "Gammel:",
+      "new": "Ny:",
+      "showBtn": "📍 Vis",
+      "none": "Ingen teleporter oppdaget eller andre henting er ikke gjort ennå.",
+      "info": "* Systemet samler data ved første analyse. Ved påfølgende analyser oppdager det landsbyer som har endret koordinater og fortsetter å liste dem historisk til det slettes.",
+      "datePrefix": "🗓️"
+    },
+    "analysis": {
+      "title": "🌍 Kontinentanalyse",
+      "player": "Spiller:",
+      "barbarian": "Barbar:",
+      "villages": "landsbyer",
+      "noTribe": "Ingen stamme",
+      "farmRatio": "🎯 Barbarer per spiller:"
+    },
+    "map": {
+      "title": "Kartvisning",
+      "gray": "Grå:",
+      "oldPos": "Gammel posisjon",
+      "red": "Rød:",
+      "newPos": "Ny posisjon",
+      "closeBtn": "Lukk"
+    },
+    "barbarian": "Barbar"
+  },
+  "opPlanner": {
+    "title": "⚔️ Individuell operasjonsplanlegger",
+    "step1": {
+      "title": "1. Datatilkobling",
+      "clearData": "Tøm alle data",
+      "worldUrl": "Verdens-URL:",
+      "playerName": "Ditt spillernavn:",
+      "fetchBtn": "Hent / oppdater data"
+    },
+    "step2": {
+      "title": "2. Dine kildebyer og enhetsvalg ({{count}})",
+      "info": "Du kan velge alle enheter som skal sendes fra landsbyen. Matchingsmotoren henter fra her.",
+      "village": "Landsby",
+      "unitSelection": "Enhetsvalg (flere kan velges)"
+    },
+    "step3": {
+      "title": "3. Mållandsbyer",
+      "maxSnobDist": "Maks adelsmannsavstandgrense:",
+      "placeholder": "Lim inn målkoordinater her (f.eks. 586|441, 587|442 i teksten er greit)",
+      "detectedTargets": "Oppdagede mål: {{count}}",
+      "mapLegend": {
+        "target": "Mål",
+        "spearLight": "Spyd/Lett",
+        "ramKami": "Ramme/Nuke",
+        "snob": "Adelsmann",
+        "spy": "Speider"
+      }
+    },
+    "step4": {
+      "title": "4. Planlegging og tidsmatchingsmotor",
+      "modeArrival": "Jeg kjenner målankomsttiden",
+      "modeDeparture": "Jeg kjenner avreisetiden",
+      "dateTime": "Dato & tid:",
+      "sourceVillage": "Kildeby:",
+      "allSourcesUsed": "Alle kilder brukt",
+      "unitToSend": "Enhet som skal sendes:",
+      "selectSourceFirst": "Velg kilde først",
+      "noUnitsLeft": "Ingen enheter igjen",
+      "target": "Mål:",
+      "calcAndAddBtn": "➕ BEREGN OG LEGG TIL"
+    },
+    "queue": {
+      "title": "Operasjonskø ({{count}} ordre)",
+      "clearQueue": "Tøm hele køen",
+      "delete": "Slett"
+    },
+    "bbcode": {
+      "title": "📋 BBCode-mal for notatblokk",
+      "copyAll": "Kopier alt",
+      "selectCols": "Velg kolonner:",
+      "attack": "Angrep",
+      "unknown": "UKJENT"
+    },
+    "status": {
+      "cached": "Data lastet fra cache. (Klikk knappen 13 ganger for å tvinge oppdatering)",
+      "fetching": "Henter data fra serveren... Vennligst vent.",
+      "playerNotFound": "Spiller ikke funnet! Sørg for at du skrev navnet riktig.",
+      "success": "Suksess! Spiller funnet og {{count}} landsbyer listet.",
+      "error": "Feil: {{msg}}"
+    },
+    "alerts": {
+      "enterWorldUrl": "Vennligst skriv inn en verdens-URL!",
+      "enterPlayerName": "Vennligst skriv inn spillernavnet ditt!",
+      "confirmClear": "Alle planer, kilder og mål (unntatt trinn 1) vil bli slettet. Er du sikker?",
+      "selectMatch": "Vennligst velg kilde, mål og enhet for matching.",
+      "snobLimitExceeded": "⚠️ Advarsel: Valgt avstand ({{dist}} enheter) overskrider maksimal adelsmannsgrense ({{limit}})!",
+      "confirmClearQueue": "Er du sikker på at du vil tømme hele køen?",
+      "copied": "Kopiert!"
+    },
+    "columns": {
+      "no": "Nr.",
+      "source": "Kildeby",
+      "target": "Mål",
+      "departure": "Avreisetid",
+      "arrival": "Ankomst",
+      "unit": "Enhet",
+      "distance": "Avstand",
+      "travelTime": "Reisetid",
+      "attackLink": "Handlingslenke"
+    },
+    "units": {
+      "spear": "Spydkriger",
+      "sword": "Sverdmann",
+      "axe": "Øksemann",
+      "spy": "Speider",
+      "light": "Lett kavalleri",
+      "heavy": "Tung kavalleri",
+      "ram": "Ramme",
+      "catapult": "Katapult",
+      "knight": "Paladin",
+      "snob": "Adelsmann",
+      "archer": "Bueskytter",
+      "marcher": "Marsjerer",
+      "militia": "Milits"
+    }
+  },
+  "productionData": {
+    "title": "Produksjonsplanlegger",
+    "worldSpeed": "Verdenhastighet:",
+    "mineSpeed": "Ressursproduksjonsfaktor:",
+    "totalFactor": "Total multipliserer: {{speed}}x",
+    "empireProdTitle": "👑 Total produksjon ({{count}} landsbyer)",
+    "hourlyProd": "⏳ Total timeproduksjon",
+    "dailyProd": "📅 Total dagproduksjon",
+    "resources": {
+      "wood": "Tre:",
+      "clay": "Leire:",
+      "iron": "Jern:"
+    },
+    "villageManagement": "Landsbyadministrasjon",
+    "resetBtn": "Tilbakestill",
+    "newVillageBtn": "+ Ny landsby",
+    "villageNamePrefix": "Landsby",
+    "bonus": {
+      "label": "Bonus:",
+      "none": "Ingen",
+      "all": "Alle ressurser",
+      "wood": "Kun tre",
+      "clay": "Kun leire",
+      "iron": "Kun jern"
+    },
+    "lvl": "Nivå",
+    "clearConfirm": "Vil du tilbakestille alle landsbyer?",
+    "referenceTable": {
+      "title": "📚 Nivåinformasjonstabell (basert på 0 % bonus)",
+      "hide": "Skjul",
+      "show": "Vis",
+      "cols": {
+        "level": "Nivå",
+        "hourly": "Timeproduksjon ({{speed}}x)",
+        "storage": "Lagringskapasitet",
+        "farm": "Gårdskapacitet"
+      },
+      "perHour": "/ t"
+    }
+  },
+  "unitCalculator": {
+    "title": "Troppeproduksjonskalkulator",
+    "settings": {
+      "basic": "🌍 Grunnleggende innstillinger",
+      "worldSpeed": "Verdenhastighet:",
+      "barracksLevel": "Barakker nivå (maks 25):",
+      "stableLevel": "Stallnivå (maks 20):",
+      "workshopLevel": "Verkstednivå (maks 15):",
+      "speedBonus": "⚡ Hastighetsbonuser (%)",
+      "barracksBonus": "Barakkeobjektbonus:",
+      "stableBonus": "Stallobjektbonus:",
+      "workshopBonus": "Verkstedobjektbonus:",
+      "flagRecruit": "Rekrutteringsflagg:",
+      "costBonus": "💰 Kostnad og ekstra (%)",
+      "massRecruit": "Maserekrutteringsbonus:",
+      "costReduction": "Ressursreduksjon (kostnad):",
+      "resetBtn": "🗑️ Tilbakestill antall"
+    },
+    "table": {
+      "unit": "Enhet",
+      "count": "Antall som skal produseres",
+      "wood": "Tre",
+      "clay": "Leire",
+      "iron": "Jern",
+      "pop": "Befolkning",
+      "time": "Produksjonstid"
+    },
+    "summary": {
+      "costTitle": "Total kostnad",
+      "woodReq": "Tre nødvendig:",
+      "clayReq": "Leire nødvendig:",
+      "ironReq": "Jern nødvendig:",
+      "totalPop": "Total befolkning:",
+      "queueTitle": "Byggekøtider",
+      "barracksTotal": "Barakker totalt:",
+      "stableTotal": "Stall totalt:",
+      "workshopTotal": "Verksted totalt:"
+    },
+    "time": {
+      "day": "d",
+      "hour": "t",
+      "minute": "m",
+      "second": "s",
+      "none": "-"
+    },
+    "units": {
+      "spear": "Spydkriger",
+      "sword": "Sverdmann",
+      "axe": "Øksemann",
+      "archer": "Bueskytter",
+      "spy": "Speider",
+      "lc": "Lett kavalleri",
+      "ma": "Riddarbueskytter",
+      "hc": "Tung kavalleri",
+      "ram": "Ramme",
+      "cat": "Katapult"
+    }
+  },
+  "mapGenerator": {
+    "title": "Avansert kartgenerator",
+    "worldUrl": "Verdens-URL:",
+    "fetchBtn": "Hent / oppdater data",
+    "generateBtn": "🗺️ GENERER KART",
+    "status": {
+      "noUrl": "Vennligst skriv inn en verdens-URL!",
+      "cached": "Lastes fra cache! (Siste oppdatering: {{time}})",
+      "fetching": "Henter data fra serveren...",
+      "success": "Data hentet vellykket!",
+      "error": "Feil: {{msg}}"
+    },
+    "settings": {
+      "title": "Kartinnstillinger",
+      "zoom": "Zoom %",
+      "center": "Senter (X|Y)",
+      "markersOnly": "Kun markører",
+      "showAbandons": "Vis barbarer",
+      "largerMarkers": "Større markører",
+      "bgColor": "Bakgrunnsfarge",
+      "dullBg": "Dempet bakgrunn",
+      "showGrid": "Kontinentrutenett",
+      "showContinentNums": "Vis kontinentnumre"
+    },
+    "players": {
+      "title": "Spillermerkere",
+      "searchPlaceholder": "Søk og legg til spiller...",
+      "points": "Poeng",
+      "selectTop25": "Velg topp 25",
+      "selectTop50": "Velg topp 50",
+      "clearSelection": "Tøm valg",
+      "noPlayers": "Ingen spillere valgt enda.",
+      "deleteBtn": "Slett"
+    },
+    "tribes": {
+      "title": "Stammerkere",
+      "searchPlaceholder": "Søk stamme (navn eller tag)...",
+      "selectAll": "Velg alle",
+      "clearSelection": "Tøm valg",
+      "selectTop25": "Velg kun topp 25",
+      "noData": "Ingen data hentet ennå.",
+      "deleteBtn": "Slett"
+    }
+  }
+}

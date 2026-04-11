@@ -1,0 +1,204 @@
+/* --- ANA KONTEYNER --- */
+.cop-container {
+    padding: 25px; 
+    background: linear-gradient(145deg, #1e150d 0%, #110904 100%);
+    color: #eaddbd; 
+    border-radius: 10px; 
+    border: 1px solid #5c3516; 
+    margin: 0 auto 40px auto; /* Ortalar ve alttan boşluk bırakır */
+    max-width: 1200px; /* Dev ekranlarda fazla sünmesini engeller */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+    box-sizing: border-box;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.cop-header { 
+    color: #f0c042; 
+    border-bottom: 3px solid #814c11; 
+    padding-bottom: 12px; 
+    margin-bottom: 25px; 
+    margin-top: 0;
+    font-size: 26px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+/* --- KUTULAR (PANELLER) --- */
+.cop-box { 
+    background: rgba(0,0,0,0.4); 
+    border: 1px solid #4a2a10; 
+    padding: 20px; 
+    border-radius: 8px; 
+    margin-bottom: 20px; 
+    box-shadow: inset 0 1px 3px rgba(255,255,255,0.05);
+    transition: all 0.3s ease;
+}
+
+.cop-box:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5), inset 0 1px 3px rgba(255,255,255,0.05);
+    border-color: #603000;
+}
+
+.cop-box h3 { 
+    margin-top: 0; 
+    color: #f0c042; 
+    font-size: 16px; 
+    border-bottom: 1px dashed #814c11; 
+    padding-bottom: 8px; 
+    margin-bottom: 15px; 
+}
+
+/* --- FORM ELEMANLARI (GİRDİLER) --- */
+.cop-input, .cop-textarea { 
+    background: rgba(0, 0, 0, 0.6); 
+    border: 1px solid #814c11; 
+    color: #f0c042; 
+    border-radius: 4px; 
+    width: 100%; 
+    box-sizing: border-box; 
+    transition: all 0.3s ease;
+}
+
+.cop-input {
+    padding: 10px 12px; 
+    font-size: 14px; 
+    font-weight: bold; 
+    margin-bottom: 10px;
+}
+
+.cop-textarea {
+    padding: 12px;
+    font-family: monospace; 
+    resize: vertical; 
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.cop-input:focus, .cop-textarea:focus {
+    outline: none;
+    border-color: #f0c042;
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 8px rgba(240, 192, 66, 0.4);
+}
+
+/* --- BUTONLAR --- */
+.cop-btn { 
+    background: linear-gradient(to bottom, #d9b972 0%, #c19c4d 100%); 
+    color: #311800; 
+    border: 1px solid #814c11; 
+    padding: 10px 15px; 
+    border-radius: 6px; 
+    font-weight: 800; 
+    cursor: pointer; 
+    font-size: 14px; 
+    transition: all 0.2s ease; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.cop-btn:hover { 
+    background: linear-gradient(to bottom, #e3d5b3 0%, #d9b972 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+}
+
+.cop-btn-danger { 
+    background: #d9534f; 
+    color: white; 
+    border: 1px solid #c9302c; 
+    padding: 8px 12px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    transition: background 0.2s;
+}
+.cop-btn-danger:hover { background: #c9302c; }
+
+/* --- TABLO DÜZENİ --- */
+.cop-table-wrapper { 
+    overflow-x: auto; 
+    background: #1e150d; 
+    border-radius: 6px; 
+    border: 1px solid #5c3516;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+.cop-table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: center; color: #eaddbd;}
+.cop-table th, .cop-table td { border: 1px solid #4a2a10; padding: 10px 8px; }
+.cop-table th { background: linear-gradient(to bottom, #3c240c, #2a1908); color: #f0c042; white-space: nowrap; font-weight: bold;}
+.cop-table tbody tr:nth-child(even) { background-color: rgba(255, 255, 255, 0.02); }
+.cop-table tbody tr:hover { background-color: rgba(240, 192, 66, 0.05); }
+
+/* --- İKON, ETİKET VE LİSTE DÜZENLEMELERİ --- */
+.cop-player-badge { background: #603000; color: #f0c042; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);}
+.cop-points { color: #5cb85c; font-weight: bold; font-size: 12px; }
+.cop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start;}
+
+.cop-action-icon {
+    width: 26px; height: 26px; cursor: pointer; border: 1px solid transparent; 
+    border-radius: 4px; transition: all 0.2s ease; background: rgba(255,255,255,0.05); padding: 3px;
+}
+.cop-action-icon:hover { 
+    transform: scale(1.2); border-color: #f0c042; background: rgba(240, 192, 66, 0.2); box-shadow: 0 0 8px rgba(240, 192, 66, 0.5);
+}
+
+.cop-map-container { height: 450px; background: #0a0a0a; border: 2px solid #5c3516; border-radius: 6px; position: relative; overflow: hidden; margin-top: 15px; box-shadow: inset 0 0 10px rgba(0,0,0,0.8);}
+
+/* --- TAKTİK SEKMELERİ --- */
+.cop-tabs { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.cop-tab-btn {
+    background: #111; color: #814c11; border: 1px solid #814c11; padding: 8px 12px;
+    border-radius: 4px; font-weight: bold; font-size: 12px; cursor: pointer; transition: 0.2s; flex: 1;
+}
+.cop-tab-btn.active { background: #814c11; color: #f0c042; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5); }
+.cop-color-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; border: 1px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.5);}
+
+/* --- LİSTE ELEMANLARI (Karanlık Kutu) --- */
+.cop-inner-box { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 6px; border: 1px solid #4a2a10; }
+.cop-list-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3c240c; padding: 10px 8px; transition: 0.2s; border-radius: 4px;}
+.cop-list-item:hover { background: rgba(240, 192, 66, 0.05); }
+.cop-list-item.active { background: #3c240c; border-left: 4px solid #f0c042; }
+
+/* --- İSTATİSTİKLER VE GİZLEME --- */
+.cop-target-stats { display: flex; gap: 12px; margin-top: 6px; font-size: 12px; color: #aaa; align-items: center;}
+.cop-target-stats img { width: 16px; height: 16px; vertical-align: middle;}
+
+.cop-hide-btn { background: none; border: none; color: #aaa; cursor: pointer; font-size: 16px; transition: 0.2s;}
+.cop-hide-btn:hover { color: #fff; transform: scale(1.2);}
+
+/* --- TOAST BİLDİRİMİ --- */
+.cop-toast {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+    background: #5cb85c; color: #fff; padding: 12px 24px; border-radius: 6px;
+    font-weight: bold; font-size: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    z-index: 9999; opacity: 0; visibility: hidden; transition: all 0.3s ease-in-out;
+}
+.cop-toast.show { opacity: 1; visibility: visible; transform: translate(-50%, -20px); }
+
+/* =========================================
+   CİHAZ UYUM (RESPONSIVE) AYARLARI
+   ========================================= */
+
+/* TABLET (1024px ve altı) */
+@media (max-width: 1024px) {
+    .cop-grid { 
+        grid-template-columns: 1fr; /* Tablettede yan yana durmaları çok sıkışık olur, alt alta atıyoruz */
+        gap: 20px;
+    }
+}
+
+/* MOBİL TELEFON (768px ve altı) */
+@media (max-width: 768px) {
+    .cop-container { padding: 15px; }
+    .cop-header { font-size: 22px; text-align: center; }
+    .cop-box { padding: 15px; }
+    
+    /* Dokunmatik hedefleri (Touch Targets) mobil için büyütüyoruz */
+    .cop-input, .cop-btn, .cop-tab-btn { padding: 12px; font-size: 15px; }
+    .cop-action-icon { width: 32px; height: 32px; padding: 4px; }
+    .cop-hide-btn { font-size: 20px; padding: 10px; }
+    
+    .cop-map-container { height: 350px; } /* Mobilde harita yüksekliğini hafif kısıyoruz */
+}

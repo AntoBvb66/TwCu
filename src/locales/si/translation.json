@@ -1,0 +1,860 @@
+{
+  "menu": {
+    "title": "TW Cobre",
+    "stats": "Statistika v živo",
+    "visitsTitle": "Skupno število obiskovalcev",
+    "mapsTitle": "Ustvarjeni zemljevidi",
+    "opsTitle": "Načrtovane operacije",
+    "simsTitle": "Zagnane simulacije",
+    "visits": "Obiski",
+    "maps": "Zemljevidi",
+    "developer": "Razvijalec",
+    "items": {
+      "buildingTimes": "Kalkulator časa gradnje",
+      "mapAnalysis": "Analiza celine in zemljevida",
+      "mapGenerator": "Generator zemljevidov",
+      "productionData": "Kalkulator proizvodnje",
+      "coinMinter": "Načrtovalec zlatih kovancev",
+      "buildingPlanner": "Načrtovalec gradnje (vrsta)",
+      "unitCalculator": "Kalk. proizvodnje čet",
+      "churchPlanner": "Načrtovalec cerkve",
+      "opPlanner": "Individualni načrtovalec operacij",
+      "clanOp": "Načrtovalec operacij plemena",
+      "clanTroop": "Načrtovalec operacij plemena (napredno)",
+      "fastSupport": "Načrtovanje hitre podpore",
+      "scavengingPlanner": "Kalkulator časa brskanja"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Dobrodošli v TW Cobre",
+      "subtitle": "Zmaga se skriva v podrobnostih in brezhibnem načrtovanju. Prihranite čas na vaši poti v Vojni plemen in osnujte strateške načrte, ki bodo vaše pleme vodili do zmage. Izberite orodje za začetek."
+    },
+    "tools": {
+      "opPlanner": { "title": "Osebni načrtovalec operacij", "desc": "Povežite izvorne in ciljne vasi, da pripravite brezhibno predlogo operacije (BBCode)." },
+      "buildingPlanner": { "title": "Načrtovalec gradnje", "desc": "Korak za korakom oblikujte načrt gradnje vaše vasi z napredno simulacijo vrste." },
+      "unitCalculator": { "title": "Kalkulator proizvodnje čet", "desc": "Izračunajte čas proizvodnje enot za vojašnico, konjušnico in delavnico, vključno z bonusi." },
+      "mapGenerator": { "title": "Generator zemljevidov", "desc": "Ustvarite posodobljene, barvne dinamične zemljevide sveta za forume plemena." },
+      "mapAnalysis": { "title": "Analiza celine", "desc": "Analizirajte prevlado plemena in igralcev na celinah na zemljevidu sveta." },
+      "productionData": { "title": "Kalkulator proizvodnje", "desc": "Optimizirajte stopnje proizvodnje v rudnikih, zmogljivosti skladišča in čas polnjenja." },
+      "coinMinter": { "title": "Načrtovalec zlatih kovancev", "desc": "Izračunajte najbolj idealno vas za kovanje zlatih kovancev." },
+      "churchPlanner": { "title": "Načrtovalec cerkve", "desc": "Optimizirajte območja pokritosti z vašimi cerkvami na zemljevidu z algoritmom za varčevanje s prebivalstvom." },
+      "buildingTimes": { "title": "Kalkulator časa gradnje", "desc": "Izračunajte in primerjajte čase gradnje stavb na različnih stopnjah, natančno do sekunde." },
+      "clanOp": { "title": "Načrtovalec operacij plemena", "desc": "Analizirajte vse vasi plemena in naredite pametne dodelitve. Razdelite personalizirana BBCode navodila članom z obveščevalno podporo osebja, podprto z zemljevidom." },
+      "clanTroop": { "title": "Načrtovalec operacij plemena (s četami)", "desc": "Analizirajte vse čete plemena in naredite pametne dodelitve. Razdelite personalizirana BBCode navodila članom z obveščevalno podporo osebja, podprto z zemljevidom." },
+      "fastSupport": { "title": "Iskalnik hitre podpore", "desc": "Ustvarite zahtevo za podporo, da dobite hitro pomoč." },
+      "scavengingPlanner": { "title": "Kalkulator časa brskanja", "desc": "Podrobno primerjajte čase brskanja." }
+    }
+  },
+  "footer": {
+    "text1": "Napredna orodja za načrtovanje za Vojno plemen",
+    "text2": "© 2026 TW Cobre | Razvijalec: ",
+    "links": {
+      "about": "O nas",
+      "privacy": "Zasebnost in GDPR"
+    }
+  },
+  "aboutPage": {
+    "title": "O nas",
+    "p1": "Pozdravljeni, sem Anto Bvb 66.",
+    "p2": "TW Cobre je elitna taktična plošča in poveljniško središče, razvito neodvisno za obdelavo surovih podatkov igralcev Vojne plemen (Tribal Wars) in jim pomaga pridobiti strateško premoč.",
+    "p3": "Od načrtovanja operacij do analize čiščenja so vsi moduli zasnovani za reševanje izračunov v nekaj sekundah, ki bi igralcu vzeli ure. Zmaga se skriva v podrobnostih!"
+  ,"contactTitle": "Poročila o napakah in stik",
+    "contactDesc": "Napake, pomanjkljivosti ali predloge za izboljšave, ki jih naletite na naši strani, mi lahko sporočite neposredno po e-pošti.",
+    "emailButton": "Pošlji e-pošto"
+  },
+  "privacyPage": {
+    "title": "Pravilnik o zasebnosti in KVKK",
+    "p1": "TW Cobre spoštuje zasebnost uporabnikov na najvišji ravni. V skladu z zakoni o varstvu podatkov (GDPR) in mednarodnimi standardi je naša politika obdelave podatkov naslednja:",
+    "items": {
+      "i1": "Varnost računa: TW Cobre NIKOLI ne zahteva, shranjuje ali gosti vašega gesla za Vojno plemen, e-pošte ali osebnih podatkov o seji na svojih strežnikih.",
+      "i2": "Lokalno shranjevanje: Vaše nastavitve (hitrost sveta, število čet, koordinate vasi itd.) so shranjene samo v brskalniku vaše naprave (Lokalna shramba / Shramba seje), zato se ne izgubijo, ko osvežite stran.",
+      "i3": "Zunanje pridobivanje podatkov: Moduli zemljevidov in analiz obdelujejo splošne podatke o svetu, ki jih Vojna plemen javno zagotavlja v realnem času. Ta operacija se izvede enkrat na uro. V skladu s pravili igre ti podatki vsebujejo samo splošne informacije o vasi in igralcih ter ne vključujejo vaših osebnih podatkov.",
+      "i4": "Statistika: Števci obiskovalcev in ustvarjenih zemljevidov na naši spletni strani so le številčni podatki; ne ujemajo se z vašim IP naslovom ali identiteto."
+    },
+    "p2": "Z uporabo TW Cobre se strinjate, da se vaši podatki varno obdelujejo v vaši napravi in da je vaša zasebnost zaščitena."
+  },
+  "buildingPlanner": {
+    "title": "🏗️ TW Načrtovalec gradnje (Simulacija vrste)",
+    "worldSpeed": "Hitrost sveta:",
+    "mineSpeed": "Faktor proizvodnje virov:",
+    "btn": {
+      "import": "📥 Naloži vrsto gradnje",
+      "export": "📤 Izvozi vrsto gradnje",
+      "clear": "🗑️ Počisti",
+      "addQueue": "Naloži",
+      "copyBoard": "Kopiraj v odložišče",
+      "close": "Zapri",
+      "delete": "Izbriši"
+    },
+    "modal": {
+      "importTitle": "📥 Prilepite vrsto gradnje, kopirano iz igre",
+      "exportTitle": "📤 Vaš izhod vrste (Lahko kopirate)",
+      "importPlaceholder": "Glavna stavba +1 (Stopnja 1)\n10 točk\n...",
+      "success": "✅ Uspeh! {{count}} stavb dodanih v vrsto.",
+      "error": "❌ Ni najdene veljavne predloge. Prosimo, preverite kopirano besedilo.",
+      "copied": "Kopirano!",
+      "exportPrefix": "Vrsta za gradnjo",
+      "levelLabel": "Stopnja",
+      "pointsLabel": "Točke"
+    },
+    "levelsTitle": "🏠 Začetne stopnje stavb (Skrij / Pokaži)",
+    "analysis": {
+      "title": "⏳ Analiza vrste in čakalne dobe (Pokaži/Skrij)",
+      "withWait": "⏳ Čas s čakanjem na vire:",
+      "withoutWait": "⚡ Čas brez čakanja na vire:",
+      "bottleneckTitle": "🚨 Koraki, kjer se vrsta upočasni:",
+      "wood": "Les",
+      "clay": "Glina",
+      "iron": "Železo",
+      "order": "Vrstni red",
+      "level": "Stopnja",
+      "waitingFor": "Čakanje",
+      "waitingSuffix": "na vire.",
+      "missing": "Manjkajoče količine",
+      "perfect": "🎉 Odlično! V tej vrsti ni časa čakanja na vire. Gradnje se bodo nadaljevale nemoteno."
+    },
+    "summary": {
+      "title": "Povzetek vrste (Kliknite stavbe za dodajanje)",
+      "max": "Na najvišji stopnji",
+      "add": "Dodaj v vrsto"
+    },
+    "columnsToggle": "👁️ Skrij / Pokaži stolpce tabele",
+    "columns": {
+      "order": "Vrstni red",
+      "expectedWait": "Pričakovano čakanje",
+      "building": "Stavba",
+      "level": "Stopnja",
+      "buildTime": "Čas gradnje",
+      "startTime": "Čas začetka",
+      "endTime": "Čas konca",
+      "points": "Točke",
+      "cost": "Stroški (Les/Glina/Železo)",
+      "resWait": "Čas čakanja na vire",
+      "currentStorage": "Trenutno v skladišču",
+      "hourlyProd": "Urna proizvodnja",
+      "pop": "Prebivalstvo",
+      "storage": "Skladišče",
+      "desc": "Opis",
+      "action": "Akcija"
+    },
+    "status": {
+      "storageFull": "∞ (Skladišče polno)",
+      "storageLimit": "Nezadostno skladišče!",
+      "requirement": "Zahteva",
+      "waitingRes": "Čakanje na vire.",
+      "farmLimit": "Nezadostna kmetija!",
+      "maxLevel": "Max. stopnja!"
+    },
+    "fastAdd": {
+      "placeholder": "Vnesite ali izberite...",
+      "modeActive": "Aktiviran način tipkovnice:",
+      "info": "Hitro lahko dodajate tako, da vtipkate ime stavbe in pritisnete Enter.",
+      "dragTitle": "Povleci za spremembo vrstnega reda"
+    },
+    "daysShort": "d",
+    "buildings": {
+      "hq": "Glavna stavba",
+      "barracks": "Vojašnica",
+      "stable": "Konjušnica",
+      "workshop": "Delavnica",
+      "first_church": "Prva cerkev",
+      "church": "Cerkev",
+      "watchtower": "Opazovalni stolp",
+      "academy": "Akademija",
+      "smithy": "Kovačnica",
+      "rally": "Zbirališče",
+      "statue": "Kip",
+      "market": "Tržnica",
+      "wood": "Gozdar",
+      "clay": "Kop za glino",
+      "iron": "Rudnik železa",
+      "farm": "Kmetija",
+      "ware": "Skladišče",
+      "hiding": "Skrivališče",
+      "wall": "Zid"
+    }
+  },
+  "buildingTimes": {
+    "title": "⏱️ Primerjava časov gradnje",
+    "worldSpeed": "Hitrost sveta:",
+    "panel1": "Načrt A (Referenca)",
+    "panel2": "Načrt B (Primerjava)",
+    "hqLevel": "Stopnja glavne stavbe:",
+    "buildingToUpgrade": "Stavba za nadgradnjo:",
+    "currentLevel": "Trenutna stopnja:",
+    "targetLevel": "Ciljna stopnja:",
+    "totalTime": "Skupni čas:",
+    "comparisonResult": "⚡ Rezultat primerjave:",
+    "panel2Faster": "Načrt B bo končan {{time}} hitreje kot načrt A!",
+    "panel1Faster": "Načrt A bo končan {{time}} hitreje kot načrt B!",
+    "tableTitle": "📊 Tabela časov vseh stavb po stopnjah",
+    "tableHqLevel": "Tabela - stopnja glavne stavbe:",
+    "level": "Stopnja",
+    "dragTitle": "Povleci za spremembo položaja",
+    "tip": "Namig: Naslove (npr. 'Vojašnica') lahko povlečete levo ali desno, da spremenite vrstni red stolpcev.",
+    "time": {
+      "day": "d",
+      "hour": "ur",
+      "minute": "min",
+      "second": "sek",
+      "zero": "0 sek"
+    },
+    "buildings": [
+      "Glavna stavba", "Vojašnica", "Konjušnica", "Delavnica", "Prva cerkev", "Cerkev",
+      "Opazovalni stolp", "Akademija", "Kovačnica", "Zbirališče", "Kip", "Tržnica",
+      "Gozdar", "Kop za glino", "Rudnik železa", "Kmetija", "Skladišče", "Skrivališče",
+      "Plemič", "Zlati kovanec", "Zid"
+    ]
+  },
+  "scavenging": {
+    "title": "Kalkulator brskanja",
+    "settings": {
+      "title": "🌍 Nastavitve sveta in proizvodnje",
+      "worldSpeed": "Hitrost sveta:",
+      "mineSpeed": "Faktor proizvodnje virov:",
+      "woodLevel": "Stopnja gozdarja:",
+      "clayLevel": "Stopnja kopa za glino:",
+      "ironLevel": "Stopnja rudnika železa:",
+      "worldConstant": "Konstanta sveta:",
+      "resHourly": "Proizvodnja virov:"
+    },
+    "production": {
+      "perMin": "/ min",
+      "perHour": "/ uro",
+      "perDay": "/ dan"
+    },
+    "troops": {
+      "title": "⚔️ Število čet in zastava",
+      "carryFlag": "Zastava za nosilnost (%):",
+      "resFlag": "Zastava za proizvodnjo virov (%):",
+      "totalCap": "Zmogljivost brskanja (Brez zastave):",
+      "totalCapFlag": "Skupna zmogljivost (Zastava nosilnosti):",
+      "totalRes": "Proizvodnja virov (Brez zastave):",
+      "totalResFlag": "Proizvodnja virov (Zastava za vire):"
+    },
+    "results": {
+      "title": "🏆 Lestvica najbolj donosnih strategij",
+      "chartTitle": "📊 Grafikon primerjave strategij (Top 10)",
+      "totalDaily": "Skupno dnevno",
+      "scavenge": "Brskanje",
+      "resource": "Proizvodnja",
+      "perMin": "min",
+      "perHour": "uro",
+      "perDay": "dan",
+      "maxTrip": "Najdaljši čas potovanja",
+      "dayShort": "/d",
+      "hourShort": "/h",
+      "minShort": "/m",
+      "modes": {
+        "eqTime": "Enak čas",
+        "eqCap": "Enaka zmogljivost"
+      },
+      "flags": {
+        "none": "Brez zastave",
+        "carry": "Zastava za nosilnost",
+        "res": "Zastava za vire"
+      },
+      "options": {
+        "c1234": "1-2-3-4 Odklenjeno",
+        "c123": "1-2-3 Odklenjeno",
+        "c234": "2-3-4 Odklenjeno",
+        "c12": "1-2 Odklenjeno",
+        "c23": "2-3 Odklenjeno"
+      }
+    },
+    "reference": {
+      "title": "📈 Točka preloma (Referenčna tabela zmogljivosti)",
+      "info": "Čete niso bile vnesene. Spodnja tabela prikazuje ocenjeni dnevni plen za strategije 'Enak čas' proti 'Enaki zmogljivosti' pri različnih stopnjah zmogljivosti (ob predpostavki, da je odklenjeno 1-2-3-4).",
+      "cap": "Vzorčna zmogljivost",
+      "eqTimeDaily": "Enak čas (Dnevno)",
+      "eqCapDaily": "Enaka zmogljivost (Dnevno)",
+      "winner": "Ugodnejša taktika"
+    },
+    "chart": {
+      "title": "📈 Krivulja dnevnega plena glede na zmogljivost (Enak čas in Brez zastave)",
+      "worldConstantInfo": "Ustvarjeno na podlagi konstante sveta ({{constant}}).",
+      "unlocked": "Odklenjeno",
+      "infoTitle": "💡 Kritične prelomne točke",
+      "be1": "🔸 Po zmogljivosti {{cap}}: Taktika 1-2-3-4 prehiti 2-3-4 in postane bolj donosna.",
+      "be2": "🔸 Po zmogljivosti {{cap}}: Taktika 1-2-3 prehiti 2-3."
+    }
+  },
+  "churchPlanner": {
+    "title": "⛪ Optimalni načrtovalec cerkve",
+    "dataInput": "Vnos podatkov",
+    "allVillagesCoords": "Vse koordinate vaših vasi:",
+    "villagesPlaceholder": "510|621, 510|622 (Izvleče tudi iz besedila)",
+    "existingChurchesLabel": "Obstoječe cerkve (Opcijsko):",
+    "existingChurchesPlaceholder": "npr. 506|496 3 (X|Y Stopnja)",
+    "includeFirstChurch": "Vključi prvo cerkev?",
+    "calculateBtn": "⚙️ Izračunaj optimalen načrt",
+    "alertNoVillage": "Prosimo, vnesite vsaj eno koordinato vasi!",
+    "resultsTitle": "Rezultati ({{count}} Cerkva)",
+    "existing": "Obstoječa",
+    "firstChurch": "Prva cerkev",
+    "normalChurch": "Običajna cerkev",
+    "lvl": "Stopnja",
+    "coversVillages": "Pokrite vasi",
+    "warningUncovered": "⚠️ Opozorilo: {{count}} vasi je ostalo nezaščitenih.",
+    "coveredVillage": "Pokrita vas",
+    "uncoveredVillage": "Nezaščitena vas"
+  },
+  "clanOp": {
+    "title": "🛡️ Načrtovalec operacij plemena",
+    "step1": {
+      "title": "1. Poiščite vasi vašega plemena",
+      "clearAll": "🧹 Počisti vse podatke",
+      "worldUrl": "URL sveta",
+      "clanTag": "Oznaka plemena",
+      "runIntel": "Poišči vasi",
+      "status": {
+        "gathering": "Zbiranje informacij: Skeniranje vseh igralcev in vasi sveta...",
+        "notFound": "❌ Pleme ni bilo najdeno! Preverite oznako.",
+        "success": "✅ Uspeh! ID plemena: {{clanId}} | Člani: {{memberCount}} | Skupaj vasi: {{villageCount}}",
+        "error": "❌ Napaka: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Ciljne vasi",
+      "snobLimit": "Omejitev razdalje za plemiča:",
+      "placeholder": "Prilepite koordinate cilja sem...",
+      "foundTargets": "Najdeni cilji: {{count}}"
+    },
+    "step3": {
+      "title": "3. Center za pametno dodeljevanje in zemljevid",
+      "arrivalTime": "Čas prihoda na cilj:",
+      "targetsTitle": "Vaši cilji (Kliknite za izbiro)",
+      "points": "Točke",
+      "p": "T",
+      "distance": "Razdalja:"
+    },
+    "manualAssign": {
+      "title": "👤 Prosto dodeljevanje igralca",
+      "selectPlayer": "-- Izberite igralca --",
+      "assignBtn": "Dodeli",
+      "info": "*Doda samo nalogo s časom prihoda na izbran cilj zgoraj. Vasi igralca se bodo na zemljevidu prikazale tudi modro."
+    },
+    "tabs": {
+      "closest10": "Najbližjih 10 vasi",
+      "furthest10": "Najbolj oddaljenih 10 vasi",
+      "selectPlayer": "Izberite igralca"
+    },
+    "suggestions": {
+      "noVillages": "Ni vasi za prikaz.",
+      "kami": "Pošlji napad (Nuke)",
+      "snob": "Pošlji plemiča",
+      "fake": "Pošlji lažni napad",
+      "show": "Naredi vidno",
+      "hide": "Skrij"
+    },
+    "queue": {
+      "title": "Vrsta operacij ({{count}} Ukazov)",
+      "clear": "Počisti celotno vrsto",
+      "delete": "Izbriši",
+      "enemy": "Sovražnik (Cilj)"
+    },
+    "bbcode": {
+      "title": "📋 Predloga BBCode za Beležnico",
+      "copyAll": "Kopiraj vse",
+      "selectCols": "Izberite stolpce:",
+      "ordersFor": "--- UKAZI ZA {{player}} ---",
+      "attack": "Napad",
+      "viewTarget": "Poglej cilj",
+      "unknown": "NEZNANO"
+    },
+    "alerts": {
+      "confirmClear": "Vsi načrti, cilji in skrite vasi (razen informacij o svetu/plemenu v 1. koraku) bodo izbrisani. Ste prepričani?",
+      "cleared": "🧹 Vsi podatki počiščeni!",
+      "enterTribeTag": "Prosimo, vnesite oznako plemena!",
+      "selectTarget": "Prosimo, izberite cilj.",
+      "selectTargetLeft": "Prosimo, izberite cilj na levi strani.",
+      "selectPlayer": "Prosimo, izberite igralca s seznama.",
+      "snobLimitExceeded": "⚠️ Opozorilo: Izbrana razdalja ({{dist}}) presega nastavljeno omejitev za plemiča ({{limit}})!",
+      "orderAdded": "✅ Ukaz dodan!",
+      "manualAdded": "✅ Prosta dodelitev dodana!",
+      "confirmClearQueue": "Ste prepričani, da želite počistiti celotno vrsto?",
+      "queueCleared": "🗑️ Vrsta počiščena!",
+      "copied": "Kopirano!"
+    },
+    "columns": {
+      "no": "Št",
+      "player": "Igralec",
+      "source": "Izvor",
+      "target": "Cilj",
+      "departure": "Čas odhoda",
+      "arrival": "Čas prihoda",
+      "unit": "Enota",
+      "distance": "Razdalja",
+      "travelTime": "Čas potovanja",
+      "attackLink": "Povezava do akcije"
+    },
+    "units": {
+      "spear": "Sulicar", "sword": "Sabljevalec", "axe": "Sekirolec", "spy": "Oglednik",
+      "light": "Lahka konjenica", "heavy": "Težka konjenica", "ram": "Oven", "catapult": "Katapult",
+      "knight": "Paladin", "snob": "Plemič", "archer": "Lokostrelec", "marcher": "Lokostrelec na konju", "militia": "Milica"
+    },
+    "shortUnits": {
+      "ram": "Nuke",
+      "snob": "Plemič",
+      "catapult": "Fake",
+      "spy": "Oglednik"
+    }
+  },
+  "clanTroop": {
+    "title": "🦅 Načrtovalec operacij plemena (Napredno)",
+    "step1": {
+      "title": "1. Poiščite vasi vašega plemena",
+      "clear": "🧹 Počisti podatke",
+      "worldUrl": "URL sveta",
+      "clanTag": "Oznaka plemena",
+      "run": "Poišči vasi",
+      "gathering": "Zbiranje informacij...",
+      "notFound": "❌ Pleme ni bilo najdeno!",
+      "success": "✅ Uspeh! ID plemena: {{clanId}} | Skupaj vasi: {{villageCount}}",
+      "error": "❌ Napaka: {{msg}}"
+    },
+    "step2": {
+      "title": "2. Ciljne vasi",
+      "snobLimit": "Omejitev razdalje za plemiča:",
+      "placeholder": "Prilepite koordinate cilja sem..."
+    },
+    "stepTroop": {
+      "title": "🛡️ Vnesite podatke o četah (Kopiraj/Prilepi)",
+      "placeholder": "Prilepite podatke o četah iz pregleda čet (tabela) ali v formatu CSV (475|494,48,0,0...)...",
+      "detected": "Odkrite informacije: {{count}} Vasi",
+      "summaryTitle": "📊 Povzetki profilov igralcev",
+      "idle": " (V prostem teku: {{count}})",
+      "depleted": " (Izčrpano)"
+    },
+    "step3": {
+      "title": "📍 Center za pametno dodeljevanje in zemljevid",
+      "arrivalTime": "Čas prihoda na cilj:",
+      "targetsTitle": "Vaši cilji (Kliknite za izbiro)",
+      "distance": "Razdalja:"
+    },
+    "tabs": {
+      "closest": "Najbližjih 10 vasi",
+      "furthest": "Najbolj oddaljenih 10 vasi",
+      "player": "Izberite igralca",
+      "selectPlayer": "-- Izberite igralca --"
+    },
+    "suggestions": {
+      "noVillages": "Ni najdenih vasi.",
+      "kami": "Pošlji napad (Nuke)",
+      "snob": "Pošlji plemiča",
+      "fake": "Pošlji lažni napad",
+      "show": "Naredi vidno",
+      "hide": "Skrij",
+      "noIntel": " (Ni informacij)"
+    },
+    "queue": {
+      "title": "Vrsta operacij ({{count}} Ukazov)",
+      "clear": "Počisti celotno vrsto",
+      "delete": "Izbriši"
+    },
+    "bbcode": {
+      "title": "📋 Predloga BBCode za Beležnico",
+      "copyAll": "Kopiraj vse",
+      "ordersFor": "--- UKAZI ZA {{player}} ---",
+      "attack": "Napad",
+      "unknown": "NEZNANO"
+    },
+    "alerts": {
+      "confirmClear": "Vsi načrti vključno z informacijami bodo izbrisani. Ste prepričani?",
+      "cleared": "🧹 Podatki počiščeni!",
+      "enterTribeTag": "Prosimo, vnesite oznako plemena!",
+      "selectTarget": "Prosimo, izberite cilj.",
+      "snobLimitExceeded": "⚠️ Opozorilo: Omejitev za plemiča ({{limit}}) presežena! Vseeno dodam?",
+      "orderAdded": "✅ Ukaz dodan!",
+      "confirmClearQueue": "Ste prepričani, da želite počistiti celotno vrsto?",
+      "queueCleared": "🗑️ Vrsta počiščena!",
+      "copied": "Kopirano!"
+    },
+    "columns": {
+      "no": "Št",
+      "player": "Igralec",
+      "source": "Izvor",
+      "target": "Cilj",
+      "departure": "Odhod",
+      "arrival": "Prihod",
+      "unit": "Enota",
+      "distance": "Razdalja",
+      "travelTime": "Potovanje",
+      "attackLink": "Akcija"
+    },
+    "units": {
+      "spear": "Sulicar", "sword": "Sabljevalec", "axe": "Sekirolec", "spy": "Oglednik",
+      "light": "Lahka", "heavy": "Težka", "ram": "Oven", "catapult": "Katapult",
+      "knight": "Paladin", "snob": "Plemič"
+    },
+    "profiles": {
+      "quarter": "Četrtina",
+      "half": "Polovica",
+      "threeQuarters": "3-Četrtine",
+      "full": "Polno",
+      "kami": "Nuke",
+      "sav": "Obramba",
+      "empty": "Novo/Prazno"
+    }
+  },
+  "coinMinter": {
+    "title": "💰 Načrtovalec zlatih kovancev (Središče)",
+    "dataInput": "Vnos podatkov",
+    "allVillagesCoords": "Vse koordinate vaših vasi:",
+    "villagesPlaceholder": "510|621, 510|622 (Izvleče tudi iz besedila)",
+    "hubCountLabel": "Koliko vasi središč (Hub)?",
+    "calculateBtn": "⚙️ Najdi najboljša središča",
+    "resultsTitle": "🎯 Načrtovana središča ({{count}})",
+    "hubCardHeader": "Središče:",
+    "hubCardSub": "Bo prejelo vire iz {{count}} vasi",
+    "hubCardBody": "Vasi, ki pošiljajo vire:",
+    "onlySelf": "Samo zase...",
+    "mapInfoTitle": "Informacije o zemljevidu:",
+    "mapInfoCenter": "Velika bela pika:",
+    "mapInfoCenterDesc": "Vasi središč (Kovanje kovancev)",
+    "mapInfoSender": "Barvne pike:",
+    "mapInfoSenderDesc": "Vasi, ki pošiljajo vire",
+    "mapInfoLines": "Črte:",
+    "mapInfoLinesDesc": "Smer pretoka virov",
+    "alerts": {
+      "noVillage": "Prosimo, vnesite vsaj eno koordinato vasi!",
+      "invalidHubCount": "Število središč ne more presegati števila vasi in mora biti večje od 0."
+    }
+  },
+  "fastSupport": {
+    "title": "🛡️ Center za načrtovanje hitre podpore",
+    "step1": {
+      "title": "1. Poiščite vasi vašega plemena",
+      "worldUrl": "URL sveta",
+      "clanTag": "Oznaka plemena",
+      "updateBtn": "Posodobi vasi",
+      "status": {
+        "scanning": "Skeniranje vasi plemena...",
+        "notFound": "❌ Pleme ni bilo najdeno! Preverite kratico.",
+        "success": "✅ Uspeh! Skupaj podpornih vasi: {{count}}",
+        "error": "❌ Napaka: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Cilj za obrambo in čas",
+      "targetCoord": "Koordinata cilja",
+      "targetPlaceholder": "npr. 564|554",
+      "arrivalTime": "Čas prihoda na cilj",
+      "slowestUnit": "Najpočasnejša hitrost enote"
+    },
+    "results": {
+      "title": "Na voljo podpore ({{count}})",
+      "allTribe": "Celotno pleme",
+      "noVillages": "Ni bilo mogoče najti vasi, ki bi lahko dosegle ta cilj ob izbranem času!",
+      "mapTarget": "🛡️ Cilj"
+    },
+    "bbcode": {
+      "title": "📋 Klic na forumu (BBCode)",
+      "copyAll": "Kopiraj vse",
+      "target": "🎯 Cilj:",
+      "arrivalTime": "⏱️ Čas prihoda:",
+      "unitSpeed": "🛡️ Hitrost enote:",
+      "sendSupport": "Pošlji podporo",
+      "supportLink": "🛡️ Pošlji podporo"
+    },
+    "alerts": {
+      "enterTribeTag": "Prosimo, vnesite oznako plemena!",
+      "copied": "Kopirano!"
+    },
+    "columns": {
+      "player": "Igralec",
+      "source": "Izvor",
+      "distance": "Razdalja",
+      "time": "Čas",
+      "departure": "Čas odhoda"
+    },
+    "units": {
+      "spear": "Sulicar", "sword": "Sabljevalec", "archer": "Lokostrelec", "spy": "Oglednik", "heavy": "Težka", "catapult": "Katapult", "knight": "Paladin"
+    }
+  },
+  "mapAnalysis": {
+    "title": "Analiza celine in zemljevida",
+    "bypassActive": "🕵️ Obvod aktiven",
+    "bypassAlertOn": "🕵️ SKRIVNI NAČIN AKTIVEN: Čas čakanja 1 ure zaobiden! Sveži podatki bodo pridobljeni vsakič.",
+    "bypassAlertOff": "🔒 SKRIVNI NAČIN NEAKTIVEN: Zaščita 1-urnega predpomnilnika omogočena.",
+    "enterWorldUrl": "Prosimo, vnesite URL sveta!",
+    "fetchError": "Napaka pri pridobivanju podatkov. Prepričajte se, da je povezava pravilna.\nNapaka: {{error}}",
+    "clearConfirm": "Vsi podatki, arhivi in zgodovina teleportacij bodo izbrisani. Ste prepričani?",
+    "status": {
+      "waiting": "Čakanje na podatke...",
+      "cached": "Naloženo iz predpomnilnika! (Zadnji podatki: {{time}})",
+      "downloading": "Prenašanje podatkov s strežnika... (To lahko traja 10-15 sek)",
+      "analyzing": "Prenos končan, analiziranje...",
+      "empty": "Ni najdenih podatkov za obdelavo!",
+      "success": "USPEH: {{villages}} vasi, {{players}} igralcev naloženih.",
+      "cleared": "Shramba popolnoma počiščena."
+    },
+    "timeMsg": {
+      "cached": "⏳ Prikazujem predpomnjene podatke. Zadnje pridobivanje: {{time}}",
+      "new": "⏳ Novi podatki pridobljeni. Čakanje na naslednje pridobivanje za zaznavo teleportacij...",
+      "diff": "Časovni interval: minilo je {{hours}} ur {{mins}} minut od prejšnje analize."
+    },
+    "sections": {
+      "autoFetch": "1. Samodejno pridobivanje podatkov (Priporočeno)",
+      "worldUrlLabel": "URL sveta (npr. https://en136.tribalwars.net):",
+      "downloadBtn": "🌍 Prenesi in obdelaj podatke",
+      "archive": "2. Arhiv podatkov",
+      "selectArchive": "-- Izberi arhiv --",
+      "loadBtn": "📂 Naloži",
+      "saveBtn": "💾 Arhiviraj trenutno",
+      "manual": "3. Ročni vnos podatkov (V primeru napake)",
+      "processManualBtn": "⚙️ Obdelaj ročne podatke",
+      "clearStorageBtn": "🗑️ Ponastavi shrambo"
+    },
+    "teleports": {
+      "title": "🚀 Zaznave teleportacije ({{count}})",
+      "showAllBtn": "🗺️ Pokaži vse na zemljevidu",
+      "continentTitle": "Teleportacije na celino {{cont}} ({{count}} igralcev)",
+      "old": "Staro:",
+      "new": "Novo:",
+      "showBtn": "📍 Pokaži",
+      "none": "Ni zaznanih teleportacij ali pa drugo pridobivanje še ni bilo izvedeno.",
+      "info": "* Sistem zbira podatke ob prvi analizi. V kasnejših analizah zazna vasi, ki so spremenile koordinate, in jih še naprej zgodovinsko navaja do počiščenja.",
+      "datePrefix": "🗓️"
+    },
+    "analysis": {
+      "title": "🌍 Analiza celine",
+      "player": "Igralec:",
+      "barbarian": "Barbar:",
+      "villages": "vasi",
+      "noTribe": "Brez plemena",
+      "farmRatio": "🎯 Barbarov na igralca:"
+    },
+    "map": {
+      "title": "Pogled zemljevida",
+      "gray": "Siva:",
+      "oldPos": "Stari položaj",
+      "red": "Rdeča:",
+      "newPos": "Novi položaj",
+      "closeBtn": "Zapri"
+    },
+    "barbarian": "Barbar"
+  },
+  "opPlanner": {
+    "title": "⚔️ Individualni načrtovalec operacij",
+    "step1": {
+      "title": "1. Podatkovna povezava",
+      "clearData": "Počisti vse podatke",
+      "worldUrl": "URL sveta:",
+      "playerName": "Ime vašega igralca:",
+      "fetchBtn": "Pridobi / Osveži podatke"
+    },
+    "step2": {
+      "title": "2. Vaše izvorne vasi in izbira enot ({{count}})",
+      "info": "Izberete lahko vse enote, ki bodo odposlane iz vasi. Motor za ujemanje se napaja od tukaj.",
+      "village": "Vas",
+      "unitSelection": "Izbira enot (Izbere se lahko več)"
+    },
+    "step3": {
+      "title": "3. Ciljne vasi",
+      "maxSnobDist": "Max. omejitev razdalje za plemiča:",
+      "placeholder": "Prilepite koordinate cilja sem (npr. 586|441, 587|442 v besedilu je v redu)",
+      "detectedTargets": "Zaznani cilji: {{count}}",
+      "mapLegend": {
+        "target": "Cilj",
+        "spearLight": "Sulicar/Lahka",
+        "ramKami": "Oven/Nuke",
+        "snob": "Plemič",
+        "spy": "Oglednik"
+      }
+    },
+    "step4": {
+      "title": "4. Motor za načrtovanje in usklajevanje časa",
+      "modeArrival": "Poznam čas prihoda na cilj",
+      "modeDeparture": "Poznam čas odhoda iz vasi",
+      "dateTime": "Datum in čas:",
+      "sourceVillage": "Izvorna vas:",
+      "allSourcesUsed": "Vsi viri uporabljeni",
+      "unitToSend": "Enota za pošiljanje:",
+      "selectSourceFirst": "Izberite izvor najprej",
+      "noUnitsLeft": "Ni več enot",
+      "target": "Cilj:",
+      "calcAndAddBtn": "➕ IZRAČUNAJ IN DODAJ"
+    },
+    "queue": {
+      "title": "Vrsta operacij ({{count}} Ukazov)",
+      "clearQueue": "Počisti celotno vrsto",
+      "delete": "Izbriši"
+    },
+    "bbcode": {
+      "title": "📋 Predloga BBCode za Beležnico",
+      "copyAll": "Kopiraj vse",
+      "selectCols": "Izberite stolpce:",
+      "attack": "Napad",
+      "unknown": "NEZNANO"
+    },
+    "status": {
+      "cached": "Podatki naloženi iz predpomnilnika. (Kliknite gumb 13-krat za vsiljeno osvežitev)",
+      "fetching": "Pridobivanje podatkov s strežnika... Prosimo, počakajte.",
+      "playerNotFound": "Igralec ni bil najden! Prepričajte se, da ste ime napisali pravilno.",
+      "success": "Uspeh! Igralec najden in {{count}} vasi navedenih.",
+      "error": "Napaka: {{msg}}"
+    },
+    "alerts": {
+      "enterWorldUrl": "Prosimo, vnesite URL sveta!",
+      "enterPlayerName": "Prosimo, vnesite ime vašega igralca!",
+      "confirmClear": "Vsi načrti, viri in cilji (razen 1. koraka) bodo izbrisani. Ste prepričani?",
+      "selectMatch": "Prosimo, izberite Izvor, Cilj in Enoto za ujemanje.",
+      "snobLimitExceeded": "⚠️ Opozorilo: Izbrana razdalja ({{dist}} enot) presega maksimalno omejitev razdalje za plemiča ({{limit}})!",
+      "confirmClearQueue": "Ste prepričani, da želite počistiti celotno vrsto?",
+      "copied": "Kopirano!"
+    },
+    "columns": {
+      "no": "Št",
+      "source": "Izvorna vas",
+      "target": "Cilj",
+      "departure": "Čas odhoda",
+      "arrival": "Čas prihoda",
+      "unit": "Enota",
+      "distance": "Razdalja",
+      "travelTime": "Čas potovanja",
+      "attackLink": "Povezava do akcije"
+    },
+    "units": {
+      "spear": "Sulicar", "sword": "Sabljevalec", "axe": "Sekirolec", "spy": "Oglednik",
+      "light": "Lahka konjenica", "heavy": "Težka konjenica", "ram": "Oven", "catapult": "Katapult",
+      "knight": "Paladin", "snob": "Plemič", "archer": "Lokostrelec", "marcher": "Lokostrelec na konju", "militia": "Milica"
+    }
+  },
+  "productionData": {
+    "title": "Načrtovalec proizvodnje",
+    "worldSpeed": "Hitrost sveta:",
+    "mineSpeed": "Faktor proizvodnje virov:",
+    "totalFactor": "Skupni multiplikator: {{speed}}x",
+    "empireProdTitle": "👑 Celotna proizvodnja ({{count}} Vasi)",
+    "hourlyProd": "⏳ Skupna urna proizvodnja",
+    "dailyProd": "📅 Skupna dnevna proizvodnja",
+    "resources": {
+      "wood": "Les:",
+      "clay": "Glina:",
+      "iron": "Železo:"
+    },
+    "villageManagement": "Upravljanje vasi",
+    "resetBtn": "Ponastavi",
+    "newVillageBtn": "+ Nova vas",
+    "villageNamePrefix": "Vas",
+    "bonus": {
+      "label": "Bonus:",
+      "none": "Brez",
+      "all": "Vse vire",
+      "wood": "Samo les",
+      "clay": "Samo glina",
+      "iron": "Samo železo"
+    },
+    "lvl": "Stopnja",
+    "clearConfirm": "Ali želite ponastaviti vse vasi?",
+    "referenceTable": {
+      "title": "📚 Referenčna tabela stopenj (na osnovi 0% bonusa)",
+      "hide": "Skrij",
+      "show": "Pokaži",
+      "cols": {
+        "level": "Stopnja",
+        "hourly": "Urna proizv. ({{speed}}x)",
+        "storage": "Zmogljivost skladišča",
+        "farm": "Zmogljivost kmetije"
+      },
+      "perHour": "/ uro"
+    }
+  },
+  "unitCalculator": {
+    "title": "Kalkulator proizvodnje čet",
+    "settings": {
+      "basic": "🌍 Osnovne nastavitve",
+      "worldSpeed": "Hitrost sveta:",
+      "barracksLevel": "Stopnja vojašnice (Max 25):",
+      "stableLevel": "Stopnja konjušnice (Max 20):",
+      "workshopLevel": "Stopnja delavnice (Max 15):",
+      "speedBonus": "⚡ Bonusi hitrosti (%)",
+      "barracksBonus": "Bonus predmeta vojašnice:",
+      "stableBonus": "Bonus predmeta konjušnice:",
+      "workshopBonus": "Bonus predmeta delavnice:",
+      "flagRecruit": "Zastava za rekrutiranje:",
+      "costBonus": "💰 Stroški in dodatno (%)",
+      "massRecruit": "Bonus masovnega rekrutiranja:",
+      "costReduction": "Zmanjšanje virov (Stroški):",
+      "resetBtn": "🗑️ Ponastavi števce"
+    },
+    "table": {
+      "unit": "Enota",
+      "count": "Količina za proizvodnjo",
+      "wood": "Les",
+      "clay": "Glina",
+      "iron": "Železo",
+      "pop": "Prebivalstvo",
+      "time": "Čas proizvodnje"
+    },
+    "summary": {
+      "costTitle": "Skupni stroški",
+      "woodReq": "Potreben les:",
+      "clayReq": "Potrebna glina:",
+      "ironReq": "Potrebno železo:",
+      "totalPop": "Skupno prebivalstvo:",
+      "queueTitle": "Časi v vrsti stavb",
+      "barracksTotal": "Vojašnica skupaj:",
+      "stableTotal": "Konjušnica skupaj:",
+      "workshopTotal": "Delavnica skupaj:"
+    },
+    "time": {
+      "day": "d",
+      "hour": "h",
+      "minute": "m",
+      "second": "s",
+      "none": "-"
+    },
+    "units": {
+      "spear": "Sulicar", "sword": "Sabljevalec", "axe": "Sekirolec", "archer": "Lokostrelec",
+      "spy": "Oglednik", "lc": "Lahka konjenica", "ma": "Lokostrelec na konju", "hc": "Težka konjenica",
+      "ram": "Oven", "cat": "Katapult"
+    }
+  },
+  "mapGenerator": {
+    "title": "Napreden generator zemljevidov",
+    "worldUrl": "URL sveta:",
+    "fetchBtn": "Pridobi / Osveži podatke",
+    "generateBtn": "🗺️ USTVARI ZEMLJEVID",
+    "status": {
+      "noUrl": "Prosimo, vnesite URL sveta!",
+      "cached": "Naloženo iz predpomnilnika! (Zadnja posodobitev: {{time}})",
+      "fetching": "Pridobivanje podatkov s strežnika...",
+      "success": "Podatki uspešno pridobljeni!",
+      "error": "Napaka: {{msg}}"
+    },
+    "settings": {
+      "title": "Nastavitve zemljevida",
+      "zoom": "Povečava %",
+      "center": "Središče (X|Y)",
+      "markersOnly": "Samo oznake",
+      "showAbandons": "Pokaži barbare",
+      "largerMarkers": "Večje oznake",
+      "bgColor": "Barva ozadja",
+      "dullBg": "Pusto ozadje",
+      "showGrid": "Mreža celin",
+      "showContinentNums": "Številke celin"
+    },
+    "players": {
+      "title": "Oznake igralcev",
+      "searchPlaceholder": "Išči in dodaj igralca...",
+      "points": "Točke",
+      "selectTop25": "Izberi top 25",
+      "selectTop50": "Izberi top 50",
+      "clearSelection": "Počisti izbiro",
+      "noPlayers": "Noben igralec še ni izbran.",
+      "deleteBtn": "Izbriši"
+    },
+    "tribes": {
+      "title": "Oznake plemen",
+      "searchPlaceholder": "Išči pleme (Ime ali oznaka)...",
+      "selectAll": "Izberi vse",
+      "clearSelection": "Počisti izbiro",
+      "selectTop25": "Izberi samo top 25",
+      "noData": "Podatki še niso bili pridobljeni.",
+      "deleteBtn": "Izbriši"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+.cm-container {
+    padding: 20px; background: linear-gradient(145deg, #1e150d, #2a1908);
+    color: #eaddbd; border-radius: 8px; border: 2px solid #814c11;
+}
+.cm-header {
+    color: #f0c042; border-bottom: 1px solid #603000;
+    padding-bottom: 10px; margin-bottom: 20px;
+}
+.cm-grid {
+    display: grid; grid-template-columns: 350px 1fr; gap: 20px;
+}
+@media (max-width: 900px) { .cm-grid { grid-template-columns: 1fr; } }
+
+.cm-box {
+    background: rgba(0,0,0,0.4); border: 1px solid #603000;
+    padding: 15px; border-radius: 6px; margin-bottom: 15px;
+}
+.cm-box h3 { margin-top: 0; color: #f0c042; font-size: 16px; border-bottom: 1px dashed #603000; padding-bottom: 5px; }
+
+.cm-label { font-size: 13px; color: #aaa; display: block; margin-bottom: 5px; }
+.cm-textarea {
+    width: 100%; background: #111; border: 1px solid #814c11;
+    color: #f0c042; padding: 10px; border-radius: 4px; box-sizing: border-box;
+    font-family: monospace; resize: vertical; margin-bottom: 15px;
+}
+.cm-input {
+    background: #111; border: 1px solid #814c11; color: #f0c042;
+    padding: 8px 12px; border-radius: 4px; width: 100%; box-sizing: border-box;
+    font-size: 16px; font-weight: bold; margin-bottom: 15px;
+}
+.cm-input:focus, .cm-textarea:focus { outline: none; border-color: #f0c042; }
+
+.cm-btn {
+    background: linear-gradient(to bottom, #d9b972, #c19c4d); color: #4a2500;
+    border: 1px solid #814c11; padding: 10px 15px; border-radius: 4px;
+    font-weight: bold; cursor: pointer; width: 100%; font-size: 15px; transition: 0.2s;
+}
+.cm-btn:hover { background: #e3d5b3; }
+
+/* Sonuç Listesi Stilleri */
+.hub-card {
+    background: #111; border: 1px solid #814c11; border-radius: 6px;
+    margin-bottom: 15px; overflow: hidden;
+}
+.hub-card-header {
+    background: #2a1908; padding: 10px; font-weight: bold;
+    border-bottom: 1px solid #603000; display: flex; justify-content: space-between;
+}
+.hub-card-body { padding: 10px; font-size: 13px; color: #ccc; max-height: 150px; overflow-y: auto; }
+.hub-village { display: inline-block; background: rgba(255,255,255,0.05); padding: 3px 6px; border-radius: 3px; margin: 2px; border: 1px solid #333;}
+
+.cm-canvas-container {
+    text-align: center; background: #0a0a0a; border: 2px solid #814c11;
+    border-radius: 4px; overflow: hidden; position: relative; height: 100%; min-height: 500px;
+}

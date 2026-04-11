@@ -1,0 +1,861 @@
+{
+  "menu": {
+    "title": "TW Cobre",
+    "stats": "Canlı İstatistikler",
+    "visitsTitle": "Toplam Ziyaretçi",
+    "mapsTitle": "Oluşturulan Haritalar",
+    "opsTitle": "Planlanan Operasyonlar",
+    "simsTitle": "Yapılan Simülasyonlar",
+    "visits": "Ziyaretler",
+    "maps": "Haritalar",
+    "developer": "Geliştirici",
+    "items": {
+      "buildingTimes": "Bina Süreleri Hesaplama",
+      "mapAnalysis": "Kıta & Harita Analizi",
+      "mapGenerator": "Harita Oluşturucu",
+      "productionData": "Üretim Hesaplama",
+      "coinMinter": "Altın Para Planlayıcı",
+      "buildingPlanner": "İnşaat Planlayıcısı (Kuyruk)",
+      "unitCalculator": "Birlik Üretim Hesaplama",
+      "churchPlanner": "Kilise Planlayıcısı",
+      "opPlanner": "Bireysel Op Planlayıcı",
+      "clanOp": "Klan Operasyon Planlayıcısı",
+      "clanTroop": "Klan Operasyon Planlayıcısı (Gelişmiş)",
+      "fastSupport": "Hızlı Destek Planlama",
+      "scavengingPlanner": "Temizlik Süreleri Hesaplama"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "TW Cobre'ye Hoş Geldiniz",
+      "subtitle": "Zafer, detaylarda ve kusursuz planlamalarda gizlidir. Klanlar serüveninizde size zaman kazandıracak ve klanınızı zafere taşıyacak strateji planlamalar yapın. Başlamak için bir araç seçin."
+    },
+    "tools": {
+      "opPlanner": { "title": "Kişisel Operasyon Planlayıcı", "desc": "Kaynak ve hedef köyleri eşleştirerek kusursuz bir operasyon şablonu (BBCode) hazırlayın." },
+      "buildingPlanner": { "title": "İnşaat Planlayıcısı", "desc": "Gelişmiş kuyruk simülasyonu ile köyünüzün inşaat planını adım adım tasarlayın." },
+      "unitCalculator": { "title": "Birlik Üretim Hesaplama", "desc": "Bonusları dahil ederek Kışla, Ahır ve Atölye için birim basım sürelerini hesaplayın." },
+      "mapGenerator": { "title": "Harita Oluşturucu", "desc": "Klan forumları için güncel, renklendirilmiş dinamik dünya haritaları oluşturun." },
+      "mapAnalysis": { "title": "Kıta Analizi", "desc": "Dünya haritası üzerinde klanların ve oyuncuların kıta hakimiyetlerini analiz edin." },
+      "productionData": { "title": "Üretim Hesaplama", "desc": "Maden üretim hızlarını, depo kapasitelerini ve dolum sürelerini optimize edin." },
+      "coinMinter": { "title": "Altın Para Planlayıcı", "desc": "Altın Para basmak için en ideal köyü hesaplayın." },
+      "churchPlanner": { "title": "Kilise Planlayıcısı", "desc": "Nüfus tasarrufu sağlayan algoritma ile kilise kapsama alanlarınızı harita üzerinde optimize edin." },
+      "buildingTimes": { "title": "Bina Süreleri Hesaplama", "desc": "Farklı seviyelerdeki binaların inşaat sürelerini saniyesine kadar hesaplayın ve kıyaslama yapın." },
+      "clanOp": { "title": "Klan Operasyon Planlayıcı", "desc": "Tüm klanın köylerini analiz edip akıllı atamalar yapın. Harita destekli kurmay zekasıyla üyelerinize kişiye özel BBCode emirleri dağıtın." },
+      "clanTroop": { "title": "Klan Operasyon Planlayıcı (Birlikli)", "desc": "Tüm klanın birliklerini analiz edip akıllı atamalar yapın. Harita destekli kurmay zekasıyla üyelerinize kişiye özel BBCode emirleri dağıtın." },
+      "fastSupport": { "title": "Hızlı Destek Bulma", "desc": "Hızlı destek almak için bir destek talebi oluşturun." },
+      "scavengingPlanner": { "title": "Temizlik Süreleri Hesaplama", "desc": "Detaylı bir şekilde temizlik sürelerini kıyaslayın." }
+    }
+  },
+  "footer": {
+    "text1": "Klanlar (Tribal Wars) Gelişmiş Planlama Araçları",
+    "text2": "© 2026 TW Cobre | Geliştirici: ",
+    "links": {
+      "about": "Hakkımda",
+      "privacy": "Gizlilik & KVKK"
+    }
+  },
+  "aboutPage": {
+    "title": "Hakkımda",
+    "p1": "Merhaba, ben Anto Bvb 66.",
+    "p2": "TW Cobre, Klanlar (Tribal Wars) oyuncularının ham verileri işleyerek stratejik bir üstünlük kurmasını sağlamak amacıyla tamamen bağımsız olarak geliştirilmiş elit bir taktik paneli ve komuta merkezidir.",
+    "p3": "Operasyon planlamalarından, temizlik analizlerine kadar tüm modüller, bir oyuncunun saatlerini alacak hesaplamaları saniyeler içinde çözmek için tasarlanmıştır. Zafer, detaylarda gizlidir!",
+    "contactTitle": "Hata Bildirimi & İletişim",
+    "contactDesc": "Sitemizde karşılaştığınız hataları, eksikleri veya geliştirme önerilerinizi bana doğrudan e-posta yoluyla iletebilirsiniz.",
+    "emailButton": "E-Posta Gönder"
+  },
+  "privacyPage": {
+    "title": "Gizlilik Politikası ve KVKK",
+    "p1": "TW Cobre, kullanıcı gizliliğine en üst düzeyde saygı duyar. 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve uluslararası standartlar gereği veri işleme politikamız aşağıdaki gibidir:",
+    "items": {
+      "i1": "Hesap Güvenliği: TW Cobre, Klanlar hesabınıza ait şifre, e-posta veya kişisel oturum bilgilerinizi KESİNLİKLE talep etmez, kaydetmez ve sunucularında barındırmaz.",
+      "i2": "Yerel Depolama (Local Storage): Yaptığınız ayarlar (dünya hızı, asker sayıları, köy koordinatları vb.) sayfayı yenilediğinizde kaybolmaması için sadece sizin kendi cihazınızın tarayıcısında (Local Storage / Session Storage) tutulur.",
+      "i3": "Harici Veri Çekimi: Harita ve analiz modülleri, Klanlar'ın halka açık sunduğu genel dünya verilerini (world data) anlık olarak işler. Bu işlem saatte 1 kez gerçekleşir. Oyun kurallarına uygun olarak, bu veriler sadece genel köy ve oyuncu bilgilerini içerir, kişisel verilerinizi içermez.",
+      "i4": "İstatistikler: Sitemizdeki ziyaretçi ve harita oluşturma sayaçları, sadece sayısal bir veridir; IP adresiniz veya kimliğiniz ile eşleştirilmez."
+    },
+    "p2": "TW Cobre'yi kullanarak, verilerinizin cihazınızda güvenle işlendiğini ve gizliliğinizin korunduğunu kabul etmiş olursunuz."
+  },
+  "buildingPlanner": {
+    "title": "🏗️ TW İnşaat Planlayıcısı (Kuyruk Simülasyonu)",
+    "worldSpeed": "Dünya Hızı:",
+    "mineSpeed": "Hammadde Üretim Faktörü:",
+    "btn": {
+      "import": "📥 Bina Kuyruğu Yükle",
+      "export": "📤 Bina Kuyruğu Aktar",
+      "clear": "🗑️ Temizle",
+      "addQueue": "Yükle",
+      "copyBoard": "Panoya Kopyala",
+      "close": "Kapat",
+      "delete": "Sil"
+    },
+    "modal": {
+      "importTitle": "📥 Oyundan Kopyalanan İnşa kuyruğu listesini yapıştırın",
+      "exportTitle": "📤 İnşaat Kuyruğunuzun Çıktısı (Kopyalayabilirsiniz)",
+      "importPlaceholder": "Ana bina +1 (Seviye 1)\n10 puan\n...",
+      "success": "✅ Başarılı! {{count}} bina kuyruğa eklendi.",
+      "error": "❌ Geçerli bir şablon bulunamadı. Lütfen kopyaladığınız metni kontrol edin.",
+      "copied": "Kopyalandı!",
+      "exportPrefix": "İnşa kuyruğu",
+      "levelLabel": "Seviye",
+      "pointsLabel": "Puan"
+    },
+    "levelsTitle": "🏠 Başlangıç Bina Seviyeleri (Gizle / Göster)",
+    "analysis": {
+      "title": "⏳ Kuyruk Analizi ve Bekleme Süreleri (Göster/Gizle)",
+      "withWait": "⏳ Hammadde beklemeli süre:",
+      "withoutWait": "⚡ Hammadde beklemezsek süre:",
+      "bottleneckTitle": "🚨 Kuyruğun Yavaşladığı Adımlar:",
+      "wood": "Odun",
+      "clay": "Kil",
+      "iron": "Demir",
+      "order": "Sıra",
+      "level": "Seviye",
+      "waitingFor": "Hammadde için",
+      "waitingSuffix": "bekleniyor.",
+      "missing": "Eksik miktarlar",
+      "perfect": "🎉 Harika! Bu kuyrukta hiçbir hammadde bekleme süresi yok. İnşaatlar kesintisiz devam edecek."
+    },
+    "summary": {
+      "title": "Kuyruk Özeti (Binaları Tıklayarak Ekle)",
+      "max": "Maksimum Seviyede",
+      "add": "Kuyruğa Ekle"
+    },
+    "columnsToggle": "👁️ Tablo Sütunlarını Gizle / Göster",
+    "columns": {
+      "order": "Sıra",
+      "expectedWait": "Beklenilen Süre",
+      "building": "Bina",
+      "level": "Seviye",
+      "buildTime": "İnşaat Süresi",
+      "startTime": "Başlangıç Zamanı",
+      "endTime": "İnşaat Bitiş Zamanı",
+      "points": "Puan",
+      "cost": "Maliyet (Odun/Kil/Demir)",
+      "resWait": "Hammadde Bekleme Süresi",
+      "currentStorage": "Anlık Depo Durumu",
+      "hourlyProd": "Saatlik Üretim",
+      "pop": "Nüfus",
+      "storage": "Depo",
+      "desc": "Açıklama",
+      "action": "İşlem"
+    },
+    "status": {
+      "storageFull": "∞ (Depo Full)",
+      "storageLimit": "Depo Yetersiz!",
+      "requirement": "Gereksinim",
+      "waitingRes": "Hammadde Bekleniyor.",
+      "farmLimit": "Çiftlik Yetersiz!",
+      "maxLevel": "Maksimum Seviye!"
+    },
+    "fastAdd": {
+      "placeholder": "Yaz veya seç...",
+      "modeActive": "Klavye Modu Aktif:",
+      "info": "Bina adını yazıp Enter'a basarak seri ekleme yapabilirsiniz.",
+      "dragTitle": "Sırasını değiştirmek için sürükleyin"
+    },
+    "daysShort": "g",
+    "buildings": {
+      "hq": "Ana Bina",
+      "barracks": "Kışla",
+      "stable": "Ahır",
+      "workshop": "Atölye",
+      "first_church": "İlk Kilise",
+      "church": "Kilise",
+      "watchtower": "Gözetleme Kulesi",
+      "academy": "Akademi",
+      "smithy": "Demirci",
+      "rally": "İçtima Meydanı",
+      "statue": "Heykel",
+      "market": "Pazar",
+      "wood": "Oduncu",
+      "clay": "Kil ocağı",
+      "iron": "Demir madeni",
+      "farm": "Çiftlik",
+      "ware": "Depo",
+      "hiding": "Gizli Depo",
+      "wall": "Sur"
+    }
+  },
+  "buildingTimes": {
+    "title": "⏱️ Bina Süreleri Kıyasla",
+    "worldSpeed": "Dünya Hızı:",
+    "panel1": "Plan A (Referans)",
+    "panel2": "Plan B (Kıyas)",
+    "hqLevel": "Ana Bina Seviyesi:",
+    "buildingToUpgrade": "Geliştirilecek Bina:",
+    "currentLevel": "Şu Anki Seviye:",
+    "targetLevel": "Hedef Seviye:",
+    "totalTime": "Toplam Süre:",
+    "comparisonResult": "⚡ Kıyaslama Sonucu:",
+    "panel2Faster": "Plan B, Plan A'dan {{time}} daha hızlı bitecek!",
+    "panel1Faster": "Plan A, Plan B'den {{time}} daha hızlı bitecek!",
+    "tableTitle": "📊 Tüm Binaların Seviye Süreleri Tablosu",
+    "tableHqLevel": "Tablo Ana Bina Seviyesi:",
+    "level": "Seviye",
+    "dragTitle": "Yerini değiştirmek için sürükleyin",
+    "tip": "İpucu: Sütunların yerini değiştirmek için başlıkları (ör. 'Kışla') tutup sağa veya sola sürükleyebilirsiniz.",
+    "time": {
+      "day": "gün",
+      "hour": "saat",
+      "minute": "dk",
+      "second": "sn",
+      "zero": "0 sn"
+    },
+    "buildings": [
+      "Ana Bina (HQ)", "Kışla", "Ahır", "Atölye", "İlk Kilise", "Kilise",
+      "Gözetleme Kulesi", "Akademi", "Demirci", "İçtima Meydanı", "Heykel", "Pazar Yeri",
+      "Oduncu", "Kil Ocağı", "Demir Madeni", "Çiftlik", "Depo", "Gizli Depo",
+      "Misyoner", "Altın Para", "Sur"
+    ]
+  },
+  "scavenging": {
+    "title": "Temizlik Hesaplayıcı",
+    "settings": {
+      "title": "🌍 Dünya ve Üretim Ayarları",
+      "worldSpeed": "Dünya Hızı:",
+      "mineSpeed": "Hammadde Üretim Faktörü:",
+      "woodLevel": "Oduncu Seviyesi:",
+      "clayLevel": "Kil Ocağı Seviyesi:",
+      "ironLevel": "Demir Madeni Seviyesi:",
+      "worldConstant": "Dünya Sabiti:",
+      "resHourly": "Hammadde Üretimi:"
+    },
+    "production": {
+      "perMin": "/ dk",
+      "perHour": "/ saat",
+      "perDay": "/ gün"
+    },
+    "troops": {
+      "title": "⚔️ Birlik Sayıları ve Bayrak",
+      "carryFlag": "Taşıma Bayrağı (%):",
+      "resFlag": "Hammadde Üretim Bayrağı (%):",
+      "totalCap": "Temizlik Kapasitesi (Bayraksız):",
+      "totalCapFlag": "Toplam Kapasite (Taşıma Bayraklı):",
+      "totalRes": "Hammadde Üretimi (Bayraksız):",
+      "totalResFlag": "Hammadde Üretimi (Bayraklı):"
+    },
+    "results": {
+      "title": "🏆 En Kazançlı Stratejiler Sıralaması",
+      "chartTitle": "📊 Strateji Kıyaslama Grafiği (İlk 10)",
+      "totalDaily": "Toplam Günlük",
+      "scavenge": "Temizlik",
+      "resource": "Üretim",
+      "perMin": "dk",
+      "perHour": "saat",
+      "perDay": "gün",
+      "maxTrip": "En Uzun Tur Süresi",
+      "dayShort": "/g",
+      "hourShort": "/sa",
+      "minShort": "/dk",
+      "modes": {
+        "eqTime": "Eşit Süre",
+        "eqCap": "Eşit Kapasite"
+      },
+      "flags": {
+        "none": "Bayraksız",
+        "carry": "Taşıma Bayraklı",
+        "res": "Hammadde Bayraklı"
+      },
+      "options": {
+        "c1234": "1-2-3-4 Açıksa",
+        "c123": "1-2-3 Açıksa",
+        "c234": "2-3-4 Açıksa",
+        "c12": "1-2 Açıksa",
+        "c23": "2-3 Açıksa"
+      }     
+    },
+    "reference": {
+      "title": "📈 Başa Baş Noktası (Kapasite Referans Tablosu)",
+      "info": "Birlik girişi olmadı. Aşağıdaki tablo farklı kapasite miktarlarında, 1-2-3-4 açıkken Eşit Süre ve Eşit Kapasite taktiklerinin günlük ne kadar ganimet getireceğini gösterir.",
+      "cap": "Örnek Kapasite",
+      "eqTimeDaily": "Eşit Süre (Günlük)",
+      "eqCapDaily": "Eşit Kapasite (Günlük)",
+      "winner": "Avantajlı Taktik"
+    },"chart": {
+      "title": "📈 Kapasiteye Göre Günlük Ganimet Eğrisi (Eşit Süre & Bayraksız)",
+      "worldConstantInfo": "Dünya Sabiti ({{constant}}) baz alınarak oluşturulmuştur.",
+      "unlocked": "Açıksa",
+      "infoTitle": "💡 Kritik Dönüm Noktaları (Başa Baş Noktaları)",
+      "be1": "🔸 {{cap}} Kapasiteyi geçtikten sonra: 1-2-3-4 taktiği, 2-3-4 taktiğini sollayarak daha kazançlı hale gelir.",
+      "be2": "🔸 {{cap}} Kapasiteyi geçtikten sonra: 1-2-3 taktiği, 2-3 taktiğini sollar."
+    }
+  },
+
+  "churchPlanner": {
+    "title": "⛪ Optimum Kilise Planlayıcı",
+    "dataInput": "Veri Girişi",
+    "allVillagesCoords": "Tüm Köylerinizin Koordinatları:",
+    "villagesPlaceholder": "510|621, 510|622 (Metin içinden de ayıklar)",
+    "existingChurchesLabel": "Mevcut Kiliseler (Opsiyonel):",
+    "existingChurchesPlaceholder": "Örn: 506|496 3 (X|Y Seviye)",
+    "includeFirstChurch": "İlk Kilise (First Church) Kurulacak mı?",
+    "calculateBtn": "⚙️ En İyi Planı Hesapla",
+    "alertNoVillage": "Lütfen en az bir köy koordinatı girin!",
+    "resultsTitle": "Sonuçlar ({{count}} Kilise)",
+    "existing": "Mevcut",
+    "firstChurch": "İlk Kilise",
+    "normalChurch": "Normal Kilise",
+    "lvl": "Seviye",
+    "coversVillages": "Köyü Kapsıyor",
+    "warningUncovered": "⚠️ Uyarı: Dışarıda kalan {{count}} köy var.",
+    "coveredVillage": "Kapsanmış Köy",
+    "uncoveredVillage": "Korunmasız Köy"
+  },
+  "clanOp": {
+    "title": "🛡️ Klan Operasyon Planlayıcısı",
+    "step1": {
+      "title": "1. Klanınıza Ait Köyleri Bulma",
+      "clearAll": "🧹 Tüm Verileri Temizle",
+      "worldUrl": "Dünya Linki",
+      "clanTag": "Klan Kısaltması",
+      "runIntel": "Köyleri Bul",
+      "status": {
+        "gathering": "Bilgiler toplanıyor: Tüm dünya oyuncuları ve köyleri taranıyor...",
+        "notFound": "❌ Klan bulunamadı! Kısaltmayı kontrol edin.",
+        "success": "✅ Başarılı! Klan ID: {{clanId}} | Üye: {{memberCount}} | Toplam Köy: {{villageCount}}",
+        "error": "❌ Hata: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Hedef Köyler",
+      "snobLimit": "Misyoner Mesafe Sınırı:",
+      "placeholder": "Hedef koordinatları buraya yapıştırın...",
+      "foundTargets": "Bulunan Hedef Sayısı: {{count}}"
+    },
+    "step3": {
+      "title": "3. Akıllı Atama Merkezi ve Harita",
+      "arrivalTime": "Hedef Varış Zamanı:",
+      "targetsTitle": "Hedefleriniz (Seçmek İçin Tıklayın)",
+      "points": "Puan",
+      "p": "P",
+      "distance": "Mesafe:"
+    },
+    "manualAssign": {
+      "title": "👤 Serbest Oyuncu Atama",
+      "selectPlayer": "-- Oyuncu Seç --",
+      "assignBtn": "Ata",
+      "info": "*Sadece yukarıdan seçili hedefe varış zamanlı görev ekler. Ayrıca oyuncunun köyleri haritada mavi renkle belirir."
+    },
+    "tabs": {
+      "closest10": "En Yakın 10 Köy",
+      "furthest10": "En Uzak 10 Köy",
+      "selectPlayer": "Oyuncu Seç"
+    },
+    "suggestions": {
+      "noVillages": "Gösterilecek köy yok.",
+      "kami": "Kami Gönder",
+      "snob": "Misyoner Gönder",
+      "fake": "Fake Gönder",
+      "show": "Görünür Yap",
+      "hide": "Gizle"
+    },
+    "queue": {
+      "title": "Operasyon Kuyruğu ({{count}} Emir)",
+      "clear": "Tüm Kuyruğu Temizle",
+      "delete": "Sil",
+      "enemy": "Düşman (Hedef)"
+    },
+    "bbcode": {
+      "title": "📋 Not Defteri İçin BBCode Şablonu",
+      "copyAll": "Hepsini Kopyala",
+      "selectCols": "Sütunları Seç:",
+      "ordersFor": "--- {{player}} İÇİN EMİRLER ---",
+      "attack": "Saldır",
+      "viewTarget": "Hedefi Gör",
+      "unknown": "BİLİNMİYOR"
+    },
+    "alerts": {
+      "confirmClear": "1. Aşama (Dünya ve Klan bilgisi) hariç tüm planlar, hedefler ve gizlenen köyler silinecek. Emin misiniz?",
+      "cleared": "🧹 Tüm veriler temizlendi!",
+      "enterClanTag": "Lütfen Klan Kısaltmasını girin!",
+      "selectTarget": "Lütfen hedef seçin.",
+      "selectTargetLeft": "Lütfen sol taraftan bir hedef seçin.",
+      "selectPlayer": "Lütfen listeden bir oyuncu seçin.",
+      "snobLimitExceeded": "⚠️ Uyarı: Seçilen mesafe ({{dist}}), belirlediğiniz misyoner sınırını ({{limit}}) aşıyor!",
+      "orderAdded": "✅ Emir Eklendi!",
+      "manualAdded": "✅ Serbest Atama Eklendi!",
+      "confirmClearQueue": "Tüm kuyruğu temizlemek istediğinize emin misiniz?",
+      "queueCleared": "🗑️ Kuyruk Temizlendi!",
+      "copied": "Kopyalandı!"
+    },
+    "columns": {
+      "no": "Sıra",
+      "player": "Oyuncu",
+      "source": "Kaynak",
+      "target": "Hedef",
+      "departure": "Çıkış Zamanı",
+      "arrival": "Varış Zamanı",
+      "unit": "Birim",
+      "distance": "Mesafe",
+      "travelTime": "Süre",
+      "attackLink": "İşlem Linki"
+    },
+    "units": {
+      "spear": "Mızrakçı", "sword": "Kılıç Ustası", "axe": "Baltacı", "spy": "Casus",
+      "light": "Hafif Atlı", "heavy": "Ağır Atlı", "ram": "Şahmerdan", "catapult": "Mancınık",
+      "knight": "Şövalye", "snob": "Misyoner", "archer": "Okçu", "marcher": "Atlı Okçu", "militia": "Milis"
+    },
+    "shortUnits": {
+      "ram": "Kami",
+      "snob": "Mis",
+      "catapult": "Fake",
+      "spy": "Casus"
+    }
+  },
+  "clanTroop": {
+    "title": "🦅 Klan Operasyon Planlayıcısı (Gelişmiş)",
+    "step1": {
+      "title": "1. Klanınıza Ait Köyleri Bulma",
+      "clear": "🧹 Temizle",
+      "worldUrl": "Dünya Linki",
+      "clanTag": "Klan Kısaltması",
+      "run": "Köyleri Bul",
+      "gathering": "Bilgiler toplanıyor...",
+      "notFound": "❌ Klan bulunamadı!",
+      "success": "✅ Başarılı! Klan ID: {{clanId}} | Toplam Köy: {{villageCount}}",
+      "error": "❌ Hata: {{msg}}"
+    },
+    "step2": {
+      "title": "2. Hedef Köyler",
+      "snobLimit": "Misyoner Mesafe Sınırı:",
+      "placeholder": "Hedef koordinatları buraya yapıştırın..."
+    },
+    "stepTroop": {
+      "title": "🛡️ Birlik Girişi (Kopyala/Yapıştır)",
+      "placeholder": "Birlik görünümünden (Tablolu) veya CSV formatlı (475|494,48,0,0...) asker verilerini buraya yapıştırın...",
+      "detected": "Algılanan İstihbarat: {{count}} Köy",
+      "summaryTitle": "📊 Oyuncu Profil Özetleri",
+      "idle": " (Boşta: {{count}})",
+      "depleted": " (Tükendi)"
+    },
+    "step3": {
+      "title": "📍 Zeki Atama Merkezi ve Harita",
+      "arrivalTime": "Hedef Varış Zamanı:",
+      "targetsTitle": "Hedefleriniz (Seçmek İçin Tıklayın)",
+      "distance": "Mesafe:"
+    },
+    "tabs": {
+      "closest": "En Yakın 10 Köy",
+      "furthest": "En Uzak 10 Köy",
+      "player": "Oyuncu Seç",
+      "selectPlayer": "-- Oyuncu Seç --"
+    },
+    "suggestions": {
+      "noVillages": "Köy bulunamadı.",
+      "kami": "Kami Gönder",
+      "snob": "Misyoner Gönder",
+      "fake": "Fake Gönder",
+      "show": "Görünür Yap",
+      "hide": "Gizle",
+      "noIntel": " (Bilgi Yok)"
+    },
+    "queue": {
+      "title": "Operasyon Kuyruğu ({{count}} Emir)",
+      "clear": "Tüm Kuyruğu Temizle",
+      "delete": "Sil"
+    },
+    "bbcode": {
+      "title": "📋 Not Defteri İçin BBCode Şablonu",
+      "copyAll": "Hepsini Kopyala",
+      "ordersFor": "--- {{player}} İÇİN EMİRLER ---",
+      "attack": "Saldır",
+      "unknown": "BİLİNMİYOR"
+    },
+    "alerts": {
+      "confirmClear": "İstihbarat dahil tüm planlar silinecek. Emin misiniz?",
+      "cleared": "🧹 Veriler temizlendi!",
+      "enterClanTag": "Lütfen Klan Kısaltmasını girin!",
+      "selectTarget": "Lütfen hedef seçin.",
+      "snobLimitExceeded": "⚠️ Uyarı: Misyoner sınırı ({{limit}}) aşıldı! Yine de eklensin mi?",
+      "orderAdded": "✅ Emir Eklendi!",
+      "confirmClearQueue": "Tüm kuyruğu temizlemek istediğinize emin misiniz?",
+      "queueCleared": "🗑️ Kuyruk Temizlendi!",
+      "copied": "Kopyalandı!"
+    },
+    "columns": {
+      "no": "Sıra",
+      "player": "Oyuncu",
+      "source": "Kaynak",
+      "target": "Hedef",
+      "departure": "Çıkış",
+      "arrival": "Varış",
+      "unit": "Birim",
+      "distance": "Mesafe",
+      "travelTime": "Süre",
+      "attackLink": "İşlem"
+    },
+    "units": {
+      "spear": "Mızrak", "sword": "Kılıç", "axe": "Balta", "spy": "Casus",
+      "light": "Hafif", "heavy": "Ağır", "ram": "Şah", "catapult": "Manc",
+      "knight": "Şövalye", "snob": "Mis"
+    },
+    "profiles": {
+      "quarter": "Çeyrek",
+      "half": "Yarım",
+      "threeQuarters": "Üç Çeyrek",
+      "full": "Tam",
+      "kami": "Kami",
+      "sav": "Sav",
+      "empty": "Yeni/Boş"
+    }
+  },
+  "coinMinter": {
+    "title": "💰 Altın Para (Merkez) Planlayıcı",
+    "dataInput": "Veri Girişi",
+    "allVillagesCoords": "Tüm Köylerinizin Koordinatları:",
+    "villagesPlaceholder": "510|621, 510|622 (Metin içinden de ayıklar)",
+    "hubCountLabel": "Kaç Adet Merkez (Hub) Köy Olsun?",
+    "calculateBtn": "⚙️ En İyi Merkezleri Bul",
+    "resultsTitle": "🎯 Planlanan Merkezler ({{count}})",
+    "hubCardHeader": "Merkez:",
+    "hubCardSub": "{{count}} Köyden Hammadde Alacak",
+    "hubCardBody": "Hammadde Gönderecek Köyler:",
+    "onlySelf": "Sadece kendisi...",
+    "mapInfoTitle": "Harita Bilgisi:",
+    "mapInfoCenter": "Beyaz Büyük Nokta:",
+    "mapInfoCenterDesc": "Merkez Köyler (Altın Basılacak)",
+    "mapInfoSender": "Renkli Noktalar:",
+    "mapInfoSenderDesc": "Hammadde Atacak Köyler",
+    "mapInfoLines": "Çizgiler:",
+    "mapInfoLinesDesc": "Hammadde Akış Yönü",
+    "alerts": {
+      "noVillage": "Lütfen en az bir köy koordinatı girin!",
+      "invalidHubCount": "Merkez sayısı köy sayısından büyük olamaz ve 0'dan büyük olmalıdır."
+    }
+  },
+  "fastSupport": {
+    "title": "🛡️ Hızlı Destek Planlama Merkezi",
+    "step1": {
+      "title": "1. Klanınıza Ait Köyleri Bulma",
+      "worldUrl": "Dünya Linki",
+      "clanTag": "Klan Kısaltması",
+      "updateBtn": "Köyleri Güncelle",
+      "status": {
+        "scanning": "Klanınıza ait köyler taranıyor...",
+        "notFound": "❌ Klan bulunamadı! Kısaltmayı kontrol edin.",
+        "success": "✅ Başarılı! Toplam Destek Köyü: {{count}}",
+        "error": "❌ Hata: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Savunulacak Hedef & Zaman",
+      "targetCoord": "Hedef Koordinat",
+      "targetPlaceholder": "Örn: 564|554",
+      "arrivalTime": "Hedefe Varış Zamanı",
+      "slowestUnit": "En Yavaş Birim Hızı"
+    },
+    "results": {
+      "title": "Yetişebilen Destekler ({{count}})",
+      "allClan": "Tüm Klan",
+      "noVillages": "Bu hedefe, seçili zamanda yetişebilecek köy bulunamadı!",
+      "mapTarget": "🛡️ Hedef"
+    },
+    "bbcode": {
+      "title": "📋 Forum Çağrısı (BBCode)",
+      "copyAll": "Hepsini Kopyala",
+      "target": "🎯 Hedef:",
+      "arrivalTime": "⏱️ Varış Zamanı:",
+      "unitSpeed": "🛡️ Birim Hızı:",
+      "sendSupport": "Destek Yolla",
+      "supportLink": "🛡️ Destek Gönder"
+    },
+    "alerts": {
+      "enterClanTag": "Lütfen Klan Kısaltmasını girin!",
+      "copied": "Kopyalandı!"
+    },
+    "columns": {
+      "player": "Oyuncu",
+      "source": "Kaynak",
+      "distance": "Mesafe",
+      "time": "Süre",
+      "departure": "Çıkış Zamanı"
+    },
+    "units": {
+      "spear": "Mızrak", "sword": "Kılıç", "archer": "Okçu", "spy": "Casus", "heavy": "Ağır", "catapult": "Mancınık", "knight": "Şövalye"
+    }
+  },
+  "mapAnalysis": {
+    "title": "Kıta & Harita Analiz",
+    "bypassActive": "🕵️ Bypass Aktif",
+    "bypassAlertOn": "🕵️ GİZLİ MOD AKTİF: 1 Saatlik bekleme süresi bypass edildi! Artık her seferinde taze veri çekilecek.",
+    "bypassAlertOff": "🔒 GİZLİ MOD KAPALI: 1 Saatlik önbellek koruması devrede.",
+    "enterWorldUrl": "Lütfen bir dünya linki girin!",
+    "fetchError": "Veri çekilirken hata oluştu. Linkin doğru olduğundan emin ol.\nHata: {{error}}",
+    "clearConfirm": "Tüm veri, arşiv ve ışınlanma geçmişi silinecek. Emin misiniz?",
+    "status": {
+      "waiting": "Veri bekleniyor...",
+      "cached": "Önbellekten yüklendi! (Son veri: {{time}})",
+      "downloading": "Veriler sunucudan indiriliyor... (Bu işlem 10-15 sn sürebilir)",
+      "analyzing": "İndirme tamam, analiz ediliyor...",
+      "empty": "İşlenecek veri bulunamadı!",
+      "success": "BAŞARILI: {{villages}} köy, {{players}} oyuncu yüklendi.",
+      "cleared": "Depo tamamen temizlendi."
+    },
+    "timeMsg": {
+      "cached": "⏳ Önbellek verisi gösteriliyor. Son çekim: {{time}}",
+      "new": "⏳ Yeni veri çekildi. Bir sonraki ışınlanmalar tespiti için bekleniyor...",
+      "diff": "Zaman Aralığı: Önceki analizden bu yana {{hours}} saat {{mins}} dakika geçti."
+    },
+    "sections": {
+      "autoFetch": "1. Otomatik Veri Çek (Önerilen)",
+      "worldUrlLabel": "Dünya Linki (Örn: https://ptc1.tribalwars.com.pt):",
+      "downloadBtn": "🌍 Verileri İndir ve İşle",
+      "archive": "2. Veri Arşivi",
+      "selectArchive": "-- Arşiv Seç --",
+      "loadBtn": "📂 Yükle",
+      "saveBtn": "💾 Günceli Arşivle",
+      "manual": "3. Manuel Veri Girişi (Hata Olursa)",
+      "processManualBtn": "⚙️ Manuel Verileri İşle",
+      "clearStorageBtn": "🗑️ Depoyu Sıfırla"
+    },
+    "teleports": {
+      "title": "🚀 Işınlanma Tespitleri ({{count}})",
+      "showAllBtn": "🗺️ Tümünü Haritada Göster",
+      "continentTitle": "Kıta {{cont}} Hedefli Işınlanmalar ({{count}} kişi)",
+      "old": "Eski:",
+      "new": "Yeni:",
+      "showBtn": "📍 Göster",
+      "none": "Hiç ışınlanma tespit edilmedi veya henüz ikinci veri çekimi yapılmadı.",
+      "info": "* Sistem ilk analizde veri toplar. Sonraki analizlerde koordinatı değişen köyleri tespit eder ve silinene kadar geçmişe dönük olarak listelemeye devam eder.",
+      "datePrefix": "🗓️"
+    },
+    "analysis": {
+      "title": "🌍 Kıta Analizi",
+      "player": "Oyuncu:",
+      "barbarian": "Barbar:",
+      "villages": "köy",
+      "noTribe": "Klansız",
+      "farmRatio": "🎯 Oyuncu Başına Barbar:"
+    },
+    "map": {
+      "title": "Harita Görünümü",
+      "gray": "Gri:",
+      "oldPos": "Eski Konum",
+      "red": "Kırmızı:",
+      "newPos": "Yeni Konum",
+      "closeBtn": "Kapat"
+    },
+    "barbarian": "Barbar"
+  },
+  "opPlanner": {
+    "title": "⚔️ Bireysel Operasyon Planlayıcı",
+    "step1": {
+      "title": "1. Veri Bağlantısı",
+      "clearData": "Tüm Verileri Temizle",
+      "worldUrl": "Dünya Linki:",
+      "playerName": "Oyuncu Adınız:",
+      "fetchBtn": "Verileri Çek / Yenile"
+    },
+    "step2": {
+      "title": "2. Kaynak Köyleriniz ve Birim Seçimi ({{count}})",
+      "info": "Köyden çıkacak tüm birimleri seçebilirsiniz. Eşleştirme motoru buradan beslenir.",
+      "village": "Köy",
+      "unitSelection": "Birim Seçimi (Birden Fazla Seçilebilir)"
+    },
+    "step3": {
+      "title": "3. Hedef Köyler",
+      "maxSnobDist": "Max Misyoner Mesafe Sınırı:",
+      "placeholder": "Buraya hedef koordinatları yapıştırın (Örn: 586|441, 587|442 metin içi de olur)",
+      "detectedTargets": "Algılanan Hedef Sayısı: {{count}}",
+      "mapLegend": {
+        "target": "Hedef",
+        "spearLight": "Mızrak/Hafif",
+        "ramKami": "Şah/Kami",
+        "snob": "Misyoner",
+        "spy": "Casus"
+      }
+    },
+    "step4": {
+      "title": "4. Planlama ve Zaman Eşleştirme Motoru",
+      "modeArrival": "Hedefe Varış Zamanını Biliyorum",
+      "modeDeparture": "Köyden Çıkış Zamanını Biliyorum",
+      "dateTime": "Tarih & Saat:",
+      "sourceVillage": "Kaynak Köy:",
+      "allSourcesUsed": "Tüm Kaynaklar Kullanıldı",
+      "unitToSend": "Gönderilecek Birim:",
+      "selectSourceFirst": "Önce Kaynak Seçin",
+      "noUnitsLeft": "Birim Kalmadı",
+      "target": "Hedef:",
+      "calcAndAddBtn": "➕ HESAPLA VE EKLE"
+    },
+    "queue": {
+      "title": "Operasyon Kuyruğu ({{count}} Emir)",
+      "clearQueue": "Tüm Kuyruğu Temizle",
+      "delete": "Sil"
+    },
+    "bbcode": {
+      "title": "📋 Not Defteri İçin BBCode Şablonu",
+      "copyAll": "Hepsini Kopyala",
+      "selectCols": "Sütunları Seç:",
+      "attack": "Saldır",
+      "unknown": "BİLİNMİYOR"
+    },
+    "status": {
+      "cached": "Veriler önbellekten yüklendi. (Yenilemeye zorlamak için butona 13 kez tıklayın)",
+      "fetching": "Veriler sunucudan çekiliyor... Lütfen bekleyin.",
+      "playerNotFound": "Oyuncu bulunamadı! İsmi doğru yazdığınızdan emin olun.",
+      "success": "Başarılı! Oyuncu bulundu ve {{count}} adet köyü listelendi.",
+      "error": "Hata: {{msg}}"
+    },
+    "alerts": {
+      "enterWorldUrl": "Lütfen dünya linki girin!",
+      "enterPlayerName": "Lütfen kendi oyuncu adınızı girin!",
+      "confirmClear": "1. Aşama (Dünya ve Oyuncu) hariç tüm plan, kaynak ve hedefler silinecek. Emin misiniz?",
+      "selectMatch": "Lütfen eşleştirme için Kaynak, Hedef ve Birim seçin.",
+      "snobLimitExceeded": "⚠️ Uyarı: Seçilen mesafe ({{dist}} birim), maksimum misyoner mesafe sınırını ({{limit}}) aşıyor!",
+      "confirmClearQueue": "Tüm kuyruğu temizlemek istediğinize emin misiniz?",
+      "copied": "Kopyalandı!"
+    },
+    "columns": {
+      "no": "Sıra",
+      "source": "Kaynak Köy",
+      "target": "Hedef",
+      "departure": "Çıkış Zamanı",
+      "arrival": "Varış Zamanı",
+      "unit": "Birim",
+      "distance": "Mesafe",
+      "travelTime": "Süre",
+      "attackLink": "İşlem Linki"
+    },
+    "units": {
+      "spear": "Mızrakçı", "sword": "Kılıç Ustası", "axe": "Baltacı", "spy": "Casus",
+      "light": "Hafif Atlı", "heavy": "Ağır Atlı", "ram": "Şahmerdan", "catapult": "Mancınık",
+      "knight": "Şövalye", "snob": "Misyoner", "archer": "Okçu", "marcher": "Atlı Okçu", "militia": "Milis"
+    }
+  },
+  "productionData": {
+    "title": "Üretim Planlayıcısı",
+    "worldSpeed": "Oyun Hızı:",
+    "mineSpeed": "Hammadde Üretim Faktörü:",
+    "totalFactor": "Toplam Katsayı: {{speed}}x",
+    "empireProdTitle": "👑 Genel Üretim ({{count}} Köy)",
+    "hourlyProd": "⏳ Toplam Saatlik Üretim",
+    "dailyProd": "📅 Toplam Günlük Üretim",
+    "resources": {
+      "wood": "Odun:",
+      "clay": "Kil:",
+      "iron": "Demir:"
+    },
+    "villageManagement": "Köy Yönetimi",
+    "resetBtn": "Sıfırla",
+    "newVillageBtn": "+ Yeni Köy",
+    "villageNamePrefix": "Köy",
+    "bonus": {
+      "label": "Bonus:",
+      "none": "Yok",
+      "all": "Tüm Hammaddeler",
+      "wood": "Sadece Odun",
+      "clay": "Sadece Kil",
+      "iron": "Sadece Demir"
+    },
+    "lvl": "Svy",
+    "clearConfirm": "Tüm köyleri sıfırlamak istiyor musunuz?",
+    "referenceTable": {
+      "title": "📚 Seviye Bilgi Tablosu (%0 Bonus Bazlı)",
+      "hide": "Gizle",
+      "show": "Göster",
+      "cols": {
+        "level": "Svy",
+        "hourly": "Saatlik Üretim ({{speed}}x)",
+        "storage": "Depo Kapasitesi",
+        "farm": "Çiftlik Kapasitesi"
+      },
+      "perHour": "/ sa"
+    }
+  },
+  "unitCalculator": {
+    "title": "Birlik Üretim Hesaplama",
+    "settings": {
+      "basic": "🌍 Temel Ayarlar",
+      "worldSpeed": "Dünya Hızı:",
+      "barracksLevel": "Kışla Seviyesi (Max 25):",
+      "stableLevel": "Ahır Seviyesi (Max 20):",
+      "workshopLevel": "Atölye Seviyesi (Max 15):",
+      "speedBonus": "⚡ Hız Bonusları (%)",
+      "barracksBonus": "Kışla Eşyası Bonusu:",
+      "stableBonus": "Ahır Eşyası Bonusu:",
+      "workshopBonus": "Atölye Eşyası Bonusu:",
+      "flagRecruit": "Asker Üretim Bayrağı:",
+      "costBonus": "💰 Maliyet & Ekstra (%)",
+      "massRecruit": "Toplu Üretim Bonusu:",
+      "costReduction": "Hammadde Azalımı (Maliyet):",
+      "resetBtn": "🗑️ Sayıları Sıfırla"
+    },
+    "table": {
+      "unit": "Birim",
+      "count": "Üretilecek Sayı",
+      "wood": "Odun",
+      "clay": "Kil",
+      "iron": "Demir",
+      "pop": "Nüfus",
+      "time": "Üretim Zamanı"
+    },
+    "summary": {
+      "costTitle": "Genel Maliyet",
+      "woodReq": "Odun İhtiyacı:",
+      "clayReq": "Kil İhtiyacı:",
+      "ironReq": "Demir İhtiyacı:",
+      "totalPop": "Toplam Nüfus:",
+      "queueTitle": "Bina Kuyruk Süreleri",
+      "barracksTotal": "Kışla Toplam:",
+      "stableTotal": "Ahır Toplam:",
+      "workshopTotal": "Atölye Toplam:"
+    },
+    "time": {
+      "day": "g",
+      "hour": "s",
+      "minute": "d",
+      "second": "sn",
+      "none": "-"
+    },
+    "units": {
+      "spear": "Mızrakçı", "sword": "Kılıç ustası", "axe": "Baltacı", "archer": "Okçu",
+      "spy": "Casus", "lc": "Hafif atlı", "ma": "Atlı okçu", "hc": "Ağır atlı",
+      "ram": "Şahmerdan", "cat": "Mancınık"
+    }
+  },
+  "mapGenerator": {
+    "title": "Gelişmiş Harita Oluşturucu",
+    "worldUrl": "Dünya Linki:",
+    "fetchBtn": "Verileri Çek / Yenile",
+    "generateBtn": "🗺️ HARİTAYI OLUŞTUR",
+    "status": {
+      "noUrl": "Lütfen dünya linki girin!",
+      "cached": "Önbellekten yüklendi! (Son güncelleme: {{time}})",
+      "fetching": "Veriler sunucudan çekiliyor...",
+      "success": "Veriler başarıyla çekildi!",
+      "error": "Hata: {{msg}}"
+    },
+    "settings": {
+      "title": "Harita Ayarları",
+      "zoom": "Yakınlaştırma (Zoom) %",
+      "center": "Merkez (X|Y)",
+      "markersOnly": "Sadece İşaretliler",
+      "showAbandons": "Barbarları Göster",
+      "largerMarkers": "Büyük İşaretler",
+      "bgColor": "Arka Plan Rengi",
+      "dullBg": "Soluk Arka Plan",
+      "showGrid": "Kıta Izgarası",
+      "showContinentNums": "Kıta Numaraları"
+    },
+    "players": {
+      "title": "Oyuncu İşaretleyiciler",
+      "searchPlaceholder": "Oyuncu Ara ve Ekle...",
+      "points": "Puan",
+      "selectTop25": "İlk 25'i Seç",
+      "selectTop50": "İlk 50'yi Seç",
+      "clearSelection": "Seçimi Temizle",
+      "noPlayers": "Henüz oyuncu seçilmedi.",
+      "deleteBtn": "Sil"
+    },
+    "tribes": {
+      "title": "Klan İşaretleyiciler",
+      "searchPlaceholder": "Klan Ara (İsim veya Tag)...",
+      "selectAll": "Hepsini Seç",
+      "clearSelection": "Seçimi Temizle",
+      "selectTop25": "Sadece İlk 25'i Seç",
+      "noData": "Henüz veri çekilmedi.",
+      "deleteBtn": "Sil"
+    }
+  }
+  
+}

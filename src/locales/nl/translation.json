@@ -1,0 +1,859 @@
+{
+  "menu": {
+    "title": "TW Cobre",
+    "stats": "Live Statistieken",
+    "visitsTitle": "Totaal Bezoekers",
+    "mapsTitle": "Gegenereerde Kaarten",
+    "opsTitle": "Geplande Operaties",
+    "simsTitle": "Uitgevoerde Simulaties",
+    "visits": "Bezoeken",
+    "maps": "Kaarten",
+    "developer": "Ontwikkelaar",
+    "items": {
+      "buildingTimes": "Gebouwstijden Calculator",
+      "mapAnalysis": "Continent & Kaart Analyse",
+      "mapGenerator": "Kaart Generator",
+      "productionData": "Productie Calculator",
+      "coinMinter": "Gouden Munt Planner",
+      "buildingPlanner": "Gebouw Planner (Wachtrij)",
+      "unitCalculator": "Troepen Productie Calc",
+      "churchPlanner": "Kerk Planner",
+      "opPlanner": "Individuele Op Planner",
+      "clanOp": "Stam Operatie Planner",
+      "clanTroop": "Stam Operatie Planner (Geavanceerd)",
+      "fastSupport": "Snelle Ondersteuning Planning",
+      "scavengingPlanner": "Plundertijd Calculator"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Welkom bij TW Cobre",
+      "subtitle": "Overwinning ligt verborgen in de details en perfect plannen. Bespaar tijd in je Tribal Wars reis en ontwikkel strategische plannen die je stam naar de overwinning leiden. Kies een tool om te beginnen."
+    },
+    "tools": {
+     "opPlanner": { "title": "Persoonlijke Operatie Planner", "desc": "Koppel bron- en doel dorpen om een perfect operatie sjabloon voor te bereiden (BBCode)." },
+     "buildingPlanner": { "title": "Gebouw Planner", "desc": "Ontwerp het bouwplan van je dorp stap voor stap met geavanceerde wachtrij simulatie." },
+     "unitCalculator": { "title": "Troepen Productie Calculator", "desc": "Bereken troepen productie tijden voor Barakken, Stal en Werkplaats, inclusief bonussen." },
+     "mapGenerator": { "title": "Kaart Generator", "desc": "Genereer up-to-date, gekleurde dynamische wereldkaarten voor stam forums." },
+     "mapAnalysis": { "title": "Continent Analyse", "desc": "Analyseer stam- en speler continent dominanties op de wereldkaart." },
+     "productionData": { "title": "Productie Calculator", "desc": "Optimaliseer mijn productie tarieven, opslag capaciteiten en vul tijden." },
+     "coinMinter": { "title": "Gouden Munt Planner", "desc": "Bereken het meest ideale dorp voor het minten van Gouden Munten." },
+     "churchPlanner": { "title": "Kerk Planner", "desc": "Optimaliseer je kerk dekking gebieden op de kaart met een bevolkingsbesparend algoritme." },
+     "buildingTimes": { "title": "Gebouwstijden Calculator", "desc": "Bereken en vergelijk bouwconstructie tijden op verschillende niveaus tot op de seconde." },
+     "clanOp": { "title": "Stam Operatie Planner", "desc": "Analyseer alle stam dorpen en maak slimme toewijzingen. Distribueer gepersonaliseerde BBCode orders naar leden met kaartondersteunde personeelsinformatie." },
+     "clanTroop": { "title": "Stam Operatie Planner (Met Troepen)", "desc": "Analyseer alle stam troepen en maak slimme toewijzingen. Distribueer gepersonaliseerde BBCode orders naar leden met kaartondersteunde personeelsinformatie." },
+     "fastSupport": { "title": "Snelle Ondersteuning Finder", "desc": "Creëer een ondersteuningsverzoek om snelle ondersteuning te krijgen." },
+     "scavengingPlanner": { "title": "Plundertijd Calculator", "desc": "Vergelijk plunder tijden in detail." }
+      }
+  },
+  "footer": {
+    "text1": "Geavanceerde Planningshulpmiddelen voor Tribal Wars",
+    "text2": "© 2026 TW Cobre | Ontwikkelaar: ",
+    "links": {
+      "about": "Over",
+      "privacy": "Privacy & GDPR"
+    }
+  },
+  "aboutPage": {
+    "title": "Over",
+    "p1": "Hallo, ik ben Anto Bvb 66.",
+    "p2": "TW Cobre is een elite tactisch paneel en commandocentrum ontwikkeld onafhankelijk om ruwe data van Clans (Tribal Wars) spelers te verwerken en hen te helpen strategische superioriteit te bereiken.",
+    "p3": "Van operatie planning tot opruim analyse, alle modules zijn ontworpen om berekeningen op te lossen die een speler uren zouden kosten in seconden. Overwinning ligt in de details!"
+  ,"contactTitle": "Foutmelding & Contact",
+    "contactDesc": "Fouten, omissies of verbetersuggesties die u op onze site tegenkomt, kunt u rechtstreeks via e-mail aan mij doorgeven.",
+    "emailButton": "E-mail verzenden"},
+  "privacyPage": {
+    "title": "Privacybeleid en KVKK",
+    "p1": "TW Cobre respecteert gebruikersprivacy op het hoogste niveau. In overeenstemming met gegevensbeschermingswetten (GDPR) en internationale standaarden, is ons gegevensverwerkingsbeleid als volgt:",
+    "items": {
+      "i1": "Account Beveiliging: TW Cobre vraagt NOOIT om, slaat op of host je Tribal Wars account wachtwoord, e-mail of persoonlijke sessie informatie op zijn servers.",
+      "i2": "Lokale Opslag: Je instellingen (wereld snelheid, troepen tellingen, dorp coördinaten, etc.) worden alleen opgeslagen in je eigen apparaat browser (Local Storage / Session Storage) zodat ze niet verloren gaan bij het verversen van de pagina.",
+      "i3": "Externe Gegevens Ophalen: De kaart en analyse modules verwerken algemene wereld data die publiekelijk verstrekt wordt door Tribal Wars in real time. Deze operatie vindt eenmaal per uur plaats. In overeenstemming met spelregels, bevat deze data alleen algemene dorp en speler informatie en niet je persoonlijke data.",
+      "i4": "Statistieken: Bezoeker en kaart generatie tellers op onze site zijn alleen numerieke data; ze zijn niet gekoppeld aan je IP adres of identiteit."
+    },
+    "p2": "Door TW Cobre te gebruiken, ga je ermee akkoord dat je data veilig wordt verwerkt op je apparaat en dat je privacy wordt beschermd."
+  },
+  "buildingPlanner": {
+    "title": "🏗️ TW Gebouw Planner (Wachtrij Simulatie)",
+    "worldSpeed": "Wereld Snelheid:",
+    "mineSpeed": "Hulpbron Productie Factor:",
+    "btn": {
+      "import": "📥 Laad Gebouw Wachtrij",
+      "export": "📤 Exporteer Gebouw Wachtrij",
+      "clear": "🗑️ Wissen",
+      "addQueue": "Laden",
+      "copyBoard": "Kopiëren naar Klembord",
+      "close": "Sluiten",
+      "delete": "Verwijderen"
+    },
+    "modal": {
+      "importTitle": "📥 Plak de Gebouw Wachtrij Gekopieerd van het Spel",
+      "exportTitle": "📤 Je Wachtrij Uitvoer (Je kunt kopiëren)",
+      "importPlaceholder": "Hoofdkwartier +1 (Niveau 1)\n10 punten\n...",
+      "success": "✅ Succes! {{count}} gebouwen toegevoegd aan de wachtrij.",
+      "error": "❌ Geen geldig sjabloon gevonden. Controleer je gekopieerde tekst.",
+      "copied": "Gekopieerd!",
+      "exportPrefix": "Constructie wachtrij",
+      "levelLabel": "Niveau",
+      "pointsLabel": "Punten"
+    },
+    "levelsTitle": "🏠 Start Gebouw Niveaus (Verbergen / Tonen)",
+    "analysis": {
+      "title": "⏳ Wachtrij Analyse en Wachttijden (Tonen/Verbergen)",
+      "withWait": "⏳ Tijd met hulpbron wacht:",
+      "withoutWait": "⚡ Tijd zonder hulpbron wacht:",
+      "bottleneckTitle": "🚨 Stappen waar de wachtrij vertraagt:",
+      "wood": "Hout",
+      "clay": "Klei",
+      "iron": "Ijzer",
+      "order": "Volgorde",
+      "level": "Niveau",
+      "waitingFor": "Wachten",
+      "waitingSuffix": "voor hulpbronnen.",
+      "missing": "Ontbrekende hoeveelheden",
+      "perfect": "🎉 Geweldig! Er is geen hulpbron wachttijd in deze wachtrij. Constructies zullen ononderbroken doorgaan."
+    },
+    "summary": {
+      "title": "Wachtrij Samenvatting (Klik Gebouwen om Toe te Voegen)",
+      "max": "Op Maximum Niveau",
+      "add": "Toevoegen aan Wachtrij"
+    },
+    "columnsToggle": "👁️ Verbergen / Tonen Tabel Kolommen",
+    "columns": {
+      "order": "Volgorde",
+      "expectedWait": "Verwachte Wacht",
+      "building": "Gebouw",
+      "level": "Niveau",
+      "buildTime": "Bouw Tijd",
+      "startTime": "Start Tijd",
+      "endTime": "Eind Tijd",
+      "points": "Punten",
+      "cost": "Kosten (Hout/Klei/Ijzer)",
+      "resWait": "Hulpbron Wacht Tijd",
+      "currentStorage": "Huidige Opslag",
+      "hourlyProd": "Uurlijkse Productie",
+      "pop": "Bevolking",
+      "storage": "Opslag",
+      "desc": "Beschrijving",
+      "action": "Actie"
+    },
+    "status": {
+      "storageFull": "∞ (Opslag Vol)",
+      "storageLimit": "Onvoldoende Opslag!",
+      "requirement": "Vereiste",
+      "waitingRes": "Wachten op Hulpbronnen.",
+      "farmLimit": "Onvoldoende Boerderij!",
+      "maxLevel": "Max Niveau!"
+    },
+    "fastAdd": {
+      "placeholder": "Typ of selecteer...",
+      "modeActive": "Toetsenbord Modus Actief:",
+      "info": "Je kunt snel toevoegen door de gebouw naam te typen en op Enter te drukken.",
+      "dragTitle": "Slepen om volgorde te veranderen"
+    },
+    "daysShort": "d",
+    "buildings": {
+      "hq": "Hoofdkwartier",
+      "barracks": "Barakken",
+      "stable": "Stal",
+      "workshop": "Werkplaats",
+      "first_church": "Eerste Kerk",
+      "church": "Kerk",
+      "watchtower": "Wachttoren",
+      "academy": "Academie",
+      "smithy": "Smederij",
+      "rally": "Verzamelplaats",
+      "statue": "Standbeeld",
+      "market": "Markt",
+      "wood": "Houthakkerskamp",
+      "clay": "Klei groeve",
+      "iron": "Ijzer mijn",
+      "farm": "Boerderij",
+      "ware": "Opslagplaats",
+      "hiding": "Verstopplaats",
+      "wall": "Muur"
+    }
+  },
+  "buildingTimes": {
+    "title": "⏱️ Gebouwstijden Vergelijking",
+    "worldSpeed": "Wereld Snelheid:",
+    "panel1": "Plan A (Referentie)",
+    "panel2": "Plan B (Vergelijking)",
+    "hqLevel": "Hoofdkwartier Niveau:",
+    "buildingToUpgrade": "Gebouw om te Upgraden:",
+    "currentLevel": "Huidig Niveau:",
+    "targetLevel": "Doel Niveau:",
+    "totalTime": "Totale Tijd:",
+    "comparisonResult": "⚡ Vergelijkings Resultaat:",
+    "panel2Faster": "Plan B zal {{time}} sneller klaar zijn dan Plan A!",
+    "panel1Faster": "Plan A zal {{time}} sneller klaar zijn dan Plan B!",
+    "tableTitle": "📊 Alle Gebouwen Niveau Tijden Tabel",
+    "tableHqLevel": "Tabel HQ Niveau:",
+    "level": "Niveau",
+    "dragTitle": "Slepen om positie te veranderen",
+    "tip": "Tip: Je kunt koppen (bijv. 'Barakken') links of rechts slepen om kolom volgorde te veranderen.",
+    "time": {
+      "day": "d",
+      "hour": "uur",
+      "minute": "min",
+      "second": "sec",
+      "zero": "0 sec"
+    },
+    "buildings": [
+      "Hoofdkwartier (HQ)", "Barakken", "Stal", "Werkplaats", "Eerste Kerk", "Kerk",
+      "Wachttoren", "Academie", "Smederij", "Verzamelplaats", "Standbeeld", "Markt",
+      "Houthakkerskamp", "Klei Groeve", "Ijzer Mijn", "Boerderij", "Opslagplaats", "Verstopplaats",
+      "Edelman", "Gouden Munt", "Muur"
+    ]
+  },
+ "scavenging": {
+    "title": "Plundering Calculator",
+    "settings": {
+      "title": "🌍 Wereld en Productie Instellingen",
+      "worldSpeed": "Wereld Snelheid:",
+      "mineSpeed": "Hulpbron Productie Factor:",
+      "woodLevel": "Houthakkerskamp Niveau:",
+      "clayLevel": "Klei Groeve Niveau:",
+      "ironLevel": "Ijzer Mijn Niveau:",
+      "worldConstant": "Wereld Constante:",
+      "resHourly": "Hulpbron Productie:"
+    },
+    "production": {
+      "perMin": "/ min",
+      "perHour": "/ uur",
+      "perDay": "/ dag"
+    },
+    "troops": {
+      "title": "⚔️ Troepen Aantallen en Vlag",
+      "carryFlag": "Draag Capaciteit Vlag (%):",
+      "resFlag": "Hulpbron Productie Vlag (%):",
+      "totalCap": "Plunder Capaciteit (Geen Vlag):",
+      "totalCapFlag": "Totale Capaciteit (Draag Vlag):",
+      "totalRes": "Hulpbron Productie (Geen Vlag):",
+      "totalResFlag": "Hulpbron Productie (Res Vlag):"
+    },
+    "results": {
+      "title": "🏆 Meest Rendabele Strategieën Ranking",
+      "chartTitle": "📊 Strategie Vergelijking Grafiek (Top 10)",
+      "totalDaily": "Totaal Dagelijks",
+      "scavenge": "Plundering",
+      "resource": "Productie",
+      "perMin": "min",
+      "perHour": "uur",
+      "perDay": "dag",
+      "maxTrip": "Langste Reis Tijd",
+      "dayShort": "/d",
+      "hourShort": "/u",
+      "minShort": "/m",
+      "modes": {
+        "eqTime": "Gelijke Tijd",
+        "eqCap": "Gelijke Capaciteit"
+      },
+      "flags": {
+        "none": "Geen Vlag",
+        "carry": "Draag Vlag",
+        "res": "Res Vlag"
+      },
+      "options": {
+        "c1234": "1-2-3-4 Ontgrendeld",
+        "c123": "1-2-3 Ontgrendeld",
+        "c234": "2-3-4 Ontgrendeld",
+        "c12": "1-2 Ontgrendeld",
+        "c23": "2-3 Ontgrendeld"
+      }
+    },
+    "reference": {
+      "title": "📈 Break-Even Punt (Capaciteit Referentie Tabel)",
+      "info": "Geen troepen ingevoerd. De tabel hieronder toont geschatte dagelijkse buit voor Gelijke Tijd vs Gelijke Capaciteit strategieën bij verschillende capaciteit niveaus (ervan uitgaande 1-2-3-4 ontgrendeld).",
+      "cap": "Voorbeeld Capaciteit",
+      "eqTimeDaily": "Gelijke Tijd (Dagelijks)",
+      "eqCapDaily": "Gelijke Cap. (Dagelijks)",
+      "winner": "Voordelige Tactiek"
+    },
+    "chart": {
+      "title": "📈 Dagelijkse Buit Curve per Capaciteit (Gelijke Tijd & Geen Vlag)",
+      "worldConstantInfo": "Gegenereerd gebaseerd op Wereld Constante ({{constant}}).",
+      "unlocked": "Ontgrendeld",
+      "infoTitle": "💡 Kritische Omkeer Punten (Break-Even)",
+      "be1": "🔸 Na {{cap}} Capaciteit: 1-2-3-4 tactiek overtreft 2-3-4 en wordt rendabeler.",
+      "be2": "🔸 Na {{cap}} Capaciteit: 1-2-3 tactiek overtreft 2-3."
+    }
+  },
+  "churchPlanner": {
+    "title": "⛪ Optimale Kerk Planner",
+    "dataInput": "Gegevens Invoer",
+    "allVillagesCoords": "Al Je Dorp Coördinaten:",
+    "villagesPlaceholder": "510|621, 510|622 (Extraheert ook uit tekst)",
+    "existingChurchesLabel": "Bestaande Kerken (Optioneel):",
+    "existingChurchesPlaceholder": "bijv., 506|496 3 (X|Y Niveau)",
+    "includeFirstChurch": "Eerste Kerk Insluiten?",
+    "calculateBtn": "⚙️ Bereken Optimale Plan",
+    "alertNoVillage": "Voer ten minste één dorp coördinaat in!",
+    "resultsTitle": "Resultaten ({{count}} Kerken)",
+    "existing": "Bestaand",
+    "firstChurch": "Eerste Kerk",
+    "normalChurch": "Normale Kerk",
+    "lvl": "Niv",
+    "coversVillages": "Dorpen Gedekt",
+    "warningUncovered": "⚠️ Waarschuwing: {{count}} dorpen zijn onbeschermd achtergelaten.",
+    "coveredVillage": "Gedekt Dorp",
+    "uncoveredVillage": "Onbeschermd Dorp"
+  },
+  "clanOp": {
+    "title": "🛡️ Stam Operatie Planner",
+    "step1": {
+      "title": "1. Vind Je Stam's Dorpen",
+      "clearAll": "🧹 Wis Alle Gegevens",
+      "worldUrl": "Wereld URL",
+      "clanTag": "Stam Tag",
+      "runIntel": "Vind Dorpen",
+      "status": {
+        "gathering": "Informatie verzamelen: Alle wereld spelers en dorpen scannen...",
+        "notFound": "❌ Stam niet gevonden! Controleer de tag.",
+        "success": "✅ Succes! Stam ID: {{clanId}} | Leden: {{memberCount}} | Totaal Dorpen: {{villageCount}}",
+        "error": "❌ Fout: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Doel Dorpen",
+      "snobLimit": "Edelman Afstands Limiet:",
+      "placeholder": "Plak doel coördinaten hier...",
+      "foundTargets": "Gevonden Doelen: {{count}}"
+    },
+    "step3": {
+      "title": "3. Slimme Toewijzing Centrum & Kaart",
+      "arrivalTime": "Doel Aankomst Tijd:",
+      "targetsTitle": "Je Doelen (Klik om te Selecteren)",
+      "points": "Punten",
+      "p": "P",
+      "distance": "Afstand:"
+    },
+    "manualAssign": {
+      "title": "👤 Vrije Speler Toewijzing",
+      "selectPlayer": "-- Selecteer Speler --",
+      "assignBtn": "Toewijzen",
+      "info": "*Voegt alleen een taak toe met een aankomst tijd naar het geselecteerde doel hierboven. De speler's dorpen zullen ook in blauw verschijnen op de kaart."
+    },
+    "tabs": {
+      "closest10": "Dichtstbijzijnde 10 Dorpen",
+      "furthest10": "Verste 10 Dorpen",
+      "selectPlayer": "Selecteer Speler"
+    },
+    "suggestions": {
+      "noVillages": "Geen dorpen om weer te geven.",
+      "kami": "Stuur Nuke",
+      "snob": "Stuur Edel",
+      "fake": "Stuur Fake",
+      "show": "Maak Zichtbaar",
+      "hide": "Verbergen"
+    },
+    "queue": {
+      "title": "Operatie Wachtrij ({{count}} Orders)",
+      "clear": "Wis Hele Wachtrij",
+      "delete": "Verwijderen",
+      "enemy": "Vijand (Doel)"
+    },
+    "bbcode": {
+      "title": "📋 BBCode Sjabloon voor Notepad",
+      "copyAll": "Kopieer Alles",
+      "selectCols": "Selecteer Kolommen:",
+      "ordersFor": "--- ORDERS VOOR {{player}} ---",
+      "attack": "Aanval",
+      "viewTarget": "Bekijk Doel",
+      "unknown": "ONBEKEND"
+    },
+    "alerts": {
+      "confirmClear": "Alle plannen, doelen en verborgen dorpen (behalve Stap 1 Wereld/Stam info) zullen worden verwijderd. Weet je het zeker?",
+      "cleared": "🧹 Alle gegevens gewist!",
+      "enterTribeTag": "Voer de Stam Tag in!",
+      "selectTarget": "Selecteer een doel.",
+      "selectTargetLeft": "Selecteer een doel van links.",
+      "selectPlayer": "Selecteer een speler uit de lijst.",
+      "snobLimitExceeded": "⚠️ Waarschuwing: De geselecteerde afstand ({{dist}}) overschrijdt je ingestelde edelman limiet ({{limit}})!",
+      "orderAdded": "✅ Order Toegevoegd!",
+      "manualAdded": "✅ Vrije Toewijzing Toegevoegd!",
+      "confirmClearQueue": "Weet je zeker dat je de hele wachtrij wilt wissen?",
+      "queueCleared": "🗑️ Wachtrij Gewist!",
+      "copied": "Gekopieerd!"
+    },
+    "columns": {
+      "no": "Nr",
+      "player": "Speler",
+      "source": "Bron",
+      "target": "Doel",
+      "departure": "Vertrek Tijd",
+      "arrival": "Aankomst Tijd",
+      "unit": "Eenheid",
+      "distance": "Afstand",
+      "travelTime": "Reis Tijd",
+      "attackLink": "Actie Link"
+    },
+    "units": {
+      "spear": "Speervechter", "sword": "Zwaardvechter", "axe": "Bijlstrijder", "spy": "Verkenner",
+      "light": "Lichte cavalerie", "heavy": "Zware cavalerie", "ram": "Ram", "catapult": "Katapult",
+      "knight": "Paladijn", "snob": "Edelman", "archer": "Boogschutter", "marcher": "Marsboogschutter", "militia": "Militie"
+    },
+    "shortUnits": {
+      "ram": "Nuke",
+      "snob": "Edel",
+      "catapult": "Fake",
+      "spy": "Verkenner"
+    }
+  },
+  "clanTroop": {
+    "title": "🦅 Stam Operatie Planner (Geavanceerd)",
+    "step1": {
+      "title": "1. Vind Je Stam's Dorpen",
+      "clear": "🧹 Wis Gegevens",
+      "worldUrl": "Wereld URL",
+      "clanTag": "Stam Tag",
+      "run": "Vind Dorpen",
+      "gathering": "Informatie verzamelen...",
+      "notFound": "❌ Stam niet gevonden!",
+      "success": "✅ Succes! Stam ID: {{clanId}} | Totaal Dorpen: {{villageCount}}",
+      "error": "❌ Fout: {{msg}}"
+    },
+    "step2": {
+      "title": "2. Doel Dorpen",
+      "snobLimit": "Edelman Afstands Limiet:",
+      "placeholder": "Plak doel coördinaten hier..."
+    },
+    "stepTroop": {
+      "title": "🛡️ Voer Troepen Gegevens In (Kopiëren/Plakken)",
+      "placeholder": "Plak troepen gegevens van troepen overzicht (tabel) of CSV formaat (475|494,48,0,0...)...",
+      "detected": "Inlichtingen Gedetecteerd: {{count}} Dorpen",
+      "summaryTitle": "📊 Speler Profiel Samenvattingen",
+      "idle": " (Inactief: {{count}})",
+      "depleted": " (Uitgeput)"
+    },
+    "step3": {
+      "title": "📍 Slimme Toewijzing Centrum & Kaart",
+      "arrivalTime": "Doel Aankomst Tijd:",
+      "targetsTitle": "Je Doelen (Klik om te Selecteren)",
+      "distance": "Afstand:"
+    },
+    "tabs": {
+      "closest": "Dichtstbijzijnde 10 dorpen",
+      "furthest": "Verste 10 dorpen",
+      "player": "Selecteer Speler",
+      "selectPlayer": "-- Selecteer Speler --"
+    },
+    "suggestions": {
+      "noVillages": "Geen dorpen gevonden.",
+      "kami": "Stuur Nuke",
+      "snob": "Stuur Edel",
+      "fake": "Stuur Fake",
+      "show": "Maak Zichtbaar",
+      "hide": "Verbergen",
+      "noIntel": " (Geen Inlichtingen)"
+    },
+    "queue": {
+      "title": "Operatie Wachtrij ({{count}} Orders)",
+      "clear": "Wis Hele Wachtrij",
+      "delete": "Verwijderen"
+    },
+    "bbcode": {
+      "title": "📋 BBCode Sjabloon voor Notepad",
+      "copyAll": "Kopieer Alles",
+      "ordersFor": "--- ORDERS VOOR {{player}} ---",
+      "attack": "Aanval",
+      "unknown": "ONBEKEND"
+    },
+    "alerts": {
+      "confirmClear": "Alle plannen inclusief inlichtingen zullen worden verwijderd. Weet je het zeker?",
+      "cleared": "🧹 Gegevens gewist!",
+      "enterTribeTag": "Voer de Stam Tag in!",
+      "selectTarget": "Selecteer een doel.",
+      "snobLimitExceeded": "⚠️ Waarschuwing: Edelman limiet ({{limit}}) overschreden! Toch toevoegen?",
+      "orderAdded": "✅ Order Toegevoegd!",
+      "confirmClearQueue": "Weet je zeker dat je de hele wachtrij wilt wissen?",
+      "queueCleared": "🗑️ Wachtrij Gewist!",
+      "copied": "Gekopieerd!"
+    },
+    "columns": {
+      "no": "Nr",
+      "player": "Speler",
+      "source": "Bron",
+      "target": "Doel",
+      "departure": "Vertrek",
+      "arrival": "Aankomst",
+      "unit": "Eenheid",
+      "distance": "Afstand",
+      "travelTime": "Reis",
+      "attackLink": "Actie"
+    },
+    "units": {
+      "spear": "Speer", "sword": "Zwaard", "axe": "Bijl", "spy": "Verkenner",
+      "light": "Licht", "heavy": "Zwaar", "ram": "Ram", "catapult": "Kat",
+      "knight": "Paladijn", "snob": "Edel"
+    },
+    "profiles": {
+      "quarter": "Kwart",
+      "half": "Half",
+      "threeQuarters": "3-Kwart",
+      "full": "Vol",
+      "kami": "Nuke",
+      "sav": "Verd",
+      "empty": "Nieuw/Leeg"
+    }
+  },
+  "coinMinter": {
+    "title": "💰 Gouden Munt (Hub) Planner",
+    "dataInput": "Gegevens Invoer",
+    "allVillagesCoords": "Al Je Dorp Coördinaten:",
+    "villagesPlaceholder": "510|621, 510|622 (Extraheert ook uit tekst)",
+    "hubCountLabel": "Hoeveel Hub Dorpen?",
+    "calculateBtn": "⚙️ Vind Beste Hubs",
+    "resultsTitle": "🎯 Geplande Hubs ({{count}})",
+    "hubCardHeader": "Hub:",
+    "hubCardSub": "Zal Hulpbronnen Ontvangen van {{count}} Dorpen",
+    "hubCardBody": "Dorpen die Hulpbronnen Sturen:",
+    "onlySelf": "Alleen zichzelf...",
+    "mapInfoTitle": "Kaart Info:",
+    "mapInfoCenter": "Grote Witte Punt:",
+    "mapInfoCenterDesc": "Hub Dorpen (Munten Minten)",
+    "mapInfoSender": "Gekleurde Punten:",
+    "mapInfoSenderDesc": "Dorpen die Hulpbronnen Sturen",
+    "mapInfoLines": "Lijnen:",
+    "mapInfoLinesDesc": "Hulpbron Stroom Richting",
+    "alerts": {
+      "noVillage": "Voer ten minste één dorp coördinaat in!",
+      "invalidHubCount": "Hub aantal kan het dorp aantal niet overschrijden en moet groter dan 0 zijn."
+    }
+  },
+  "fastSupport": {
+    "title": "🛡️ Snelle Ondersteuning Planning Centrum",
+    "step1": {
+      "title": "1. Vind Je Stam's Dorpen",
+      "worldUrl": "Wereld URL",
+      "clanTag": "Stam Tag",
+      "updateBtn": "Update Dorpen",
+      "status": {
+        "scanning": "Stam dorpen scannen...",
+        "notFound": "❌ Stam niet gevonden! Controleer de afkorting.",
+        "success": "✅ Succes! Totaal Ondersteuning Dorpen: {{count}}",
+        "error": "❌ Fout: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Doel om te Verdedigen & Tijd",
+      "targetCoord": "Doel Coördinaat",
+      "targetPlaceholder": "bijv., 564|554",
+      "arrivalTime": "Doel Aankomst Tijd",
+      "slowestUnit": "Langzaamste Eenheid Snelheid"
+    },
+    "results": {
+      "title": "Beschikbare Ondersteuningen ({{count}})",
+      "allTribe": "Hele Stam",
+      "noVillages": "Geen dorpen gevonden die dit doel op de geselecteerde tijd kunnen bereiken!",
+      "mapTarget": "🛡️ Doel"
+    },
+    "bbcode": {
+      "title": "📋 Forum Oproep (BBCode)",
+      "copyAll": "Kopieer Alles",
+      "target": "🎯 Doel:",
+      "arrivalTime": "⏱️ Aankomst Tijd:",
+      "unitSpeed": "🛡️ Eenheid Snelheid:",
+      "sendSupport": "Stuur Ondersteuning",
+      "supportLink": "🛡️ Stuur Ondersteuning"
+    },
+    "alerts": {
+      "enterTribeTag": "Voer de Stam Tag in!",
+      "copied": "Gekopieerd!"
+    },
+    "columns": {
+      "player": "Speler",
+      "source": "Bron",
+      "distance": "Afstand",
+      "time": "Tijd",
+      "departure": "Vertrek Tijd"
+    },
+    "units": {
+      "spear": "Speer", "sword": "Zwaard", "archer": "Boog", "spy": "Verkenner", "heavy": "Zwaar", "catapult": "Katapult", "knight": "Paladijn"
+    }
+  },
+  "mapAnalysis": {
+    "title": "Continent & Kaart Analyse",
+    "bypassActive": "🕵️ Bypass Actief",
+    "bypassAlertOn": "🕵️ GEHEIME MODUS ACTIEF: 1-uur wacht tijd omzeild! Verse data zal elke keer worden opgehaald.",
+    "bypassAlertOff": "🔒 GEHEIME MODUS INACTIEF: 1-uur cache bescherming ingeschakeld.",
+    "enterWorldUrl": "Voer een wereld URL in!",
+    "fetchError": "Fout bij ophalen data. Zorg dat de link correct is.\nFout: {{error}}",
+    "clearConfirm": "Alle data, archieven en teleport geschiedenis zullen worden verwijderd. Weet je het zeker?",
+    "status": {
+      "waiting": "Wachten op data...",
+      "cached": "Geladen van cache! (Laatste data: {{time}})",
+      "downloading": "Data downloaden van server... (Dit kan 10-15 sec duren)",
+      "analyzing": "Download compleet, analyseren...",
+      "empty": "Geen data om te verwerken gevonden!",
+      "success": "SUCCES: {{villages}} dorpen, {{players}} spelers geladen.",
+      "cleared": "Opslag volledig gewist."
+    },
+    "timeMsg": {
+      "cached": "⏳ Toont gecachte data. Laatste ophaal: {{time}}",
+      "new": "⏳ Verse data opgehaald. Wachten voor volgende ophaal om teleports te detecteren...",
+      "diff": "Tijd Interval: {{hours}} uur {{mins}} minuten zijn verstreken sinds de vorige analyse."
+    },
+    "sections": {
+      "autoFetch": "1. Auto Ophaal Data (Aanbevolen)",
+      "worldUrlLabel": "Wereld URL (bijv., https://en136.tribalwars.net):",
+      "downloadBtn": "🌍 Download en Verwerk Data",
+      "archive": "2. Data Archief",
+      "selectArchive": "-- Selecteer Archief --",
+      "loadBtn": "📂 Laden",
+      "saveBtn": "💾 Archiveer Huidig",
+      "manual": "3. Handmatige Data Invoer (Indien Fout)",
+      "processManualBtn": "⚙️ Verwerk Handmatige Data",
+      "clearStorageBtn": "🗑️ Reset Opslag"
+    },
+    "teleports": {
+      "title": "🚀 Teleport Detecties ({{count}})",
+      "showAllBtn": "🗺️ Toon Alles op Kaart",
+      "continentTitle": "Teleports naar Continent {{cont}} ({{count}} spelers)",
+      "old": "Oud:",
+      "new": "Nieuw:",
+      "showBtn": "📍 Toon",
+      "none": "Geen teleports gedetecteerd of de tweede ophaal is nog niet gedaan.",
+      "info": "* Het systeem verzamelt data bij de eerste analyse. Bij volgende analyses detecteert het dorpen die coördinaten hebben veranderd en blijft ze historisch vermelden tot gewist.",
+      "datePrefix": "🗓️"
+    },
+    "analysis": {
+      "title": "🌍 Continent Analyse",
+      "player": "Speler:",
+      "barbarian": "Barbaar:",
+      "villages": "dorpen",
+      "noTribe": "Geen Stam",
+      "farmRatio": "🎯 Barbaren per Speler:"
+    },
+    "map": {
+      "title": "Kaart Weergave",
+      "gray": "Grijs:",
+      "oldPos": "Oude Positie",
+      "red": "Rood:",
+      "newPos": "Nieuwe Positie",
+      "closeBtn": "Sluiten"
+    },
+    "barbarian": "Barbaar"
+  },
+  "opPlanner": {
+    "title": "⚔️ Individuele Operatie Planner",
+    "step1": {
+      "title": "1. Gegevens Verbinding",
+      "clearData": "Wis Alle Gegevens",
+      "worldUrl": "Wereld URL:",
+      "playerName": "Je Speler Naam:",
+      "fetchBtn": "Ophaal / Vernieuw Gegevens"
+    },
+    "step2": {
+      "title": "2. Je Bron Dorpen & Eenheid Selectie ({{count}})",
+      "info": "Je kunt alle eenheden selecteren die vanuit het dorp zullen worden verzonden. De matching engine voedt van hier.",
+      "village": "Dorp",
+      "unitSelection": "Eenheid Selectie (Meerdere kunnen worden geselecteerd)"
+    },
+    "step3": {
+      "title": "3. Doel Dorpen",
+      "maxSnobDist": "Max Edel Afstands Limiet:",
+      "placeholder": "Plak doel coördinaten hier (bijv., 586|441, 587|442 binnen tekst is prima)",
+      "detectedTargets": "Gedetecteerde Doelen: {{count}}",
+      "mapLegend": {
+        "target": "Doel",
+        "spearLight": "Speer/Licht",
+        "ramKami": "Ram/Nuke",
+        "snob": "Edel",
+        "spy": "Verkenner"
+      }
+    },
+    "step4": {
+      "title": "4. Planning & Tijd Matching Engine",
+      "modeArrival": "Ik Ken de Doel Aankomst Tijd",
+      "modeDeparture": "Ik Ken de Dorp Vertrek Tijd",
+      "dateTime": "Datum & Tijd:",
+      "sourceVillage": "Bron Dorp:",
+      "allSourcesUsed": "Alle Bronnen Gebruikt",
+      "unitToSend": "Eenheid om te Verzenden:",
+      "selectSourceFirst": "Selecteer Bron Eerst",
+      "noUnitsLeft": "Geen Eenheden Over",
+      "target": "Doel:",
+      "calcAndAddBtn": "➕ BEREKEN EN TOEVOEGEN"
+    },
+    "queue": {
+      "title": "Operatie Wachtrij ({{count}} Orders)",
+      "clearQueue": "Wis Hele Wachtrij",
+      "delete": "Verwijderen"
+    },
+    "bbcode": {
+      "title": "📋 BBCode Sjabloon voor Notepad",
+      "copyAll": "Kopieer Alles",
+      "selectCols": "Selecteer Kolommen:",
+      "attack": "Aanval",
+      "unknown": "ONBEKEND"
+    },
+    "status": {
+      "cached": "Data geladen van cache. (Klik de knop 13 keer om geforceerd te vernieuwen)",
+      "fetching": "Data ophalen van server... Wacht alstublieft.",
+      "playerNotFound": "Speler niet gevonden! Zorg dat je de naam correct hebt getypt.",
+      "success": "Succes! Speler gevonden en {{count}} dorpen vermeld.",
+      "error": "Fout: {{msg}}"
+    },
+    "alerts": {
+      "enterWorldUrl": "Voer een wereld URL in!",
+      "enterPlayerName": "Voer je speler naam in!",
+      "confirmClear": "Alle plannen, bronnen en doelen (behalve Stap 1) zullen worden verwijderd. Weet je het zeker?",
+      "selectMatch": "Selecteer Bron, Doel en Eenheid voor matching.",
+      "snobLimitExceeded": "⚠️ Waarschuwing: De geselecteerde afstand ({{dist}} eenheden) overschrijdt de maximum edel afstand limiet ({{limit}})!",
+      "confirmClearQueue": "Weet je zeker dat je de hele wachtrij wilt wissen?",
+      "copied": "Gekopieerd!"
+    },
+    "columns": {
+      "no": "Nr",
+      "source": "Bron Dorp",
+      "target": "Doel",
+      "departure": "Vertrek Tijd",
+      "arrival": "Aankomst Tijd",
+      "unit": "Eenheid",
+      "distance": "Afstand",
+      "travelTime": "Reis Tijd",
+      "attackLink": "Actie Link"
+    },
+    "units": {
+      "spear": "Speervechter", "sword": "Zwaardvechter", "axe": "Bijlstrijder", "spy": "Verkenner",
+      "light": "Lichte cavalerie", "heavy": "Zware cavalerie", "ram": "Ram", "catapult": "Katapult",
+      "knight": "Paladijn", "snob": "Edelman", "archer": "Boogschutter", "marcher": "Marsboogschutter", "militia": "Militie"
+    }
+  },
+  "productionData": {
+    "title": "Productie Planner",
+    "worldSpeed": "Wereld Snelheid:",
+    "mineSpeed": "Hulpbron Productie Factor:",
+    "totalFactor": "Totale Vermenigvuldiger: {{speed}}x",
+    "empireProdTitle": "👑 Algemene Productie ({{count}} Dorpen)",
+    "hourlyProd": "⏳ Totaal Uurlijkse Productie",
+    "dailyProd": "📅 Totaal Dagelijkse Productie",
+    "resources": {
+      "wood": "Hout:",
+      "clay": "Klei:",
+      "iron": "Ijzer:"
+    },
+    "villageManagement": "Dorp Beheer",
+    "resetBtn": "Reset",
+    "newVillageBtn": "+ Nieuw Dorp",
+    "villageNamePrefix": "Dorp",
+    "bonus": {
+      "label": "Bonus:",
+      "none": "Geen",
+      "all": "Alle Hulpbronnen",
+      "wood": "Alleen Hout",
+      "clay": "Alleen Klei",
+      "iron": "Alleen Ijzer"
+    },
+    "lvl": "Niv",
+    "clearConfirm": "Wil je alle dorpen resetten?",
+    "referenceTable": {
+      "title": "📚 Niveau Info Tabel (0% Bonus Gebaseerd)",
+      "hide": "Verbergen",
+      "show": "Tonen",
+      "cols": {
+        "level": "Niv",
+        "hourly": "Uurlijkse Prod ({{speed}}x)",
+        "storage": "Opslag Capaciteit",
+        "farm": "Boerderij Capaciteit"
+      },
+      "perHour": "/ uur"
+    }
+  },
+  "unitCalculator": {
+    "title": "Troepen Productie Calculator",
+    "settings": {
+      "basic": "🌍 Basis Instellingen",
+      "worldSpeed": "Wereld Snelheid:",
+      "barracksLevel": "Barakken Niveau (Max 25):",
+      "stableLevel": "Stal Niveau (Max 20):",
+      "workshopLevel": "Werkplaats Niveau (Max 15):",
+      "speedBonus": "⚡ Snelheid Bonussen (%)",
+      "barracksBonus": "Barakken Item Bonus:",
+      "stableBonus": "Stal Item Bonus:",
+      "workshopBonus": "Werkplaats Item Bonus:",
+      "flagRecruit": "Werving Vlag:",
+      "costBonus": "💰 Kosten & Extra (%)",
+      "massRecruit": "Massa Werving Bonus:",
+      "costReduction": "Hulpbron Reductie (Kosten):",
+      "resetBtn": "🗑️ Reset Aantallen"
+    },
+    "table": {
+      "unit": "Eenheid",
+      "count": "Aantal om te Produceren",
+      "wood": "Hout",
+      "clay": "Klei",
+      "iron": "Ijzer",
+      "pop": "Bevolking",
+      "time": "Productie Tijd"
+    },
+    "summary": {
+      "costTitle": "Algemene Kosten",
+      "woodReq": "Hout Vereist:",
+      "clayReq": "Klei Vereist:",
+      "ironReq": "Ijzer Vereist:",
+      "totalPop": "Totale Bevolking:",
+      "queueTitle": "Gebouw Wachtrij Tijden",
+      "barracksTotal": "Barakken Totaal:",
+      "stableTotal": "Stal Totaal:",
+      "workshopTotal": "Werkplaats Totaal:"
+    },
+    "time": {
+      "day": "d",
+      "hour": "u",
+      "minute": "m",
+      "second": "s",
+      "none": "-"
+    },
+    "units": {
+      "spear": "Speervechter", "sword": "Zwaardvechter", "axe": "Bijlstrijder", "archer": "Boogschutter",
+      "spy": "Verkenner", "lc": "Lichte cavalerie", "ma": "Gemonteerde boogschutter", "hc": "Zware cavalerie",
+      "ram": "Ram", "cat": "Katapult"
+    }
+  },
+  "mapGenerator": {
+    "title": "Geavanceerde Kaart Generator",
+    "worldUrl": "Wereld URL:",
+    "fetchBtn": "Ophaal / Vernieuw Gegevens",
+    "generateBtn": "🗺️ GENEREER KAART",
+    "status": {
+      "noUrl": "Voer een wereld URL in!",
+      "cached": "Geladen van cache! (Laatste update: {{time}})",
+      "fetching": "Data ophalen van server...",
+      "success": "Data succesvol opgehaald!",
+      "error": "Fout: {{msg}}"
+    },
+    "settings": {
+      "title": "Kaart Instellingen",
+      "zoom": "Zoom %",
+      "center": "Centrum (X|Y)",
+      "markersOnly": "Alleen Markeringen",
+      "showAbandons": "Toon Barbaren",
+      "largerMarkers": "Grotere Markeringen",
+      "bgColor": "Achtergrond Kleur",
+      "dullBg": "Dof Achtergrond",
+      "showGrid": "Continent Raster",
+      "showContinentNums": "Continent Nummers"
+    },
+    "players": {
+      "title": "Speler Markeringen",
+      "searchPlaceholder": "Zoek en Voeg Speler Toe...",
+      "points": "Punten",
+      "selectTop25": "Selecteer Top 25",
+      "selectTop50": "Selecteer Top 50",
+      "clearSelection": "Selectie Wissen",
+      "noPlayers": "Nog geen spelers geselecteerd.",
+      "deleteBtn": "Verwijderen"
+    },
+    "tribes": {
+      "title": "Stam Markeringen",
+      "searchPlaceholder": "Zoek Stam (Naam of Tag)...",
+      "selectAll": "Selecteer Alles",
+      "clearSelection": "Selectie Wissen",
+      "selectTop25": "Selecteer Alleen Top 25",
+      "noData": "Nog geen data opgehaald.",
+      "deleteBtn": "Verwijderen"
+    }
+  }
+}

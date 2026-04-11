@@ -1,0 +1,859 @@
+{
+  "menu": {
+    "title": "TW Cobre",
+    "stats": "Live Statistics",
+    "visitsTitle": "Total Visitors",
+    "mapsTitle": "Maps Generated",
+    "opsTitle": "Operations Planned",
+    "simsTitle": "Simulations Run",
+    "visits": "Visits",
+    "maps": "Maps",
+    "developer": "Developer",
+    "items": {
+      "buildingTimes": "Building Times Calculator",
+      "mapAnalysis": "Continent & Map Analysis",
+      "mapGenerator": "Map Generator",
+      "productionData": "Production Calculator",
+      "coinMinter": "Gold Coin Planner",
+      "buildingPlanner": "Building Planner (Queue)",
+      "unitCalculator": "Troop Production Calc",
+      "churchPlanner": "Church Planner",
+      "opPlanner": "Individual Op Planner",
+      "clanOp": "Tribe Operation Planner",
+      "clanTroop": "Tribe Operation Planner (Advanced)",
+      "fastSupport": "Fast Support Planning",
+      "scavengingPlanner": "Scavenging Times Calculator"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Welcome to TW Cobre",
+      "subtitle": "Victory is hidden in the details and flawless planning. Save time in your Tribal Wars journey and devise strategic plans that will lead your tribe to victory. Choose a tool to get started."
+    },
+    "tools": {
+     "opPlanner": { "title": "Personal Operation Planner", "desc": "Match source and target villages to prepare a flawless operation template (BBCode)." },
+     "buildingPlanner": { "title": "Building Planner", "desc": "Design your village's construction plan step by step with advanced queue simulation." },
+     "unitCalculator": { "title": "Troop Production Calculator", "desc": "Calculate unit production times for Barracks, Stable, and Workshop, including bonuses." },
+     "mapGenerator": { "title": "Map Generator", "desc": "Generate up-to-date, colored dynamic world maps for clan forums." },
+     "mapAnalysis": { "title": "Continent Analysis", "desc": "Analyze clan and player continent dominances on the world map." },
+     "productionData": { "title": "Production Calculator", "desc": "Optimize mine production rates, storage capacities, and fill times." },
+     "coinMinter": { "title": "Gold Coin Planner", "desc": "Calculate the most ideal village for minting Gold Coins." },
+     "churchPlanner": { "title": "Church Planner", "desc": "Optimize your church coverage areas on the map with a population-saving algorithm." },
+     "buildingTimes": { "title": "Building Times Calculator", "desc": "Calculate and compare building construction times at different levels down to the second." },
+     "clanOp": { "title": "Tribe Operation Planner", "desc": "Analyze all clan villages and make smart assignments. Distribute personalized BBCode orders to members with map-supported staff intelligence." },
+     "clanTroop": { "title": "Tribe Operation Planner (With Troops)", "desc": "Analyze all clan troops and make smart assignments. Distribute personalized BBCode orders to members with map-supported staff intelligence." },
+     "fastSupport": { "title": "Fast Support Finder", "desc": "Create a support request to get fast support." },
+     "scavengingPlanner": { "title": "Scavenging Times Calculator", "desc": "Compare scavenging times in detail." }
+      }
+  },
+  "footer": {
+    "text1": "Advanced Planning Tools for Tribal Wars",
+    "text2": "© 2026 TW Cobre | Developer: ",
+    "links": {
+      "about": "About",
+      "privacy": "Privacy & GDPR"
+    }
+  },
+  "aboutPage": {
+    "title": "About",
+    "p1": "Hello, I'm Anto Bvb 66.",
+    "p2": "TW Cobre is an elite tactical panel and command center developed independently to process raw data from Clans (Tribal Wars) players and help them gain strategic superiority.",
+    "p3": "From operation planning to cleanup analysis, all modules are designed to solve calculations that would take a player hours in seconds. Victory is hidden in the details!"
+  ,"contactTitle": "Error Reporting & Contact",
+    "contactDesc": "You can send me errors, omissions, or development suggestions you encounter on our site directly via email.",
+    "emailButton": "Send Email"},
+  "privacyPage": {
+    "title": "Privacy Policy and KVKK",
+    "p1": "TW Cobre respects user privacy at the highest level. In accordance with data protection laws (GDPR) and international standards, our data processing policy is as follows:",
+    "items": {
+      "i1": "Account Security: TW Cobre NEVER requests, stores, or hosts your Tribal Wars account password, email, or personal session information on its servers.",
+      "i2": "Local Storage: Your settings (world speed, troop counts, village coordinates, etc.) are stored only in your own device's browser (Local Storage / Session Storage) so they are not lost when you refresh the page.",
+      "i3": "External Data Fetching: The map and analysis modules process general world data publicly provided by Tribal Wars in real time. This operation occurs once per hour. In accordance with game rules, this data only contains general village and player information and does not include your personal data.",
+      "i4": "Statistics: Visitor and map generation counters on our site are only numerical data; they are not matched with your IP address or identity."
+    },
+    "p2": "By using TW Cobre, you agree that your data is processed securely on your device and that your privacy is protected."
+  },
+  "buildingPlanner": {
+    "title": "🏗️ TW Building Planner (Queue Simulation)",
+    "worldSpeed": "World Speed:",
+    "mineSpeed": "Resource Production Factor:",
+    "btn": {
+      "import": "📥 Load Building Queue",
+      "export": "📤 Export Building Queue",
+      "clear": "🗑️ Clear",
+      "addQueue": "Load",
+      "copyBoard": "Copy to Clipboard",
+      "close": "Close",
+      "delete": "Delete"
+    },
+    "modal": {
+      "importTitle": "📥 Paste the Building Queue Copied from the Game",
+      "exportTitle": "📤 Your Queue Output (You can copy)",
+      "importPlaceholder": "Headquarters +1 (Level 1)\n10 points\n...",
+      "success": "✅ Success! {{count}} buildings added to the queue.",
+      "error": "❌ No valid template found. Please check your copied text.",
+      "copied": "Copied!",
+      "exportPrefix": "Construction queue",
+      "levelLabel": "Level",
+      "pointsLabel": "Points"
+    },
+    "levelsTitle": "🏠 Starting Building Levels (Hide / Show)",
+    "analysis": {
+      "title": "⏳ Queue Analysis and Waiting Times (Show/Hide)",
+      "withWait": "⏳ Time with resource wait:",
+      "withoutWait": "⚡ Time without resource wait:",
+      "bottleneckTitle": "🚨 Steps where the queue slows down:",
+      "wood": "Wood",
+      "clay": "Clay",
+      "iron": "Iron",
+      "order": "Order",
+      "level": "Level",
+      "waitingFor": "Waiting",
+      "waitingSuffix": "for resources.",
+      "missing": "Missing amounts",
+      "perfect": "🎉 Great! There is no resource waiting time in this queue. Constructions will continue uninterrupted."
+    },
+    "summary": {
+      "title": "Queue Summary (Click Buildings to Add)",
+      "max": "At Maximum Level",
+      "add": "Add to Queue"
+    },
+    "columnsToggle": "👁️ Hide / Show Table Columns",
+    "columns": {
+      "order": "Order",
+      "expectedWait": "Expected Wait",
+      "building": "Building",
+      "level": "Level",
+      "buildTime": "Build Time",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "points": "Points",
+      "cost": "Cost (Wood/Clay/Iron)",
+      "resWait": "Resource Wait Time",
+      "currentStorage": "Current Storage",
+      "hourlyProd": "Hourly Production",
+      "pop": "Population",
+      "storage": "Storage",
+      "desc": "Description",
+      "action": "Action"
+    },
+    "status": {
+      "storageFull": "∞ (Storage Full)",
+      "storageLimit": "Insufficient Storage!",
+      "requirement": "Requirement",
+      "waitingRes": "Waiting for Resources.",
+      "farmLimit": "Insufficient Farm!",
+      "maxLevel": "Max Level!"
+    },
+    "fastAdd": {
+      "placeholder": "Type or select...",
+      "modeActive": "Keyboard Mode Active:",
+      "info": "You can quickly add by typing the building name and pressing Enter.",
+      "dragTitle": "Drag to change order"
+    },
+    "daysShort": "d",
+    "buildings": {
+      "hq": "Headquarters",
+      "barracks": "Barracks",
+      "stable": "Stable",
+      "workshop": "Workshop",
+      "first_church": "First Church",
+      "church": "Church",
+      "watchtower": "Watchtower",
+      "academy": "Academy",
+      "smithy": "Smithy",
+      "rally": "Rally point",
+      "statue": "Statue",
+      "market": "Market",
+      "wood": "Timber camp",
+      "clay": "Clay pit",
+      "iron": "Iron mine",
+      "farm": "Farm",
+      "ware": "Warehouse",
+      "hiding": "Hiding place",
+      "wall": "Wall"
+    }
+  },
+  "buildingTimes": {
+    "title": "⏱️ Building Times Comparison",
+    "worldSpeed": "World Speed:",
+    "panel1": "Plan A (Reference)",
+    "panel2": "Plan B (Comparison)",
+    "hqLevel": "Headquarters Level:",
+    "buildingToUpgrade": "Building to Upgrade:",
+    "currentLevel": "Current Level:",
+    "targetLevel": "Target Level:",
+    "totalTime": "Total Time:",
+    "comparisonResult": "⚡ Comparison Result:",
+    "panel2Faster": "Plan B will finish {{time}} faster than Plan A!",
+    "panel1Faster": "Plan A will finish {{time}} faster than Plan B!",
+    "tableTitle": "📊 All Buildings Level Times Table",
+    "tableHqLevel": "Table HQ Level:",
+    "level": "Level",
+    "dragTitle": "Drag to change position",
+    "tip": "Tip: You can drag and drop headers (e.g., 'Barracks') left or right to change column order.",
+    "time": {
+      "day": "d",
+      "hour": "hrs",
+      "minute": "mins",
+      "second": "secs",
+      "zero": "0 secs"
+    },
+    "buildings": [
+      "Headquarters (HQ)", "Barracks", "Stable", "Workshop", "First Church", "Church",
+      "Watchtower", "Academy", "Smithy", "Rally Point", "Statue", "Market",
+      "Timber Camp", "Clay Pit", "Iron Mine", "Farm", "Warehouse", "Hiding Place",
+      "Nobleman", "Gold Coin", "Wall"
+    ]
+  },
+ "scavenging": {
+    "title": "Scavenging Calculator",
+    "settings": {
+      "title": "🌍 World and Production Settings",
+      "worldSpeed": "World Speed:",
+      "mineSpeed": "Resource Production Factor:",
+      "woodLevel": "Timber Camp Level:",
+      "clayLevel": "Clay Pit Level:",
+      "ironLevel": "Iron Mine Level:",
+      "worldConstant": "World Constant:",
+      "resHourly": "Resource Production:"
+    },
+    "production": {
+      "perMin": "/ min",
+      "perHour": "/ hour",
+      "perDay": "/ day"
+    },
+    "troops": {
+      "title": "⚔️ Troop Counts and Flag",
+      "carryFlag": "Haul Capacity Flag (%):",
+      "resFlag": "Resource Production Flag (%):",
+      "totalCap": "Scavenge Capacity (No Flag):",
+      "totalCapFlag": "Total Capacity (Haul Flag):",
+      "totalRes": "Resource Production (No Flag):",
+      "totalResFlag": "Resource Production (Res Flag):"
+    },
+    "results": {
+      "title": "🏆 Most Profitable Strategies Ranking",
+      "chartTitle": "📊 Strategy Comparison Chart (Top 10)",
+      "totalDaily": "Total Daily",
+      "scavenge": "Scavenging",
+      "resource": "Production",
+      "perMin": "min",
+      "perHour": "hour",
+      "perDay": "day",
+      "maxTrip": "Longest Trip Time",
+      "dayShort": "/d",
+      "hourShort": "/h",
+      "minShort": "/m",
+      "modes": {
+        "eqTime": "Equal Time",
+        "eqCap": "Equal Capacity"
+      },
+      "flags": {
+        "none": "No Flag",
+        "carry": "Haul Flag",
+        "res": "Resource Flag"
+      },
+      "options": {
+        "c1234": "1-2-3-4 Unlocked",
+        "c123": "1-2-3 Unlocked",
+        "c234": "2-3-4 Unlocked",
+        "c12": "1-2 Unlocked",
+        "c23": "2-3 Unlocked"
+      }
+    },
+    "reference": {
+      "title": "📈 Break-Even Point (Capacity Reference Table)",
+      "info": "No troops entered. The table below shows estimated daily loot for Equal Time vs Equal Capacity strategies at various capacity levels (assuming 1-2-3-4 unlocked).",
+      "cap": "Sample Capacity",
+      "eqTimeDaily": "Equal Time (Daily)",
+      "eqCapDaily": "Equal Cap. (Daily)",
+      "winner": "Advantageous Tactic"
+    },
+    "chart": {
+      "title": "📈 Daily Loot Curve by Capacity (Equal Time & No Flag)",
+      "worldConstantInfo": "Generated based on World Constant ({{constant}}).",
+      "unlocked": "Unlocked",
+      "infoTitle": "💡 Critical Turnaround Points (Break-Even)",
+      "be1": "🔸 After {{cap}} Capacity: 1-2-3-4 tactic overtakes 2-3-4 and becomes more profitable.",
+      "be2": "🔸 After {{cap}} Capacity: 1-2-3 tactic overtakes 2-3."
+    }
+  },
+  "churchPlanner": {
+    "title": "⛪ Optimum Church Planner",
+    "dataInput": "Data Input",
+    "allVillagesCoords": "All Your Village Coordinates:",
+    "villagesPlaceholder": "510|621, 510|622 (Extracts from text too)",
+    "existingChurchesLabel": "Existing Churches (Optional):",
+    "existingChurchesPlaceholder": "e.g., 506|496 3 (X|Y Level)",
+    "includeFirstChurch": "Include First Church?",
+    "calculateBtn": "⚙️ Calculate Optimal Plan",
+    "alertNoVillage": "Please enter at least one village coordinate!",
+    "resultsTitle": "Results ({{count}} Churches)",
+    "existing": "Existing",
+    "firstChurch": "First Church",
+    "normalChurch": "Normal Church",
+    "lvl": "Level",
+    "coversVillages": "Villages Covered",
+    "warningUncovered": "⚠️ Warning: {{count}} villages are left unprotected.",
+    "coveredVillage": "Covered Village",
+    "uncoveredVillage": "Unprotected Village"
+  },
+  "clanOp": {
+    "title": "🛡️ Tribe Operation Planner",
+    "step1": {
+      "title": "1. Find Your Tribe's Villages",
+      "clearAll": "🧹 Clear All Data",
+      "worldUrl": "World URL",
+      "clanTag": "Tribe Tag",
+      "runIntel": "Find Villages",
+      "status": {
+        "gathering": "Gathering information: Scanning all world players and villages...",
+        "notFound": "❌ Tribe not found! Check the tag.",
+        "success": "✅ Success! Tribe ID: {{clanId}} | Members: {{memberCount}} | Total Villages: {{villageCount}}",
+        "error": "❌ Error: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Target Villages",
+      "snobLimit": "Nobleman Distance Limit:",
+      "placeholder": "Paste target coordinates here...",
+      "foundTargets": "Targets Found: {{count}}"
+    },
+    "step3": {
+      "title": "3. Smart Assignment Center & Map",
+      "arrivalTime": "Target Arrival Time:",
+      "targetsTitle": "Your Targets (Click to Select)",
+      "points": "Points",
+      "p": "P",
+      "distance": "Distance:"
+    },
+    "manualAssign": {
+      "title": "👤 Free Player Assignment",
+      "selectPlayer": "-- Select Player --",
+      "assignBtn": "Assign",
+      "info": "*Only adds a task with an arrival time to the selected target above. The player's villages will also appear in blue on the map."
+    },
+    "tabs": {
+      "closest10": "Closest 10 Villages",
+      "furthest10": "Furthest 10 Villages",
+      "selectPlayer": "Select Player"
+    },
+    "suggestions": {
+      "noVillages": "No villages to display.",
+      "kami": "Send Nuke",
+      "snob": "Send Noble",
+      "fake": "Send Fake",
+      "show": "Make Visible",
+      "hide": "Hide"
+    },
+    "queue": {
+      "title": "Operation Queue ({{count}} Orders)",
+      "clear": "Clear Entire Queue",
+      "delete": "Delete",
+      "enemy": "Enemy (Target)"
+    },
+    "bbcode": {
+      "title": "📋 BBCode Template for Notepad",
+      "copyAll": "Copy All",
+      "selectCols": "Select Columns:",
+      "ordersFor": "--- ORDERS FOR {{player}} ---",
+      "attack": "Attack",
+      "viewTarget": "View Target",
+      "unknown": "UNKNOWN"
+    },
+    "alerts": {
+      "confirmClear": "All plans, targets, and hidden villages (except Step 1 World/Tribe info) will be deleted. Are you sure?",
+      "cleared": "🧹 All data cleared!",
+      "enterTribeTag": "Please enter the Tribe Tag!",
+      "selectTarget": "Please select a target.",
+      "selectTargetLeft": "Please select a target from the left.",
+      "selectPlayer": "Please select a player from the list.",
+      "snobLimitExceeded": "⚠️ Warning: The selected distance ({{dist}}) exceeds your set nobleman limit ({{limit}})!",
+      "orderAdded": "✅ Order Added!",
+      "manualAdded": "✅ Free Assignment Added!",
+      "confirmClearQueue": "Are you sure you want to clear the entire queue?",
+      "queueCleared": "🗑️ Queue Cleared!",
+      "copied": "Copied!"
+    },
+    "columns": {
+      "no": "No",
+      "player": "Player",
+      "source": "Source",
+      "target": "Target",
+      "departure": "Departure Time",
+      "arrival": "Arrival Time",
+      "unit": "Unit",
+      "distance": "Distance",
+      "travelTime": "Travel Time",
+      "attackLink": "Action Link"
+    },
+    "units": {
+      "spear": "Spear fighter", "sword": "Swordsman", "axe": "Axeman", "spy": "Scout",
+      "light": "Light cavalry", "heavy": "Heavy cavalry", "ram": "Ram", "catapult": "Catapult",
+      "knight": "Paladin", "snob": "Nobleman", "archer": "Archer", "marcher": "Marcher", "militia": "Militia"
+    },
+    "shortUnits": {
+      "ram": "Nuke",
+      "snob": "Noble",
+      "catapult": "Fake",
+      "spy": "Scout"
+    }
+  },
+  "clanTroop": {
+    "title": "🦅 Tribe Operation Planner (Advanced)",
+    "step1": {
+      "title": "1. Find Your Tribe's Villages",
+      "clear": "🧹 Clear Data",
+      "worldUrl": "World URL",
+      "clanTag": "Tribe Tag",
+      "run": "Find Villages",
+      "gathering": "Gathering information...",
+      "notFound": "❌ Tribe not found!",
+      "success": "✅ Success! Tribe ID: {{clanId}} | Total Villages: {{villageCount}}",
+      "error": "❌ Error: {{msg}}"
+    },
+    "step2": {
+      "title": "2. Target Villages",
+      "snobLimit": "Nobleman Distance Limit:",
+      "placeholder": "Paste target coordinates here..."
+    },
+    "stepTroop": {
+      "title": "🛡️ Enter Troop Data (Copy/Paste)",
+      "placeholder": "Paste troop data from troop overview (table) or CSV format (475|494,48,0,0...)...",
+      "detected": "Intelligence Detected: {{count}} Villages",
+      "summaryTitle": "📊 Player Profile Summaries",
+      "idle": " (Idle: {{count}})",
+      "depleted": " (Depleted)"
+    },
+    "step3": {
+      "title": "📍 Smart Assignment Center & Map",
+      "arrivalTime": "Target Arrival Time:",
+      "targetsTitle": "Your Targets (Click to Select)",
+      "distance": "Distance:"
+    },
+    "tabs": {
+      "closest": "Closest 10 villages",
+      "furthest": "Furthest 10 villages",
+      "player": "Select Player",
+      "selectPlayer": "-- Select Player --"
+    },
+    "suggestions": {
+      "noVillages": "No villages found.",
+      "kami": "Send Nuke",
+      "snob": "Send Noble",
+      "fake": "Send Fake",
+      "show": "Make Visible",
+      "hide": "Hide",
+      "noIntel": " (No  Intelligence)"
+    },
+    "queue": {
+      "title": "Operation Queue ({{count}} Orders)",
+      "clear": "Clear Entire Queue",
+      "delete": "Delete"
+    },
+    "bbcode": {
+      "title": "📋 BBCode Template for Notepad",
+      "copyAll": "Copy All",
+      "ordersFor": "--- ORDERS FOR {{player}} ---",
+      "attack": "Attack",
+      "unknown": "UNKNOWN"
+    },
+    "alerts": {
+      "confirmClear": "All plans including intelligence will be deleted. Are you sure?",
+      "cleared": "🧹 Data cleared!",
+      "enterTribeTag": "Please enter the Tribe Tag!",
+      "selectTarget": "Please select a target.",
+      "snobLimitExceeded": "⚠️ Warning: Nobleman limit ({{limit}}) exceeded! Add anyway?",
+      "orderAdded": "✅ Order Added!",
+      "confirmClearQueue": "Are you sure you want to clear the entire queue?",
+      "queueCleared": "🗑️ Queue Cleared!",
+      "copied": "Copied!"
+    },
+    "columns": {
+      "no": "No",
+      "player": "Player",
+      "source": "Source",
+      "target": "Target",
+      "departure": "Departure",
+      "arrival": "Arrival",
+      "unit": "Unit",
+      "distance": "Distance",
+      "travelTime": "Travel",
+      "attackLink": "Action"
+    },
+    "units": {
+      "spear": "Spear", "sword": "Sword", "axe": "Axe", "spy": "Scout",
+      "light": "Light", "heavy": "Heavy", "ram": "Ram", "catapult": "Cat",
+      "knight": "Paladin", "snob": "Noble"
+    },
+    "profiles": {
+      "quarter": "Quarter",
+      "half": "Half",
+      "threeQuarters": "3-Quarters",
+      "full": "Full",
+      "kami": "Nuke",
+      "sav": "Def",
+      "empty": "New/Empty"
+    }
+  },
+  "coinMinter": {
+    "title": "💰 Gold Coin (Hub) Planner",
+    "dataInput": "Data Input",
+    "allVillagesCoords": "All Your Village Coordinates:",
+    "villagesPlaceholder": "510|621, 510|622 (Extracts from text too)",
+    "hubCountLabel": "How Many Hub Villages?",
+    "calculateBtn": "⚙️ Find Best Hubs",
+    "resultsTitle": "🎯 Planned Hubs ({{count}})",
+    "hubCardHeader": "Hub:",
+    "hubCardSub": "Will Receive Resources from {{count}} Villages",
+    "hubCardBody": "Villages Sending Resources:",
+    "onlySelf": "Only itself...",
+    "mapInfoTitle": "Map Info:",
+    "mapInfoCenter": "Large White Dot:",
+    "mapInfoCenterDesc": "Hub Villages (Minting Coins)",
+    "mapInfoSender": "Colored Dots:",
+    "mapInfoSenderDesc": "Villages Sending Resources",
+    "mapInfoLines": "Lines:",
+    "mapInfoLinesDesc": "Resource Flow Direction",
+    "alerts": {
+      "noVillage": "Please enter at least one village coordinate!",
+      "invalidHubCount": "Hub count cannot exceed village count and must be greater than 0."
+    }
+  },
+  "fastSupport": {
+    "title": "🛡️ Fast Support Planning Center",
+    "step1": {
+      "title": "1. Find Your Tribe's Villages",
+      "worldUrl": "World URL",
+      "clanTag": "Tribe Tag",
+      "updateBtn": "Update Villages",
+      "status": {
+        "scanning": "Scanning tribe villages...",
+        "notFound": "❌ Tribe not found! Check the abbreviation.",
+        "success": "✅ Success! Total Support Villages: {{count}}",
+        "error": "❌ Error: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Target to Defend & Time",
+      "targetCoord": "Target Coordinate",
+      "targetPlaceholder": "e.g., 564|554",
+      "arrivalTime": "Target Arrival Time",
+      "slowestUnit": "Slowest Unit Speed"
+    },
+    "results": {
+      "title": "Available Supports ({{count}})",
+      "allTribe": "Entire Tribe",
+      "noVillages": "No villages found that can reach this target at the selected time!",
+      "mapTarget": "🛡️ Target"
+    },
+    "bbcode": {
+      "title": "📋 Forum Call (BBCode)",
+      "copyAll": "Copy All",
+      "target": "🎯 Target:",
+      "arrivalTime": "⏱️ Arrival Time:",
+      "unitSpeed": "🛡️ Unit Speed:",
+      "sendSupport": "Send Support",
+      "supportLink": "🛡️ Send Support"
+    },
+    "alerts": {
+      "enterTribeTag": "Please enter the Tribe Tag!",
+      "copied": "Copied!"
+    },
+    "columns": {
+      "player": "Player",
+      "source": "Source",
+      "distance": "Distance",
+      "time": "Time",
+      "departure": "Departure Time"
+    },
+    "units": {
+      "spear": "Spear", "sword": "Sword", "archer": "Archer", "spy": "Scout", "heavy": "Heavy", "catapult": "Catapult", "knight": "Paladin"
+    }
+  },
+  "mapAnalysis": {
+    "title": "Continent & Map Analysis",
+    "bypassActive": "🕵️ Bypass Active",
+    "bypassAlertOn": "🕵️ SECRET MODE ACTIVE: 1-Hour wait time bypassed! Fresh data will be fetched every time.",
+    "bypassAlertOff": "🔒 SECRET MODE INACTIVE: 1-Hour cache protection enabled.",
+    "enterWorldUrl": "Please enter a world URL!",
+    "fetchError": "Error fetching data. Make sure the link is correct.\nError: {{error}}",
+    "clearConfirm": "All data, archives, and teleport history will be deleted. Are you sure?",
+    "status": {
+      "waiting": "Waiting for data...",
+      "cached": "Loaded from cache! (Last data: {{time}})",
+      "downloading": "Downloading data from server... (This may take 10-15 secs)",
+      "analyzing": "Download complete, analyzing...",
+      "empty": "No data found to process!",
+      "success": "SUCCESS: {{villages}} villages, {{players}} players loaded.",
+      "cleared": "Storage completely cleared."
+    },
+    "timeMsg": {
+      "cached": "⏳ Showing cached data. Last fetch: {{time}}",
+      "new": "⏳ New data fetched. Waiting for next fetch to detect teleports...",
+      "diff": "Time Interval: {{hours}} hours {{mins}} minutes have passed since the previous analysis."
+    },
+    "sections": {
+      "autoFetch": "1. Auto Fetch Data (Recommended)",
+      "worldUrlLabel": "World URL (e.g., https://en136.tribalwars.net):",
+      "downloadBtn": "🌍 Download and Process Data",
+      "archive": "2. Data Archive",
+      "selectArchive": "-- Select Archive --",
+      "loadBtn": "📂 Load",
+      "saveBtn": "💾 Archive Current",
+      "manual": "3. Manual Data Entry (If Error)",
+      "processManualBtn": "⚙️ Process Manual Data",
+      "clearStorageBtn": "🗑️ Reset Storage"
+    },
+    "teleports": {
+      "title": "🚀 Teleport Detections ({{count}})",
+      "showAllBtn": "🗺️ Show All on Map",
+      "continentTitle": "Teleports to Continent {{cont}} ({{count}} players)",
+      "old": "Old:",
+      "new": "New:",
+      "showBtn": "📍 Show",
+      "none": "No teleports detected or the second fetch hasn't been done yet.",
+      "info": "* The system collects data on the first analysis. In subsequent analyses, it detects villages that changed coordinates and continues to list them historically until cleared.",
+      "datePrefix": "🗓️"
+    },
+    "analysis": {
+      "title": "🌍 Continent Analysis",
+      "player": "Player:",
+      "barbarian": "Barbarian:",
+      "villages": "villages",
+      "noTribe": "No Tribe",
+      "farmRatio": "🎯 Barbarians per Player:"
+    },
+    "map": {
+      "title": "Map View",
+      "gray": "Gray:",
+      "oldPos": "Old Position",
+      "red": "Red:",
+      "newPos": "New Position",
+      "closeBtn": "Close"
+    },
+    "barbarian": "Barbarian"
+  },
+  "opPlanner": {
+    "title": "⚔️ Individual Operation Planner",
+    "step1": {
+      "title": "1. Data Connection",
+      "clearData": "Clear All Data",
+      "worldUrl": "World URL:",
+      "playerName": "Your Player Name:",
+      "fetchBtn": "Fetch / Refresh Data"
+    },
+    "step2": {
+      "title": "2. Your Source Villages & Unit Selection ({{count}})",
+      "info": "You can select all units that will be dispatched from the village. The matching engine feeds from here.",
+      "village": "Village",
+      "unitSelection": "Unit Selection (Multiple can be selected)"
+    },
+    "step3": {
+      "title": "3. Target Villages",
+      "maxSnobDist": "Max Noble Distance Limit:",
+      "placeholder": "Paste target coordinates here (e.g., 586|441, 587|442 inside text is fine)",
+      "detectedTargets": "Detected Targets: {{count}}",
+      "mapLegend": {
+        "target": "Target",
+        "spearLight": "Spear/Light",
+        "ramKami": "Ram/Nuke",
+        "snob": "Noble",
+        "spy": "Scout"
+      }
+    },
+    "step4": {
+      "title": "4. Planning & Time Matching Engine",
+      "modeArrival": "I Know the Target Arrival Time",
+      "modeDeparture": "I Know the Village Departure Time",
+      "dateTime": "Date & Time:",
+      "sourceVillage": "Source Village:",
+      "allSourcesUsed": "All Sources Used",
+      "unitToSend": "Unit to Send:",
+      "selectSourceFirst": "Select Source First",
+      "noUnitsLeft": "No Units Left",
+      "target": "Target:",
+      "calcAndAddBtn": "➕ CALCULATE AND ADD"
+    },
+    "queue": {
+      "title": "Operation Queue ({{count}} Orders)",
+      "clearQueue": "Clear Entire Queue",
+      "delete": "Delete"
+    },
+    "bbcode": {
+      "title": "📋 BBCode Template for Notepad",
+      "copyAll": "Copy All",
+      "selectCols": "Select Columns:",
+      "attack": "Attack",
+      "unknown": "UNKNOWN"
+    },
+    "status": {
+      "cached": "Data loaded from cache. (Click the button 13 times to force refresh)",
+      "fetching": "Fetching data from server... Please wait.",
+      "playerNotFound": "Player not found! Make sure you typed the name correctly.",
+      "success": "Success! Player found and {{count}} villages listed.",
+      "error": "Error: {{msg}}"
+    },
+    "alerts": {
+      "enterWorldUrl": "Please enter a world URL!",
+      "enterPlayerName": "Please enter your player name!",
+      "confirmClear": "All plans, sources, and targets (except Step 1) will be deleted. Are you sure?",
+      "selectMatch": "Please select Source, Target, and Unit for matching.",
+      "snobLimitExceeded": "⚠️ Warning: The selected distance ({{dist}} units) exceeds the maximum noble distance limit ({{limit}})!",
+      "confirmClearQueue": "Are you sure you want to clear the entire queue?",
+      "copied": "Copied!"
+    },
+    "columns": {
+      "no": "No",
+      "source": "Source Village",
+      "target": "Target",
+      "departure": "Departure Time",
+      "arrival": "Arrival Time",
+      "unit": "Unit",
+      "distance": "Distance",
+      "travelTime": "Travel Time",
+      "attackLink": "Action Link"
+    },
+    "units": {
+      "spear": "Spear fighter", "sword": "Swordsman", "axe": "Axeman", "spy": "Scout",
+      "light": "Light cavalry", "heavy": "Heavy cavalry", "ram": "Ram", "catapult": "Catapult",
+      "knight": "Paladin", "snob": "Nobleman", "archer": "Archer", "marcher": "Marcher", "militia": "Militia"
+    }
+  },
+  "productionData": {
+    "title": "Production Planner",
+    "worldSpeed": "World Speed:",
+    "mineSpeed": "Resource Production Factor:",
+    "totalFactor": "Total Multiplier: {{speed}}x",
+    "empireProdTitle": "👑 Overall Production ({{count}} Villages)",
+    "hourlyProd": "⏳ Total Hourly Production",
+    "dailyProd": "📅 Total Daily Production",
+    "resources": {
+      "wood": "Wood:",
+      "clay": "Clay:",
+      "iron": "Iron:"
+    },
+    "villageManagement": "Village Management",
+    "resetBtn": "Reset",
+    "newVillageBtn": "+ New Village",
+    "villageNamePrefix": "Village",
+    "bonus": {
+      "label": "Bonus:",
+      "none": "None",
+      "all": "All Resources",
+      "wood": "Wood Only",
+      "clay": "Clay Only",
+      "iron": "Iron Only"
+    },
+    "lvl": "Lvl",
+    "clearConfirm": "Do you want to reset all villages?",
+    "referenceTable": {
+      "title": "📚 Level Info Table (0% Bonus Based)",
+      "hide": "Hide",
+      "show": "Show",
+      "cols": {
+        "level": "Lvl",
+        "hourly": "Hourly Prod ({{speed}}x)",
+        "storage": "Storage Capacity",
+        "farm": "Farm Capacity"
+      },
+      "perHour": "/ hr"
+    }
+  },
+  "unitCalculator": {
+    "title": "Troop Production Calculator",
+    "settings": {
+      "basic": "🌍 Basic Settings",
+      "worldSpeed": "World Speed:",
+      "barracksLevel": "Barracks Level (Max 25):",
+      "stableLevel": "Stable Level (Max 20):",
+      "workshopLevel": "Workshop Level (Max 15):",
+      "speedBonus": "⚡ Speed Bonuses (%)",
+      "barracksBonus": "Barracks Item Bonus:",
+      "stableBonus": "Stable Item Bonus:",
+      "workshopBonus": "Workshop Item Bonus:",
+      "flagRecruit": "Recruitment Flag:",
+      "costBonus": "💰 Cost & Extra (%)",
+      "massRecruit": "Mass Recruitment Bonus:",
+      "costReduction": "Resource Reduction (Cost):",
+      "resetBtn": "🗑️ Reset Counts"
+    },
+    "table": {
+      "unit": "Unit",
+      "count": "Amount to Produce",
+      "wood": "Wood",
+      "clay": "Clay",
+      "iron": "Iron",
+      "pop": "Population",
+      "time": "Production Time"
+    },
+    "summary": {
+      "costTitle": "Overall Cost",
+      "woodReq": "Wood Required:",
+      "clayReq": "Clay Required:",
+      "ironReq": "Iron Required:",
+      "totalPop": "Total Population:",
+      "queueTitle": "Building Queue Times",
+      "barracksTotal": "Barracks Total:",
+      "stableTotal": "Stable Total:",
+      "workshopTotal": "Workshop Total:"
+    },
+    "time": {
+      "day": "d",
+      "hour": "h",
+      "minute": "m",
+      "second": "s",
+      "none": "-"
+    },
+    "units": {
+      "spear": "Spear fighter", "sword": "Swordsman", "axe": "Axeman", "archer": "Archer",
+      "spy": "Scout", "lc": "Light cavalry", "ma": "Mounted archer", "hc": "Heavy cavalry",
+      "ram": "Ram", "cat": "Catapult"
+    }
+  },
+  "mapGenerator": {
+    "title": "Advanced Map Generator",
+    "worldUrl": "World URL:",
+    "fetchBtn": "Fetch / Refresh Data",
+    "generateBtn": "🗺️ GENERATE MAP",
+    "status": {
+      "noUrl": "Please enter a world URL!",
+      "cached": "Loaded from cache! (Last update: {{time}})",
+      "fetching": "Fetching data from server...",
+      "success": "Data fetched successfully!",
+      "error": "Error: {{msg}}"
+    },
+    "settings": {
+      "title": "Map Settings",
+      "zoom": "Zoom %",
+      "center": "Center (X|Y)",
+      "markersOnly": "Markers Only",
+      "showAbandons": "Show Barbarians",
+      "largerMarkers": "Larger Markers",
+      "bgColor": "Background Color",
+      "dullBg": "Dull Background",
+      "showGrid": "Continent Grid",
+      "showContinentNums": "Continent Numbers"
+    },
+    "players": {
+      "title": "Player Markers",
+      "searchPlaceholder": "Search and Add Player...",
+      "points": "Points",
+      "selectTop25": "Select Top 25",
+      "selectTop50": "Select Top 50",
+      "clearSelection": "Clear Selection",
+      "noPlayers": "No players selected yet.",
+      "deleteBtn": "Delete"
+    },
+    "tribes": {
+      "title": "Tribe Markers",
+      "searchPlaceholder": "Search Tribe (Name or Tag)...",
+      "selectAll": "Select All",
+      "clearSelection": "Clear Selection",
+      "selectTop25": "Select Top 25 Only",
+      "noData": "No data fetched yet.",
+      "deleteBtn": "Delete"
+    }
+  }
+}

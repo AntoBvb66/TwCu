@@ -1,0 +1,72 @@
+.uc-container {
+    padding: 20px; background: linear-gradient(145deg, #f4e8d4, #eaddbd);
+    color: #333; border-radius: 8px; border: 2px solid #8b5a2b;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.uc-header {
+    color: #5a3a18; border-bottom: 2px solid #dcb589;
+    padding-bottom: 10px; margin-bottom: 20px; margin-top: 0;
+}
+
+.uc-panel {
+    background: #faf5eb; padding: 15px; border-radius: 6px;
+    border: 1px solid #dcb589; margin-bottom: 15px;
+}
+
+.uc-grid-3 {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;
+}
+
+.uc-settings-group {
+    background: #fff; padding: 10px; border: 1px solid #ccc; border-radius: 4px;
+}
+.uc-settings-group h4 { margin: 0 0 10px 0; color: #8b5a2b; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+
+.uc-input-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 5px; font-size: 13px; font-weight: bold; color: #5a3a18;
+}
+.uc-input-row input {
+    width: 60px; padding: 4px; border: 1px solid #aaa;
+    border-radius: 3px; text-align: center;
+}
+
+.uc-table-wrapper { overflow-x: auto; background: #fff; border: 1px solid #dcb589; border-radius: 4px; margin-bottom: 20px;}
+.uc-table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: center; white-space: nowrap; }
+.uc-table th, .uc-table td { border: 1px solid #dcb589; padding: 8px 6px; }
+.uc-table th { background-color: #e6d2b5; color: #5a3a18; position: sticky; top: 0; z-index: 1;}
+.uc-table tbody tr:nth-child(even) { background-color: #fcf8f2; }
+.uc-table tbody tr:hover { background-color: #f0e6d2; }
+
+.uc-unit-input { width: 70px; padding: 4px; border: 2px solid #8b5a2b; border-radius: 4px; text-align: center; font-weight: bold; font-size: 14px;}
+.uc-unit-input:focus { outline: none; border-color: #d9534f; }
+
+.uc-wood { color: #8b5a2b; font-weight: bold; }
+.uc-clay { color: #b5651d; font-weight: bold;}
+.uc-iron { color: #555; font-weight: bold;}
+.uc-pop { color: #2b542c; font-weight: bold;}
+.uc-time { color: #d9534f; font-weight: bold; }
+
+.uc-summary-box {
+    background: #2a1908; color: #eaddbd; padding: 15px; border-radius: 6px;
+    border: 2px solid #f0c042; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px;
+}
+.uc-summary-item { font-size: 14px; }
+.uc-summary-item span { color: #f0c042; font-weight: bold; font-size: 16px;}
+.uc-queue-times { background: #111; padding: 10px; border-radius: 4px; border: 1px solid #603000;}
+
+/* MOBİL EKRANLAR İÇİN ALT BOŞLUK (SCROLL) DÜZELTMESİ */
+.uc-container {
+    margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+    .uc-container {
+        padding-bottom: 100px !important; /* Mobilde en alta ekstra yastık koyar */
+    }
+    .uc-table-wrapper {
+        margin-bottom: 40px;
+    }
+}

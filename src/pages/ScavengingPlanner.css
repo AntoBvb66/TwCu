@@ -1,0 +1,176 @@
+/* ScavengingPlanner.css */
+
+/* --- ANA KONTEYNER --- */
+.scav-container {
+    padding: 20px;
+    color: #eaddbd;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    max-width: 1200px; 
+    margin: 0 auto;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* --- BAŞLIK --- */
+.scav-header {
+    font-size: 28px;
+    color: #f0c042;
+    border-bottom: 3px solid #814c11;
+    padding-bottom: 12px;
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    letter-spacing: 0.5px;
+}
+
+/* --- IZGARA SİSTEMLERİ (GRID - BİLGİSAYAR İÇİN) --- */
+.scav-main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Sağ taraf (Askerler) biraz daha geniş */
+    gap: 25px;
+    margin-bottom: 25px;
+    align-items: stretch;
+}
+
+.scav-bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Yarı yarıya eşit */
+    gap: 25px;
+    align-items: stretch;
+}
+
+/* --- KUTU (PANEL) TASARIMI - Premium TW Cobre Hissiyatı --- */
+.scav-box {
+    background: linear-gradient(145deg, #1e150d 0%, #110904 100%);
+    border: 1px solid #5c3516;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.05);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.scav-box:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.8), inset 0 1px 2px rgba(255,255,255,0.08);
+}
+
+.scav-box h3 {
+    margin-top: 0;
+    font-size: 17px;
+    color: #f0c042;
+    border-bottom: 1px dashed #814c11;
+    padding-bottom: 8px;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+
+/* --- İNPUT (GİRDİ) TASARIMLARI --- */
+.scav-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid #814c11;
+    color: #f0c042;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+/* Tıklanınca Altın Rengi Parlama Efekti */
+.scav-input:focus {
+    outline: none;
+    border-color: #f0c042;
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 8px rgba(240, 192, 66, 0.4);
+}
+
+/* --- TABLO TASARIMI --- */
+.scav-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.scav-table th {
+    background: linear-gradient(to bottom, #3c240c, #2a1908);
+    color: #f0c042;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #5c3516;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.scav-table td {
+    padding: 10px;
+    border: 1px solid #333;
+    text-align: center;
+    font-size: 13px;
+}
+
+.scav-table tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.scav-table tr:hover {
+    background: rgba(240, 192, 66, 0.05);
+}
+
+/* --- ŞIK SCROLLBAR (Grafikler ve Listeler İçin) --- */
+.scav-box ::-webkit-scrollbar { width: 8px; height: 8px; }
+.scav-box ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); border-radius: 4px;}
+.scav-box ::-webkit-scrollbar-thumb { background: #603000; border-radius: 4px; border: 1px solid #111; }
+.scav-box ::-webkit-scrollbar-thumb:hover { background: #f0c042; }
+
+/* --- ANİMASYON --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   RESPONSIVE (CİHAZ UYUM) AYARLARI
+   ========================================= */
+
+/* TABLET EKRANLAR (1024px ve altı) */
+@media (max-width: 1024px) {
+    .scav-main-grid {
+        grid-template-columns: 1fr; /* Kutular sıkışmasın diye alt alta alıyoruz */
+        gap: 20px;
+    }
+    .scav-bottom-grid {
+        grid-template-columns: 1fr; /* Grafik ve Sonuç Listesi alt alta geçer */
+    }
+}
+
+/* TELEFON EKRANLAR (768px ve altı) */
+@media (max-width: 768px) {
+    .scav-container {
+        padding: 10px;
+    }
+    
+    .scav-header {
+        font-size: 24px;
+        text-align: center;
+    }
+    
+    .scav-box {
+        padding: 15px; /* Mobilde iç boşlukları daralt */
+    }
+    
+    /* Inputları mobilde parmakla daha rahat tıklanabilmesi için büyüt */
+    .scav-input {
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    .scav-table th, .scav-table td {
+        padding: 8px 4px;
+        font-size: 11px; /* Tabloyu ekrana sığdırmak için fontu küçült */
+    }
+}

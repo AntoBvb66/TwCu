@@ -1,0 +1,858 @@
+{
+  "menu": {
+    "title": "TW Cobre",
+    "stats": "Statystyki na żywo",
+    "visitsTitle": "Całkowita liczba odwiedzin",
+    "mapsTitle": "Wygenerowane mapy",
+    "opsTitle": "Zaplanowane operacje",
+    "simsTitle": "Uruchomione symulacje",
+    "visits": "Odwiedziny",
+    "maps": "Mapy",
+    "developer": "Deweloper",
+    "items": {
+      "buildingTimes": "Kalkulator czasu budowy",
+      "mapAnalysis": "Analiza kontynentu i mapy",
+      "mapGenerator": "Generator mapy",
+      "productionData": "Kalkulator produkcji",
+      "coinMinter": "Planer monet złota",
+      "buildingPlanner": "Planer budowy (kolejka)",
+      "unitCalculator": "Kalkulator produkcji jednostek",
+      "churchPlanner": "Planer kościoła",
+      "opPlanner": "Planer indywidualnej operacji",
+      "clanOp": "Planer operacji plemienia",
+      "clanTroop": "Planer operacji plemienia (zaawansowany)",
+      "fastSupport": "Planowanie szybkiego wsparcia",
+      "scavengingPlanner": "Kalkulator czasu zbierania"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Witaj w TW Cobre",
+      "subtitle": "Zwycięstwo ukrywa się w szczegółach i doskonałym planowaniu. Oszczędź czas w swojej podróży po Tribal Wars i opracuj strategiczne plany, które poprowadzą twoje plemię do zwycięstwa. Wybierz narzędzie, aby zacząć."
+    },
+    "tools": {
+      "opPlanner": { "title": "Osobisty planer operacji", "desc": "Dopasuj wioski źródłowe i docelowe, aby przygotować doskonały szablon operacji (BBCode)." },
+      "buildingPlanner": { "title": "Planer budowy", "desc": "Zaprojektuj plan budowy swojej wioski krok po kroku z zaawansowaną symulacją kolejki." },
+      "unitCalculator": { "title": "Kalkulator produkcji jednostek", "desc": "Oblicz czasy produkcji jednostek dla Koszar, Stajni i Warsztatu, w tym bonusy." },
+      "mapGenerator": { "title": "Generator mapy", "desc": "Generuj aktualne, kolorowe dynamiczne mapy świata dla forów plemiennych." },
+      "mapAnalysis": { "title": "Analiza kontynentu", "desc": "Analizuj dominacje plemion i graczy na mapie świata." },
+      "productionData": { "title": "Kalkulator produkcji", "desc": "Optymalizuj stawki produkcji kopalń, pojemności magazynów i czasy napełniania." },
+      "coinMinter": { "title": "Planer monet złota", "desc": "Oblicz najbardziej idealną wioskę do bicia monet złota." },
+      "churchPlanner": { "title": "Planer kościoła", "desc": "Optymalizuj zasięg pokrycia kościoła na mapie z algorytmem oszczędzającym populację." },
+      "buildingTimes": { "title": "Kalkulator czasu budowy", "desc": "Oblicz i porównaj czasy budowy budynków na różnych poziomach do sekundy." },
+      "clanOp": { "title": "Planer operacji plemienia", "desc": "Analizuj wszystkie wioski plemienia i dokonaj inteligentnych przypisań. Rozdystrybuuj spersonalizowane zamówienia BBCode do członków z wsparciem mapy." },
+      "clanTroop": { "title": "Planer operacji plemienia (z jednostkami)", "desc": "Analizuj wszystkie jednostki plemienia i dokonaj inteligentnych przypisań. Rozdystrybuuj spersonalizowane zamówienia BBCode do członków z wsparciem mapy." },
+      "fastSupport": { "title": "Znajdź szybkie wsparcie", "desc": "Utwórz prośbę o wsparcie, aby uzyskać szybkie wsparcie." },
+      "scavengingPlanner": { "title": "Kalkulator czasu zbierania", "desc": "Porównaj czasy zbierania szczegółowo." }
+    }
+  },
+  "footer": {
+    "text1": "Zaawansowane narzędzia planowania dla Tribal Wars",
+    "text2": "© 2026 TW Cobre | Deweloper: ",
+    "links": {
+      "about": "O nas",
+      "privacy": "Prywatność i GDPR"
+    }
+  },
+  "aboutPage": {
+    "title": "O nas",
+    "p1": "Cześć, jestem Anto Bvb 66.",
+    "p2": "TW Cobre to elitarny panel taktyczny i centrum dowodzenia opracowany niezależnie, aby przetwarzać surowe dane graczy plemion (Tribal Wars) i pomagać im osiągnąć przewagę strategiczną.",
+    "p3": "Od planowania operacji po analizę czyszczenia, wszystkie moduły są zaprojektowane, aby rozwiązywać obliczenia, które zajęłyby graczowi godziny w sekundach. Zwycięstwo ukrywa się w szczegółach!"
+  ,"contactTitle": "Zgłaszanie błędów i Kontakt",
+    "contactDesc": "Błędy, pominięcia lub sugestie ulepszeń napotkane na naszej stronie można przesyłać bezpośrednio do mnie pocztą elektroniczną.",
+    "emailButton": "Wyślij e-mail"},
+  "privacyPage": {
+    "title": "Polityka prywatności i KVKK",
+    "p1": "TW Cobre szanuje prywatność użytkowników na najwyższym poziomie. Zgodnie z prawami ochrony danych (GDPR) i międzynarodowymi standardami, nasza polityka przetwarzania danych jest następująca:",
+    "items": {
+      "i1": "Bezpieczeństwo konta: TW Cobre NIGDY nie żąda, nie przechowuje ani nie hostuje hasła do konta Tribal Wars, adresu e-mail ani osobistych informacji sesyjnych na swoich serwerach.",
+      "i2": "Lokalne przechowywanie: Twoje ustawienia (prędkość świata, liczebność jednostek, współrzędne wiosek itp.) są przechowywane tylko w przeglądarce urządzenia (Local Storage / Session Storage), więc nie giną po odświeżeniu strony.",
+      "i3": "Pobieranie zewnętrznych danych: Moduły mapy i analizy przetwarzają ogólne dane świata publicznie dostarczane przez Tribal Wars w czasie rzeczywistym. Ta operacja występuje raz na godzinę. Zgodnie z zasadami gry, te dane zawierają tylko ogólne informacje o wioskach i graczach i nie obejmują Twoich danych osobowych.",
+      "i4": "Statystyki: Liczniki odwiedzających i generowania map na naszej stronie to tylko dane liczbowe; nie są dopasowane do Twojego adresu IP ani tożsamości."
+    },
+    "p2": "Korzystając z TW Cobre, zgadzasz się, że Twoje dane są przetwarzane bezpiecznie na Twoim urządzeniu i że Twoja prywatność jest chroniona."
+  },
+  "buildingPlanner": {
+    "title": "🏗️ Planer budowy TW (symulacja kolejki)",
+    "worldSpeed": "Prędkość świata:",
+    "mineSpeed": "Współczynnik produkcji zasobów:",
+    "btn": {
+      "import": "📥 Załaduj kolejkę budowy",
+      "export": "📤 Eksportuj kolejkę budowy",
+      "clear": "🗑️ Wyczyść",
+      "addQueue": "Załaduj",
+      "copyBoard": "Kopiuj do schowka",
+      "close": "Zamknij",
+      "delete": "Usuń"
+    },
+    "modal": {
+      "importTitle": "📥 Wklej kolejkę budowy skopiowaną z gry",
+      "exportTitle": "📤 Wyjście Twojej kolejki (możesz skopiować)",
+      "importPlaceholder": "Kwatera główna +1 (Poziom 1)\n10 punktów\n...",
+      "success": "✅ Sukces! Dodano {{count}} budynków do kolejki.",
+      "error": "❌ Nie znaleziono prawidłowego szablonu. Sprawdź swój skopiowany tekst.",
+      "copied": "Skopiowano!",
+      "exportPrefix": "Kolejka budowy",
+      "levelLabel": "Poziom",
+      "pointsLabel": "Punkty"
+    },
+    "levelsTitle": "🏠 Początkowe poziomy budynków (Ukryj / Pokaż)",
+    "analysis": {
+      "title": "⏳ Analiza kolejki i czasy oczekiwania (Pokaż/Ukryj)",
+      "withWait": "⏳ Czas z oczekiwaniem na zasoby:",
+      "withoutWait": "⚡ Czas bez oczekiwania na zasoby:",
+      "bottleneckTitle": "🚨 Kroki, w których kolejka zwalnia:",
+      "wood": "Drewno",
+      "clay": "Glina",
+      "iron": "Żelazo",
+      "order": "Zamówienie",
+      "level": "Poziom",
+      "waitingFor": "Oczekiwanie",
+      "waitingSuffix": "na zasoby.",
+      "missing": "Brakujące ilości",
+      "perfect": "🎉 Świetnie! W tej kolejce nie ma czasu oczekiwania na zasoby. Budowy będą kontynuowane bez przerwy."
+    },
+    "summary": {
+      "title": "Podsumowanie kolejki (Kliknij budynki, aby dodać)",
+      "max": "Na maksymalnym poziomie",
+      "add": "Dodaj do kolejki"
+    },
+    "columnsToggle": "👁️ Ukryj / Pokaż kolumny tabeli",
+    "columns": {
+      "order": "Zamówienie",
+      "expectedWait": "Oczekiwane oczekiwanie",
+      "building": "Budynek",
+      "level": "Poziom",
+      "buildTime": "Czas budowy",
+      "startTime": "Czas rozpoczęcia",
+      "endTime": "Czas zakończenia",
+      "points": "Punkty",
+      "cost": "Koszt (Drewno/Glina/Żelazo)",
+      "resWait": "Czas oczekiwania na zasoby",
+      "currentStorage": "Aktualny magazyn",
+      "hourlyProd": "Godzinowa produkcja",
+      "pop": "Populacja",
+      "storage": "Magazyn",
+      "desc": "Opis",
+      "action": "Akcja"
+    },
+    "status": {
+      "storageFull": "∞ (Magazyn pełny)",
+      "storageLimit": "Niewystarczający magazyn!",
+      "requirement": "Wymaganie",
+      "waitingRes": "Oczekiwanie na zasoby.",
+      "farmLimit": "Niewystarczająca farma!",
+      "maxLevel": "Maksymalny poziom!"
+    },
+    "fastAdd": {
+      "placeholder": "Wpisz lub wybierz...",
+      "modeActive": "Tryb klawiatury aktywny:",
+      "info": "Możesz szybko dodawać, wpisując nazwę budynku i naciskając Enter.",
+      "dragTitle": "Przeciągnij, aby zmienić kolejność"
+    },
+    "daysShort": "d",
+    "buildings": {
+      "hq": "Kwatera główna",
+      "barracks": "Koszar",
+      "stable": "Stajnia",
+      "workshop": "Warsztat",
+      "first_church": "Pierwszy kościół",
+      "church": "Kościół",
+      "watchtower": "Wieża strażnicza",
+      "academy": "Akademia",
+      "smithy": "Kuźnia",
+      "rally": "Miejsce zbiórki",
+      "statue": "Posąg",
+      "market": "Rynek",
+      "wood": "Tartak",
+      "clay": "Kopalnia gliny",
+      "iron": "Huta żelaza",
+      "farm": "Farma",
+      "ware": "Magazyn",
+      "hiding": "Kryjówka",
+      "wall": "Mur"
+    }
+  },
+  "buildingTimes": {
+    "title": "⏱️ Porównanie czasu budowy",
+    "worldSpeed": "Prędkość świata:",
+    "panel1": "Plan A (Referencyjny)",
+    "panel2": "Plan B (Porównanie)",
+    "hqLevel": "Poziom kwatery głównej:",
+    "buildingToUpgrade": "Budynek do ulepszenia:",
+    "currentLevel": "Aktualny poziom:",
+    "targetLevel": "Docelowy poziom:",
+    "totalTime": "Całkowity czas:",
+    "comparisonResult": "⚡ Wynik porównania:",
+    "panel2Faster": "Plan B zakończy się {{time}} szybciej niż Plan A!",
+    "panel1Faster": "Plan A zakończy się {{time}} szybciej niż Plan B!",
+    "tableTitle": "📊 Tabela czasów poziomów wszystkich budynków",
+    "tableHqLevel": "Poziom HQ tabeli:",
+    "level": "Poziom",
+    "dragTitle": "Przeciągnij, aby zmienić pozycję",
+    "tip": "Wskazówka: Możesz przeciągać nagłówki (np. 'Koszar') w lewo lub w prawo, aby zmienić kolejność kolumn.",
+    "time": {
+      "day": "d",
+      "hour": "godz",
+      "minute": "min",
+      "second": "sek"
+    },
+    "buildings": [
+      "Kwatera główna (HQ)", "Koszar", "Stajnia", "Warsztat", "Pierwszy kościół", "Kościół",
+      "Wieża strażnicza", "Akademia", "Kuźnia", "Miejsce zbiórki", "Posąg", "Rynek",
+      "Tartak", "Kopalnia gliny", "Huta żelaza", "Farma", "Magazyn", "Kryjówka",
+      "Szlachcic", "Moneta złota", "Mur"
+    ]
+  },
+  "scavenging": {
+    "title": "Kalkulator zbierania",
+    "settings": {
+      "title": "🌍 Ustawienia świata i produkcji",
+      "worldSpeed": "Prędkość świata:",
+      "mineSpeed": "Współczynnik produkcji zasobów:",
+      "woodLevel": "Poziom tartaku:",
+      "clayLevel": "Poziom kopalni gliny:",
+      "ironLevel": "Poziom huty żelaza:",
+      "worldConstant": "Stała świata:",
+      "resHourly": "Produkcja zasobów:"
+    },
+    "production": {
+      "perMin": "/ min",
+      "perHour": "/ godz",
+      "perDay": "/ dzień"
+    },
+    "troops": {
+      "title": "⚔️ Liczebność jednostek i flaga",
+      "carryFlag": "Flaga pojemności przewozu (%):",
+      "resFlag": "Flaga produkcji zasobów (%):",
+      "totalCap": "Pojemność zbierania (bez flagi):",
+      "totalCapFlag": "Całkowita pojemność (flaga przewozu):",
+      "totalRes": "Produkcja zasobów (bez flagi):",
+      "totalResFlag": "Produkcja zasobów (flaga zasobów):"
+    },
+    "results": {
+      "title": "🏆 Ranking najbardziej dochodowych strategii",
+      "chartTitle": "📊 Wykres porównania strategii (Top 10)",
+      "totalDaily": "Całkowity dzienny",
+      "scavenge": "Zbieranie",
+      "resource": "Produkcja",
+      "perMin": "min",
+      "perHour": "godz",
+      "perDay": "dzień",
+      "maxTrip": "Najdłuższy czas podróży",
+      "dayShort": "/d",
+      "hourShort": "/h",
+      "minShort": "/m",
+      "modes": {
+        "eqTime": "Równy czas",
+        "eqCap": "Równa pojemność"
+      },
+      "flags": {
+        "none": "Bez flagi",
+        "carry": "Flaga przewozu",
+        "res": "Flaga zasobów"
+      },
+      "options": {
+        "c1234": "1-2-3-4 odblokowane",
+        "c123": "1-2-3 odblokowane",
+        "c234": "2-3-4 odblokowane",
+        "c12": "1-2 odblokowane",
+        "c23": "2-3 odblokowane"
+      }
+    },
+    "reference": {
+      "title": "📈 Punkt równowagi (tabela referencyjna pojemności)",
+      "info": "Nie wprowadzono jednostek. Poniższa tabela pokazuje szacowaną dzienną łupież dla strategii Równy czas vs Równa pojemność przy różnych poziomach pojemności (zakładając 1-2-3-4 odblokowane).",
+      "cap": "Przykładowa pojemność",
+      "eqTimeDaily": "Równy czas (dzienny)",
+      "eqCapDaily": "Równa poj. (dzienny)",
+      "winner": "Korzystniejsza taktyka"
+    },
+    "chart": {
+      "title": "📈 Krzywa dziennej łupieży wg pojemności (równy czas i bez flagi)",
+      "worldConstantInfo": "Wygenerowane na podstawie stałej świata ({{constant}}).",
+      "unlocked": "Odblokowane",
+      "infoTitle": "💡 Krytyczne punkty zwrotne (równowagi)",
+      "be1": "🔸 Po pojemności {{cap}}: taktyka 1-2-3-4 przewyższa 2-3-4 i staje się bardziej dochodowa.",
+      "be2": "🔸 Po pojemności {{cap}}: taktyka 1-2-3 przewyższa 2-3."
+    }
+  },
+  "churchPlanner": {
+    "title": "⛪ Optymalny planer kościoła",
+    "dataInput": "Wprowadzanie danych",
+    "allVillagesCoords": "Współrzędne wszystkich Twoich wiosek:",
+    "villagesPlaceholder": "510|621, 510|622 (wyciąga również z tekstu)",
+    "existingChurchesLabel": "Istniejące kościoły (opcjonalne):",
+    "existingChurchesPlaceholder": "np. 506|496 3 (X|Y Poziom)",
+    "includeFirstChurch": "Uwzględnij pierwszy kościół?",
+    "calculateBtn": "⚙️ Oblicz optymalny plan",
+    "alertNoVillage": "Wprowadź przynajmniej jedną współrzędną wioski!",
+    "resultsTitle": "Wyniki ({{count}} kościołów)",
+    "existing": "Istniejące",
+    "firstChurch": "Pierwszy kościół",
+    "normalChurch": "Normalny kościół",
+    "lvl": "Poziom",
+    "coversVillages": "Pokryte wioski",
+    "warningUncovered": "⚠️ Ostrzeżenie: {{count}} wiosek pozostaje niechronionych.",
+    "coveredVillage": "Pokryta wioska",
+    "uncoveredVillage": "Niechroniona wioska"
+  },
+  "clanOp": {
+    "title": "🛡️ Planer operacji plemienia",
+    "step1": {
+      "title": "1. Znajdź wioski swojego plemienia",
+      "clearAll": "🧹 Wyczyść wszystkie dane",
+      "worldUrl": "URL świata",
+      "clanTag": "Tag plemienia",
+      "runIntel": "Znajdź wioski",
+      "status": {
+        "gathering": "Zbieranie informacji: Skanowanie wszystkich graczy świata i wiosek...",
+        "notFound": "❌ Plemię nie znalezione! Sprawdź tag.",
+        "success": "✅ Sukces! ID plemienia: {{clanId}} | Członkowie: {{memberCount}} | Całkowite wioski: {{villageCount}}",
+        "error": "❌ Błąd: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Docelowe wioski",
+      "snobLimit": "Limit odległości szlachty:",
+      "placeholder": "Wklej współrzędne docelowe tutaj...",
+      "foundTargets": "Znalezionych celów: {{count}}"
+    },
+    "step3": {
+      "title": "3. Inteligentne centrum przypisania i mapa",
+      "arrivalTime": "Czas przybycia celu:",
+      "targetsTitle": "Twoje cele (Kliknij, aby wybrać)",
+      "points": "Punkty",
+      "p": "P",
+      "distance": "Odległość:"
+    },
+    "manualAssign": {
+      "title": "👤 Ręczne przypisanie gracza",
+      "selectPlayer": "-- Wybierz gracza --",
+      "assignBtn": "Przypisz",
+      "info": "*Dodaje tylko zadanie z czasem przybycia do wybranego celu powyżej. Wioski gracza również pojawią się na niebiesko na mapie."
+    },
+    "tabs": {
+      "closest10": "Najbliższe 10 wiosek",
+      "furthest10": "Najdalsze 10 wiosek",
+      "selectPlayer": "Wybierz gracza"
+    },
+    "suggestions": {
+      "noVillages": "Brak wiosek do wyświetlenia.",
+      "kami": "Wyślij nuke",
+      "snob": "Wyślij szlachtę",
+      "fake": "Wyślij fake",
+      "show": "Pokaż",
+      "hide": "Ukryj"
+    },
+    "queue": {
+      "title": "Kolejka operacji ({{count}} zamówień)",
+      "clear": "Wyczyść całą kolejkę",
+      "delete": "Usuń",
+      "enemy": "Wróg (cel)"
+    },
+    "bbcode": {
+      "title": "📋 Szablon BBCode dla notatnika",
+      "copyAll": "Kopiuj wszystko",
+      "selectCols": "Wybierz kolumny:",
+      "ordersFor": "--- ZAMÓWIENIA DLA {{player}} ---",
+      "attack": "Atak",
+      "viewTarget": "Zobacz cel",
+      "unknown": "NIEZNANY"
+    },
+    "alerts": {
+      "confirmClear": "Wszystkie plany, cele i ukryte wioski (z wyjątkiem informacji o świecie/plemieniu z Krok 1) zostaną usunięte. Czy na pewno?",
+      "cleared": "🧹 Wszystkie dane wyczyszczone!",
+      "enterTribeTag": "Wprowadź tag plemienia!",
+      "selectTarget": "Wybierz cel.",
+      "selectTargetLeft": "Wybierz cel z lewej.",
+      "selectPlayer": "Wybierz gracza z listy.",
+      "snobLimitExceeded": "⚠️ Ostrzeżenie: Wybrana odległość ({{dist}}) przekracza ustawiony limit szlachty ({{limit}})!",
+      "orderAdded": "✅ Zamówienie dodane!",
+      "manualAdded": "✅ Ręczne przypisanie dodane!",
+      "confirmClearQueue": "Czy na pewno chcesz wyczyścić całą kolejkę?",
+      "queueCleared": "🗑️ Kolejka wyczyszczona!",
+      "copied": "Skopiowano!"
+    },
+    "columns": {
+      "no": "Nr",
+      "player": "Gracz",
+      "source": "Źródło",
+      "target": "Cel",
+      "departure": "Czas wyjazdu",
+      "arrival": "Czas przybycia",
+      "unit": "Jednostka",
+      "distance": "Odległość",
+      "travelTime": "Czas podróży",
+      "attackLink": "Link akcji"
+    },
+    "units": {
+      "spear": "Włócznik", "sword": "Miecznik", "axe": "Topornik", "spy": "Zwiadowca",
+      "light": "Lekka kawaleria", "heavy": "Ciężka kawaleria", "ram": "Taran", "catapult": "Katapulta",
+      "knight": "Paladyn", "snob": "Szlachcic", "archer": "Łucznik", "marcher": "Marszowiec", "militia": "Milicyjny"
+    },
+    "shortUnits": {
+      "ram": "Nuke",
+      "snob": "Szlachcic",
+      "catapult": "Fake",
+      "spy": "Zwiadowca"
+    }
+  },
+  "clanTroop": {
+    "title": "🦅 Planer operacji plemienia (zaawansowany)",
+    "step1": {
+      "title": "1. Znajdź wioski swojego plemienia",
+      "clear": "🧹 Wyczyść dane",
+      "worldUrl": "URL świata",
+      "clanTag": "Tag plemienia",
+      "run": "Znajdź wioski",
+      "gathering": "Zbieranie informacji...",
+      "notFound": "❌ Plemię nie znalezione!",
+      "success": "✅ Sukces! ID plemienia: {{clanId}} | Całkowite wioski: {{villageCount}}",
+      "error": "❌ Błąd: {{msg}}"
+    },
+    "step2": {
+      "title": "2. Docelowe wioski",
+      "snobLimit": "Limit odległości szlachty:",
+      "placeholder": "Wklej współrzędne docelowe tutaj..."
+    },
+    "stepTroop": {
+      "title": "🛡️ Wprowadź dane jednostek (Kopiuj/Wklej)",
+      "placeholder": "Wklej dane jednostek z przeglądu jednostek (tabela) lub format CSV (475|494,48,0,0...)...",
+      "detected": "Wykryta inteligencja: {{count}} wiosek",
+      "summaryTitle": "📊 Podsumowania profili graczy",
+      "idle": " (Bezczynny: {{count}})",
+      "depleted": " (Wyczerpany)"
+    },
+    "step3": {
+      "title": "📍 Inteligentne centrum przypisania i mapa",
+      "arrivalTime": "Czas przybycia celu:",
+      "targetsTitle": "Twoje cele (Kliknij, aby wybrać)",
+      "distance": "Odległość:"
+    },
+    "tabs": {
+      "closest": "Najbliższe 10 wiosek",
+      "furthest": "Najdalsze 10 wiosek",
+      "player": "Wybierz gracza",
+      "selectPlayer": "-- Wybierz gracza --"
+    },
+    "suggestions": {
+      "noVillages": "Nie znaleziono wiosek.",
+      "kami": "Wyślij nuke",
+      "snob": "Wyślij szlachtę",
+      "fake": "Wyślij fake",
+      "show": "Pokaż",
+      "hide": "Ukryj",
+      "noIntel": " (Brak inteligencji)"
+    },
+    "queue": {
+      "title": "Kolejka operacji ({{count}} zamówień)",
+      "clear": "Wyczyść całą kolejkę",
+      "delete": "Usuń"
+    },
+    "bbcode": {
+      "title": "📋 Szablon BBCode dla notatnika",
+      "copyAll": "Kopiuj wszystko",
+      "ordersFor": "--- ZAMÓWIENIA DLA {{player}} ---",
+      "attack": "Atak",
+      "unknown": "NIEZNANY"
+    },
+    "alerts": {
+      "confirmClear": "Wszystkie plany wraz z inteligencją zostaną usunięte. Czy na pewno?",
+      "cleared": "🧹 Dane wyczyszczone!",
+      "enterTribeTag": "Wprowadź tag plemienia!",
+      "selectTarget": "Wybierz cel.",
+      "snobLimitExceeded": "⚠️ Ostrzeżenie: Limit szlachty ({{limit}}) przekroczony! Dodać mimo to?",
+      "orderAdded": "✅ Zamówienie dodane!",
+      "confirmClearQueue": "Czy na pewno chcesz wyczyścić całą kolejkę?",
+      "queueCleared": "🗑️ Kolejka wyczyszczona!",
+      "copied": "Skopiowano!"
+    },
+    "columns": {
+      "no": "Nr",
+      "player": "Gracz",
+      "source": "Źródło",
+      "target": "Cel",
+      "departure": "Wyjazd",
+      "arrival": "Przybycie",
+      "unit": "Jednostka",
+      "distance": "Odległość",
+      "travelTime": "Podróż",
+      "attackLink": "Akcja"
+    },
+    "units": {
+      "spear": "Włócznik", "sword": "Miecznik", "axe": "Topornik", "spy": "Zwiadowca",
+      "light": "Lekka", "heavy": "Ciężka", "ram": "Taran", "catapult": "Katapulta",
+      "knight": "Paladyn", "snob": "Szlachcic"
+    },
+    "profiles": {
+      "quarter": "Ćwierć",
+      "half": "Połowa",
+      "threeQuarters": "3-ćwierci",
+      "full": "Pełny",
+      "kami": "Nuke",
+      "sav": "Obrona",
+      "empty": "Nowy/Pusty"
+    }
+  },
+  "coinMinter": {
+    "title": "💰 Planer monet złota (centrum)",
+    "dataInput": "Wprowadzanie danych",
+    "allVillagesCoords": "Współrzędne wszystkich Twoich wiosek:",
+    "villagesPlaceholder": "510|621, 510|622 (wyciąga również z tekstu)",
+    "hubCountLabel": "Ile wiosek centrum?",
+    "calculateBtn": "⚙️ Znajdź najlepsze centra",
+    "resultsTitle": "🎯 Zaplanowane centra ({{count}})",
+    "hubCardHeader": "Centrum:",
+    "hubCardSub": "Będzie otrzymywać zasoby od {{count}} wiosek",
+    "hubCardBody": "Wioski wysyłające zasoby:",
+    "onlySelf": "Tylko sama...",
+    "mapInfoTitle": "Informacje o mapie:",
+    "mapInfoCenter": "Duża biała kropka:",
+    "mapInfoCenterDesc": "Wioski centrum (bicie monet)",
+    "mapInfoSender": "Kolorowe kropki:",
+    "mapInfoSenderDesc": "Wioski wysyłające zasoby",
+    "mapInfoLines": "Linie:",
+    "mapInfoLinesDesc": "Kierunek przepływu zasobów",
+    "alerts": {
+      "noVillage": "Wprowadź przynajmniej jedną współrzędną wioski!",
+      "invalidHubCount": "Liczba centrów nie może przekraczać liczby wiosek i musi być większa niż 0."
+    }
+  },
+  "fastSupport": {
+    "title": "🛡️ Centrum planowania szybkiego wsparcia",
+    "step1": {
+      "title": "1. Znajdź wioski swojego plemienia",
+      "worldUrl": "URL świata",
+      "clanTag": "Tag plemienia",
+      "updateBtn": "Aktualizuj wioski",
+      "status": {
+        "scanning": "Skanowanie wiosek plemienia...",
+        "notFound": "❌ Plemię nie znalezione! Sprawdź skrót.",
+        "success": "✅ Sukces! Całkowite wioski wsparcia: {{count}}",
+        "error": "❌ Błąd: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Cel do obrony i czas",
+      "targetCoord": "Współrzędna celu",
+      "targetPlaceholder": "np. 564|554",
+      "arrivalTime": "Czas przybycia celu",
+      "slowestUnit": "Najwolniejsza prędkość jednostki"
+    },
+    "results": {
+      "title": "Dostępne wsparcia ({{count}})",
+      "allTribe": "Całe plemię",
+      "noVillages": "Nie znaleziono wiosek, które mogą dotrzeć do tego celu w wybranym czasie!",
+      "mapTarget": "🛡️ Cel"
+    },
+    "bbcode": {
+      "title": "📋 Wezwanie na forum (BBCode)",
+      "copyAll": "Kopiuj wszystko",
+      "target": "🎯 Cel:",
+      "arrivalTime": "⏱️ Czas przybycia:",
+      "unitSpeed": "🛡️ Prędkość jednostki:",
+      "sendSupport": "Wyślij wsparcie",
+      "supportLink": "🛡️ Wyślij wsparcie"
+    },
+    "alerts": {
+      "enterTribeTag": "Wprowadź tag plemienia!",
+      "copied": "Skopiowano!"
+    },
+    "columns": {
+      "player": "Gracz",
+      "source": "Źródło",
+      "distance": "Odległość",
+      "time": "Czas",
+      "departure": "Czas wyjazdu"
+    },
+    "units": {
+      "spear": "Włócznik", "sword": "Miecznik", "archer": "Łucznik", "spy": "Zwiadowca", "heavy": "Ciężka", "catapult": "Katapulta", "knight": "Paladyn"
+    }
+  },
+  "mapAnalysis": {
+    "title": "Analiza kontynentu i mapy",
+    "bypassActive": "🕵️ Bypass aktywny",
+    "bypassAlertOn": "🕵️ TRYB SEKRETNY AKTYWNY: czas oczekiwania 1 godziny ominięty! Świeże dane będą pobierane za każdym razem.",
+    "bypassAlertOff": "🔒 TRYB SEKRETNY NIEAKTYWNY: ochrona pamięci podręcznej 1 godziny włączona.",
+    "enterWorldUrl": "Wprowadź URL świata!",
+    "fetchError": "Błąd pobierania danych. Upewnij się, że link jest prawidłowy.\nBłąd: {{error}}",
+    "clearConfirm": "Wszystkie dane, archiwa i historia teleportów zostaną usunięte. Czy na pewno?",
+    "status": {
+      "waiting": "Oczekiwanie na dane...",
+      "cached": "Załadowane z pamięci podręcznej! (Ostatnie dane: {{time}})",
+      "downloading": "Pobieranie danych z serwera... (Może zająć 10-15 sek)",
+      "analyzing": "Pobieranie zakończone, analizowanie...",
+      "empty": "Brak danych do przetworzenia!",
+      "success": "SUKCES: {{villages}} wiosek, {{players}} graczy załadowanych.",
+      "cleared": "Pamięć całkowicie wyczyszczona."
+    },
+    "timeMsg": {
+      "cached": "⏳ Wyświetlanie danych z pamięci podręcznej. Ostatnie pobranie: {{time}}",
+      "new": "⏳ Nowe dane pobrane. Oczekiwanie na następne pobranie, aby wykryć teleporty...",
+      "diff": "Przedział czasu: minęło {{hours}} godzin {{mins}} minut od poprzedniej analizy."
+    },
+    "sections": {
+      "autoFetch": "1. Automatyczne pobieranie danych (zalecane)",
+      "worldUrlLabel": "URL świata (np. https://en136.tribalwars.net):",
+      "downloadBtn": "🌍 Pobierz i przetwórz dane",
+      "archive": "2. Archiwum danych",
+      "selectArchive": "-- Wybierz archiwum --",
+      "loadBtn": "📂 Załaduj",
+      "saveBtn": "💾 Archiwizuj aktualne",
+      "manual": "3. Ręczne wprowadzanie danych (jeśli błąd)",
+      "processManualBtn": "⚙️ Przetwórz ręczne dane",
+      "clearStorageBtn": "🗑️ Resetuj pamięć"
+    },
+    "teleports": {
+      "title": "🚀 Wykrycia teleportów ({{count}})",
+      "showAllBtn": "🗺️ Pokaż wszystkie na mapie",
+      "continentTitle": "Teleporty do kontynentu {{cont}} ({{count}} graczy)",
+      "old": "Stary:",
+      "new": "Nowy:",
+      "showBtn": "📍 Pokaż",
+      "none": "Brak wykrytych teleportów lub drugie pobranie nie zostało jeszcze wykonane.",
+      "info": "* System zbiera dane przy pierwszej analizie. W kolejnych analizach wykrywa wioski, które zmieniły współrzędne i kontynuuje ich historyczne listowanie aż do wyczyszczenia.",
+      "datePrefix": "🗓️"
+    },
+    "analysis": {
+      "title": "🌍 Analiza kontynentu",
+      "player": "Gracz:",
+      "barbarian": "Barbarzyńca:",
+      "villages": "wiosek",
+      "noTribe": "Bez plemienia",
+      "farmRatio": "🎯 Barbarzyńców na gracza:"
+    },
+    "map": {
+      "title": "Widok mapy",
+      "gray": "Szary:",
+      "oldPos": "Stara pozycja",
+      "red": "Czerwony:",
+      "newPos": "Nowa pozycja",
+      "closeBtn": "Zamknij"
+    },
+    "barbarian": "Barbarzyńca"
+  },
+  "opPlanner": {
+    "title": "⚔️ Indywidualny planer operacji",
+    "step1": {
+      "title": "1. Połączenie danych",
+      "clearData": "Wyczyść wszystkie dane",
+      "worldUrl": "URL świata:",
+      "playerName": "Twoja nazwa gracza:",
+      "fetchBtn": "Pobierz / Odśwież dane"
+    },
+    "step2": {
+      "title": "2. Twoje wioski źródłowe i wybór jednostek ({{count}})",
+      "info": "Możesz wybrać wszystkie jednostki, które zostaną wysłane z wioski. Silnik dopasowania pobiera stąd.",
+      "village": "Wioska",
+      "unitSelection": "Wybór jednostek (można wybrać wiele)"
+    },
+    "step3": {
+      "title": "3. Docelowe wioski",
+      "maxSnobDist": "Maksymalny limit odległości szlachty:",
+      "placeholder": "Wklej współrzędne docelowe tutaj (np. 586|441, 587|442 w tekście też w porządku)",
+      "detectedTargets": "Wykrytych celów: {{count}}",
+      "mapLegend": {
+        "target": "Cel",
+        "spearLight": "Włócznik/Lekka",
+        "ramKami": "Taran/Nuke",
+        "snob": "Szlachcic",
+        "spy": "Zwiadowca"
+      }
+    },
+    "step4": {
+      "title": "4. Planowanie i silnik dopasowania czasu",
+      "modeArrival": "Znam czas przybycia celu",
+      "modeDeparture": "Znam czas wyjazdu wioski",
+      "dateTime": "Data i czas:",
+      "sourceVillage": "Wioska źródłowa:",
+      "allSourcesUsed": "Wszystkie źródła użyte",
+      "unitToSend": "Jednostka do wysłania:",
+      "selectSourceFirst": "Najpierw wybierz źródło",
+      "noUnitsLeft": "Brak jednostek",
+      "target": "Cel:",
+      "calcAndAddBtn": "➕ OBLICZ I DODAJ"
+    },
+    "queue": {
+      "title": "Kolejka operacji ({{count}} zamówień)",
+      "clearQueue": "Wyczyść całą kolejkę",
+      "delete": "Usuń"
+    },
+    "bbcode": {
+      "title": "📋 Szablon BBCode dla notatnika",
+      "copyAll": "Kopiuj wszystko",
+      "selectCols": "Wybierz kolumny:",
+      "attack": "Atak",
+      "unknown": "NIEZNANY"
+    },
+    "status": {
+      "cached": "Dane załadowane z pamięci podręcznej. (Kliknij przycisk 13 razy, aby wymusić odświeżenie)",
+      "fetching": "Pobieranie danych z serwera... Proszę czekać.",
+      "playerNotFound": "Gracz nie znaleziony! Upewnij się, że nazwa jest poprawnie wpisana.",
+      "success": "Sukces! Gracz znaleziony i {{count}} wiosek wymienionych.",
+      "error": "Błąd: {{msg}}"
+    },
+    "alerts": {
+      "enterWorldUrl": "Wprowadź URL świata!",
+      "enterPlayerName": "Wprowadź swoją nazwę gracza!",
+      "confirmClear": "Wszystkie plany, źródła i cele (z wyjątkiem Krok 1) zostaną usunięte. Czy na pewno?",
+      "selectMatch": "Wybierz Źródło, Cel i Jednostkę do dopasowania.",
+      "snobLimitExceeded": "⚠️ Ostrzeżenie: Wybrana odległość ({{dist}} jednostek) przekracza maksymalny limit odległości szlachty ({{limit}})!",
+      "confirmClearQueue": "Czy na pewno chcesz wyczyścić całą kolejkę?",
+      "copied": "Skopiowano!"
+    },
+    "columns": {
+      "no": "Nr",
+      "source": "Wioska źródłowa",
+      "target": "Cel",
+      "departure": "Czas wyjazdu",
+      "arrival": "Czas przybycia",
+      "unit": "Jednostka",
+      "distance": "Odległość",
+      "travelTime": "Czas podróży",
+      "attackLink": "Link akcji"
+    },
+    "units": {
+      "spear": "Włócznik", "sword": "Miecznik", "axe": "Topornik", "spy": "Zwiadowca",
+      "light": "Lekka kawaleria", "heavy": "Ciężka kawaleria", "ram": "Taran", "catapult": "Katapulta",
+      "knight": "Paladyn", "snob": "Szlachcic", "archer": "Łucznik", "marcher": "Marszowiec", "militia": "Milicyjny"
+    }
+  },
+  "productionData": {
+    "title": "Planer produkcji",
+    "worldSpeed": "Prędkość świata:",
+    "mineSpeed": "Współczynnik produkcji zasobów:",
+    "totalFactor": "Całkowity mnożnik: {{speed}}x",
+    "empireProdTitle": "👑 Ogólna produkcja ({{count}} wiosek)",
+    "hourlyProd": "⏳ Całkowita godzinowa produkcja",
+    "dailyProd": "📅 Całkowita dzienna produkcja",
+    "resources": {
+      "wood": "Drewno:",
+      "clay": "Glina:",
+      "iron": "Żelazo:"
+    },
+    "villageManagement": "Zarządzanie wioską",
+    "resetBtn": "Resetuj",
+    "newVillageBtn": "+ Nowa wioska",
+    "villageNamePrefix": "Wioska",
+    "bonus": {
+      "label": "Bonus:",
+      "none": "Brak",
+      "all": "Wszystkie zasoby",
+      "wood": "Tylko drewno",
+      "clay": "Tylko glina",
+      "iron": "Tylko żelazo"
+    },
+    "lvl": "Poziom",
+    "clearConfirm": "Czy chcesz zresetować wszystkie wioski?",
+    "referenceTable": {
+      "title": "📚 Tabela informacji o poziomach (0% bonusu)",
+      "hide": "Ukryj",
+      "show": "Pokaż",
+      "cols": {
+        "level": "Poziom",
+        "hourly": "Godzinowa prod ({{speed}}x)",
+        "storage": "Pojemność magazynu",
+        "farm": "Pojemność farmy"
+      },
+      "perHour": "/ godz"
+    }
+  },
+  "unitCalculator": {
+    "title": "Kalkulator produkcji jednostek",
+    "settings": {
+      "basic": "🌍 Podstawowe ustawienia",
+      "worldSpeed": "Prędkość świata:",
+      "barracksLevel": "Poziom koszar (Maks 25):",
+      "stableLevel": "Poziom stajni (Maks 20):",
+      "workshopLevel": "Poziom warsztatu (Maks 15):",
+      "speedBonus": "⚡ Bonusy prędkości (%)",
+      "barracksBonus": "Bonus przedmiotu koszar:",
+      "stableBonus": "Bonus przedmiotu stajni:",
+      "workshopBonus": "Bonus przedmiotu warsztatu:",
+      "flagRecruit": "Flaga rekrutacji:",
+      "costBonus": "💰 Koszt i dodatkowy (%)",
+      "massRecruit": "Bonus masowej rekrutacji:",
+      "costReduction": "Redukcja zasobów (koszt):",
+      "resetBtn": "🗑️ Resetuj liczebności"
+    },
+    "table": {
+      "unit": "Jednostka",
+      "count": "Ilość do produkcji",
+      "wood": "Drewno",
+      "clay": "Glina",
+      "iron": "Żelazo",
+      "pop": "Populacja",
+      "time": "Czas produkcji"
+    },
+    "summary": {
+      "costTitle": "Ogólny koszt",
+      "woodReq": "Wymagane drewno:",
+      "clayReq": "Wymagana glina:",
+      "ironReq": "Wymagane żelazo:",
+      "totalPop": "Całkowita populacja:",
+      "queueTitle": "Czasy kolejki budynków",
+      "barracksTotal": "Razem koszar:",
+      "stableTotal": "Razem stajni:",
+      "workshopTotal": "Razem warsztatu:"
+    },
+    "time": {
+      "day": "d",
+      "hour": "g",
+      "minute": "m",
+      "second": "s",
+      "none": "-"
+    },
+    "units": {
+      "spear": "Włócznik", "sword": "Miecznik", "axe": "Topornik", "archer": "Łucznik",
+      "spy": "Zwiadowca", "lc": "Lekka kawaleria", "ma": "Konny łucznik", "hc": "Ciężka kawaleria",
+      "ram": "Taran", "cat": "Katapulta"
+    }
+  },
+  "mapGenerator": {
+    "title": "Zaawansowany generator mapy",
+    "worldUrl": "URL świata:",
+    "fetchBtn": "Pobierz / Odśwież dane",
+    "generateBtn": "🗺️ GENERUJ MAPĘ",
+    "status": {
+      "noUrl": "Wprowadź URL świata!",
+      "cached": "Załadowane z pamięci podręcznej! (Ostatnia aktualizacja: {{time}})",
+      "fetching": "Pobieranie danych z serwera...",
+      "success": "Dane pobrane pomyślnie!",
+      "error": "Błąd: {{msg}}"
+    },
+    "settings": {
+      "title": "Ustawienia mapy",
+      "zoom": "Powiększenie %",
+      "center": "Środek (X|Y)",
+      "markersOnly": "Tylko znaczniki",
+      "showAbandons": "Pokaż barbarzyńców",
+      "largerMarkers": "Większe znaczniki",
+      "bgColor": "Kolor tła",
+      "dullBg": "Przytłumione tło",
+      "showGrid": "Siatka kontynentów",
+      "showContinentNums": "Numery kontynentów"
+    },
+    "players": {
+      "title": "Znaczniki graczy",
+      "searchPlaceholder": "Szukaj i dodaj gracza...",
+      "points": "Punkty",
+      "selectTop25": "Wybierz Top 25",
+      "selectTop50": "Wybierz Top 50",
+      "clearSelection": "Wyczyść wybór",
+      "noPlayers": "Nie wybrano jeszcze graczy.",
+      "deleteBtn": "Usuń"
+    },
+    "tribes": {
+      "title": "Znaczniki plemion",
+      "searchPlaceholder": "Szukaj plemienia (Nazwa lub Tag)...",
+      "selectAll": "Wybierz wszystkie",
+      "clearSelection": "Wyczyść wybór",
+      "selectTop25": "Wybierz tylko Top 25",
+      "noData": "Nie pobrano jeszcze danych.",
+      "deleteBtn": "Usuń"
+    }
+  }
+}

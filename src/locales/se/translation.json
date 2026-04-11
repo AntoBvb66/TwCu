@@ -1,0 +1,860 @@
+{
+  "menu": {
+    "title": "TW Cobre",
+    "stats": "Direktstatistik",
+    "visitsTitle": "Totala Besökare",
+    "mapsTitle": "Genererade Kartor",
+    "opsTitle": "Planerade Operationer",
+    "simsTitle": "Körda Simuleringar",
+    "visits": "Besök",
+    "maps": "Kartor",
+    "developer": "Utvecklare",
+    "items": {
+      "buildingTimes": "Byggnadstidsräknare",
+      "mapAnalysis": "Kontinent- och kartanalys",
+      "mapGenerator": "Kartgenerator",
+      "productionData": "Produktionsräknare",
+      "coinMinter": "Guldmyntplanerare",
+      "buildingPlanner": "Byggplaner (Kö)",
+      "unitCalculator": "Truppproduktionsräknare",
+      "churchPlanner": "Kyrkoplanerare",
+      "opPlanner": "Individuell Operationsplanerare",
+      "clanOp": "Stammoperationsplanerare",
+      "clanTroop": "Stammoperationsplanerare (Avancerad)",
+      "fastSupport": "Snabb Stödplanering",
+      "scavengingPlanner": "Plundringstidsräknare"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Välkommen till TW Cobre",
+      "subtitle": "Seger är gömd i detaljerna och felfri planering. Spara tid på din Tribal Wars-resa och utarbeta strategiska planer som leder din stam till seger. Välj ett verktyg för att komma igång."
+    },
+    "tools": {
+      "opPlanner": { "title": "Personlig Operationsplanerare", "desc": "Matcha käll- och målbyar för att förbereda en felfri operationsmall (BBCode)." },
+      "buildingPlanner": { "title": "Byggplaner", "desc": "Designa din bys byggplan steg för steg med avancerad kösimulerare." },
+      "unitCalculator": { "title": "Truppproduktionsräknare", "desc": "Beräkna enhetersproduceringstider för Baracker, Stall och Verkstad, inklusive bonusar." },
+      "mapGenerator": { "title": "Kartgenerator", "desc": "Generera uppdaterade, färgade dynamiska världskartor för stammforum." },
+      "mapAnalysis": { "title": "Kontinentanalys", "desc": "Analysera stam- och spelare-kontinentkontroll på världskartan." },
+      "productionData": { "title": "Produktionsräknare", "desc": "Optimera gruvetproduktionshastigheter, lagringskapacitet och fylltider." },
+      "coinMinter": { "title": "Guldmyntplanerare", "desc": "Beräkna den mest idealiska byn för prägling av guldmynt." },
+      "churchPlanner": { "title": "Kyrkoplanerare", "desc": "Optimera dina kyrkkoverageområden på kartan med en populationssparande algoritm." },
+      "buildingTimes": { "title": "Byggnadstidsräknare", "desc": "Beräkna och jämför byggnadsbyggtider på olika nivåer ned till sekunden." },
+      "clanOp": { "title": "Stammoperationsplanerare", "desc": "Analysera alla stammbyar och gör smarta tilldelningar. Distribuera personaliserade BBCode-order till medlemmar med kartunderstödd stabsintelligens." },
+      "clanTroop": { "title": "Stammoperationsplanerare (Med Trupper)", "desc": "Analysera alla stammtrupper och gör smarta tilldelningar. Distribuera personaliserade BBCode-order till medlemmar med kartunderstödd stabsintelligens." },
+      "fastSupport": { "title": "Snabb Stödfinnare", "desc": "Skapa en stödbegäran för att få snabb support." },
+      "scavengingPlanner": { "title": "Plundringstidsräknare", "desc": "Jämför plundringstider i detalj." }
+    }
+  },
+  "footer": {
+    "text1": "Avancerade Planeringsverktyg för Tribal Wars",
+    "text2": "© 2026 TW Cobre | Utvecklare: ",
+    "links": {
+      "about": "Om",
+      "privacy": "Sekretess & GDPR"
+    }
+  },
+  "aboutPage": {
+    "title": "Om",
+    "p1": "Hej, jag är Anto Bvb 66.",
+    "p2": "TW Cobre är en elitlogistikpanel och kommandocental utvecklad oberoende för att bearbeta rådata från Stammars (Tribal Wars) spelare och hjälpa dem att uppnå strategisk överlägsenhet.",
+    "p3": "Från operationsplanering till rengöringsanalys är alla moduler designade för att lösa beräkningar som skulle ta en spelare timmar på sekunder. Seger är gömd i detaljerna!"
+  ,"contactTitle": "Felrapport & Kontakt",
+    "contactDesc": "Du kan rapportera fel, brister eller utvecklingsförslag du stöter på på vår webbplats direkt till mig via e-post.",
+    "emailButton": "Skicka E-post"
+  },
+  "privacyPage": {
+    "title": "Sekretesspolicy och KVKK",
+    "p1": "TW Cobre respekterar användarsekretess på högsta nivå. I enlighet med dataskyddslagar (GDPR) och internationella standarder är vår databehandlingspolicy följande:",
+    "items": {
+      "i1": "Kontosäkerhet: TW Cobre ber ALDRIG om, lagrar eller är värd för ditt Tribal Wars-kontolösenord, e-post eller personlig sessionsinformation på sina servrar.",
+      "i2": "Lokal lagring: Dina inställningar (världshastighet, truppantal, byskoordinater, etc.) lagras endast i din egen enhets webbläsare (Local Storage / Session Storage) så de går inte förlorade när du uppdaterar sidan.",
+      "i3": "Extern datahämtning: Kart- och analysmodulerna bearbetar allmän världsdata som offentligt tillhandahålls av Tribal Wars i realtid. Denna operation sker en gång per timme. I enlighet med spelets regler innehåller denna data endast allmän bys- och spelarinformation och inkluderar inte dina personliga data.",
+      "i4": "Statistik: Besöks- och kartgenereringsräknare på vår webbplats är endast numerisk data; de matchas inte med din IP-adress eller identitet."
+    },
+    "p2": "Genom att använda TW Cobre godkänner du att dina data behandlas säkert på din enhet och att din sekretess är skyddad."
+  },
+  "buildingPlanner": {
+    "title": "🏗️ TW Byggplaner (Kösimulerare)",
+    "worldSpeed": "Världshastighet:",
+    "mineSpeed": "Resursproduktionsfaktor:",
+    "btn": {
+      "import": "📥 Ladda Byggkö",
+      "export": "📤 Exportera Byggkö",
+      "clear": "🗑️ Rensa",
+      "addQueue": "Ladda",
+      "copyBoard": "Kopiera till Urklipp",
+      "close": "Stäng",
+      "delete": "Radera"
+    },
+    "modal": {
+      "importTitle": "📥 Klistra in Byggkön Kopierad från Spelet",
+      "exportTitle": "📤 Din Köutmatning (Du kan kopiera)",
+      "importPlaceholder": "Huvudkontor +1 (Nivå 1)\n10 poäng\n...",
+      "success": "✅ Framgång! {{count}} byggnader tillagda i kön.",
+      "error": "❌ Ingen giltig mall hittad. Kontrollera ditt kopierade text.",
+      "copied": "Kopierat!",
+      "exportPrefix": "Byggkö",
+      "levelLabel": "Nivå",
+      "pointsLabel": "Poäng"
+    },
+    "levelsTitle": "🏠 Startbyggnadsnivåer (Dölj / Visa)",
+    "analysis": {
+      "title": "⏳ Köanalys och Väntetider (Visa/Dölj)",
+      "withWait": "⏳ Tid med resursväntan:",
+      "withoutWait": "⚡ Tid utan resursväntan:",
+      "bottleneckTitle": "🚨 Steg där kön bromsar upp:",
+      "wood": "Trä",
+      "clay": "Lera",
+      "iron": "Järn",
+      "order": "Ordning",
+      "level": "Nivå",
+      "waitingFor": "Väntar",
+      "waitingSuffix": "på resurser.",
+      "missing": "Saknade mängder",
+      "perfect": "🎉 Bra! Det finns ingen resursväntetid i denna kö. Konstruktionerna kommer att fortsätta utan avbrott."
+    },
+    "summary": {
+      "title": "Kösammanfattning (Klicka Byggnader för att Lägga Till)",
+      "max": "Vid Maximal Nivå",
+      "add": "Lägg till i Kö"
+    },
+    "columnsToggle": "👁️ Dölj / Visa Tabellkolumner",
+    "columns": {
+      "order": "Ordning",
+      "expectedWait": "Förväntad Väntan",
+      "building": "Byggnad",
+      "level": "Nivå",
+      "buildTime": "Byggtid",
+      "startTime": "Starttid",
+      "endTime": "Sluttid",
+      "points": "Poäng",
+      "cost": "Kostnad (Trä/Lera/Järn)",
+      "resWait": "Resursväntid",
+      "currentStorage": "Aktuell Lagring",
+      "hourlyProd": "Timlöst Produktion",
+      "pop": "Befolkning",
+      "storage": "Lagring",
+      "desc": "Beskrivning",
+      "action": "Åtgärd"
+    },
+    "status": {
+      "storageFull": "∞ (Lagring Full)",
+      "storageLimit": "Otillräcklig Lagring!",
+      "requirement": "Krav",
+      "waitingRes": "Väntar på Resurser.",
+      "farmLimit": "Otillräcklig Gård!",
+      "maxLevel": "Maxnivå!"
+    },
+    "fastAdd": {
+      "placeholder": "Skriv eller välj...",
+      "modeActive": "Tangentbordsläge Aktivt:",
+      "info": "Du kan snabbt lägga till genom att skriva byggnadnamnet och trycka Enter.",
+      "dragTitle": "Dra för att ändra ordning"
+    },
+    "daysShort": "d",
+    "buildings": {
+      "hq": "Huvudkontor",
+      "barracks": "Baracker",
+      "stable": "Stall",
+      "workshop": "Verkstad",
+      "first_church": "Första Kyrka",
+      "church": "Kyrka",
+      "watchtower": "Vakttorn",
+      "academy": "Akademi",
+      "smithy": "Smedja",
+      "rally": "Samlingsplats",
+      "statue": "Staty",
+      "market": "Marknad",
+      "wood": "Trälager",
+      "clay": "Lerabrud",
+      "iron": "Järngruva",
+      "farm": "Gård",
+      "ware": "Magasin",
+      "hiding": "Gömstal",
+      "wall": "Vägg"
+    }
+  },
+  "buildingTimes": {
+    "title": "⏱️ Jämförelse av Byggtider",
+    "worldSpeed": "Världshastighet:",
+    "panel1": "Plan A (Referens)",
+    "panel2": "Plan B (Jämförelse)",
+    "hqLevel": "Huvudkontor Nivå:",
+    "buildingToUpgrade": "Byggnad att Uppgradera:",
+    "currentLevel": "Aktuell Nivå:",
+    "targetLevel": "Målnivå:",
+    "totalTime": "Total Tid:",
+    "comparisonResult": "⚡ Jämförelseresultat:",
+    "panel2Faster": "Plan B avslutas {{time}} snabbare än Plan A!",
+    "panel1Faster": "Plan A avslutas {{time}} snabbare än Plan B!",
+    "tableTitle": "📊 Tabell över Alla Byggnadsniväers Tider",
+    "tableHqLevel": "Tabelll HQ Nivå:",
+    "level": "Nivå",
+    "dragTitle": "Dra för att ändra position",
+    "tip": "Tips: Du kan dra och släppa rubriker (t.ex. 'Baracker') åt vänster eller höger för att ändra kolumnordning.",
+    "time": {
+      "day": "d",
+      "hour": "tim",
+      "minute": "min",
+      "second": "sek",
+      "zero": "0 sek"
+    },
+    "buildings": [
+      "Huvudkontor (HQ)", "Baracker", "Stall", "Verkstad", "Första Kyrka", "Kyrka",
+      "Vakttorn", "Akademi", "Smedja", "Samlingsplats", "Staty", "Marknad",
+      "Trälager", "Lerabrud", "Järngruva", "Gård", "Magasin", "Gömstal",
+      "Adelsman", "Guldmynt", "Vägg"
+    ]
+  },
+  "scavenging": {
+    "title": "Plundringsräknare",
+    "settings": {
+      "title": "🌍 Värld och Produktionsinställningar",
+      "worldSpeed": "Världshastighet:",
+      "mineSpeed": "Resursproduktionsfaktor:",
+      "woodLevel": "Trälagernivå:",
+      "clayLevel": "Lerabrundsnivå:",
+      "ironLevel": "Järngrunans Nivå:",
+      "worldConstant": "Världskonstant:",
+      "resHourly": "Resursproduktion:"
+    },
+    "production": {
+      "perMin": "/ min",
+      "perHour": "/ timme",
+      "perDay": "/ dag"
+    },
+    "troops": {
+      "title": "⚔️ Truppantal och Flagga",
+      "carryFlag": "Transportkapacitet Flagga (%):",
+      "resFlag": "Resursproduktion Flagga (%):",
+      "totalCap": "Plundringkapacitet (Ingen Flagga):",
+      "totalCapFlag": "Total Kapacitet (Transportflagga):",
+      "totalRes": "Resursproduktion (Ingen Flagga):",
+      "totalResFlag": "Resursproduktion (Resursflagga):"
+    },
+    "results": {
+      "title": "🏆 Mest Lönsam Strategi Ranking",
+      "chartTitle": "📊 Strategijämförelse Diagram (Top 10)",
+      "totalDaily": "Total Daglig",
+      "scavenge": "Plundring",
+      "resource": "Produktion",
+      "perMin": "min",
+      "perHour": "timme",
+      "perDay": "dag",
+      "maxTrip": "Längsta Resenär",
+      "dayShort": "/d",
+      "hourShort": "/h",
+      "minShort": "/m",
+      "modes": {
+        "eqTime": "Lika Tid",
+        "eqCap": "Lika Kapacitet"
+      },
+      "flags": {
+        "none": "Ingen Flagga",
+        "carry": "Transportflagga",
+        "res": "Resursflagga"
+      },
+      "options": {
+        "c1234": "1-2-3-4 Olåst",
+        "c123": "1-2-3 Olåst",
+        "c234": "2-3-4 Olåst",
+        "c12": "1-2 Olåst",
+        "c23": "2-3 Olåst"
+      }
+    },
+    "reference": {
+      "title": "📈 Brytpunkt (Kapacitetsreferenstabell)",
+      "info": "Inga trupper inmatade. Tabellen nedan visar uppskattat dagligt byte för Lika Tid vs Lika Kapacitet strategier vid olika kapacitetsnivåer (förutsatt 1-2-3-4 olåst).",
+      "cap": "Exempelkapacitet",
+      "eqTimeDaily": "Lika Tid (Daglig)",
+      "eqCapDaily": "Lika Kap. (Daglig)",
+      "winner": "Fördelaktig Taktik"
+    },
+    "chart": {
+      "title": "📈 Daglig Byteskurva efter Kapacitet (Lika Tid & Ingen Flagga)",
+      "worldConstantInfo": "Genererad baserat på Världskonstant ({{constant}}).",
+      "unlocked": "Olåst",
+      "infoTitle": "💡 Kritiska Vändpunkter (Brytpunkt)",
+      "be1": "🔸 Efter {{cap}} Kapacitet: 1-2-3-4 taktik övertar 2-3-4 och blir mer lönsam.",
+      "be2": "🔸 Efter {{cap}} Kapacitet: 1-2-3 taktik övertar 2-3."
+    }
+  },
+  "churchPlanner": {
+    "title": "⛪ Optimal Kyrkoplanerare",
+    "dataInput": "Datainmatning",
+    "allVillagesCoords": "Alla Dina Byskoordinater:",
+    "villagesPlaceholder": "510|621, 510|622 (Extraherar från text också)",
+    "existingChurchesLabel": "Befintliga Kyrkor (Valfritt):",
+    "existingChurchesPlaceholder": "t.ex., 506|496 3 (X|Y Nivå)",
+    "includeFirstChurch": "Inkludera Första Kyrka?",
+    "calculateBtn": "⚙️ Beräkna Optimal Plan",
+    "alertNoVillage": "Vänligen ange minst en byskoordinat!",
+    "resultsTitle": "Resultat ({{count}} Kyrkor)",
+    "existing": "Befintlig",
+    "firstChurch": "Första Kyrka",
+    "normalChurch": "Normal Kyrka",
+    "lvl": "Nivå",
+    "coversVillages": "Täckta Byar",
+    "warningUncovered": "⚠️ Varning: {{count}} byar är utan skydd.",
+    "coveredVillage": "Täckt By",
+    "uncoveredVillage": "Utan Skydd By"
+  },
+  "clanOp": {
+    "title": "🛡️ Stammoperationsplanerare",
+    "step1": {
+      "title": "1. Hitta Din Stams Byar",
+      "clearAll": "🧹 Rensa All Data",
+      "worldUrl": "Värld-URL",
+      "clanTag": "Stammtag",
+      "runIntel": "Hitta Byar",
+      "status": {
+        "gathering": "Samlar information: Skannar alla världsspelare och byar...",
+        "notFound": "❌ Stam inte hittad! Kontrollera taggen.",
+        "success": "✅ Framgång! Stamm-ID: {{clanId}} | Medlemmar: {{memberCount}} | Totala Byar: {{villageCount}}",
+        "error": "❌ Fel: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Målbyar",
+      "snobLimit": "Adelsmans Avståndsgräns:",
+      "placeholder": "Klistra in målkoordinater här...",
+      "foundTargets": "Mål Hittade: {{count}}"
+    },
+    "step3": {
+      "title": "3. Smart Tilldelningscenter & Karta",
+      "arrivalTime": "Målens Ankomsttid:",
+      "targetsTitle": "Dina Mål (Klicka för att Välja)",
+      "points": "Poäng",
+      "p": "P",
+      "distance": "Avstånd:"
+    },
+    "manualAssign": {
+      "title": "👤 Fri Spelartilldelning",
+      "selectPlayer": "-- Välj Spelare --",
+      "assignBtn": "Tilldela",
+      "info": "*Lägger bara till en uppgift med ankomsttid till det valda målet ovan. Spelarens byar kommer också att visas i blått på kartan."
+    },
+    "tabs": {
+      "closest10": "10 Närmaste Byar",
+      "furthest10": "10 Fjärmaste Byar",
+      "selectPlayer": "Välj Spelare"
+    },
+    "suggestions": {
+      "noVillages": "Inga byar att visa.",
+      "kami": "Skicka Nuke",
+      "snob": "Skicka Adelsman",
+      "fake": "Skicka Fejk",
+      "show": "Gör Synlig",
+      "hide": "Dölj"
+    },
+    "queue": {
+      "title": "Operationskö ({{count}} Order)",
+      "clear": "Rensa Hela Kön",
+      "delete": "Radera",
+      "enemy": "Fiende (Mål)"
+    },
+    "bbcode": {
+      "title": "📋 BBCode Mall för Anteckningar",
+      "copyAll": "Kopiera Allt",
+      "selectCols": "Välj Kolumner:",
+      "ordersFor": "--- ORDER FÖR {{player}} ---",
+      "attack": "Anfall",
+      "viewTarget": "Visa Mål",
+      "unknown": "OKÄND"
+    },
+    "alerts": {
+      "confirmClear": "Alla planer, mål och dolda byar (förutom Steg 1 Värld/Stam-info) kommer att raderas. Är du säker?",
+      "cleared": "🧹 All data rensad!",
+      "enterTribeTag": "Vänligen ange Stammtag!",
+      "selectTarget": "Vänligen välj ett mål.",
+      "selectTargetLeft": "Vänligen välj ett mål från listan till vänster.",
+      "selectPlayer": "Vänligen välj en spelare från listan.",
+      "snobLimitExceeded": "⚠️ Varning: Det valda avståndet ({{dist}}) överskrider din inställda adelsmans gräns ({{limit}})!",
+      "orderAdded": "✅ Order Tilllagd!",
+      "manualAdded": "✅ Fri Tilldelning Tilllagd!",
+      "confirmClearQueue": "Är du säker på att du vill rensa hela kön?",
+      "queueCleared": "🗑️ Kö Rensad!",
+      "copied": "Kopierat!"
+    },
+    "columns": {
+      "no": "Nr",
+      "player": "Spelare",
+      "source": "Källa",
+      "target": "Mål",
+      "departure": "Avgångstid",
+      "arrival": "Ankomsttid",
+      "unit": "Enhet",
+      "distance": "Avstånd",
+      "travelTime": "Restid",
+      "attackLink": "Åtgärdslänk"
+    },
+    "units": {
+      "spear": "Spjutman", "sword": "Svärdsman", "axe": "Yxman", "spy": "Spion",
+      "light": "Lätt kavalleri", "heavy": "Tungt kavalleri", "ram": "Ram", "catapult": "Katapult",
+      "knight": "Paladin", "snob": "Adelsman", "archer": "Bågskytt", "marcher": "Ridarskyttar", "militia": "Milits"
+    },
+    "shortUnits": {
+      "ram": "Nuke",
+      "snob": "Adelsman",
+      "catapult": "Fejk",
+      "spy": "Spion"
+    }
+  },
+  "clanTroop": {
+    "title": "🦅 Stammoperationsplanerare (Avancerad)",
+    "step1": {
+      "title": "1. Hitta Din Stams Byar",
+      "clear": "🧹 Rensa Data",
+      "worldUrl": "Värld-URL",
+      "clanTag": "Stammtag",
+      "run": "Hitta Byar",
+      "gathering": "Samlar information...",
+      "notFound": "❌ Stam inte hittad!",
+      "success": "✅ Framgång! Stamm-ID: {{clanId}} | Totala Byar: {{villageCount}}",
+      "error": "❌ Fel: {{msg}}"
+    },
+    "step2": {
+      "title": "2. Målbyar",
+      "snobLimit": "Adelsmans Avståndsgräns:",
+      "placeholder": "Klistra in målkoordinater här..."
+    },
+    "stepTroop": {
+      "title": "🛡️ Ange Truppdata (Kopiera/Klistra)",
+      "placeholder": "Klistra in truppdata från truppöversikt (tabell) eller CSV-format (475|494,48,0,0...)...",
+      "detected": "Intelligens Detekterad: {{count}} Byar",
+      "summaryTitle": "📊 Sammanfattningar av Spelarprofiler",
+      "idle": " (Inaktiv: {{count}})",
+      "depleted": " (Slut)"
+    },
+    "step3": {
+      "title": "📍 Smart Tilldelningscenter & Karta",
+      "arrivalTime": "Målens Ankomsttid:",
+      "targetsTitle": "Dina Mål (Klicka för att Välja)",
+      "distance": "Avstånd:"
+    },
+    "tabs": {
+      "closest": "10 Närmaste byar",
+      "furthest": "10 Fjärmaste byar",
+      "player": "Välj Spelare",
+      "selectPlayer": "-- Välj Spelare --"
+    },
+    "suggestions": {
+      "noVillages": "Inga byar hittade.",
+      "kami": "Skicka Nuke",
+      "snob": "Skicka Adelsman",
+      "fake": "Skicka Fejk",
+      "show": "Gör Synlig",
+      "hide": "Dölj",
+      "noIntel": " (Ingen Intelligens)"
+    },
+    "queue": {
+      "title": "Operationskö ({{count}} Order)",
+      "clear": "Rensa Hela Kön",
+      "delete": "Radera"
+    },
+    "bbcode": {
+      "title": "📋 BBCode Mall för Anteckningar",
+      "copyAll": "Kopiera Allt",
+      "ordersFor": "--- ORDER FÖR {{player}} ---",
+      "attack": "Anfall",
+      "unknown": "OKÄND"
+    },
+    "alerts": {
+      "confirmClear": "Alla planer inklusive intelligens kommer att raderas. Är du säker?",
+      "cleared": "🧹 Data rensad!",
+      "enterTribeTag": "Vänligen ange Stammtag!",
+      "selectTarget": "Vänligen välj ett mål.",
+      "snobLimitExceeded": "⚠️ Varning: Adelsmans gräns ({{limit}}) överskriden! Lägg till ändå?",
+      "orderAdded": "✅ Order Tilllagd!",
+      "confirmClearQueue": "Är du säker på att du vill rensa hela kön?",
+      "queueCleared": "🗑️ Kö Rensad!",
+      "copied": "Kopierat!"
+    },
+    "columns": {
+      "no": "Nr",
+      "player": "Spelare",
+      "source": "Källa",
+      "target": "Mål",
+      "departure": "Avgång",
+      "arrival": "Ankomst",
+      "unit": "Enhet",
+      "distance": "Avstånd",
+      "travelTime": "Restid",
+      "attackLink": "Åtgärd"
+    },
+    "units": {
+      "spear": "Spjut", "sword": "Svärd", "axe": "Yxa", "spy": "Spion",
+      "light": "Lätt", "heavy": "Tungt", "ram": "Ram", "catapult": "Kat",
+      "knight": "Paladin", "snob": "Adelsman"
+    },
+    "profiles": {
+      "quarter": "Fjärdedel",
+      "half": "Halv",
+      "threeQuarters": "Tre-fjärdedel",
+      "full": "Full",
+      "kami": "Nuke",
+      "sav": "Försvaret",
+      "empty": "Ny/Tom"
+    }
+  },
+  "coinMinter": {
+    "title": "💰 Guldmynt (Hub) Planerare",
+    "dataInput": "Datainmatning",
+    "allVillagesCoords": "Alla Dina Byskoordinater:",
+    "villagesPlaceholder": "510|621, 510|622 (Extraherar från text också)",
+    "hubCountLabel": "Hur Många Hub Byar?",
+    "calculateBtn": "⚙️ Hitta Bästa Hubs",
+    "resultsTitle": "🎯 Planerade Hubs ({{count}})",
+    "hubCardHeader": "Hub:",
+    "hubCardSub": "Kommer att Ta Emot Resurser från {{count}} Byar",
+    "hubCardBody": "Byar som Skickar Resurser:",
+    "onlySelf": "Bara sig själv...",
+    "mapInfoTitle": "Kartinfo:",
+    "mapInfoCenter": "Stor Vit Prick:",
+    "mapInfoCenterDesc": "Hub Byar (Präglar Mynt)",
+    "mapInfoSender": "Färgade Prickar:",
+    "mapInfoSenderDesc": "Byar som Skickar Resurser",
+    "mapInfoLines": "Linjer:",
+    "mapInfoLinesDesc": "Resursflödesriktning",
+    "alerts": {
+      "noVillage": "Vänligen ange minst en byskoordinat!",
+      "invalidHubCount": "Hub-antal kan inte överstiga byantal och måste vara större än 0."
+    }
+  },
+  "fastSupport": {
+    "title": "🛡️ Snabb Stödplaneringscenter",
+    "step1": {
+      "title": "1. Hitta Din Stams Byar",
+      "worldUrl": "Värld-URL",
+      "clanTag": "Stammtag",
+      "updateBtn": "Uppdatera Byar",
+      "status": {
+        "scanning": "Skannar stammbyar...",
+        "notFound": "❌ Stam inte hittad! Kontrollera förkortningen.",
+        "success": "✅ Framgång! Totala Stödbyar: {{count}}",
+        "error": "❌ Fel: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Målby att Försvara & Tid",
+      "targetCoord": "Målkoordinat",
+      "targetPlaceholder": "t.ex., 564|554",
+      "arrivalTime": "Målens Ankomsttid",
+      "slowestUnit": "Långsammaste Enhetshastighet"
+    },
+    "results": {
+      "title": "Tillgängligt Stöd ({{count}})",
+      "allTribe": "Hela Stammen",
+      "noVillages": "Inga byar hittades som kan nå detta mål vid den valda tiden!",
+      "mapTarget": "🛡️ Mål"
+    },
+    "bbcode": {
+      "title": "📋 Forumuppmaning (BBCode)",
+      "copyAll": "Kopiera Allt",
+      "target": "🎯 Mål:",
+      "arrivalTime": "⏱️ Ankomsttid:",
+      "unitSpeed": "🛡️ Enhetshastighet:",
+      "sendSupport": "Skicka Stöd",
+      "supportLink": "🛡️ Skicka Stöd"
+    },
+    "alerts": {
+      "enterTribeTag": "Vänligen ange Stammtag!",
+      "copied": "Kopierat!"
+    },
+    "columns": {
+      "player": "Spelare",
+      "source": "Källa",
+      "distance": "Avstånd",
+      "time": "Tid",
+      "departure": "Avgångstid"
+    },
+    "units": {
+      "spear": "Spjut", "sword": "Svärd", "archer": "Bågskytt", "spy": "Spion", "heavy": "Tungt", "catapult": "Katapult", "knight": "Paladin"
+    }
+  },
+  "mapAnalysis": {
+    "title": "Kontinent- & Kartanalys",
+    "bypassActive": "🕵️ Kringgå Aktivt",
+    "bypassAlertOn": "🕵️ HEMLIGT LÄGE AKTIVT: 1-timmars väntetid kringåtgången! Ny data hämtas varje gång.",
+    "bypassAlertOff": "🔒 HEMLIGT LÄGE INAKTIVT: 1-timmes cacheskydd aktiverat.",
+    "enterWorldUrl": "Vänligen ange en värld-URL!",
+    "fetchError": "Fel vid hämtning av data. Se till att länken är korrekt.\nFel: {{error}}",
+    "clearConfirm": "All data, arkiv och teleporteringshistorik kommer att raderas. Är du säker?",
+    "status": {
+      "waiting": "Väntar på data...",
+      "cached": "Laddad från cache! (Senaste data: {{time}})",
+      "downloading": "Laddar ned data från server... (Detta kan ta 10-15 sekunder)",
+      "analyzing": "Nedladdning slutförd, analyserar...",
+      "empty": "Ingen data hittad att bearbeta!",
+      "success": "FRAMGÅNG: {{villages}} byar, {{players}} spelare inladdade.",
+      "cleared": "Lagringen helt renssad."
+    },
+    "timeMsg": {
+      "cached": "⏳ Visar cachad data. Senaste hämtning: {{time}}",
+      "new": "⏳ Ny data hämtad. Vänta på nästa hämtning för att detektera teleporteringar...",
+      "diff": "Tidsintervall: {{hours}} timmar {{mins}} minuter har gått sedan tidigare analys."
+    },
+    "sections": {
+      "autoFetch": "1. Automatisk Datahämtning (Rekommenderas)",
+      "worldUrlLabel": "Värld-URL (t.ex., https://en136.tribalwars.net):",
+      "downloadBtn": "🌍 Ladda ned och Bearbeta Data",
+      "archive": "2. Dataarkiv",
+      "selectArchive": "-- Välj Arkiv --",
+      "loadBtn": "📂 Ladda",
+      "saveBtn": "💾 Arkivera Nuvarande",
+      "manual": "3. Manuell Datainmatning (Om Fel)",
+      "processManualBtn": "⚙️ Bearbeta Manuell Data",
+      "clearStorageBtn": "🗑️ Återställ Lagring"
+    },
+    "teleports": {
+      "title": "🚀 Teleporteringsdetektioner ({{count}})",
+      "showAllBtn": "🗺️ Visa Alla på Karta",
+      "continentTitle": "Teleporteringar till Kontinent {{cont}} ({{count}} spelare)",
+      "old": "Gamla:",
+      "new": "Nya:",
+      "showBtn": "📍 Visa",
+      "none": "Inga teleporteringar detekterade eller andra hämtningen har inte gjorts ännu.",
+      "info": "* Systemet samlar in data på första analysen. I senare analyser detekterar det byar som ändrat koordinater och fortsätter att lista dem historiskt tills de rensas.",
+      "datePrefix": "🗓️"
+    },
+    "analysis": {
+      "title": "🌍 Kontinentanalys",
+      "player": "Spelare:",
+      "barbarian": "Barbar:",
+      "villages": "byar",
+      "noTribe": "Ingen Stam",
+      "farmRatio": "🎯 Barbarer per Spelare:"
+    },
+    "map": {
+      "title": "Kartvy",
+      "gray": "Grå:",
+      "oldPos": "Gammal Position",
+      "red": "Röd:",
+      "newPos": "Ny Position",
+      "closeBtn": "Stäng"
+    },
+    "barbarian": "Barbar"
+  },
+  "opPlanner": {
+    "title": "⚔️ Individuell Operationsplanerare",
+    "step1": {
+      "title": "1. Dataanslutning",
+      "clearData": "Rensa All Data",
+      "worldUrl": "Värld-URL:",
+      "playerName": "Ditt Spelarnamn:",
+      "fetchBtn": "Hämta / Uppdatera Data"
+    },
+    "step2": {
+      "title": "2. Dina Källbyar & Enhetval ({{count}})",
+      "info": "Du kan välja alla enheter som kommer att skickas från byn. Matchningsmotorn matar sig från här.",
+      "village": "By",
+      "unitSelection": "Enhetval (Flera kan väljas)"
+    },
+    "step3": {
+      "title": "3. Målbyar",
+      "maxSnobDist": "Max Adelsmans Avståndsgräns:",
+      "placeholder": "Klistra in målkoordinater här (t.ex., 586|441, 587|442 inne i text bra)",
+      "detectedTargets": "Detekterade Mål: {{count}}",
+      "mapLegend": {
+        "target": "Mål",
+        "spearLight": "Spjut/Lätt",
+        "ramKami": "Ram/Nuke",
+        "snob": "Adelsman",
+        "spy": "Spion"
+      }
+    },
+    "step4": {
+      "title": "4. Planering & Tidsmatchningsmotor",
+      "modeArrival": "Jag Vet Målens Ankomsttid",
+      "modeDeparture": "Jag Vet Bynens Avgångstid",
+      "dateTime": "Datum & Tid:",
+      "sourceVillage": "Källby:",
+      "allSourcesUsed": "All Källor Använd",
+      "unitToSend": "Enhet att Skicka:",
+      "selectSourceFirst": "Välj Källa Först",
+      "noUnitsLeft": "Inga Enheter Kvar",
+      "target": "Mål:",
+      "calcAndAddBtn": "➕ BERÄKNA OCH LÄGG TILL"
+    },
+    "queue": {
+      "title": "Operationskö ({{count}} Order)",
+      "clearQueue": "Rensa Hela Kön",
+      "delete": "Radera"
+    },
+    "bbcode": {
+      "title": "📋 BBCode Mall för Anteckningar",
+      "copyAll": "Kopiera Allt",
+      "selectCols": "Välj Kolumner:",
+      "attack": "Anfall",
+      "unknown": "OKÄND"
+    },
+    "status": {
+      "cached": "Data laddad från cache. (Klick knappen 13 gånger för att tvinga uppdatering)",
+      "fetching": "Hämtar data från server... Vänta.",
+      "playerNotFound": "Spelare inte hittad! Se till att du skrev namnet rätt.",
+      "success": "Framgång! Spelare hittad och {{count}} byar listade.",
+      "error": "Fel: {{msg}}"
+    },
+    "alerts": {
+      "enterWorldUrl": "Vänligen ange en värld-URL!",
+      "enterPlayerName": "Vänligen ange ditt spelarnamn!",
+      "confirmClear": "Alla planer, källor och mål (förutom Steg 1) kommer att raderas. Är du säker?",
+      "selectMatch": "Vänligen välj Källa, Mål och Enhet för matchning.",
+      "snobLimitExceeded": "⚠️ Varning: Det valda avståndet ({{dist}} enheter) överskrider maximal adelsmans avståndsgräns ({{limit}})!",
+      "confirmClearQueue": "Är du säker på att du vill rensa hela kön?",
+      "copied": "Kopierat!"
+    },
+    "columns": {
+      "no": "Nr",
+      "source": "Källby",
+      "target": "Mål",
+      "departure": "Avgångstid",
+      "arrival": "Ankomsttid",
+      "unit": "Enhet",
+      "distance": "Avstånd",
+      "travelTime": "Restid",
+      "attackLink": "Åtgärdslänk"
+    },
+    "units": {
+      "spear": "Spjutman", "sword": "Svärdsman", "axe": "Yxman", "spy": "Spion",
+      "light": "Lätt kavalleri", "heavy": "Tungt kavalleri", "ram": "Ram", "catapult": "Katapult",
+      "knight": "Paladin", "snob": "Adelsman", "archer": "Bågskytt", "marcher": "Ridarskyttar", "militia": "Milits"
+    }
+  },
+  "productionData": {
+    "title": "Produktionsplanerare",
+    "worldSpeed": "Världshastighet:",
+    "mineSpeed": "Resursproduktionsfaktor:",
+    "totalFactor": "Total Multiplikator: {{speed}}x",
+    "empireProdTitle": "👑 Sammanfattande Produktion ({{count}} Byar)",
+    "hourlyProd": "⏳ Total Timlös Produktion",
+    "dailyProd": "📅 Total Daglig Produktion",
+    "resources": {
+      "wood": "Trä:",
+      "clay": "Lera:",
+      "iron": "Järn:"
+    },
+    "villageManagement": "Byhantering",
+    "resetBtn": "Återställ",
+    "newVillageBtn": "+ Ny By",
+    "villageNamePrefix": "By",
+    "bonus": {
+      "label": "Bonus:",
+      "none": "Ingen",
+      "all": "All Resurser",
+      "wood": "Bara Trä",
+      "clay": "Bara Lera",
+      "iron": "Bara Järn"
+    },
+    "lvl": "Nivå",
+    "clearConfirm": "Vill du återställa alla byar?",
+    "referenceTable": {
+      "title": "📚 Nivåinformationstabell (0% Bonus Baserat)",
+      "hide": "Dölj",
+      "show": "Visa",
+      "cols": {
+        "level": "Nivå",
+        "hourly": "Timlös Prod ({{speed}}x)",
+        "storage": "Lagringskapacitet",
+        "farm": "Gårdskapacitet"
+      },
+      "perHour": "/ tim"
+    }
+  },
+  "unitCalculator": {
+    "title": "Truppproduktionsräknare",
+    "settings": {
+      "basic": "🌍 Grundläggande Inställningar",
+      "worldSpeed": "Världshastighet:",
+      "barracksLevel": "Baracknivå (Max 25):",
+      "stableLevel": "Stallnivå (Max 20):",
+      "workshopLevel": "Verkstadnivå (Max 15):",
+      "speedBonus": "⚡ Hastighetsbonusar (%)",
+      "barracksBonus": "Barackföremålsbonus:",
+      "stableBonus": "Stallföremålsbonus:",
+      "workshopBonus": "Verkstadföremålsbonus:",
+      "flagRecruit": "Värvningsflagga:",
+      "costBonus": "💰 Kostnad & Extra (%)",
+      "massRecruit": "Massvärving Bonus:",
+      "costReduction": "Resursminskning (Kostnad):",
+      "resetBtn": "🗑️ Återställ Räknare"
+    },
+    "table": {
+      "unit": "Enhet",
+      "count": "Antal att Producera",
+      "wood": "Trä",
+      "clay": "Lera",
+      "iron": "Järn",
+      "pop": "Befolkning",
+      "time": "Produktionstid"
+    },
+    "summary": {
+      "costTitle": "Sammanfattande Kostnad",
+      "woodReq": "Trä Krävs:",
+      "clayReq": "Lera Krävs:",
+      "ironReq": "Järn Krävs:",
+      "totalPop": "Total Befolkning:",
+      "queueTitle": "Byggkötider",
+      "barracksTotal": "Baracker Totalt:",
+      "stableTotal": "Stall Totalt:",
+      "workshopTotal": "Verkstad Totalt:"
+    },
+    "time": {
+      "day": "d",
+      "hour": "h",
+      "minute": "m",
+      "second": "s",
+      "none": "-"
+    },
+    "units": {
+      "spear": "Spjutman", "sword": "Svärdsman", "axe": "Yxman", "archer": "Bågskytt",
+      "spy": "Spion", "lc": "Lätt kavalleri", "ma": "Ridarskyttar", "hc": "Tungt kavalleri",
+      "ram": "Ram", "cat": "Katapult"
+    }
+  },
+  "mapGenerator": {
+    "title": "Avancerad Kartgenerator",
+    "worldUrl": "Värld-URL:",
+    "fetchBtn": "Hämta / Uppdatera Data",
+    "generateBtn": "🗺️ GENERERA KARTA",
+    "status": {
+      "noUrl": "Vänligen ange en värld-URL!",
+      "cached": "Laddad från cache! (Senaste uppdatering: {{time}})",
+      "fetching": "Hämtar data från server...",
+      "success": "Data hämtad framgångsrikt!",
+      "error": "Fel: {{msg}}"
+    },
+    "settings": {
+      "title": "Kartinställningar",
+      "zoom": "Zoom %",
+      "center": "Center (X|Y)",
+      "markersOnly": "Bara Markörer",
+      "showAbandons": "Visa Barbarer",
+      "largerMarkers": "Större Markörer",
+      "bgColor": "Bakgrundsfärg",
+      "dullBg": "Matt Bakgrund",
+      "showGrid": "Kontinentgrid",
+      "showContinentNums": "Kontinentnummer"
+    },
+    "players": {
+      "title": "Spelarmarkörer",
+      "searchPlaceholder": "Sök och Lägg Till Spelare...",
+      "points": "Poäng",
+      "selectTop25": "Välj Top 25",
+      "selectTop50": "Välj Top 50",
+      "clearSelection": "Rensa Val",
+      "noPlayers": "Inga spelare valda ännu.",
+      "deleteBtn": "Radera"
+    },
+    "tribes": {
+      "title": "Stammmarkörer",
+      "searchPlaceholder": "Sök Stamm (Namn eller Tag)...",
+      "selectAll": "Välj Alla",
+      "clearSelection": "Rensa Val",
+      "selectTop25": "Välj Bara Top 25",
+      "noData": "Ingen data hämtad ännu.",
+      "deleteBtn": "Radera"
+    }
+  }
+}

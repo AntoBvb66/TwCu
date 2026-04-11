@@ -1,0 +1,956 @@
+{
+  "menu": {
+    "title": "TW Cobre",
+    "stats": "Živé statistiky",
+    "visitsTitle": "Celkoví návštěvníci",
+    "mapsTitle": "Generované mapy",
+    "opsTitle": "Plánované operace",
+    "simsTitle": "Spuštěné simulace",
+    "visits": "Návštěvy",
+    "maps": "Mapy",
+    "developer": "Vývojář",
+    "items": {
+      "buildingTimes": "Kalkulačka časů budov",
+      "mapAnalysis": "Analýza kontinentu a mapy",
+      "mapGenerator": "Generátor map",
+      "productionData": "Kalkulačka produkce",
+      "coinMinter": "Plánovač zlatých mincí",
+      "buildingPlanner": "Plánovač budov (fronta)",
+      "unitCalculator": "Kalkulátor výroby jednotek",
+      "churchPlanner": "Plánovač kostelů",
+      "opPlanner": "Plánovač individuálních operací",
+      "clanOp": "Plánovač kmenových operací",
+      "clanTroop": "Plánovač kmenových operací (pokročilý)",
+      "fastSupport": "Plánování rychlé podpory",
+      "scavengingPlanner": "Kalkulačka časů plenění"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Vítejte v TW Cobre",
+      "subtitle": "Vítězství se skrývá v detailech a bezchybné taktice. Ušetřete čas na své cestě v Tribal Wars a vytvořte strategické plány, které přivedou váš kmen k vítězství. Vyberte nástroj a začněte."
+    },
+    "tools": {
+      "opPlanner": {
+        "title": "Osobní plánovač operací",
+        "desc": "Spojte výchozí a cílové vesnice a připravte bezchybnou šablonu operace (BBCode)."
+      },
+      "buildingPlanner": {
+        "title": "Plánovač budov",
+        "desc": "Navrhněte výstavbu vesnice krok za krokem pomocí pokročilé simulace fronty."
+      },
+      "unitCalculator": {
+        "title": "Kalkulačka výroby jednotek",
+        "desc": "Spočítejte časy výroby jednotek ve Kasárnách, Stájích a Dílne, včetně bonusů."
+      },
+      "mapGenerator": {
+        "title": "Generátor map",
+        "desc": "Vytvořte aktuální barevné dynamické mapy světa pro klanová fóra."
+      },
+      "mapAnalysis": {
+        "title": "Analýza kontinentu",
+        "desc": "Analyzujte dominanci klanů a hráčů na mapě světa."
+      },
+      "productionData": {
+        "title": "Kalkulačka produkce",
+        "desc": "Optimalizujte rychlosti produkce dolů, kapacity skladu a časy naplnění."
+      },
+      "coinMinter": {
+        "title": "Plánovač zlatých mincí",
+        "desc": "Spočítejte nejvhodnější vesnici pro ražbu zlatých mincí."
+      },
+      "churchPlanner": {
+        "title": "Plánovač kostelů",
+        "desc": "Optimalizujte pokrytí kostelů na mapě pomocí algoritmu šetřícího populaci."
+      },
+      "buildingTimes": {
+        "title": "Kalkulačka časů budov",
+        "desc": "Spočítejte a porovnejte časy stavby budov na různých úrovních až na sekundy."
+      },
+      "clanOp": {
+        "title": "Plánovač kmenových operací",
+        "desc": "Analyzujte všechny vesnice kmene a dělejte chytrá přiřazení. Rozesílejte členům personalizované BBCode rozkazy s mapovou podporou."
+      },
+      "clanTroop": {
+        "title": "Plánovač kmenových operací (s jednotkami)",
+        "desc": "Analyzujte všechny jednotky kmene a dělejte chytrá přiřazení. Rozesílejte členům personalizované BBCode rozkazy s mapovou podporou."
+      },
+      "fastSupport": {
+        "title": "Vyhledávač rychlé podpory",
+        "desc": "Vytvořte žádost o podporu a získejte rychlou podporu."
+      },
+      "scavengingPlanner": {
+        "title": "Kalkulačka časů plenění",
+        "desc": "Podrobně porovnejte časy plenění."
+      }
+    }
+  },
+  "footer": {
+    "text1": "Pokročilé plánovací nástroje pro Tribal Wars",
+    "text2": "© 2026 TW Cobre | Vývojář: ",
+    "links": {
+      "about": "O aplikaci",
+      "privacy": "Ochrana soukromí a GDPR"
+    }
+  },
+  "aboutPage": {
+    "title": "O aplikaci",
+    "p1": "Ahoj, jsem Anto Bvb 66.",
+    "p2": "TW Cobre je elitní taktický panel a velitelké centrum vyvinuté nezávisle pro zpracování surových dat hráčů Clans (Tribal Wars) a pomoc jim získat strategickou převahu.",
+    "p3": "Od plánování operací po analýzu úklidu jsou všechny moduly navrženy tak, aby vypočítaly úlohy, které by hráči zabraly hodiny, během sekund. Vítězství je skryto v detailech!",
+    "contactTitle": "Chybová hláška a kontakt",
+    "contactDesc": "Můžeš mi přímo poslat e-mail, když najdeš chybu, něco chybí nebo máš návrh na vylepšení.",
+    "emailButton": "Poslat e-mail"
+    },
+  "privacyPage": {
+    "title": "Zásady ochrany osobních údajů a KVKK",
+    "p1": "TW Cobre respektuje soukromí uživatelů na nejvyšší úrovni. V souladu se zákony na ochranu osobních údajů (GDPR) a mezinárodními standardy jsou naše zásady zpracování dat následující:",
+    "items": {
+      "i1": "Bezpečnost účtu: TW Cobre NIKDY nežádá, neukládá ani nehostuje vaše heslo k účtu Tribal Wars, e-mail ani osobní informace o relaci na svých serverech.",
+      "i2": "Lokální úložiště: Vaše nastavení (rychlost světa, počty jednotek, souřadnice vesnic atd.) jsou uložena pouze v prohlížeči vašeho zařízení (Local Storage / Session Storage), aby se při aktualizaci stránky neztratila.",
+      "i3": "Načítání externích dat: Moduly mapy a analýzy zpracovávají obecná světová data veřejně poskytovaná Tribal Wars v reálném čase. Tento proces probíhá jednou za hodinu. V souladu s pravidly hry tato data obsahují pouze obecné informace o vesnicích a hráčích a nezahrnují vaše osobní údaje.",
+      "i4": "Statistiky: Počítadla návštěvníků a generování map na našem webu jsou pouze číselná data; nejsou spojována s vaší IP adresou nebo identitou."
+    },
+    "p2": "Používáním TW Cobre souhlasíte s tím, že vaše data jsou bezpečně zpracovávána ve vašem zařízení a že je vaše soukromí chráněno."
+  },
+  "buildingPlanner": {
+    "title": "🏗️ TW Plánovač budov (simulace fronty)",
+    "worldSpeed": "Rychlost světa:",
+    "mineSpeed": "Faktor produkce surovin:",
+    "btn": {
+      "import": "📥 Načíst frontu budov",
+      "export": "📤 Exportovat frontu budov",
+      "clear": "🗑️ Vyčistit",
+      "addQueue": "Načíst",
+      "copyBoard": "Kopírovat do schránky",
+      "close": "Zavřít",
+      "delete": "Smazat"
+    },
+    "modal": {
+      "importTitle": "📥 Vložte frontu budov zkopírovanou ze hry",
+      "exportTitle": "📤 Výstup vaší fronty (můžete kopírovat)",
+      "importPlaceholder": "Velitelství +1 (úroveň 1)\n10 bodů\n...",
+      "success": "✅ Hotovo! Do fronty bylo přidáno {{count}} budov.",
+      "error": "❌ Nebyla nalezena platná šablona. Zkontrolujte zkopírovaný text.",
+      "copied": "Zkopírováno!",
+      "exportPrefix": "Stavební fronta",
+      "levelLabel": "Úroveň",
+      "pointsLabel": "Body"
+    },
+    "levelsTitle": "🏠 Počáteční úrovně budov (skrýt / zobrazit)",
+    "analysis": {
+      "title": "⏳ Analýza fronty a čekacích dob (zobrazit / skrýt)",
+      "withWait": "⏳ Čas s čekáním na suroviny:",
+      "withoutWait": "⚡ Čas bez čekání na suroviny:",
+      "bottleneckTitle": "🚨 Kroky, kde se fronta zpomaluje:",
+      "wood": "Dřevo",
+      "clay": "Hlína",
+      "iron": "Železo",
+      "order": "Pořadí",
+      "level": "Úroveň",
+      "waitingFor": "Čekání",
+      "waitingSuffix": "na suroviny.",
+      "missing": "Chybějící množství",
+      "perfect": "🎉 Skvělé! Ve frontě není čekání na suroviny. Stavba bude pokračovat nepřerušovaně."
+    },
+    "summary": {
+      "title": "Souhrn fronty (klikněte na budovy pro přidání)",
+      "max": "Na maximální úrovni",
+      "add": "Přidat do fronty"
+    },
+    "columnsToggle": "👁️ Skrýt / zobrazit sloupce tabulky",
+    "columns": {
+      "order": "Pořadí",
+      "expectedWait": "Očekávané čekání",
+      "building": "Budova",
+      "level": "Úroveň",
+      "buildTime": "Čas stavby",
+      "startTime": "Čas začátku",
+      "endTime": "Čas dokončení",
+      "points": "Body",
+      "cost": "Náklad (Dřevo/Hlína/Železo)",
+      "resWait": "Čas čekání na suroviny",
+      "currentStorage": "Aktuální zásoby",
+      "hourlyProd": "Hodinová produkce",
+      "pop": "Populace",
+      "storage": "Sklad",
+      "desc": "Popis",
+      "action": "Akce"
+    },
+    "status": {
+      "storageFull": "∞ (Sklad plný)",
+      "storageLimit": "Nedostatečný sklad!",
+      "requirement": "Požadavek",
+      "waitingRes": "Čekání na suroviny.",
+      "farmLimit": "Nedostatečná farma!",
+      "maxLevel": "Maximální úroveň!"
+    },
+    "fastAdd": {
+      "placeholder": "Zadejte nebo vyberte...",
+      "modeActive": "Režim klávesnice aktivní:",
+      "info": "Můžete rychle přidat zadáním názvu budovy a stisknutím Enter.",
+      "dragTitle": "Táhněte pro změnu pořadí"
+    },
+    "daysShort": "d",
+    "buildings": {
+      "hq": "Velitelství",
+      "barracks": "Kasárna",
+      "stable": "Stáj",
+      "workshop": "Dílna",
+      "first_church": "První kostel",
+      "church": "Kostel",
+      "watchtower": "Strážnice",
+      "academy": "Akademie",
+      "smithy": "Kovář",
+      "rally": "Shromaždiště",
+      "statue": "Socha",
+      "market": "Tržiště",
+      "wood": "Dřevařský tábor",
+      "clay": "Hliněný důl",
+      "iron": "Železný důl",
+      "farm": "Farma",
+      "ware": "Sklad",
+      "hiding": "Úkryt",
+      "wall": "Hradby"
+    }
+  },
+  "buildingTimes": {
+    "title": "⏱️ Porovnání časů budov",
+    "worldSpeed": "Rychlost světa:",
+    "panel1": "Plán A (referenční)",
+    "panel2": "Plán B (porovnání)",
+    "hqLevel": "Úroveň velitelství:",
+    "buildingToUpgrade": "Budova k vylepšení:",
+    "currentLevel": "Současná úroveň:",
+    "targetLevel": "Cílová úroveň:",
+    "totalTime": "Celkový čas:",
+    "comparisonResult": "⚡ Výsledek porovnání:",
+    "panel2Faster": "Plán B dokončí o {{time}} dříve než plán A!",
+    "panel1Faster": "Plán A dokončí o {{time}} dříve než plán B!",
+    "tableTitle": "📊 Tabulka časů úrovní všech budov",
+    "tableHqLevel": "Úroveň HQ tabulky:",
+    "level": "Úroveň",
+    "dragTitle": "Táhněte pro změnu pozice",
+    "tip": "Tip: Můžete táhnout záhlaví (např. 'Kasárna') doleva nebo doprava a změnit tak pořadí sloupců.",
+    "time": {
+      "day": "d",
+      "hour": "hod",
+      "minute": "min",
+      "second": "sek",
+      "zero": "0 sek"
+    },
+    "buildings": [
+      "Velitelství (HQ)",
+      "Kasárna",
+      "Stáj",
+      "Dílna",
+      "První kostel",
+      "Kostel",
+      "Strážnice",
+      "Akademie",
+      "Kovář",
+      "Shromaždiště",
+      "Socha",
+      "Tržiště",
+      "Dřevařský tábor",
+      "Hliněný důl",
+      "Železný důl",
+      "Farma",
+      "Sklad",
+      "Úkryt",
+      "Šlechtic",
+      "Zlatá mince",
+      "Hradby"
+    ]
+  },
+  "scavenging": {
+    "title": "Kalkulačka plenění",
+    "settings": {
+      "title": "🌍 Nastavení světa a produkce",
+      "worldSpeed": "Rychlost světa:",
+      "mineSpeed": "Faktor produkce surovin:",
+      "woodLevel": "Úroveň dřevařského tábora:",
+      "clayLevel": "Úroveň hliněného dolu:",
+      "ironLevel": "Úroveň železného dolu:",
+      "worldConstant": "Konstanta světa:",
+      "resHourly": "Produkce surovin:"
+    },
+    "production": {
+      "perMin": "/ min",
+      "perHour": "/ hod",
+      "perDay": "/ den"
+    },
+    "troops": {
+      "title": "⚔️ Počty jednotek a vlajka",
+      "carryFlag": "Vlajka nosnosti (%):",
+      "resFlag": "Vlajka produkce surovin (%):",
+      "totalCap": "Kapacita plenění (bez vlajky):",
+      "totalCapFlag": "Celková kapacita (vlajka nosnosti):",
+      "totalRes": "Produkce surovin (bez vlajky):",
+      "totalResFlag": "Produkce surovin (vlajka produkce):"
+    },
+    "results": {
+      "title": "🏆 Žebříček nejziskovějších strategií",
+      "chartTitle": "📊 Graf porovnání strategií (top 10)",
+      "totalDaily": "Celkem denně",
+      "scavenge": "Plenění",
+      "resource": "Produkce",
+      "perMin": "min",
+      "perHour": "hod",
+      "perDay": "den",
+      "maxTrip": "Nejdelší doba cesty",
+      "dayShort": "/d",
+      "hourShort": "/h",
+      "minShort": "/m",
+      "modes": {
+        "eqTime": "Stejný čas",
+        "eqCap": "Stejná kapacita"
+      },
+      "flags": {
+        "none": "Žádná vlajka",
+        "carry": "Vlajka nosnosti",
+        "res": "Vlajka produkce"
+      },
+      "options": {
+        "c1234": "1-2-3-4 odemčeno",
+        "c123": "1-2-3 odemčeno",
+        "c234": "2-3-4 odemčeno",
+        "c12": "1-2 odemčeno",
+        "c23": "2-3 odemčeno"
+      }
+    },
+    "reference": {
+      "title": "📈 Bod zvratu (referenční tabulka kapacity)",
+      "info": "Nejsou zadány žádné jednotky. Níže uvedená tabulka ukazuje odhadovaný denní lup pro strategie stejného času vs stejné kapacity při různých úrovních kapacity (za předpokladu, že 1-2-3-4 je odemčeno).",
+      "cap": "Ukázková kapacita",
+      "eqTimeDaily": "Stejný čas (denně)",
+      "eqCapDaily": "Stejná kapacita (denně)",
+      "winner": "Výhodná taktika"
+    },
+    "chart": {
+      "title": "📈 Křivka denního lupu podle kapacity (stejný čas & bez vlajky)",
+      "worldConstantInfo": "Vygenerováno na základě konstanty světa ({{constant}}).",
+      "unlocked": "Odemčeno",
+      "infoTitle": "💡 Kritické body obratu (bod zvratu)",
+      "be1": "🔸 Po kapacitě {{cap}}: taktika 1-2-3-4 předčí 2-3-4 a stává se ziskovější.",
+      "be2": "🔸 Po kapacitě {{cap}}: taktika 1-2-3 předčí 2-3."
+    }
+  },
+  "churchPlanner": {
+    "title": "⛪ Optimální plánovač kostelů",
+    "dataInput": "Vstup dat",
+    "allVillagesCoords": "Souřadnice všech vašich vesnic:",
+    "villagesPlaceholder": "510|621, 510|622 (extrahuje i ze textu)",
+    "existingChurchesLabel": "Stávající kostely (volitelné):",
+    "existingChurchesPlaceholder": "např. 506|496 3 (X|Y úroveň)",
+    "includeFirstChurch": "Zahrnout první kostel?",
+    "calculateBtn": "⚙️ Vypočítat optimální plán",
+    "alertNoVillage": "Zadejte prosím alespoň jednu souřadnici vesnice!",
+    "resultsTitle": "Výsledky ({{count}} kostelů)",
+    "existing": "Stávající",
+    "firstChurch": "První kostel",
+    "normalChurch": "Běžný kostel",
+    "lvl": "Úroveň",
+    "coversVillages": "Pokryté vesnice",
+    "warningUncovered": "⚠️ Upozornění: {{count}} vesnic zůstává nechráněných.",
+    "coveredVillage": "Pokrytá vesnice",
+    "uncoveredVillage": "Nechráněná vesnice"
+  },
+  "clanOp": {
+    "title": "🛡️ Plánovač kmenových operací",
+    "step1": {
+      "title": "1. Najděte vesnice vašeho kmene",
+      "clearAll": "🧹 Vymazat všechna data",
+      "worldUrl": "URL světa",
+      "clanTag": "Značka kmene",
+      "runIntel": "Najít vesnice",
+      "status": {
+        "gathering": "Shromažďování informací: Skenují se všichni hráči a vesnice světa...",
+        "notFound": "❌ Kmen nenalezen! Zkontrolujte značku.",
+        "success": "✅ Úspěch! ID kmene: {{clanId}} | Členové: {{memberCount}} | Celkem vesnic: {{villageCount}}",
+        "error": "❌ Chyba: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Cílové vesnice",
+      "snobLimit": "Limit vzdálenosti šlechtice:",
+      "placeholder": "Vložte sem cílové souřadnice...",
+      "foundTargets": "Nalezené cíle: {{count}}"
+    },
+    "step3": {
+      "title": "3. Centrum chytrého přiřazení a mapa",
+      "arrivalTime": "Čas příjezdu cíle:",
+      "targetsTitle": "Vaše cíle (klikněte pro výběr)",
+      "points": "Body",
+      "p": "P",
+      "distance": "Vzdálenost:"
+    },
+    "manualAssign": {
+      "title": "👤 Volné přiřazení hráče",
+      "selectPlayer": "-- Vyberte hráče --",
+      "assignBtn": "Přiřadit",
+      "info": "*Přidá pouze úkol s časem příjezdu pro vybraný cíl výše. Vesnice hráče se také zobrazí na mapě modře."
+    },
+    "tabs": {
+      "closest10": "10 nejbližších vesnic",
+      "furthest10": "10 nejvzdálenějších vesnic",
+      "selectPlayer": "Vybrat hráče"
+    },
+    "suggestions": {
+      "noVillages": "Žádné vesnice k zobrazení.",
+      "kami": "Poslat nuk",
+      "snob": "Poslat šlechtice",
+      "fake": "Poslat falešný útok",
+      "show": "Zobrazit",
+      "hide": "Skrýt"
+    },
+    "queue": {
+      "title": "Fronta operací ({{count}} příkazů)",
+      "clear": "Vymazat celou frontu",
+      "delete": "Smazat",
+      "enemy": "Nepřítel (cíl)"
+    },
+    "bbcode": {
+      "title": "📋 Šablona BBCode pro Poznámkový blok",
+      "copyAll": "Kopírovat vše",
+      "selectCols": "Vyberte sloupce:",
+      "ordersFor": "--- PŘÍKAZY PRO {{player}} ---",
+      "attack": "Útok",
+      "viewTarget": "Zobrazit cíl",
+      "unknown": "NEZNÁMÝ"
+    },
+    "alerts": {
+      "confirmClear": "Všechny plány, cíle a skryté vesnice (kromě informací o světě/kmenu ze Kroku 1) budou smazány. Jste si jistý?",
+      "cleared": "🧹 Všechna data vymazána!",
+      "enterTribeTag": "Zadejte prosím značku kmene!",
+      "selectTarget": "Vyberte prosím cíl.",
+      "selectTargetLeft": "Vyberte prosím cíl vlevo.",
+      "selectPlayer": "Vyberte prosím hráče ze seznamu.",
+      "snobLimitExceeded": "⚠️ Upozornění: Vybraná vzdálenost ({{dist}}) překračuje váš nastavený limit pro šlechtice ({{limit}})!",
+      "orderAdded": "✅ Příkaz přidán!",
+      "manualAdded": "✅ Volné přiřazení přidáno!",
+      "confirmClearQueue": "Jste si jistý, že chcete vymazat celou frontu?",
+      "queueCleared": "🗑️ Fronta vymazána!",
+      "copied": "Zkopírováno!"
+    },
+    "columns": {
+      "no": "Č.",
+      "player": "Hráč",
+      "source": "Zdroj",
+      "target": "Cíl",
+      "departure": "Čas odjezdu",
+      "arrival": "Čas příjezdu",
+      "unit": "Jednotka",
+      "distance": "Vzdálenost",
+      "travelTime": "Doba cesty",
+      "attackLink": "Odkaz akce"
+    },
+    "units": {
+      "spear": "Pikař",
+      "sword": "Šermíř",
+      "axe": "Sekerník",
+      "spy": "Špeh",
+      "light": "Lehká jízda",
+      "heavy": "Těžká jízda",
+      "ram": "Beranidlo",
+      "catapult": "Katapult",
+      "knight": "Paladin",
+      "snob": "Šlechtic",
+      "archer": "Lučištník",
+      "marcher": "Pochodník",
+      "militia": "Milice"
+    },
+    "shortUnits": {
+      "ram": "Nuk",
+      "snob": "Šlechtic",
+      "catapult": "Falešný",
+      "spy": "Špeh"
+    }
+  },
+  "clanTroop": {
+    "title": "🦅 Plánovač kmenových operací (pokročilý)",
+    "step1": {
+      "title": "1. Najděte vesnice vašeho kmene",
+      "clear": "🧹 Vymazat data",
+      "worldUrl": "URL světa",
+      "clanTag": "Značka kmene",
+      "run": "Najít vesnice",
+      "gathering": "Shromažďování informací...",
+      "notFound": "❌ Kmen nenalezen!",
+      "success": "✅ Úspěch! ID kmene: {{clanId}} | Celkem vesnic: {{villageCount}}",
+      "error": "❌ Chyba: {{msg}}"
+    },
+    "step2": {
+      "title": "2. Cílové vesnice",
+      "snobLimit": "Limit vzdálenosti šlechtice:",
+      "placeholder": "Vložte sem cílové souřadnice..."
+    },
+    "stepTroop": {
+      "title": "🛡️ Zadejte údaje o jednotkách (kopírovat/vložit)",
+      "placeholder": "Vložte údaje o jednotkách z přehledu jednotek (tabulka) nebo formátu CSV (475|494,48,0,0...)...",
+      "detected": "Zjištěno průzkumem: {{count}} vesnic",
+      "summaryTitle": "📊 Souhrny profilů hráčů",
+      "idle": " (Volno: {{count}})",
+      "depleted": " (Vyčerpáno)"
+    },
+    "step3": {
+      "title": "📍 Centrum chytrého přiřazení a mapa",
+      "arrivalTime": "Čas příjezdu cíle:",
+      "targetsTitle": "Vaše cíle (klikněte pro výběr)",
+      "distance": "Vzdálenost:"
+    },
+    "tabs": {
+      "closest": "10 nejbližších vesnic",
+      "furthest": "10 nejvzdálenějších vesnic",
+      "player": "Vybrat hráče",
+      "selectPlayer": "-- Vyberte hráče --"
+    },
+    "suggestions": {
+      "noVillages": "Nebyly nalezeny žádné vesnice.",
+      "kami": "Poslat nuk",
+      "snob": "Poslat šlechtice",
+      "fake": "Poslat falešný útok",
+      "show": "Zobrazit",
+      "hide": "Skrýt",
+      "noIntel": " (bez průzkumu)"
+    },
+    "queue": {
+      "title": "Fronta operací ({{count}} příkazů)",
+      "clear": "Vymazat celou frontu",
+      "delete": "Smazat"
+    },
+    "bbcode": {
+      "title": "📋 Šablona BBCode pro Poznámkový blok",
+      "copyAll": "Kopírovat vše",
+      "ordersFor": "--- PŘÍKAZY PRO {{player}} ---",
+      "attack": "Útok",
+      "unknown": "NEZNÁMÝ"
+    },
+    "alerts": {
+      "confirmClear": "Všechny plány včetně průzkumu budou smazány. Jste si jistý?",
+      "cleared": "🧹 Data vymazána!",
+      "enterTribeTag": "Zadejte prosím značku kmene!",
+      "selectTarget": "Vyberte prosím cíl.",
+      "snobLimitExceeded": "⚠️ Upozornění: Limit šlechtice ({{limit}}) byl překročen! Přidat stejně?",
+      "orderAdded": "✅ Příkaz přidán!",
+      "confirmClearQueue": "Jste si jistý, že chcete vymazat celou frontu?",
+      "queueCleared": "🗑️ Fronta vymazána!",
+      "copied": "Zkopírováno!"
+    },
+    "columns": {
+      "no": "Č.",
+      "player": "Hráč",
+      "source": "Zdroj",
+      "target": "Cíl",
+      "departure": "Odjezd",
+      "arrival": "Příjezd",
+      "unit": "Jednotka",
+      "distance": "Vzdálenost",
+      "travelTime": "Cesta",
+      "attackLink": "Akce"
+    },
+    "units": {
+      "spear": "Pikař",
+      "sword": "Šermíř",
+      "axe": "Sekerník",
+      "spy": "Špeh",
+      "light": "Lehký",
+      "heavy": "Těžký",
+      "ram": "Beranidlo",
+      "catapult": "Kat",
+      "knight": "Paladin",
+      "snob": "Šlechtic"
+    },
+    "profiles": {
+      "quarter": "Čtvrtina",
+      "half": "Polovina",
+      "threeQuarters": "3/4",
+      "full": "Plný",
+      "kami": "Nuk",
+      "sav": "Def",
+      "empty": "Nový/prázdný"
+    }
+  },
+  "coinMinter": {
+    "title": "💰 Plánovač zlatých mincí (centrum)",
+    "dataInput": "Vstup dat",
+    "allVillagesCoords": "Souřadnice všech vašich vesnic:",
+    "villagesPlaceholder": "510|621, 510|622 (extrahuje i ze textu)",
+    "hubCountLabel": "Kolik vesnic bude centrem?",
+    "calculateBtn": "⚙️ Najít nejlepší centra",
+    "resultsTitle": "🎯 Naplánovaná centra ({{count}})",
+    "hubCardHeader": "Centrum:",
+    "hubCardSub": "Bude přijímat suroviny od {{count}} vesnic",
+    "hubCardBody": "Vesnice odesílající suroviny:",
+    "onlySelf": "Pouze sebe...",
+    "mapInfoTitle": "Informace o mapě:",
+    "mapInfoCenter": "Velký bílý bod:",
+    "mapInfoCenterDesc": "Centra vesnic (ražba mincí)",
+    "mapInfoSender": "Barevné body:",
+    "mapInfoSenderDesc": "Vesnice odesílající suroviny",
+    "mapInfoLines": "Čáry:",
+    "mapInfoLinesDesc": "Směr toku surovin",
+    "alerts": {
+      "noVillage": "Zadejte prosím alespoň jednu souřadnici vesnice!",
+      "invalidHubCount": "Počet center nesmí přesáhnout počet vesnic a musí být větší než 0."
+    }
+  },
+  "fastSupport": {
+    "title": "🛡️ Centrum plánování rychlé podpory",
+    "step1": {
+      "title": "1. Najděte vesnice vašeho kmene",
+      "worldUrl": "URL světa",
+      "clanTag": "Značka kmene",
+      "updateBtn": "Aktualizovat vesnice",
+      "status": {
+        "scanning": "Skenují se vesnice kmene...",
+        "notFound": "❌ Kmen nenalezen! Zkontrolujte zkratku.",
+        "success": "✅ Úspěch! Celkem vesnic podpory: {{count}}",
+        "error": "❌ Chyba: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Cíl k obraně a čas",
+      "targetCoord": "Souřadnice cíle",
+      "targetPlaceholder": "např. 564|554",
+      "arrivalTime": "Čas příjezdu cíle",
+      "slowestUnit": "Nejpomalejší rychlost jednotky"
+    },
+    "results": {
+      "title": "Dostupné podpory ({{count}})",
+      "allTribe": "Celý kmen",
+      "noVillages": "Nebyly nalezeny vesnice, které by mohly dorazit v tento čas!",
+      "mapTarget": "🛡️ Cíl"
+    },
+    "bbcode": {
+      "title": "📋 Fórumový výzva (BBCode)",
+      "copyAll": "Kopírovat vše",
+      "target": "🎯 Cíl:",
+      "arrivalTime": "⏱️ Čas příjezdu:",
+      "unitSpeed": "🛡️ Rychlost jednotky:",
+      "sendSupport": "Poslat podporu",
+      "supportLink": "🛡️ Poslat podporu"
+    },
+    "alerts": {
+      "enterTribeTag": "Zadejte prosím značku kmene!",
+      "copied": "Zkopírováno!"
+    },
+    "columns": {
+      "player": "Hráč",
+      "source": "Zdroj",
+      "distance": "Vzdálenost",
+      "time": "Čas",
+      "departure": "Čas odjezdu"
+    },
+    "units": {
+      "spear": "Pikař",
+      "sword": "Šermíř",
+      "archer": "Lučištník",
+      "spy": "Špeh",
+      "heavy": "Těžký",
+      "catapult": "Katapult",
+      "knight": "Paladin"
+    }
+  },
+  "mapAnalysis": {
+    "title": "Analýza kontinentu a mapy",
+    "bypassActive": "🕵️ Obcházení aktivní",
+    "bypassAlertOn": "🕵️ TAJNÝ REŽIM AKTIVNÍ: čekání 1 hodiny je obcházeno! Čerstvá data budou načtena při každém spuštění.",
+    "bypassAlertOff": "🔒 TAJNÝ REŽIM NEAKTIVNÍ: je povoleno 1hodinové ukládání do mezipaměti.",
+    "enterWorldUrl": "Zadejte prosím URL světa!",
+    "fetchError": "Chyba při načítání dat. Ujistěte se, že odkaz je správný.\nChyba: {{error}}",
+    "clearConfirm": "Všechna data, archivní záznamy a historie teleportů budou smazány. Jste si jistý?",
+    "status": {
+      "waiting": "Čekání na data...",
+      "cached": "Načteno z mezipaměti! (Poslední data: {{time}})",
+      "downloading": "Stahují se data ze serveru... (může to trvat 10–15 s)",
+      "analyzing": "Stahování dokončeno, analyzuji...",
+      "empty": "Nebyla nalezena žádná data ke zpracování!",
+      "success": "ÚSPĚCH: načteno {{villages}} vesnic, {{players}} hráčů.",
+      "cleared": "Úložiště bylo kompletně vymazáno."
+    },
+    "timeMsg": {
+      "cached": "⏳ Zobrazují se data z mezipaměti. Poslední načtení: {{time}}",
+      "new": "⏳ Nová data načtena. Čekání na další načtení pro detekci teleportů...",
+      "diff": "Časový interval: od předchozí analýzy uplynulo {{hours}} hodin {{mins}} minut."
+    },
+    "sections": {
+      "autoFetch": "1. Automatické načítání dat (doporučeno)",
+      "worldUrlLabel": "URL světa (např. https://en136.tribalwars.net):",
+      "downloadBtn": "🌍 Stáhnout a zpracovat data",
+      "archive": "2. Archiv dat",
+      "selectArchive": "-- Vyberte archiv --",
+      "loadBtn": "📂 Načíst",
+      "saveBtn": "💾 Archivovat aktuální",
+      "manual": "3. Manuální zadání dat (v případě chyby)",
+      "processManualBtn": "⚙️ Zpracovat manuální data",
+      "clearStorageBtn": "🗑️ Resetovat úložiště"
+    },
+    "teleports": {
+      "title": "🚀 Detekce teleportů ({{count}})",
+      "showAllBtn": "🗺️ Zobrazit vše na mapě",
+      "continentTitle": "Teleporty na kontinent {{cont}} ({{count}} hráčů)",
+      "old": "Staré:",
+      "new": "Nové:",
+      "showBtn": "📍 Zobrazit",
+      "none": "Nebyl detekován žádný teleport nebo nebylo provedeno druhé načtení.",
+      "info": "* Systém sbírá data při první analýze. Při dalších analýzách detekuje vesnice, které změnily souřadnice, a nadále je zaznamenává v historii, dokud nejsou vymazány.",
+      "datePrefix": "🗓️"
+    },
+    "analysis": {
+      "title": "🌍 Analýza kontinentu",
+      "player": "Hráč:",
+      "barbarian": "Barbar:",
+      "villages": "vesnic",
+      "noTribe": "Bez kmene",
+      "farmRatio": "🎯 Barbarů na hráče:"
+    },
+    "map": {
+      "title": "Zobrazení mapy",
+      "gray": "Šedé:",
+      "oldPos": "Staré umístění",
+      "red": "Červené:",
+      "newPos": "Nové umístění",
+      "closeBtn": "Zavřít"
+    },
+    "barbarian": "Barbar"
+  },
+  "opPlanner": {
+    "title": "⚔️ Individuální plánovač operací",
+    "step1": {
+      "title": "1. Připojení dat",
+      "clearData": "Vymazat všechna data",
+      "worldUrl": "URL světa:",
+      "playerName": "Vaše jméno hráče:",
+      "fetchBtn": "Načíst / obnovit data"
+    },
+    "step2": {
+      "title": "2. Vaše výchozí vesnice a výběr jednotek ({{count}})",
+      "info": "Můžete vybrat všechny jednotky, které budou odeslány z vesnice. Od tohoto místa se napájí algoritmus párování.",
+      "village": "Vesnice",
+      "unitSelection": "Výběr jednotek (lze vybrat více)"
+    },
+    "step3": {
+      "title": "3. Cílové vesnice",
+      "maxSnobDist": "Maximální limit vzdálenosti šlechtice:",
+      "placeholder": "Vložte sem cílové souřadnice (např. 586|441, 587|442 ve textu je v pořádku)",
+      "detectedTargets": "Zjištěné cíle: {{count}}",
+      "mapLegend": {
+        "target": "Cíl",
+        "spearLight": "Pika/Lehká",
+        "ramKami": "Beranidlo/Nuk",
+        "snob": "Šlechtic",
+        "spy": "Špeh"
+      }
+    },
+    "step4": {
+      "title": "4. Plánování a časový párovací engine",
+      "modeArrival": "Znám čas příjezdu cíle",
+      "modeDeparture": "Znám čas odjezdu vesnice",
+      "dateTime": "Datum a čas:",
+      "sourceVillage": "Výchozí vesnice:",
+      "allSourcesUsed": "Všechny zdroje použity",
+      "unitToSend": "Jednotka k odeslání:",
+      "selectSourceFirst": "Nejprve vyberte zdroj",
+      "noUnitsLeft": "Žádné jednotky nezbyly",
+      "target": "Cíl:",
+      "calcAndAddBtn": "➕ VYPOČÍTAT A PŘIDAT"
+    },
+    "queue": {
+      "title": "Fronta operací ({{count}} příkazů)",
+      "clearQueue": "Vymazat celou frontu",
+      "delete": "Smazat"
+    },
+    "bbcode": {
+      "title": "📋 Šablona BBCode pro Poznámkový blok",
+      "copyAll": "Kopírovat vše",
+      "selectCols": "Vyberte sloupce:",
+      "attack": "Útok",
+      "unknown": "NEZNÁMÝ"
+    },
+    "status": {
+      "cached": "Data načtena z mezipaměti. (Klikněte na tlačítko 13× pro nucené obnovení)",
+      "fetching": "Načítají se data ze serveru... Prosím čekejte.",
+      "playerNotFound": "Hráč nenalezen! Ujistěte se, že jste jméno zadali správně.",
+      "success": "Úspěch! Hráč nalezen a uvedeno {{count}} vesnic.",
+      "error": "Chyba: {{msg}}"
+    },
+    "alerts": {
+      "enterWorldUrl": "Zadejte prosím URL světa!",
+      "enterPlayerName": "Zadejte prosím své jméno hráče!",
+      "confirmClear": "Všechny plány, zdroje a cíle (kromě kroku 1) budou smazány. Jste si jistý?",
+      "selectMatch": "Vyberte prosím zdroj, cíl a jednotku pro párování.",
+      "snobLimitExceeded": "⚠️ Upozornění: Vybraná vzdálenost ({{dist}} jednotek) překračuje maximální limit pro šlechtice ({{limit}})!",
+      "confirmClearQueue": "Jste si jistý, že chcete vymazat celou frontu?",
+      "copied": "Zkopírováno!"
+    },
+    "columns": {
+      "no": "Č.",
+      "source": "Výchozí vesnice",
+      "target": "Cíl",
+      "departure": "Čas odjezdu",
+      "arrival": "Čas příjezdu",
+      "unit": "Jednotka",
+      "distance": "Vzdálenost",
+      "travelTime": "Doba cesty",
+      "attackLink": "Odkaz na akci"
+    },
+    "units": {
+      "spear": "Pikař",
+      "sword": "Šermíř",
+      "axe": "Sekerník",
+      "spy": "Špeh",
+      "light": "Lehká jízda",
+      "heavy": "Těžká jízda",
+      "ram": "Beranidlo",
+      "catapult": "Katapult",
+      "knight": "Paladin",
+      "snob": "Šlechtic",
+      "archer": "Lučištník",
+      "marcher": "Pochodník",
+      "militia": "Milice"
+    }
+  },
+  "productionData": {
+    "title": "Plánovač produkce",
+    "worldSpeed": "Rychlost světa:",
+    "mineSpeed": "Faktor produkce surovin:",
+    "totalFactor": "Celkový násobitel: {{speed}}x",
+    "empireProdTitle": "👑 Celková produkce ({{count}} vesnic)",
+    "hourlyProd": "⏳ Celková hodinová produkce",
+    "dailyProd": "📅 Celková denní produkce",
+    "resources": {
+      "wood": "Dřevo:",
+      "clay": "Hlína:",
+      "iron": "Železo:"
+    },
+    "villageManagement": "Správa vesnic",
+    "resetBtn": "Reset",
+    "newVillageBtn": "+ Nová vesnice",
+    "villageNamePrefix": "Vesnice",
+    "bonus": {
+      "label": "Bonus:",
+      "none": "Žádný",
+      "all": "Všechny suroviny",
+      "wood": "Pouze dřevo",
+      "clay": "Pouze hlína",
+      "iron": "Pouze železo"
+    },
+    "lvl": "Úro",
+    "clearConfirm": "Chcete resetovat všechny vesnice?",
+    "referenceTable": {
+      "title": "📚 Tabulka informací o úrovních (založeno na bonusech 0 %)",
+      "hide": "Skrýt",
+      "show": "Zobrazit",
+      "cols": {
+        "level": "Úro",
+        "hourly": "Hodinová prod. ({{speed}}x)",
+        "storage": "Kapacita skladu",
+        "farm": "Kapacita farmy"
+      },
+      "perHour": "/ hod"
+    }
+  },
+  "unitCalculator": {
+    "title": "Kalkulačka výroby jednotek",
+    "settings": {
+      "basic": "🌍 Základní nastavení",
+      "worldSpeed": "Rychlost světa:",
+      "barracksLevel": "Úroveň kasáren (max 25):",
+      "stableLevel": "Úroveň stáje (max 20):",
+      "workshopLevel": "Úroveň dílny (max 15):",
+      "speedBonus": "⚡ Bonusy rychlosti (%)",
+      "barracksBonus": "Bonus předmětu kasáren:",
+      "stableBonus": "Bonus předmětu stáje:",
+      "workshopBonus": "Bonus předmětu dílny:",
+      "flagRecruit": "Vlajka náboru:",
+      "costBonus": "💰 Náklady a bonusy (%)",
+      "massRecruit": "Bonus masového náboru:",
+      "costReduction": "Snížení nákladů (suroviny):",
+      "resetBtn": "🗑️ Resetovat počty"
+    },
+    "table": {
+      "unit": "Jednotka",
+      "count": "Množství k výrobě",
+      "wood": "Dřevo",
+      "clay": "Hlína",
+      "iron": "Železo",
+      "pop": "Populace",
+      "time": "Čas výroby"
+    },
+    "summary": {
+      "costTitle": "Celkové náklady",
+      "woodReq": "Potřebné dřevo:",
+      "clayReq": "Potřebná hlína:",
+      "ironReq": "Potřebné železo:",
+      "totalPop": "Celková populace:",
+      "queueTitle": "Časy fronty budov",
+      "barracksTotal": "Kasárna celkem:",
+      "stableTotal": "Stáj celkem:",
+      "workshopTotal": "Dílna celkem:"
+    },
+    "time": {
+      "day": "d",
+      "hour": "h",
+      "minute": "m",
+      "second": "s",
+      "none": "-"
+    },
+    "units": {
+      "spear": "Pikař",
+      "sword": "Šermíř",
+      "axe": "Sekerník",
+      "archer": "Lučištník",
+      "spy": "Špeh",
+      "lc": "Lehká jízda",
+      "ma": "Jezdecký lučištník",
+      "hc": "Těžká jízda",
+      "ram": "Beranidlo",
+      "cat": "Katapult"
+    }
+  },
+  "mapGenerator": {
+    "title": "Pokročilý generátor map",
+    "worldUrl": "URL světa:",
+    "fetchBtn": "Načíst / obnovit data",
+    "generateBtn": "🗺️ VYTVOŘIT MAPU",
+    "status": {
+      "noUrl": "Zadejte prosím URL světa!",
+      "cached": "Načteno z mezipaměti! (Poslední aktualizace: {{time}})",
+      "fetching": "Načítají se data ze serveru...",
+      "success": "Data byla úspěšně načtena!",
+      "error": "Chyba: {{msg}}"
+    },
+    "settings": {
+      "title": "Nastavení mapy",
+      "zoom": "Zoom %",
+      "center": "Střed (X|Y)",
+      "markersOnly": "Pouze značky",
+      "showAbandons": "Zobrazit barbaby",
+      "largerMarkers": "Větší značky",
+      "bgColor": "Barva pozadí",
+      "dullBg": "Matné pozadí",
+      "showGrid": "Mřížka kontinentu",
+      "showContinentNums": "Čísla kontinentů"
+    },
+    "players": {
+      "title": "Značky hráčů",
+      "searchPlaceholder": "Hledejte a přidejte hráče...",
+      "points": "Body",
+      "selectTop25": "Vybrat top 25",
+      "selectTop50": "Vybrat top 50",
+      "clearSelection": "Vymazat výběr",
+      "noPlayers": "Zatím nebyli vybráni žádní hráči.",
+      "deleteBtn": "Smazat"
+    },
+    "tribes": {
+      "title": "Značky kmenů",
+      "searchPlaceholder": "Hledat kmen (jméno nebo značka)...",
+      "selectAll": "Vybrat vše",
+      "clearSelection": "Vymazat výběr",
+      "selectTop25": "Vybrat pouze top 25",
+      "noData": "Zatím nebyla načtena žádná data.",
+      "deleteBtn": "Smazat"
+    }
+  }
+}

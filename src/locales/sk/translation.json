@@ -1,0 +1,859 @@
+{
+  "menu": {
+    "title": "TW Meď",
+    "stats": "Naživo Štatistika",
+    "visitsTitle": "Celkový počet návštevníkov",
+    "mapsTitle": "Vygenerované mapy",
+    "opsTitle": "Plánované operácie",
+    "simsTitle": "Spustené simulácie",
+    "visits": "Návštevy",
+    "maps": "Mapy",
+    "developer": "Vývojár",
+    "items": {
+      "buildingTimes": "Kalkulačka času budovania",
+      "mapAnalysis": "Analýza kontinentu a mapy",
+      "mapGenerator": "Generátor máp",
+      "productionData": "Kalkulačka výroby",
+      "coinMinter": "Plánovač zlatých mincí",
+      "buildingPlanner": "Plánovač budovania (Fronta)",
+      "unitCalculator": "Kalkulačka produkcie vojsk",
+      "churchPlanner": "Plánovač kostolov",
+      "opPlanner": "Plánovač individuálnych operácií",
+      "clanOp": "Plánovač operácií kmeňa",
+      "clanTroop": "Plánovač operácií kmeňa (Rozšírený)",
+      "fastSupport": "Plánovanie rýchlej podpory",
+      "scavengingPlanner": "Kalkulačka času prehľadávania"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Vítajte v TW Meď",
+      "subtitle": "Víťazstvo sa skrýva v detailoch a bezchybnom plánovaní. Ušetrite čas vo svojej ceste hrou Tribal Wars a navrhujte strategické plány, ktoré privedu váš kmeň k víťazstvu. Vyberte si nástroj na začiatok."
+    },
+    "tools": {
+     "opPlanner": { "title": "Plánovač osobných operácií", "desc": "Spárujte zdrojové a cieľové dediny na prípravu bezchybnej šablóny operácie (BBCode)." },
+     "buildingPlanner": { "title": "Plánovač budovania", "desc": "Dizajnujte plán stavania vašej dediny krok za krokom s pokročilou simuláciou fronty." },
+     "unitCalculator": { "title": "Kalkulačka produkcie vojsk", "desc": "Vypočítajte časy produkcie jednotiek pre kasárne, stajne a dielňu vrátane bonusov." },
+     "mapGenerator": { "title": "Generátor máp", "desc": "Vygenerujte aktuálne, farebné dynamické svetové mapy pre fóra kmeňa." },
+     "mapAnalysis": { "title": "Analýza kontinentu", "desc": "Analyzujte dominanciu kmeňa a hráča na kontinentoch na svetovej mape." },
+     "productionData": { "title": "Kalkulačka výroby", "desc": "Optimalizujte rýchlosti produkcie baní, kapacity skladov a čas plnenia." },
+     "coinMinter": { "title": "Plánovač zlatých mincí", "desc": "Vypočítajte najideálnejšiu dedinu na razenie zlatých mincí." },
+     "churchPlanner": { "title": "Plánovač kostolov", "desc": "Optimalizujte oblasti pokrytia kostola na mape pomocou algoritmu šetriacich obyvateľov." },
+     "buildingTimes": { "title": "Kalkulačka času budovania", "desc": "Vypočítajte a porovnajte časy výstavby budov na rôznych úrovniach až na sekundu." },
+     "clanOp": { "title": "Plánovač operácií kmeňa", "desc": "Analyzujte všetky dediny kmeňa a vykonávajte inteligentné pridelenia. Distribuujte personalizované príkazy BBCode členom s mapou podporovanou inteligenciu." },
+     "clanTroop": { "title": "Plánovač operácií kmeňa (S vojskami)", "desc": "Analyzujte všetky vojská kmeňa a vykonávajte inteligentné pridelenia. Distribuujte personalizované príkazy BBCode členom s mapou podporovanou inteligenciu." },
+     "fastSupport": { "title": "Vyhľadávač rýchlej podpory", "desc": "Vytvorte žiadosť o podporu, aby ste získali rýchlu podporu." },
+     "scavengingPlanner": { "title": "Kalkulačka času prehľadávania", "desc": "Podrobne porovnajte časy prehľadávania." }
+      }
+  },
+  "footer": {
+    "text1": "Pokročilé nástroje plánovania pre Tribal Wars",
+    "text2": "© 2026 TW Meď | Vývojár: ",
+    "links": {
+      "about": "O nás",
+      "privacy": "Ochrana osobných údajov a GDPR"
+    }
+  },
+  "aboutPage": {
+    "title": "O nás",
+    "p1": "Ahoj, som Anto Bvb 66.",
+    "p2": "TW Meď je elitný taktický panel a veliteľské centrum vyvinuté nezávisle na spracovanie surových dát od hráčov Kmeňa (Tribal Wars) a pomôcť im dosiahnuť stratéickú nadrazenosť.",
+    "p3": "Od plánovania operácií až po analýzu čistoty, všetky moduly sú navrhnuté na riešenie výpočtov, ktoré by hráčovi trvali hodiny, v sekundách. Víťazstvo sa skrýva v detailoch!"
+ ,"contactTitle": "Hlášenie chýb & Kontakt",
+  "contactDesc": "Chyby, nedostatky alebo návrhy na vývoj, ktoré narazíte na našej stránke, mi môžete poslať priamo e-mailom.",
+  "emailButton": "Poslať e-mail"
+  },
+  "privacyPage": {
+    "title": "Politika ochrany osobných údajov a KVKK",
+    "p1": "TW Meď rešpektuje súkromie používateľov na najvyššej úrovni. V súlade so zákonmi na ochranu údajov (GDPR) a medzinárodnými normami, naša politika spracovania údajov je nasledovná:",
+    "items": {
+      "i1": "Bezpečnosť účtu: TW Meď NIKDY nepožaduje, neuchovávame ani nehostíme heslo vášho účtu Tribal Wars, e-mail alebo informácie o osobnej relácii na svojich serveroch.",
+      "i2": "Lokálne úložisko: Vaše nastavenia (rýchlosť sveta, počty vojsk, súradnice dedín atď.) sú uložené iba v lokálnom úložisku prehliadača vašeho zariadenia (Local Storage / Session Storage), aby sa nestratili pri obnovení stránky.",
+      "i3": "Načítavanie externých údajov: Moduly mápy a analýzy spracovávajú všeobecné údaje sveta, ktoré sú verejne poskytované hrou Tribal Wars v reálnom čase. Táto operácia sa vyskytuje raz za hodinu. V súlade s pravidlami hry obsahujú tieto údaje iba všeobecné informácie o dedinách a hráčoch a neobsahujú vaše osobné údaje.",
+      "i4": "Štatistika: Počítadlá návštevníkov a vygenerovaných máp na našej stránke sú iba číselné údaje; nie sú zhodované s vašou IP adresou alebo totožnosťou."
+    },
+    "p2": "Používaním TW Meď súhlasíte s tým, že vaše údaje sú spracovávané bezpečne na vašom zariadení a že vaše súkromie je chránené."
+  },
+  "buildingPlanner": {
+    "title": "🏗️ TW Plánovač budovania (Simulácia fronty)",
+    "worldSpeed": "Rýchlosť sveta:",
+    "mineSpeed": "Faktor produkcie zdrojov:",
+    "btn": {
+      "import": "📥 Načítať frontu budovania",
+      "export": "📤 Exportovať frontu budovania",
+      "clear": "🗑️ Vymazať",
+      "addQueue": "Načítať",
+      "copyBoard": "Kopírovať do schránky",
+      "close": "Zatvoriť",
+      "delete": "Odstrániť"
+    },
+    "modal": {
+      "importTitle": "📥 Vložte frontu budovania skopírovanú zo hry",
+      "exportTitle": "📤 Váš výstup fronty (Môžete kopírovať)",
+      "importPlaceholder": "Sídlo +1 (Úroveň 1)\n10 bodov\n...",
+      "success": "✅ Úspech! {{count}} budov pridaných do fronty.",
+      "error": "❌ Nenašla sa platná šablóna. Skontrolujte skopírovaný text.",
+      "copied": "Skopírované!",
+      "exportPrefix": "Fronta výstavby",
+      "levelLabel": "Úroveň",
+      "pointsLabel": "Body"
+    },
+    "levelsTitle": "🏠 Počiatočné úrovne budov (Skryť / Zobraziť)",
+    "analysis": {
+      "title": "⏳ Analýza fronty a časy čakania (Zobraziť/Skryť)",
+      "withWait": "⏳ Čas s čakaním na zdroje:",
+      "withoutWait": "⚡ Čas bez čakania na zdroje:",
+      "bottleneckTitle": "🚨 Kroky, kde sa fronta spomalí:",
+      "wood": "Drevo",
+      "clay": "Hlina",
+      "iron": "Železo",
+      "order": "Poradie",
+      "level": "Úroveň",
+      "waitingFor": "Čakanie",
+      "waitingSuffix": "na zdroje.",
+      "missing": "Chýbajúce množstvá",
+      "perfect": "🎉 Skvelé! V tejto fronte nie je čas čakania na zdroje. Stavby budú pokračovať bez prerušenia."
+    },
+    "summary": {
+      "title": "Zhrnutie fronty (Kliknite na budovy na pridanie)",
+      "max": "Na maximálnej úrovni",
+      "add": "Pridať do fronty"
+    },
+    "columnsToggle": "👁️ Skryť / Zobraziť stĺpce tabuľky",
+    "columns": {
+      "order": "Poradie",
+      "expectedWait": "Očakávané čakanie",
+      "building": "Budova",
+      "level": "Úroveň",
+      "buildTime": "Čas stavby",
+      "startTime": "Čas začiatku",
+      "endTime": "Čas konca",
+      "points": "Body",
+      "cost": "Cena (Drevo/Hlina/Železo)",
+      "resWait": "Čas čakania na zdroje",
+      "currentStorage": "Aktuálne úložisko",
+      "hourlyProd": "Hodinová produkcia",
+      "pop": "Populácia",
+      "storage": "Úložisko",
+      "desc": "Popis",
+      "action": "Akcia"
+    },
+    "status": {
+      "storageFull": "∞ (Úložisko plné)",
+      "storageLimit": "Nedostatočné úložisko!",
+      "requirement": "Požadavok",
+      "waitingRes": "Čakanie na zdroje.",
+      "farmLimit": "Nedostatočná farma!",
+      "maxLevel": "Maximálna úroveň!"
+    },
+    "fastAdd": {
+      "placeholder": "Napíšte alebo vyberte...",
+      "modeActive": "Režim klávesnice aktívny:",
+      "info": "Môžete rýchlo pridávať zadaním názvu budovy a stlačením Enter.",
+      "dragTitle": "Pretiahnite na zmenu poradia"
+    },
+    "daysShort": "d",
+    "buildings": {
+      "hq": "Sídlo",
+      "barracks": "Kasárne",
+      "stable": "Stajňa",
+      "workshop": "Dielňa",
+      "first_church": "Prvý kostol",
+      "church": "Kostol",
+      "watchtower": "Strážna veža",
+      "academy": "Akadémia",
+      "smithy": "Kováčske dielňa",
+      "rally": "Zhromažďovacie miesto",
+      "statue": "Socha",
+      "market": "Trh",
+      "wood": "Tesárska pila",
+      "clay": "Tehlička",
+      "iron": "Železarňa",
+      "farm": "Farma",
+      "ware": "Sklad",
+      "hiding": "Skrývačka",
+      "wall": "Múr"
+    }
+  },
+  "buildingTimes": {
+    "title": "⏱️ Porovnanie časov budovania",
+    "worldSpeed": "Rýchlosť sveta:",
+    "panel1": "Plán A (Referencia)",
+    "panel2": "Plán B (Porovnanie)",
+    "hqLevel": "Úroveň sídla:",
+    "buildingToUpgrade": "Budova na inováciu:",
+    "currentLevel": "Aktuálna úroveň:",
+    "targetLevel": "Cieľová úroveň:",
+    "totalTime": "Celkový čas:",
+    "comparisonResult": "⚡ Výsledok porovnania:",
+    "panel2Faster": "Plán B skončí {{time}} skôr ako plán A!",
+    "panel1Faster": "Plán A skončí {{time}} skôr ako plán B!",
+    "tableTitle": "📊 Tabuľka všetkých časov úrovní budov",
+    "tableHqLevel": "Úroveň sídla tabuľky:",
+    "level": "Úroveň",
+    "dragTitle": "Pretiahnite na zmenu pozície",
+    "tip": "Tip: Môžete pretiahnuť a pustiť záhlavia (napr. 'Kasárne') doľava alebo doprava na zmenu poradia stĺpcov.",
+    "time": {
+      "day": "d",
+      "hour": "hod",
+      "minute": "min",
+      "second": "s",
+      "zero": "0 s"
+    },
+    "buildings": [
+      "Sídlo (HQ)", "Kasárne", "Stajňa", "Dielňa", "Prvý kostol", "Kostol",
+      "Strážna veža", "Akadémia", "Kováčske dielňa", "Zhromažďovacie miesto", "Socha", "Trh",
+      "Tesárska pila", "Tehlička", "Železarňa", "Farma", "Sklad", "Skrývačka",
+      "Šľachtic", "Zlatá minca", "Múr"
+    ]
+  },
+ "scavenging": {
+    "title": "Kalkulačka prehľadávania",
+    "settings": {
+      "title": "🌍 Nastavenia sveta a produkcie",
+      "worldSpeed": "Rýchlosť sveta:",
+      "mineSpeed": "Faktor produkcie zdrojov:",
+      "woodLevel": "Úroveň tesárskej pily:",
+      "clayLevel": "Úroveň tehličky:",
+      "ironLevel": "Úroveň železarne:",
+      "worldConstant": "Svetová konštanta:",
+      "resHourly": "Produkcia zdrojov:"
+    },
+    "production": {
+      "perMin": "/ min",
+      "perHour": "/ hod",
+      "perDay": "/ deň"
+    },
+    "troops": {
+      "title": "⚔️ Počty vojsk a vlajka",
+      "carryFlag": "Vlajka nosnosti (%)",
+      "resFlag": "Vlajka produkcie zdrojov (%)",
+      "totalCap": "Kapacita prehľadávania (Bez vlajky):",
+      "totalCapFlag": "Celková kapacita (Vlajka nosnosti):",
+      "totalRes": "Produkcia zdrojov (Bez vlajky):",
+      "totalResFlag": "Produkcia zdrojov (Vlajka produkcie):"
+    },
+    "results": {
+      "title": "🏆 Najprofitabilnejšie stratégie hodnotenie",
+      "chartTitle": "📊 Porovnanie stratégií (Top 10)",
+      "totalDaily": "Celkom denne",
+      "scavenge": "Prehľadávanie",
+      "resource": "Produkcia",
+      "perMin": "min",
+      "perHour": "hod",
+      "perDay": "deň",
+      "maxTrip": "Najdlhší čas cesty",
+      "dayShort": "/d",
+      "hourShort": "/h",
+      "minShort": "/m",
+      "modes": {
+        "eqTime": "Rovnaký čas",
+        "eqCap": "Rovnaká kapacita"
+      },
+      "flags": {
+        "none": "Bez vlajky",
+        "carry": "Vlajka nosnosti",
+        "res": "Vlajka produkcie"
+      },
+      "options": {
+        "c1234": "1-2-3-4 Odomknuté",
+        "c123": "1-2-3 Odomknuté",
+        "c234": "2-3-4 Odomknuté",
+        "c12": "1-2 Odomknuté",
+        "c23": "2-3 Odomknuté"
+      }
+    },
+    "reference": {
+      "title": "📈 Bod zvratu (Tabuľka referenčnej kapacity)",
+      "info": "Žiadne vojská nezadané. Nižšie uvedená tabuľka ukazuje odhadovaný denný kmeň pre stratégie rovnakého času vs rovnakej kapacity na rôznych úrovniach kapacity (za predpokladu odomknutých 1-2-3-4).",
+      "cap": "Vzorová kapacita",
+      "eqTimeDaily": "Rovnaký čas (Denne)",
+      "eqCapDaily": "Rovnaká kapacita (Denne)",
+      "winner": "Výhodná taktika"
+    },
+    "chart": {
+      "title": "📈 Krivka denného kmeňa podľa kapacity (Rovnaký čas a bez vlajky)",
+      "worldConstantInfo": "Vygenerované na základe svetovej konštanty ({{constant}}).",
+      "unlocked": "Odomknuté",
+      "infoTitle": "💡 Kritické body zvratu",
+      "be1": "🔸 Po {{cap}} kapacite: taktika 1-2-3-4 predbehne 2-3-4 a stane sa ziskovejšou.",
+      "be2": "🔸 Po {{cap}} kapacite: taktika 1-2-3 predbehne 2-3."
+    }
+  },
+  "churchPlanner": {
+    "title": "⛪ Optimálny plánovač kostolov",
+    "dataInput": "Vstup údajov",
+    "allVillagesCoords": "Všetky súradnice vašich dedín:",
+    "villagesPlaceholder": "510|621, 510|622 (Extrahovať z textu)",
+    "existingChurchesLabel": "Existujúce kostoly (Voliteľne):",
+    "existingChurchesPlaceholder": "napr. 506|496 3 (X|Y Úroveň)",
+    "includeFirstChurch": "Zahrnúť prvý kostol?",
+    "calculateBtn": "⚙️ Vypočítať optimálny plán",
+    "alertNoVillage": "Prosím zadajte aspoň jednu súradnicu dediny!",
+    "resultsTitle": "Výsledky ({{count}} kostolov)",
+    "existing": "Existujúci",
+    "firstChurch": "Prvý kostol",
+    "normalChurch": "Normálny kostol",
+    "lvl": "Úroveň",
+    "coversVillages": "Pokryté dediny",
+    "warningUncovered": "⚠️ Varovanie: {{count}} dedín je ponechaných bez ochrany.",
+    "coveredVillage": "Pokrytá dedina",
+    "uncoveredVillage": "Nechránená dedina"
+  },
+  "clanOp": {
+    "title": "🛡️ Plánovač operácií kmeňa",
+    "step1": {
+      "title": "1. Nájdite dediny vášho kmeňa",
+      "clearAll": "🧹 Vymazať všetky údaje",
+      "worldUrl": "URL sveta",
+      "clanTag": "Značka kmeňa",
+      "runIntel": "Nájdite dediny",
+      "status": {
+        "gathering": "Zbieranie informácií: Skenovanie všetkých hráčov sveta a dedín...",
+        "notFound": "❌ Kmeň nenájdený! Skontrolujte značku.",
+        "success": "✅ Úspech! ID kmeňa: {{clanId}} | Členovia: {{memberCount}} | Celkom dedín: {{villageCount}}",
+        "error": "❌ Chyba: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Cieľové dediny",
+      "snobLimit": "Limit vzdialenosti šľachtica:",
+      "placeholder": "Vložte súradnice cieľov sem..."
+    },
+    "step3": {
+      "title": "3. Inteligentné centrum priradenia a mapa",
+      "arrivalTime": "Čas príchodu cieľa:",
+      "targetsTitle": "Vaše ciele (Kliknite na výber)",
+      "points": "Body",
+      "p": "B",
+      "distance": "Vzdialenosť:"
+    },
+    "manualAssign": {
+      "title": "👤 Priradenie voľného hráča",
+      "selectPlayer": "-- Vyberte hráča --",
+      "assignBtn": "Priradiť",
+      "info": "*Iba pridá úlohu s časom príchodu na vybraný cieľ vyššie. Dediny hráča sa tiež zobrazia modrou farbou na mape."
+    },
+    "tabs": {
+      "closest10": "10 najbližších dedín",
+      "furthest10": "10 najvzdialenejších dedín",
+      "selectPlayer": "Vyberte hráča"
+    },
+    "suggestions": {
+      "noVillages": "Žiadne dediny na zobrazenie.",
+      "kami": "Poslať kopa",
+      "snob": "Poslať šľachtica",
+      "fake": "Poslať fake",
+      "show": "Urobiť viditeľným",
+      "hide": "Skryť"
+    },
+    "queue": {
+      "title": "Fronta operácií ({{count}} príkazov)",
+      "clear": "Vymazať celú frontu",
+      "delete": "Odstrániť",
+      "enemy": "Nepriateľ (Cieľ)"
+    },
+    "bbcode": {
+      "title": "📋 Šablóna BBCode pre Notepad",
+      "copyAll": "Kopírovať všetko",
+      "selectCols": "Vyberte stĺpce:",
+      "ordersFor": "--- PRÍKAZY PRE {{player}} ---",
+      "attack": "Útok",
+      "viewTarget": "Zobraziť cieľ",
+      "unknown": "NEZNÁMY"
+    },
+    "alerts": {
+      "confirmClear": "Všetky plány, ciele a skryté dediny (okrem kroku 1 informácie o svete/kmeňa) budú vymazané. Ste si istí?",
+      "cleared": "🧹 Všetky údaje vymazané!",
+      "enterTribeTag": "Prosím zadajte značku kmeňa!",
+      "selectTarget": "Prosím vyberte cieľ.",
+      "selectTargetLeft": "Prosím vyberte cieľ zľava.",
+      "selectPlayer": "Prosím vyberte hráča zo zoznamu.",
+      "snobLimitExceeded": "⚠️ Varovanie: Vybraná vzdialenosť ({{dist}}) prekračuje váš nastavený limit šľachtica ({{limit}})!",
+      "orderAdded": "✅ Príkaz pridaný!",
+      "manualAdded": "✅ Priradenie voľného hráča pridané!",
+      "confirmClearQueue": "Ste si istí, že chcete vymazať celú frontu?",
+      "queueCleared": "🗑️ Fronta vymazaná!",
+      "copied": "Skopírované!"
+    },
+    "columns": {
+      "no": "Číslo",
+      "player": "Hráč",
+      "source": "Zdroj",
+      "target": "Cieľ",
+      "departure": "Čas odchodu",
+      "arrival": "Čas príchodu",
+      "unit": "Jednotka",
+      "distance": "Vzdialenosť",
+      "travelTime": "Čas cesty",
+      "attackLink": "Odkaz na akciu"
+    },
+    "units": {
+      "spear": "Záhradník", "sword": "Mečiar", "axe": "Sekerník", "spy": "Prieskumník",
+      "light": "Ľahká jazda", "heavy": "Ťažká jazda", "ram": "Baran", "catapult": "Katapulta",
+      "knight": "Paladin", "snob": "Šľachtic", "archer": "Lukostrelec", "marcher": "Jazdec lukostrelec", "militia": "Milícia"
+    },
+    "shortUnits": {
+      "ram": "Kopa",
+      "snob": "Šľachtic",
+      "catapult": "Fake",
+      "spy": "Prieskumník"
+    }
+  },
+  "clanTroop": {
+    "title": "🦅 Plánovač operácií kmeňa (Rozšírený)",
+    "step1": {
+      "title": "1. Nájdite dediny vášho kmeňa",
+      "clear": "🧹 Vymazať údaje",
+      "worldUrl": "URL sveta",
+      "clanTag": "Značka kmeňa",
+      "run": "Nájdite dediny",
+      "gathering": "Zbieranie informácií...",
+      "notFound": "❌ Kmeň nenájdený!",
+      "success": "✅ Úspech! ID kmeňa: {{clanId}} | Celkom dedín: {{villageCount}}",
+      "error": "❌ Chyba: {{msg}}"
+    },
+    "step2": {
+      "title": "2. Cieľové dediny",
+      "snobLimit": "Limit vzdialenosti šľachtica:",
+      "placeholder": "Vložte súradnice cieľov sem..."
+    },
+    "stepTroop": {
+      "title": "🛡️ Zadajte údaje o vojskách (Kopírovať/Vložiť)",
+      "placeholder": "Vložte údaje o vojskách z prehľadu vojsk (tabuľka) alebo formát CSV (475|494,48,0,0...)...",
+      "detected": "Inteligenciu detektovaná: {{count}} dedín",
+      "summaryTitle": "📊 Zhrnutie profilov hráčov",
+      "idle": " (Nečinnosť: {{count}})",
+      "depleted": " (Vyčerpané)"
+    },
+    "step3": {
+      "title": "📍 Inteligentné centrum priradenia a mapa",
+      "arrivalTime": "Čas príchodu cieľa:",
+      "targetsTitle": "Vaše ciele (Kliknite na výber)",
+      "distance": "Vzdialenosť:"
+    },
+    "tabs": {
+      "closest": "10 najbližších dedín",
+      "furthest": "10 najvzdialenejších dedín",
+      "player": "Vyberte hráča",
+      "selectPlayer": "-- Vyberte hráča --"
+    },
+    "suggestions": {
+      "noVillages": "Žiadne dediny nenájdené.",
+      "kami": "Poslať kopa",
+      "snob": "Poslať šľachtica",
+      "fake": "Poslať fake",
+      "show": "Urobiť viditeľným",
+      "hide": "Skryť",
+      "noIntel": " (Bez inteligencie)"
+    },
+    "queue": {
+      "title": "Fronta operácií ({{count}} príkazov)",
+      "clear": "Vymazať celú frontu",
+      "delete": "Odstrániť"
+    },
+    "bbcode": {
+      "title": "📋 Šablóna BBCode pre Notepad",
+      "copyAll": "Kopírovať všetko",
+      "ordersFor": "--- PRÍKAZY PRE {{player}} ---",
+      "attack": "Útok",
+      "unknown": "NEZNÁMY"
+    },
+    "alerts": {
+      "confirmClear": "Všetky plány vrátane inteligencie budú vymazané. Ste si istí?",
+      "cleared": "🧹 Údaje vymazané!",
+      "enterTribeTag": "Prosím zadajte značku kmeňa!",
+      "selectTarget": "Prosím vyberte cieľ.",
+      "snobLimitExceeded": "⚠️ Varovanie: Limit šľachtica ({{limit}}) prekročený! Pridať aj tak?",
+      "orderAdded": "✅ Príkaz pridaný!",
+      "confirmClearQueue": "Ste si istí, že chcete vymazať celú frontu?",
+      "queueCleared": "🗑️ Fronta vymazaná!",
+      "copied": "Skopírované!"
+    },
+    "columns": {
+      "no": "Číslo",
+      "player": "Hráč",
+      "source": "Zdroj",
+      "target": "Cieľ",
+      "departure": "Odchod",
+      "arrival": "Príchod",
+      "unit": "Jednotka",
+      "distance": "Vzdialenosť",
+      "travelTime": "Cesta",
+      "attackLink": "Akcia"
+    },
+    "units": {
+      "spear": "Záhradník", "sword": "Mečiar", "axe": "Sekerník", "spy": "Prieskumník",
+      "light": "Ľahká jazda", "heavy": "Ťažká jazda", "ram": "Baran", "catapult": "Kat",
+      "knight": "Paladin", "snob": "Šľachtic"
+    },
+    "profiles": {
+      "quarter": "Štvrť",
+      "half": "Polovica",
+      "threeQuarters": "Tri štvrtiny",
+      "full": "Plný",
+      "kami": "Kopa",
+      "sav": "Obrana",
+      "empty": "Nový/Prázdny"
+    }
+  },
+  "coinMinter": {
+    "title": "💰 Plánovač zlatých mincí (Hub)",
+    "dataInput": "Vstup údajov",
+    "allVillagesCoords": "Všetky súradnice vašich dedín:",
+    "villagesPlaceholder": "510|621, 510|622 (Extrahovať z textu)",
+    "hubCountLabel": "Koľko hubových dedín?",
+    "calculateBtn": "⚙️ Nájdite najlepšie huby",
+    "resultsTitle": "🎯 Plánované huby ({{count}})",
+    "hubCardHeader": "Hub:",
+    "hubCardSub": "Bude prijímať zdroje z {{count}} dedín",
+    "hubCardBody": "Dediny posielajúce zdroje:",
+    "onlySelf": "Len sama sebou...",
+    "mapInfoTitle": "Informácia o mape:",
+    "mapInfoCenter": "Veľká biela bodka:",
+    "mapInfoCenterDesc": "Hubové dediny (Razenie mincí)",
+    "mapInfoSender": "Farebné bodky:",
+    "mapInfoSenderDesc": "Dediny posielajúce zdroje",
+    "mapInfoLines": "Čiary:",
+    "mapInfoLinesDesc": "Smer toku zdrojov",
+    "alerts": {
+      "noVillage": "Prosím zadajte aspoň jednu súradnicu dediny!",
+      "invalidHubCount": "Počet hubov nemôže prekročiť počet dedín a musí byť väčší ako 0."
+    }
+  },
+  "fastSupport": {
+    "title": "🛡️ Centrum plánovania rýchlej podpory",
+    "step1": {
+      "title": "1. Nájdite dediny vášho kmeňa",
+      "worldUrl": "URL sveta",
+      "clanTag": "Značka kmeňa",
+      "updateBtn": "Aktualizovať dediny",
+      "status": {
+        "scanning": "Skenovanie dedín kmeňa...",
+        "notFound": "❌ Kmeň nenájdený! Skontrolujte skratku.",
+        "success": "✅ Úspech! Celkom podporných dedín: {{count}}",
+        "error": "❌ Chyba: {{msg}}"
+      }
+    },
+    "step2": {
+      "title": "2. Cieľ na obranu a čas",
+      "targetCoord": "Súradnice cieľa",
+      "targetPlaceholder": "napr. 564|554",
+      "arrivalTime": "Čas príchodu cieľa",
+      "slowestUnit": "Najpomalšia jednotka"
+    },
+    "results": {
+      "title": "Dostupné podpory ({{count}})",
+      "allTribe": "Celý kmeň",
+      "noVillages": "Žiadne dediny nenájdené, ktoré by mohli dosiahnuť tento cieľ v zvolenom čase!",
+      "mapTarget": "🛡️ Cieľ"
+    },
+    "bbcode": {
+      "title": "📋 Výzva na fóre (BBCode)",
+      "copyAll": "Kopírovať všetko",
+      "target": "🎯 Cieľ:",
+      "arrivalTime": "⏱️ Čas príchodu:",
+      "unitSpeed": "🛡️ Rýchlosť jednotky:",
+      "sendSupport": "Poslať podporu",
+      "supportLink": "🛡️ Poslať podporu"
+    },
+    "alerts": {
+      "enterTribeTag": "Prosím zadajte značku kmeňa!",
+      "copied": "Skopírované!"
+    },
+    "columns": {
+      "player": "Hráč",
+      "source": "Zdroj",
+      "distance": "Vzdialenosť",
+      "time": "Čas",
+      "departure": "Čas odchodu"
+    },
+    "units": {
+      "spear": "Záhradník", "sword": "Mečiar", "archer": "Lukostrelec", "spy": "Prieskumník", "heavy": "Ťažká jazda", "catapult": "Katapulta", "knight": "Paladin"
+    }
+  },
+  "mapAnalysis": {
+    "title": "Analýza kontinentu a mapy",
+    "bypassActive": "🕵️ Bypass aktívny",
+    "bypassAlertOn": "🕵️ TAJNÝ REŽIM AKTÍVNY: Čakanie 1 hodinu obídené! Čerstvé údaje budú načítané zakaždým.",
+    "bypassAlertOff": "🔒 TAJNÝ REŽIM NEAKTÍVNY: Ochrana medzipamieti 1 hodinu je povolená.",
+    "enterWorldUrl": "Prosím zadajte URL sveta!",
+    "fetchError": "Chyba pri načítavaní údajov. Uistite sa, že odkaz je správny.\nChyba: {{error}}",
+    "clearConfirm": "Všetky údaje, archívy a história teleportácie budú vymazané. Ste si istí?",
+    "status": {
+      "waiting": "Čakanie na údaje...",
+      "cached": "Načítané z medzipamieti! (Posledné údaje: {{time}})",
+      "downloading": "Sťahovanie údajov zo servera... (Môže trvať 10-15 sekúnd)",
+      "analyzing": "Sťahovanie dokončené, analýza...",
+      "empty": "Žiadne údaje na spracovanie!",
+      "success": "ÚSPECH: {{villages}} dedín, {{players}} hráčov načítaných.",
+      "cleared": "Úložisko úplne vymazané."
+    },
+    "timeMsg": {
+      "cached": "⏳ Zobrazenie údajov z medzipamieti. Posledné stiahnutie: {{time}}",
+      "new": "⏳ Nové údaje stiahnuté. Čakanie na ďalšie stiahnutie na detekciu teleportácií...",
+      "diff": "Časový interval: {{hours}} hodín {{mins}} minút od predchádzajúcej analýzy."
+    },
+    "sections": {
+      "autoFetch": "1. Automatické stiahnutie údajov (Odporúčané)",
+      "worldUrlLabel": "URL sveta (napr. https://sk136.tribalwars.net):",
+      "downloadBtn": "🌍 Stiahnutie a spracovanie údajov",
+      "archive": "2. Archív údajov",
+      "selectArchive": "-- Vyberte archív --",
+      "loadBtn": "📂 Načítať",
+      "saveBtn": "💾 Archivizovať aktuálne",
+      "manual": "3. Manuálny vstup údajov (V prípade chyby)",
+      "processManualBtn": "⚙️ Spracovať manuálne údaje",
+      "clearStorageBtn": "🗑️ Obnoviť úložisko"
+    },
+    "teleports": {
+      "title": "🚀 Detekcie teleportácií ({{count}})",
+      "showAllBtn": "🗺️ Zobraziť všetko na mape",
+      "continentTitle": "Teleportácie na kontinent {{cont}} ({{count}} hráčov)",
+      "old": "Staré:",
+      "new": "Nové:",
+      "showBtn": "📍 Zobraziť",
+      "none": "Žiadne teleportácie detektované alebo druhé stiahnutie ešte nebolo vykonané.",
+      "info": "* Systém zbiera údaje pri prvej analýze. Pri ďalších analýzach detekuje dediny, ktoré zmenili súradnice a naďalej ich historicky zoznamuje, kým nie sú vymazané.",
+      "datePrefix": "🗓️"
+    },
+    "analysis": {
+      "title": "🌍 Analýza kontinentu",
+      "player": "Hráč:",
+      "barbarian": "Barbar:",
+      "villages": "dedín",
+      "noTribe": "Bez kmeňa",
+      "farmRatio": "🎯 Barbari na hráča:"
+    },
+    "map": {
+      "title": "Pohľad na mapu",
+      "gray": "Sivá:",
+      "oldPos": "Stará pozícia",
+      "red": "Červená:",
+      "newPos": "Nová pozícia",
+      "closeBtn": "Zatvoriť"
+    },
+    "barbarian": "Barbar"
+  },
+  "opPlanner": {
+    "title": "⚔️ Plánovač individuálnych operácií",
+    "step1": {
+      "title": "1. Pripojenie údajov",
+      "clearData": "Vymazať všetky údaje",
+      "worldUrl": "URL sveta:",
+      "playerName": "Vaše meno hráča:",
+      "fetchBtn": "Stiahnutie / Obnovenie údajov"
+    },
+    "step2": {
+      "title": "2. Vaše zdrojové dediny a výber jednotiek ({{count}})",
+      "info": "Môžete vybrať všetky jednotky, ktoré budú expedované z dediny. Engine na párovanie sa z tu starostí.",
+      "village": "Dedina",
+      "unitSelection": "Výber jednotiek (Viacerý výber je možný)"
+    },
+    "step3": {
+      "title": "3. Cieľové dediny",
+      "maxSnobDist": "Max limit vzdialenosti šľachtica:",
+      "placeholder": "Vložte súradnice cieľov (napr. 586|441, 587|442 v texte je v poriadku)",
+      "detectedTargets": "Zistené ciele: {{count}}",
+      "mapLegend": {
+        "target": "Cieľ",
+        "spearLight": "Záhradník/Ľahká",
+        "ramKami": "Baran/Kopa",
+        "snob": "Šľachtic",
+        "spy": "Prieskumník"
+      }
+    },
+    "step4": {
+      "title": "4. Plánovanie a engine na párovanie času",
+      "modeArrival": "Poznám čas príchodu na cieľ",
+      "modeDeparture": "Poznám čas odchodu z dediny",
+      "dateTime": "Dátum a čas:",
+      "sourceVillage": "Zdrojová dedina:",
+      "allSourcesUsed": "Všetky zdroje použité",
+      "unitToSend": "Jednotka na poslanie:",
+      "selectSourceFirst": "Najprv vyberte zdroj",
+      "noUnitsLeft": "Žiadne jednotky zvyšné",
+      "target": "Cieľ:",
+      "calcAndAddBtn": "➕ VYPOČÍTAŤ A PRIDAŤ"
+    },
+    "queue": {
+      "title": "Fronta operácií ({{count}} príkazov)",
+      "clearQueue": "Vymazať celú frontu",
+      "delete": "Odstrániť"
+    },
+    "bbcode": {
+      "title": "📋 Šablóna BBCode pre Notepad",
+      "copyAll": "Kopírovať všetko",
+      "selectCols": "Vyberte stĺpce:",
+      "attack": "Útok",
+      "unknown": "NEZNÁMY"
+    },
+    "status": {
+      "cached": "Údaje načítané z medzipamieti. (Kliknite na tlačidlo 13 krát na vynútenie obnovenia)",
+      "fetching": "Sťahovanie údajov zo servera... Čakajte prosím.",
+      "playerNotFound": "Hráč nenájdený! Uistite sa, že ste zadali meno správne.",
+      "success": "Úspech! Hráč nájdený a {{count}} dedín zoznamených.",
+      "error": "Chyba: {{msg}}"
+    },
+    "alerts": {
+      "enterWorldUrl": "Prosím zadajte URL sveta!",
+      "enterPlayerName": "Prosím zadajte vaše meno hráča!",
+      "confirmClear": "Všetky plány, zdroje a ciele (okrem kroku 1) budú vymazané. Ste si istí?",
+      "selectMatch": "Prosím vyberte zdroj, cieľ a jednotku na párovanie.",
+      "snobLimitExceeded": "⚠️ Varovanie: Vybraná vzdialenosť ({{dist}} jednotiek) prekračuje maximálny limit vzdialenosti šľachtica ({{limit}})!",
+      "confirmClearQueue": "Ste si istí, že chcete vymazať celú frontu?",
+      "copied": "Skopírované!"
+    },
+    "columns": {
+      "no": "Číslo",
+      "source": "Zdrojová dedina",
+      "target": "Cieľ",
+      "departure": "Čas odchodu",
+      "arrival": "Čas príchodu",
+      "unit": "Jednotka",
+      "distance": "Vzdialenosť",
+      "travelTime": "Čas cesty",
+      "attackLink": "Odkaz na akciu"
+    },
+    "units": {
+      "spear": "Záhradník", "sword": "Mečiar", "axe": "Sekerník", "spy": "Prieskumník",
+      "light": "Ľahká jazda", "heavy": "Ťažká jazda", "ram": "Baran", "catapult": "Katapulta",
+      "knight": "Paladin", "snob": "Šľachtic", "archer": "Lukostrelec", "marcher": "Jazdec lukostrelec", "militia": "Milícia"
+    }
+  },
+  "productionData": {
+    "title": "Plánovač produkcie",
+    "worldSpeed": "Rýchlosť sveta:",
+    "mineSpeed": "Faktor produkcie zdrojov:",
+    "totalFactor": "Celkový multiplikátor: {{speed}}x",
+    "empireProdTitle": "👑 Celková produkcia ({{count}} dedín)",
+    "hourlyProd": "⏳ Celková hodinová produkcia",
+    "dailyProd": "📅 Celková denná produkcia",
+    "resources": {
+      "wood": "Drevo:",
+      "clay": "Hlina:",
+      "iron": "Železo:"
+    },
+    "villageManagement": "Správa dedín",
+    "resetBtn": "Obnoviť",
+    "newVillageBtn": "+ Nová dedina",
+    "villageNamePrefix": "Dedina",
+    "bonus": {
+      "label": "Bonus:",
+      "none": "Žiadny",
+      "all": "Všetky zdroje",
+      "wood": "Iba drevo",
+      "clay": "Iba hlina",
+      "iron": "Iba železo"
+    },
+    "lvl": "Úroveň",
+    "clearConfirm": "Chcete obnoviť všetky dediny?",
+    "referenceTable": {
+      "title": "📚 Tabuľka informácií o úrovni (0% bonus)",
+      "hide": "Skryť",
+      "show": "Zobraziť",
+      "cols": {
+        "level": "Úroveň",
+        "hourly": "Hodinová produkcia ({{speed}}x)",
+        "storage": "Kapacita úložiska",
+        "farm": "Kapacita farmy"
+      },
+      "perHour": "/ hod"
+    }
+  },
+  "unitCalculator": {
+    "title": "Kalkulačka produkcie vojsk",
+    "settings": {
+      "basic": "🌍 Základné nastavenia",
+      "worldSpeed": "Rýchlosť sveta:",
+      "barracksLevel": "Úroveň kasární (Max 25):",
+      "stableLevel": "Úroveň stajne (Max 20):",
+      "workshopLevel": "Úroveň dielne (Max 15):",
+      "speedBonus": "⚡ Bonusy rýchlosti (%)",
+      "barracksBonus": "Bonus položky kasární:",
+      "stableBonus": "Bonus položky stajne:",
+      "workshopBonus": "Bonus položky dielne:",
+      "flagRecruit": "Vlajka náboru:",
+      "costBonus": "💰 Cena a extra (%)",
+      "massRecruit": "Bonus hromadného náboru:",
+      "costReduction": "Zníženie zdrojov (cena):",
+      "resetBtn": "🗑️ Obnoviť počty"
+    },
+    "table": {
+      "unit": "Jednotka",
+      "count": "Počet na produkciu",
+      "wood": "Drevo",
+      "clay": "Hlina",
+      "iron": "Železo",
+      "pop": "Populácia",
+      "time": "Čas produkcie"
+    },
+    "summary": {
+      "costTitle": "Celková cena",
+      "woodReq": "Potrebované drevo:",
+      "clayReq": "Potrebovaná hlina:",
+      "ironReq": "Potrebované železo:",
+      "totalPop": "Celková populácia:",
+      "queueTitle": "Časy fronty budovania",
+      "barracksTotal": "Kasárne celkom:",
+      "stableTotal": "Stajňa celkom:",
+      "workshopTotal": "Dielňa celkom:"
+    },
+    "time": {
+      "day": "d",
+      "hour": "h",
+      "minute": "m",
+      "second": "s",
+      "none": "-"
+    },
+    "units": {
+      "spear": "Záhradník", "sword": "Mečiar", "axe": "Sekerník", "archer": "Lukostrelec",
+      "spy": "Prieskumník", "lc": "Ľahká jazda", "ma": "Jazdec lukostrelec", "hc": "Ťažká jazda",
+      "ram": "Baran", "cat": "Katapulta"
+    }
+  },
+  "mapGenerator": {
+    "title": "Pokročilý generátor máp",
+    "worldUrl": "URL sveta:",
+    "fetchBtn": "Stiahnutie / Obnovenie údajov",
+    "generateBtn": "🗺️ GENEROVAŤ MAPU",
+    "status": {
+      "noUrl": "Prosím zadajte URL sveta!",
+      "cached": "Načítané z medzipamieti! (Posledná aktualizácia: {{time}})",
+      "fetching": "Sťahovanie údajov zo servera...",
+      "success": "Údaje úspešne stiahnuté!",
+      "error": "Chyba: {{msg}}"
+    },
+    "settings": {
+      "title": "Nastavenia mapy",
+      "zoom": "Priblíženie %",
+      "center": "Centrum (X|Y)",
+      "markersOnly": "Iba značky",
+      "showAbandons": "Zobraziť barbarov",
+      "largerMarkers": "Väčšie značky",
+      "bgColor": "Farba pozadia",
+      "dullBg": "Matné pozadie",
+      "showGrid": "Mriežka kontinentu",
+      "showContinentNums": "Čísla kontinentu"
+    },
+    "players": {
+      "title": "Značky hráčov",
+      "searchPlaceholder": "Hľadať a pridať hráča...",
+      "points": "Body",
+      "selectTop25": "Vyberte Top 25",
+      "selectTop50": "Vyberte Top 50",
+      "clearSelection": "Zrušiť výber",
+      "noPlayers": "Žiadni hráči neboli ešte vybraní.",
+      "deleteBtn": "Odstrániť"
+    },
+    "tribes": {
+      "title": "Značky kmeňov",
+      "searchPlaceholder": "Hľadať kmeň (Meno alebo značka)...",
+      "selectAll": "Vyberte všetky",
+      "clearSelection": "Zrušiť výber",
+      "selectTop25": "Vyberte iba Top 25",
+      "noData": "Žiadne údaje zatiaľ stiahnuté.",
+      "deleteBtn": "Odstrániť"
+    }
+  }
+}
