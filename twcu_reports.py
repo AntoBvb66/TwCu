@@ -325,16 +325,17 @@ def process_user_conquests(user_config, conquests_lines, p_map, a_map, v_map, wo
     monitored_p = {p['name']: p.get('active_filters', []) for p in user_config.get('monitored_players', [])}
     monitored_t = {t['tag']: t.get('active_filters', []) for t in user_config.get('monitored_tribes', [])}
 
-    table_rows = []
+    # İki ayrı liste oluşturuyoruz
+    global_rows = []
+    monitored_rows = []
 
     for line in conquests_lines:
         parts = line.split(',')
         if len(parts) < 4: continue
         v_id, ts, new_id, old_id = parts[0], int(parts[1]), parts[2], parts[3]
         
-        # ================= DUBLE FETİH KORUMASI =================
-        if ts <= last_ts: continue # Eski saniyedeki köyü tekrar listeye alma!
-        # ========================================================
+        # Duble Fetih Koruması
+        if ts <= last_ts: continue 
         
         v_info = v_map.get(v_id, {"coord": "??|?? (K??)", "pts": "???"})
         new_d = p_map.get(new_id, {"name": "Unknown", "tag": ""})
@@ -347,18 +348,33 @@ def process_user_conquests(user_config, conquests_lines, p_map, a_map, v_map, wo
         if old_id == "0": tip = "B"
         elif new_d['tag'] == old_d['tag'] and new_d['tag'] != "": tip = "I"
 
+        tr_time = datetime.fromtimestamp(ts, tz=timezone.utc) + timedelta(hours=3)
+        row_data = [tr_time.strftime('%H:%M'), new_txt[:16], old_txt[:16], v_info['coord'], v_info['pts'], tip]
+
+        # Bu işlem takip edilen birine mi ait?
         is_monitored = (new_d['name'] in monitored_p or old_d['name'] in monitored_p or 
                         new_d['tag'] in monitored_t or old_d['tag'] in monitored_t)
 
-        if track_all or is_monitored:
-            tr_time = datetime.fromtimestamp(ts, tz=timezone.utc) + timedelta(hours=3)
-            row_data = [tr_time.strftime('%H:%M'), new_txt[:16], old_txt[:16], v_info['coord'], v_info['pts'], tip]
-            table_rows.append(row_data)
+        # Eğer takip edilense özel listeye ekle
+        if is_monitored:
+            monitored_rows.append(row_data)
+        
+        # Eğer dünyayı izle açıksa global listeye ekle
+        if track_all:
+            global_rows.append(row_data)
 
-    if table_rows:
-        photo_bytes = generate_table_image(table_rows)
-        caption = f"🌍 *CONQUER REPORT [{world_id.upper()}]*\n*T: G=Gain, B=Barb, I=Internal*"
+    # 1. ÖNCE TAKİP EDİLENLERİN MESAJINI AT (Özel Uyarı)
+    if monitored_rows:
+        photo_bytes = generate_table_image(monitored_rows)
+        caption = f"🎯 *HEDEF FETİH RAPORU [{world_id.upper()}]*\n_Takip listendeki bir oyuncu/klan işlem yaptı!_"
         send_telegram_photo(caption, photo_bytes, bot_token, chat_id)
+
+    # 2. SONRA GLOBAL RAPORU AT
+    if track_all and global_rows:
+        photo_bytes = generate_table_image(global_rows)
+        caption = f"🌍 *GLOBAL CONQUER REPORT [{world_id.upper()}]*\n*T: G=Gain, B=Barb, I=Internal*"
+        send_telegram_photo(caption, photo_bytes, bot_token, chat_id)
+
 # ====================== ANA AKIŞ ======================
 # --- RENDER İÇİN MİNİ WEB SUNUCUSU ---
 app = Flask(__name__)

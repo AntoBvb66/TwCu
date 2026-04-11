@@ -198,15 +198,36 @@ const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#
     ));
   };
 
-  const handleAddEntity = (type) => {
+ const handleAddEntity = (type) => {
     if (!newName.trim()) { alert("Please enter a name or tag first."); return; }
-    const namesArray = newName.split(',').map(n => n.trim()).filter(n => n !== '');
+    
+    // 1. Girdiyi virgülle ayır, boşlukları temizle ve boş olanları at
+    let namesArray = newName.split(',').map(n => n.trim()).filter(n => n !== '');
     if (namesArray.length === 0) return;
 
-    const newEntries = namesArray.map((name, index) => ({
+    // 2. Kullanıcı "AMIGOS, AMIGOS" gibi aynı anda çift giriş yaptıysa kendi içinde temizle
+    namesArray = [...new Set(namesArray)];
+
+    // 3. ZATEN EKLİ OLANLARI FİLTRELE (Büyük/Küçük harf duyarsız kontrol)
+    const uniqueNames = namesArray.filter(name => {
+      // Eğer mevcut listede aynı tipte (Player/Tribe) ve aynı isimde biri varsa isDuplicate 'true' olur
+      const isDuplicate = entities.some(ent => 
+        ent.type === type && ent.name.toLowerCase() === name.toLowerCase()
+      );
+      return !isDuplicate; // Sadece duplicate OLMAYANLARI yeni listeye al
+    });
+
+    // 4. Eğer kullanıcının girdiği her şey zaten listede varsa uyar ve işlemi durdur
+    if (uniqueNames.length === 0) {
+      alert("Entered target(s) are already in your monitoring list!");
+      return;
+    }
+
+    // 5. Sadece yepyeni (benzersiz) olanları ekle
+    const newEntries = uniqueNames.map((name, index) => ({
       id: Date.now() + index,
       type: type,
-      name: name,
+      name: name, // Kullanıcının yazdığı orijinal harf büyüklüğü ile kaydet
       filters: { ...newFilters }
     }));
 
