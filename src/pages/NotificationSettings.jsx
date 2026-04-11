@@ -154,8 +154,7 @@ const NotificationSettings = () => {
       alert("An ID is already generated! If you want a new one, delete the current ID first.");
       return;
     }
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~|}{[]:;?><,./-=";
-    let newId = "";
+const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~|}{[]:;?><,-=";    let newId = "";
     for (let i = 0; i < 66; i++) {
       newId += chars.charAt(Math.floor(Math.random() * chars.length));
     }
