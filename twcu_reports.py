@@ -303,15 +303,23 @@ if __name__ == "__main__":
             last_ts = check_doc.to_dict().get('timestamp', 0) if check_doc.exists else now_ts - 3600
             
             # 86400 (1 gün) veya gelecek zaman hatası varsa son 1 saate çek
-            if last_ts > now_ts or (now_ts - last_ts) > 86400: last_ts = now_ts - 3600 
+            if last_ts > now_ts or (now_ts - last_ts) > 86400: 
+                last_ts = now_ts - 3600 
+                print(f"   ⚠️  {world_id} - Timestamp sıfırlandı (çok eski/yüksek)")
 
             url = f"{base_url}/interface.php?func=get_conquer&since={last_ts}"
+            print(f"   🔍 {world_id} - since={last_ts} ({datetime.fromtimestamp(last_ts, tz=timezone.utc) + timedelta(hours=3):%H:%M:%S} TRT)")
+
             try:
                 conquests_text = requests.get(url, timeout=10).text.strip()
                 if conquests_text:
                     w_data['conquests_lines'] = conquests_text.splitlines()
+                    print(f"🔍 {len(w_data['conquests_lines'])} yeni fetih bulundu, haritalar indiriliyor...")
+                else:
+                    print(f"   ℹ️  {world_id} - Yeni fetih yok")
             except Exception as e:
                 print(f"Fetih çekme hatası ({world_id}): {e}")
+                w_data['conquests_lines'] = []
 
             # Eğer fetih varsa, harita verilerini (isim, köy koordinat) de 1 kere çek
             current_max_ts = last_ts
