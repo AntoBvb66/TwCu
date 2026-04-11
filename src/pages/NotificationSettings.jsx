@@ -242,26 +242,25 @@ const NotificationSettings = () => {
     // 1. Ekrandaki tüm ayarları JSON formatında topla
     const payload = generateConfigPayload();
     
-    // Dünyayı Global Ayarlardan al (örn: https://ptc1.tribalwars.com.pt/ -> ptc1)
-    // Eğer boşsa varsayılan olarak "ptc1" kullan
-    let worldId = "ptc1";
-    if (globalSettings.worldUrl) {
-      try {
-        const urlObj = new URL(globalSettings.worldUrl);
-        worldId = urlObj.hostname.split('.')[0]; 
-      } catch (e) { console.log("URL parse hatası"); }
+    // 2. Kullanıcının formda girdiği Special Access ID'yi al
+    const specialId = payload.global_settings?.special_access_id?.trim();
+
+    // Güvenlik kontrolü: Şifre girilmemişse veya boşsa kaydetmeyi durdur
+    if (!specialId || specialId === "" || specialId === "[EMPTY]") {
+      alert("Hata: Ayarları kaydetmek için lütfen geçerli bir Special Access ID (Lisans) girin!");
+      return; 
     }
 
     try {
-      // 2. Firebase'e "worlds > ptc1 > config > main_settings" yoluna kaydet
-      // setDoc, dosya yoksa oluşturur, varsa üzerine yazar
-      const configRef = doc(db, "worlds", worldId, "config", "main_settings");
-      await setDoc(configRef, payload);
+      // 3. Firebase'e "users > [KULLANICI_ID]" yoluna kaydet
+      // { merge: true } ile belge yoksa oluşturulur, varsa sadece değişen kısımlar üzerine yazılır
+      const userRef = doc(db, "users", specialId);
+      await setDoc(userRef, payload, { merge: true });
       
-      alert(`Settings successfully saved to Firebase under world: ${worldId}!`);
+      alert("Ayarlar başarıyla kaydedildi! Sistem lisansın üzerinden çalışacak.");
     } catch (error) {
       console.error("Error saving config: ", error);
-      alert("Error saving configuration to Firebase.");
+      alert("Ayarlar Firebase'e kaydedilirken bir hata oluştu.");
     }
   };
 
@@ -436,7 +435,6 @@ const NotificationSettings = () => {
   </label>
 </div>
 
-        {/* --- ADD NEW ENTRY --- */}
         {/* --- ADD NEW ENTRY --- */}
         <div className="section-block">
           <h3 className="section-title">Add New Target</h3>

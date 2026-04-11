@@ -4,30 +4,23 @@ import requests # type: ignore
 import firebase_admin # type: ignore
 import urllib.parse
 import time
-import io # Resim verisi için
+import io
 from firebase_admin import credentials, firestore # type: ignore
 from datetime import datetime, timezone, timedelta
 from PIL import Image, ImageDraw, ImageFont # type: ignore
 
-# ====================== AYARLAR & BAĞLANTI ======================
+# ====================== BAŞLATMA ======================
 FIREBASE_KEY_JSON = os.environ.get('FIREBASE_SERVICE_ACCOUNT_KEY')
-TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
-TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
-WORLD_ID = "ptc1"
-BASE_URL = "https://ptc1.tribalwars.com.pt"
 
-# Firebase Başlatma
 if not firebase_admin._apps:
     cred = credentials.Certificate(json.loads(FIREBASE_KEY_JSON))
     firebase_admin.initialize_app(cred)
 db = firestore.client()
 
-# ====================== TABLO RESMİ OLUŞTURMA ======================
+# ====================== YARDIMCI FONKSİYONLAR ======================
 def generate_table_image(rows):
     """Verileri şık bir koyu tema tablo resmine dönüştürür"""
     headers = ["Saat", "Yeni Sahip", "Eski Sahip", "Köy (Kıta)", "Puan", "T"]
-    
-    # Font Ayarları
     font_size = 14
     try:
         font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", font_size)
@@ -36,111 +29,95 @@ def generate_table_image(rows):
         font = ImageFont.load_default()
         char_w = 7.0
 
-    # Sütun Genişlikleri (Karakter Sayısı)
     col_widths = [6, 18, 18, 15, 9, 3]
     cell_h = 28
     margin = 20
     
-    # Resim Boyutu Hesaplama
     width = int(sum(col_widths) * char_w + (len(col_widths) * 10) + (margin * 2))
     height = (len(rows) + 2) * cell_h + (margin * 2)
 
-    # Arka Plan (Koyu Tema)
     img = Image.new("RGB", (width, height), (25, 25, 25))
     draw = ImageDraw.Draw(img)
 
-    # Başlıkları Yaz
     x_offset = margin
     for i, h in enumerate(headers):
-        # Puan sütununu (index 4) sağa '>'. Diğerlerini sola '<' hizala
         align = ">" if i == 4 else "<"
         text_format = f"{h:{align}{col_widths[i]}}"
         draw.text((x_offset, margin), text_format, font=font, fill=(255, 215, 0))
         x_offset += col_widths[i] * char_w + 10
 
-    # Ayırıcı Çizgi
     draw.line((margin, margin + 25, width - margin, margin + 25), fill=(80, 80, 80), width=1)
 
-    # Verileri Yaz
     y_offset = margin + 35
     for row in rows:
         x_offset = margin
         for i, cell in enumerate(row):
-            # Puan sütununu (index 4) sağa '>'. Diğerlerini sola '<' hizala
             align = ">" if i == 4 else "<"
             text_format = f"{str(cell):{align}{col_widths[i]}}"
             draw.text((x_offset, y_offset), text_format, font=font, fill=(230, 230, 230))
             x_offset += col_widths[i] * char_w + 10
         y_offset += cell_h
 
-    # Belleğe Kaydet
     buf = io.BytesIO()
     img.save(buf, format='PNG')
     return buf.getvalue()
-# ====================== TELEGRAM GÖNDERME ======================
-def send_telegram_photo(caption, photo_bytes):
-    """Telegram mesajını fotoğraf olarak gönderir"""
+
+def send_telegram_photo(caption, photo_bytes, bot_token, chat_id):
+    """Kullanıcıya özel Telegram mesajını fotoğraf olarak gönderir"""
     try:
-        url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendPhoto"
-        payload = {"chat_id": TELEGRAM_CHAT_ID, "caption": caption, "parse_mode": "Markdown"}
-        
-        # io'daki fotoğraf verisini Telegram'a gönder
+        url = f"https://api.telegram.org/bot{bot_token}/sendPhoto"
+        payload = {"chat_id": chat_id, "caption": caption, "parse_mode": "Markdown"}
         files = {"photo": ("conquer_report.png", photo_bytes, "image/png")}
-        
         requests.post(url, data=payload, files=files, timeout=15)
     except Exception as e:
-        print(f"Fotoğraf gönderilemedi: {e}")
-        # Hata varsa metin olarak göndermeyi dene (Kurtarma)
-        # requests.post(..., text=caption, ...) # Opsiyonel
+        print(f"Fotoğraf gönderilemedi (Chat ID: {chat_id}): {e}")
 
-# ... (Veri Haritalama ve Stats Çekme fonksiyonları aynı kalır - twcu_reports.py içindeki get_world_data_maps, get_entity_stats, process_periodic_report) ...
-def get_world_data_maps():
-    """ID -> Detaylı Bilgi haritalarını oluşturur (Village, Player, Ally)"""
+def send_telegram_message(text, bot_token, chat_id):
+    """Kullanıcıya özel standart metin gönderir"""
+    try:
+        url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+        payload = {"chat_id": chat_id, "text": text, "parse_mode": "Markdown"}
+        requests.post(url, json=payload, timeout=10)
+    except Exception as e:
+        print(f"Mesaj gönderilemedi (Chat ID: {chat_id}): {e}")
+
+def get_world_data_maps(base_url):
+    """ID -> Detaylı Bilgi haritalarını oluşturur"""
     p_map = {"0": {"name": "Barbarian", "tag": ""}}
     a_map = {"0": ""}
     v_map = {}
 
     try:
-        # 1. Klanlar
-        a_req = requests.get(f"{BASE_URL}/map/ally.txt", timeout=15).text.splitlines()
+        a_req = requests.get(f"{base_url}/map/ally.txt", timeout=15).text.splitlines()
         for line in a_req:
             parts = line.split(',')
-            if len(parts) >= 3:
-                a_map[parts[0]] = urllib.parse.unquote_plus(parts[2])
+            if len(parts) >= 3: a_map[parts[0]] = urllib.parse.unquote_plus(parts[2])
 
-        # 2. Oyuncular
-        p_req = requests.get(f"{BASE_URL}/map/player.txt", timeout=15).text.splitlines()
+        p_req = requests.get(f"{base_url}/map/player.txt", timeout=15).text.splitlines()
         for line in p_req:
             parts = line.split(',')
             if len(parts) >= 3:
-                p_map[parts[0]] = {
-                    "name": urllib.parse.unquote_plus(parts[1]),
-                    "tag": a_map.get(parts[2], "")
-                }
+                p_map[parts[0]] = {"name": urllib.parse.unquote_plus(parts[1]), "tag": a_map.get(parts[2], "")}
 
-        # 3. Köyler (Koordinat, Kıta ve Puan)
-        v_req = requests.get(f"{BASE_URL}/map/village.txt", timeout=15).text.splitlines()
+        v_req = requests.get(f"{base_url}/map/village.txt", timeout=15).text.splitlines()
         for line in v_req:
             parts = line.split(',')
             if len(parts) >= 6:
                 vx, vy, pts = parts[2], parts[3], int(parts[5])
                 continent = f"K{vy[:1]}{vx[:1]}"
-                v_map[parts[0]] = {
-                    "coord": f"{vx}|{vy} ({continent})",
-                    "pts": f"{pts:,}".replace(",", ".")
-                }
+                v_map[parts[0]] = {"coord": f"{vx}|{vy} ({continent})", "pts": f"{pts:,}".replace(",", ".")}
     except Exception as e:
-        print(f"Map çekme hatası: {e}")
+        print(f"Map çekme hatası ({base_url}): {e}")
     
     return p_map, a_map, v_map
 
-def get_entity_stats(name, is_tribe=False):
+def get_entity_stats(name, is_tribe, base_url):
     """Oyuncu veya klanın güncel istatistiklerini çeker"""
     stats = {"id": None, "points": 0, "villages": 0, "od_att": 0, "od_def": 0, "od_sup": 0}
     file_type = "ally" if is_tribe else "player"
     
     try:
-        r = requests.get(f"{BASE_URL}/map/{file_type}.txt", timeout=10)
+        r = requests.get(f"{base_url}/map/{file_type}.txt", timeout=10)
         for line in r.text.splitlines():
             p = line.split(',')
             actual_name = urllib.parse.unquote_plus(p[2 if is_tribe else 1])
@@ -153,7 +130,6 @@ def get_entity_stats(name, is_tribe=False):
 
     if not stats["id"]: return stats
 
-    # OD Verileri
     suffix = "_tribe" if is_tribe else ""
     od_tasks = [("kill_att", "od_att"), ("kill_def", "od_def")]
     if not is_tribe: od_tasks.append(("kill_sup", "od_sup"))
@@ -161,7 +137,7 @@ def get_entity_stats(name, is_tribe=False):
 
     for f_name, key in od_tasks:
         try:
-            res = requests.get(f"{BASE_URL}/map/{f_name}{suffix if 'tribe' not in f_name else ''}.txt", timeout=10)
+            res = requests.get(f"{base_url}/map/{f_name}{suffix if 'tribe' not in f_name else ''}.txt", timeout=10)
             for line in res.text.splitlines():
                 p = line.split(',')
                 if p[1] == stats["id"]:
@@ -173,13 +149,19 @@ def get_entity_stats(name, is_tribe=False):
         stats["od_sup"] = max(0, stats.get("od_all", 0) - stats["od_att"] - stats["od_def"])
     return stats
 
-def process_periodic_report(name, e_type, mode, p_settings):
-    """Saatlik/Günlük raporları işler"""
+# ====================== RAPORLAMA MANTIKLARI ======================
+def process_periodic_report(world_id, base_url, user_config, name, e_type, mode):
+    """Kullanıcıya özel saatlik/günlük raporları işler"""
     is_tribe = e_type == "Tribe"
-    now_stats = get_entity_stats(name, is_tribe)
+    p_settings = user_config.get('periodic_reports', {})
+    bot_token = user_config['global_settings']['telegram_bot_token']
+    chat_id = user_config['global_settings']['telegram_chat_id']
+
+    now_stats = get_entity_stats(name, is_tribe, base_url)
     if not now_stats["id"]: return
 
-    ref = db.collection('worlds').document(WORLD_ID).collection(f"{mode}_snapshots").document(f"{e_type}_{name}")
+    # Snapshots (anlık görüntüler) dünya bazında ortak tutulur
+    ref = db.collection('worlds').document(world_id).collection(f"{mode}_snapshots").document(f"{e_type}_{name}")
     old_doc = ref.get()
     old_stats = old_doc.to_dict() if old_doc.exists else {}
     tr_now = datetime.now(timezone.utc) + timedelta(hours=3)
@@ -200,183 +182,164 @@ def process_periodic_report(name, e_type, mode, p_settings):
     lines.append(f"🏘️ *Villages:* {get_diff('villages'):+} ({now_stats['villages']})")
     lines.append(f"📈 *Points:* {now_stats['points']:,}")
 
-    # Raporlar metin kalabilir (Çok yer kaplamaz)
-    # create_text_report(f"{header}```\n{sep}\n{table_body}```\n{footer}") 
-    # Ama istenirse send_telegram_photo ile resim olarak da gönderilebilir.
+    send_telegram_message("\n".join(lines), bot_token, chat_id)
 
-    # Raporlar metin olarak kalır
-    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": "\n".join(lines), "parse_mode": "Markdown"}
-    requests.post(url, json=payload, timeout=10)
-
+    # Dünya snapshot'ını güncelle (aynı dünyadaki diğer kullanıcılar da taze veri üzerinden hesap yapsın)
     now_stats["timestamp"] = datetime.now(timezone.utc).isoformat()
     ref.set(now_stats)
 
-# ====================== ANA MODÜL (FETİH TAKİBİ) ======================
-def check_conquer_notifications(config):
-    """Fetihleri kontrol eder ve tabloyu resim olarak gönderir"""
-    print("🔍 Fetih kontrolü (Resim Tablosu)...")
-    
-    p_settings = config.get('periodic_reports', {})
+def process_user_conquests(user_config, conquests_lines, p_map, a_map, v_map):
+    """Çekilmiş fetih verilerini kullanıcının filtrelerine göre tarayıp mesaj atar"""
+    p_settings = user_config.get('periodic_reports', {})
     track_all = p_settings.get('trackAllConquests', False)
+    bot_token = user_config['global_settings']['telegram_bot_token']
+    chat_id = user_config['global_settings']['telegram_chat_id']
 
-    check_ref = db.collection('worlds').document(WORLD_ID).collection('config').document('last_conquer_check')
-    check_doc = check_ref.get()
-    now_ts = int(time.time())
+    monitored_p = {p['name']: p.get('active_filters', []) for p in user_config.get('monitored_players', [])}
+    monitored_t = {t['tag']: t.get('active_filters', []) for t in user_config.get('monitored_tribes', [])}
 
-    if check_doc.exists:
-        last_ts = check_doc.to_dict().get('timestamp', 0)
-        if last_ts > now_ts or (now_ts - last_ts) > 86400:
-            last_ts = now_ts - 3600 # Hata varsa son 1 saate dön
-    else:
-        last_ts = now_ts - 3600
-
-    url = f"{BASE_URL}/interface.php?func=get_conquer&since={last_ts}"
-    try:
-        lines = requests.get(url, timeout=10).text.strip().splitlines()
-        if not lines: return
-    except: return
-
-    p_map, a_map, v_map = get_world_data_maps()
-    monitored_p = {p['name']: p.get('active_filters', []) for p in config.get('monitored_players', [])}
-    monitored_t = {t['tag']: t.get('active_filters', []) for t in config.get('monitored_tribes', [])}
-
-    # Resim tablosu için satırları topla (Dizi olarak)
     table_rows = []
-    current_max_ts = last_ts
 
-    for line in lines:
+    for line in conquests_lines:
         parts = line.split(',')
         if len(parts) < 4: continue
         v_id, ts, new_id, old_id = parts[0], int(parts[1]), parts[2], parts[3]
         
-        if ts > current_max_ts: current_max_ts = ts
-
-        # Veri Hazırlama
         v_info = v_map.get(v_id, {"coord": "??|?? (K??)", "pts": "???"})
         new_d = p_map.get(new_id, {"name": "Unknown", "tag": ""})
         old_d = p_map.get(old_id, {"name": "Barbarian", "tag": ""})
         
-        # İsim(Klan) Formatı
         new_txt = f"{new_d['name']}({new_d['tag']})" if new_d['tag'] else new_d['name']
         old_txt = f"{old_d['name']}({old_d['tag']})" if old_d['tag'] else old_d['name']
         
-        # Filtreleme & Tip
-        tip = "G" # Gain
-        if old_id == "0": tip = "B" # Barbarian
-        elif new_d['tag'] == old_d['tag'] and new_d['tag'] != "": tip = "I" # Internal
+        tip = "G"
+        if old_id == "0": tip = "B"
+        elif new_d['tag'] == old_d['tag'] and new_d['tag'] != "": tip = "I"
 
         is_monitored = (new_d['name'] in monitored_p or old_d['name'] in monitored_p or 
                         new_d['tag'] in monitored_t or old_d['tag'] in monitored_t)
 
         if track_all or is_monitored:
             tr_time = datetime.fromtimestamp(ts, tz=timezone.utc) + timedelta(hours=3)
-            t_str = tr_time.strftime('%H:%M')
-            # Resim tablosu satırı: Saat | Yeni | Eski | Köy | Puan | T
-            row_data = [t_str, new_txt[:16], old_txt[:16], v_info['coord'], v_info['pts'], tip]
+            row_data = [tr_time.strftime('%H:%M'), new_txt[:16], old_txt[:16], v_info['coord'], v_info['pts'], tip]
             table_rows.append(row_data)
 
     if table_rows:
-        # 1. Metin tablosunu oluşturma mantığını siliyoruz.
-        # 2. generate_table_image fonksiyonu ile resim oluşturuyoruz.
-        # 3. send_telegram_photo ile gönderiyoruz.
-        
-        # Resmi Oluştur
         photo_bytes = generate_table_image(table_rows)
-        
-        # Telegram Mesajı
-        caption = "🌍 *GLOBAL CONQUER REPORT*\n*T: G=Gain, B=Barb, I=Internal*"
-        send_telegram_photo(caption, photo_bytes)
+        caption = "🌍 *CONQUER REPORT*\n*T: G=Gain, B=Barb, I=Internal*"
+        send_telegram_photo(caption, photo_bytes, bot_token, chat_id)
 
-    check_ref.set({"timestamp": current_max_ts})
-
-# ====================== GÜVENLİK VE LİSANS KONTROLÜ ======================
-def verify_license(config):
-    """Kullanıcının lisans anahtarını Firebase'deki kasa ile karşılaştırır"""
-    print("🔐 Güvenlik duvarı: Lisans kontrol ediliyor...")
-    
-    # React'ten gelen şifreyi al
-    global_settings = config.get('global_settings', {})
-    special_id = global_settings.get('special_access_id', '').strip()
-
-    # Şifre yoksa veya boşsa sistemi kapat
-    if not special_id or special_id == "[EMPTY]":
-        print("❌ YETKİSİZ ERİŞİM: Lisans anahtarı bulunamadı! Lütfen React panelinden 66 haneli ID'nizi oluşturun.")
-        exit(1)
-
-    try:
-        # Kasanın (admin_system > licenses) içine bak
-        license_doc = db.collection('admin_system').document('licenses').get()
-        
-        if not license_doc.exists:
-            print("❌ SİSTEM HATASI: 'admin_system/licenses' kasası Firebase'de bulunamadı!")
-            exit(1)
-        
-        # Kasadaki onaylı şifreleri (Array) al
-        approved_keys = license_doc.to_dict().get('valid_keys', [])
-        
-        # Kullanıcının şifresi kasada yoksa sistemi kapat
-        if special_id not in approved_keys:
-            # Şifrenin sadece ilk 10 hanesini gösterelim ki loglardan çalınmasın
-            print(f"🚫 YETKİSİZ ERİŞİM: Bu lisans ID'si ({special_id[:10]}...) yönetici tarafından onaylanmamış!")
-            exit(1)
-            
-        print("✅ LİSANS ONAYLANDI! Sisteme giriş yapılıyor...")
-    except Exception as e:
-        print(f"🔥 Lisans doğrulama servisi çöktü: {e}")
-        exit(1)
-        
 # ====================== ANA AKIŞ ======================
 if __name__ == "__main__":
     try:
-        # 1. TÜRKİYE SAATİNİ (UTC+3) HESAPLA
         tr_now = datetime.now(timezone.utc) + timedelta(hours=3)
-        print(f"🚀 TW Engine Başlatıldı: {tr_now.strftime('%Y-%m-%d %H:%M:%S')} (TRT)")
+        print(f"🚀 TW Engine Multi-Tenant Başlatıldı: {tr_now.strftime('%Y-%m-%d %H:%M:%S')} (TRT)")
         
-        # 2. AYARLARI ÇEK
-        config_doc = db.collection('worlds').document(WORLD_ID).collection('config').document('main_settings').get()
-        if not config_doc.exists:
-            print("❌ Firebase config bulunamadı!")
+        # 1. GEÇERLİ LİSANSLARI ÇEK (Güvenlik Duvarı)
+        valid_keys_doc = db.collection('admin_system').document('licenses').get()
+        if not valid_keys_doc.exists:
+            print("❌ SİSTEM HATASI: 'admin_system/licenses' bulunamadı!")
             exit(1)
+        approved_keys = valid_keys_doc.to_dict().get('valid_keys', [])
+
+        # 2. KULLANICILARI DÜNYALARA GÖRE GRUPLA (Optimizasyon için)
+        worlds_cache = {}
+        users_docs = db.collection('users').stream()
+
+        for user_doc in users_docs:
+            user_id = user_doc.id
+            # Lisans onaylı değilse bu kullanıcıyı atla
+            if user_id not in approved_keys:
+                print(f"🚫 Yetkisiz erişim denemesi veya süresi dolmuş lisans engellendi: {user_id[:10]}...")
+                continue
+
+            user_config = user_doc.to_dict()
+            gs = user_config.get('global_settings', {})
+            world_link = gs.get('world_link', '').strip().rstrip('/')
+            bot_token = gs.get('telegram_bot_token', '')
+            chat_id = gs.get('telegram_chat_id', '')
+
+            # Gerekli bilgiler eksikse atla
+            if not world_link or not bot_token or not chat_id or bot_token == "*****HIDDEN*****":
+                continue
+                
+            world_id = world_link.split('//')[-1].split('.')[0] # Örn: ptc1
+
+            if world_id not in worlds_cache:
+                worlds_cache[world_id] = {
+                    'base_url': world_link,
+                    'users': [],
+                    'maps_fetched': False,
+                    'p_map': None, 'a_map': None, 'v_map': None,
+                    'conquests_lines': []
+                }
+            worlds_cache[world_id]['users'].append(user_config)
+
+        # 3. HER DÜNYAYI VE İÇİNDEKİ KULLANICILARI İŞLE
+        now_ts = int(time.time())
+
+        for world_id, w_data in worlds_cache.items():
+            print(f"\n🌍 İşleniyor: Dünya [{world_id}] - Toplam {len(w_data['users'])} kullanıcı aktif.")
+            base_url = w_data['base_url']
+
+            # --- A. DÜNYA FETİH VERİLERİNİ ÇEK (Sadece 1 Kere) ---
+            check_ref = db.collection('worlds').document(world_id).collection('config').document('last_conquer_check')
+            check_doc = check_ref.get()
+            last_ts = check_doc.to_dict().get('timestamp', 0) if check_doc.exists else now_ts - 3600
             
-        config = config_doc.to_dict()
+            # 86400 (1 gün) veya gelecek zaman hatası varsa son 1 saate çek
+            if last_ts > now_ts or (now_ts - last_ts) > 86400: last_ts = now_ts - 3600 
 
-        # 3. KAPIYI KONTROL ET (GÜVENLİK ONAYI)
-        verify_license(config)
+            url = f"{base_url}/interface.php?func=get_conquer&since={last_ts}"
+            try:
+                conquests_text = requests.get(url, timeout=10).text.strip()
+                if conquests_text:
+                    w_data['conquests_lines'] = conquests_text.splitlines()
+            except Exception as e:
+                print(f"Fetih çekme hatası ({world_id}): {e}")
 
-        # 4. TELEGRAM AYARLARINI GÜNCELLE
-        sc = config.get('global_settings', {}).get('telegram_chat_id')
-        if sc and sc != "[EMPTY]": 
-            TELEGRAM_CHAT_ID = sc
-
-        # 5. FETİHLERİ KONTROL ET (Resimli Tablo)
-        check_conquer_notifications(config) 
-
-       # 6. RAPOR MODLARINI BELİRLE (Türkiye Saatine Göre)
-        p_settings = config.get('periodic_reports', {})
-        modes = []
-        
-        # SAATLİK RAPOR (Sadece saat başlarında çalışır, örn: 15:00 - 15:09 arası)
-        if p_settings.get("hourlyReport") and tr_now.minute < 10: 
-            modes.append("hourly")
+            # Eğer fetih varsa, harita verilerini (isim, köy koordinat) de 1 kere çek
+            current_max_ts = last_ts
+            if w_data['conquests_lines']:
+                print(f"🔍 {len(w_data['conquests_lines'])} yeni fetih bulundu, haritalar indiriliyor...")
+                w_data['p_map'], w_data['a_map'], w_data['v_map'] = get_world_data_maps(base_url)
+                w_data['maps_fetched'] = True
+                
+                # Yeni max_ts'i hesapla
+                for line in w_data['conquests_lines']:
+                    parts = line.split(',')
+                    if len(parts) >= 2:
+                        ts = int(parts[1])
+                        if ts > current_max_ts: current_max_ts = ts
             
-        # GÜNLÜK RAPOR (Sadece Sabah 09:00 - 09:09 TRT arasında çalışır)
-        if tr_now.hour == 9 and tr_now.minute < 10 and p_settings.get("dailyReport"): 
-            modes.append("daily")
-            
-        # HAFTALIK RAPOR (Sadece Pazar günleri sabah 09:00 - 09:09 TRT arasında çalışır)
-        if tr_now.hour == 9 and tr_now.minute < 10 and tr_now.weekday() == 6 and p_settings.get("weeklyReport"): 
-            modes.append("weekly")
+            # --- B. BU DÜNYADAKİ KULLANICILARI DÖNGÜYE SOK ---
+            for user_config in w_data['users']:
+                user_log_name = user_config['global_settings']['telegram_chat_id']
+                print(f"  👤 İşleniyor: Kullanıcı/ChatID -> {user_log_name}")
 
-        # 7. PERİYODİK RAPORLARI ÇALIŞTIR
-        for mode in modes:
-            print(f"📊 {mode.upper()} raporları hazırlanıyor...")
-            for p in config.get('monitored_players', []):
-                process_periodic_report(p['name'], "Player", mode, p_settings)
-            for t in config.get('monitored_tribes', []):
-                process_periodic_report(t['tag'], "Tribe", mode, p_settings)
+                # 1. Fetihleri Kullanıcıya Göre Filtrele ve Gönder
+                if w_data['conquests_lines']:
+                    process_user_conquests(user_config, w_data['conquests_lines'], w_data['p_map'], w_data['a_map'], w_data['v_map'])
 
-        print("✅ TW Engine işlemi tamamlandı.")
+                # 2. Periyodik Raporları Belirle ve Gönder
+                p_settings = user_config.get('periodic_reports', {})
+                modes = []
+                
+                # TRT saatlerine göre kontrol
+                if p_settings.get("hourlyReport") and tr_now.minute < 10: modes.append("hourly")
+                if p_settings.get("dailyReport") and tr_now.hour == 9 and tr_now.minute < 10: modes.append("daily")
+                if p_settings.get("weeklyReport") and tr_now.hour == 9 and tr_now.minute < 10 and tr_now.weekday() == 6: modes.append("weekly")
+
+                for mode in modes:
+                    for p in user_config.get('monitored_players', []):
+                        process_periodic_report(world_id, base_url, user_config, p['name'], "Player", mode)
+                    for t in user_config.get('monitored_tribes', []):
+                        process_periodic_report(world_id, base_url, user_config, t['tag'], "Tribe", mode)
+
+            # Dünya işlemleri bitince, o dünyanın son fetih saatini güncelle
+            check_ref.set({"timestamp": current_max_ts})
+
+        print("\n✅ Tüm dünyalar ve kullanıcılar için TW Engine işlemi tamamlandı.")
         
     except Exception as e:
         print(f"🔥 KRİTİK HATA: {e}")
