@@ -19,7 +19,7 @@ db = firestore.client()
 
 # ====================== YARDIMCI FONKSİYONLAR ======================
 def generate_table_image(rows):
-    """Verileri şık bir koyu tema tablo resmine dönüştürür"""
+    """Verileri ızgara (kareli) bir tablo resmine dönüştürür"""
     headers = ["Saat", "Yeni Sahip", "Eski Sahip", "Köy (Kıta)", "Puan", "T"]
     font_size = 14
     try:
@@ -30,37 +30,52 @@ def generate_table_image(rows):
         char_w = 7.0
 
     col_widths = [6, 18, 18, 15, 9, 3]
-    cell_h = 28
+    cell_h = 30 # Biraz daha genişlik çizgiler için iyi olur
     margin = 20
     
-    width = int(sum(col_widths) * char_w + (len(col_widths) * 10) + (margin * 2))
-    height = (len(rows) + 2) * cell_h + (margin * 2)
+    # Sütunların başlangıç X koordinatlarını hesapla
+    x_positions = [margin]
+    current_x = margin
+    for w in col_widths:
+        current_x += w * char_w + 12
+        x_positions.append(current_x)
+
+    width = int(x_positions[-1] + margin)
+    height = (len(rows) + 1) * cell_h + (margin * 2)
 
     img = Image.new("RGB", (width, height), (25, 25, 25))
     draw = ImageDraw.Draw(img)
+    line_color = (60, 60, 60) # Çizgi rengi (koyu gri)
 
-    x_offset = margin
+    # --- DİKEY ÇİZGİLER ---
+    for x in x_positions:
+        draw.line((x, margin, x, height - margin), fill=line_color, width=1)
+
+    # --- YATAY ÇİZGİLER & VERİLER ---
+    # Üst kenar çizgisi
+    draw.line((margin, margin, x_positions[-1], margin), fill=line_color, width=1)
+    
+    # Başlıkları Yaz
+    y = margin
     for i, h in enumerate(headers):
-        align = ">" if i == 4 else "<"
-        text_format = f"{h:{align}{col_widths[i]}}"
-        draw.text((x_offset, margin), text_format, font=font, fill=(255, 215, 0))
-        x_offset += col_widths[i] * char_w + 10
+        draw.text((x_positions[i] + 5, y + 5), h, font=font, fill=(255, 215, 0))
+    
+    # Başlık altı çizgisi
+    y += cell_h
+    draw.line((margin, y, x_positions[-1], y), fill=line_color, width=1)
 
-    draw.line((margin, margin + 25, width - margin, margin + 25), fill=(80, 80, 80), width=1)
-
-    y_offset = margin + 35
+    # Satırları Yaz
     for row in rows:
-        x_offset = margin
         for i, cell in enumerate(row):
-            align = ">" if i == 4 else "<"
-            text_format = f"{str(cell):{align}{col_widths[i]}}"
-            draw.text((x_offset, y_offset), text_format, font=font, fill=(230, 230, 230))
-            x_offset += col_widths[i] * char_w + 10
-        y_offset += cell_h
+            draw.text((x_positions[i] + 5, y + 5), str(cell), font=font, fill=(230, 230, 230))
+        y += cell_h
+        # Her satır altına çizgi (Kareli görünüm)
+        draw.line((margin, y, x_positions[-1], y), fill=line_color, width=1)
 
     buf = io.BytesIO()
     img.save(buf, format='PNG')
     return buf.getvalue()
+
 
 def send_telegram_photo(caption, photo_bytes, bot_token, chat_id):
     """Kullanıcıya özel Telegram mesajını fotoğraf olarak gönderir"""
@@ -325,11 +340,22 @@ if __name__ == "__main__":
                 p_settings = user_config.get('periodic_reports', {})
                 modes = []
                 
-                # TRT saatlerine göre kontrol
-                if p_settings.get("hourlyReport") and tr_now.minute < 10: modes.append("hourly")
-                if p_settings.get("dailyReport") and tr_now.hour == 9 and tr_now.minute < 10: modes.append("daily")
-                if p_settings.get("weeklyReport") and tr_now.hour == 9 and tr_now.minute < 10 and tr_now.weekday() == 6: modes.append("weekly")
+                # --- TRT Saatlerine Göre Kontrol (YENİ AYARLAR) ---
+                
+                # SAATLİK RAPOR (Saat başı ilk 5 dakika içinde çalışır)
+                if p_settings.get("hourlyReport") and tr_now.minute < 5: 
+                    modes.append("hourly")
+                
+                # GÜNLÜK RAPOR (Her sabah 09:00 - 09:05 arası)
+                if p_settings.get("dailyReport") and tr_now.hour == 9 and tr_now.minute < 5: 
+                    modes.append("daily")
+                
+                # HAFTALIK RAPOR (Pazartesi sabah 09:00 - 09:05 arası)
+                # weekday() == 0 Pazartesi demektir.
+                if p_settings.get("weeklyReport") and tr_now.weekday() == 0 and tr_now.hour == 9 and tr_now.minute < 5: 
+                    modes.append("weekly")
 
+                # Belirlenen raporları gönder
                 for mode in modes:
                     for p in user_config.get('monitored_players', []):
                         process_periodic_report(world_id, base_url, user_config, p['name'], "Player", mode)
@@ -340,7 +366,7 @@ if __name__ == "__main__":
             check_ref.set({"timestamp": current_max_ts})
 
         print("\n✅ Tüm dünyalar ve kullanıcılar için TW Engine işlemi tamamlandı.")
-        
+
     except Exception as e:
         print(f"🔥 KRİTİK HATA: {e}")
         raise e
