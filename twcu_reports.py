@@ -166,6 +166,95 @@ def get_entity_stats(name, is_tribe, base_url):
         stats["od_sup"] = max(0, stats.get("od_all", 0) - stats["od_att"] - stats["od_def"])
     return stats
 
+def create_entity_map(base_url, target_name, is_tribe):
+    """Oyuncunun veya klanın bulunduğu bölgenin mini haritasını çizer"""
+    print(f"🗺️ Harita oluşturuluyor: {target_name}...")
+    
+    try:
+        # 1. Gerekli ID'leri bul
+        target_player_ids = set()
+        
+        p_req = requests.get(f"{base_url}/map/player.txt", timeout=10).text.splitlines()
+        a_req = requests.get(f"{base_url}/map/ally.txt", timeout=10).text.splitlines()
+        
+        # Eğer klan ise, önce klan ID'sini bul, sonra o klandaki oyuncuları topla
+        if is_tribe:
+            tribe_id = None
+            for line in a_req:
+                parts = line.split(',')
+                if len(parts) > 2 and urllib.parse.unquote_plus(parts[2]) == target_name:
+                    tribe_id = parts[0]
+                    break
+            if not tribe_id: return None
+            
+            for line in p_req:
+                parts = line.split(',')
+                if len(parts) > 2 and parts[2] == tribe_id:
+                    target_player_ids.add(parts[0])
+        else: # Eğer oyuncu ise direkt oyuncu ID'sini bul
+            for line in p_req:
+                parts = line.split(',')
+                if len(parts) > 1 and urllib.parse.unquote_plus(parts[1]) == target_name:
+                    target_player_ids.add(parts[0])
+                    break
+
+        if not target_player_ids: return None
+
+        # 2. Köyleri Tara ve Hedefin Merkezini Bul
+        v_req = requests.get(f"{base_url}/map/village.txt", timeout=10).text.splitlines()
+        all_villages = []
+        target_x, target_y = [], []
+
+        for line in v_req:
+            parts = line.split(',')
+            if len(parts) >= 5:
+                x, y, p_id = int(parts[2]), int(parts[3]), parts[4]
+                all_villages.append((x, y, p_id))
+                if p_id in target_player_ids:
+                    target_x.append(x)
+                    target_y.append(y)
+
+        if not target_x: return None
+
+        # Merkez koordinatları ve kamera açısını belirle (Hedefin etrafında 40 karelik alan)
+        min_x, max_x = max(0, min(target_x) - 20), min(999, max(target_x) + 20)
+        min_y, max_y = max(0, min(target_y) - 20), min(999, max(target_y) + 20)
+        
+        width_grids = max_x - min_x + 1
+        height_grids = max_y - min_y + 1
+        
+        # Resmi 10 kat büyüt (Her köy 10x10 piksel olsun ki net görünsün)
+        scale = 10 
+        img = Image.new("RGB", (width_grids * scale, height_grids * scale), (20, 30, 20)) # Koyu Orman Yeşili Arkaplan
+        draw = ImageDraw.Draw(img)
+
+        # 3. Köyleri Haritaya Çiz
+        for x, y, p_id in all_villages:
+            if min_x <= x <= max_x and min_y <= y <= max_y:
+                # Ekrana çizeceğimiz pikselin yerini hesapla
+                px = (x - min_x) * scale
+                py = (y - min_y) * scale
+                
+                # Renk Belirleme
+                if p_id == "0":
+                    color = (150, 150, 150) # Barbar (Gri)
+                elif p_id in target_player_ids:
+                    color = (0, 255, 255) # Hedef (Parlak Turkuaz)
+                else:
+                    color = (200, 50, 50) # Düşman/Diğer (Kırmızı)
+                    
+                # Köyü kare olarak çiz (Aralarda 1 piksel boşluk bırakarak grid efekti ver)
+                draw.rectangle([px + 1, py + 1, px + scale - 1, py + scale - 1], fill=color)
+
+        buf = io.BytesIO()
+        img.save(buf, format='PNG')
+        return buf.getvalue()
+        
+    except Exception as e:
+        print(f"Harita çizim hatası: {e}")
+        return None
+
+
 # ====================== RAPORLAMA MANTIKLARI ======================
 def process_periodic_report(world_id, base_url, user_config, name, e_type, mode):
     """Kullanıcıya özel saatlik/günlük raporları işler"""
@@ -208,7 +297,18 @@ def process_periodic_report(world_id, base_url, user_config, name, e_type, mode)
     lines.append(f"🏘️ *Villages:* {get_diff('villages'):+} ({now_stats['villages']})")
     lines.append(f"📈 *Points:* {now_stats['points']:,}")
 
-    send_telegram_message("\n".join(lines), bot_token, chat_id)
+    # ===== HARİTA ÖZELLİĞİ =====
+    # Ayarlarda sendMap aktifse metin yerine harita görseliyle birlikte at!
+    if p_settings.get("sendMap"):
+        map_bytes = create_entity_map(base_url, name, is_tribe)
+        if map_bytes:
+            send_telegram_photo("\n".join(lines), map_bytes, bot_token, chat_id)
+        else:
+            # Harita çizilemezse mecburen sadece metin at
+            send_telegram_message("\n".join(lines), bot_token, chat_id)
+    else:
+        # Harita kapalıysa normal metin at
+        send_telegram_message("\n".join(lines), bot_token, chat_id)
 
     # Ne zaman mesaj attığını kaydet ki bir daha atmasın
     now_stats["timestamp"] = tr_now.isoformat()
