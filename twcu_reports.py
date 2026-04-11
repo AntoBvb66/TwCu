@@ -203,7 +203,7 @@ def process_periodic_report(world_id, base_url, user_config, name, e_type, mode)
     now_stats["timestamp"] = datetime.now(timezone.utc).isoformat()
     ref.set(now_stats)
 
-def process_user_conquests(user_config, conquests_lines, p_map, a_map, v_map):
+def process_user_conquests(user_config, conquests_lines, p_map, a_map, v_map,world_id):
     """Çekilmiş fetih verilerini kullanıcının filtrelerine göre tarayıp mesaj atar"""
     p_settings = user_config.get('periodic_reports', {})
     track_all = p_settings.get('trackAllConquests', False)
@@ -241,7 +241,7 @@ def process_user_conquests(user_config, conquests_lines, p_map, a_map, v_map):
 
     if table_rows:
         photo_bytes = generate_table_image(table_rows)
-        caption = "🌍 *CONQUER REPORT*\n*T: G=Gain, B=Barb, I=Internal*"
+        caption = f"🌍 *CONQUER REPORT [{world_id.upper()}]*\n*T: G=Gain, B=Barb, I=Internal*"
         send_telegram_photo(caption, photo_bytes, bot_token, chat_id)
 
 # ====================== ANA AKIŞ ======================
@@ -334,7 +334,7 @@ if __name__ == "__main__":
 
                 # 1. Fetihleri Kullanıcıya Göre Filtrele ve Gönder
                 if w_data['conquests_lines']:
-                    process_user_conquests(user_config, w_data['conquests_lines'], w_data['p_map'], w_data['a_map'], w_data['v_map'])
+                    process_user_conquests(user_config, w_data['conquests_lines'], w_data['p_map'], w_data['a_map'], w_data['v_map'],world_id)
 
                 # 2. Periyodik Raporları Belirle ve Gönder
                 p_settings = user_config.get('periodic_reports', {})
@@ -364,6 +364,7 @@ if __name__ == "__main__":
 
             # Dünya işlemleri bitince, o dünyanın son fetih saatini güncelle
             check_ref.set({"timestamp": current_max_ts})
+        print(f"  ⏰ TRT: {tr_now.strftime('%H:%M')} | Hourly: {p_settings.get('hourlyReport')} | Daily: {p_settings.get('dailyReport')} | Weekly: {p_settings.get('weeklyReport')}")
 
         print("\n✅ Tüm dünyalar ve kullanıcılar için TW Engine işlemi tamamlandı.")
 
