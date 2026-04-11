@@ -5,7 +5,7 @@ import firebase_admin # type: ignore
 import urllib.parse
 import time
 import io
-from flask import Flask
+from flask import Flask # type: ignore
 from threading import Thread
 from firebase_admin import credentials, firestore # type: ignore
 from datetime import datetime, timezone, timedelta
