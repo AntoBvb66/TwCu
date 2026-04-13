@@ -1,19 +1,23 @@
 /* ====================== NotificationSettings.css ====================== */
 
 :root {
-  --bg-main: #0b1121;
-  --bg-panel: rgba(15, 23, 42, 0.75);
-  --bg-block: rgba(30, 41, 59, 0.5);
-  --bg-card: rgba(15, 23, 42, 0.8);
-  --border-subtle: rgba(71, 85, 105, 0.5);
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
+  /* Karanlık / Siyah Tonlar */
+  --bg-main: #0a0a0a;
+  --bg-panel: rgba(20, 20, 20, 0.85);
+  --bg-block: rgba(30, 30, 30, 0.6);
+  --bg-card: rgba(25, 25, 25, 0.9);
+  --border-subtle: rgba(80, 80, 80, 0.4);
   
-  --color-player: #3b82f6;
-  --color-tribe: #8b5cf6;
+  /* Metin Renkleri */
+  --text-primary: #f8fafc;
+  --text-secondary: #a1a1aa;
+  
+  /* Vurgu Renkleri - Sarı & Siyah Konsepti */
+  --color-player: #FDE100; /* Ana Sarı Vurgu */
+  --color-tribe: #fb923c;  /* Klan için tamamlayıcı Turuncu/Amber */
   --color-danger: #ef4444;
-  --color-save: #10b981;
-  --color-save-hover: #059669;
+  --color-save: #FDE100;
+  --color-save-hover: #eab308;
   
   --radius-lg: 16px;
   --radius-md: 10px;
@@ -22,7 +26,7 @@
 
 .twcu-container {
   font-family: 'Inter', system-ui, sans-serif;
-  background: radial-gradient(circle at top center, #1e293b 0%, var(--bg-main) 100%);
+  background: radial-gradient(circle at top center, #1a1a1a 0%, var(--bg-main) 100%);
   min-height: 100vh;
   padding: 40px 20px;
   color: var(--text-primary);
@@ -39,11 +43,114 @@
   border-radius: var(--radius-lg);
   padding: 32px;
   border: 1px solid var(--border-subtle);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.twcu-header-container { text-align: center; margin-bottom: 32px; }
-.twcu-header { color: #e0e7ff; margin: 0 0 8px 0; font-size: 26px; font-weight: 700; }
-.twcu-subtitle { color: var(--text-secondary); font-size: 15px; margin: 0; }
+.twcu-header-container {
+  position: relative;
+  margin-bottom: 40px;
+  padding: 0 8px;
+}
+
+.twcu-header-main {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.twcu-header {
+  color: #FDE100;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  margin: 0 0 10px 0;
+  text-shadow: 0 2px 15px rgba(253, 225, 0, 0.25);
+}
+
+.twcu-subtitle {
+  color: var(--text-secondary);
+  font-size: 15.2px;
+  margin: 0;
+  line-height: 1.45;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ====================== SAĞDAKİ BİLGİ BUTONU ====================== */
+
+.twcu-info-btn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: rgba(30, 30, 35, 0.9);
+  border: 1px solid rgba(80, 80, 90, 0.6);
+  color: #d1d5db;
+  padding: 10px 18px;
+  border-radius: 9999px;           /* Tam yuvarlak pill */
+  font-size: 13.8px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+.twcu-info-btn:hover {
+  background: rgba(40, 40, 48, 0.95);
+  border-color: #FDE100;
+  color: #fff;
+  box-shadow: 0 0 0 3px rgba(253, 225, 0, 0.2);
+  transform: translateY(-50%) scale(1.04);
+}
+
+.twcu-info-btn svg {
+  width: 18px;
+  height: 18px;
+  color: inherit;
+}
+
+.twcu-info-btn:hover svg {
+  color: #FDE100;
+}
+
+/* ====================== MOBİL UYUM ====================== */
+
+@media (max-width: 720px) {
+  .twcu-header-container {
+    padding: 0 4px;
+  }
+
+  .twcu-info-btn {
+    position: static;           /* Mobilde sağdan alıp alta taşıyoruz */
+    transform: none;
+    margin: 16px auto 0;
+    width: fit-content;
+  }
+
+  .twcu-header {
+    font-size: 25px;
+  }
+
+  .twcu-subtitle {
+    font-size: 14.8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .twcu-info-btn {
+    padding: 9px 16px;
+    font-size: 13px;
+    gap: 6px;
+  }
+}
+
 
 .section-block {
   background: var(--bg-block);
@@ -60,12 +167,12 @@
 .section-title::before { content: ''; display: block; width: 4px; height: 16px; background: var(--color-player); border-radius: 4px; }
 
 .settings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
-.form-group label { display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 13px; font-weight: 500; text-transform: uppercase; }
+.form-group label { display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 13px; font-weight: 500; }
 .twcu-input {
-  width: 100%; padding: 12px 16px; background: rgba(15, 23, 42, 0.6);
+  width: 100%; padding: 12px 16px; background: rgba(0, 0, 0, 0.6);
   border: 1px solid var(--border-subtle); border-radius: var(--radius-md); color: var(--text-primary); box-sizing: border-box;
 }
-.twcu-input:focus { outline: none; border-color: var(--color-player); }
+.twcu-input:focus { outline: none; border-color: var(--color-player); box-shadow: 0 0 8px rgba(253, 225, 0, 0.2); }
 
 /* --- YUVARLAK İKON TOGGLE TASARIMI --- */
 .circle-filter-group {
@@ -80,19 +187,19 @@
 .circle-toggle .icon-wrapper {
   width: 48px; height: 48px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  background: transparent; border: 2px solid #475569; color: #94a3b8;
+  background: transparent; border: 2px solid #333; color: #71717a;
   transition: var(--transition);
 }
 
 .circle-toggle .icon-wrapper svg { width: 24px; height: 24px; }
-.circle-toggle .icon-label { font-size: 12px; font-weight: 500; color: #94a3b8; transition: var(--transition); }
+.circle-toggle .icon-label { font-size: 12px; font-weight: 500; color: #71717a; transition: var(--transition); }
 
 .circle-toggle.active .icon-wrapper {
-  background: rgba(59, 130, 246, 0.15); border-color: #3b82f6; color: #60a5fa;
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+  background: rgba(253, 225, 0, 0.1); border-color: var(--color-player); color: var(--color-player);
+  box-shadow: 0 0 15px rgba(253, 225, 0, 0.15);
 }
-.circle-toggle.active .icon-label { color: #60a5fa; }
-.circle-toggle:hover .icon-wrapper { transform: translateY(-2px); border-color: #60a5fa; color: #60a5fa;}
+.circle-toggle.active .icon-label { color: var(--color-player); }
+.circle-toggle:hover .icon-wrapper { transform: translateY(-2px); border-color: var(--color-player); color: var(--color-player);}
 
 .circle-toggle.mini { width: 50px; gap: 4px; }
 .circle-toggle.mini .icon-wrapper { width: 38px; height: 38px; }
@@ -101,25 +208,25 @@
 
 /* --- MANAGE NOTIFICATIONS LISTE --- */
 .entities-container { display: flex; flex-direction: column; gap: 12px; }
-.empty-state { text-align: center; padding: 30px; color: var(--text-secondary); background: rgba(15, 23, 42, 0.4); border-radius: var(--radius-md); border: 1px dashed var(--border-subtle); font-size: 14px; }
+.empty-state { text-align: center; padding: 30px; color: var(--text-secondary); background: rgba(0, 0, 0, 0.4); border-radius: var(--radius-md); border: 1px dashed var(--border-subtle); font-size: 14px; }
 
 .entity-row {
   background: var(--bg-card); border-radius: var(--radius-md); padding: 16px 20px;
   display: flex; align-items: center; justify-content: space-between; gap: 20px;
   border: 1px solid var(--border-subtle); transition: var(--transition);
 }
-.entity-row:hover { border-color: rgba(59, 130, 246, 0.5); }
+.entity-row:hover { border-color: rgba(253, 225, 0, 0.5); }
 
 .entity-info-col { display: flex; flex-direction: column; gap: 4px; min-width: 140px; }
 .entity-name { margin: 0; font-size: 18px; font-weight: 500; color: var(--text-primary); }
-.type-badge { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+.type-badge { font-size: 11px; font-weight: 700; letter-spacing: 1px; }
 .type-badge.player { color: var(--color-player); }
 .type-badge.tribe { color: var(--color-tribe); }
 
 .entity-filters-col { display: flex; gap: 12px; flex: 1; justify-content: center; }
 
 .btn-trash {
-  background: transparent; border: none; padding: 8px; color: #64748b;
+  background: transparent; border: none; padding: 8px; color: #52525b;
   cursor: pointer; transition: var(--transition); border-radius: 8px;
 }
 .btn-trash svg { width: 24px; height: 24px; }
@@ -127,62 +234,31 @@
 
 /* --- Ekleme ve Kaydetme Butonları --- */
 .action-buttons { display: flex; gap: 16px; margin-top: 16px; }
-.btn { padding: 12px 24px; border: none; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; color: white; flex: 1; transition: var(--transition); }
+.btn { padding: 12px 24px; border: none; border-radius: var(--radius-md); font-weight: 700; cursor: pointer; color: #000; flex: 1; transition: var(--transition); font-size: 13px; letter-spacing: 0.5px;}
 .btn-player { background: var(--color-player); }
 .btn-tribe { background: var(--color-tribe); }
-.btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+.btn:hover { transform: translateY(-2px); filter: brightness(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
 
-/* --- SİLİNEN BUTON VE JSON KISMI --- */
+/* --- KAYDET BUTONU --- */
 .btn-save {
   width: 100%;
   background: var(--color-save);
+  color: #000;
   padding: 16px;
   font-size: 16px;
+  font-weight: 800;
   margin: 16px 0;
   border-radius: var(--radius-lg);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 15px rgba(253, 225, 0, 0.2);
 }
-.btn-save:hover { background: var(--color-save-hover); box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3); }
+.btn-save:hover { background: var(--color-save-hover); box-shadow: 0 6px 20px rgba(253, 225, 0, 0.3); }
 
-.json-preview {
-  background: #0f172a;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-subtle);
-  margin-top: 24px;
-  overflow: hidden;
-}
-
-.json-header {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 10px 16px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.json-preview pre {
-  margin: 0;
-  padding: 16px;
-  font-family: 'JetBrains Mono', 'Consolas', monospace;
-  font-size: 13px;
-  color: #a5b4fc;
-  white-space: pre-wrap;
-  overflow-x: auto;
-  line-height: 1.5;
-}
-
-@media (max-width: 768px) {
-  .entity-row { flex-direction: column; align-items: center; text-align: center; }
-  .entity-info-col { align-items: center; }
-  .entity-filters-col { flex-wrap: wrap; }
-}
+/* --- TOGGLE (SWITCH) TASARIMI --- */
 .toggle-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 32px;
-  background: rgba(15, 23, 42, 0.4);
+  background: rgba(0, 0, 0, 0.4);
   padding: 20px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-subtle);
@@ -196,9 +272,8 @@
 
 .toggle-column-title {
   margin: 0 0 8px 0;
-  color: #cbd5e1;
+  color: #a1a1aa;
   font-size: 14px;
-  text-transform: uppercase;
   letter-spacing: 1px;
   border-bottom: 1px solid var(--border-subtle);
   padding-bottom: 8px;
@@ -220,31 +295,34 @@
   position: relative;
   width: 44px;
   height: 24px;
-  background-color: #334155;
+  background-color: #333;
   border-radius: 24px;
   transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
+  border: 1px solid #444;
 }
 
 .toggle-slider::before {
   content: "";
   position: absolute;
-  height: 18px;
-  width: 18px;
+  height: 16px;
+  width: 16px;
   left: 3px;
   bottom: 3px;
-  background-color: white;
+  background-color: #888;
   border-radius: 50%;
   transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .modern-toggle input:checked + .toggle-slider {
   background-color: var(--color-player);
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+  border-color: var(--color-player);
+  box-shadow: 0 0 10px rgba(253, 225, 0, 0.3);
 }
 
 .modern-toggle input:checked + .toggle-slider::before {
   transform: translateX(20px);
+  background-color: #000;
 }
 
 .toggle-label {
@@ -255,9 +333,8 @@
   flex-direction: column;
 }
 
-.toggle-label small {
-  color: #64748b;
-  font-size: 11px;
-  font-weight: 400;
-  margin-top: 2px;
+@media (max-width: 768px) {
+  .entity-row { flex-direction: column; align-items: center; text-align: center; }
+  .entity-info-col { align-items: center; }
+  .entity-filters-col { flex-wrap: wrap; }
 }

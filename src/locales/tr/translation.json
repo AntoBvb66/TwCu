@@ -856,6 +856,101 @@
       "noData": "Henüz veri çekilmedi.",
       "deleteBtn": "Sil"
     }
+  },
+  "notificationSettings": {
+    "header": {
+      "title": "TwCu Bildirim Merkezi",
+      "subtitle": "Oynadığınız tüm dünyalar için bildirim ayarlarınızı buradan yönetebilirsiniz",
+      "hideInfo": "Bilgi Gizle",
+      "showInfo": "Bilgi Göster"
+    },
+    "infoPanel": {
+      "title": "Nasıl Kullanılır?",
+      "profileNameTitle": "Profil Adı:",
+      "profileNameDesc": "Bu ayar grubunu hatırlamanız için belirlediğiniz bir isim (Kullanıcı adınız, Nickiniz veya Dünya adı olabilir). <u>Kesinlikle boş bırakılamaz</u> ve sistemde sizi tanımlayan bir etikettir.",
+      "specialIdTitle": "Special Access ID:",
+      "specialIdDesc": "TwCu'nun arka planında sizi eşleştiren eşsiz 66 karakterlik koddur. Eğer elinizde yoksa <em>Generate ID</em> butonuna basarak rastgele bir tane oluşturmalısınız.",
+      "worldLinkTitle": "Dünya Linki:",
+      "worldLinkDesc": "Oynadığınız dünyanın kök adresidir. (Örn: <code>https://tr1.klanlar.org/</code>). Bot, verileri bu adresten çeker.",
+      "botTokenTitle": "Telegram Bot Token & Chat ID:",
+      "botTokenDesc": "Bildirimleri almak için Telegram'da kendi oluşturduğunuz botun Token'ı ve mesajların iletileceği sohbetin (Chat) ID'sidir. Telegram ID: @userinfobot'u bulup /start yazın. Bot Token: @BotFather'ı bulup /newbot ile bot oluşturun.",
+      "periodicReportsTitle": "Periyodik Raporlar",
+      "periodicReportsDesc": "Saatlik, Günlük veya Haftalık olarak botun size otomatik rapor (Köy durumu, puan vb.) atmasını sağlar ayrıca fotoğraflı seçenek mevcuttur.",
+      "odTrackingTitle": "Yenilen Rakipler Takibi:",
+      "odTrackingDesc": "Saldırı (Attack), Savunma (Defance) ve Destek (Support) kesim puanlarınızdaki değişimleri takip edip size bildirir.",
+      "globalMonitoringTitle": "Global Dünya İzleme",
+      "globalMonitoringDesc": "Sadece kendi hedeflerinizi değil, <u>dünyadaki tüm köy fetihi hareketlerini</u> anlık olarak takip edebilirsiniz. Çok mesaj gelebilir, dikkatli kullanın.",
+      "note": "Not: Bu ayarlar sadece bildirimler içindir, TwCu'nun diğer özelliklerini kullanmak için profil oluşturmanız gerekmez. Özel Erişim Kimliğini Anto Bvb 66 ( TwCobre@protonmail.com ) ile paylaşarak kullanım sağlayabilirsiniz."
+    },
+    "profile": {
+      "mainProfile": "Ana Profil",
+      "newProfile": "Yeni Profil",
+      "unknownWorld": "Bilinmeyen Dünya",
+      "delete": "Sil",
+      "createNewProfile": "Yeni Profil Oluştur"
+    },
+    "filters": {
+      "gains": "Gains",
+      "losses": "Losses",
+      "barbarian": "Barbarian",
+      "selfConquer": "SelfConquer",
+      "internal": "Internal"
+    },
+    "settings": {
+      "basicSettings": "Temel Ayarlar",
+      "profileNameLabel": "Profil Adı (Nick / Kullanıcı Adı)",
+      "required": "*Zorunlu",
+      "profileNamePlaceholder": "Örnek: Anto Bvb 66 - Klanlar Tr1",
+      "fieldCannotBeEmpty": "Bu alan boş bırakılamaz.",
+      "specialIdLabel": "Özel Erişim Kimliği",
+      "specialIdPlaceholder": "66 karakterlik lisans ID'nizi girin veya oluşturun",
+      "generateIdBtn": "Özel Erişim Kimliği Oluştur",
+      "worldLinkLabel": "Dünya Linki",
+      "worldLinkPlaceholder": "https://tr1.klanlar.org/",
+      "botTokenLabel": "Telegram Bot Token",
+      "botTokenPlaceholder": "123456789:ABCDEF...",
+      "chatIdLabel": "Telegram Chat ID",
+      "chatIdPlaceholder": "örnek, 1135068175",
+      "saveAllConfigs": "Tüm Ayarları Kaydet"
+    },
+    "reports": {
+      "sectionTitle": "Rapor ve İstatistik Ayarları",
+      "periodicReportsTitle": "Periyodik Raporlar",
+      "odTrackingTitle": "Yenilen Rakipler Takibi:",
+      "globalMonitoringTitle": "🌍 Global Dünya İzleme",
+      "toggles": {
+        "hourlyReport": "Saatlik Rapor",
+        "dailyReport": "Günlük Rapor",
+        "weeklyReport": "Haftalık Rapor",
+        "sendMap": "Harita Resmi Ekle",
+        "trackODAtt": "Yenilen Rakipler Takip - Saldırı",
+        "trackODDef": "Yenilen Rakipler Takip - Savunma",
+        "trackODSup": "Yenilen Rakipler Takip - Destek",
+        "trackAllConquests": "Dünyadaki Tüm Fethileri Takip Et (Çoklu Mesaj Uyarısı!)"
+      }
+    },
+    "targets": {
+      "addNewTarget": "Yeni Hedef Ekle",
+      "inputLabel": "Oyuncu Adı veya Klan Tagı",
+      "inputPlaceholder": "Örn: Oyuncu1, Oyuncu2 veya KLAN1",
+      "clearAll": "Tümünü Temizle",
+      "selectAll": "Tümünü Seç",
+      "addAsPlayer": "+ Oyuncu Olarak Ekle",
+      "addAsTribe": "+ Klan Olarak Ekle",
+      "manageTargets": "Hedef Listesini Yönet",
+      "emptyState": "Henüz takip edilen bir hedef yok."
+    },
+    "alerts": {
+      "confirmDeleteProfile": "Bu dünya ayarlarını tamamen silmek istediğinize emin misiniz?",
+      "idExists": "Zaten bir ID var! Yenisini istiyorsanız önce kutuyu temizleyin.",
+      "emptyTargetName": "Lütfen önce bir isim veya klan tagı girin.",
+      "targetExists": "Girdiğiniz hedefler zaten takip listesinde mevcut!",
+      "profileNameEmpty": "sıradaki profil için 'Profil Adı' boş bırakılamaz! Lütfen önce profil adını girin.",
+      "specialIdEmpty": "profili için Özel Erişim Kimliği eksik. Lütfen ID oluşturun veya girin.",
+      "saveSuccess": "adet profil başarıyla kaydedildi!",
+      "saveError": "adet profil kaydedilirken hata oluştu.",
+      "saveNoData": "Kaydedilecek geçerli bir veri bulunamadı."
+    }
   }
   
 }
