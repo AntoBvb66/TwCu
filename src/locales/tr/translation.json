@@ -22,7 +22,8 @@
       "clanOp": "Klan Operasyon Planlayıcısı",
       "clanTroop": "Klan Operasyon Planlayıcısı (Gelişmiş)",
       "fastSupport": "Hızlı Destek Planlama",
-      "scavengingPlanner": "Temizlik Süreleri Hesaplama"
+      "scavengingPlanner": "Temizlik Süreleri Hesaplama",
+      "notificationSettings": "Bildirim Ayarları"
     }
   },
   "home": {
@@ -31,19 +32,63 @@
       "subtitle": "Zafer, detaylarda ve kusursuz planlamalarda gizlidir. Klanlar serüveninizde size zaman kazandıracak ve klanınızı zafere taşıyacak strateji planlamalar yapın. Başlamak için bir araç seçin."
     },
     "tools": {
-      "opPlanner": { "title": "Kişisel Operasyon Planlayıcı", "desc": "Kaynak ve hedef köyleri eşleştirerek kusursuz bir operasyon şablonu (BBCode) hazırlayın." },
-      "buildingPlanner": { "title": "İnşaat Planlayıcısı", "desc": "Gelişmiş kuyruk simülasyonu ile köyünüzün inşaat planını adım adım tasarlayın." },
-      "unitCalculator": { "title": "Birlik Üretim Hesaplama", "desc": "Bonusları dahil ederek Kışla, Ahır ve Atölye için birim basım sürelerini hesaplayın." },
-      "mapGenerator": { "title": "Harita Oluşturucu", "desc": "Klan forumları için güncel, renklendirilmiş dinamik dünya haritaları oluşturun." },
-      "mapAnalysis": { "title": "Kıta Analizi", "desc": "Dünya haritası üzerinde klanların ve oyuncuların kıta hakimiyetlerini analiz edin." },
-      "productionData": { "title": "Üretim Hesaplama", "desc": "Maden üretim hızlarını, depo kapasitelerini ve dolum sürelerini optimize edin." },
-      "coinMinter": { "title": "Altın Para Planlayıcı", "desc": "Altın Para basmak için en ideal köyü hesaplayın." },
-      "churchPlanner": { "title": "Kilise Planlayıcısı", "desc": "Nüfus tasarrufu sağlayan algoritma ile kilise kapsama alanlarınızı harita üzerinde optimize edin." },
-      "buildingTimes": { "title": "Bina Süreleri Hesaplama", "desc": "Farklı seviyelerdeki binaların inşaat sürelerini saniyesine kadar hesaplayın ve kıyaslama yapın." },
-      "clanOp": { "title": "Klan Operasyon Planlayıcı", "desc": "Tüm klanın köylerini analiz edip akıllı atamalar yapın. Harita destekli kurmay zekasıyla üyelerinize kişiye özel BBCode emirleri dağıtın." },
-      "clanTroop": { "title": "Klan Operasyon Planlayıcı (Birlikli)", "desc": "Tüm klanın birliklerini analiz edip akıllı atamalar yapın. Harita destekli kurmay zekasıyla üyelerinize kişiye özel BBCode emirleri dağıtın." },
-      "fastSupport": { "title": "Hızlı Destek Bulma", "desc": "Hızlı destek almak için bir destek talebi oluşturun." },
-      "scavengingPlanner": { "title": "Temizlik Süreleri Hesaplama", "desc": "Detaylı bir şekilde temizlik sürelerini kıyaslayın." }
+      "opPlanner": {
+        "title": "Kişisel Operasyon Planlayıcı",
+        "desc": "Kaynak ve hedef köyleri eşleştirerek kusursuz bir operasyon şablonu (BBCode) hazırlayın."
+      },
+      "buildingPlanner": {
+        "title": "İnşaat Planlayıcısı",
+        "desc": "Gelişmiş kuyruk simülasyonu ile köyünüzün inşaat planını adım adım tasarlayın."
+      },
+      "unitCalculator": {
+        "title": "Birlik Üretim Hesaplama",
+        "desc": "Bonusları dahil ederek Kışla, Ahır ve Atölye için birim basım sürelerini hesaplayın."
+      },
+      "mapGenerator": {
+        "title": "Harita Oluşturucu",
+        "desc": "Klan forumları için güncel, renklendirilmiş dinamik dünya haritaları oluşturun."
+      },
+      "mapAnalysis": {
+        "title": "Kıta Analizi",
+        "desc": "Dünya haritası üzerinde klanların ve oyuncuların kıta hakimiyetlerini analiz edin."
+      },
+      "productionData": {
+        "title": "Üretim Hesaplama",
+        "desc": "Maden üretim hızlarını, depo kapasitelerini ve dolum sürelerini optimize edin."
+      },
+      "coinMinter": {
+        "title": "Altın Para Planlayıcı",
+        "desc": "Altın Para basmak için en ideal köyü hesaplayın."
+      },
+      "churchPlanner": {
+        "title": "Kilise Planlayıcısı",
+        "desc": "Nüfus tasarrufu sağlayan algoritma ile kilise kapsama alanlarınızı harita üzerinde optimize edin."
+      },
+      "buildingTimes": {
+        "title": "Bina Süreleri Hesaplama",
+        "desc": "Farklı seviyelerdeki binaların inşaat sürelerini saniyesine kadar hesaplayın ve kıyaslama yapın."
+      },
+      "clanOp": {
+        "title": "Klan Operasyon Planlayıcı",
+        "desc": "Tüm klanın köylerini analiz edip akıllı atamalar yapın. Harita destekli kurmay zekasıyla üyelerinize kişiye özel BBCode emirleri dağıtın."
+      },
+      "clanTroop": {
+        "title": "Klan Operasyon Planlayıcı (Birlikli)",
+        "desc": "Tüm klanın birliklerini analiz edip akıllı atamalar yapın. Harita destekli kurmay zekasıyla üyelerinize kişiye özel BBCode emirleri dağıtın."
+      },
+      "fastSupport": {
+        "title": "Hızlı Destek Bulma",
+        "desc": "Hızlı destek almak için bir destek talebi oluşturun."
+      },
+      "scavengingPlanner": {
+        "title": "Temizlik Süreleri Hesaplama",
+        "desc": "Detaylı bir şekilde temizlik sürelerini kıyaslayın."
+      },
+      "notificationSettings": {
+        "title": "Bildirim Ayarları",
+        "desc": "Bildirimlerin nasıl gösterileceğini özelleştirin."
+      }
+
     }
   },
   "footer": {
@@ -201,10 +246,27 @@
       "zero": "0 sn"
     },
     "buildings": [
-      "Ana Bina (HQ)", "Kışla", "Ahır", "Atölye", "İlk Kilise", "Kilise",
-      "Gözetleme Kulesi", "Akademi", "Demirci", "İçtima Meydanı", "Heykel", "Pazar Yeri",
-      "Oduncu", "Kil Ocağı", "Demir Madeni", "Çiftlik", "Depo", "Gizli Depo",
-      "Misyoner", "Altın Para", "Sur"
+      "Ana Bina (HQ)",
+      "Kışla",
+      "Ahır",
+      "Atölye",
+      "İlk Kilise",
+      "Kilise",
+      "Gözetleme Kulesi",
+      "Akademi",
+      "Demirci",
+      "İçtima Meydanı",
+      "Heykel",
+      "Pazar Yeri",
+      "Oduncu",
+      "Kil Ocağı",
+      "Demir Madeni",
+      "Çiftlik",
+      "Depo",
+      "Gizli Depo",
+      "Misyoner",
+      "Altın Para",
+      "Sur"
     ]
   },
   "scavenging": {
@@ -261,7 +323,7 @@
         "c234": "2-3-4 Açıksa",
         "c12": "1-2 Açıksa",
         "c23": "2-3 Açıksa"
-      }     
+      }
     },
     "reference": {
       "title": "📈 Başa Baş Noktası (Kapasite Referans Tablosu)",
@@ -270,7 +332,8 @@
       "eqTimeDaily": "Eşit Süre (Günlük)",
       "eqCapDaily": "Eşit Kapasite (Günlük)",
       "winner": "Avantajlı Taktik"
-    },"chart": {
+    },
+    "chart": {
       "title": "📈 Kapasiteye Göre Günlük Ganimet Eğrisi (Eşit Süre & Bayraksız)",
       "worldConstantInfo": "Dünya Sabiti ({{constant}}) baz alınarak oluşturulmuştur.",
       "unlocked": "Açıksa",
@@ -279,7 +342,6 @@
       "be2": "🔸 {{cap}} Kapasiteyi geçtikten sonra: 1-2-3 taktiği, 2-3 taktiğini sollar."
     }
   },
-
   "churchPlanner": {
     "title": "⛪ Optimum Kilise Planlayıcı",
     "dataInput": "Veri Girişi",
@@ -390,9 +452,19 @@
       "attackLink": "İşlem Linki"
     },
     "units": {
-      "spear": "Mızrakçı", "sword": "Kılıç Ustası", "axe": "Baltacı", "spy": "Casus",
-      "light": "Hafif Atlı", "heavy": "Ağır Atlı", "ram": "Şahmerdan", "catapult": "Mancınık",
-      "knight": "Şövalye", "snob": "Misyoner", "archer": "Okçu", "marcher": "Atlı Okçu", "militia": "Milis"
+      "spear": "Mızrakçı",
+      "sword": "Kılıç Ustası",
+      "axe": "Baltacı",
+      "spy": "Casus",
+      "light": "Hafif Atlı",
+      "heavy": "Ağır Atlı",
+      "ram": "Şahmerdan",
+      "catapult": "Mancınık",
+      "knight": "Şövalye",
+      "snob": "Misyoner",
+      "archer": "Okçu",
+      "marcher": "Atlı Okçu",
+      "militia": "Milis"
     },
     "shortUnits": {
       "ram": "Kami",
@@ -484,9 +556,16 @@
       "attackLink": "İşlem"
     },
     "units": {
-      "spear": "Mızrak", "sword": "Kılıç", "axe": "Balta", "spy": "Casus",
-      "light": "Hafif", "heavy": "Ağır", "ram": "Şah", "catapult": "Manc",
-      "knight": "Şövalye", "snob": "Mis"
+      "spear": "Mızrak",
+      "sword": "Kılıç",
+      "axe": "Balta",
+      "spy": "Casus",
+      "light": "Hafif",
+      "heavy": "Ağır",
+      "ram": "Şah",
+      "catapult": "Manc",
+      "knight": "Şövalye",
+      "snob": "Mis"
     },
     "profiles": {
       "quarter": "Çeyrek",
@@ -570,7 +649,13 @@
       "departure": "Çıkış Zamanı"
     },
     "units": {
-      "spear": "Mızrak", "sword": "Kılıç", "archer": "Okçu", "spy": "Casus", "heavy": "Ağır", "catapult": "Mancınık", "knight": "Şövalye"
+      "spear": "Mızrak",
+      "sword": "Kılıç",
+      "archer": "Okçu",
+      "spy": "Casus",
+      "heavy": "Ağır",
+      "catapult": "Mancınık",
+      "knight": "Şövalye"
     }
   },
   "mapAnalysis": {
@@ -717,9 +802,19 @@
       "attackLink": "İşlem Linki"
     },
     "units": {
-      "spear": "Mızrakçı", "sword": "Kılıç Ustası", "axe": "Baltacı", "spy": "Casus",
-      "light": "Hafif Atlı", "heavy": "Ağır Atlı", "ram": "Şahmerdan", "catapult": "Mancınık",
-      "knight": "Şövalye", "snob": "Misyoner", "archer": "Okçu", "marcher": "Atlı Okçu", "militia": "Milis"
+      "spear": "Mızrakçı",
+      "sword": "Kılıç Ustası",
+      "axe": "Baltacı",
+      "spy": "Casus",
+      "light": "Hafif Atlı",
+      "heavy": "Ağır Atlı",
+      "ram": "Şahmerdan",
+      "catapult": "Mancınık",
+      "knight": "Şövalye",
+      "snob": "Misyoner",
+      "archer": "Okçu",
+      "marcher": "Atlı Okçu",
+      "militia": "Milis"
     }
   },
   "productionData": {
@@ -808,9 +903,16 @@
       "none": "-"
     },
     "units": {
-      "spear": "Mızrakçı", "sword": "Kılıç ustası", "axe": "Baltacı", "archer": "Okçu",
-      "spy": "Casus", "lc": "Hafif atlı", "ma": "Atlı okçu", "hc": "Ağır atlı",
-      "ram": "Şahmerdan", "cat": "Mancınık"
+      "spear": "Mızrakçı",
+      "sword": "Kılıç ustası",
+      "axe": "Baltacı",
+      "archer": "Okçu",
+      "spy": "Casus",
+      "lc": "Hafif atlı",
+      "ma": "Atlı okçu",
+      "hc": "Ağır atlı",
+      "ram": "Şahmerdan",
+      "cat": "Mancınık"
     }
   },
   "mapGenerator": {
@@ -867,20 +969,27 @@
     "infoPanel": {
       "title": "Nasıl Kullanılır?",
       "profileNameTitle": "Profil Adı:",
-      "profileNameDesc": "Bu ayar grubunu hatırlamanız için belirlediğiniz bir isim (Kullanıcı adınız, Nickiniz veya Dünya adı olabilir). <u>Kesinlikle boş bırakılamaz</u> ve sistemde sizi tanımlayan bir etikettir.",
-      "specialIdTitle": "Special Access ID:",
-      "specialIdDesc": "TwCu'nun arka planında sizi eşleştiren eşsiz 66 karakterlik koddur. Eğer elinizde yoksa <em>Generate ID</em> butonuna basarak rastgele bir tane oluşturmalısınız.",
+      "profileNameDesc": "Bu ayar grubunu hatırlamanız için belirlediğiniz bir isimdir. <u>Boş bırakılamaz</u> ve sistemde sizi tanımlayan temel etikettir.",
+      "specialIdTitle": "Özel Erişim Kimliği (Special ID):",
+      "specialIdDesc": "Sistemle eşleşmenizi sağlayan eşsiz koddur. Eğer elinizde yoksa, <em>Generate ID</em> butonuna tıklayarak rastgele oluşturabilirsiniz.",
       "worldLinkTitle": "Dünya Linki:",
-      "worldLinkDesc": "Oynadığınız dünyanın kök adresidir. (Örn: <code>https://tr1.klanlar.org/</code>). Bot, verileri bu adresten çeker.",
+      "worldLinkDesc": "Oynadığınız dünyanın kök adresidir (Örn: <code>https://tr1.klanlar.org/</code>). Bot tüm veri akışını bu adres üzerinden sağlar.",
       "botTokenTitle": "Telegram Bot Token & Chat ID:",
-      "botTokenDesc": "Bildirimleri almak için Telegram'da kendi oluşturduğunuz botun Token'ı ve mesajların iletileceği sohbetin (Chat) ID'sidir. Telegram ID: @userinfobot'u bulup /start yazın. Bot Token: @BotFather'ı bulup /newbot ile bot oluşturun.",
-      "periodicReportsTitle": "Periyodik Raporlar",
-      "periodicReportsDesc": "Saatlik, Günlük veya Haftalık olarak botun size otomatik rapor (Köy durumu, puan vb.) atmasını sağlar ayrıca fotoğraflı seçenek mevcuttur.",
-      "odTrackingTitle": "Yenilen Rakipler Takibi:",
-      "odTrackingDesc": "Saldırı (Attack), Savunma (Defance) ve Destek (Support) kesim puanlarınızdaki değişimleri takip edip size bildirir.",
-      "globalMonitoringTitle": "Global Dünya İzleme",
-      "globalMonitoringDesc": "Sadece kendi hedeflerinizi değil, <u>dünyadaki tüm köy fetihi hareketlerini</u> anlık olarak takip edebilirsiniz. Çok mesaj gelebilir, dikkatli kullanın.",
-      "note": "Not: Bu ayarlar sadece bildirimler içindir, TwCu'nun diğer özelliklerini kullanmak için profil oluşturmanız gerekmez. Özel Erişim Kimliğini Anto Bvb 66 ( TwCobre@protonmail.com ) ile paylaşarak kullanım sağlayabilirsiniz."
+      "botTokenDesc": "Bildirimler için gereklidir. <strong>Chat ID:</strong> Telegram'da <code>@userinfobot</code>'a <code>/start</code> yazarak öğrenebilirsiniz. <strong>Bot Token:</strong> <code>@BotFather</code>'a <code>/newbot</code> yazarak kendi botunuzu oluşturabilirsiniz.",
+      "filtersInfo": "<strong style='color: #ff1919;'>Anlık Bildirimler:</strong> <span style='color: #ffffff;'><strong style='color: #ff1919;'>3 dakika</strong> aralıklarla güncellenir ve sadece o anki durumunu gösterir.</span> <br/><br/><strong style='color: #ff1919;'>Saatlik/Günlük/Haftalık Bildirimler:</strong> <span style='color: #ffffff;'>Belirlediğiniz periyotlarda o zaman dilimindeki hareketleri topluca raporlar. Saatlik <strong style='color: #ff1919;'>her saat başı</strong>, Günlük <strong style='color: #ff1919;'>her sabah 08:00'da</strong>, Haftalık <strong style='color: #ff1919;'>Pazartesi 08:00'da</strong> bilgilendirir.</span> <br/><br/><strong style='color: #ff1919;'>Harita Resimli Bildirimler:</strong> <span style='color: #ffffff;'>Anlık olarak harita üzerinde hedeflerinizin durumunu gösteren görseller içerir.</span>",
+      "entityFiltersTitle": "Hedef Yönetimi ve Filtreler:",
+      "entityFiltersDesc": "Periyodik Raporlar, Harita Resimleri ve diğer takipleri global değil; <u>eklediğiniz her oyuncu ve klan için özel olarak</u> seçilmektedir. Her hedefin yanındaki ayarlardan detaylı filtreleme (anlık, saatlik, kazanım, kayıp vb.) yapabilirsiniz.",
+      "continentTrackingTitle": "Kıta Takibi:",
+      "continentTrackingDesc": "Sadece ilgilendiğiniz kıtaları (Örn: 44,45,54) belirleyerek o bölgelerdeki fetih hareketlerini izleyebilirsiniz.",
+      "warTrackingTitle": "Savaş Takibi:",
+      "warTrackingDesc": "Belirlediğiniz iki klan arasındaki köy alım/verim durumlarını anlık eşleştirerek savaş raporları almanızı sağlar.",
+      "customHighlightsTitle": "Özel Harita Vurguları:",
+      "customHighlightsDesc": "İstediğiniz oyuncu veya klanları kendi seçeceğiniz renklerle haritada işaretleyebilir ve günlük/haftalık periyotlarla durumlarını izleyebilirsiniz.",
+      "autoMapsTitle": "Otomatik Harita ve Top Listeler:",
+      "autoMapsDesc": "Dünyanın en iyi 20 oyuncu/klan haritaları ile haftalık en çok köy alan/kaybeden listelerini tek bir butonla otomatik bildirimlerinize ekleyebilirsiniz.",
+      "fullTrackingTitle": "Tam (Full) Dünya İzleme:",
+      "fullTrackingDesc": "Dünyadaki tüm köy fetih hareketlerini anlık izlemenizi sağlar. <strong>Uyarı:</strong> Aşırı mesaj trafiği yaratabilir.",
+      "note": "Not: Bu ayarlar bildirim sistemi içindir. TwCu'nun tüm özelliklerinden yararlanmak için Özel Erişim Kimliğinizi (TwCobre@protonmail.com) adresinden onaylatmanız gerekir. Kullanım Ücretsizdir."
     },
     "profile": {
       "mainProfile": "Ana Profil",
@@ -890,11 +999,20 @@
       "createNewProfile": "Yeni Profil Oluştur"
     },
     "filters": {
-      "gains": "Gains",
-      "losses": "Losses",
-      "barbarian": "Barbarian",
-      "selfConquer": "SelfConquer",
-      "internal": "Internal"
+      "gains": "Köy Fetihleri (Gains)",
+      "losses": "Köy Kayıpları (Losses)",
+      "barbarian": "Barbar Köyü Fetihleri (Barbarian)",
+      "selfConquer": "Kendi Köyünü Fetih (SelfConquer)",
+      "internal": "Klan İçi Fetihler (Internal)",
+      "anlikTakip": "Anlık Takip",
+      "saatlikTakip": "Saatlik Takip",
+      "gunlukTakip": "Günlük Takip",
+      "haftalikTakip": "Haftalık Takip",
+      "haritaResimli": "Harita Resimli Bildirim",
+      "yenilenSaldiri": "Yenilen Rakipler (Saldırı)",
+      "yenilenSavunma": "Yenilen Rakipler (Savunma)",
+      "yenilenDestek": "Yenilen Rakipler (Destek)",
+      "yenilenToplam": "Yenilen Rakipler (Toplam)"
     },
     "settings": {
       "basicSettings": "Temel Ayarlar",
@@ -904,7 +1022,7 @@
       "fieldCannotBeEmpty": "Bu alan boş bırakılamaz.",
       "specialIdLabel": "Özel Erişim Kimliği",
       "specialIdPlaceholder": "66 karakterlik lisans ID'nizi girin veya oluşturun",
-      "generateIdBtn": "Özel Erişim Kimliği Oluştur",
+      "generateIdBtn": "Oluştur",
       "worldLinkLabel": "Dünya Linki",
       "worldLinkPlaceholder": "https://tr1.klanlar.org/",
       "botTokenLabel": "Telegram Bot Token",
@@ -913,44 +1031,95 @@
       "chatIdPlaceholder": "örnek, 1135068175",
       "saveAllConfigs": "Tüm Ayarları Kaydet"
     },
-    "reports": {
-      "sectionTitle": "Rapor ve İstatistik Ayarları",
-      "periodicReportsTitle": "Periyodik Raporlar",
-      "odTrackingTitle": "Yenilen Rakipler Takibi:",
-      "globalMonitoringTitle": "🌍 Global Dünya İzleme",
-      "toggles": {
-        "hourlyReport": "Saatlik Rapor",
-        "dailyReport": "Günlük Rapor",
-        "weeklyReport": "Haftalık Rapor",
-        "sendMap": "Harita Resmi Ekle",
-        "trackODAtt": "Yenilen Rakipler Takip - Saldırı",
-        "trackODDef": "Yenilen Rakipler Takip - Savunma",
-        "trackODSup": "Yenilen Rakipler Takip - Destek",
-        "trackAllConquests": "Dünyadaki Tüm Fethileri Takip Et (Çoklu Mesaj Uyarısı!)"
-      }
-    },
     "targets": {
       "addNewTarget": "Yeni Hedef Ekle",
       "inputLabel": "Oyuncu Adı veya Klan Tagı",
-      "inputPlaceholder": "Örn: Oyuncu1, Oyuncu2 veya KLAN1",
+      "inputPlaceholder": "Örnek: Oyuncu1, Oyuncu2 veya KLAN1,KLAN2",
+      "selectFilters": "Bildirim Filtrelerini Seçin",
       "clearAll": "Tümünü Temizle",
       "selectAll": "Tümünü Seç",
       "addAsPlayer": "+ Oyuncu Olarak Ekle",
       "addAsTribe": "+ Klan Olarak Ekle",
       "manageTargets": "Hedef Listesini Yönet",
-      "emptyState": "Henüz takip edilen bir hedef yok."
+      "emptyState": "Henüz takip edilen bir hedef yok.",
+      "show": "Göster",
+      "hide": "Gizle",
+      "delete": "Sil",
+      "deleteConfirm": "Bu hedefi silmek istediğinize emin misiniz?",
+      "playerBadge": "👤 Oyuncu",
+      "tribeBadge": "🛡️ Klan"
     },
     "alerts": {
+      "enterPlayerOrTribe": "Lütfen bir oyuncu adı veya klan tagı girin!",
+      "worldDataFetchError": "Dünya verileri çekilemedi. Bağlantınızı kontrol edin.",
+      "invalidDataReceived": "Gelen Hatalı Veri:",
+      "worldDataReadError": "HATA: Dünya verisi okunamadı!\n\nLütfen 'Temel Ayarlar' sekmesine geçerli ve aktif bir dünya linki (örn: https://ptc1.tribalwars.com.pt) girdiğinizden emin olun.",
+      "playerNotFound": "HATA: \"{{name}}\" adında bir oyuncu bu dünyada bulunamadı! İsmi tam yazdığınızdan emin olun.",
+      "tribeNotFound": "HATA: \"{{name}}\" tagına veya ismine sahip bir klan bu dünyada bulunamadı!",
+      "enterBothTribes": "Lütfen her iki taraf için de klan tagı/adı girin!",
+      "worldDataCorrupted": "HATA: Dünya verisi bozuk veya okunamıyor!",
+      "tribesNotFoundList": "Aşağıdaki klanlar bu dünyada bulunamadı:",
+      "sideAError": "A Tarafı Hatalı",
+      "sideBError": "B Tarafı Hatalı",
+      "enterHighlightName": "Lütfen harita vurgusu için bir isim veya tag girin!",
+      "worldDataFetchErrorShort": "Dünya verileri çekilemedi.",
+      "bothTribesRequired": "Her iki kabile etiketi de dolu olmalı",
+      "invalidContinent": "Lütfen 0 ile 99 arasında geçerli bir kıta numarası (Örn: 44) girin.",
+      "continentAlreadyAdded": "Bu kıta zaten ekli!",
       "confirmDeleteProfile": "Bu dünya ayarlarını tamamen silmek istediğinize emin misiniz?",
       "idExists": "Zaten bir ID var! Yenisini istiyorsanız önce kutuyu temizleyin.",
       "emptyTargetName": "Lütfen önce bir isim veya klan tagı girin.",
       "targetExists": "Girdiğiniz hedefler zaten takip listesinde mevcut!",
-      "profileNameEmpty": "sıradaki profil için 'Profil Adı' boş bırakılamaz! Lütfen önce profil adını girin.",
-      "specialIdEmpty": "profili için Özel Erişim Kimliği eksik. Lütfen ID oluşturun veya girin.",
-      "saveSuccess": "adet profil başarıyla kaydedildi!",
-      "saveError": "adet profil kaydedilirken hata oluştu.",
-      "saveNoData": "Kaydedilecek geçerli bir veri bulunamadı."
+      "profileNameEmpty": "{{index}}. profil için isim girmelisiniz!",
+      "specialIdEmpty": "'{{name}}' profili için Özel ID eksik veya oluşturulmamış!",
+      "saveSuccess": "{{count}} profil başarıyla buluta kaydedildi!",
+      "saveError": "{{count}} profil kaydedilirken hata oluştu!",
+      "saveNoData": "Kaydedilecek profil bulunamadı!"
+    },
+    "common": {
+      "add": "Ekle",
+      "delete": "Sil",
+      "show": "Göster",
+      "hide": "Gizle"
+    },
+    "warTracking": {
+      "title": "Anlık Savaş Takibi (A vs B)",
+      "tribeAPlaceholder": "Klan A (Virgülle ayırabilirsiniz)",
+      "tribeBPlaceholder": "Klan B (Virgülle ayırabilirsiniz)"
+    },
+    "fullTracking": {
+      "title": "Anlık Full Takip",
+      "description": "Dünya genelindeki tüm köy alımlarını anlık takip et.",
+      "active": "Aktif (Tüm Dünya İzleniyor)",
+      "inactive": "Kapalı"
+    },
+    "continentTracking": {
+      "title": "Anlık Kıta Takibi",
+      "description": "Sadece belirli kıtalardaki köy değişimlerini takip et.",
+      "placeholder": "Örnek: 44",
+      "continentPrefix": "Kıta",
+      "noContinentAdded": "Henüz kıta eklenmedi."
+    },
+    "customHighlights": {
+      "title": "Özel Harita İstatistikleri ve Vurgular",
+      "typePlayer": "Oyuncu",
+      "typeTribe": "Klan",
+      "namePlaceholder": "İsim / Tag",
+      "periodDaily": "Günlük",
+      "periodWeekly": "Haftalık"
+    },
+    "autoMapsLists": {
+      "title": "Otomatik Harita ve Top Listeler",
+      "mapsTitle": "Haritalar",
+      "dailyTop25TribeMap": "Günlük Top 20 Klan Haritası",
+      "dailyTop25PlayerMap": "Günlük Top 20 Oyuncu Haritası",
+      "weeklyTop25TribeMap": "Haftalık Top 20 Klan Haritası",
+      "weeklyTop25PlayerMap": "Haftalık Top 20 Oyuncu Haritası",
+      "statsTitle": "İstatistik Listeleri",
+      "weeklyTop10TribeGains": "Haftalık En Fazla Köy Fetheden 10 Klan",
+      "weeklyTop5TribeLosses": "Haftalık En Fazla Köy Kaybeden 10 Klan",
+      "weeklyTop10PlayerGains": "Haftalık En Fazla Köy Fetheden 10 Oyuncu",
+      "weeklyTop10PlayerLosses": "Haftalık En Fazla Köy Kaybeden 10 Oyuncu"
     }
   }
-  
 }

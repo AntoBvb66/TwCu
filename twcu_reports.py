@@ -1,7 +1,9 @@
 import os
 import json
 import requests # type: ignore
+import re
 import firebase_admin # type: ignore
+from google.cloud import firestore
 import urllib.parse
 import time
 import io
@@ -18,6 +20,79 @@ if not firebase_admin._apps:
     cred = credentials.Certificate(json.loads(FIREBASE_KEY_JSON))
     firebase_admin.initialize_app(cred)
 db = firestore.client()
+
+
+def update_global_worlds(db):
+    """Tüm ülke sunucularını gezer, aktif normal dünyaları bulur ve Firebase'e yazar."""
+    
+    # Kullanıcının verdiği tüm ana sunucular (Güvenlik için HTTPS yapıldı)
+    server_roots = {
+        "en": "https://www.tribalwars.net",
+        "se": "https://www.tribalwars.se",
+        "nl": "https://www.tribalwars.nl",
+        "br": "https://www.tribalwars.com.br",
+        "ro": "https://www.triburile.ro",
+        "no": "https://no.tribalwars.com",
+        "pt": "https://www.tribalwars.com.pt",
+        "gr": "https://www.fyletikesmaxes.gr",
+        "sk": "https://www.divoke-kmene.sk",
+        "hu": "https://www.klanhaboru.hu",
+        "cz": "https://www.divokekmeny.cz",
+        "es": "https://www.guerrastribales.es",
+        "it": "https://www.tribals.it",
+        "fr": "https://www.guerretribale.fr",
+        "tr": "https://www.klanlar.org",
+        "ae": "https://www.tribalwars.ae",
+        "uk": "https://www.tribalwars.co.uk",
+        "de": "https://www.die-staemme.de",
+        "pl": "https://www.plemiona.pl",
+        "si": "https://www.vojnaplemen.si",
+        "hr": "https://www.plemena.com",
+        "th": "https://www.tribalwars.asia",
+        "us": "https://www.tribalwars.us",
+        "ru": "https://www.voynaplemyon.com",
+        "ch": "https://www.staemme.ch"
+    }
+
+    print("🌍 Küresel Dünya Tarayıcı Başlatıldı...")
+    
+    # Firebase'de bu verileri tutacağımız ana koleksiyon:
+    collection_ref = db.collection('system_data').document('active_worlds')
+    all_worlds_data = {}
+
+    for lang, base_url in server_roots.items():
+        try:
+            res = requests.get(f"{base_url}/backend/get_servers.php", timeout=10)
+            if res.status_code != 200:
+                continue
+                
+            php_string = res.text
+            
+            # Regex ile PHP stringinden (ID ve URL) ikililerini çıkartıyoruz
+            # Örnek eşleşme: Group 1 -> 'en148', Group 2 -> 'https://en148.tribalwars.net'
+            matches = re.findall(r's:\d+:"([^"]+)";s:\d+:"([^"]+)"', php_string)
+            
+            standard_worlds = []
+            for world_id, world_url in matches:
+                # FİLTRE: Sadece harfle başlayıp rakamla bitenleri al.
+                # Örn: 'tr100' geçer, 'trs1' (arada s var) kalır.
+                if re.match(r'^[a-z]+[0-9]+$', world_id):
+                    standard_worlds.append({
+                        "id": world_id,
+                        "url": world_url
+                    })
+            
+            if standard_worlds:
+                all_worlds_data[lang] = standard_worlds
+                print(f"✅ {lang.upper()}: {len(standard_worlds)} standart dünya bulundu.")
+                
+        except Exception as e:
+            print(f"❌ {lang.upper()} sunucusu taranırken hata oluştu: {e}")
+
+    # Tüm veriyi tek bir doküman olarak Firebase'e kaydet (1MB limitine hayli hayli uyar, en fazla 30-40KB tutar)
+    collection_ref.set(all_worlds_data)
+    print("💾 Tüm sunucu verileri Firebase 'system_data/active_worlds' altına kaydedildi!")
+
 
 # ====================== YARDIMCI FONKSİYONLAR ======================
 def generate_table_image(rows):
@@ -384,144 +459,153 @@ def home():
     return "🚀 TW Engine is Alive and Running 7/24!"
 
 def run_bot():
-    """Botu sonsuza kadar 3 dakikada bir çalıştıran döngü"""
+    last_world_check_time = 0  # Bot ilk açıldığında sıfır
     while True:
-        try:
-            tr_now = datetime.now(timezone.utc) + timedelta(hours=3)
-            print(f"🚀 TW Engine Multi-Tenant Başlatıldı: {tr_now.strftime('%Y-%m-%d %H:%M:%S')} (TRT)")
-            
-            # 1. GEÇERLİ LİSANSLARI ÇEK (Güvenlik Duvarı)
-            valid_keys_doc = db.collection('admin_system').document('licenses').get()
-            if not valid_keys_doc.exists:
-                print("❌ SİSTEM HATASI: 'admin_system/licenses' bulunamadı!")
-                exit(1)
-            approved_keys = valid_keys_doc.to_dict().get('valid_keys', [])
+        now_ts = int(time.time())
+        
+        # 1. GÜNDE BİR KERE DÜNYALARI GÜNCELLE (86400 saniye = 24 saat)
+        if now_ts - last_world_check_time > 86400:
+            update_global_worlds(db)  # Yukarıdaki fonksiyonu çağır
+            last_world_check_time = now_ts
 
-            # 2. KULLANICILARI DÜNYALARA GÖRE GRUPLA (Optimizasyon için)
-            worlds_cache = {}
-            users_docs = db.collection('users').stream()
-
-            for user_doc in users_docs:
-                user_id = user_doc.id
-                # Lisans onaylı değilse bu kullanıcıyı atla
-                if user_id not in approved_keys:
-                    print(f"🚫 Yetkisiz erişim denemesi veya süresi dolmuş lisans engellendi: {user_id[:10]}...")
-                    continue
-
-                user_config = user_doc.to_dict()
-                gs = user_config.get('global_settings', {})
-                world_link = gs.get('world_link', '').strip().rstrip('/')
-                bot_token = gs.get('telegram_bot_token', '')
-                chat_id = gs.get('telegram_chat_id', '')
-
-                # Gerekli bilgiler eksikse atla
-                if not world_link or not bot_token or not chat_id or bot_token == "*****HIDDEN*****":
-                    continue
-                    
-                world_id = world_link.split('//')[-1].split('.')[0] # Örn: ptc1
-
-                if world_id not in worlds_cache:
-                    worlds_cache[world_id] = {
-                        'base_url': world_link,
-                        'users': [],
-                        'maps_fetched': False,
-                        'p_map': None, 'a_map': None, 'v_map': None,
-                        'conquests_lines': []
-                    }
-                worlds_cache[world_id]['users'].append(user_config)
-
-            # 3. HER DÜNYAYI VE İÇİNDEKİ KULLANICILARI İŞLE
-            now_ts = int(time.time())
-
-            for world_id, w_data in worlds_cache.items():
-                print(f"\n🌍 İşleniyor: Dünya [{world_id}] - Toplam {len(w_data['users'])} kullanıcı aktif.")
-                base_url = w_data['base_url']
-
-                # --- A. DÜNYA FETİH VERİLERİNİ ÇEK (Sadece 1 Kere) ---
-                check_ref = db.collection('worlds').document(world_id).collection('config').document('last_conquer_check')
-                check_doc = check_ref.get()
-                last_ts = check_doc.to_dict().get('timestamp', 0) if check_doc.exists else now_ts - 3600
+        """Botu sonsuza kadar 3 dakikada bir çalıştıran döngü"""
+        while True:
+            try:
+                tr_now = datetime.now(timezone.utc) + timedelta(hours=3)
+                print(f"🚀 TW Engine Multi-Tenant Başlatıldı: {tr_now.strftime('%Y-%m-%d %H:%M:%S')} (TRT)")
                 
-                # 86400 (1 gün) veya gelecek zaman hatası varsa son 1 saate çek
-                if last_ts > now_ts or (now_ts - last_ts) > 86400: 
-                    last_ts = now_ts - 3600 
-                    print(f"   ⚠️  {world_id} - Timestamp sıfırlandı (çok eski/yüksek)")
+                # 1. GEÇERLİ LİSANSLARI ÇEK (Güvenlik Duvarı)
+                valid_keys_doc = db.collection('admin_system').document('licenses').get()
+                if not valid_keys_doc.exists:
+                    print("❌ SİSTEM HATASI: 'admin_system/licenses' bulunamadı!")
+                    exit(1)
+                approved_keys = valid_keys_doc.to_dict().get('valid_keys', [])
 
-                url = f"{base_url}/interface.php?func=get_conquer&since={last_ts}"
-                print(f"   🔍 {world_id} - since={last_ts} ({datetime.fromtimestamp(last_ts, tz=timezone.utc) + timedelta(hours=3):%H:%M:%S} TRT)")
+                # 2. KULLANICILARI DÜNYALARA GÖRE GRUPLA (Optimizasyon için)
+                worlds_cache = {}
+                users_docs = db.collection('users').stream()
 
-                try:
-                    conquests_text = requests.get(url, timeout=10).text.strip()
-                    if conquests_text:
-                        w_data['conquests_lines'] = conquests_text.splitlines()
-                        print(f"🔍 {len(w_data['conquests_lines'])} yeni fetih bulundu, haritalar indiriliyor...")
-                    else:
-                        print(f"   ℹ️  {world_id} - Yeni fetih yok")
-                except Exception as e:
-                    print(f"Fetih çekme hatası ({world_id}): {e}")
-                    w_data['conquests_lines'] = []
+                for user_doc in users_docs:
+                    user_id = user_doc.id
+                    # Lisans onaylı değilse bu kullanıcıyı atla
+                    if user_id not in approved_keys:
+                        print(f"🚫 Yetkisiz erişim denemesi veya süresi dolmuş lisans engellendi: {user_id[:10]}...")
+                        continue
 
-                # Eğer fetih varsa, harita verilerini (isim, köy koordinat) de 1 kere çek
-                current_max_ts = last_ts
-                if w_data['conquests_lines']:
-                    print(f"🔍 {len(w_data['conquests_lines'])} yeni fetih bulundu, haritalar indiriliyor...")
-                    w_data['p_map'], w_data['a_map'], w_data['v_map'] = get_world_data_maps(base_url)
-                    w_data['maps_fetched'] = True
+                    user_config = user_doc.to_dict()
+                    gs = user_config.get('global_settings', {})
+                    world_link = gs.get('world_link', '').strip().rstrip('/')
+                    bot_token = gs.get('telegram_bot_token', '')
+                    chat_id = gs.get('telegram_chat_id', '')
+
+                    # Gerekli bilgiler eksikse atla
+                    if not world_link or not bot_token or not chat_id or bot_token == "*****HIDDEN*****":
+                        continue
+                        
+                    world_id = world_link.split('//')[-1].split('.')[0] # Örn: ptc1
+
+                    if world_id not in worlds_cache:
+                        worlds_cache[world_id] = {
+                            'base_url': world_link,
+                            'users': [],
+                            'maps_fetched': False,
+                            'p_map': None, 'a_map': None, 'v_map': None,
+                            'conquests_lines': []
+                        }
+                    worlds_cache[world_id]['users'].append(user_config)
+
+                # 3. HER DÜNYAYI VE İÇİNDEKİ KULLANICILARI İŞLE
+                now_ts = int(time.time())
+
+                for world_id, w_data in worlds_cache.items():
+                    print(f"\n🌍 İşleniyor: Dünya [{world_id}] - Toplam {len(w_data['users'])} kullanıcı aktif.")
+                    base_url = w_data['base_url']
+
+                    # --- A. DÜNYA FETİH VERİLERİNİ ÇEK (Sadece 1 Kere) ---
+                    check_ref = db.collection('worlds').document(world_id).collection('config').document('last_conquer_check')
+                    check_doc = check_ref.get()
+                    last_ts = check_doc.to_dict().get('timestamp', 0) if check_doc.exists else now_ts - 3600
                     
-                    # Yeni max_ts'i hesapla
-                    for line in w_data['conquests_lines']:
-                        parts = line.split(',')
-                        if len(parts) >= 2:
-                            ts = int(parts[1])
-                            if ts > current_max_ts: current_max_ts = ts
-                
-                # --- B. BU DÜNYADAKİ KULLANICILARI DÖNGÜYE SOK ---
-                for user_config in w_data['users']:
-                    user_log_name = user_config['global_settings']['telegram_chat_id']
-                    print(f"  👤 İşleniyor: Kullanıcı/ChatID -> {user_log_name}")
+                    # 86400 (1 gün) veya gelecek zaman hatası varsa son 1 saate çek
+                    if last_ts > now_ts or (now_ts - last_ts) > 86400: 
+                        last_ts = now_ts - 3600 
+                        print(f"   ⚠️  {world_id} - Timestamp sıfırlandı (çok eski/yüksek)")
 
-                    # 1. Fetihleri Kullanıcıya Göre Filtrele ve Gönder
+                    url = f"{base_url}/interface.php?func=get_conquer&since={last_ts}"
+                    print(f"   🔍 {world_id} - since={last_ts} ({datetime.fromtimestamp(last_ts, tz=timezone.utc) + timedelta(hours=3):%H:%M:%S} TRT)")
+
+                    try:
+                        conquests_text = requests.get(url, timeout=10).text.strip()
+                        if conquests_text:
+                            w_data['conquests_lines'] = conquests_text.splitlines()
+                            print(f"🔍 {len(w_data['conquests_lines'])} yeni fetih bulundu, haritalar indiriliyor...")
+                        else:
+                            print(f"   ℹ️  {world_id} - Yeni fetih yok")
+                    except Exception as e:
+                        print(f"Fetih çekme hatası ({world_id}): {e}")
+                        w_data['conquests_lines'] = []
+
+                    # Eğer fetih varsa, harita verilerini (isim, köy koordinat) de 1 kere çek
+                    current_max_ts = last_ts
                     if w_data['conquests_lines']:
-                        process_user_conquests(user_config, w_data['conquests_lines'], w_data['p_map'], w_data['a_map'], w_data['v_map'], world_id, last_ts)
-
-                    # 2. Periyodik Raporları Belirle ve Gönder
-                    p_settings = user_config.get('periodic_reports', {})
-                    modes = []
+                        print(f"🔍 {len(w_data['conquests_lines'])} yeni fetih bulundu, haritalar indiriliyor...")
+                        w_data['p_map'], w_data['a_map'], w_data['v_map'] = get_world_data_maps(base_url)
+                        w_data['maps_fetched'] = True
+                        
+                        # Yeni max_ts'i hesapla
+                        for line in w_data['conquests_lines']:
+                            parts = line.split(',')
+                            if len(parts) >= 2:
+                                ts = int(parts[1])
+                                if ts > current_max_ts: current_max_ts = ts
                     
-                    # --- TRT Saatlerine Göre Kontrol (YENİ AYARLAR) ---
-                    
-                    # SAATLİK RAPOR (Saat başı ilk 5 dakika içinde çalışır)
-                    if p_settings.get("hourlyReport") and tr_now.minute < 5: 
-                        modes.append("hourly")
-                    
-                    # GÜNLÜK RAPOR (Her sabah 09:00 - 09:05 arası)
-                    if p_settings.get("dailyReport") and tr_now.hour == 9 and tr_now.minute < 5: 
-                        modes.append("daily")
-                    
-                    # HAFTALIK RAPOR (Pazartesi sabah 09:00 - 09:05 arası)
-                    # weekday() == 0 Pazartesi demektir.
-                    if p_settings.get("weeklyReport") and tr_now.weekday() == 0 and tr_now.hour == 9 and tr_now.minute < 5: 
-                        modes.append("weekly")
+                    # --- B. BU DÜNYADAKİ KULLANICILARI DÖNGÜYE SOK ---
+                    for user_config in w_data['users']:
+                        user_log_name = user_config['global_settings']['telegram_chat_id']
+                        print(f"  👤 İşleniyor: Kullanıcı/ChatID -> {user_log_name}")
 
-                    # Belirlenen raporları gönder
-                    for mode in modes:
-                        for p in user_config.get('monitored_players', []):
-                            process_periodic_report(world_id, base_url, user_config, p['name'], "Player", mode)
-                        for t in user_config.get('monitored_tribes', []):
-                            process_periodic_report(world_id, base_url, user_config, t['tag'], "Tribe", mode)
+                        # 1. Fetihleri Kullanıcıya Göre Filtrele ve Gönder
+                        if w_data['conquests_lines']:
+                            process_user_conquests(user_config, w_data['conquests_lines'], w_data['p_map'], w_data['a_map'], w_data['v_map'], world_id, last_ts)
 
-                # Dünya işlemleri bitince, o dünyanın son fetih saatini güncelle
-                check_ref.set({"timestamp": current_max_ts})
-            print(f"  ⏰ TRT: {tr_now.strftime('%H:%M')} | Hourly: {p_settings.get('hourlyReport')} | Daily: {p_settings.get('dailyReport')} | Weekly: {p_settings.get('weeklyReport')}")
+                        # 2. Periyodik Raporları Belirle ve Gönder
+                        p_settings = user_config.get('periodic_reports', {})
+                        modes = []
+                        
+                        # --- TRT Saatlerine Göre Kontrol (YENİ AYARLAR) ---
+                        
+                        # SAATLİK RAPOR (Saat başı ilk 5 dakika içinde çalışır)
+                        if p_settings.get("hourlyReport") and tr_now.minute < 5: 
+                            modes.append("hourly")
+                        
+                        # GÜNLÜK RAPOR (Her sabah 09:00 - 09:05 arası)
+                        if p_settings.get("dailyReport") and tr_now.hour == 9 and tr_now.minute < 5: 
+                            modes.append("daily")
+                        
+                        # HAFTALIK RAPOR (Pazartesi sabah 09:00 - 09:05 arası)
+                        # weekday() == 0 Pazartesi demektir.
+                        if p_settings.get("weeklyReport") and tr_now.weekday() == 0 and tr_now.hour == 9 and tr_now.minute < 5: 
+                            modes.append("weekly")
 
-            print("\n✅ Tüm dünyalar ve kullanıcılar için TW Engine işlemi tamamlandı.")
-            
-        except Exception as e:
-            print(f"🔥 Döngüde hata oluştu ama bot çökmeyecek: {e}")
-            
-        # İşlem bitince 3 dakika (180 saniye) uyu, sonra tekrar başa dön!
-        print("⏳ 3 dakika bekleniyor...\n")
-        time.sleep(180) 
+                        # Belirlenen raporları gönder
+                        for mode in modes:
+                            for p in user_config.get('monitored_players', []):
+                                process_periodic_report(world_id, base_url, user_config, p['name'], "Player", mode)
+                            for t in user_config.get('monitored_tribes', []):
+                                process_periodic_report(world_id, base_url, user_config, t['tag'], "Tribe", mode)
+
+                    # Dünya işlemleri bitince, o dünyanın son fetih saatini güncelle
+                    check_ref.set({"timestamp": current_max_ts})
+                print(f"  ⏰ TRT: {tr_now.strftime('%H:%M')} | Hourly: {p_settings.get('hourlyReport')} | Daily: {p_settings.get('dailyReport')} | Weekly: {p_settings.get('weeklyReport')}")
+
+                print("\n✅ Tüm dünyalar ve kullanıcılar için TW Engine işlemi tamamlandı.")
+                
+            except Exception as e:
+                print(f"🔥 Döngüde hata oluştu ama bot çökmeyecek: {e}")
+                
+            # İşlem bitince 3 dakika (180 saniye) uyu, sonra tekrar başa dön!
+            print("⏳ 3 dakika bekleniyor...\n")
+            time.sleep(180) 
 
 # ====================== ANA AKIŞ ======================
 if __name__ == "__main__":
