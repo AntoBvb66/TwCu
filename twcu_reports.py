@@ -57,9 +57,12 @@ def update_global_worlds(db):
     print("🌍 Küresel Dünya Tarayıcı Başlatıldı...")
     
     # Firebase'de bu verileri tutacağımız ana koleksiyon:
-    collection_ref = db.collection('system_data').document('active_worlds')
+    worlds_ref = db.collection('system_data').document('active_worlds')
+    counts_ref = db.collection('system_data').document('world_counts')
     all_worlds_data = {}
-
+    world_counts = {}
+    total_active_worlds = 0
+    
     for lang, base_url in server_roots.items():
         try:
             res = requests.get(f"{base_url}/backend/get_servers.php", timeout=10)
@@ -67,31 +70,43 @@ def update_global_worlds(db):
                 continue
                 
             php_string = res.text
-            
-            # Regex ile PHP stringinden (ID ve URL) ikililerini çıkartıyoruz
-            # Örnek eşleşme: Group 1 -> 'en148', Group 2 -> 'https://en148.tribalwars.net'
             matches = re.findall(r's:\d+:"([^"]+)";s:\d+:"([^"]+)"', php_string)
             
             standard_worlds = []
             for world_id, world_url in matches:
-                # FİLTRE: Sadece harfle başlayıp rakamla bitenleri al.
-                # Örn: 'tr100' geçer, 'trs1' (arada s var) kalır.
-                if re.match(r'^[a-z]+[0-9]+$', world_id):
-                    standard_worlds.append({
-                        "id": world_id,
-                        "url": world_url
-                    })
+                
+                # SENİN KURALIN: İçinde 's1.' veya 's2.' varsa çöpe at (Speed dünyaları dışla)
+                # GÜVENLİK: us1 (Amerika), es1 (İspanya), cs1 (Çekya) silinmesin!
+                is_speed = ("s1." in world_url or "s2." in world_url or "s3." in world_url)
+                is_safe = ("us1." in world_url or "es1." in world_url or "cs1." in world_url)
+                
+                if is_speed and not is_safe:
+                    continue # Çöpe at! Listeye ekleme.
+                    
+                standard_worlds.append({
+                    "id": world_id,
+                    "url": world_url
+                })
             
             if standard_worlds:
+                count = len(standard_worlds)
                 all_worlds_data[lang] = standard_worlds
-                print(f"✅ {lang.upper()}: {len(standard_worlds)} standart dünya bulundu.")
+                world_counts[lang] = count # Ülkenin sayısını kaydet
+                total_active_worlds += count # Toplama ekle
+                
+                print(f"✅ {lang.upper()}: {count} dünya bulundu.")
                 
         except Exception as e:
             print(f"❌ {lang.upper()} sunucusu taranırken hata oluştu: {e}")
 
-    # Tüm veriyi tek bir doküman olarak Firebase'e kaydet (1MB limitine hayli hayli uyar, en fazla 30-40KB tutar)
-    collection_ref.set(all_worlds_data)
-    print("💾 Tüm sunucu verileri Firebase 'system_data/active_worlds' altına kaydedildi!")
+    # Toplam sayıyı da JSON'un en sonuna ekle
+    world_counts["total"] = total_active_worlds
+
+    # İki veriyi de Firebase'e kaydet
+    worlds_ref.set(all_worlds_data)
+    counts_ref.set(world_counts)
+    
+    print(f"💾 İşlem Tamam! Tüm veriler kaydedildi. Toplam Aktif Dünya: {total_active_worlds}")
 
 
 # ====================== YARDIMCI FONKSİYONLAR ======================
