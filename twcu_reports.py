@@ -278,17 +278,23 @@ def run_bot():
                 # last_ts kontrolü
                 check_ref = db.collection('worlds').document(world_id).collection('config').document('last_ts')
                 last_ts_doc = check_ref.get()
-                last_ts = last_ts_doc.to_dict().get('timestamp', 0) if last_ts_doc.exists else now_ts - 120
+                last_ts = last_ts_doc.to_dict().get('timestamp', 0) if last_ts_doc.exists else now_ts - 300
 
                 oracle_url = f"{ORACLE_API_URL}/{world_id}/Anlik_Fetihler"
                 try:
                     res = requests.get(oracle_url, timeout=15)
+                    print(f"   → {world_id} API çağrısı: Status {res.status_code} | Response uzunluğu: {len(res.text)}")
+
                     if res.status_code != 200:
-                        print(f"   → {world_id} Oracle erişim hatası: {res.status_code}")
+                        print(f"   → Hata: {res.text[:300]}")
                         continue
-                    fetih_listesi = res.json().get("veriler", [])
+                    
+                    data = res.json()
+                    fetih_listesi = data.get("veriler", [])
+                    print(f"   → {world_id}: Toplam {len(fetih_listesi)} fetih çekildi. En yeni ts: {max((f.get('ts',0) for f in fetih_listesi), default=0)}")
+                    
                 except Exception as e:
-                    print(f"   → {world_id} Oracle bağlantı hatası: {e}")
+                    print(f"   → {world_id} Bağlantı hatası: {e}")
                     continue
 
                 yeni_fetihler = [f for f in fetih_listesi if f.get("ts", 0) > last_ts]
@@ -336,7 +342,7 @@ def run_bot():
 
         print(f"   ⏳ {60} saniye bekleniyor...\n")
         time.sleep(60)
-        
+
 def start_background_bot():
     """Gunicorn worker'ları başladığında botu çalıştır"""
     print("✅ Background bot thread başlatılıyor...")
