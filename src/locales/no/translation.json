@@ -912,5 +912,123 @@
       "noData": "Ingen data hentet ennå.",
       "deleteBtn": "Slett"
     }
+  },
+  "notificationSettings": {
+  "header": {
+    "title": "TwCu Varslingssenter",
+    "subtitle": "Her kan du administrere varslingsinnstillinger for alle verdener du spiller i.",
+    "hideInfo": "Skjul info",
+    "showInfo": "Vis info"
+  },
+  "infoPanel": {
+    "title": "Hvordan bruke?",
+    "profileNameTitle": "Profilnavn:",
+    "profileNameDesc": "Dette er navnet du tildeler denne innstillingsgruppen for å enkelt huske den. <u>Kan ikke stå tomt</u> og fungerer som hovedetiketten som identifiserer deg i systemet.",
+    "specialIdTitle": "Spesiell Tilgangs-ID (Special ID):",
+    "specialIdDesc": "Dette er den unike koden som lar systemet koble seg til deg. Hvis du ikke har en, klikk på <em>Generer ID</em>-knappen for å lage en tilfeldig en.",
+    "worldLinkTitle": "Verdenslenke:",
+    "worldLinkDesc": "Dette er hovedadressen til verdenen du spiller på (f.eks.: <code>https://no1.tribalwars.no.com/</code>). Boten mottar all datastrøm gjennom denne adressen.",
+    "botTokenTitle": "Telegram Bot Token & Chat ID:",
+    "botTokenDesc": "Påkrevd for varslinger. <strong>Chat ID:</strong> Du kan få den ved å sende <code>/start</code> til <code>@userinfobot</code> på Telegram. <strong>Bot Token:</strong> Opprett din egen bot ved å sende <code>/newbot</code> til <code>@BotFather</code>.",
+    "filtersInfo": "Varslingsfiltre:",
+    "filtersInfoDesc": "Du kan velge hvilke typer bevegelser du vil motta varsler for. For eksempel kan du motta varsler kun for landsbyerobringer (gevinster) eller tap. Når du har valgt filtrene dine, vil du få umiddelbare Telegram-varsler når bevegelser relatert til målene dine oppstår.",
+    "continentTrackingTitle": "Kontinentovervåking:",
+    "continentTrackingDesc": "Du kan spore erobringer kun i spesifikke kontinenter (f.eks.: 44, 45, 54).",
+    "fullTrackingTitle": "Full Verdensovervåking:",
+    "fullTrackingDesc": "Aktiverer sanntidsovervåking av alle landsbyerobringer i hele verdenen. <strong>Advarsel:</strong> Dette kan generere svært mye meldingstrafikk."
+  },
+  "profile": {
+    "mainProfile": "Hovedprofil",
+    "newProfile": "Ny profil",
+    "unknownWorld": "Ukjent verden",
+    "delete": "Slett",
+    "createNewProfile": "Opprett ny profil"
+  },
+  "filters": {
+    "gains": "Landsbyerobringer (Gevinster)",
+    "losses": "Landsbytap (Tap)",
+    "barbarian": "Erobring av barbarlandsbyer (Barbar)",
+    "selfConquer": "Selverobring (SelfConquer)",
+    "internal": "Interne stammerobringer (Intern)"
+  },
+  "settings": {
+    "basicSettings": "Grunnleggende innstillinger",
+    "profileNameLabel": "Profilnavn (Nick / Brukernavn)",
+    "required": "*Påkrevd",
+    "profileNamePlaceholder": "Eksempel: Anto Bvb 66 - TribalWars No1",
+    "fieldCannotBeEmpty": "Dette feltet kan ikke stå tomt.",
+    "specialIdLabel": "Spesiell Tilgangs-ID",
+    "specialIdPlaceholder": "Skriv inn din 66-tegn lange lisens-ID eller generer en",
+    "generateIdBtn": "Generer",
+    "worldLinkLabel": "Verdenslenke",
+    "worldLinkPlaceholder": "https://no1.tribalwars.no.com/",
+    "botTokenLabel": "Telegram Bot Token",
+    "botTokenPlaceholder": "123456789:ABCDEF...",
+    "chatIdLabel": "Telegram Chat ID",
+    "chatIdPlaceholder": "eksempel: 1135068175",
+    "saveAllConfigs": "Lagre alle innstillinger",
+    "languageLabel": "Språk",
+    "languagePlaceholder": "Velg språk"
+  },
+  "targets": {
+    "addNewTarget": "Legg til nytt mål",
+    "inputLabel": "Spillernavn eller stammetag",
+    "inputPlaceholder": "Eksempel: Spiller1, Spiller2 eller STAMME1, STAMME2",
+    "selectFilters": "Velg varslingsfiltre",
+    "clearAll": "Tøm alt",
+    "selectAll": "Velg alle",
+    "addAsPlayer": "+ Legg til som spiller",
+    "addAsTribe": "+ Legg til som stamme",
+    "manageTargets": "Administrer målliste",
+    "emptyState": "Ingen mål overvåkes ennå.",
+    "show": "Vis",
+    "hide": "Skjul",
+    "delete": "Slett",
+    "deleteConfirm": "Er du sikker på at du vil slette dette målet?",
+    "playerBadge": "👤 Spiller",
+    "tribeBadge": "🛡️ Stamme"
+  },
+  "alerts": {
+    "enterPlayerOrTribe": "Vennligst skriv inn et spillernavn eller en stammetag!",
+    "worldDataFetchError": "Kunne ikke hente verdensdata. Vennligst sjekk tilkoblingen din.",
+    "invalidDataReceived": "Ugyldig data mottatt:",
+    "worldDataReadError": "FEIL: Verdensdata kunne ikke leses!\n\nVennligst forsikre deg om at du har lagt inn en gyldig og aktiv verdenslenke (f.eks.: https://no1.tribalwars.no.com) i fanen 'Grunnleggende innstillinger'.",
+    "playerNotFound": "FEIL: Ingen spiller med navnet \"{{name}}\" ble funnet i denne verdenen! Sjekk at du har skrevet navnet riktig.",
+    "tribeNotFound": "FEIL: Ingen stamme med tag eller navn \"{{name}}\" ble funnet i denne verdenen!",
+    "enterBothTribes": "Vennligst skriv inn stammetag/navn for begge sider!",
+    "worldDataCorrupted": "FEIL: Verdensdata er skadet eller kan ikke leses!",
+    "tribesNotFoundList": "Følgende stammer ble ikke funnet i denne verdenen:",
+    "worldDataFetchErrorShort": "Kunne ikke hente verdens data.",
+    "invalidContinent": "Vennligst skriv inn et gyldig kontinentnummer mellom 0 og 99 (f.eks.: 44).",
+    "continentAlreadyAdded": "Dette kontinentet er allerede lagt til!",
+    "confirmDeleteProfile": "Er du sikker på at du vil slette disse verdensinnstillingene fullstendig?",
+    "idExists": "En ID eksisterer allerede! Tøm boksen først hvis du vil ha en ny.",
+    "emptyTargetName": "Vennligst skriv inn et navn eller en stammetag først.",
+    "targetExists": "Målene du skrev inn er allerede i overvåkningslisten!",
+    "profileNameEmpty": "Du må skrive inn et navn for profil {{index}}!",
+    "specialIdEmpty": "Spesiell ID mangler eller er ikke generert for '{{name}}'-profilen!",
+    "saveSuccess": "{{count}} profil(er) ble lagret i skyen!",
+    "saveError": "Det oppsto en feil under lagring av {{count}} profil(er)!",
+    "saveNoData": "Ingen profil funnet for lagring!"
+  },
+  "common": {
+    "add": "Legg til",
+    "delete": "Slett",
+    "show": "Vis",
+    "hide": "Skjul"
+  },
+  "fullTracking": {
+    "title": "Umiddelbar full overvåking",
+    "description": "Spor alle landsbyerobringer over hele verdenen i sanntid.",
+    "active": "Aktiv (Hele verdenen overvåkes)",
+    "inactive": "Inaktiv"
+  },
+  "continentTracking": {
+    "title": "Umiddelbar kontinentovervåking",
+    "description": "Spor landsbyendringer kun i valgte kontinenter.",
+    "placeholder": "Eksempel: 44",
+    "continentPrefix": "Kontinent",
+    "noContinentAdded": "Ingen kontinent er lagt til ennå."
   }
+}
 }

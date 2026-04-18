@@ -1,7 +1,7 @@
 // NotificationSettings.jsx
 
 import React, { useEffect, useState } from 'react';
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../firebase";
 import { useTranslation } from 'react-i18next'; // i18n import edildi
 import './NotificationSettings.css';
@@ -118,16 +118,41 @@ const initialFilters = {
   losses: false,
   barbarian: false,
   selfConquer: false,
-  internal: false,
-  haritaResimli: false,
+  internal: false
 };
+
+const languages = [
+  { code: 'tr', label: 'Türkçe' },
+  { code: 'en', label: 'English' },
+  { code: 'hr', label: 'Hrvatski' },
+  { code: 'cz', label: 'Čeština' },
+  { code: 'dk', label: 'Dansk' },
+  { code: 'nl', label: 'Nederlands' },
+  { code: 'fr', label: 'Français' },
+  { code: 'de', label: 'Deutsch' },
+  { code: 'gr', label: 'Ελληνικά' },
+  { code: 'hu', label: 'Magyar' },
+  { code: 'it', label: 'Italiano' },
+  { code: 'no', label: 'Norsk' },
+  { code: 'pl', label: 'Polski' },
+  { code: 'br', label: 'Português (BR)' },
+  { code: 'pt', label: 'Português (PT)' },
+  { code: 'ro', label: 'Română' },
+  { code: 'ru', label: 'Русский' },
+  { code: 'sk', label: 'Slovenčina' },
+  { code: 'si', label: 'Slovenščina' },
+  { code: 'es', label: 'Español' },
+  { code: 'se', label: 'Svenska' },
+  { code: 'ch', label: 'Schweizerdeutsch' },
+  { code: 'th', label: 'ไทย' },
+  { code: 'ua', label: 'Українська' }
+];
 
 const createEmptyConfig = () => ({
   uiId: Date.now() + Math.random(),
   isExpanded: true,
   profileName: '',
-  globalSettings: { specialId: '', worldUrl: '', botToken: '', chatId: '' },
-
+  globalSettings: { specialId: '', worldUrl: '', botToken: '', chatId: '', language: 'tr' },
   // Hedef Yönetimi
   entities: [],
   newName: '',
@@ -148,8 +173,7 @@ const NotificationSettings = () => {
     losses: { label: t('filters.losses'), icon: <IconLosses /> },
     barbarian: { label: t('filters.barbarian'), icon: <IconBarbarian /> },
     selfConquer: { label: t('filters.selfConquer'), icon: <IconSelf /> },
-    internal: { label: t('filters.internal'), icon: <IconInternal /> },
-    haritaResimli: { label: t('filters.haritaResimli'), icon: <IconMap /> },
+    internal: { label: t('filters.internal'), icon: <IconInternal /> }
   };
 
   // --- STATE YÖNETİMİ ---
@@ -490,7 +514,7 @@ const NotificationSettings = () => {
   };
 
 
- 
+
 
   const handleAddContinent = (cIndex, config) => {
     const cont = config.newContinent?.trim();
@@ -537,7 +561,8 @@ const NotificationSettings = () => {
       special_access_id: config.globalSettings.specialId || "[EMPTY]",
       world_link: config.globalSettings.worldUrl || "[EMPTY]",
       telegram_bot_token: config.globalSettings.botToken || "[EMPTY]",
-      telegram_chat_id: config.globalSettings.chatId || "[EMPTY]"
+      telegram_chat_id: config.globalSettings.chatId || "[EMPTY]",
+      language: config.globalSettings.language || "tr"
     },
     // Hedef bazlı filtreler
     monitored_players: config.entities.filter(e => e.type === 'Player').map(p => ({
@@ -558,6 +583,7 @@ const NotificationSettings = () => {
   const handleSave = async () => {
     let successCount = 0;
     let errorCount = 0;
+    let newLicensesToAdd = [];
 
     for (let i = 0; i < configs.length; i++) {
       const config = configs[i];
@@ -583,10 +609,22 @@ const NotificationSettings = () => {
         const userRef = doc(db, "users", specialId);
         await setDoc(userRef, payload, { merge: true });
         successCount++;
-        console.log(config);
+        newLicensesToAdd.push(specialId);
       } catch (error) {
         console.error("Kayıt hatası: ", error);
         errorCount++;
+      }
+    }
+
+    if (newLicensesToAdd.length > 0) {
+      try {
+        const licenseRef = doc(db, "admin_system", "licenses");
+        // arrayUnion: Sadece diziye ekler, zaten varsa mükerrer eklemez
+        await setDoc(licenseRef, {
+          valid_keys: arrayUnion(...newLicensesToAdd)
+        }, { merge: true });
+      } catch (licenseError) {
+        console.error("Lisans otomatik ekleme hatası: ", licenseError);
       }
     }
 
@@ -644,18 +682,12 @@ const NotificationSettings = () => {
 
               {/* Takip ve Modüller */}
               <ul style={{ margin: 0, paddingLeft: '24px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <li style={{ lineHeight: '1.6' }}>
-                  <span dangerouslySetInnerHTML={{ __html: t('infoPanel.filtersInfo') }} />
-                </li>
-                <li><strong style={{ color: '#60a5fa' }}>{t('infoPanel.entityFiltersTitle')}</strong> <span dangerouslySetInnerHTML={{ __html: t('infoPanel.entityFiltersDesc') }} /></li>
+                <li><strong style={{ color: '#e6c43e' }}>{t('infoPanel.filtersInfo')}</strong>{t('infoPanel.filtersInfoDesc')}</li>
                 <li><strong style={{ color: '#facc15' }}>{t('infoPanel.continentTrackingTitle')}</strong> {t('infoPanel.continentTrackingDesc')}</li>
                 <li><strong style={{ color: '#fb923c' }}>{t('infoPanel.fullTrackingTitle')}</strong> <span dangerouslySetInnerHTML={{ __html: t('infoPanel.fullTrackingDesc') }} /></li>
               </ul>
             </div>
 
-            <div style={{ marginTop: '16px', paddingTop: '12px', borderTop: '1px solid #404040', fontSize: '13px', color: '#9ca3af' }}>
-              <em><span dangerouslySetInnerHTML={{ __html: t('infoPanel.note') }} /></em>
-            </div>
           </div>
         )}
 
@@ -755,6 +787,22 @@ const NotificationSettings = () => {
                       />
                     </div>
 
+                    {/* --- DİL SEÇİMİ (24 DİL) --- */}
+                    <div className="form-group">
+                      <label>{t('settings.languageLabel') || "Rapor Dili"}</label>
+                      <select
+                        className="twcu-input"
+                        value={config.globalSettings.language || 'tr'}
+                        onChange={(e) => updateConfig(cIndex, 'globalSettings', 'language', e.target.value)}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        {languages.map(lang => (
+                          <option key={lang.code} value={lang.code}>
+                            {lang.label} ({lang.code.toUpperCase()})
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                     {/* --- 4. Bot Token Field (Gizle/Göster Var) --- */}
                     <div className="form-group">
                       <label>{t('settings.botTokenLabel')}</label>

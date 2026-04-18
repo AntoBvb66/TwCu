@@ -855,5 +855,123 @@
       "noData": "Nessun dato recuperato ancora.",
       "deleteBtn": "Elimina"
     }
+  },
+  "notificationSettings": {
+  "header": {
+    "title": "TwCu Centro Notifiche",
+    "subtitle": "Qui puoi gestire le impostazioni di notifica per tutti i mondi in cui giochi.",
+    "hideInfo": "Nascondi Info",
+    "showInfo": "Mostra Info"
+  },
+  "infoPanel": {
+    "title": "Come si usa?",
+    "profileNameTitle": "Nome Profilo:",
+    "profileNameDesc": "Questo è il nome che assegni a questo gruppo di impostazioni per ricordarlo facilmente. <u>Non può essere lasciato vuoto</u> e funge da etichetta principale che ti identifica nel sistema.",
+    "specialIdTitle": "ID di Accesso Speciale (Special ID):",
+    "specialIdDesc": "Questo è il codice univoco che permette al sistema di associarsi a te. Se non ne hai uno, clicca sul pulsante <em>Genera ID</em> per crearne uno casuale.",
+    "worldLinkTitle": "Link del Mondo:",
+    "worldLinkDesc": "Questo è l'indirizzo principale del mondo in cui stai giocando (es.: <code>https://it1.tribals.it/</code>). Il bot riceve tutto il flusso di dati attraverso questo indirizzo.",
+    "botTokenTitle": "Telegram Bot Token & Chat ID:",
+    "botTokenDesc": "Necessario per le notifiche. <strong>Chat ID:</strong> Puoi ottenerlo inviando <code>/start</code> a <code>@userinfobot</code> su Telegram. <strong>Bot Token:</strong> Crea il tuo bot inviando <code>/newbot</code> a <code>@BotFather</code>.",
+    "filtersInfo": "Filtri di Notifica:",
+    "filtersInfoDesc": "Puoi selezionare i tipi di movimenti per i quali desideri ricevere notifiche. Ad esempio, puoi ricevere notifiche solo per le conquiste di villaggi (guadagni) o le perdite. Una volta selezionati i filtri, riceverai notifiche istantanee su Telegram quando si verificano movimenti relativi ai tuoi obiettivi.",
+    "continentTrackingTitle": "Monitoraggio Continente:",
+    "continentTrackingDesc": "Puoi monitorare i movimenti di conquista solo in specifici continenti (es.: 44, 45, 54).",
+    "fullTrackingTitle": "Monitoraggio Mondiale Completo:",
+    "fullTrackingDesc": "Abilita il monitoraggio in tempo reale di tutte le conquiste di villaggi nel mondo. <strong>Attenzione:</strong> Questo può generare un traffico di messaggi eccessivo."
+  },
+  "profile": {
+    "mainProfile": "Profilo Principale",
+    "newProfile": "Nuovo Profilo",
+    "unknownWorld": "Mondo Sconosciuto",
+    "delete": "Elimina",
+    "createNewProfile": "Crea Nuovo Profilo"
+  },
+  "filters": {
+    "gains": "Conquiste Villaggi (Guadagni)",
+    "losses": "Perdite Villaggi (Perdite)",
+    "barbarian": "Conquiste Villaggi Barbari (Barbari)",
+    "selfConquer": "Auto-conquista (SelfConquer)",
+    "internal": "Conquiste Interne alla Tribù (Internal)"
+  },
+  "settings": {
+    "basicSettings": "Impostazioni di Base",
+    "profileNameLabel": "Nome Profilo (Nick / Nome utente)",
+    "required": "*Obbligatorio",
+    "profileNamePlaceholder": "Esempio: Anto Bvb 66 - Tribals It1",
+    "fieldCannotBeEmpty": "Questo campo non può essere lasciato vuoto.",
+    "specialIdLabel": "ID di Accesso Speciale",
+    "specialIdPlaceholder": "Inserisci il tuo ID licenza di 66 caratteri o generane uno",
+    "generateIdBtn": "Genera",
+    "worldLinkLabel": "Link del Mondo",
+    "worldLinkPlaceholder": "https://it1.tribals.it/",
+    "botTokenLabel": "Telegram Bot Token",
+    "botTokenPlaceholder": "123456789:ABCDEF...",
+    "chatIdLabel": "Telegram Chat ID",
+    "chatIdPlaceholder": "esempio: 1135068175",
+    "saveAllConfigs": "Salva Tutte le Impostazioni",
+    "languageLabel": "Lingua",
+    "languagePlaceholder": "Seleziona Lingua"
+  },
+  "targets": {
+    "addNewTarget": "Aggiungi Nuovo Obiettivo",
+    "inputLabel": "Nome Giocatore o Tag Tribù",
+    "inputPlaceholder": "Esempio: Player1, Player2 o TRIBÙ1, TRIBÙ2",
+    "selectFilters": "Seleziona Filtri di Notifica",
+    "clearAll": "Cancella Tutto",
+    "selectAll": "Seleziona Tutto",
+    "addAsPlayer": "+ Aggiungi come Giocatore",
+    "addAsTribe": "+ Aggiungi come Tribù",
+    "manageTargets": "Gestisci Lista Obiettivi",
+    "emptyState": "Nessun obiettivo ancora monitorato.",
+    "show": "Mostra",
+    "hide": "Nascondi",
+    "delete": "Elimina",
+    "deleteConfirm": "Sei sicuro di voler eliminare questo obiettivo?",
+    "playerBadge": "👤 Giocatore",
+    "tribeBadge": "🛡️ Tribù"
+  },
+  "alerts": {
+    "enterPlayerOrTribe": "Per favore, inserisci un nome giocatore o un tag tribù!",
+    "worldDataFetchError": "Impossibile recuperare i dati del mondo. Controlla la tua connessione.",
+    "invalidDataReceived": "Dati ricevuti non validi:",
+    "worldDataReadError": "ERRORE: Impossibile leggere i dati del mondo!\n\nAssicurati di aver inserito un link del mondo valido e attivo (es.: https://it1.tribals.it) nella scheda 'Impostazioni di Base'.",
+    "playerNotFound": "ERRORE: Nessun giocatore chiamato \"{{name}}\" trovato in questo mondo! Assicurati di aver scritto il nome correttamente.",
+    "tribeNotFound": "ERRORE: Nessuna tribù con il tag o il nome \"{{name}}\" trovata in questo mondo!",
+    "enterBothTribes": "Per favore, inserisci il tag/nome della tribù per entrambi i lati!",
+    "worldDataCorrupted": "ERRORE: I dati del mondo sono corrotti o illeggibili!",
+    "tribesNotFoundList": "Le seguenti tribù non sono state trovate in questo mondo:",
+    "worldDataFetchErrorShort": "Errore nel recupero dei dati del mondo.",
+    "invalidContinent": "Per favore, inserisci un numero di continente valido tra 0 e 99 (es.: 44).",
+    "continentAlreadyAdded": "Questo continente è già stato aggiunto!",
+    "confirmDeleteProfile": "Sei sicuro di voler eliminare completamente queste impostazioni del mondo?",
+    "idExists": "Un ID esiste già! Svuota la casella se desideri crearne uno nuovo.",
+    "emptyTargetName": "Per favore, inserisci prima un nome o un tag tribù.",
+    "targetExists": "Gli obiettivi inseriti sono già nella lista di monitoraggio!",
+    "profileNameEmpty": "Devi inserire un nome per il profilo {{index}}!",
+    "specialIdEmpty": "L'ID Speciale manca o non è stato generato per il profilo '{{name}}'!",
+    "saveSuccess": "{{count}} profilo/i salvato/i con successo nel cloud!",
+    "saveError": "Si è verificato un errore durante il salvataggio di {{count}} profilo/i!",
+    "saveNoData": "Nessun profilo trovato da salvare!"
+  },
+  "common": {
+    "add": "Aggiungi",
+    "delete": "Elimina",
+    "show": "Mostra",
+    "hide": "Nascondi"
+  },
+  "fullTracking": {
+    "title": "Monitoraggio Totale Istantaneo",
+    "description": "Monitora tutte le conquiste di villaggi nell'intero mondo in tempo reale.",
+    "active": "Attivo (L'intero mondo è monitorato)",
+    "inactive": "Inattivo"
+  },
+  "continentTracking": {
+    "title": "Monitoraggio Continente Istantaneo",
+    "description": "Monitora i cambiamenti dei villaggi solo nei continenti selezionati.",
+    "placeholder": "Esempio: 44",
+    "continentPrefix": "Continente",
+    "noContinentAdded": "Nessun continente aggiunto ancora."
   }
+}
 }

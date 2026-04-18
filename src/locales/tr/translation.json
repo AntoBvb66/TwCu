@@ -976,20 +976,12 @@
       "worldLinkDesc": "Oynadığınız dünyanın kök adresidir (Örn: <code>https://tr1.klanlar.org/</code>). Bot tüm veri akışını bu adres üzerinden sağlar.",
       "botTokenTitle": "Telegram Bot Token & Chat ID:",
       "botTokenDesc": "Bildirimler için gereklidir. <strong>Chat ID:</strong> Telegram'da <code>@userinfobot</code>'a <code>/start</code> yazarak öğrenebilirsiniz. <strong>Bot Token:</strong> <code>@BotFather</code>'a <code>/newbot</code> yazarak kendi botunuzu oluşturabilirsiniz.",
-      "filtersInfo": "<strong style='color: #ff1919;'>Anlık Bildirimler:</strong> <span style='color: #ffffff;'><strong style='color: #ff1919;'>3 dakika</strong> aralıklarla güncellenir ve sadece o anki durumunu gösterir.</span> <br/><br/><strong style='color: #ff1919;'>Saatlik/Günlük/Haftalık Bildirimler:</strong> <span style='color: #ffffff;'>Belirlediğiniz periyotlarda o zaman dilimindeki hareketleri topluca raporlar. Saatlik <strong style='color: #ff1919;'>her saat başı</strong>, Günlük <strong style='color: #ff1919;'>her sabah 08:00'da</strong>, Haftalık <strong style='color: #ff1919;'>Pazartesi 08:00'da</strong> bilgilendirir.</span> <br/><br/><strong style='color: #ff1919;'>Harita Resimli Bildirimler:</strong> <span style='color: #ffffff;'>Anlık olarak harita üzerinde hedeflerinizin durumunu gösteren görseller içerir.</span>",
-      "entityFiltersTitle": "Hedef Yönetimi ve Filtreler:",
-      "entityFiltersDesc": "Periyodik Raporlar, Harita Resimleri ve diğer takipleri global değil; <u>eklediğiniz her oyuncu ve klan için özel olarak</u> seçilmektedir. Her hedefin yanındaki ayarlardan detaylı filtreleme (anlık, saatlik, kazanım, kayıp vb.) yapabilirsiniz.",
+      "filtersInfo": "Bildirim Filtreleri:",
+      "filtersInfoDesc": "Bildirim almak istediğiniz hareket türlerini seçebilirsiniz. Örneğin, sadece köy fetihleri (gains) veya kayıpları (losses) için bildirim alabilirsiniz . Seçtiğiniz filtrelere göre, hedeflerinizle ilgili hareketler gerçekleştiğinde Telegram üzerinden anında bildirim alırsınız. Bu sayede önemli gelişmeleri kaçırmazsınız.",
       "continentTrackingTitle": "Kıta Takibi:",
       "continentTrackingDesc": "Sadece ilgilendiğiniz kıtaları (Örn: 44,45,54) belirleyerek o bölgelerdeki fetih hareketlerini izleyebilirsiniz.",
-      "warTrackingTitle": "Savaş Takibi:",
-      "warTrackingDesc": "Belirlediğiniz iki klan arasındaki köy alım/verim durumlarını anlık eşleştirerek savaş raporları almanızı sağlar.",
-      "customHighlightsTitle": "Özel Harita Vurguları:",
-      "customHighlightsDesc": "İstediğiniz oyuncu veya klanları kendi seçeceğiniz renklerle haritada işaretleyebilir ve günlük/haftalık periyotlarla durumlarını izleyebilirsiniz.",
-      "autoMapsTitle": "Otomatik Harita ve Top Listeler:",
-      "autoMapsDesc": "Dünyanın en iyi 20 oyuncu/klan haritaları ile haftalık en çok köy alan/kaybeden listelerini tek bir butonla otomatik bildirimlerinize ekleyebilirsiniz.",
       "fullTrackingTitle": "Tam (Full) Dünya İzleme:",
-      "fullTrackingDesc": "Dünyadaki tüm köy fetih hareketlerini anlık izlemenizi sağlar. <strong>Uyarı:</strong> Aşırı mesaj trafiği yaratabilir.",
-      "note": "Not: Bu ayarlar bildirim sistemi içindir. TwCu'nun tüm özelliklerinden yararlanmak için Özel Erişim Kimliğinizi (TwCobre@protonmail.com) adresinden onaylatmanız gerekir. Kullanım Ücretsizdir."
+      "fullTrackingDesc": "Dünyadaki tüm köy fetih hareketlerini anlık izlemenizi sağlar. <strong>Uyarı:</strong> Aşırı mesaj trafiği yaratabilir."
     },
     "profile": {
       "mainProfile": "Ana Profil",
@@ -1003,16 +995,7 @@
       "losses": "Köy Kayıpları (Losses)",
       "barbarian": "Barbar Köyü Fetihleri (Barbarian)",
       "selfConquer": "Kendi Köyünü Fetih (SelfConquer)",
-      "internal": "Klan İçi Fetihler (Internal)",
-      "anlikTakip": "Anlık Takip",
-      "saatlikTakip": "Saatlik Takip",
-      "gunlukTakip": "Günlük Takip",
-      "haftalikTakip": "Haftalık Takip",
-      "haritaResimli": "Harita Resimli Bildirim",
-      "yenilenSaldiri": "Yenilen Rakipler (Saldırı)",
-      "yenilenSavunma": "Yenilen Rakipler (Savunma)",
-      "yenilenDestek": "Yenilen Rakipler (Destek)",
-      "yenilenToplam": "Yenilen Rakipler (Toplam)"
+      "internal": "Klan İçi Fetihler (Internal)"
     },
     "settings": {
       "basicSettings": "Temel Ayarlar",
@@ -1029,7 +1012,9 @@
       "botTokenPlaceholder": "123456789:ABCDEF...",
       "chatIdLabel": "Telegram Chat ID",
       "chatIdPlaceholder": "örnek, 1135068175",
-      "saveAllConfigs": "Tüm Ayarları Kaydet"
+      "saveAllConfigs": "Tüm Ayarları Kaydet",
+      "languageLabel":"Dil / Language",
+      "languagePlaceholder":"Dil Seç / Select Language"
     },
     "targets": {
       "addNewTarget": "Yeni Hedef Ekle",
@@ -1059,11 +1044,7 @@
       "enterBothTribes": "Lütfen her iki taraf için de klan tagı/adı girin!",
       "worldDataCorrupted": "HATA: Dünya verisi bozuk veya okunamıyor!",
       "tribesNotFoundList": "Aşağıdaki klanlar bu dünyada bulunamadı:",
-      "sideAError": "A Tarafı Hatalı",
-      "sideBError": "B Tarafı Hatalı",
-      "enterHighlightName": "Lütfen harita vurgusu için bir isim veya tag girin!",
       "worldDataFetchErrorShort": "Dünya verileri çekilemedi.",
-      "bothTribesRequired": "Her iki kabile etiketi de dolu olmalı",
       "invalidContinent": "Lütfen 0 ile 99 arasında geçerli bir kıta numarası (Örn: 44) girin.",
       "continentAlreadyAdded": "Bu kıta zaten ekli!",
       "confirmDeleteProfile": "Bu dünya ayarlarını tamamen silmek istediğinize emin misiniz?",

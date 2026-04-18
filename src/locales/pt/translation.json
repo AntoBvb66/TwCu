@@ -855,5 +855,123 @@
       "noData": "Nenhum dado obtido ainda.",
       "deleteBtn": "Eliminar"
     }
+  },
+  "notificationSettings": {
+  "header": {
+    "title": "TwCu Centro de Notificações",
+    "subtitle": "Pode gerir as suas definições de notificação para todos os mundos em que joga aqui.",
+    "hideInfo": "Ocultar Info",
+    "showInfo": "Mostrar Info"
+  },
+  "infoPanel": {
+    "title": "Como Utilizar?",
+    "profileNameTitle": "Nome do Perfil:",
+    "profileNameDesc": "Este é o nome que atribui a este grupo de definições para o lembrar facilmente. <u>Não pode ficar vazio</u> e serve como o rótulo principal que o identifica no sistema.",
+    "specialIdTitle": "ID de Acesso Especial (Special ID):",
+    "specialIdDesc": "Este é o código único que permite ao sistema fazer a correspondência consigo. Se não tiver um, clique no botão <em>Gerar ID</em> para criar um aleatório.",
+    "worldLinkTitle": "Link do Mundo:",
+    "worldLinkDesc": "Este é o endereço base do mundo em que está a jogar (ex.: <code>https://pt1.tribalwars.com.pt/</code>). O bot recebe todo o fluxo de dados através deste endereço.",
+    "botTokenTitle": "Token do Bot de Telegram & Chat ID:",
+    "botTokenDesc": "Necessário para as notificações. <strong>Chat ID:</strong> Pode obtê-lo enviando <code>/start</code> para <code>@userinfobot</code> no Telegram. <strong>Bot Token:</strong> Crie o seu próprio bot enviando <code>/newbot</code> para <code>@BotFather</code>.",
+    "filtersInfo": "Filtros de Notificação:",
+    "filtersInfoDesc": "Pode selecionar os tipos de movimentos para os quais deseja receber notificações. Por exemplo, pode receber notificações apenas para conquistas de aldeias (ganhos) ou perdas. Assim que selecionar os seus filtros, receberá notificações instantâneas no Telegram quando ocorrerem movimentos relacionados com os seus alvos.",
+    "continentTrackingTitle": "Rastreio de Continente:",
+    "continentTrackingDesc": "Pode rastrear movimentos de conquista apenas em continentes específicos (ex.: 44,45,54).",
+    "fullTrackingTitle": "Rastreio Total do Mundo:",
+    "fullTrackingDesc": "Ativa o rastreio em tempo real de todas as conquistas de aldeias no mundo. <strong>Aviso:</strong> Isto pode gerar um tráfego excessivo de mensagens."
+  },
+  "profile": {
+    "mainProfile": "Perfil Principal",
+    "newProfile": "Novo Perfil",
+    "unknownWorld": "Mundo Desconhecido",
+    "delete": "Eliminar",
+    "createNewProfile": "Criar Novo Perfil"
+  },
+  "filters": {
+    "gains": "Conquistas de Aldeias (Ganhos)",
+    "losses": "Perdas de Aldeias (Perdas)",
+    "barbarian": "Conquistas de Aldeias Bárbaras (Bárbaras)",
+    "selfConquer": "Autoconquista (SelfConquer)",
+    "internal": "Conquistas Internas da Tribo (Internas)"
+  },
+  "settings": {
+    "basicSettings": "Definições Básicas",
+    "profileNameLabel": "Nome do Perfil (Nick / Nome de Utilizador)",
+    "required": "*Obrigatório",
+    "profileNamePlaceholder": "Exemplo: Anto Bvb 66 - TribalWars Pt1",
+    "fieldCannotBeEmpty": "Este campo não pode ficar vazio.",
+    "specialIdLabel": "ID de Acesso Especial",
+    "specialIdPlaceholder": "Introduza o seu ID de licença de 66 caracteres ou gere um",
+    "generateIdBtn": "Gerar",
+    "worldLinkLabel": "Link do Mundo",
+    "worldLinkPlaceholder": "https://pt1.tribalwars.com.pt/",
+    "botTokenLabel": "Token do Bot de Telegram",
+    "botTokenPlaceholder": "123456789:ABCDEF...",
+    "chatIdLabel": "Telegram Chat ID",
+    "chatIdPlaceholder": "exemplo: 1135068175",
+    "saveAllConfigs": "Guardar Todas as Definições",
+    "languageLabel": "Idioma",
+    "languagePlaceholder": "Selecionar Idioma"
+  },
+  "targets": {
+    "addNewTarget": "Adicionar Novo Alvo",
+    "inputLabel": "Nome de Jogador ou Tag de Tribo",
+    "inputPlaceholder": "Exemplo: Jogador1, Jogador2 ou TRIBO1, TRIBO2",
+    "selectFilters": "Selecionar Filtros de Notificação",
+    "clearAll": "Limpar Tudo",
+    "selectAll": "Selecionar Tudo",
+    "addAsPlayer": "+ Adicionar como Jogador",
+    "addAsTribe": "+ Adicionar como Tribu",
+    "manageTargets": "Gerir Lista de Alvos",
+    "emptyState": "Ainda não existem alvos a ser rastreados.",
+    "show": "Mostrar",
+    "hide": "Ocultar",
+    "delete": "Eliminar",
+    "deleteConfirm": "Tem a certeza de que deseja eliminar este alvo?",
+    "playerBadge": "👤 Jogador",
+    "tribeBadge": "🛡️ Tribo"
+  },
+  "alerts": {
+    "enterPlayerOrTribe": "Por favor, introduza um nome de jogador ou tag de tribo!",
+    "worldDataFetchError": "Não foi possível obter os dados do mundo. Por favor, verifique a sua ligação.",
+    "invalidDataReceived": "Dados Recebidos Inválidos:",
+    "worldDataReadError": "ERRO: Os dados do mundo não puderam ser lidos!\n\nPor favor, certifique-se de que introduziu um link de mundo válido e ativo (ex.: https://pt1.tribalwars.com.pt) no separador 'Definições Básicas'.",
+    "playerNotFound": "ERRO: Nenhum jogador com o nome \"{{name}}\" foi encontrado neste mundo! Certifique-se de que escreveu o nome corretamente.",
+    "tribeNotFound": "ERRO: Nenhuma tribo com a tag ou nome \"{{name}}\" foi encontrada neste mundo!",
+    "enterBothTribes": "Por favor, introduza a tag/nome da tribo para ambos os lados!",
+    "worldDataCorrupted": "ERRO: Os dados do mundo estão corrompidos ou não podem ser lidos!",
+    "tribesNotFoundList": "As seguintes tribos não foram encontradas neste mundo:",
+    "worldDataFetchErrorShort": "Não foi possível obter os dados do mundo.",
+    "invalidContinent": "Por favor, introduza um número de continente válido entre 0 e 99 (ex.: 44).",
+    "continentAlreadyAdded": "Este continente já foi adicionado!",
+    "confirmDeleteProfile": "Tem a certeza de que deseja eliminar completamente estas definições de mundo?",
+    "idExists": "Já existe um ID! Limpe a caixa primeiro se desejar um novo.",
+    "emptyTargetName": "Por favor, introduza um nome ou tag de tribo primeiro.",
+    "targetExists": "Os alvos que introduziu já se encontram na lista de rastreio!",
+    "profileNameEmpty": "Deve introduzir um nome para o perfil {{index}}!",
+    "specialIdEmpty": "O ID Especial está em falta ou não foi gerado para o perfil '{{name}}'!",
+    "saveSuccess": "{{count}} perfil(is) guardado(s) com sucesso na cloud!",
+    "saveError": "Ocorreu um erro ao guardar {{count}} perfil(is)!",
+    "saveNoData": "Nenhum perfil encontrado para guardar!"
+  },
+  "common": {
+    "add": "Adicionar",
+    "delete": "Eliminar",
+    "show": "Mostrar",
+    "hide": "Ocultar"
+  },
+  "fullTracking": {
+    "title": "Rastreio Total Instantâneo",
+    "description": "Rastreie todas as conquistas de aldeias em todo o mundo em tempo real.",
+    "active": "Ativo (Todo o mundo está a ser rastreado)",
+    "inactive": "Inativo"
+  },
+  "continentTracking": {
+    "title": "Rastreio de Continente Instantâneo",
+    "description": "Rastreie alterações de aldeias apenas nos continentes selecionados.",
+    "placeholder": "Exemplo: 44",
+    "continentPrefix": "Continente",
+    "noContinentAdded": "Ainda não foi adicionado nenhum continente."
   }
+}
 }

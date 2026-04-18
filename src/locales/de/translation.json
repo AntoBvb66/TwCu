@@ -951,5 +951,123 @@
       "noData": "Noch keine Daten abgerufen.",
       "deleteBtn": "Löschen"
     }
+  },
+  "notificationSettings": {
+    "header": {
+      "title": "TwCu Benachrichtigungszentrum",
+      "subtitle": "Hier können Sie Ihre Benachrichtigungseinstellungen für alle Welten verwalten, die Sie spielen.",
+      "hideInfo": "Informationen ausblenden",
+      "showInfo": "Informationen anzeigen"
+    },
+    "infoPanel": {
+      "title": "Wie benutzt man es?",
+      "profileNameTitle": "Profilname:",
+      "profileNameDesc": "Dies ist der Name, den Sie dieser Einstellungsgruppe zuweisen, damit Sie sie leicht wiedererkennen. <u>Darf nicht leer sein</u> und dient als Hauptbezeichnung, die Sie im System identifiziert.",
+      "specialIdTitle": "Spezielle Zugriffs-ID (Special ID):",
+      "specialIdDesc": "Dies ist der eindeutige Code, mit dem das System Sie identifiziert. Wenn Sie keinen haben, klicken Sie auf die Schaltfläche <em>ID generieren</em>, um eine zufällige zu erstellen.",
+      "worldLinkTitle": "Welt-Link:",
+      "worldLinkDesc": "Dies ist die Basisadresse der Welt, auf der Sie spielen (z.B.: <code>https://tr1.klanlar.org/</code>). Der Bot erhält alle Daten über diese Adresse.",
+      "botTokenTitle": "Telegram Bot Token & Chat ID:",
+      "botTokenDesc": "Erforderlich für Benachrichtigungen. <strong>Chat ID:</strong> Sie erhalten diese, indem Sie <code>/start</code> an <code>@userinfobot</code> auf Telegram senden. <strong>Bot Token:</strong> Erstellen Sie Ihren eigenen Bot, indem Sie <code>/newbot</code> an <code>@BotFather</code> senden.",
+      "filtersInfo": "Benachrichtigungsfilter:",
+      "filtersInfoDesc": "Sie können auswählen, für welche Bewegungen Sie Benachrichtigungen erhalten möchten. Zum Beispiel nur für Dorferoberungen (Gewinne) oder Verluste. Nachdem Sie Ihre Filter ausgewählt haben, erhalten Sie sofortige Telegram-Benachrichtigungen, wenn Ereignisse im Zusammenhang mit Ihren Zielen auftreten. So verpassen Sie keine wichtigen Entwicklungen.",
+      "continentTrackingTitle": "Kontinent-Tracking:",
+      "continentTrackingDesc": "Sie können Eroberungen nur in bestimmten Kontinenten verfolgen (z.B.: 44,45,54).",
+      "fullTrackingTitle": "Vollständiges Welt-Tracking:",
+      "fullTrackingDesc": "Aktiviert das Echtzeit-Tracking aller Dorferoberungen weltweit. <strong>Warnung:</strong> Dies kann zu einer sehr hohen Nachrichtenanzahl führen."
+    },
+    "profile": {
+      "mainProfile": "Hauptprofil",
+      "newProfile": "Neues Profil",
+      "unknownWorld": "Unbekannte Welt",
+      "delete": "Löschen",
+      "createNewProfile": "Neues Profil erstellen"
+    },
+    "filters": {
+      "gains": "Dorferoberungen (Gewinne)",
+      "losses": "Dorfverluste (Verluste)",
+      "barbarian": "Eroberungen von Barbarendörfern (Barbaren)",
+      "selfConquer": "Eigene Dorferoberung (SelfConquer)",
+      "internal": "Interne Stammeseroberungen (Intern)"
+    },
+    "settings": {
+      "basicSettings": "Grundeinstellungen",
+      "profileNameLabel": "Profilname (Nick / Benutzername)",
+      "required": "*Pflichtfeld",
+      "profileNamePlaceholder": "Beispiel: Anto Bvb 66 - Klanlar Tr1",
+      "fieldCannotBeEmpty": "Dieses Feld darf nicht leer sein.",
+      "specialIdLabel": "Spezielle Zugriffs-ID",
+      "specialIdPlaceholder": "Geben Sie Ihre 66-stellige Lizenz-ID ein oder generieren Sie eine",
+      "generateIdBtn": "Generieren",
+      "worldLinkLabel": "Welt-Link",
+      "worldLinkPlaceholder": "https://tr1.klanlar.org/",
+      "botTokenLabel": "Telegram Bot Token",
+      "botTokenPlaceholder": "123456789:ABCDEF...",
+      "chatIdLabel": "Telegram Chat-ID",
+      "chatIdPlaceholder": "Beispiel: 1135068175",
+      "saveAllConfigs": "Alle Einstellungen speichern",
+      "languageLabel": "Sprache",
+      "languagePlaceholder": "Sprache auswählen"
+    },
+    "targets": {
+      "addNewTarget": "Neues Ziel hinzufügen",
+      "inputLabel": "Spielername oder Stammes-Tag",
+      "inputPlaceholder": "Beispiel: Spieler1, Spieler2 oder STAMM1,STAMM2",
+      "selectFilters": "Benachrichtigungsfilter auswählen",
+      "clearAll": "Alles löschen",
+      "selectAll": "Alles auswählen",
+      "addAsPlayer": "+ Als Spieler hinzufügen",
+      "addAsTribe": "+ Als Stamm hinzufügen",
+      "manageTargets": "Zielliste verwalten",
+      "emptyState": "Es werden noch keine Ziele verfolgt.",
+      "show": "Anzeigen",
+      "hide": "Ausblenden",
+      "delete": "Löschen",
+      "deleteConfirm": "Sind Sie sicher, dass Sie dieses Ziel löschen möchten?",
+      "playerBadge": "👤 Spieler",
+      "tribeBadge": "🛡️ Stamm"
+    },
+    "alerts": {
+      "enterPlayerOrTribe": "Bitte geben Sie einen Spielernamen oder einen Stammes-Tag ein!",
+      "worldDataFetchError": "Weltdaten konnten nicht abgerufen werden. Bitte überprüfen Sie Ihre Verbindung.",
+      "invalidDataReceived": "Ungültige Daten empfangen:",
+      "worldDataReadError": "FEHLER: Weltdaten konnten nicht gelesen werden!\n\nBitte stellen Sie sicher, dass Sie einen gültigen und aktiven Welt-Link (z.B.: https://ptc1.tribalwars.com.pt) im Tab 'Grundeinstellungen' eingegeben haben.",
+      "playerNotFound": "FEHLER: Kein Spieler mit dem Namen \"{{name}}\" in dieser Welt gefunden! Bitte überprüfen Sie die Eingabe.",
+      "tribeNotFound": "FEHLER: Kein Stamm mit dem Tag oder Namen \"{{name}}\" gefunden!",
+      "enterBothTribes": "Bitte geben Sie für beide Seiten einen Stammesnamen/Tag ein!",
+      "worldDataCorrupted": "FEHLER: Weltdaten sind beschädigt oder können nicht gelesen werden!",
+      "tribesNotFoundList": "Die folgenden Stämme wurden nicht gefunden:",
+      "worldDataFetchErrorShort": "Weltdaten konnten nicht abgerufen werden.",
+      "invalidContinent": "Bitte geben Sie eine gültige Kontinentnummer zwischen 0 und 99 ein (z.B.: 44).",
+      "continentAlreadyAdded": "Dieser Kontinent wurde bereits hinzugefügt!",
+      "confirmDeleteProfile": "Sind Sie sicher, dass Sie diese Welteinstellungen vollständig löschen möchten?",
+      "idExists": "Eine ID existiert bereits! Leeren Sie zuerst das Feld, wenn Sie eine neue erstellen möchten.",
+      "emptyTargetName": "Bitte geben Sie zuerst einen Namen oder Stammes-Tag ein.",
+      "targetExists": "Die eingegebenen Ziele befinden sich bereits in der Liste!",
+      "profileNameEmpty": "Sie müssen einen Namen für Profil {{index}} eingeben!",
+      "specialIdEmpty": "Die spezielle ID fehlt oder wurde für das Profil '{{name}}' nicht generiert!",
+      "saveSuccess": "{{count}} Profil(e) erfolgreich in der Cloud gespeichert!",
+      "saveError": "Fehler beim Speichern von {{count}} Profil(en)!",
+      "saveNoData": "Keine Profile zum Speichern gefunden!"
+    },
+    "common": {
+      "add": "Hinzufügen",
+      "delete": "Löschen",
+      "show": "Anzeigen",
+      "hide": "Ausblenden"
+    },
+    "fullTracking": {
+      "title": "Sofortiges vollständiges Tracking",
+      "description": "Verfolgen Sie alle Dorferoberungen weltweit in Echtzeit.",
+      "active": "Aktiv (gesamte Welt wird verfolgt)",
+      "inactive": "Inaktiv"
+    },
+    "continentTracking": {
+      "title": "Sofortiges Kontinent-Tracking",
+      "description": "Verfolgen Sie Dorfänderungen nur in ausgewählten Kontinenten.",
+      "placeholder": "Beispiel: 44",
+      "continentPrefix": "Kontinent",
+      "noContinentAdded": "Noch kein Kontinent hinzugefügt."
+    }
   }
 }

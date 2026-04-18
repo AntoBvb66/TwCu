@@ -855,5 +855,123 @@
       "noData": "Nog geen data opgehaald.",
       "deleteBtn": "Verwijderen"
     }
+  },
+  "notificationSettings": {
+  "header": {
+    "title": "TwCu Notificatiecentrum",
+    "subtitle": "Hier kun je de notificatie-instellingen beheren voor alle werelden die je speelt.",
+    "hideInfo": "Info Verbergen",
+    "showInfo": "Info Tonen"
+  },
+  "infoPanel": {
+    "title": "Hoe te gebruiken?",
+    "profileNameTitle": "Profielnaam:",
+    "profileNameDesc": "Dit is de naam die je aan deze instellingengroep toekent om deze gemakkelijk te onthouden. <u>Mag niet leeg worden gelaten</u> en dient als het belangrijkste label dat je in het systeem identificeert.",
+    "specialIdTitle": "Speciale Toegangs-ID (Speciale ID):",
+    "specialIdDesc": "Dit is de unieke code waarmee het systeem je kan herkennen. Als je er geen hebt, klik dan op de knop <em>ID Genereren</em> om een willekeurige code aan te maken.",
+    "worldLinkTitle": "Wereldlink:",
+    "worldLinkDesc": "Dit is het hoofdadres van de wereld waarop je speelt (bijv.: <code>https://nl1.tribalwars.nl/</code>). De bot ontvangt alle gegevensstroom via dit adres.",
+    "botTokenTitle": "Telegram Bot Token & Chat ID:",
+    "botTokenDesc": "Vereist voor notificaties. <strong>Chat ID:</strong> Je kunt deze verkrijgen door <code>/start</code> te sturen naar <code>@userinfobot</code> op Telegram. <strong>Bot Token:</strong> Maak je eigen bot door <code>/newbot</code> te sturen naar <code>@BotFather</code>.",
+    "filtersInfo": "Notificatiefilters:",
+    "filtersInfoDesc": "Je kunt de soorten bewegingen selecteren waarvoor je notificaties wilt ontvangen. Je kunt bijvoorbeeld alleen meldingen ontvangen voor dorpsveroveringen (winst) of verliezen. Zodra je je filters hebt geselecteerd, ontvang je direct Telegram-notificaties wanneer er bewegingen plaatsvinden die betrekking hebben op je doelen.",
+    "continentTrackingTitle": "Continent Tracking:",
+    "continentTrackingDesc": "Je kunt veroveringsbewegingen in alleen specifieke continenten volgen (bijv.: 44,45,54).",
+    "fullTrackingTitle": "Volledige Wereld Tracking:",
+    "fullTrackingDesc": "Schakelt realtime tracking in van alle dorpsveroveringen in de wereld. <strong>Waarschuwing:</strong> Dit kan leiden tot overmatig berichtenverkeer."
+  },
+  "profile": {
+    "mainProfile": "Hoofdprofiel",
+    "newProfile": "Nieuw Profiel",
+    "unknownWorld": "Onbekende Wereld",
+    "delete": "Verwijderen",
+    "createNewProfile": "Nieuw Profiel Aanmaken"
+  },
+  "filters": {
+    "gains": "Dorpsveroveringen (Winst)",
+    "losses": "Dorpsverliezen (Verlies)",
+    "barbarian": "Barbarendorpen Veroveringen (Barbaars)",
+    "selfConquer": "Zelfverovering (SelfConquer)",
+    "internal": "Interne Stamveroveringen (Intern)"
+  },
+  "settings": {
+    "basicSettings": "Basisinstellingen",
+    "profileNameLabel": "Profielnaam (Nick / Gebruikersnaam)",
+    "required": "*Vereist",
+    "profileNamePlaceholder": "Voorbeeld: Anto Bvb 66 - TribalWars Nl1",
+    "fieldCannotBeEmpty": "Dit veld mag niet leeg blijven.",
+    "specialIdLabel": "Speciale Toegangs-ID",
+    "specialIdPlaceholder": "Voer je 66-tekens lange licentie-ID in of genereer er een",
+    "generateIdBtn": "Genereren",
+    "worldLinkLabel": "Wereldlink",
+    "worldLinkPlaceholder": "https://nl1.tribalwars.nl/",
+    "botTokenLabel": "Telegram Bot Token",
+    "botTokenPlaceholder": "123456789:ABCDEF...",
+    "chatIdLabel": "Telegram Chat ID",
+    "chatIdPlaceholder": "voorbeeld: 1135068175",
+    "saveAllConfigs": "Alle Instellingen Opslaan",
+    "languageLabel": "Taal",
+    "languagePlaceholder": "Selecteer Taal"
+  },
+  "targets": {
+    "addNewTarget": "Nieuw Doel Toevoegen",
+    "inputLabel": "Spelersnaam of Stamtag",
+    "inputPlaceholder": "Voorbeeld: Speler1, Speler2 of STAM1,STAM2",
+    "selectFilters": "Selecteer Notificatiefilters",
+    "clearAll": "Alles Wissen",
+    "selectAll": "Alles Selecteren",
+    "addAsPlayer": "+ Toevoegen als Speler",
+    "addAsTribe": "+ Toevoegen als Stam",
+    "manageTargets": "Doellijst Beheren",
+    "emptyState": "Er worden nog geen doelen gevolgd.",
+    "show": "Tonen",
+    "hide": "Verbergen",
+    "delete": "Verwijderen",
+    "deleteConfirm": "Weet je zeker dat je dit doel wilt verwijderen?",
+    "playerBadge": "👤 Speler",
+    "tribeBadge": "🛡️ Stam"
+  },
+  "alerts": {
+    "enterPlayerOrTribe": "Voer een spelersnaam of stamtag in!",
+    "worldDataFetchError": "Kon wereldgegevens niet ophalen. Controleer je verbinding.",
+    "invalidDataReceived": "Ongeldige Gegevens Ontvangen:",
+    "worldDataReadError": "FOUT: Wereldgegevens konden niet worden gelezen!\n\nZorg ervoor dat je een geldige en actieve wereldlink hebt ingevoerd (bijv.: https://nl1.tribalwars.nl) in het tabblad 'Basisinstellingen'.",
+    "playerNotFound": "FOUT: Geen speler met de naam \"{{name}}\" gevonden in deze wereld! Controleer of je de naam correct hebt gespeld.",
+    "tribeNotFound": "FOUT: Geen stam met de tag of naam \"{{name}}\" gevonden in deze wereld!",
+    "enterBothTribes": "Voer de stamtag/-naam in voor beide kanten!",
+    "worldDataCorrupted": "FOUT: Wereldgegevens zijn beschadigd of kunnen niet worden gelezen!",
+    "tribesNotFoundList": "De volgende stammen zijn niet gevonden in deze wereld:",
+    "worldDataFetchErrorShort": "Kon wereldgegevens niet ophalen.",
+    "invalidContinent": "Voer een geldig continentnummer in tussen 0 en 99 (bijv.: 44).",
+    "continentAlreadyAdded": "Dit continent is al toegevoegd!",
+    "confirmDeleteProfile": "Weet je zeker dat je deze wereldinstellingen volledig wilt verwijderen?",
+    "idExists": "Er bestaat al een ID! Maak het vak eerst leeg als je een nieuwe wilt.",
+    "emptyTargetName": "Voer eerst een naam of stamtag in.",
+    "targetExists": "De doelen die je hebt ingevoerd staan al in de trackinglijst!",
+    "profileNameEmpty": "Je moet een naam invoeren voor profiel {{index}}!",
+    "specialIdEmpty": "Speciale ID ontbreekt of is niet gegenereerd voor profiel '{{name}}'!",
+    "saveSuccess": "{{count}} profiel(en) succesvol opgeslagen in de cloud!",
+    "saveError": "Fout opgetreden bij het opslaan van {{count}} profiel(en)!",
+    "saveNoData": "Geen profiel gevonden om op te slaan!"
+  },
+  "common": {
+    "add": "Toevoegen",
+    "delete": "Verwijderen",
+    "show": "Tonen",
+    "hide": "Verbergen"
+  },
+  "fullTracking": {
+    "title": "Instant Volledige Tracking",
+    "description": "Volg alle dorpsveroveringen over de hele wereld in realtime.",
+    "active": "Actief (Hele wereld wordt gevolgd)",
+    "inactive": "Inactief"
+  },
+  "continentTracking": {
+    "title": "Instant Continent Tracking",
+    "description": "Volg dorpswijzigingen alleen in geselecteerde continenten.",
+    "placeholder": "Voorbeeld: 44",
+    "continentPrefix": "Continent",
+    "noContinentAdded": "Nog geen continent toegevoegd."
   }
+}
 }

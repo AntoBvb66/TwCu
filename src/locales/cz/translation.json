@@ -952,5 +952,123 @@
       "noData": "Zatím nebyla načtena žádná data.",
       "deleteBtn": "Smazat"
     }
+  },
+  "notificationSettings": {
+    "header": {
+      "title": "Centrum oznámení TwCu",
+      "subtitle": "Zde můžete spravovat nastavení oznámení pro všechny světy, které hrajete.",
+      "hideInfo": "Skrýt informace",
+      "showInfo": "Zobrazit informace"
+    },
+    "infoPanel": {
+      "title": "Jak používat?",
+      "profileNameTitle": "Název profilu:",
+      "profileNameDesc": "Toto je název, který přiřadíte této skupině nastavení, abyste si ji snadno zapamatovali. <u>Nesmí být prázdný</u> a slouží jako hlavní označení, které vás identifikuje v systému.",
+      "specialIdTitle": "Speciální přístupové ID (Special ID):",
+      "specialIdDesc": "Jedinečný kód, který umožňuje systému vás identifikovat. Pokud jej nemáte, klikněte na tlačítko <em>Generovat ID</em> a vytvořte náhodné.",
+      "worldLinkTitle": "Odkaz na svět:",
+      "worldLinkDesc": "Kořenová adresa světa, na kterém hrajete (např.: <code>https://tr1.klanlar.org/</code>). Bot přijímá veškerý tok dat přes tuto adresu.",
+      "botTokenTitle": "Telegram Bot Token & Chat ID:",
+      "botTokenDesc": "Vyžadováno pro oznámení. <strong>Chat ID:</strong> Získáte jej odesláním <code>/start</code> na <code>@userinfobot</code> na Telegramu. <strong>Bot Token:</strong> Vytvořte vlastního bota odesláním <code>/newbot</code> na <code>@BotFather</code>.",
+      "filtersInfo": "Filtry oznámení:",
+      "filtersInfoDesc": "Můžete vybrat typy pohybů, pro které chcete dostávat oznámení. Například pouze dobytí vesnic (zisky) nebo ztráty. Po výběru filtrů budete dostávat okamžitá oznámení na Telegram, když dojde k událostem souvisejícím s vašimi cíli. Díky tomu vám neuniknou důležité změny.",
+      "continentTrackingTitle": "Sledování kontinentů:",
+      "continentTrackingDesc": "Můžete sledovat dobytí pouze v určitých kontinentech (např.: 44,45,54).",
+      "fullTrackingTitle": "Plné sledování světa:",
+      "fullTrackingDesc": "Zapne sledování všech dobytí vesnic v reálném čase po celém světě. <strong>Upozornění:</strong> Může generovat velké množství zpráv."
+    },
+    "profile": {
+      "mainProfile": "Hlavní profil",
+      "newProfile": "Nový profil",
+      "unknownWorld": "Neznámý svět",
+      "delete": "Smazat",
+      "createNewProfile": "Vytvořit nový profil"
+    },
+    "filters": {
+      "gains": "Dobytí vesnic (zisky)",
+      "losses": "Ztráty vesnic (ztráty)",
+      "barbarian": "Dobytí barbarských vesnic (barbaři)",
+      "selfConquer": "Vlastní dobytí vesnice (SelfConquer)",
+      "internal": "Interní dobytí kmene (interní)"
+    },
+    "settings": {
+      "basicSettings": "Základní nastavení",
+      "profileNameLabel": "Název profilu (Nick / uživatel)",
+      "required": "*Povinné",
+      "profileNamePlaceholder": "Příklad: Anto Bvb 66 - Klanlar Tr1",
+      "fieldCannotBeEmpty": "Toto pole nesmí být prázdné.",
+      "specialIdLabel": "Speciální přístupové ID",
+      "specialIdPlaceholder": "Zadejte svůj 66znakový licenční ID nebo jej vygenerujte",
+      "generateIdBtn": "Generovat",
+      "worldLinkLabel": "Odkaz na svět",
+      "worldLinkPlaceholder": "https://tr1.klanlar.org/",
+      "botTokenLabel": "Telegram Bot Token",
+      "botTokenPlaceholder": "123456789:ABCDEF...",
+      "chatIdLabel": "Telegram Chat ID",
+      "chatIdPlaceholder": "např.: 1135068175",
+      "saveAllConfigs": "Uložit všechna nastavení",
+      "languageLabel": "Jazyk",
+      "languagePlaceholder": "Vyberte jazyk"
+    },
+    "targets": {
+      "addNewTarget": "Přidat nový cíl",
+      "inputLabel": "Jméno hráče nebo tag kmene",
+      "inputPlaceholder": "Příklad: Hrac1, Hrac2 nebo KLAN1,KLAN2",
+      "selectFilters": "Vyberte filtry oznámení",
+      "clearAll": "Vymazat vše",
+      "selectAll": "Vybrat vše",
+      "addAsPlayer": "+ Přidat jako hráč",
+      "addAsTribe": "+ Přidat jako kmen",
+      "manageTargets": "Správa seznamu cílů",
+      "emptyState": "Zatím nejsou sledovány žádné cíle.",
+      "show": "Zobrazit",
+      "hide": "Skrýt",
+      "delete": "Smazat",
+      "deleteConfirm": "Opravdu chcete tento cíl smazat?",
+      "playerBadge": "👤 Hráč",
+      "tribeBadge": "🛡️ Kmen"
+    },
+    "alerts": {
+      "enterPlayerOrTribe": "Zadejte jméno hráče nebo tag kmene!",
+      "worldDataFetchError": "Nepodařilo se načíst data světa. Zkontrolujte připojení.",
+      "invalidDataReceived": "Přijata neplatná data:",
+      "worldDataReadError": "CHYBA: Data světa nelze načíst!\n\nUjistěte se, že jste zadali platný a aktivní odkaz na svět (např.: https://ptc1.tribalwars.com.pt) v záložce 'Základní nastavení'.",
+      "playerNotFound": "CHYBA: Hráč \"{{name}}\" nebyl v tomto světě nalezen! Zkontrolujte správnost zadání.",
+      "tribeNotFound": "CHYBA: Kmen s tagem nebo názvem \"{{name}}\" nebyl nalezen!",
+      "enterBothTribes": "Zadejte tag/název kmene pro obě strany!",
+      "worldDataCorrupted": "CHYBA: Data světa jsou poškozená nebo nelze načíst!",
+      "tribesNotFoundList": "Následující kmeny nebyly nalezeny:",
+      "worldDataFetchErrorShort": "Nelze načíst data světa.",
+      "invalidContinent": "Zadejte platné číslo kontinentu mezi 0 a 99 (např.: 44).",
+      "continentAlreadyAdded": "Tento kontinent již byl přidán!",
+      "confirmDeleteProfile": "Opravdu chcete úplně smazat toto nastavení světa?",
+      "idExists": "ID již existuje! Pokud chcete nové, nejprve pole vymažte.",
+      "emptyTargetName": "Nejprve zadejte jméno nebo tag kmene.",
+      "targetExists": "Zadané cíle již jsou v seznamu sledování!",
+      "profileNameEmpty": "Musíte zadat název pro profil {{index}}!",
+      "specialIdEmpty": "Speciální ID chybí nebo nebylo vygenerováno pro profil '{{name}}'!",
+      "saveSuccess": "{{count}} profil(ů) bylo úspěšně uloženo do cloudu!",
+      "saveError": "Při ukládání {{count}} profil(ů) došlo k chybě!",
+      "saveNoData": "Žádné profily k uložení!"
+    },
+    "common": {
+      "add": "Přidat",
+      "delete": "Smazat",
+      "show": "Zobrazit",
+      "hide": "Skrýt"
+    },
+    "fullTracking": {
+      "title": "Okamžité plné sledování",
+      "description": "Sledujte všechna dobytí vesnic v celém světě v reálném čase.",
+      "active": "Aktivní (sledován celý svět)",
+      "inactive": "Neaktivní"
+    },
+    "continentTracking": {
+      "title": "Okamžité sledování kontinentů",
+      "description": "Sledujte změny vesnic pouze ve vybraných kontinentech.",
+      "placeholder": "Příklad: 44",
+      "continentPrefix": "Kontinent",
+      "noContinentAdded": "Zatím nebyl přidán žádný kontinent."
+    }
   }
 }

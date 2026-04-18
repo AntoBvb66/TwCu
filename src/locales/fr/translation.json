@@ -855,5 +855,123 @@
       "noData": "Aucune donnée récupérée encore.",
       "deleteBtn": "Supprimer"
     }
+  },
+  "notificationSettings": {
+  "header": {
+    "title": "Centre de Notifications TwCu",
+    "subtitle": "Vous pouvez gérer ici vos paramètres de notification pour tous les mondes auxquels vous jouez.",
+    "hideInfo": "Masquer Info",
+    "showInfo": "Afficher Info"
+  },
+  "infoPanel": {
+    "title": "Comment utiliser ?",
+    "profileNameTitle": "Nom du Profil :",
+    "profileNameDesc": "C'est le nom que vous attribuez à ce groupe de paramètres pour vous en souvenir facilement. <u>Ne peut pas être laissé vide</u> et sert d'identifiant principal dans le système.",
+    "specialIdTitle": "ID d'Accès Spécial (Special ID) :",
+    "specialIdDesc": "C'est le code unique qui permet au système de vous identifier. Si vous n'en avez pas, cliquez sur le bouton <em>Générer ID</em> pour en créer un aléatoirement.",
+    "worldLinkTitle": "Lien du Monde :",
+    "worldLinkDesc": "C'est l'adresse racine du monde sur lequel vous jouez (ex : <code>https://fr1.guerretribale.fr/</code>). Le bot reçoit tous les flux de données via cette adresse.",
+    "botTokenTitle": "Token du Bot Telegram & Chat ID :",
+    "botTokenDesc": "Requis pour les notifications. <strong>Chat ID :</strong> Vous pouvez l'obtenir en envoyant <code>/start</code> à <code>@userinfobot</code> sur Telegram. <strong>Bot Token :</strong> Créez votre propre bot en envoyant <code>/newbot</code> à <code>@BotFather</code>.",
+    "filtersInfo": "Filtres de Notification :",
+    "filtersInfoDesc": "Vous pouvez sélectionner les types de mouvements pour lesquels vous souhaitez recevoir des notifications. Par exemple, vous pouvez recevoir des notifications uniquement pour les conquêtes (gains) ou les pertes de villages. Une fois vos filtres sélectionnés, vous recevrez des notifications Telegram instantanées dès que des mouvements liés à vos cibles se produiront.",
+    "continentTrackingTitle": "Suivi par Continent :",
+    "continentTrackingDesc": "Vous pouvez suivre les mouvements de conquête uniquement dans des continents spécifiques (ex : 44, 45, 54).",
+    "fullTrackingTitle": "Suivi Mondial Complet :",
+    "fullTrackingDesc": "Permet le suivi en temps réel de toutes les conquêtes de villages dans le monde. <strong>Attention :</strong> Cela peut générer un flux de messages excessif."
+  },
+  "profile": {
+    "mainProfile": "Profil Principal",
+    "newProfile": "Nouveau Profil",
+    "unknownWorld": "Monde Inconnu",
+    "delete": "Supprimer",
+    "createNewProfile": "Créer un Nouveau Profil"
+  },
+  "filters": {
+    "gains": "Conquêtes de Villages (Gains)",
+    "losses": "Pertes de Villages (Pertes)",
+    "barbarian": "Conquêtes de Villages Barbares (Barbares)",
+    "selfConquer": "Auto-conquête (SelfConquer)",
+    "internal": "Conquêtes Internes de Tribu (Interne)"
+  },
+  "settings": {
+    "basicSettings": "Paramètres de Base",
+    "profileNameLabel": "Nom du Profil (Pseudo / Nom d'utilisateur)",
+    "required": "*Requis",
+    "profileNamePlaceholder": "Exemple : Anto Bvb 66 - GT Fr1",
+    "fieldCannotBeEmpty": "Ce champ ne peut pas être laissé vide.",
+    "specialIdLabel": "ID d'Accès Spécial",
+    "specialIdPlaceholder": "Entrez votre ID de licence à 66 caractères ou générez-en un",
+    "generateIdBtn": "Générer",
+    "worldLinkLabel": "Lien du Monde",
+    "worldLinkPlaceholder": "https://fr1.guerretribale.fr/",
+    "botTokenLabel": "Token du Bot Telegram",
+    "botTokenPlaceholder": "123456789:ABCDEF...",
+    "chatIdLabel": "Telegram Chat ID",
+    "chatIdPlaceholder": "exemple : 1135068175",
+    "saveAllConfigs": "Enregistrer Tous les Paramètres",
+    "languageLabel": "Langue",
+    "languagePlaceholder": "Choisir la Langue"
+  },
+  "targets": {
+    "addNewTarget": "Ajouter une Nouvelle Cible",
+    "inputLabel": "Nom du Joueur ou Tag de Tribu",
+    "inputPlaceholder": "Exemple : Joueur1, Joueur2 ou TRIBU1, TRIBU2",
+    "selectFilters": "Sélectionner les Filtres de Notification",
+    "clearAll": "Tout effacer",
+    "selectAll": "Tout sélectionner",
+    "addAsPlayer": "+ Ajouter comme Joueur",
+    "addAsTribe": "+ Ajouter comme Tribu",
+    "manageTargets": "Gérer la Liste des Cibles",
+    "emptyState": "Aucune cible n'est encore suivie.",
+    "show": "Afficher",
+    "hide": "Masquer",
+    "delete": "Supprimer",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette cible ?",
+    "playerBadge": "👤 Joueur",
+    "tribeBadge": "🛡️ Tribu"
+  },
+  "alerts": {
+    "enterPlayerOrTribe": "Veuillez entrer un nom de joueur ou un tag de tribu !",
+    "worldDataFetchError": "Impossible de récupérer les données du monde. Veuillez vérifier votre connexion.",
+    "invalidDataReceived": "Données Invalides Reçues :",
+    "worldDataReadError": "ERREUR : Les données du monde n'ont pas pu être lues !\n\nVeuillez vous assurer d'avoir entré un lien de monde valide et actif (ex : https://fr1.guerretribale.fr) dans l'onglet 'Paramètres de Base'.",
+    "playerNotFound": "ERREUR : Aucun joueur nommé \"{{name}}\" n'a été trouvé dans ce monde ! Vérifiez l'orthographe.",
+    "tribeNotFound": "ERREUR : Aucune tribu avec le tag ou le nom \"{{name}}\" n'a été trouvée dans ce monde !",
+    "enterBothTribes": "Veuillez entrer le tag/nom de la tribu pour les deux camps !",
+    "worldDataCorrupted": "ERREUR : Les données du monde sont corrompues ou illisibles !",
+    "tribesNotFoundList": "Les tribus suivantes n'ont pas été trouvées dans ce monde :",
+    "worldDataFetchErrorShort": "Échec de la récupération des données du monde.",
+    "invalidContinent": "Veuillez entrer un numéro de continent valide entre 0 et 99 (ex : 44).",
+    "continentAlreadyAdded": "Ce continent est déjà ajouté !",
+    "confirmDeleteProfile": "Êtes-vous sûr de vouloir supprimer complètement ces paramètres de monde ?",
+    "idExists": "Un ID existe déjà ! Videz le champ d'abord si vous souhaitez en créer un nouveau.",
+    "emptyTargetName": "Veuillez d'abord entrer un nom ou un tag de tribu.",
+    "targetExists": "Les cibles que vous avez entrées sont déjà dans la liste de suivi !",
+    "profileNameEmpty": "Vous devez entrer un nom pour le profil {{index}} !",
+    "specialIdEmpty": "L'ID spécial est manquant ou n'a pas été généré pour le profil '{{name}}' !",
+    "saveSuccess": "{{count}} profil(s) enregistré(s) avec succès sur le cloud !",
+    "saveError": "Une erreur est survenue lors de l'enregistrement de {{count}} profil(s) !",
+    "saveNoData": "Aucun profil trouvé à enregistrer !"
+  },
+  "common": {
+    "add": "Ajouter",
+    "delete": "Supprimer",
+    "show": "Afficher",
+    "hide": "Masquer"
+  },
+  "fullTracking": {
+    "title": "Suivi Instantané Complet",
+    "description": "Suivez toutes les conquêtes de villages sur l'ensemble du monde en temps réel.",
+    "active": "Actif (Tout le monde est suivi)",
+    "inactive": "Inactif"
+  },
+  "continentTracking": {
+    "title": "Suivi Instantané par Continent",
+    "description": "Suivez les changements de villages uniquement dans les continents sélectionnés.",
+    "placeholder": "Exemple : 44",
+    "continentPrefix": "Continent",
+    "noContinentAdded": "Aucun continent ajouté pour le moment."
   }
+}
 }

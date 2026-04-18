@@ -855,5 +855,123 @@
       "noData": "Aún no se obtuvieron datos.",
       "deleteBtn": "Eliminar"
     }
+  },
+  "notificationSettings": {
+  "header": {
+    "title": "Centro de Notificaciones TwCu",
+    "subtitle": "Aquí puedes gestionar la configuración de notificaciones para todos los mundos en los que juegas.",
+    "hideInfo": "Ocultar información",
+    "showInfo": "Mostrar información"
+  },
+  "infoPanel": {
+    "title": "¿Cómo se usa?",
+    "profileNameTitle": "Nombre del Perfil:",
+    "profileNameDesc": "Este es el nombre que asignas a este grupo de ajustes para recordarlo fácilmente. <u>No puede dejarse vacío</u> y sirve como la etiqueta principal que te identifica en el sistema.",
+    "specialIdTitle": "ID de Acceso Especial (Special ID):",
+    "specialIdDesc": "Este es el código único que permite al sistema vincularse contigo. Si no tienes uno, haz clic en el botón <em>Generar ID</em> para crear uno aleatorio.",
+    "worldLinkTitle": "Enlace del Mundo:",
+    "worldLinkDesc": "Esta es la dirección raíz del mundo en el que estás jugando (ej.: <code>https://es1.guerrastribales.es/</code>). El bot recibe todo el flujo de datos a través de esta dirección.",
+    "botTokenTitle": "Token del Bot de Telegram y Chat ID:",
+    "botTokenDesc": "Necesario para las notificaciones. <strong>Chat ID:</strong> Puedes obtenerlo enviando <code>/start</code> a <code>@userinfobot</code> en Telegram. <strong>Bot Token:</strong> Crea tu propio bot enviando <code>/newbot</code> a <code>@BotFather</code>.",
+    "filtersInfo": "Filtros de Notificación:",
+    "filtersInfoDesc": "Puedes seleccionar los tipos de movimientos para los que deseas recibir notificaciones. Por ejemplo, puedes recibir notificaciones solo para conquistas de pueblos (ganancias) o pérdidas. Una vez selecciones tus filtros, recibirás notificaciones instantáneas en Telegram cuando ocurran movimientos relacionados con tus objetivos. Así no te perderás ningún acontecimiento importante.",
+    "continentTrackingTitle": "Seguimiento de Continente:",
+    "continentTrackingDesc": "Puedes seguir los movimientos de conquista solo en continentes específicos (ej.: 44,45,54).",
+    "fullTrackingTitle": "Seguimiento Total del Mundo:",
+    "fullTrackingDesc": "Activa el seguimiento en tiempo real de todas las conquistas de pueblos en el mundo. <strong>Advertencia:</strong> Esto puede generar un tráfico excesivo de mensajes."
+  },
+  "profile": {
+    "mainProfile": "Perfil Principal",
+    "newProfile": "Nuevo Perfil",
+    "unknownWorld": "Mundo Desconocido",
+    "delete": "Eliminar",
+    "createNewProfile": "Crear Nuevo Perfil"
+  },
+  "filters": {
+    "gains": "Conquistas de Pueblos (Ganancias)",
+    "losses": "Pérdidas de Pueblos (Pérdidas)",
+    "barbarian": "Conquistas de Bárbaros (Bárbaros)",
+    "selfConquer": "Autoconquista (SelfConquer)",
+    "internal": "Conquistas Internas de Tribu (Internas)"
+  },
+  "settings": {
+    "basicSettings": "Ajustes Básicos",
+    "profileNameLabel": "Nombre del Perfil (Nick / Usuario)",
+    "required": "*Obligatorio",
+    "profileNamePlaceholder": "Ejemplo: Anto Bvb 66 - Mundos Es1",
+    "fieldCannotBeEmpty": "Este campo no puede dejarse vacío.",
+    "specialIdLabel": "ID de Acceso Especial",
+    "specialIdPlaceholder": "Introduce tu ID de licencia de 66 caracteres o genera uno",
+    "generateIdBtn": "Generar",
+    "worldLinkLabel": "Enlace del Mundo",
+    "worldLinkPlaceholder": "https://es1.guerrastribales.es/",
+    "botTokenLabel": "Token del Bot de Telegram",
+    "botTokenPlaceholder": "123456789:ABCDEF...",
+    "chatIdLabel": "ID de Chat de Telegram",
+    "chatIdPlaceholder": "ejemplo: 1135068175",
+    "saveAllConfigs": "Guardar Todos los Ajustes",
+    "languageLabel": "Idioma",
+    "languagePlaceholder": "Seleccionar Idioma"
+  },
+  "targets": {
+    "addNewTarget": "Añadir Nuevo Objetivo",
+    "inputLabel": "Nombre de Jugador o Etiqueta de Tribu",
+    "inputPlaceholder": "Ejemplo: Jugador1, Jugador2 o TRIBU1,TRIBU2",
+    "selectFilters": "Seleccionar Filtros de Notificación",
+    "clearAll": "Borrar Todo",
+    "selectAll": "Seleccionar Todo",
+    "addAsPlayer": "+ Añadir como Jugador",
+    "addAsTribe": "+ Añadir como Tribu",
+    "manageTargets": "Gestionar Lista de Objetivos",
+    "emptyState": "Aún no se están siguiendo objetivos.",
+    "show": "Mostrar",
+    "hide": "Ocultar",
+    "delete": "Eliminar",
+    "deleteConfirm": "¿Estás seguro de que quieres eliminar este objetivo?",
+    "playerBadge": "👤 Jugador",
+    "tribeBadge": "🛡️ Tribu"
+  },
+  "alerts": {
+    "enterPlayerOrTribe": "¡Por favor, introduce un nombre de jugador o etiqueta de tribu!",
+    "worldDataFetchError": "No se pudieron obtener los datos del mundo. Comprueba tu conexión.",
+    "invalidDataReceived": "Datos Recibidos Inválidos:",
+    "worldDataReadError": "ERROR: ¡No se pudieron leer los datos del mundo!\n\nAsegúrate de haber introducido un enlace de mundo válido y activo (ej.: https://es1.guerrastribales.es) en la pestaña 'Ajustes Básicos'.",
+    "playerNotFound": "ERROR: ¡No se encontró ningún jugador llamado \"{{name}}\" en este mundo! Asegúrate de haber escrito el nombre correctamente.",
+    "tribeNotFound": "ERROR: ¡No se encontró ninguna tribu con la etiqueta o nombre \"{{name}}\" en este mundo!",
+    "enterBothTribes": "¡Por favor, introduce la etiqueta o nombre de la tribu para ambos bandos!",
+    "worldDataCorrupted": "ERROR: ¡Los datos del mundo están corruptos o no se pueden leer!",
+    "tribesNotFoundList": "Las siguientes tribus no se encontraron en este mundo:",
+    "worldDataFetchErrorShort": "No se pudieron obtener los datos del mundo.",
+    "invalidContinent": "Por favor, introduce un número de continente válido entre 0 y 99 (ej.: 44).",
+    "continentAlreadyAdded": "¡Este continente ya ha sido añadido!",
+    "confirmDeleteProfile": "¿Estás seguro de que quieres eliminar completamente estos ajustes del mundo?",
+    "idExists": "¡Ya existe un ID! Limpia el cuadro primero si quieres generar uno nuevo.",
+    "emptyTargetName": "Por favor, introduce primero un nombre o etiqueta de tribu.",
+    "targetExists": "¡Los objetivos introducidos ya están en la lista de seguimiento!",
+    "profileNameEmpty": "¡Debes introducir un nombre para el perfil {{index}}!",
+    "specialIdEmpty": "¡Falta el Special ID o no se ha generado para el perfil '{{name}}'!",
+    "saveSuccess": "¡{{count}} perfil(es) guardado(s) correctamente en la nube!",
+    "saveError": "¡Ocurrió un error al guardar {{count}} perfil(es)!",
+    "saveNoData": "¡No se encontró ningún perfil para guardar!"
+  },
+  "common": {
+    "add": "Añadir",
+    "delete": "Eliminar",
+    "show": "Mostrar",
+    "hide": "Ocultar"
+  },
+  "fullTracking": {
+    "title": "Seguimiento Instantáneo Total",
+    "description": "Sigue todas las conquistas de pueblos en todo el mundo en tiempo real.",
+    "active": "Activo (Se está siguiendo todo el mundo)",
+    "inactive": "Inactivo"
+  },
+  "continentTracking": {
+    "title": "Seguimiento de Continente Instantáneo",
+    "description": "Sigue los cambios de pueblos solo en los continentes seleccionados.",
+    "placeholder": "Ejemplo: 44",
+    "continentPrefix": "Continente",
+    "noContinentAdded": "Aún no se ha añadido ningún continente."
   }
+}
 }

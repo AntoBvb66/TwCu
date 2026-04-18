@@ -854,5 +854,123 @@
       "noData": "Nie pobrano jeszcze danych.",
       "deleteBtn": "Usuń"
     }
+  },
+  "notificationSettings": {
+  "header": {
+    "title": "Centrum Powiadomień TwCu",
+    "subtitle": "Tutaj możesz zarządzać ustawieniami powiadomień dla wszystkich światów, na których grasz.",
+    "hideInfo": "Ukryj Info",
+    "showInfo": "Pokaż Info"
+  },
+  "infoPanel": {
+    "title": "Jak używać?",
+    "profileNameTitle": "Nazwa Profilu:",
+    "profileNameDesc": "Jest to nazwa przypisana do tej grupy ustawień, aby łatwo ją zapamiętać. <u>Nie może być pusta</u> i służy jako główna etykieta identyfikująca Cię w systemie.",
+    "specialIdTitle": "Specjalny ID Dostępu (Special ID):",
+    "specialIdDesc": "Jest to unikalny kod, który pozwala systemowi dopasować dane do Ciebie. Jeśli go nie masz, kliknij przycisk <em>Generuj ID</em>, aby utworzyć losowy kod.",
+    "worldLinkTitle": "Link do Świata:",
+    "worldLinkDesc": "Jest to główny adres świata, na którym grasz (np.: <code>https://pl1.plemiona.pl/</code>). Bot odbiera wszystkie dane za pośrednictwem tego adresu.",
+    "botTokenTitle": "Token Bota Telegram i Chat ID:",
+    "botTokenDesc": "Wymagane do powiadomień. <strong>Chat ID:</strong> Możesz go uzyskać, wysyłając <code>/start</code> do <code>@userinfobot</code> na Telegramie. <strong>Bot Token:</strong> Stwórz własnego bota, wysyłając <code>/newbot</code> do <code>@BotFather</code>.",
+    "filtersInfo": "Filtry Powiadomień:",
+    "filtersInfoDesc": "Możesz wybrać rodzaje akcji, o których chcesz otrzymywać powiadomienia. Na przykład możesz otrzymywać powiadomienia tylko o przejęciach wiosek (zyski) lub stratach. Po wybraniu filtrów będziesz otrzymywać natychmiastowe powiadomienia na Telegramie, gdy wystąpią zdarzenia związane z Twoimi celami.",
+    "continentTrackingTitle": "Śledzenie Kontynentu:",
+    "continentTrackingDesc": "Możesz śledzić przejęcia tylko na konkretnych kontynentach (np.: 44, 45, 54).",
+    "fullTrackingTitle": "Śledzenie Całego Świata:",
+    "fullTrackingDesc": "Włącza śledzenie wszystkich przejęć wiosek na świecie w czasie rzeczywistym. <strong>Ostrzeżenie:</strong> Może to generować bardzo dużą liczbę wiadomości."
+  },
+  "profile": {
+    "mainProfile": "Profil Główny",
+    "newProfile": "Nowy Profil",
+    "unknownWorld": "Nieznany Świat",
+    "delete": "Usuń",
+    "createNewProfile": "Utwórz Nowy Profil"
+  },
+  "filters": {
+    "gains": "Przejęcia Wiosek (Zyski)",
+    "losses": "Straty Wiosek (Straty)",
+    "barbarian": "Przejęcia Wiosek Barbarzyńskich (Barbarzyńcy)",
+    "selfConquer": "Samoprzejęcie (SelfConquer)",
+    "internal": "Przejęcia Wewnętrzne Plemienia (Internal)"
+  },
+  "settings": {
+    "basicSettings": "Ustawienia Podstawowe",
+    "profileNameLabel": "Nazwa Profilu (Nick / Użytkownik)",
+    "required": "*Wymagane",
+    "profileNamePlaceholder": "Przykład: Anto Bvb 66 - Plemiona Pl1",
+    "fieldCannotBeEmpty": "To pole nie może być puste.",
+    "specialIdLabel": "Specjalny ID Dostępu",
+    "specialIdPlaceholder": "Wprowadź swój 66-znakowy ID licencji lub wygeneruj nowy",
+    "generateIdBtn": "Generuj",
+    "worldLinkLabel": "Link do Świata",
+    "worldLinkPlaceholder": "https://pl1.plemiona.pl/",
+    "botTokenLabel": "Token Bota Telegram",
+    "botTokenPlaceholder": "123456789:ABCDEF...",
+    "chatIdLabel": "Telegram Chat ID",
+    "chatIdPlaceholder": "przykład: 1135068175",
+    "saveAllConfigs": "Zapisz Wszystkie Ustawienia",
+    "languageLabel": "Język",
+    "languagePlaceholder": "Wybierz Język"
+  },
+  "targets": {
+    "addNewTarget": "Dodaj Nowy Cel",
+    "inputLabel": "Nazwa Gracza lub Skrót Plemienia",
+    "inputPlaceholder": "Przykład: Gracz1, Gracz2 lub TAG1, TAG2",
+    "selectFilters": "Wybierz Filtry Powiadomień",
+    "clearAll": "Wyczyść Wszystko",
+    "selectAll": "Zaznacz Wszystko",
+    "addAsPlayer": "+ Dodaj jako Gracza",
+    "addAsTribe": "+ Dodaj jako Plemię",
+    "manageTargets": "Zarządzaj Listą Celów",
+    "emptyState": "Żadne cele nie są jeszcze śledzone.",
+    "show": "Pokaż",
+    "hide": "Ukryj",
+    "delete": "Usuń",
+    "deleteConfirm": "Czy na pewno chcesz usunąć ten cel?",
+    "playerBadge": "👤 Gracz",
+    "tribeBadge": "🛡️ Plemię"
+  },
+  "alerts": {
+    "enterPlayerOrTribe": "Proszę wprowadzić nazwę gracza lub tag plemienia!",
+    "worldDataFetchError": "Nie udało się pobrać danych świata. Sprawdź połączenie.",
+    "invalidDataReceived": "Otrzymano nieprawidłowe dane:",
+    "worldDataReadError": "BŁĄD: Nie można odczytać danych świata!\n\nUpewnij się, że w zakładce 'Ustawienia Podstawowe' wpisano poprawny i aktywny link do świata (np.: https://pl1.plemiona.pl).",
+    "playerNotFound": "BŁĄD: Nie znaleziono gracza o nazwie \"{{name}}\" na tym świecie! Upewnij się, że nazwa jest poprawna.",
+    "tribeNotFound": "BŁĄD: Nie znaleziono plemienia o tagu lub nazwie \"{{name}}\" na tym świecie!",
+    "enterBothTribes": "Proszę wprowadzić tag/nazwę plemienia dla obu stron!",
+    "worldDataCorrupted": "BŁĄD: Dane świata są uszkodzone lub nieczytelne!",
+    "tribesNotFoundList": "Następujące plemiona nie zostały znalezione na tym świecie:",
+    "worldDataFetchErrorShort": "Nie udało się pobrać danych świata.",
+    "invalidContinent": "Proszę podać poprawny numer kontynentu od 0 do 99 (np.: 44).",
+    "continentAlreadyAdded": "Ten kontynent jest już dodany!",
+    "confirmDeleteProfile": "Czy na pewno chcesz całkowicie usunąć ustawienia dla tego świata?",
+    "idExists": "ID już istnieje! Opróżnij pole, jeśli chcesz wygenerować nowy.",
+    "emptyTargetName": "Proszę najpierw wprowadzić nazwę lub tag plemienia.",
+    "targetExists": "Wprowadzone cele znajdują się już na liście śledzenia!",
+    "profileNameEmpty": "Musisz podać nazwę dla profilu {{index}}!",
+    "specialIdEmpty": "Brakuje Special ID lub nie został wygenerowany dla profilu '{{name}}'!",
+    "saveSuccess": "{{count}} profil(i) pomyślnie zapisano w chmurze!",
+    "saveError": "Wystąpił błąd podczas zapisywania {{count}} profil(i)!",
+    "saveNoData": "Nie znaleziono profilu do zapisania!"
+  },
+  "common": {
+    "add": "Dodaj",
+    "delete": "Usuń",
+    "show": "Pokaż",
+    "hide": "Ukryj"
+  },
+  "fullTracking": {
+    "title": "Natychmiastowe Śledzenie Świata",
+    "description": "Śledź wszystkie przejęcia wiosek na całym świecie w czasie rzeczywistym.",
+    "active": "Aktywne (Cały świat jest śledzony)",
+    "inactive": "Nieaktywne"
+  },
+  "continentTracking": {
+    "title": "Natychmiastowe Śledzenie Kontynentu",
+    "description": "Śledź zmiany wiosek tylko na wybranych kontynentach.",
+    "placeholder": "Przykład: 44",
+    "continentPrefix": "Kontynent",
+    "noContinentAdded": "Nie dodano jeszcze żadnego kontynentu."
   }
+}
 }
