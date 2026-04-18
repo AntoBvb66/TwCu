@@ -327,9 +327,18 @@ def run_bot():
 
         time.sleep(60)
 
-if __name__ == "__main__":
-    # Botu ayrı thread'de başlat
+def start_background_bot():
+    """Gunicorn worker'ları başladığında botu çalıştır"""
+    print("✅ Background bot thread başlatılıyor...")
     bot_thread = Thread(target=run_bot, daemon=True)
     bot_thread.start()
-    
-    print("✅ Bot thread başlatıldı. Flask web server çalışıyor...")
+
+# Bu fonksiyonu app yüklenirken çağıracağız
+start_background_bot()
+
+# Gunicorn için sadece app'i expose et (hiçbir şey çalıştırma)
+if __name__ == "__main__":
+    # Sadece yerel test için (Render'da bu blok çalışmaz)
+    print("🚀 Yerel test modu - Flask dev server başlatılıyor...")
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port, debug=False)
