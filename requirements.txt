@@ -1,6 +1,6 @@
 flask
+gunicorn
 requests
 firebase-admin
-pillow
+Pillow
 aiohttp
-gunicorn

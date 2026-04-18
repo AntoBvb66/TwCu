@@ -239,13 +239,12 @@ def run_bot():
     while True:
         now_ts = int(time.time())
         
-        # 1. GÜNDE BİR KERE DÜNYA GÜNCELLEMESİ
         if now_ts - last_world_check_time > 86400:
             update_global_worlds()
             last_world_check_time = now_ts
 
         print(f"\n[{datetime.now(timezone.utc).strftime('%H:%M:%S')}] 🚀 TW Santrali Oracle'ı Tarıyor...")
-        
+
         try:
             # 2. Firebase'den Tüm Kullanıcıları Çek
             users_docs = db.collection('users').stream()
@@ -326,13 +325,11 @@ def run_bot():
         except Exception as e:
             print(f"Döngü Hatası: {e}")
 
-        # Oracle API zaten hazır ve veriyi tuttuğu için 60 saniyede bir taramamız yeterli
-        time.sleep(60) 
+        time.sleep(60)
 
 if __name__ == "__main__":
-    bot_thread = Thread(target=run_bot)
-    bot_thread.daemon = True
+    # Botu ayrı thread'de başlat
+    bot_thread = Thread(target=run_bot, daemon=True)
     bot_thread.start()
     
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host='0.0.0.0', port=port)
+    print("✅ Bot thread başlatıldı. Flask web server çalışıyor...")
