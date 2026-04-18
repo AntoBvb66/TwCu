@@ -1082,11 +1082,6 @@
       "show": "Göster",
       "hide": "Gizle"
     },
-    "warTracking": {
-      "title": "Anlık Savaş Takibi (A vs B)",
-      "tribeAPlaceholder": "Klan A (Virgülle ayırabilirsiniz)",
-      "tribeBPlaceholder": "Klan B (Virgülle ayırabilirsiniz)"
-    },
     "fullTracking": {
       "title": "Anlık Full Takip",
       "description": "Dünya genelindeki tüm köy alımlarını anlık takip et.",
@@ -1099,27 +1094,6 @@
       "placeholder": "Örnek: 44",
       "continentPrefix": "Kıta",
       "noContinentAdded": "Henüz kıta eklenmedi."
-    },
-    "customHighlights": {
-      "title": "Özel Harita İstatistikleri ve Vurgular",
-      "typePlayer": "Oyuncu",
-      "typeTribe": "Klan",
-      "namePlaceholder": "İsim / Tag",
-      "periodDaily": "Günlük",
-      "periodWeekly": "Haftalık"
-    },
-    "autoMapsLists": {
-      "title": "Otomatik Harita ve Top Listeler",
-      "mapsTitle": "Haritalar",
-      "dailyTop25TribeMap": "Günlük Top 20 Klan Haritası",
-      "dailyTop25PlayerMap": "Günlük Top 20 Oyuncu Haritası",
-      "weeklyTop25TribeMap": "Haftalık Top 20 Klan Haritası",
-      "weeklyTop25PlayerMap": "Haftalık Top 20 Oyuncu Haritası",
-      "statsTitle": "İstatistik Listeleri",
-      "weeklyTop10TribeGains": "Haftalık En Fazla Köy Fetheden 10 Klan",
-      "weeklyTop5TribeLosses": "Haftalık En Fazla Köy Kaybeden 10 Klan",
-      "weeklyTop10PlayerGains": "Haftalık En Fazla Köy Fetheden 10 Oyuncu",
-      "weeklyTop10PlayerLosses": "Haftalık En Fazla Köy Kaybeden 10 Oyuncu"
     }
   }
 }

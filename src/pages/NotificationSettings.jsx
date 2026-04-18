@@ -105,34 +105,6 @@ const IconInfo = () => (
   </svg>
 );
 
-const IconLive = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="9" />
-    <circle cx="12" cy="12" r="3" fill="currentColor" />
-  </svg>
-);
-
-const IconHourly = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="9" />
-    <path d="M12 7v5l3 3" />
-  </svg>
-);
-
-const IconDaily = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="4" width="18" height="18" rx="2" />
-    <path d="M8 10h8M8 14h8" />
-  </svg>
-);
-
-const IconWeekly = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="4" width="18" height="18" rx="2" />
-    <path d="M8 10h8M8 14h4" />
-  </svg>
-);
-
 const IconMap = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polygon points="1 6 8 3 16 6 23 3 23 18 16 21 8 18 1 21 1 6" />
@@ -141,51 +113,13 @@ const IconMap = () => (
   </svg>
 );
 
-const IconAttackLost = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M14 3l7 7-4 4-7-7 4-4z" />
-    <line x1="3" y1="21" x2="10" y2="14" />
-  </svg>
-);
-
-const IconDefenseLost = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 2L5 5v6c0 5 3.5 8 7 11 3.5-3 7-6 7-11V5L12 2z" />
-    <line x1="9" y1="9" x2="15" y2="15" />
-  </svg>
-);
-
-const IconSupportLost = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" />
-    <circle cx="9" cy="7" r="4" />
-    <line x1="8" y1="13" x2="16" y2="13" />
-  </svg>
-);
-
-const IconTotalLost = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="22 17 13.5 8.5 8.5 13.5 2 7" />
-    <polyline points="16 17 22 17 22 11" />
-  </svg>
-);
-
-
 const initialFilters = {
-  anlikTakip: false,
   gains: false,
   losses: false,
   barbarian: false,
   selfConquer: false,
   internal: false,
-  saatlikTakip: false,
-  gunlukTakip: false,
-  haftalikTakip: false,
   haritaResimli: false,
-  yenilenSaldiri: false,
-  yenilenSavunma: false,
-  yenilenDestek: false,
-  yenilenToplam: false
 };
 
 const createEmptyConfig = () => ({
@@ -201,30 +135,8 @@ const createEmptyConfig = () => ({
 
   // Kıta ve Full Takip
   selectedContinents: '',        // "1,2,15" gibi virgülle ayrılmış
-  newContinent: '',              // YENİ: Kıta ekleme inputu için geçici state
   fullTracking: false,
 
-  // Savaş Takibi
-  warPairs: [],                  // [{tribeA: "...", tribeB: "..."}, ...]
-  newWarA: '',
-  newWarB: '',
-
-  // Özel Harita İstatistikleri (Renkli Top List)
-  customHighlights: [],
-  newHighlightType: 'Player',
-  newHighlightName: '',
-  newHighlightColor: '#df2929',
-  newHighlightPeriod: 'daily',
-
-  // YENİ: Otomatik Harita ve Top Listeler (Toggle Anahtarları)
-  autoDailyTop25TribeMap: false,
-  autoDailyTop25PlayerMap: false,
-  autoWeeklyTop25TribeMap: false,
-  autoWeeklyTop25PlayerMap: false,
-  autoWeeklyTop10TribeGains: false,
-  autoWeeklyTop5TribeLosses: false,
-  autoWeeklyTop10PlayerGains: false,
-  autoWeeklyTop10PlayerLosses: false
 });
 
 const NotificationSettings = () => {
@@ -232,20 +144,12 @@ const NotificationSettings = () => {
 
   // Filtre tanımlamaları çeviriye erişebilmek için bileşen içine alındı
   const filterDefinitions = {
-    anlikTakip: { label: t('filters.anlikTakip'), icon: <IconLive /> },
     gains: { label: t('filters.gains'), icon: <IconGains /> },
     losses: { label: t('filters.losses'), icon: <IconLosses /> },
     barbarian: { label: t('filters.barbarian'), icon: <IconBarbarian /> },
     selfConquer: { label: t('filters.selfConquer'), icon: <IconSelf /> },
     internal: { label: t('filters.internal'), icon: <IconInternal /> },
-    saatlikTakip: { label: t('filters.saatlikTakip'), icon: <IconHourly /> },
-    gunlukTakip: { label: t('filters.gunlukTakip'), icon: <IconDaily /> },
-    haftalikTakip: { label: t('filters.haftalikTakip'), icon: <IconWeekly /> },
     haritaResimli: { label: t('filters.haritaResimli'), icon: <IconMap /> },
-    yenilenSaldiri: { label: t('filters.yenilenSaldiri'), icon: <IconAttackLost /> },
-    yenilenSavunma: { label: t('filters.yenilenSavunma'), icon: <IconDefenseLost /> },
-    yenilenDestek: { label: t('filters.yenilenDestek'), icon: <IconSupportLost /> },
-    yenilenToplam: { label: t('filters.yenilenToplam'), icon: <IconTotalLost /> }
   };
 
   // --- STATE YÖNETİMİ ---
@@ -500,109 +404,6 @@ const NotificationSettings = () => {
     return str.replace(/\s+/g, ' ').trim().toLocaleLowerCase('tr-TR');
   };
 
-  // === 1. SAVAŞ TAKİBİ DOĞRULAYICI (Çoklu Klan Desteği) ===
-  const validateAndAddWarPair = async (cIndex, config) => {
-    const rawWarA = config.newWarA?.trim();
-    const rawWarB = config.newWarB?.trim();
-
-    if (!rawWarA || !rawWarB) {
-      alert(t('alerts.enterBothTribes'));
-      return;
-    }
-
-    const worldUrl = config.globalSettings?.worldUrl || "https://tr1.klanlar.org";
-    const cleanUrl = worldUrl.replace(/\/$/, "");
-
-    // --- Veri Çekme / Cache Kontrolü (Ortak) ---
-    const now = Date.now();
-    const lastFetch = parseInt(localStorage.getItem("mg_last_fetch") || "0");
-    const lastUrl = localStorage.getItem("mg_last_url");
-    let allyData = "";
-    let cachedData = null;
-
-    try { cachedData = JSON.parse(localStorage.getItem("mg_cache_data")); } catch (e) { }
-
-    if (cachedData && cachedData.ally && lastUrl === cleanUrl && (now - lastFetch < 3600000)) {
-      allyData = cachedData.ally;
-    } else {
-      try {
-        const fetchWithProxy = async (targetUrl) => {
-          const res = await fetch(`https://tw-proxy.halimtttt10.workers.dev/?url=${encodeURIComponent(targetUrl)}`);
-          if (!res.ok) throw new Error("Ağ Hatası");
-          return await res.text();
-        };
-        allyData = await fetchWithProxy(`${cleanUrl}/map/ally.txt`);
-        // Savaş için sadece ally.txt yeterli ama cache bozulmasın diye player'ı da çekiyoruz
-        const playerData = await fetchWithProxy(`${cleanUrl}/map/player.txt`);
-        const newData = { ...(cachedData || {}), ally: allyData, player: playerData };
-        localStorage.setItem("mg_cache_data", JSON.stringify(newData));
-        localStorage.setItem("mg_last_fetch", now.toString());
-        localStorage.setItem("mg_last_url", cleanUrl);
-      } catch (error) {
-        alert(t('alerts.worldDataFetchError'));
-        return;
-      }
-    }
-
-    if (!allyData || !allyData.includes(',')) {
-      alert(t('alerts.worldDataCorrupted'));
-      return;
-    }
-
-    // --- Virgülle Ayrılmış İsimleri Kontrol Etme ---
-    const lines = allyData.split('\n').map(line => line.trim());
-
-    // Girilen metni virgüllerden bölüp boşlukları temizliyoruz
-    const tribesA = rawWarA.split(',').map(s => s.trim()).filter(s => s);
-    const tribesB = rawWarB.split(',').map(s => s.trim()).filter(s => s);
-
-    const validateTribes = (tribeList) => {
-      let valid = [];
-      let invalid = [];
-
-      for (let target of tribeList) {
-        const searchTarget = cleanString(target);
-        let found = false;
-        let officialTag = "";
-
-        for (let line of lines) {
-          if (!line) continue;
-          const cols = line.split(',');
-          if (cols.length < 3) continue;
-
-          const rawName = decodeTW(cols[1]);
-          const rawTag = decodeTW(cols[2]);
-
-          if (cleanString(rawTag) === searchTarget || cleanString(rawName) === searchTarget) {
-            found = true;
-            officialTag = rawTag; // Savaşlarda Tag kullanmak daha şıktır
-            break;
-          }
-        }
-        if (found) valid.push(officialTag);
-        else invalid.push(target);
-      }
-      return { valid, invalid };
-    };
-
-    const resultA = validateTribes(tribesA);
-    const resultB = validateTribes(tribesB);
-
-    // Hatalı olanlar varsa işlemi durdur ve kullanıcıyı uyar
-    if (resultA.invalid.length > 0 || resultB.invalid.length > 0) {
-      let errorMsg = t('alerts.tribesNotFoundList') + "\n";
-      if (resultA.invalid.length > 0) errorMsg += `\n${t('alerts.sideAError')}: ${resultA.invalid.join(', ')}`;
-      if (resultB.invalid.length > 0) errorMsg += `\n${t('alerts.sideBError')}: ${resultB.invalid.join(', ')}`;
-      alert(errorMsg);
-      return;
-    }
-
-    // Her şey doğruysa orijinal isimleri virgülle birleştirip kaydet
-    const finalWarA = resultA.valid.join(', ');
-    const finalWarB = resultB.valid.join(', ');
-
-    handleAddWarPair(cIndex, finalWarA, finalWarB, config.warPairs);
-  };
 
   // === 2. ÖZEL HARİTA İSTATİSTİKLERİ DOĞRULAYICI ===
   const validateAndAddHighlight = async (cIndex, config) => {
@@ -686,36 +487,10 @@ const NotificationSettings = () => {
       return;
     }
 
-    handleAddCustomHighlight(cIndex, type, officialName, config.newHighlightColor, config.newHighlightPeriod, config.customHighlights);
   };
 
 
-  // ── SAVAŞ TAKİBİ ──
-  const handleAddWarPair = (cIndex, a, b, currentPairs) => {
-    if (!a.trim() || !b.trim()) { alert(t('alerts.bothTribesRequired')); return; }
-    const newPair = { tribeA: a.trim().toUpperCase(), tribeB: b.trim().toUpperCase() };
-    updateConfig(cIndex, 'warPairs', null, [...currentPairs, newPair]);
-    updateConfig(cIndex, 'newWarA', null, '');
-    updateConfig(cIndex, 'newWarB', null, '');
-  };
-
-  const handleRemoveWarPair = (cIndex, idx, currentPairs) => {
-    updateConfig(cIndex, 'warPairs', null, currentPairs.filter((_, i) => i !== idx));
-  };
-
-  // ── CUSTOM HIGHLIGHT (renkli harita istatistikleri) ──
-  const handleAddCustomHighlight = (cIndex, type, name, color, period, currentHighlights) => {
-    if (!name.trim()) { alert(t('alerts.emptyTargetName')); return; }
-    const newH = {
-      id: Date.now(),
-      type,
-      name: name.trim(),
-      color,
-      period
-    };
-    updateConfig(cIndex, 'customHighlights', null, [...currentHighlights, newH]);
-    updateConfig(cIndex, 'newHighlightName', null, '');
-  };
+ 
 
   const handleAddContinent = (cIndex, config) => {
     const cont = config.newContinent?.trim();
@@ -755,10 +530,6 @@ const NotificationSettings = () => {
     updateConfig(cIndex, 'selectedContinents', null, updatedArray.join(','));
   };
 
-  const handleRemoveCustomHighlight = (cIndex, id, currentHighlights) => {
-    updateConfig(cIndex, 'customHighlights', null, currentHighlights.filter(h => h.id !== id));
-  };
-
   // --- KAYDETME İŞLEMİ (ÇOKLU) ---
   const generateConfigPayload = (config) => ({
     global_settings: {
@@ -780,21 +551,8 @@ const NotificationSettings = () => {
 
     // ── Global takip ayarları ──
     continent_tracking: config.selectedContinents || '',
-    war_tracking: config.warPairs || [],
-    full_tracking: config.fullTracking || false,
-    custom_highlights: config.customHighlights || [],
+    full_tracking: config.fullTracking || false
 
-    // ── YENİ: Otomatik Harita ve İstatistik Raporları ──
-    auto_reports: {
-      daily_top25_tribe_map: config.autoDailyTop25TribeMap || false,
-      daily_top25_player_map: config.autoDailyTop25PlayerMap || false,
-      weekly_top25_tribe_map: config.autoWeeklyTop25TribeMap || false,
-      weekly_top25_player_map: config.autoWeeklyTop25PlayerMap || false,
-      weekly_top10_tribe_gains: config.autoWeeklyTop10TribeGains || false,
-      weekly_top5_tribe_losses: config.autoWeeklyTop5TribeLosses || false,
-      weekly_top10_player_gains: config.autoWeeklyTop10PlayerGains || false,
-      weekly_top10_player_losses: config.autoWeeklyTop10PlayerLosses || false
-    }
   });
 
   const handleSave = async () => {
@@ -891,9 +649,6 @@ const NotificationSettings = () => {
                 </li>
                 <li><strong style={{ color: '#60a5fa' }}>{t('infoPanel.entityFiltersTitle')}</strong> <span dangerouslySetInnerHTML={{ __html: t('infoPanel.entityFiltersDesc') }} /></li>
                 <li><strong style={{ color: '#facc15' }}>{t('infoPanel.continentTrackingTitle')}</strong> {t('infoPanel.continentTrackingDesc')}</li>
-                <li><strong style={{ color: '#facc15' }}>{t('infoPanel.warTrackingTitle')}</strong> {t('infoPanel.warTrackingDesc')}</li>
-                <li><strong style={{ color: '#facc15' }}>{t('infoPanel.customHighlightsTitle')}</strong> {t('infoPanel.customHighlightsDesc')}</li>
-                <li><strong style={{ color: '#c084fc' }}>{t('infoPanel.autoMapsTitle')}</strong> {t('infoPanel.autoMapsDesc')}</li>
                 <li><strong style={{ color: '#fb923c' }}>{t('infoPanel.fullTrackingTitle')}</strong> <span dangerouslySetInnerHTML={{ __html: t('infoPanel.fullTrackingDesc') }} /></li>
               </ul>
             </div>
@@ -1184,84 +939,6 @@ const NotificationSettings = () => {
                   </div>
                 </div>
 
-                {/* === YENİ: SAVAŞ TAKİBİ === */}
-                <div className="section-block">
-                  <h3 className="section-title" style={{ color: '#ff4d4d' }}>
-                    {t('warTracking.title')}
-                  </h3>
-
-                  <div style={{
-                    display: 'flex',
-                    gap: '10px',
-                    marginBottom: '15px',
-                    alignItems: 'center'
-                  }}>
-                    <input
-                      type="text"
-                      className="twcu-input"
-                      placeholder={t('warTracking.tribeAPlaceholder')}
-                      value={config.newWarA}
-                      onChange={e => updateConfig(cIndex, 'newWarA', null, e.target.value)}
-                      style={{ flex: 1 }}
-                    />
-
-                    <span style={{
-                      alignSelf: 'center',
-                      fontSize: '20px',
-                      color: '#888',
-                      fontWeight: 'bold',
-                      padding: '0 5px'
-                    }}>
-                      VS
-                    </span>
-
-                    <input
-                      type="text"
-                      className="twcu-input"
-                      placeholder={t('warTracking.tribeBPlaceholder')}
-                      value={config.newWarB}
-                      onChange={e => updateConfig(cIndex, 'newWarB', null, e.target.value)}
-                      style={{ flex: 1 }}
-                    />
-
-                    {/* Buton - flex iptal edildi ve küçültüldü */}
-                    <button
-                      className="btn btn-primary"
-                      onClick={() => validateAndAddWarPair(cIndex, config)}
-                      style={{
-                        flex: '0 0 auto',        // ← Bu satır çok önemli! flex:1'i iptal eder
-                        padding: '8px 20px',
-                        fontSize: '14px',
-                        whiteSpace: 'nowrap',
-                        height: '42px',
-                        minWidth: '100px'         // istediğin kadar daraltabilirsin
-                      }}
-                    >
-                      {t('common.add')}
-                    </button>
-                  </div>
-
-                  {/* War Pairs Pills */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                    {config.warPairs.map((pair, idx) => (
-                      <div key={idx} className="war-pair-pill">
-                        <strong>{pair.tribeA}</strong>
-                        <span className="vs">VS</span>
-                        <strong>{pair.tribeB}</strong>
-
-                        <button
-                          onClick={() => handleRemoveWarPair(cIndex, idx, config.warPairs)}
-                          className="btn-icon-danger"
-                          style={{ marginLeft: '4px' }}
-                          title={t('common.delete')}
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
                 {/* === YENİ: FULL TAKİP & KITA TAKİBİ BİRLEŞİK BLOK === */}
                 <div className="section-block" style={{ border: '1px solid #ff4d4d', backgroundColor: 'rgba(255, 77, 77, 0.05)' }}>
 
@@ -1348,116 +1025,6 @@ const NotificationSettings = () => {
 
                     </div>
 
-                  </div>
-                </div>
-
-                {/* === YENİ: GÜNLÜK/HAFTALIK ÖZEL HARİTA İSTATİSTİKLERİ === */}
-                <div className="section-block">
-                  <h3 className="section-title">{t('customHighlights.title')}</h3>
-
-                  <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '15px' }}>
-                    <select value={config.newHighlightType} onChange={e => updateConfig(cIndex, 'newHighlightType', null, e.target.value)} className="twcu-input" style={{ width: '140px', flex: 'none' }}>
-                      <option value="Player">{t('customHighlights.typePlayer')}</option>
-                      <option value="Tribe">{t('customHighlights.typeTribe')}</option>
-                    </select>
-                    <input type="text" className="twcu-input" placeholder={t('customHighlights.namePlaceholder')} value={config.newHighlightName} onChange={e => updateConfig(cIndex, 'newHighlightName', null, e.target.value)} style={{ flex: 1, minWidth: '150px' }} />
-                    <input type="color" value={config.newHighlightColor} onChange={e => updateConfig(cIndex, 'newHighlightColor', null, e.target.value)} style={{ width: '60px', height: '42px', padding: 0, border: 'none', flex: 'none' }} />
-
-                    <select value={config.newHighlightPeriod} onChange={e => updateConfig(cIndex, 'newHighlightPeriod', null, e.target.value)} className="twcu-input" style={{ width: '110px', flex: 'none' }}>
-                      <option value="daily">{t('customHighlights.periodDaily')}</option>
-                      <option value="weekly">{t('customHighlights.periodWeekly')}</option>
-                    </select>
-
-                    <button className="btn btn-primary" onClick={() => validateAndAddHighlight(cIndex, config)} style={{
-                      background: '#ff4d4d',
-                      color: '#fff',
-                      flex: 'none',
-                      padding: '0 24px',
-                      width: 'auto'
-                    }}>{t('common.add')}</button>
-                  </div>
-
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                    {config.customHighlights.map(h => (
-                      <div key={h.id} style={{ background: '#2a2a2a', padding: '8px 12px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <div style={{ width: 20, height: 20, backgroundColor: h.color, borderRadius: '50%', border: '1px solid #444' }}></div>
-                        <strong>{h.name}</strong>
-                        <small style={{ color: '#888' }}>({h.period === 'daily' ? t('customHighlights.periodDaily') : t('customHighlights.periodWeekly')})</small>
-                        <button
-                          onClick={() => handleRemoveCustomHighlight(cIndex, h.id, config.customHighlights)}
-                          className="btn-icon-danger"
-                          style={{ marginLeft: '4px' }}
-                          title={t('common.delete')}
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* === YENİ: OTOMATİK HARİTA VE TOP LİSTELER (TOGGLE) === */}
-                <div className="section-block">
-                  <h3 className="section-title">{t('autoMapsLists.title')}</h3>
-
-                  <div className="toggle-grid">
-                    {/* Sol Sütun: Haritalar */}
-                    <div className="toggle-column">
-                      <h4 className="toggle-column-title">{t('autoMapsLists.mapsTitle')}</h4>
-
-                      <label className="modern-toggle">
-                        <input type="checkbox" checked={config.autoDailyTop25TribeMap || false} onChange={(e) => updateConfig(cIndex, 'autoDailyTop25TribeMap', null, e.target.checked)} />
-                        <div className="toggle-slider"></div>
-                        <span className="toggle-label">{t('autoMapsLists.dailyTop25TribeMap')}</span>
-                      </label>
-
-                      <label className="modern-toggle">
-                        <input type="checkbox" checked={config.autoDailyTop25PlayerMap || false} onChange={(e) => updateConfig(cIndex, 'autoDailyTop25PlayerMap', null, e.target.checked)} />
-                        <div className="toggle-slider"></div>
-                        <span className="toggle-label">{t('autoMapsLists.dailyTop25PlayerMap')}</span>
-                      </label>
-
-                      <label className="modern-toggle">
-                        <input type="checkbox" checked={config.autoWeeklyTop25TribeMap || false} onChange={(e) => updateConfig(cIndex, 'autoWeeklyTop25TribeMap', null, e.target.checked)} />
-                        <div className="toggle-slider"></div>
-                        <span className="toggle-label">{t('autoMapsLists.weeklyTop25TribeMap')}</span>
-                      </label>
-
-                      <label className="modern-toggle">
-                        <input type="checkbox" checked={config.autoWeeklyTop25PlayerMap || false} onChange={(e) => updateConfig(cIndex, 'autoWeeklyTop25PlayerMap', null, e.target.checked)} />
-                        <div className="toggle-slider"></div>
-                        <span className="toggle-label">{t('autoMapsLists.weeklyTop25PlayerMap')}</span>
-                      </label>
-                    </div>
-
-                    {/* Sağ Sütun: İstatistik Listeleri */}
-                    <div className="toggle-column">
-                      <h4 className="toggle-column-title">{t('autoMapsLists.statsTitle')}</h4>
-
-                      <label className="modern-toggle">
-                        <input type="checkbox" checked={config.autoWeeklyTop10TribeGains || false} onChange={(e) => updateConfig(cIndex, 'autoWeeklyTop10TribeGains', null, e.target.checked)} />
-                        <div className="toggle-slider"></div>
-                        <span className="toggle-label">{t('autoMapsLists.weeklyTop10TribeGains')}</span>
-                      </label>
-
-                      <label className="modern-toggle">
-                        <input type="checkbox" checked={config.autoWeeklyTop5TribeLosses || false} onChange={(e) => updateConfig(cIndex, 'autoWeeklyTop5TribeLosses', null, e.target.checked)} />
-                        <div className="toggle-slider"></div>
-                        <span className="toggle-label">{t('autoMapsLists.weeklyTop5TribeLosses')}</span>
-                      </label>
-
-                      <label className="modern-toggle">
-                        <input type="checkbox" checked={config.autoWeeklyTop10PlayerGains || false} onChange={(e) => updateConfig(cIndex, 'autoWeeklyTop10PlayerGains', null, e.target.checked)} />
-                        <div className="toggle-slider"></div>
-                        <span className="toggle-label">{t('autoMapsLists.weeklyTop10PlayerGains')}</span>
-                      </label>
-
-                      <label className="modern-toggle">
-                        <input type="checkbox" checked={config.autoWeeklyTop10PlayerLosses || false} onChange={(e) => updateConfig(cIndex, 'autoWeeklyTop10PlayerLosses', null, e.target.checked)} />
-                        <div className="toggle-slider"></div>
-                        <span className="toggle-label">{t('autoMapsLists.weeklyTop10PlayerLosses')}</span>
-                      </label>
-                    </div>
                   </div>
                 </div>
 
