@@ -235,19 +235,24 @@ def is_conquest_matching(fetih, config):
 # ====================== 5. ANA DÖNGÜ (Oracle API Okuyucu) ======================
 def run_bot():
     last_world_check_time = 0
+    loop_count = 0
     
+    print("🔄 Arka plan bot döngüsü başlatıldı (her 60 saniyede bir tarama)")
+
     while True:
+        loop_count += 1
         now_ts = int(time.time())
         
+        # Günde bir kez dünya güncellemesi
         if now_ts - last_world_check_time > 86400:
             update_global_worlds()
             last_world_check_time = now_ts
 
-        print(f"\n[{datetime.now(timezone.utc).strftime('%H:%M:%S')}] 🚀 TW Santrali Oracle'ı Tarıyor...")
+        print(f"[{datetime.now(timezone.utc).strftime('%H:%M:%S')}] 🚀 Tarama #{loop_count} - Oracle kontrol ediliyor...")
 
         try:
-            # 2. Firebase'den Tüm Kullanıcıları Çek
-            users_docs = db.collection('users').stream()
+            # Firebase'den kullanıcıları çek
+            users_docs = list(db.collection('users').stream())   # list() ekledik ki tüketilsin
             worlds_cache = {}
             
             for user_doc in users_docs:
@@ -257,76 +262,81 @@ def run_bot():
                 b_token = gs.get('telegram_bot_token', '')
                 c_id = gs.get('telegram_chat_id', '')
                 
-                if not w_link or not b_token or not c_id or b_token == "*****HIDDEN*****": continue
+                if not w_link or not b_token or not c_id or b_token == "*****HIDDEN*****":
+                    continue
                 
-                w_id = w_link.split('//')[-1].split('.')[0] # ptc1
+                w_id = w_link.split('//')[-1].split('.')[0]
                 if w_id not in worlds_cache:
                     worlds_cache[w_id] = {'users': []}
                 worlds_cache[w_id]['users'].append(config)
 
+            print(f"   → {len(worlds_cache)} dünya ve {sum(len(w['users']) for w in worlds_cache.values())} kullanıcı config yüklendi.")
+
             async_tasks_queue = []
 
-            # 3. Her Dünya İçin Doğrudan ORACLE'A SOR
             for world_id, w_data in worlds_cache.items():
-                
-                # Render kapanıp açıldığında eski mesajları spamlamamak için ts kontrolü
+                # last_ts kontrolü
                 check_ref = db.collection('worlds').document(world_id).collection('config').document('last_ts')
-                last_ts = check_ref.get().to_dict().get('timestamp', 0) if check_ref.get().exists else now_ts - 120
-                if last_ts > now_ts or (now_ts - last_ts) > 86400: last_ts = now_ts - 120
+                last_ts_doc = check_ref.get()
+                last_ts = last_ts_doc.to_dict().get('timestamp', 0) if last_ts_doc.exists else now_ts - 120
 
-                # İŞTE BÜYÜ BURADA: Oracle API'sine bağlan!
                 oracle_url = f"{ORACLE_API_URL}/{world_id}/Anlik_Fetihler"
                 try:
-                    res = requests.get(oracle_url, timeout=10)
-                    if res.status_code != 200: continue
+                    res = requests.get(oracle_url, timeout=15)
+                    if res.status_code != 200:
+                        print(f"   → {world_id} Oracle erişim hatası: {res.status_code}")
+                        continue
                     fetih_listesi = res.json().get("veriler", [])
-                except: continue
+                except Exception as e:
+                    print(f"   → {world_id} Oracle bağlantı hatası: {e}")
+                    continue
 
-                # Yeni fetihleri ayıkla
-                yeni_fetihler = [f for f in fetih_listesi if f["ts"] > last_ts]
-                if not yeni_fetihler: continue
+                yeni_fetihler = [f for f in fetih_listesi if f.get("ts", 0) > last_ts]
+                
+                if yeni_fetihler:
+                    print(f"   → {world_id}: {len(fetih_listesi)} toplam fetih, {len(yeni_fetihler)} yeni fetih bulundu.")
+                    current_max_ts = max(f["ts"] for f in yeni_fetihler)
 
-                current_max_ts = max(f["ts"] for f in yeni_fetihler)
+                    # Kullanıcı filtreleme
+                    for user_config in w_data['users']:
+                        eslesen_fetihler = []
+                        for fetih in yeni_fetihler:
+                            if is_conquest_matching(fetih, user_config):
+                                # decode
+                                fetih['yeni_sahip'] = urllib.parse.unquote_plus(fetih.get('yeni_sahip', ''))
+                                fetih['eski_sahip'] = urllib.parse.unquote_plus(fetih.get('eski_sahip', ''))
+                                fetih['yeni_klan_tag'] = urllib.parse.unquote_plus(fetih.get('yeni_klan_tag', ''))
+                                fetih['eski_klan_tag'] = urllib.parse.unquote_plus(fetih.get('eski_klan_tag', ''))
+                                eslesen_fetihler.append(fetih)
 
-                # 4. Kullanıcılara Göre Süz
-                for user_config in w_data['users']:
-                    eslesen_fetihler = []
-                    
-                    for fetih in yeni_fetihler:
-                        # URL Encoding çözümü ve süzgeç kontrolü
-                        if is_conquest_matching(fetih, user_config):
-                            # Mesajda güzel görünsün diye decode edelim
-                            fetih['yeni_sahip'] = urllib.parse.unquote_plus(fetih.get('yeni_sahip', ''))
-                            fetih['eski_sahip'] = urllib.parse.unquote_plus(fetih.get('eski_sahip', ''))
-                            fetih['yeni_klan_tag'] = urllib.parse.unquote_plus(fetih.get('yeni_klan_tag', ''))
-                            fetih['eski_klan_tag'] = urllib.parse.unquote_plus(fetih.get('eski_klan_tag', ''))
-                            eslesen_fetihler.append(fetih)
+                        if eslesen_fetihler:
+                            baslik = f"⚔️ YENİ FETİH RAPORU [{world_id.upper()}]"
+                            photo_bytes = generate_vertical_image(eslesen_fetihler, baslik)
+                            
+                            async_tasks_queue.append({
+                                "token": user_config['global_settings']['telegram_bot_token'],
+                                "chat_id": user_config['global_settings']['telegram_chat_id'],
+                                "caption": f"🎯 Kriterlerinize uyan {len(eslesen_fetihler)} işlem bulundu! ({world_id.upper()})",
+                                "bytes": photo_bytes
+                            })
 
-                    if eslesen_fetihler:
-                        baslik = f"⚔️ YENİ FETİH RAPORU [{world_id.upper()}]"
-                        photo_bytes = generate_vertical_image(eslesen_fetihler, baslik)
-                        
-                        async_tasks_queue.append({
-                            "token": user_config['global_settings']['telegram_bot_token'],
-                            "chat_id": user_config['global_settings']['telegram_chat_id'],
-                            "caption": f"🎯 Kriterlerinize uyan {len(eslesen_fetihler)} işlem bulundu!",
-                            "bytes": photo_bytes
-                        })
+                    # Timestamp güncelle
+                    check_ref.set({"timestamp": current_max_ts})
+                else:
+                    print(f"   → {world_id}: Yeni fetih yok.")
 
-                # İşlem bitti, zamanı Firebase'e kaydet
-                check_ref.set({"timestamp": current_max_ts})
-
-            # 5. Mesajları Fırlat
+            # Telegram gönderimleri
             if async_tasks_queue:
-                print(f"🔥 {len(async_tasks_queue)} adet görsel Telegram'a asenkron fırlatılıyor...")
+                print(f"🔥 {len(async_tasks_queue)} adet rapor Telegram'a gönderiliyor...")
                 asyncio.run(dispatch_all_tasks(async_tasks_queue))
-                print("✅ Başarıyla gönderildi!")
+                print("✅ Gönderimler tamamlandı!")
 
         except Exception as e:
-            print(f"Döngü Hatası: {e}")
+            print(f"❌ Ana döngü hatası: {e}")
 
+        print(f"   ⏳ {60} saniye bekleniyor...\n")
         time.sleep(60)
-
+        
 def start_background_bot():
     """Gunicorn worker'ları başladığında botu çalıştır"""
     print("✅ Background bot thread başlatılıyor...")
