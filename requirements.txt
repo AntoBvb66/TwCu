@@ -1,4 +1,6 @@
+flask
 requests
 firebase-admin
-Pillow
-Flask
+pillow
+aiohttp
+gunicorn
