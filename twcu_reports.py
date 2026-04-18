@@ -85,11 +85,11 @@ def update_global_worlds():
         print(f"💾 {total} aktif dünya Firebase'e kaydedildi!\n")
 
 def generate_vertical_image(fetihler, baslik):
-    """Modern, şık ve fetih türü gösteren görüntü oluşturur"""
+    """Render dostu, emoji'siz, modern ve şık fetih raporu"""
     toplam_fetih = len(fetihler)
     gosterilecek_sayi = min(toplam_fetih, 25)
 
-    # Sütun mantığı
+    # Sütun ayarları
     if gosterilecek_sayi <= 6:
         sutun_sayisi = 1
     elif gosterilecek_sayi <= 12:
@@ -99,9 +99,9 @@ def generate_vertical_image(fetihler, baslik):
 
     satir_sayisi = math.ceil(gosterilecek_sayi / sutun_sayisi)
 
-    card_w, card_h = 480, 155
-    margin, padding = 26, 22
-    header_h = 95
+    card_w, card_h = 490, 158
+    margin, padding = 28, 24
+    header_h = 98
 
     img_w = margin + (sutun_sayisi * (card_w + margin))
     img_h = header_h + (satir_sayisi * (card_h + margin)) + 40
@@ -119,11 +119,11 @@ def generate_vertical_image(fetihler, baslik):
         font_title = font_bold = font_regular = font_small = ImageFont.load_default()
 
     # ====================== BAŞLIK ======================
-    baslik_metni = f"⚔️ {baslik} ({toplam_fetih} İşlem)"
+    baslik_metni = f"⚔️ YENİ FETİH RAPORU - {baslik} ({toplam_fetih} İşlem)"
     draw.rectangle([0, 0, img_w, header_h], fill=(22, 27, 42))
-    draw.text((margin, 24), baslik_metni, font=font_title, fill=(255, 215, 0))
+    draw.text((margin, 22), baslik_metni, font=font_title, fill=(255, 215, 0))
 
-    draw.line((margin, header_h - 10, img_w - margin, header_h - 10), fill=(70, 90, 130), width=4)
+    draw.line((margin, header_h - 10, img_w - margin, header_h - 10), fill=(100, 130, 180), width=4)
 
     # ====================== KARTLAR ======================
     for idx in range(gosterilecek_sayi):
@@ -136,70 +136,58 @@ def generate_vertical_image(fetihler, baslik):
         y = header_h + (satir * (card_h + margin))
 
         # Kart arka planı
-        draw.rounded_rectangle([x + 4, y + 4, x + card_w + 4, y + card_h + 4], radius=14, fill=(0, 0, 0, 90))
+        draw.rounded_rectangle([x + 5, y + 5, x + card_w + 5, y + card_h + 5], radius=14, fill=(0, 0, 0, 100))
         draw.rounded_rectangle([x, y, x + card_w, y + card_h], radius=14, fill=(28, 34, 48))
 
         # Saat
         saat_txt = datetime.fromtimestamp(f['ts'], tz=timezone.utc) + timedelta(hours=3)
         saat_str = saat_txt.strftime('%H:%M')
-        draw.text((x + padding, y + 14), f"🕒 {saat_str}", font=font_small, fill=(160, 180, 210))
+        draw.text((x + padding, y + 16), f"🕒 {saat_str}", font=font_small, fill=(160, 180, 210))
 
         # Köy Bilgisi
-        koy_str = f"{f.get('koy_adi', 'Bilinmeyen')} ({f.get('koordinat', '??|??')})"
-        draw.text((x + padding, y + 38), "🏰 " + koy_str, font=font_bold, fill=(235, 235, 245))
+        koy_str = f"{f.get('koy_adi', 'Bilinmeyen Köy')} ({f.get('koordinat', '??|??')})"
+        draw.text((x + padding, y + 42), koy_str, font=font_bold, fill=(235, 235, 245))
 
         # ====================== FETİH TÜRÜ BELİRLEME ======================
-        yeni_sahip = f.get('yeni_sahip', '').lower()
-        eski_sahip = f.get('eski_sahip', '').lower()
+        yeni = f.get('yeni_sahip', '').lower()
+        eski = f.get('eski_sahip', '').lower()
         yeni_klan = f.get('yeni_klan_tag', '')
         eski_klan = f.get('eski_klan_tag', '')
 
-        is_gain = yeni_sahip and yeni_sahip != eski_sahip
-        is_loss = eski_sahip and eski_sahip != yeni_sahip
-        is_barb = eski_sahip == "barbar" or f.get('eski_sahip_id') == "0"
-        is_self = yeni_sahip == eski_sahip and yeni_sahip != ""
+        is_barb = eski == "barbar" or str(f.get('eski_sahip_id', '')) == "0"
+        is_self = yeni == eski and yeni != ""
         is_internal = yeni_klan == eski_klan and yeni_klan not in ["", "---", None]
 
-        # Tür ve Renk Belirleme
-        if is_barb and is_gain:
-            tur_adi = "BARBAR KÖYÜ FETİHİ"
-            tur_emoji = "🏹"
-            tur_renk = (255, 180, 60)      # Turuncu
+        if is_barb:
+            tur_adi = "BARBAR FETİHİ"
+            tur_renk = (255, 170, 50)      # Turuncu
         elif is_self:
             tur_adi = "KENDİ KÖYÜNÜ FETİH"
-            tur_emoji = "🔄"
-            tur_renk = (100, 200, 255)     # Mavi
+            tur_renk = (80, 190, 255)      # Mavi
         elif is_internal:
             tur_adi = "KLAN İÇİ FETİH"
-            tur_emoji = "🔄"
-            tur_renk = (180, 100, 255)     # Mor
-        elif is_gain:
-            tur_adi = "KÖY FETHİ (GAINS)"
-            tur_emoji = "✅"
-            tur_renk = (80, 255, 140)      # Yeşil
-        elif is_loss:
-            tur_adi = "KÖY KAYBI (LOSSES)"
-            tur_emoji = "❌"
-            tur_renk = (255, 90, 100)      # Kırmızı
+            tur_renk = (190, 120, 255)     # Mor
+        elif yeni != eski and yeni != "":
+            tur_adi = "KÖY FETİHİ (GAINS)"
+            tur_renk = (80, 255, 130)      # Yeşil
         else:
-            tur_adi = "FETİH"
-            tur_emoji = "⚔️"
-            tur_renk = (200, 200, 200)
+            tur_adi = "KÖY KAYBI (LOSSES)"
+            tur_renk = (255, 100, 110)     # Kırmızı
 
-        # Türü göster
-        draw.text((x + padding, y + 68), f"{tur_emoji} {tur_adi}", font=font_bold, fill=tur_renk)
+        # Türü göster (kalın ve büyük)
+        draw.text((x + padding, y + 72), tur_adi, font=font_bold, fill=tur_renk)
 
         # Alan (Yeni Sahip)
-        alan_txt = f"Alan: {f['yeni_sahip']}"
+        alan_txt = f"Alan: {f.get('yeni_sahip', '')}"
         if yeni_klan and yeni_klan != "---":
-            alan_txt += f" [{yeni_klan}]"
-        draw.text((x + padding, y + 98), alan_txt, font=font_regular, fill=(100, 255, 160))
+            alan_txt += f"  [{yeni_klan}]"
+        draw.text((x + padding, y + 102), alan_txt, font=font_regular, fill=(110, 255, 170))
 
         # Veren (Eski Sahip)
-        veren_txt = f"Veren: {f['eski_sahip']}"
+        veren_txt = f"Veren: {f.get('eski_sahip', '')}"
         if eski_klan and eski_klan != "---":
-            veren_txt += f" [{eski_klan}]"
-        draw.text((x + padding, y + 122), veren_txt, font=font_regular, fill=(255, 130, 130))
+            veren_txt += f"  [{eski_klan}]"
+        draw.text((x + padding, y + 126), veren_txt, font=font_regular, fill=(255, 140, 140))
 
     buf = io.BytesIO()
     img.save(buf, format='PNG', optimize=True, quality=95)
