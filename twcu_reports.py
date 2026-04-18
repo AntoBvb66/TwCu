@@ -84,91 +84,125 @@ def update_global_worlds():
         worlds_ref.set(all_worlds_data)
         print(f"💾 {total} aktif dünya Firebase'e kaydedildi!\n")
 
-# ====================== 2. MOBİL UYUMLU ŞIK FOTOĞRAF OLUŞTURUCU ======================
-# ====================== 2. AKILLI DİNAMİK FOTOĞRAF OLUŞTURUCU ======================
 def generate_vertical_image(fetihler, baslik):
-    """Gelen veri sayısına göre tek, çift veya üçlü sütun tasarımı yapar."""
+    """Modern, şık ve fetih türü gösteren görüntü oluşturur"""
     toplam_fetih = len(fetihler)
-    
-    # 💥 Güvenlik Sınırı: Resim devasa olup Telegramı çökertmesin diye maks 30 kart çizilir.
-    gosterilecek_sayi = min(toplam_fetih, 30)
+    gosterilecek_sayi = min(toplam_fetih, 25)
 
-    # 📐 Kaç sütun olacağına karar ver
-    if gosterilecek_sayi <= 8:
+    # Sütun mantığı
+    if gosterilecek_sayi <= 6:
         sutun_sayisi = 1
-    elif gosterilecek_sayi <= 16:
+    elif gosterilecek_sayi <= 12:
         sutun_sayisi = 2
     else:
         sutun_sayisi = 3
 
     satir_sayisi = math.ceil(gosterilecek_sayi / sutun_sayisi)
 
-    # Kart boyutları
-    card_w, card_h = 420, 110 # Yan yana geleceği için hafif daralttık
-    margin, padding = 20, 15
-    header_h = 60
+    card_w, card_h = 480, 155
+    margin, padding = 26, 22
+    header_h = 95
 
-    # Resmin devasa (Dinamik) Tuvali
     img_w = margin + (sutun_sayisi * (card_w + margin))
-    img_h = header_h + (satir_sayisi * (card_h + margin))
+    img_h = header_h + (satir_sayisi * (card_h + margin)) + 40
 
-    img = Image.new("RGB", (img_w, img_h), (20, 24, 28))
+    img = Image.new("RGB", (img_w, img_h), (15, 18, 26))
     draw = ImageDraw.Draw(img)
 
-    # Fontları Yükle
+    # Fontlar
     try:
-        font_bold = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 16)
-        font_regular = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 14)
-        font_small = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 12)
+        font_title = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 26)
+        font_bold = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 18)
+        font_regular = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 16)
+        font_small = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 14)
     except:
-        font_bold = font_regular = font_small = ImageFont.load_default()
+        font_title = font_bold = font_regular = font_small = ImageFont.load_default()
 
-    # Başlığı Yaz
-    if toplam_fetih > 30:
-        baslik_metni = f"{baslik} (Gösterilen: {gosterilecek_sayi} / Toplam: {toplam_fetih})"
-    else:
-        baslik_metni = f"{baslik} (Toplam: {toplam_fetih} İşlem)"
-        
-    draw.text((margin, margin), baslik_metni, font=font_bold, fill=(255, 215, 0))
-    draw.line((margin, header_h - 10, img_w - margin, header_h - 10), fill=(60, 60, 60), width=2)
+    # ====================== BAŞLIK ======================
+    baslik_metni = f"⚔️ {baslik} ({toplam_fetih} İşlem)"
+    draw.rectangle([0, 0, img_w, header_h], fill=(22, 27, 42))
+    draw.text((margin, 24), baslik_metni, font=font_title, fill=(255, 215, 0))
 
-    # Kartları Çiz (Izgara Mantığı)
+    draw.line((margin, header_h - 10, img_w - margin, header_h - 10), fill=(70, 90, 130), width=4)
+
+    # ====================== KARTLAR ======================
     for idx in range(gosterilecek_sayi):
         f = fetihler[idx]
-        
-        # Bu kart hangi satır ve sütuna denk geliyor?
+
         sutun = idx // satir_sayisi
         satir = idx % satir_sayisi
 
-        # Kartın X ve Y başlangıç noktaları
         x = margin + (sutun * (card_w + margin))
         y = header_h + (satir * (card_h + margin))
 
-        # 1. Kart Arka Planı
-        draw.rounded_rectangle([x, y, x + card_w, y + card_h], radius=8, fill=(30, 36, 43))
-        
-        # 2. Saat ve Köy
+        # Kart arka planı
+        draw.rounded_rectangle([x + 4, y + 4, x + card_w + 4, y + card_h + 4], radius=14, fill=(0, 0, 0, 90))
+        draw.rounded_rectangle([x, y, x + card_w, y + card_h], radius=14, fill=(28, 34, 48))
+
+        # Saat
         saat_txt = datetime.fromtimestamp(f['ts'], tz=timezone.utc) + timedelta(hours=3)
-        saat_str = f"🕒 {saat_txt.strftime('%H:%M')}"
-        koy_str = f"🏰 {f['koy_adi']} ({f['koordinat']})"
-        
-        draw.text((x + padding, y + 10), saat_str, font=font_small, fill=(150, 150, 150))
-        draw.text((x + padding + 70, y + 8), koy_str, font=font_bold, fill=(240, 240, 240))
+        saat_str = saat_txt.strftime('%H:%M')
+        draw.text((x + padding, y + 14), f"🕒 {saat_str}", font=font_small, fill=(160, 180, 210))
 
-        # 3. Alan (Yeşil)
-        alan_txt = f"🟢 Alan: {f['yeni_sahip']}"
-        if f.get('yeni_klan_tag') and f['yeni_klan_tag'] != "---":
-            alan_txt += f" [{f['yeni_klan_tag']}]"
-        draw.text((x + padding, y + 40), alan_txt, font=font_regular, fill=(74, 222, 128))
+        # Köy Bilgisi
+        koy_str = f"{f.get('koy_adi', 'Bilinmeyen')} ({f.get('koordinat', '??|??')})"
+        draw.text((x + padding, y + 38), "🏰 " + koy_str, font=font_bold, fill=(235, 235, 245))
 
-        # 4. Veren (Kırmızı)
-        veren_txt = f"🔴 Veren: {f['eski_sahip']}"
-        if f.get('eski_klan_tag') and f['eski_klan_tag'] != "---":
-            veren_txt += f" [{f['eski_klan_tag']}]"
-        draw.text((x + padding, y + 70), veren_txt, font=font_regular, fill=(248, 113, 113))
+        # ====================== FETİH TÜRÜ BELİRLEME ======================
+        yeni_sahip = f.get('yeni_sahip', '').lower()
+        eski_sahip = f.get('eski_sahip', '').lower()
+        yeni_klan = f.get('yeni_klan_tag', '')
+        eski_klan = f.get('eski_klan_tag', '')
+
+        is_gain = yeni_sahip and yeni_sahip != eski_sahip
+        is_loss = eski_sahip and eski_sahip != yeni_sahip
+        is_barb = eski_sahip == "barbar" or f.get('eski_sahip_id') == "0"
+        is_self = yeni_sahip == eski_sahip and yeni_sahip != ""
+        is_internal = yeni_klan == eski_klan and yeni_klan not in ["", "---", None]
+
+        # Tür ve Renk Belirleme
+        if is_barb and is_gain:
+            tur_adi = "BARBAR KÖYÜ FETİHİ"
+            tur_emoji = "🏹"
+            tur_renk = (255, 180, 60)      # Turuncu
+        elif is_self:
+            tur_adi = "KENDİ KÖYÜNÜ FETİH"
+            tur_emoji = "🔄"
+            tur_renk = (100, 200, 255)     # Mavi
+        elif is_internal:
+            tur_adi = "KLAN İÇİ FETİH"
+            tur_emoji = "🔄"
+            tur_renk = (180, 100, 255)     # Mor
+        elif is_gain:
+            tur_adi = "KÖY FETHİ (GAINS)"
+            tur_emoji = "✅"
+            tur_renk = (80, 255, 140)      # Yeşil
+        elif is_loss:
+            tur_adi = "KÖY KAYBI (LOSSES)"
+            tur_emoji = "❌"
+            tur_renk = (255, 90, 100)      # Kırmızı
+        else:
+            tur_adi = "FETİH"
+            tur_emoji = "⚔️"
+            tur_renk = (200, 200, 200)
+
+        # Türü göster
+        draw.text((x + padding, y + 68), f"{tur_emoji} {tur_adi}", font=font_bold, fill=tur_renk)
+
+        # Alan (Yeni Sahip)
+        alan_txt = f"Alan: {f['yeni_sahip']}"
+        if yeni_klan and yeni_klan != "---":
+            alan_txt += f" [{yeni_klan}]"
+        draw.text((x + padding, y + 98), alan_txt, font=font_regular, fill=(100, 255, 160))
+
+        # Veren (Eski Sahip)
+        veren_txt = f"Veren: {f['eski_sahip']}"
+        if eski_klan and eski_klan != "---":
+            veren_txt += f" [{eski_klan}]"
+        draw.text((x + padding, y + 122), veren_txt, font=font_regular, fill=(255, 130, 130))
 
     buf = io.BytesIO()
-    img.save(buf, format='PNG')
+    img.save(buf, format='PNG', optimize=True, quality=95)
     return buf.getvalue()
 
 # ====================== 3. ASENKRON TELEGRAM ======================
