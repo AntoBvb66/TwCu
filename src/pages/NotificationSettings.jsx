@@ -1,7 +1,7 @@
 // NotificationSettings.jsx
 
 import React, { useEffect, useState } from 'react';
-import { doc, setDoc, arrayUnion } from "firebase/firestore";
+import { doc, setDoc,deleteDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../firebase";
 import { useTranslation } from 'react-i18next'; // i18n import edildi
 import './NotificationSettings.css';
@@ -222,8 +222,24 @@ const NotificationSettings = () => {
     });
   };
 
-  const removeProfile = (cIndex) => {
+const removeProfile = async (cIndex) => {
+    const configToDelete = configs[cIndex];
+    const specialId = configToDelete.globalSettings?.specialId;
+
     if (window.confirm(t('alerts.confirmDeleteProfile'))) {
+      // Eğer kullanıcının daha önceden oluşmuş bir Special ID'si varsa, Firebase'den vur!
+      if (specialId && specialId !== "[EMPTY]") {
+        try {
+          await deleteDoc(doc(db, "users", specialId));
+          console.log("Firebase'den kalıcı olarak silindi:", specialId);
+        } catch (error) {
+          console.error("Firebase'den silerken hata:", error);
+          alert(t('alerts.deleteError') || "Veritabanından silinirken bir hata oluştu!");
+          return; // Hata olursa ekrandan (state'ten) silme ki kullanıcı sorunu görsün
+        }
+      }
+
+      // Veritabanından başarıyla silindiyse (veya zaten hiç kaydedilmemiş yeni bir profilse) ekrandan da kaldır
       setConfigs(prev => prev.filter((_, i) => i !== cIndex));
     }
   };

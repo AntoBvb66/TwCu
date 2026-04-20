@@ -47,8 +47,8 @@ const OpPlanner = () => {
     const [selectedDateTime, setSelectedDateTime] = useState(() => formatToLocalISO(new Date()));
 
     // === VERİ STATE'LERİ ===
-    const [villages, setVillages] = useState(() => storage.get("op_cache_allVils", []));
-    const [playerVillages, setPlayerVillages] = useState(() => storage.get("op_cache_pVils", []));
+    const [villages, setVillages] = useState([]);
+    const [playerVillages, setPlayerVillages] = useState([]);
     const [unitSpeeds, setUnitSpeeds] = useState(() => storage.get("op_cache_speeds", defaultUnitSpeeds));
     const [parsedTargets, setParsedTargets] = useState([]); 
     
@@ -127,35 +127,39 @@ const OpPlanner = () => {
 
 
     // === 1. VERİ ÇEKME ===
+    // === 1. ZEKİ VERİ MADENCİLİĞİ ===
     const fetchWithProxy = async (targetUrl) => {
-        const myProxy = "https://tw-proxy.halimtttt10.workers.dev"; 
-        const finalUrl = `${myProxy}/?url=${encodeURIComponent(targetUrl)}`;
-        const res = await fetch(finalUrl);
-        if (!res.ok) throw new Error("Ağ Hatası");
+        const res = await fetch(`https://tw-proxy.halimtttt10.workers.dev/?url=${encodeURIComponent(targetUrl)}`);
+        if (!res.ok) throw new Error("Veri çekilemedi.");
         return await res.text();
+    };
+    const extractWorldId = (url) => {
+        const match = url.match(/https?:\/\/([^.]+)\./);
+        return match ? match[1] : null;
     };
 
     const loadWorldPlayers = async () => {
-        if (!worldUrl || worldUrl.length < 10) return;
+        const worldId = extractWorldId(worldUrl);
+        if (!worldId || worldId.length < 3) return;
+
         try {
-            const cleanUrl = worldUrl.replace(/\/$/, "");
-            const playerData = await fetchWithProxy(`${cleanUrl}/map/player.txt`);
+            // YENİ: Oracle API'sine sslip.io üzerinden istek atıyoruz
+            const targetApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Oyuncular?limit=500000`;
+            const rawText = await fetchWithProxy(targetApiUrl);
+            const data = JSON.parse(rawText);
+
             const players = [];
-            playerData.split("\n").forEach(line => {
-                const p = line.split(",");
-                if (p.length >= 2) {
-                    players.push({
-                        id: p[0],
-                        name: decodeURIComponent(p[1]).replace(/\+/g, ' ')
-                    });
-                }
+            data.veriler.forEach(item => {
+                players.push({
+                    id: item.id,
+                    name: item.isim // API'den gelen anahtar
+                });
             });
             setWorldPlayers(players);
         } catch (err) {
-            console.log("Oyuncu listesi arka planda çekilemedi.");
+            console.log("Oyuncu listesi API'den çekilemedi:", err);
         }
     };
-
     useEffect(() => {
         if (worldUrl) loadWorldPlayers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -163,7 +167,9 @@ const OpPlanner = () => {
 
    const handleFetchData = async () => {
         const cleanUrl = worldUrl.replace(/\/$/, "");
-        if (!cleanUrl) return alert(t('opPlanner.alerts.enterWorldUrl'));
+        const worldId = extractWorldId(worldUrl);
+        
+        if (!cleanUrl || !worldId) return alert(t('opPlanner.alerts.enterWorldUrl'));
         if (!playerName) return alert(t('opPlanner.alerts.enterPlayerName'));
 
         const newClickCount = clickCount + 1;
@@ -179,7 +185,7 @@ const OpPlanner = () => {
 
         setStatus(t('opPlanner.status.fetching'));
         try {
-            // === YENİ: OTOMATİK MİSYONER MESAFESİ ÇEKME ===
+            // 1. CONFIG ÇEKİMİ (Proxy üzerinden kalmaya devam ediyor)
             try {
                 const configData = await fetchWithProxy(`${cleanUrl}/interface.php?func=get_config`);
                 const distMatch = configData.match(/<max_dist>(\d+)<\/max_dist>/);
@@ -189,34 +195,45 @@ const OpPlanner = () => {
             } catch (err) {
                 console.log("Konfigürasyon çekilemedi, mevcut sınır kullanılacak.");
             }
-            // ===============================================
 
-            const playerTxt = await fetchWithProxy(`${cleanUrl}/map/player.txt`);
+            // 2. API'DEN OYUNCULARI ÇEK VE OYUNCU ID'Yİ BUL
+            const playerApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Oyuncular?limit=500000`;
+            const rawPlayerText = await fetchWithProxy(playerApiUrl);
+            const playerData = JSON.parse(rawPlayerText);
+            
             let playerId = null;
-            const searchName = playerName.toLocaleLowerCase('tr-TR').replace(/\+/g, ' ');
+            const searchName = playerName.toLocaleLowerCase('tr-TR').trim();
 
-            playerTxt.split("\n").forEach(line => {
-                const p = line.split(",");
-                if (p.length >= 2) {
-                    const decodedName = decodeURIComponent(p[1]).replace(/\+/g, ' ').toLocaleLowerCase('tr-TR');
-                    if (decodedName === searchName) playerId = parseInt(p[0]);
+            playerData.veriler.forEach(item => {
+                const currentName = (item.isim || "").toLocaleLowerCase('tr-TR').trim();
+                if (currentName === searchName) {
+                    playerId = parseInt(item.id);
                 }
             });
 
             if (!playerId) return setStatus(t('opPlanner.status.playerNotFound'));
 
-            const villageTxt = await fetchWithProxy(`${cleanUrl}/map/village.txt`);
+            // 3. API'DEN KÖYLERİ ÇEK VE OYUNCUYA AİT OLANLARI FİLTRELE
+            const villageApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Koyler?limit=500000`;
+            const rawVillageText = await fetchWithProxy(villageApiUrl);
+            const villageData = JSON.parse(rawVillageText);
+            
             const allVils = []; const pVils = [];
 
-            villageTxt.split("\n").forEach(line => {
-                const p = line.split(",");
-                if (p.length >= 5) {
-                    const vilObj = { id: parseInt(p[0]), x: parseInt(p[2]), y: parseInt(p[3]), pid: parseInt(p[4]), coord: `${p[2]}|${p[3]}` };
-                    allVils.push(vilObj);
-                    if (vilObj.pid === playerId) pVils.push(vilObj);
-                }
+            villageData.veriler.forEach(item => {
+                const pid = parseInt(item.oyuncu_id || item.pid || item.player_id); // API'deki sütun adın
+                const vilObj = { 
+                    id: parseInt(item.id), 
+                    x: parseInt(item.x), 
+                    y: parseInt(item.y), 
+                    pid: pid, 
+                    coord: `${item.x}|${item.y}` 
+                };
+                allVils.push(vilObj);
+                if (vilObj.pid === playerId) pVils.push(vilObj);
             });
 
+            // 4. BİRİM HIZLARINI ÇEK (Proxy üzerinden devam ediyor)
             try {
                 const unitXml = await fetchWithProxy(`${cleanUrl}/interface.php?func=get_unit_info`);
                 const parser = new DOMParser();
@@ -232,9 +249,14 @@ const OpPlanner = () => {
                 }
             } catch (e) { console.log("Birim hızları varsayılan kalacak."); }
 
-            setVillages(allVils); setPlayerVillages(pVils);
-            storage.set("op_cache_allVils", allVils);
-            storage.set("op_cache_pVils", pVils);
+            // 5. YENİ VERİLERİ STATE'E AT VE HAFIZAYI ŞİŞİRMEDEN KAYDET
+            setVillages(allVils); 
+            setPlayerVillages(pVils);
+            
+            // DİKKAT: QuotaExceededError almamak için büyük dizileri LocalStorage'a kaydetmiyoruz!
+            // storage.set("op_cache_allVils", allVils); 
+            // storage.set("op_cache_pVils", pVils);
+            
             storage.set("op_last_fetch", now);
             setClickCount(0); 
             

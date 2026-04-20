@@ -57,84 +57,66 @@ const MapGenerator = () => {
         return await res.text();
     };
 
+    const extractWorldId = (url) => {
+        const match = url.match(/https?:\/\/([^.]+)\./);
+        return match ? match[1] : null;
+    };
+
     const handleFetchData = async () => {
-        const cleanUrl = worldUrl.replace(/\/$/, "");
-        if (!cleanUrl) return alert(t('mapGenerator.status.noUrl'));
-
-        const now = Date.now();
-        const lastFetch = storage.get("mg_last_fetch", 0);
-        const cachedData = storage.get("mg_cache_data", null);
-        const lastFetchedUrl = storage.get("mg_last_url", "");
-
-        if (cachedData && (lastFetchedUrl === cleanUrl) && (now - lastFetch < 3600000)) {
-            setStatus(t('mapGenerator.status.cached').replace('{{time}}', new Date(lastFetch).toLocaleTimeString()));
-            parseData(cachedData.ally, cachedData.player, cachedData.village);
-            return;
-        }
+        const worldId = extractWorldId(worldUrl);
+        if (!worldId) return alert(t('mapGenerator.status.noUrl'));
 
         setStatus(t('mapGenerator.status.fetching'));
         try {
-            const [allyTxt, playerTxt, villageTxt] = await Promise.all([
-                fetchWithProxy(`${cleanUrl}/map/ally.txt`),
-                fetchWithProxy(`${cleanUrl}/map/player.txt`),
-                fetchWithProxy(`${cleanUrl}/map/village.txt`)
+            // 1. API'DEN VERİLERİ PARALEL OLARAK ÇEK
+            const [allyRes, playerRes, villageRes] = await Promise.all([
+                fetchWithProxy(`http://152.70.16.201.sslip.io/api/${worldId}/Klanlar?limit=5000`),
+                fetchWithProxy(`http://152.70.16.201.sslip.io/api/${worldId}/Oyuncular?limit=500000`),
+                fetchWithProxy(`http://152.70.16.201.sslip.io/api/${worldId}/Koyler?limit=500000`)
             ]);
 
-            storage.set("mg_last_fetch", now);
-            storage.set("mg_last_url", cleanUrl);
-            storage.set("mg_cache_data", { ally: allyTxt, player: playerTxt, village: villageTxt });
-            
-            setStatus(t('mapGenerator.status.success'));
-            parseData(allyTxt, playerTxt, villageTxt);
-        } catch (error) {
-            setStatus(t('mapGenerator.status.error').replace('{{msg}}', error.message));
-        }
-    };
+            const allyData = JSON.parse(allyRes);
+            const playerData = JSON.parse(playerRes);
+            const villageData = JSON.parse(villageRes);
 
-    const parseData = (allyTxt, playerTxt, villageTxt) => {
-        const tribesDb = {};
-        const parsedTribes = [];
-
-        allyTxt.split("\n").forEach(line => {
-            if (!line.trim()) return;
-            const p = line.split(",");
-            const id = parseInt(p[0]);
-            if (!isNaN(id)) {
-                const points = parseInt(p[5]) || 0;
-                const tribeObj = { id, name: decodeTW(p[1]), tag: decodeTW(p[2]), points };
+            // 2. KLANLARI İŞLE
+            const tribesDb = {};
+            const parsedTribes = [];
+            allyData.veriler.forEach(item => {
+                const id = parseInt(item.id);
+                const points = parseInt(item.puan || item.points) || 0;
+                const tribeObj = { id, name: item.isim, tag: item.kisaltma, points };
                 tribesDb[id] = tribeObj;
-                parsedTribes.push({ ...tribeObj, checked: false }); 
-            }
-        });
+                parsedTribes.push({ ...tribeObj, checked: false });
+            });
 
-        const playersDb = {};
-        const parsedPlayers = [];
-        
-        playerTxt.split("\n").forEach(line => {
-            if (!line.trim()) return;
-            const p = line.split(",");
-            const id = parseInt(p[0]);
-            if (!isNaN(id)) {
-                const points = parseInt(p[4]) || 0; 
-                const playerObj = { id, name: decodeTW(p[1]), tribeId: parseInt(p[2]), points };
+            // 3. OYUNCULARI İŞLE
+            const playersDb = {};
+            const parsedPlayers = [];
+            playerData.veriler.forEach(item => {
+                const id = parseInt(item.id);
+                const points = parseInt(item.puan || item.points) || 0;
+                const playerObj = { 
+                    id, 
+                    name: item.isim, 
+                    tribeId: parseInt(item.klan_id || item.ally_id), 
+                    points 
+                };
                 playersDb[id] = playerObj;
                 parsedPlayers.push(playerObj);
-            }
-        });
+            });
 
-        parsedPlayers.sort((a, b) => b.points - a.points);
-        mapData.current.sortedPlayers = parsedPlayers;
+            parsedPlayers.sort((a, b) => b.points - a.points);
+            mapData.current.sortedPlayers = parsedPlayers;
 
-        const villages = [];
-        const tribeCenters = {};
-
-        villageTxt.split("\n").forEach(line => {
-            if (!line.trim()) return;
-            const p = line.split(",");
-            if (p.length >= 4) {
-                const x = parseInt(p[2]);
-                const y = parseInt(p[3]);
-                const pid = parseInt(p[4]);
+            // 4. KÖYLERİ VE KLAN MERKEZLERİNİ İŞLE
+            const villages = [];
+            const tribeCenters = {};
+            villageData.veriler.forEach(item => {
+                const x = parseInt(item.x);
+                const y = parseInt(item.y);
+                const pid = parseInt(item.oyuncu_id || item.pid || item.player_id);
+                
                 villages.push({ x, y, pid });
 
                 if (pid !== 0 && playersDb[pid]) {
@@ -146,26 +128,32 @@ const MapGenerator = () => {
                         tribeCenters[tid].count += 1;
                     }
                 }
-            }
-        });
+            });
 
-        parsedTribes.forEach(t => {
-            let cx = 500, cy = 500; 
-            if (tribeCenters[t.id] && tribeCenters[t.id].count > 0) {
-                cx = tribeCenters[t.id].sumX / tribeCenters[t.id].count;
-                cy = tribeCenters[t.id].sumY / tribeCenters[t.id].count;
-            }
-            t.angle = Math.atan2(cy - 500, cx - 500);
-        });
+            // 5. KLAN AÇILARINI (HARİTA RENK DAĞILIMI İÇİN) HESAPLA
+            parsedTribes.forEach(tObj => {
+                let cx = 500, cy = 500;
+                if (tribeCenters[tObj.id] && tribeCenters[tObj.id].count > 0) {
+                    cx = tribeCenters[tObj.id].sumX / tribeCenters[tObj.id].count;
+                    cy = tribeCenters[tObj.id].sumY / tribeCenters[tObj.id].count;
+                }
+                tObj.angle = Math.atan2(cy - 500, cx - 500);
+            });
 
-        const angleSorted = [...parsedTribes].sort((a, b) => a.angle - b.angle);
-        angleSorted.forEach((t, index) => { t.color = hslToHex((index * 137.508) % 360, 85, 55); });
-        parsedTribes.sort((a, b) => b.points - a.points);
-        
-        setTribes(parsedTribes); 
-        mapData.current.villages = villages;
-        mapData.current.playersDb = playersDb;
-        mapData.current.tribesDb = tribesDb;
+            const angleSorted = [...parsedTribes].sort((a, b) => a.angle - b.angle);
+            angleSorted.forEach((tObj, index) => { tObj.color = hslToHex((index * 137.508) % 360, 85, 55); });
+            parsedTribes.sort((a, b) => b.points - a.points);
+
+            // 6. VERİLERİ STATE'E VE HAFIZAYA (REFS) YAZ
+            setTribes(parsedTribes);
+            mapData.current.villages = villages;
+            mapData.current.playersDb = playersDb;
+            mapData.current.tribesDb = tribesDb;
+
+            setStatus(t('mapGenerator.status.success'));
+        } catch (error) {
+            setStatus(t('mapGenerator.status.error').replace('{{msg}}', error.message));
+        }
     };
 
     const handlePlayerSearchText = (e) => {
