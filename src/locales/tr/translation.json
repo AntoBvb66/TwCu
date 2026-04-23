@@ -88,7 +88,6 @@
         "title": "Bildirim Ayarları",
         "desc": "Bildirimlerin nasıl gösterileceğini özelleştirin."
       }
-
     }
   },
   "footer": {
@@ -1013,8 +1012,12 @@
       "chatIdLabel": "Telegram Chat ID",
       "chatIdPlaceholder": "örnek, 1135068175",
       "saveAllConfigs": "Tüm Ayarları Kaydet",
-      "languageLabel":"Dil / Language",
-      "languagePlaceholder":"Dil Seç / Select Language"
+      "languageLabel": "Dil / Language",
+      "languagePlaceholder": "Dil Seç / Select Language",
+      "remoteDeleteToggle": "Bulut Kaydı Silme",
+      "notificationTypeLabel": "Bildirim Türü",
+      "typeImage": "Görsel Bildirim",
+      "typeText": "Metin Bildirimi"
     },
     "targets": {
       "addNewTarget": "Yeni Hedef Ekle",
@@ -1055,7 +1058,8 @@
       "specialIdEmpty": "'{{name}}' profili için Özel ID eksik veya oluşturulmamış!",
       "saveSuccess": "{{count}} profil başarıyla buluta kaydedildi!",
       "saveError": "{{count}} profil kaydedilirken hata oluştu!",
-      "saveNoData": "Kaydedilecek profil bulunamadı!"
+      "saveNoData": "Kaydedilecek profil bulunamadı!",
+      "enterSpecialId": "Lütfen Özel Erişim Kimliği girin!"
     },
     "common": {
       "add": "Ekle",

@@ -1,9 +1,10 @@
 // NotificationSettings.jsx
 
 import React, { useEffect, useState } from 'react';
-import { doc, setDoc,deleteDoc, arrayUnion } from "firebase/firestore";
+import { doc, setDoc, deleteDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useTranslation } from 'react-i18next'; // i18n import edildi
+import storage from '../utils/storage';
 import './NotificationSettings.css';
 
 const IconGains = () => (
@@ -113,6 +114,23 @@ const IconMap = () => (
   </svg>
 );
 
+const IconImage = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '22px', height: '22px' }}>
+    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+    <circle cx="8.5" cy="8.5" r="1.5" />
+    <polyline points="21 15 16 10 5 21" />
+  </svg>
+);
+
+const IconText = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '22px', height: '22px' }}>
+    <line x1="4" y1="6" x2="20" y2="6" />
+    <line x1="4" y1="12" x2="14" y2="12" />
+    <line x1="4" y1="18" x2="18" y2="18" />
+  </svg>
+);
+
+
 const initialFilters = {
   gains: false,
   losses: false,
@@ -152,7 +170,7 @@ const createEmptyConfig = () => ({
   uiId: Date.now() + Math.random(),
   isExpanded: true,
   profileName: '',
-  globalSettings: { specialId: '', worldUrl: '', botToken: '', chatId: '', language: 'tr' },
+  globalSettings: { specialId: '', worldUrl: '', botToken: '', chatId: '', language: 'tr' ,notificationType: 'text'},
   // Hedef Yönetimi
   entities: [],
   newName: '',
@@ -178,30 +196,20 @@ const NotificationSettings = () => {
 
   // --- STATE YÖNETİMİ ---
   const [configs, setConfigs] = useState(() => {
-    const savedConfigs = localStorage.getItem('twcu_configs_multi');
-    if (savedConfigs) return JSON.parse(savedConfigs);
+    return storage.get('twcu_configs_multi', [createEmptyConfig()]);
+  });
 
-    const oldGlobal = localStorage.getItem('twcu_globalSettings');
-    if (oldGlobal) {
-      return [{
-        ...createEmptyConfig(),
-        profileName: t('profile.mainProfile'), // Çeviri kullanıldı
-        globalSettings: JSON.parse(oldGlobal),
-        entities: JSON.parse(localStorage.getItem('twcu_entities')) || [],
-      }];
-    }
-
-    return [createEmptyConfig()];
+  const [showInfoPanel, setShowInfoPanel] = useState(() => {
+    return storage.get('twcu_infoPanel', true);
   });
 
   const [showSecrets, setShowSecrets] = useState({});
-  const [showInfoPanel, setShowInfoPanel] = useState(() => {
-    const saved = localStorage.getItem('twcu_infoPanel');
-    return saved !== null ? JSON.parse(saved) : true;
-  });
+  
+  const [showRemoteDelete, setShowRemoteDelete] = useState(false);
+  const [remoteSpecialId, setRemoteSpecialId] = useState("");
 
-  useEffect(() => { localStorage.setItem('twcu_configs_multi', JSON.stringify(configs)); }, [configs]);
-  useEffect(() => { localStorage.setItem('twcu_infoPanel', JSON.stringify(showInfoPanel)); }, [showInfoPanel]);
+  useEffect(() => { storage.set('twcu_configs_multi', configs); }, [configs]);
+  useEffect(() => { storage.set('twcu_infoPanel', showInfoPanel); }, [showInfoPanel]);
 
   // --- YARDIMCI FONKSİYONLAR ---
   const updateConfig = (cIndex, field, subField, value) => {
@@ -222,7 +230,7 @@ const NotificationSettings = () => {
     });
   };
 
-const removeProfile = async (cIndex) => {
+  const removeProfile = async (cIndex) => {
     const configToDelete = configs[cIndex];
     const specialId = configToDelete.globalSettings?.specialId;
 
@@ -244,14 +252,41 @@ const removeProfile = async (cIndex) => {
     }
   };
 
-  const generateSpecialId = (cIndex, currentId) => {
+  const generateSpecialId = async (cIndex, currentId) => {
     if (currentId && currentId.length > 0) {
       alert(t('alerts.idExists'));
       return;
     }
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~|}{[]:;?><,-=";
+
+    let isUnique = false;
     let newId = "";
-    for (let i = 0; i < 66; i++) newId += chars.charAt(Math.floor(Math.random() * chars.length));
+
+    // Firebase'de eşsiz bir ID bulana kadar dön
+    while (!isUnique) {
+      newId = "";
+      for (let i = 0; i < 66; i++) {
+        newId += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+
+      try {
+        // Firebase'e bu ID ile bir kayıt var mı diye soruyoruz
+        const docRef = doc(db, "users", newId);
+        const docSnap = await getDoc(docRef);
+
+        if (!docSnap.exists()) {
+          // Eğer böyle bir doküman yoksa, ID eşsizdir! Döngüden çık.
+          isUnique = true;
+        } else {
+        }
+      } catch (error) {
+        console.error("ID kontrolü sırasında Firebase hatası:", error);
+        alert("Bağlantı hatası! ID üretilemedi.");
+        return; // Hata durumunda sonsuz döngüyü engellemek için fonksiyonu durdur.
+      }
+    }
+
+    // Eşsizliği onaylanan ID'yi state'e kaydet
     updateConfig(cIndex, 'globalSettings', 'specialId', newId);
   };
 
@@ -318,89 +353,86 @@ const removeProfile = async (cIndex) => {
     updateConfig(cIndex, 'entities', null, currentEntities.filter(ent => ent.id !== entityId));
   };
 
+  // === 1. HEDEF DOĞRULAMA VE EKLEME ===
   const validateAndAddEntity = async (cIndex, config, type) => {
-    // 1. Input Boş mu Kontrolü
     const targetName = config.newName?.trim();
     if (!targetName) {
       alert(t('alerts.enterPlayerOrTribe'));
       return;
     }
 
-    // 🔥 DÜZELTİLEN KISIM: Senin state yapına (globalSettings.worldUrl) uygun hale getirildi 🔥
     const worldUrl = config.globalSettings?.worldUrl || "https://tr1.klanlar.org";
     const cleanUrl = worldUrl.replace(/\/$/, "");
+    
+    // YENİ: URL'den dünya ID'sini buluyoruz (örn: "https://tr100.klanlar.org" -> "tr100")
+    const worldIdMatch = cleanUrl.match(/https?:\/\/([^.]+)\./);
+    const worldId = worldIdMatch ? worldIdMatch[1] : null;
 
-    let allyData = "";
-    let playerData = "";
+    if (!worldId) {
+      alert("Geçersiz dünya linki!");
+      return;
+    }
+
+    let allyData = [];
+    let playerData = [];
 
     const now = Date.now();
-    const lastFetch = parseInt(localStorage.getItem("mg_last_fetch") || "0");
-    const lastUrl = localStorage.getItem("mg_last_url");
+    // YENİ: Modern storage kullanımı
+    const lastFetch = parseInt(storage.get("mg_last_fetch", "0"));
+    const lastUrl = storage.get("mg_last_url", "");
+    const cachedData = storage.get("mg_cache_data", null);
 
-    let cachedData = null;
-    try {
-      cachedData = JSON.parse(localStorage.getItem("mg_cache_data"));
-    } catch (e) { }
-
-    // 2. Veri Çekme veya Cache'den Okuma
+    // Cache Kontrolü
     if (cachedData && cachedData.ally && cachedData.player && lastUrl === cleanUrl && (now - lastFetch < 3600000)) {
       allyData = cachedData.ally;
       playerData = cachedData.player;
     } else {
       try {
+        // YENİ: Kendi API sunucumuza istek atıyoruz ve JSON olarak çözüyoruz
         const fetchWithProxy = async (targetUrl) => {
-          const res = await fetch(`https://tw-proxy.halimtttt10.workers.dev/?url=${encodeURIComponent(targetUrl)}`);
+          const myProxy = "https://tw-proxy.halimtttt10.workers.dev";
+          const res = await fetch(`${myProxy}/?url=${encodeURIComponent(targetUrl)}`);
           if (!res.ok) throw new Error("Ağ Hatası");
-          return await res.text();
+          return await res.json(); 
         };
 
-        allyData = await fetchWithProxy(`${cleanUrl}/map/ally.txt`);
-        playerData = await fetchWithProxy(`${cleanUrl}/map/player.txt`);
+        const allyRes = await fetchWithProxy(`http://152.70.16.201.sslip.io/api/${worldId}/Klanlar?limit=5000`);
+        const playerRes = await fetchWithProxy(`http://152.70.16.201.sslip.io/api/${worldId}/Oyuncular?limit=500000`);
 
-        const newData = { ...(cachedData || {}), ally: allyData, player: playerData };
-        localStorage.setItem("mg_cache_data", JSON.stringify(newData));
-        localStorage.setItem("mg_last_fetch", now.toString());
-        localStorage.setItem("mg_last_url", cleanUrl);
+        allyData = allyRes.veriler || [];
+        playerData = playerRes.veriler || [];
+
+        // YENİ: Modern storage ile kaydetme
+        storage.set("mg_cache_data", { ally: allyData, player: playerData });
+        storage.set("mg_last_fetch", now.toString());
+        storage.set("mg_last_url", cleanUrl);
       } catch (error) {
-        alert(t('alerts.worldDataFetchError'));
+        alert(t('alerts.worldDataFetchError') || "Dünya verileri API'den çekilemedi!");
         return;
       }
     }
 
-    // 3. Bozuk Veri Kontrolü
-    if (!playerData || !playerData.includes(',') || playerData.includes('<html')) {
-      console.error("Gelen Hatalı Veri:", playerData.substring(0, 150));
-      alert(t('alerts.worldDataReadError'));
-      localStorage.removeItem("mg_cache_data");
-      return;
-    }
-
-    // 4. Akıllı Arama Mantığı
+    // 4. Akıllı Arama Mantığı (JSON formatına göre güncellendi)
     const searchTarget = cleanString(targetName);
     let exists = false;
     let officialName = "";
 
-    const textToSearch = type === 'Player' ? playerData : allyData;
-    const lines = textToSearch.split('\n').map(line => line.trim());
+    const targetList = type === 'Player' ? playerData : allyData;
 
-    for (let line of lines) {
-      if (!line) continue;
-      const cols = line.split(',');
-      if (cols.length < 3) continue;
-
+    for (let item of targetList) {
       if (type === 'Player') {
-        const rawName = decodeTW(cols[1]);
+        const rawName = decodeTW(item.isim || item.name);
         if (cleanString(rawName) === searchTarget) {
           exists = true;
           officialName = rawName;
           break;
         }
       } else {
-        const rawName = decodeTW(cols[1]);
-        const rawTag = decodeTW(cols[2]);
+        const rawName = decodeTW(item.isim || item.name);
+        const rawTag = decodeTW(item.kisaltma || item.tag);
         if (cleanString(rawTag) === searchTarget || cleanString(rawName) === searchTarget) {
           exists = true;
-          officialName = rawTag;
+          officialName = rawTag; // Klan eklendiğinde etiketini (Tag) kullanıyoruz
           break;
         }
       }
@@ -456,61 +488,63 @@ const removeProfile = async (cIndex) => {
     const type = config.newHighlightType; // 'Player' veya 'Tribe'
     const worldUrl = config.globalSettings?.worldUrl || "https://tr1.klanlar.org";
     const cleanUrl = worldUrl.replace(/\/$/, "");
+    
+    // YENİ: URL'den dünya ID'sini buluyoruz
+    const worldIdMatch = cleanUrl.match(/https?:\/\/([^.]+)\./);
+    const worldId = worldIdMatch ? worldIdMatch[1] : null;
 
-    // --- Veri Çekme / Cache Kontrolü (Ortak) ---
+    if (!worldId) return;
+
+    let targetData = [];
     const now = Date.now();
-    const lastFetch = parseInt(localStorage.getItem("mg_last_fetch") || "0");
-    const lastUrl = localStorage.getItem("mg_last_url");
-    let targetData = "";
-    let cachedData = null;
+    const lastFetch = parseInt(storage.get("mg_last_fetch", "0"));
+    const lastUrl = storage.get("mg_last_url", "");
+    const cachedData = storage.get("mg_cache_data", null);
 
-    try { cachedData = JSON.parse(localStorage.getItem("mg_cache_data")); } catch (e) { }
-
+    // Cache Kontrolü
     if (cachedData && cachedData.ally && cachedData.player && lastUrl === cleanUrl && (now - lastFetch < 3600000)) {
       targetData = type === 'Player' ? cachedData.player : cachedData.ally;
     } else {
       try {
         const fetchWithProxy = async (targetUrl) => {
-          const res = await fetch(`https://tw-proxy.halimtttt10.workers.dev/?url=${encodeURIComponent(targetUrl)}`);
+          const myProxy = "https://tw-proxy.halimtttt10.workers.dev";
+          const res = await fetch(`${myProxy}/?url=${encodeURIComponent(targetUrl)}`);
           if (!res.ok) throw new Error("Ağ Hatası");
-          return await res.text();
+          return await res.json(); 
         };
-        const allyData = await fetchWithProxy(`${cleanUrl}/map/ally.txt`);
-        const playerData = await fetchWithProxy(`${cleanUrl}/map/player.txt`);
 
+        const allyRes = await fetchWithProxy(`http://152.70.16.201.sslip.io/api/${worldId}/Klanlar?limit=5000`);
+        const playerRes = await fetchWithProxy(`http://152.70.16.201.sslip.io/api/${worldId}/Oyuncular?limit=500000`);
+
+        const allyData = allyRes.veriler || [];
+        const playerData = playerRes.veriler || [];
         targetData = type === 'Player' ? playerData : allyData;
 
-        const newData = { ...(cachedData || {}), ally: allyData, player: playerData };
-        localStorage.setItem("mg_cache_data", JSON.stringify(newData));
-        localStorage.setItem("mg_last_fetch", now.toString());
-        localStorage.setItem("mg_last_url", cleanUrl);
+        storage.set("mg_cache_data", { ally: allyData, player: playerData });
+        storage.set("mg_last_fetch", now.toString());
+        storage.set("mg_last_url", cleanUrl);
       } catch (error) {
         alert(t('alerts.worldDataFetchErrorShort'));
         return;
       }
     }
 
-    // --- Arama Mantığı ---
+    // --- Arama Mantığı (JSON için) ---
     const searchTarget = cleanString(targetName);
     let exists = false;
     let officialName = "";
-    const lines = targetData.split('\n').map(line => line.trim());
 
-    for (let line of lines) {
-      if (!line) continue;
-      const cols = line.split(',');
-      if (cols.length < 3) continue;
-
+    for (let item of targetData) {
       if (type === 'Player') {
-        const rawName = decodeTW(cols[1]);
+        const rawName = decodeTW(item.isim || item.name);
         if (cleanString(rawName) === searchTarget) {
           exists = true;
           officialName = rawName;
           break;
         }
       } else {
-        const rawName = decodeTW(cols[1]);
-        const rawTag = decodeTW(cols[2]);
+        const rawName = decodeTW(item.isim || item.name);
+        const rawTag = decodeTW(item.kisaltma || item.tag);
         if (cleanString(rawTag) === searchTarget || cleanString(rawName) === searchTarget) {
           exists = true;
           officialName = rawTag;
@@ -526,9 +560,7 @@ const removeProfile = async (cIndex) => {
       );
       return;
     }
-
   };
-
 
 
 
@@ -578,7 +610,8 @@ const removeProfile = async (cIndex) => {
       world_link: config.globalSettings.worldUrl || "[EMPTY]",
       telegram_bot_token: config.globalSettings.botToken || "[EMPTY]",
       telegram_chat_id: config.globalSettings.chatId || "[EMPTY]",
-      language: config.globalSettings.language || "tr"
+      language: config.globalSettings.language || "tr",
+      notification_type: config.globalSettings.notificationType || "text"
     },
     // Hedef bazlı filtreler
     monitored_players: config.entities.filter(e => e.type === 'Player').map(p => ({
@@ -647,6 +680,31 @@ const removeProfile = async (cIndex) => {
     if (successCount > 0) alert(t('alerts.saveSuccess', { count: successCount }));
     if (errorCount > 0) alert(t('alerts.saveError', { count: errorCount }));
     if (successCount === 0 && errorCount === 0) alert(t('alerts.saveNoData'));
+  };
+
+  // --- BAŞKA CİHAZDAKİ (UZAKTAN) PROFİLİ SİLME ---
+  const handleRemoteDelete = async () => {
+    const idToTrash = remoteSpecialId.trim();
+    if (!idToTrash) {
+      alert(t('alerts.enterSpecialId') || "Lütfen silmek istediğiniz Special ID'yi girin.");
+      return;
+    }
+
+    if (window.confirm(t('alerts.confirmRemoteDelete') || "Bu Special ID'ye ait tüm veriler veritabanından kalıcı olarak silinecek. Emin misiniz?")) {
+      try {
+        await deleteDoc(doc(db, "users", idToTrash));
+
+        // Ekranda (local state) tesadüfen bu id ile eşleşen profil varsa, onu da ekrandan kaldıralım
+        setConfigs(prev => prev.filter(c => c.globalSettings?.specialId !== idToTrash));
+
+        alert(t('alerts.remoteDeleteSuccess') || "Profil veritabanından başarıyla silindi.");
+        setRemoteSpecialId("");
+        setShowRemoteDelete(false); // İşlem bitince alanı geri kapat
+      } catch (error) {
+        console.error("Uzaktan silme hatası:", error);
+        alert(t('alerts.remoteDeleteError') || "Silme işlemi sırasında bir hata oluştu. ID'yi kontrol edin.");
+      }
+    }
   };
 
   return (
@@ -768,9 +826,11 @@ const removeProfile = async (cIndex) => {
                           <input
                             type={showSecrets[`${config.uiId}_id`] ? "text" : "password"}
                             className="twcu-input has-icon is-monospace"
-                            placeholder={t('settings.specialIdPlaceholder')}
+                            placeholder={t('settings.specialIdPlaceholder') || "Sistem otomatik üretecek"}
                             value={config.globalSettings.specialId}
-                            onChange={(e) => updateConfig(cIndex, 'globalSettings', 'specialId', e.target.value)}
+                            readOnly // <--- Kullanıcının elle yazmasını engeller (sadece kopyalamaya izin verir)
+                            style={{ cursor: 'not-allowed', opacity: 0.8 }} // <--- Tıklanamaz hissi verir
+                          // onChange satırı tamamen silindi
                           />
                           <button
                             type="button"
@@ -819,6 +879,43 @@ const removeProfile = async (cIndex) => {
                         ))}
                       </select>
                     </div>
+
+                    {/* --- BİLDİRİM TÜRÜ SEÇİMİ (GÖRSEL / YAZI) --- */}
+                    <div className="form-group">
+                      <label>{t('settings.notificationTypeLabel') || "Bildirim Türü"}</label>
+                      <div style={{ display: 'flex', gap: '10px' }}>
+                        <button
+                          type="button"
+                          onClick={() => updateConfig(cIndex, 'globalSettings', 'notificationType', 'image')}
+                          style={{
+                            flex: 1, padding: '10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s',
+                            backgroundColor: config.globalSettings.notificationType === 'image' ? '#ef4444' : '#2a2a2a',
+                            border: config.globalSettings.notificationType === 'image' ? '1px solid #ef4444' : '1px solid #555',
+                            color: config.globalSettings.notificationType === 'image' ? '#fff' : '#888',
+                            display: 'flex', justifyContent: 'center', alignItems: 'center'
+                          }}
+                          title={t('settings.typeImage') || "Görsel (Resimli) Bildirim"}
+                        >
+                          <IconImage />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => updateConfig(cIndex, 'globalSettings', 'notificationType', 'text')}
+                          style={{
+                            flex: 1, padding: '10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s',
+                            backgroundColor: config.globalSettings.notificationType === 'text' || !config.globalSettings.notificationType ? '#ef4444' : '#2a2a2a',
+                            border: config.globalSettings.notificationType === 'text' || !config.globalSettings.notificationType ? '1px solid #ef4444' : '1px solid #555',
+                            color: config.globalSettings.notificationType === 'text' || !config.globalSettings.notificationType ? '#fff' : '#888',
+                            display: 'flex', justifyContent: 'center', alignItems: 'center'
+                          }}
+                          title={t('settings.typeText') || "Metin (Yazılı) Bildirim"}
+                        >
+                          <IconText />
+                        </button>
+                      </div>
+                    </div>
+
+                    
                     {/* --- 4. Bot Token Field (Gizle/Göster Var) --- */}
                     <div className="form-group">
                       <label>{t('settings.botTokenLabel')}</label>
@@ -1125,6 +1222,67 @@ const removeProfile = async (cIndex) => {
         <button className="btn btn-save" onClick={handleSave} style={{ width: '100%', fontSize: '18px', padding: '15px' }}>
           💾 {t('settings.saveAllConfigs')}
         </button>
+        {/* --- UZAKTAN (DIŞARIDAN) PROFIL SİLME LİNKİ --- */}
+        <div style={{ marginTop: '20px', textAlign: 'center' }}>
+          <button
+            onClick={() => setShowRemoteDelete(!showRemoteDelete)}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#888',
+              textDecoration: 'underline',
+              cursor: 'pointer',
+              fontSize: '14px',
+              transition: 'color 0.2s'
+            }}
+            onMouseEnter={(e) => e.target.style.color = '#ef4444'}
+            onMouseLeave={(e) => e.target.style.color = '#888'}
+          >
+            {t('settings.remoteDeleteToggle') || "Farklı bir cihazdaki profili ID ile silmek istiyorum"}
+          </button>
+
+          {showRemoteDelete && (
+            <div style={{
+              marginTop: '15px',
+              padding: '15px',
+              backgroundColor: '#1e1e1e',
+              border: '1px solid #ef4444',
+              borderRadius: '8px',
+              display: 'flex',
+              gap: '10px',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              animation: 'fadeIn 0.3s ease-in-out'
+            }}>
+              <input
+                type="text"
+                className="twcu-input"
+                placeholder="Special Access ID"
+                value={remoteSpecialId}
+                onChange={(e) => setRemoteSpecialId(e.target.value)}
+                style={{ width: '300px', margin: 0 }}
+              />
+              <button
+                className="btn btn-icon-danger"
+                onClick={handleRemoteDelete}
+                style={{
+                  padding: '10px 20px',
+                  backgroundColor: '#ef4444',
+                  color: '#fff',
+                  borderRadius: '6px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '5px'
+                }}
+              >
+                <IconTrash /> {t('common.delete') || "Kalıcı Olarak Sil"}
+              </button>
+            </div>
+          )}
+        </div>
 
       </div>
     </div>

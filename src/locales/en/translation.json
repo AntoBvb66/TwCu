@@ -913,7 +913,11 @@
     "chatIdPlaceholder": "example: 1135068175",
     "saveAllConfigs": "Save All Settings",
     "languageLabel": "Language",
-    "languagePlaceholder": "Select Language"
+    "languagePlaceholder": "Select Language",
+    "remoteDeleteToggle" : "Delete Cloud Record",
+    "notificationTypeLabel": "Notification Types",
+    "typeImage": "Image Notification",
+    "typeText": "Text Notification"
   },
   "targets": {
     "addNewTarget": "Add New Target",
@@ -954,7 +958,8 @@
     "specialIdEmpty": "Special ID is missing or not generated for '{{name}}' profile!",
     "saveSuccess": "{{count}} profile(s) successfully saved to the cloud!",
     "saveError": "Error occurred while saving {{count}} profile(s)!",
-    "saveNoData": "No profile found to save!"
+    "saveNoData": "No profile found to save!",
+    "enterSpecialId": "Please enter your Special Access ID!"
   },
   "common": {
     "add": "Add",

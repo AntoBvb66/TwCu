@@ -1,9 +1,117 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next'; // YENİ: Çeviri motoru eklendi
+import { useTranslation } from 'react-i18next';
 import storage from '../utils/storage';
 import './MapGenerator.css';
 
-const getRandomColor = () => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+// === 25 ÖZEL RENK PALETİ ===
+const PREDEFINED_COLORS = [
+    { name: "Black", hex: "#000000" },
+    { name: "White", hex: "#ffffff" },
+    { name: "Gray", hex: "#808080" },
+    { name: "Red", hex: "#ff0000" },
+    { name: "Blue", hex: "#0000ff" },
+    { name: "Green", hex: "#008000" },
+    { name: "Yellow", hex: "#ffff00" },
+    { name: "Orange", hex: "#ffa500" },
+    { name: "Pink", hex: "#ffc0cb" },
+    { name: "Purple", hex: "#800080" },
+    { name: "Brown", hex: "#a52a2a" },
+    { name: "Turquoise", hex: "#40e0d0" },
+    { name: "Navy", hex: "#000080" },
+    { name: "Maroon", hex: "#800000" },
+    { name: "Beige", hex: "#f5f5dc" },
+    { name: "Olive", hex: "#808000" },
+    { name: "Mustard", hex: "#ffdb58" },
+    { name: "Mint", hex: "#98ff98" },
+    { name: "Fuchsia", hex: "#ff00ff" },
+    { name: "Gold", hex: "#ffd700" },
+    { name: "Silver", hex: "#c0c0c0" },
+    { name: "Cream", hex: "#fffdd0" },
+    { name: "Teal", hex: "#008080" },
+    { name: "Terracotta", hex: "#e2725b" },
+    { name: "Lavender", hex: "#e6e6fa" }
+];
+
+// === ÖZEL RENK SEÇİCİ BİLEŞENİ ===
+const CustomColorPicker = ({ color, onChange }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [hexValue, setHexValue] = useState(color);
+
+    useEffect(() => { setHexValue(color); }, [color]);
+
+    const handleHexChange = (e) => {
+        const val = e.target.value;
+        setHexValue(val);
+        // Sadece geçerli bir hex koduysa haritayı güncelle (#fff veya #ffffff)
+        if (/^#([0-9A-F]{3}){1,2}$/i.test(val)) {
+            onChange(val);
+        }
+    };
+
+    return (
+        <div style={{ position: 'relative', display: 'inline-block', marginRight: '8px' }}>
+            {/* Renk Kutucuğu (Tıklanınca Menü Açılır) */}
+            <div
+                style={{ width: '24px', height: '24px', backgroundColor: color, border: '1px solid #555', cursor: 'pointer', borderRadius: '4px' }}
+                onClick={() => setIsOpen(!isOpen)}
+                title={hexValue}
+            />
+
+            {/* Açılır Menü (Popover) */}
+            {isOpen && (
+                <>
+                    {/* Arka plan tıklamasını yakalayıp menüyü kapatmak için görünmez katman */}
+                    <div style={{ position: 'fixed', inset: 0, zIndex: 99 }} onClick={() => setIsOpen(false)} />
+                    
+                    <div style={{ position: 'absolute', top: '30px', left: '0', zIndex: 100, background: '#262626', border: '1px solid #444', padding: '10px', borderRadius: '8px', width: '200px', boxShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
+                        
+                        {/* Hex Input ve Yerleşik Renk Tekerleği */}
+                        <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
+                            <input 
+                                type="color" 
+                                value={color} 
+                                onChange={e => { setHexValue(e.target.value); onChange(e.target.value); }} 
+                                style={{ width: '30px', height: '30px', padding: 0, border: 'none', cursor: 'pointer', borderRadius: '4px' }} 
+                                title="Custom Color" 
+                            />
+                            <input 
+                                type="text" 
+                                value={hexValue} 
+                                onChange={handleHexChange} 
+                                style={{ flexGrow: 1, background: '#1e1e1e', color: '#fff', border: '1px solid #555', borderRadius: '4px', padding: '0 8px', fontSize: '14px', outline: 'none' }} 
+                            />
+                        </div>
+
+                        {/* 25 Renkli Palet Izgarası */}
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '6px' }}>
+                            {PREDEFINED_COLORS.map(c => (
+                                <div
+                                    key={c.hex}
+                                    title={c.name}
+                                    onClick={() => { onChange(c.hex); setIsOpen(false); }}
+                                    style={{ 
+                                        width: '100%', 
+                                        aspectRatio: '1', 
+                                        backgroundColor: c.hex, 
+                                        cursor: 'pointer', 
+                                        borderRadius: '4px', 
+                                        border: '1px solid rgba(255,255,255,0.15)',
+                                        transition: 'transform 0.1s'
+                                    }}
+                                    onMouseEnter={e => e.target.style.transform = 'scale(1.1)'}
+                                    onMouseLeave={e => e.target.style.transform = 'scale(1)'}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </>
+            )}
+        </div>
+    );
+};
+
+
+const getRandomColor = () => '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
 
 const hslToHex = (h, s, l) => {
     l /= 100;
@@ -27,11 +135,11 @@ const decodeTW = (str) => {
 };
 
 const MapGenerator = () => {
-    const { t } = useTranslation(); // YENİ: Çeviri kancası
+    const { t } = useTranslation();
 
     const [worldUrl, setWorldUrl] = useState(() => storage.get("mg_world_url", "https://ptc1.tribalwars.com.pt/"));
     const [status, setStatus] = useState("");
-    
+
     const [settings, setSettings] = useState({
         zoom: 100, centerX: 500, centerY: 500, markersOnly: false, showAbandons: true,
         largerMarkers: false, bgColor: '#000000', dullBg: false, showGrid: true, showContinentNums: true
@@ -50,7 +158,7 @@ const MapGenerator = () => {
     useEffect(() => { storage.set("mg_world_url", worldUrl); }, [worldUrl]);
 
     const fetchWithProxy = async (targetUrl) => {
-        const myProxy = "https://tw-proxy.halimtttt10.workers.dev"; 
+        const myProxy = "https://tw-proxy.halimtttt10.workers.dev";
         const finalUrl = `${myProxy}/?url=${encodeURIComponent(targetUrl)}`;
         const res = await fetch(finalUrl);
         if (!res.ok) throw new Error("Ağ Hatası");
@@ -68,7 +176,6 @@ const MapGenerator = () => {
 
         setStatus(t('mapGenerator.status.fetching'));
         try {
-            // 1. API'DEN VERİLERİ PARALEL OLARAK ÇEK
             const [allyRes, playerRes, villageRes] = await Promise.all([
                 fetchWithProxy(`http://152.70.16.201.sslip.io/api/${worldId}/Klanlar?limit=5000`),
                 fetchWithProxy(`http://152.70.16.201.sslip.io/api/${worldId}/Oyuncular?limit=500000`),
@@ -79,28 +186,30 @@ const MapGenerator = () => {
             const playerData = JSON.parse(playerRes);
             const villageData = JSON.parse(villageRes);
 
-            // 2. KLANLARI İŞLE
             const tribesDb = {};
             const parsedTribes = [];
             allyData.veriler.forEach(item => {
                 const id = parseInt(item.id);
-                const points = parseInt(item.puan || item.points) || 0;
-                const tribeObj = { id, name: item.isim, tag: item.kisaltma, points };
+                const points = parseInt(item.toplam_puan || item.puan || item.points) || 0;
+                const rank = parseInt(item.sira) || 9999;
+
+                const tribeObj = { id, name: item.isim, tag: item.kisaltma, points, rank };
                 tribesDb[id] = tribeObj;
                 parsedTribes.push({ ...tribeObj, checked: false });
             });
 
-            // 3. OYUNCULARI İŞLE
+            parsedTribes.sort((a, b) => b.points - a.points);
+
             const playersDb = {};
             const parsedPlayers = [];
             playerData.veriler.forEach(item => {
                 const id = parseInt(item.id);
                 const points = parseInt(item.puan || item.points) || 0;
-                const playerObj = { 
-                    id, 
-                    name: item.isim, 
-                    tribeId: parseInt(item.klan_id || item.ally_id), 
-                    points 
+                const playerObj = {
+                    id,
+                    name: item.isim,
+                    tribeId: parseInt(item.klan_id || item.ally_id),
+                    points
                 };
                 playersDb[id] = playerObj;
                 parsedPlayers.push(playerObj);
@@ -109,14 +218,13 @@ const MapGenerator = () => {
             parsedPlayers.sort((a, b) => b.points - a.points);
             mapData.current.sortedPlayers = parsedPlayers;
 
-            // 4. KÖYLERİ VE KLAN MERKEZLERİNİ İŞLE
             const villages = [];
             const tribeCenters = {};
             villageData.veriler.forEach(item => {
                 const x = parseInt(item.x);
                 const y = parseInt(item.y);
                 const pid = parseInt(item.oyuncu_id || item.pid || item.player_id);
-                
+
                 villages.push({ x, y, pid });
 
                 if (pid !== 0 && playersDb[pid]) {
@@ -130,7 +238,6 @@ const MapGenerator = () => {
                 }
             });
 
-            // 5. KLAN AÇILARINI (HARİTA RENK DAĞILIMI İÇİN) HESAPLA
             parsedTribes.forEach(tObj => {
                 let cx = 500, cy = 500;
                 if (tribeCenters[tObj.id] && tribeCenters[tObj.id].count > 0) {
@@ -144,7 +251,6 @@ const MapGenerator = () => {
             angleSorted.forEach((tObj, index) => { tObj.color = hslToHex((index * 137.508) % 360, 85, 55); });
             parsedTribes.sort((a, b) => b.points - a.points);
 
-            // 6. VERİLERİ STATE'E VE HAFIZAYA (REFS) YAZ
             setTribes(parsedTribes);
             mapData.current.villages = villages;
             mapData.current.playersDb = playersDb;
@@ -164,7 +270,7 @@ const MapGenerator = () => {
             const searchLower = value.toLocaleLowerCase('tr-TR');
             const results = mapData.current.sortedPlayers
                 .filter(p => p.name.toLocaleLowerCase('tr-TR').includes(searchLower))
-                .slice(0, 8); 
+                .slice(0, 8);
             setPlayerSuggestions(results);
         } else {
             setPlayerSuggestions([]);
@@ -183,7 +289,7 @@ const MapGenerator = () => {
         const top = mapData.current.sortedPlayers.slice(0, count);
         const newPlayers = top.map((p, index) => ({
             ...p,
-            color: hslToHex((index * 137.508) % 360, 85, 65) 
+            color: hslToHex((index * 137.508) % 360, 85, 65)
         }));
         setPlayers(newPlayers);
     };
@@ -194,7 +300,18 @@ const MapGenerator = () => {
     const updateTribe = (id, field, value) => setTribes(tribes.map(t => t.id === id ? { ...t, [field]: value } : t));
     const removeTribe = (id) => setTribes(tribes.filter(t => t.id !== id));
     const handleSelectAllTribes = (status) => setTribes(tribes.map(t => ({ ...t, checked: status })));
-    const handleSelectTop25Tribes = () => setTribes(tribes.map((t, index) => ({ ...t, checked: index < 25 })));
+    
+    const handleSelectTop25Tribes = () => {
+        const top25Ids = [...tribes]
+            .sort((a, b) => b.points - a.points)
+            .slice(0, 25)
+            .map(t => t.id);
+
+        setTribes(tribes.map(t => ({
+            ...t,
+            checked: top25Ids.includes(t.id)
+        })));
+    };
 
     const filteredTribes = tribes.filter(t => {
         const searchLower = tribeSearch.toLocaleLowerCase('tr-TR');
@@ -202,13 +319,13 @@ const MapGenerator = () => {
     });
 
     const generateMap = () => {
-        fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=maps").catch(() => {});
+        fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=maps").catch(() => { });
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext("2d");
         const { villages, playersDb } = mapData.current;
         const { zoom, centerX, centerY, bgColor, showGrid, showContinentNums, showAbandons, largerMarkers, dullBg, markersOnly } = settings;
-        
+
         const width = canvas.width; const height = canvas.height;
         ctx.fillStyle = bgColor; ctx.fillRect(0, 0, width, height);
 
@@ -229,18 +346,18 @@ const MapGenerator = () => {
             ctx.fillStyle = "rgba(255, 255, 255, 0.4)"; ctx.font = `${20 / scale}px Arial`;
             for (let x = 0; x < 1000; x += 100) {
                 for (let y = 0; y < 1000; y += 100) {
-                    ctx.fillText(`K${Math.floor(y/100)*10 + Math.floor(x/100)}`, x + 5, y + (25 / scale));
+                    ctx.fillText(`K${Math.floor(y / 100) * 10 + Math.floor(x / 100)}`, x + 5, y + (25 / scale));
                 }
             }
         }
 
         const playerColors = {};
-        players.forEach(p => { if(p.name) playerColors[p.name.toLocaleLowerCase('tr-TR')] = p.color; });
-        
+        players.forEach(p => { if (p.name) playerColors[p.name.toLocaleLowerCase('tr-TR')] = p.color; });
+
         const tribeColors = {};
-        const tribeTags = {}; 
-        tribes.forEach(tObj => { 
-            if(tObj.checked) { tribeColors[tObj.id] = tObj.color; tribeTags[tObj.id] = tObj.tag; }
+        const tribeTags = {};
+        tribes.forEach(tObj => {
+            if (tObj.checked) { tribeColors[tObj.id] = tObj.color; tribeTags[tObj.id] = tObj.tag; }
         });
 
         const markerSize = largerMarkers ? 3.5 / scale : 2 / scale;
@@ -255,21 +372,21 @@ const MapGenerator = () => {
                 const player = playersDb[v.pid];
                 if (player) {
                     const pNameLower = player.name.toLocaleLowerCase('tr-TR');
-                    
+
                     if (playerColors[pNameLower]) {
                         color = playerColors[pNameLower];
                         if (!playerCentersMap[pNameLower]) playerCentersMap[pNameLower] = { x: 0, y: 0, count: 0, name: player.name, color: color };
                         playerCentersMap[pNameLower].x += v.x;
                         playerCentersMap[pNameLower].y += v.y;
                         playerCentersMap[pNameLower].count += 1;
-                    } 
+                    }
                     else if (tribeColors[player.tribeId]) {
                         color = tribeColors[player.tribeId];
                         if (!tribeCentersMap[player.tribeId]) tribeCentersMap[player.tribeId] = { x: 0, y: 0, count: 0, tag: tribeTags[player.tribeId], color: color };
                         tribeCentersMap[player.tribeId].x += v.x;
                         tribeCentersMap[player.tribeId].y += v.y;
                         tribeCentersMap[player.tribeId].count += 1;
-                    } 
+                    }
                     else if (!markersOnly) {
                         color = dullBg ? "#444444" : "#880000";
                     }
@@ -278,15 +395,14 @@ const MapGenerator = () => {
             if (color) { ctx.fillStyle = color; ctx.fillRect(v.x, v.y, markerSize, markerSize); }
         });
 
-        // === AKILLI ÇARPIŞMA ÖNLEYİCİ (COLLISION DETECTION) ===
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.font = `bold ${16 / scale}px Arial`; 
-        ctx.lineWidth = 4 / scale; 
-        ctx.strokeStyle = "rgba(0, 0, 0, 0.9)"; 
-        
+        ctx.font = `bold ${16 / scale}px Arial`;
+        ctx.lineWidth = 4 / scale;
+        ctx.strokeStyle = "rgba(0, 0, 0, 0.9)";
+
         const labelsToDraw = [];
-        
+
         Object.values(tribeCentersMap).forEach(tc => {
             labelsToDraw.push({ text: tc.tag, x: tc.x / tc.count, y: tc.y / tc.count, color: tc.color });
         });
@@ -298,26 +414,26 @@ const MapGenerator = () => {
 
         labelsToDraw.forEach(label => {
             const tWidth = ctx.measureText(label.text).width;
-            const tHeight = 16 / scale; 
-            
+            const tHeight = 16 / scale;
+
             let lx = label.x;
-            let ly = label.y - (14 / scale); 
-            
-            let box = { x: lx - tWidth/2 - 2, y: ly - tHeight/2 - 2, w: tWidth + 4, h: tHeight + 4 };
-            
+            let ly = label.y - (14 / scale);
+
+            let box = { x: lx - tWidth / 2 - 2, y: ly - tHeight / 2 - 2, w: tWidth + 4, h: tHeight + 4 };
+
             let shiftRadius = 0;
             let angle = 0;
-            
-            while(drawnBoxes.some(b => box.x < b.x + b.w && box.x + box.w > b.x && box.y < b.y + b.h && box.y + box.h > b.y) && shiftRadius < (150/scale)) {
-                shiftRadius += 4 / scale; 
-                angle += 0.8; 
-                
+
+            while (drawnBoxes.some(b => box.x < b.x + b.w && box.x + box.w > b.x && box.y < b.y + b.h && box.y + box.h > b.y) && shiftRadius < (150 / scale)) {
+                shiftRadius += 4 / scale;
+                angle += 0.8;
+
                 lx = label.x + Math.cos(angle) * shiftRadius;
                 ly = (label.y - (14 / scale)) + Math.sin(angle) * shiftRadius;
-                box = { x: lx - tWidth/2 - 2, y: ly - tHeight/2 - 2, w: tWidth + 4, h: tHeight + 4 };
+                box = { x: lx - tWidth / 2 - 2, y: ly - tHeight / 2 - 2, w: tWidth + 4, h: tHeight + 4 };
             }
 
-            drawnBoxes.push(box); 
+            drawnBoxes.push(box);
 
             ctx.strokeText(label.text, lx, ly);
             ctx.fillStyle = label.color;
@@ -325,19 +441,19 @@ const MapGenerator = () => {
         });
 
         ctx.restore();
-        
-        fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=maps").catch(()=>console.log("sayac hatasi"));
+
+        fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=maps").catch(() => console.log("sayac hatasi"));
     };
 
     return (
         <div className="map-gen-container">
             <h1 className="map-gen-header">{t('mapGenerator.title')}</h1>
-            
-            <div className="mg-box" style={{display:'flex', gap:'10px', alignItems:'center'}}>
+
+            <div className="mg-box" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                 <label>{t('mapGenerator.worldUrl')}</label>
-                <input type="text" className="mg-input" value={worldUrl} onChange={e => setWorldUrl(e.target.value)} style={{width:'400px'}} />
-                <button className="mg-btn" style={{width:'auto'}} onClick={handleFetchData}>{t('mapGenerator.fetchBtn')}</button>
-                <span style={{fontSize:'12px', color:'#aaa'}}>{status}</span>
+                <input type="text" className="mg-input" value={worldUrl} onChange={e => setWorldUrl(e.target.value)} style={{ width: '400px' }} />
+                <button className="mg-btn" style={{ width: 'auto' }} onClick={handleFetchData}>{t('mapGenerator.fetchBtn')}</button>
+                <span style={{ fontSize: '12px', color: '#aaa' }}>{status}</span>
             </div>
 
             <div className="map-gen-grid">
@@ -347,44 +463,47 @@ const MapGenerator = () => {
                         <table className="mg-table">
                             <tbody>
                                 <tr>
-                                    <td style={{width:'55%'}}>{t('mapGenerator.settings.zoom')}</td>
-                                    <td><input type="number" step="50" className="mg-input mg-input-small" value={settings.zoom} onChange={e => setSettings({...settings, zoom: e.target.value})} /> %</td>
+                                    <td style={{ width: '55%' }}>{t('mapGenerator.settings.zoom')}</td>
+                                    <td><input type="number" step="50" className="mg-input mg-input-small" value={settings.zoom} onChange={e => setSettings({ ...settings, zoom: e.target.value })} /> %</td>
                                 </tr>
                                 <tr>
                                     <td>{t('mapGenerator.settings.center')}</td>
                                     <td>
-                                        <input type="number" className="mg-input mg-input-small" value={settings.centerX} onChange={e => setSettings({...settings, centerX: e.target.value})} /> | 
-                                        <input type="number" className="mg-input mg-input-small" value={settings.centerY} onChange={e => setSettings({...settings, centerY: e.target.value})} />
+                                        <input type="number" className="mg-input mg-input-small" value={settings.centerX} onChange={e => setSettings({ ...settings, centerX: e.target.value })} /> |
+                                        <input type="number" className="mg-input mg-input-small" value={settings.centerY} onChange={e => setSettings({ ...settings, centerY: e.target.value })} />
                                     </td>
                                 </tr>
-                                <tr><td>{t('mapGenerator.settings.markersOnly')}</td><td><input type="checkbox" checked={settings.markersOnly} onChange={e => setSettings({...settings, markersOnly: e.target.checked})} /></td></tr>
-                                <tr><td>{t('mapGenerator.settings.showAbandons')}</td><td><input type="checkbox" checked={settings.showAbandons} onChange={e => setSettings({...settings, showAbandons: e.target.checked})} /></td></tr>
-                                <tr><td>{t('mapGenerator.settings.largerMarkers')}</td><td><input type="checkbox" checked={settings.largerMarkers} onChange={e => setSettings({...settings, largerMarkers: e.target.checked})} /></td></tr>
-                                <tr><td>{t('mapGenerator.settings.bgColor')}</td><td><input type="color" className="mg-color" value={settings.bgColor} onChange={e => setSettings({...settings, bgColor: e.target.value})} /></td></tr>
-                                <tr><td>{t('mapGenerator.settings.dullBg')}</td><td><input type="checkbox" checked={settings.dullBg} onChange={e => setSettings({...settings, dullBg: e.target.checked})} /></td></tr>
-                                <tr><td>{t('mapGenerator.settings.showGrid')}</td><td><input type="checkbox" checked={settings.showGrid} onChange={e => setSettings({...settings, showGrid: e.target.checked})} /></td></tr>
-                                <tr><td>{t('mapGenerator.settings.showContinentNums')}</td><td><input type="checkbox" checked={settings.showContinentNums} onChange={e => setSettings({...settings, showContinentNums: e.target.checked})} /></td></tr>
+                                <tr><td>{t('mapGenerator.settings.markersOnly')}</td><td><input type="checkbox" checked={settings.markersOnly} onChange={e => setSettings({ ...settings, markersOnly: e.target.checked })} /></td></tr>
+                                <tr><td>{t('mapGenerator.settings.showAbandons')}</td><td><input type="checkbox" checked={settings.showAbandons} onChange={e => setSettings({ ...settings, showAbandons: e.target.checked })} /></td></tr>
+                                <tr><td>{t('mapGenerator.settings.largerMarkers')}</td><td><input type="checkbox" checked={settings.largerMarkers} onChange={e => setSettings({ ...settings, largerMarkers: e.target.checked })} /></td></tr>
+                                {/* Arka plan rengi için de yeni seçiciyi kullandım */}
+                                <tr><td>{t('mapGenerator.settings.bgColor')}</td><td>
+                                    <CustomColorPicker color={settings.bgColor} onChange={newColor => setSettings({ ...settings, bgColor: newColor })} />
+                                </td></tr>
+                                <tr><td>{t('mapGenerator.settings.dullBg')}</td><td><input type="checkbox" checked={settings.dullBg} onChange={e => setSettings({ ...settings, dullBg: e.target.checked })} /></td></tr>
+                                <tr><td>{t('mapGenerator.settings.showGrid')}</td><td><input type="checkbox" checked={settings.showGrid} onChange={e => setSettings({ ...settings, showGrid: e.target.checked })} /></td></tr>
+                                <tr><td>{t('mapGenerator.settings.showContinentNums')}</td><td><input type="checkbox" checked={settings.showContinentNums} onChange={e => setSettings({ ...settings, showContinentNums: e.target.checked })} /></td></tr>
                             </tbody>
                         </table>
                     </div>
 
                     <div className="mg-box">
                         <h3>{t('mapGenerator.players.title')}</h3>
-                        
-                        <div style={{position:'relative', marginBottom: '10px'}}>
-                            <input 
-                                type="text" className="mg-input" 
-                                placeholder={t('mapGenerator.players.searchPlaceholder')} 
-                                value={playerSearchText} 
-                                onChange={handlePlayerSearchText} 
-                                onFocus={(e) => handlePlayerSearchText(e)} 
-                                onBlur={() => setTimeout(() => setPlayerSuggestions([]), 200)} 
+
+                        <div style={{ position: 'relative', marginBottom: '10px' }}>
+                            <input
+                                type="text" className="mg-input"
+                                placeholder={t('mapGenerator.players.searchPlaceholder')}
+                                value={playerSearchText}
+                                onChange={handlePlayerSearchText}
+                                onFocus={(e) => handlePlayerSearchText(e)}
+                                onBlur={() => setTimeout(() => setPlayerSuggestions([]), 200)}
                             />
                             {playerSuggestions.length > 0 && (
                                 <ul className="autocomplete-list">
                                     {playerSuggestions.map(sug => (
                                         <li key={sug.id} onMouseDown={() => selectPlayerSuggestion(sug)}>
-                                            {sug.name} <span style={{color:'#777', fontSize:'11px'}}>({sug.points.toLocaleString()} {t('mapGenerator.players.points')})</span>
+                                            {sug.name} <span style={{ color: '#777', fontSize: '11px' }}>({sug.points.toLocaleString()} {t('mapGenerator.players.points')})</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -394,16 +513,18 @@ const MapGenerator = () => {
                         <div className="tribe-controls">
                             <button className="mg-btn" onClick={() => selectTopPlayers(25)}>{t('mapGenerator.players.selectTop25')}</button>
                             <button className="mg-btn" onClick={() => selectTopPlayers(50)}>{t('mapGenerator.players.selectTop50')}</button>
-                            <button className="mg-btn" onClick={() => setPlayers([])} style={{gridColumn: '1 / 3'}}>{t('mapGenerator.players.clearSelection')}</button>
+                            <button className="mg-btn" onClick={() => setPlayers([])} style={{ gridColumn: '1 / 3' }}>{t('mapGenerator.players.clearSelection')}</button>
                         </div>
 
-                        <div className="tribe-list" style={{marginTop:'10px'}}>
-                            {players.length === 0 ? <div style={{padding:'5px', color:'#aaa', fontSize:'12px'}}>{t('mapGenerator.players.noPlayers')}</div> : null}
+                        <div className="tribe-list" style={{ marginTop: '10px' }}>
+                            {players.length === 0 ? <div style={{ padding: '5px', color: '#aaa', fontSize: '12px' }}>{t('mapGenerator.players.noPlayers')}</div> : null}
                             {players.map((p, index) => (
-                                <div key={p.id} className="tribe-item">
-                                    <span style={{color:'#777', width:'25px'}}>{index + 1}.</span>
-                                    <input type="color" className="mg-color" value={p.color} onChange={e => updatePlayerColor(p.id, e.target.value)} />
-                                    <span style={{flexGrow: 1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}} title={p.name}>
+                                <div key={p.id} className="tribe-item" style={{ display: 'flex', alignItems: 'center' }}>
+                                    <span style={{ color: '#777', width: '25px' }}>{index + 1}.</span>
+                                    {/* BURAYA YENİ RENK SEÇİCİ EKLENDİ */}
+                                    <CustomColorPicker color={p.color} onChange={(newColor) => updatePlayerColor(p.id, newColor)} />
+                                    
+                                    <span style={{ flexGrow: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={p.name}>
                                         {p.name}
                                     </span>
                                     <button className="mg-btn-danger" onClick={() => removePlayer(p.id)}>{t('mapGenerator.players.deleteBtn')}</button>
@@ -414,36 +535,39 @@ const MapGenerator = () => {
 
                     <div className="mg-box">
                         <h3>{t('mapGenerator.tribes.title')}</h3>
-                        
-                        <input type="text" className="mg-input" placeholder={t('mapGenerator.tribes.searchPlaceholder')} value={tribeSearch} onChange={e => setTribeSearch(e.target.value)} style={{marginBottom: '10px'}} />
-                        
+
+                        <input type="text" className="mg-input" placeholder={t('mapGenerator.tribes.searchPlaceholder')} value={tribeSearch} onChange={e => setTribeSearch(e.target.value)} style={{ marginBottom: '10px' }} />
+
                         <div className="tribe-controls">
                             <button className="mg-btn" onClick={() => handleSelectAllTribes(true)}>{t('mapGenerator.tribes.selectAll')}</button>
                             <button className="mg-btn" onClick={() => handleSelectAllTribes(false)}>{t('mapGenerator.tribes.clearSelection')}</button>
-                            <button className="mg-btn" onClick={handleSelectTop25Tribes} style={{gridColumn: '1 / 3'}}>{t('mapGenerator.tribes.selectTop25')}</button>
+                            <button className="mg-btn" onClick={handleSelectTop25Tribes} style={{ gridColumn: '1 / 3' }}>{t('mapGenerator.tribes.selectTop25')}</button>
                         </div>
 
                         <div className="tribe-list">
-                            {tribes.length === 0 ? <div style={{padding:'10px', color:'#aaa'}}>{t('mapGenerator.tribes.noData')}</div> : null}
+                            {tribes.length === 0 ? <div style={{ padding: '10px', color: '#aaa' }}>{t('mapGenerator.tribes.noData')}</div> : null}
                             {filteredTribes.map((tObj, index) => (
-                                <div key={tObj.id} className="tribe-item">
-                                    <span style={{color:'#777', width:'25px'}}>{index + 1}.</span>
-                                    <input type="checkbox" checked={tObj.checked} onChange={e => updateTribe(tObj.id, 'checked', e.target.checked)} />
-                                    <input type="color" className="mg-color" value={tObj.color} onChange={e => updateTribe(tObj.id, 'color', e.target.value)} />
+                                <div key={tObj.id} className="tribe-item" style={{ display: 'flex', alignItems: 'center' }}>
+                                    <span style={{ color: '#777', width: '25px' }}>{index + 1}.</span>
+                                    <input type="checkbox" checked={tObj.checked} onChange={e => updateTribe(tObj.id, 'checked', e.target.checked)} style={{ marginRight: '8px' }} />
+                                    
+                                    {/* BURAYA YENİ RENK SEÇİCİ EKLENDİ */}
+                                    <CustomColorPicker color={tObj.color} onChange={(newColor) => updateTribe(tObj.id, 'color', newColor)} />
+                                    
                                     <span className="tribe-tag">[{tObj.tag}]</span>
-                                    <span style={{flexGrow: 1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}} title={tObj.name}>{tObj.name}</span>
+                                    <span style={{ flexGrow: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={tObj.name}>{tObj.name}</span>
                                     <button className="mg-btn-danger" onClick={() => removeTribe(tObj.id)}>{t('mapGenerator.tribes.deleteBtn')}</button>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    <button className="mg-btn" onClick={generateMap} style={{height:'50px', fontSize:'16px'}}>{t('mapGenerator.generateBtn')}</button>
+                    <button className="mg-btn" onClick={generateMap} style={{ height: '50px', fontSize: '16px' }}>{t('mapGenerator.generateBtn')}</button>
                 </div>
 
                 <div>
                     <div className="mg-canvas-container">
-                        <canvas ref={canvasRef} width="1000" height="1000" style={{maxWidth:'100%', height:'auto', display:'block'}}></canvas>
+                        <canvas ref={canvasRef} width="1000" height="1000" style={{ maxWidth: '100%', height: 'auto', display: 'block' }}></canvas>
                     </div>
                 </div>
             </div>
