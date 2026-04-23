@@ -131,13 +131,16 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "🚀 TwCu Arşivci (MongoDB) Başarıyla Çalışıyor!"
+    # Buraya tıkladığında veritabanında kaç dünya olduğunu görmek istersen diye küçük bir ekleme:
+    return "🚀 TwCu Arşivci (MongoDB) Başarıyla Çalışıyor! <br> Bot arka planda aktif."
 
+# Render (Gunicorn) dosyayı içe aktardığı an botu başlatması için:
+print("✅ Arka plan botu tetikleniyor...")
+bot_thread = Thread(target=run_schedule, daemon=True)
+bot_thread.start()
+
+# Bu blok sadece bilgisayarında 'python twcu_reports.py' yazarsan çalışır.
+# Render/Gunicorn burayı pas geçer, yukarıdaki Thread zaten başlamış olur.
 if __name__ == "__main__":
-    # Arka plan işini başlat
-    bot_thread = Thread(target=run_schedule, daemon=True)
-    bot_thread.start()
-
-    # Flask'ı başlatıp Render'ın istediği Portu dinle
     port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port, debug=False)
