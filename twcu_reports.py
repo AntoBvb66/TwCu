@@ -12,12 +12,13 @@ from datetime import datetime
 from pymongo import MongoClient, UpdateOne
 from flask import Flask
 from threading import Thread
+import certifi  # BURASI EKLENDİ
 
 # ==========================================
 # 1. BAĞLANTILAR (FIREBASE & MONGODB)
 # ==========================================
+# Firebase
 try:
-    # Render'da Firebase key'ini Environment Variable (FIREBASE_SERVICE_ACCOUNT_KEY) olarak eklemelisin
     FIREBASE_KEY_JSON = os.environ.get('FIREBASE_SERVICE_ACCOUNT_KEY')
     if not firebase_admin._apps:
         cred = credentials.Certificate(json.loads(FIREBASE_KEY_JSON))
@@ -27,34 +28,24 @@ try:
 except Exception as e:
     print(f"❌ Firebase bağlantı hatası: {e}")
 
+# MongoDB Atlas
+mongo_db = None
 try:
-    # 1. Değişkeni Render panelinden çekiyoruz
     MONGO_URI = os.environ.get("MONGO_URI")
-
     if not MONGO_URI:
-        # Değişken boşsa süreci durdur ve uyar
-        raise ValueError("❌ HATA: Render panelinde MONGO_URI tanımlanmamış!")
-
-    # 2. Bağlantıyı kuruyoruz
-    # certifi.where() eklemek, Render/Linux ortamındaki SSL hatalarını çözer.
-    mongo_client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
-    
-    # 3. Bağlantıyı gerçekten test edelim (Ping atıyoruz)
-    # Bu satır sayesinde eğer şifre yanlışsa veya adres hatalıysa 
-    # daha en başta hatayı loglarda görürsün.
-    mongo_client.admin.command('ping')
-    
-    mongo_db = mongo_client["TwCu_Data"]
-    print(f"✅ MongoDB Atlas bağlantısı başarılı! (Adres: {MONGO_URI[:20]}...)")
-
+        print("❌ HATA: MONGO_URI tanımlanmamış!")
+    else:
+        # SSL sertifikası hatasını önlemek için certifi ekliyoruz
+        mongo_client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
+        # Bağlantı testi
+        mongo_client.admin.command('ping')
+        mongo_db = mongo_client["TwCu_Data"]
+        print("✅ MongoDB Atlas bağlantısı başarılı!")
 except Exception as e:
     print(f"❌ MongoDB bağlantı hatası: {e}")
-    # Önemli: Eğer bağlantı kurulamazsa mongo_db değişkeni tanımlanmamış olur.
-    # Bu yüzden gerekirse uygulamayı burada durdurabilirsin.
-    mongo_db = None
 
 # ==========================================
-# 2. AYARLAR VE YARDIMCI FONKSİYONLAR
+# 2. AYARLAR
 # ==========================================
 DOSYALAR = {
     "/map/village.txt.gz": "Koyler",
@@ -68,30 +59,30 @@ def get_active_worlds():
         doc = doc_ref.get()
         all_worlds = []
         if doc.exists:
-            for dunya_listesi in doc.to_dict().values():
+            data = doc.to_dict()
+            for dunya_listesi in data.values():
                 if isinstance(dunya_listesi, list):
                     all_worlds.extend(dunya_listesi)
             return all_worlds
         return []
     except Exception as e:
-        print(f"Firebase'den dünya listesi çekilemedi: {e}")
+        print(f"Firebase'den dunya listesi cekilemedi: {e}")
         return []
 
 # ==========================================
-# 3. VERİ ÇEKME VE MONGODB'YE YAZMA GÖREVİ
+# 3. VERİ ÇEKME GÖREVİ
 # ==========================================
 def ana_arsiv_gorevi():
+    if mongo_db is None:
+        print("⚠️ MongoDB bağlantısı yok, arşivleme yapılamaz!")
+        return
+
     print(f"\n[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] SAATLİK ARŞİVLEME BAŞLADI...")
     dunyalar = get_active_worlds()
-
-    if not dunyalar:
-        print("Hata: Aktif dünya listesi boş, atlanıyor.")
-        return
 
     for d in dunyalar:
         d_id = d.get('id')
         d_url = d.get('url')
-        
         if not d_id or not d_url: continue
 
         print(f"[{datetime.now().strftime('%H:%M:%S')}] {d_id} verisi çekiliyor...")
@@ -109,6 +100,7 @@ def ana_arsiv_gorevi():
                         for satir in f:
                             if satir.strip():
                                 parcalar = satir.strip().split(',')
+                                # MongoDB _id alanını parcalar[0] (id) olarak set ediyoruz
                                 islem = UpdateOne(
                                     {'_id': str(parcalar[0])}, 
                                     {'$set': {'veri': json.dumps(parcalar)}}, 
@@ -117,25 +109,24 @@ def ana_arsiv_gorevi():
                                 toplu_islemler.append(islem)
 
                         if toplu_islemler:
-                            koleksiyon.bulk_write(toplu_islemler)
+                            koleksiyon.bulk_write(toplu_islemler, ordered=False)
                             print(f"    {tablo_adi} Atlas'a kaydedildi: {len(toplu_islemler)} kayıt.")
             except Exception as e:
                 print(f"    HATA ({tablo_adi}): {e}")
 
-        time.sleep(5)
+        time.sleep(2)
         gc.collect()
 
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] SAATLİK GÜNCELLEME TAMAMLANDI.\n")
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] SAATLİK GÜNCELLEME TAMAMLANDI.")
 
 # ==========================================
-# 4. ARKA PLAN DÖNGÜSÜ (THREAD)
+# 4. ÇALIŞTIRICI DÖNGÜ
 # ==========================================
 def run_schedule():
-    print("🔄 Arka plan arşiv döngüsü başlatıldı (Saat başı çalışacak)")
-    # İlk çalışma (Sunucu açılır açılmaz çalışsın)
+    print("🔄 Arka plan arşiv döngüsü başlatıldı.")
+    # İlk çalıştırma
     ana_arsiv_gorevi()
     
-    # Sonrakiler her saat başı
     schedule.every().hour.at(":00").do(ana_arsiv_gorevi)
     
     while True:
@@ -143,22 +134,19 @@ def run_schedule():
         time.sleep(1)
 
 # ==========================================
-# 5. FLASK WEB SUNUCUSU (RENDER İÇİN ŞART)
+# 5. FLASK WEB SUNUCUSU
 # ==========================================
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    # Buraya tıkladığında veritabanında kaç dünya olduğunu görmek istersen diye küçük bir ekleme:
-    return "🚀 TwCu Arşivci (MongoDB) Başarıyla Çalışıyor! <br> Bot arka planda aktif."
+    return "🚀 TwCu Engine is Running!"
 
-# Render (Gunicorn) dosyayı içe aktardığı an botu başlatması için:
+# Botu arka planda başlat
 print("✅ Arka plan botu tetikleniyor...")
 bot_thread = Thread(target=run_schedule, daemon=True)
 bot_thread.start()
 
-# Bu blok sadece bilgisayarında 'python twcu_reports.py' yazarsan çalışır.
-# Render/Gunicorn burayı pas geçer, yukarıdaki Thread zaten başlamış olur.
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port, debug=False)
