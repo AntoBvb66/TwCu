@@ -28,12 +28,30 @@ except Exception as e:
     print(f"❌ Firebase bağlantı hatası: {e}")
 
 try:
-    MONGO_URI = os.getenv("MONGO_URI") 
-    mongo_client = MongoClient(MONGO_URI)
+    # 1. Değişkeni Render panelinden çekiyoruz
+    MONGO_URI = os.environ.get("MONGO_URI")
+
+    if not MONGO_URI:
+        # Değişken boşsa süreci durdur ve uyar
+        raise ValueError("❌ HATA: Render panelinde MONGO_URI tanımlanmamış!")
+
+    # 2. Bağlantıyı kuruyoruz
+    # certifi.where() eklemek, Render/Linux ortamındaki SSL hatalarını çözer.
+    mongo_client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
+    
+    # 3. Bağlantıyı gerçekten test edelim (Ping atıyoruz)
+    # Bu satır sayesinde eğer şifre yanlışsa veya adres hatalıysa 
+    # daha en başta hatayı loglarda görürsün.
+    mongo_client.admin.command('ping')
+    
     mongo_db = mongo_client["TwCu_Data"]
-    print("✅ MongoDB Atlas bağlantısı başarılı!")
+    print(f"✅ MongoDB Atlas bağlantısı başarılı! (Adres: {MONGO_URI[:20]}...)")
+
 except Exception as e:
     print(f"❌ MongoDB bağlantı hatası: {e}")
+    # Önemli: Eğer bağlantı kurulamazsa mongo_db değişkeni tanımlanmamış olur.
+    # Bu yüzden gerekirse uygulamayı burada durdurabilirsin.
+    mongo_db = None
 
 # ==========================================
 # 2. AYARLAR VE YARDIMCI FONKSİYONLAR
