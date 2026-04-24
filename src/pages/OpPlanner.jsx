@@ -143,16 +143,22 @@ const OpPlanner = () => {
         if (!worldId || worldId.length < 3) return;
 
         try {
-            // YENİ: Oracle API'sine sslip.io üzerinden istek atıyoruz
-            const targetApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Oyuncular?limit=500000`;
-            const rawText = await fetchWithProxy(targetApiUrl);
-            const data = JSON.parse(rawText);
+            // YENİ: Oracle yerine doğrudan Render API'mize istek atıyoruz
+            const targetApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Oyuncular`;
+            const res = await fetch(targetApiUrl);
+            const data = await res.json();
+
+            // GÜVENLİK: Eğer veri yoksa veya hata dönerse durdur
+            if (data.hata || !data.veriler) {
+                console.log("Oyuncu listesi API hatası:", data.hata);
+                return;
+            }
 
             const players = [];
             data.veriler.forEach(item => {
                 players.push({
-                    id: item.id,
-                    name: item.isim // API'den gelen anahtar
+                    id: parseInt(item[0]), // TiDB Formatı: id(0)
+                    name: item[1]          // TiDB Formatı: name(1)
                 });
             });
             setWorldPlayers(players);
@@ -160,6 +166,8 @@ const OpPlanner = () => {
             console.log("Oyuncu listesi API'den çekilemedi:", err);
         }
     };
+
+
     useEffect(() => {
         if (worldUrl) loadWorldPlayers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -197,42 +205,54 @@ const OpPlanner = () => {
             }
 
             // 2. API'DEN OYUNCULARI ÇEK VE OYUNCU ID'Yİ BUL
-            const playerApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Oyuncular?limit=500000`;
-            const rawPlayerText = await fetchWithProxy(playerApiUrl);
-            const playerData = JSON.parse(rawPlayerText);
+            const playerApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Oyuncular`;
+            const playerRes = await fetch(playerApiUrl);
+            const playerData = await playerRes.json();
+            
+            // GÜVENLİK
+            if (playerData.hata || !playerData.veriler) {
+                throw new Error(playerData.hata || "Veritabanında oyuncu bilgisi bulunamadı.");
+            }
             
             let playerId = null;
             const searchName = playerName.toLocaleLowerCase('tr-TR').trim();
 
             playerData.veriler.forEach(item => {
-                const currentName = (item.isim || "").toLocaleLowerCase('tr-TR').trim();
+                // TiDB Oyuncu: id(0), name(1), ally_id(2)
+                const currentName = (item[1] || "").toLocaleLowerCase('tr-TR').trim();
                 if (currentName === searchName) {
-                    playerId = parseInt(item.id);
+                    playerId = parseInt(item[0]);
                 }
             });
 
             if (!playerId) return setStatus(t('opPlanner.status.playerNotFound'));
 
             // 3. API'DEN KÖYLERİ ÇEK VE OYUNCUYA AİT OLANLARI FİLTRELE
-            const villageApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Koyler?limit=500000`;
-            const rawVillageText = await fetchWithProxy(villageApiUrl);
-            const villageData = JSON.parse(rawVillageText);
+            const villageApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Koyler`;
+            const villageRes = await fetch(villageApiUrl);
+            const villageData = await villageRes.json();
+            
+            // GÜVENLİK
+            if (villageData.hata || !villageData.veriler) {
+                throw new Error(villageData.hata || "Veritabanında köy bilgisi bulunamadı.");
+            }
             
             const allVils = []; const pVils = [];
 
             villageData.veriler.forEach(item => {
-                const pid = parseInt(item.oyuncu_id || item.pid || item.player_id); // API'deki sütun adın
+                // TiDB Köy: id(0), name(1), x(2), y(3), player_id(4), points(5)
+                const pid = parseInt(item[4]); 
                 const vilObj = { 
-                    id: parseInt(item.id), 
-                    x: parseInt(item.x), 
-                    y: parseInt(item.y), 
+                    id: parseInt(item[0]), 
+                    x: parseInt(item[2]), 
+                    y: parseInt(item[3]), 
                     pid: pid, 
-                    coord: `${item.x}|${item.y}` 
+                    coord: `${item[2]}|${item[3]}` 
                 };
                 allVils.push(vilObj);
                 if (vilObj.pid === playerId) pVils.push(vilObj);
             });
-
+            
             // 4. BİRİM HIZLARINI ÇEK (Proxy üzerinden devam ediyor)
             try {
                 const unitXml = await fetchWithProxy(`${cleanUrl}/interface.php?func=get_unit_info`);

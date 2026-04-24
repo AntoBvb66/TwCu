@@ -15,6 +15,12 @@ const decodeTW = (str) => {
     }
 };
 
+const extractWorldId = (url) => {
+    const match = url.match(/https?:\/\/([^.]+)\./);
+    return match ? match[1] : null;
+};
+
+
 const MapAnalysis = () => {
     const { t } = useTranslation();
 
@@ -74,6 +80,9 @@ const MapAnalysis = () => {
         const cleanUrl = worldUrl.replace(/\/$/, "");
         if (!cleanUrl) return alert(t('mapAnalysis.enterWorldUrl'));
         
+        const worldId = extractWorldId(cleanUrl);
+        if (!worldId) return alert("Geçersiz dünya URL'si.");
+
         const now = Date.now();
         const lastFetch = storage.get("tw_last_fetch_time", 0);
         const cachedData = storage.get("tw_cache_data", null);
@@ -90,11 +99,29 @@ const MapAnalysis = () => {
         setStatus({ type: 'loading', msg: t('mapAnalysis.status.downloading') });
         
         try {
-            const [allyData, playerData, villageData] = await Promise.all([
-                fetchWithProxy(`${cleanUrl}/map/ally.txt`),
-                fetchWithProxy(`${cleanUrl}/map/player.txt`),
-                fetchWithProxy(`${cleanUrl}/map/village.txt`)
+            // YENİ RENDER API İSTEKLERİ
+            const API_BASE = `https://twcu-bot.onrender.com/api/${worldId}`;
+            
+            const [allyRes, playerRes, villageRes] = await Promise.all([
+                fetch(`${API_BASE}/Klanlar`),
+                fetch(`${API_BASE}/Oyuncular`),
+                fetch(`${API_BASE}/Koyler`)
             ]);
+
+            const allyJson = await allyRes.json();
+            const playerJson = await playerRes.json();
+            const villageJson = await villageRes.json();
+
+            // GÜVENLİK
+            if (allyJson.hata || playerJson.hata || villageJson.hata) {
+                throw new Error(allyJson.hata || playerJson.hata || villageJson.hata || "Veritabanında veri bulunamadı.");
+            }
+
+            // MÜKEMMEL HİLE: TiDB'den gelen JSON dizilerini tekrar eski TXT virgüllü formatına çeviriyoruz!
+            // Böylece processData fonksiyonu ve Manuel Text kutuları HİÇ bozulmadan çalışmaya devam eder.
+            const allyData = allyJson.veriler.map(row => row.join(",")).join("\n");
+            const playerData = playerJson.veriler.map(row => row.join(",")).join("\n");
+            const villageData = villageJson.veriler.map(row => row.join(",")).join("\n");
 
             setAllyTxt(allyData); setPlayerTxt(playerData); setVillageTxt(villageData);
             
@@ -105,7 +132,7 @@ const MapAnalysis = () => {
             setTimeout(() => processData(allyData, playerData, villageData, false), 100);
         } catch (error) {
             setStatus({ type: 'empty', msg: 'HATA' });
-            alert(t('mapAnalysis.fetchError').replace('{{error}}', error));
+            alert(t('mapAnalysis.fetchError').replace('{{error}}', error.message));
         }
     };
 

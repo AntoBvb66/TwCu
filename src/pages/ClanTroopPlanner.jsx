@@ -126,25 +126,29 @@ const ClanTroopPlanner = () => {
         if (!worldId) return;
 
         try {
-            // FastAPI'ye istek atıyoruz (Tüm klanları çekmek için limiti yüksek tutuyoruz)
-            const targetApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Klanlar?limit=5000`;
-            const rawText = await fetchWithProxy(targetApiUrl);
-            const data = JSON.parse(rawText);
+            const targetApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Klanlar`;
+            const res = await fetch(targetApiUrl);
+            const data = await res.json();
+
+            // GÜVENLİK: API'den hata döndüyse işlemi sessizce durdur
+            if (data.hata || !data.veriler) {
+                console.log("Klan listesi API hatası:", data.hata);
+                return;
+            }
 
             const clans = [];
             data.veriler.forEach(item => {
                 clans.push({
-                    id: item.id,
-                    name: item.isim,  // API'den gelen 'isim'
-                    tag: item.kisaltma // API'den gelen 'kisaltma'
+                    id: parseInt(item[0]),
+                    name: item[1], 
+                    tag: item[2]
                 });
             });
             setWorldClans(clans);
         } catch (err) {
-            console.log("Klan listesi API'den çekilemedi:", err);
+            console.log("Klan listesi çekilemedi:", err);
         }
     };
-
     useEffect(() => {
         if (worldUrl) loadWorldClans();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -187,56 +191,64 @@ const ClanTroopPlanner = () => {
             } catch (e) { console.log("Birim bilgisi veya sınır çekilemedi, manuel sınır kullanılacak."); }
 
            // 2. API'DEN KLANLARI ÇEK VE KLAN ID BUL
-            const clanApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Klanlar?limit=5000`;
-            const rawClanText = await fetchWithProxy(clanApiUrl);
-            const clanData = JSON.parse(rawClanText);
-            let clanId = null;
+            const clanApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Klanlar`;
+            const clanRes = await fetch(clanApiUrl);
+            const clanData = await clanRes.json();
+            
+            // GÜVENLİK: Eğer API "Böyle bir tablo yok" derse kullanıcıyı uyar
+            if (clanData.hata || !clanData.veriler) {
+                throw new Error(clanData.hata || "Veritabanında klan bilgisi bulunamadı.");
+            }
 
-            // Aranan klan etiketini hazırla
+            let clanId = null;
             const searchTag = clanTag.toLocaleLowerCase('tr-TR').trim();
 
             clanData.veriler.forEach(item => {
-                // ÖNEMLİ: Artik item[1] yok, item.kisaltma (veya API'den gelen isim) var.
-                // item doğrudan bir obje olduğu için tekrar JSON.parse(item[1]) yapmıyoruz.
-
-                const currentTag = (item.kisaltma || "").toLocaleLowerCase('tr-TR').trim();
-
+                const currentTag = (item[2] || "").toLocaleLowerCase('tr-TR').trim();
                 if (currentTag === searchTag) {
-                    clanId = parseInt(item.id);
+                    clanId = parseInt(item[0]);
                 }
             });
-            if (!clanId) return setStatus(t('clanTroop.step1.notFound'));
+
+            if (!clanId) return setStatus(t('clanOp.step1.status.notFound'));
 
             // 3. API'DEN OYUNCULARI ÇEK VE KLANA AİT OLANLARI FİLTRELE
-            const playerApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Oyuncular?limit=500000`;
-            const rawPlayerText = await fetchWithProxy(playerApiUrl);
-            const playerData = JSON.parse(rawPlayerText);
-            const allPlayers = {}; const cPlayers = {};
+            const playerApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Oyuncular`;
+            const playerRes = await fetch(playerApiUrl);
+            const playerData = await playerRes.json();
 
+            if (playerData.hata || !playerData.veriler) {
+                throw new Error("Veritabanında oyuncu bilgisi bulunamadı.");
+            }
+
+            const allPlayers = {}; const cPlayers = {};
             playerData.veriler.forEach(item => {
-                // API'den gelen sütun isimlerini buraya yaz (id, isim, klan_id gibi)
-                const pid = parseInt(item.id);
-                const pname = item.isim;
+                const pid = parseInt(item[0]);
+                const pname = item[1];
                 allPlayers[pid] = pname;
-                if (parseInt(item.klan_id) === clanId) cPlayers[pid] = pname;
+                if (parseInt(item[2]) === clanId) cPlayers[pid] = pname;
             });
             setClanPlayers(cPlayers);
 
             // 4. API'DEN KÖYLERİ ÇEK VE KLANA AİT KÖYLERİ AYIR
-            const villageApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Koyler?limit=500000`;
-            const rawVillageText = await fetchWithProxy(villageApiUrl);
-            const villageData = JSON.parse(rawVillageText);
-            const cVils = []; const allVils = [];
+            const villageApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Koyler`;
+            const villageRes = await fetch(villageApiUrl);
+            const villageData = await villageRes.json();
 
+            if (villageData.hata || !villageData.veriler) {
+                throw new Error("Veritabanında köy bilgisi bulunamadı.");
+            }
+
+            const cVils = []; const allVils = [];
             villageData.veriler.forEach(item => {
-                const pid = parseInt(item.oyuncu_id || item.pid); // API'deki sütun adın neyse o
+                const pid = parseInt(item[4]);
                 const vObj = {
-                    id: parseInt(item.id),
-                    coord: `${item.x}|${item.y}`, // Eğer sütun adları x ve y ise
-                    x: parseInt(item.x),
-                    y: parseInt(item.y),
+                    id: parseInt(item[0]),
+                    coord: `${item[2]}|${item[3]}`,
+                    x: parseInt(item[2]),
+                    y: parseInt(item[3]),
                     pid: pid,
-                    points: parseInt(item.puan || item.points),
+                    points: parseInt(item[5]) || 0,
                     playerName: pid === 0 ? "Barbar" : (allPlayers[pid] || t('clanOp.bbcode.unknown'))
                 };
                 allVils.push(vObj);
@@ -246,7 +258,7 @@ const ClanTroopPlanner = () => {
             setAllVillagesRaw(allVils);
             setClanVillages(cVils);
 
-            setStatus(t('clanTroop.step1.success', { clanId, villageCount: cVils.length }));
+            setStatus(t('clanOp.step1.status.success', { clanId, memberCount: Object.keys(cPlayers).length, villageCount: cVils.length }));
         } catch (err) {
             setStatus(t('clanTroop.step1.error', { msg: err.message }));
         }

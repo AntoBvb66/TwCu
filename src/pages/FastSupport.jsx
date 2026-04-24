@@ -83,17 +83,24 @@ const FastSupport = () => {
                 setUnitSpeedMultiplier(1);
             }
 
-            // YENİ: KLANLARI API'DEN ÇEKME
-            const targetApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Klanlar?limit=5000`;
-            const rawText = await fetchWithProxy(targetApiUrl);
-            const data = JSON.parse(rawText);
+            // YENİ: KLANLARI TiDB API'DEN ÇEKME
+            const targetApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Klanlar`;
+            const res = await fetch(targetApiUrl);
+            const data = await res.json();
+
+            // GÜVENLİK
+            if (data.hata || !data.veriler) {
+                console.log("Klan listesi API hatası:", data.hata);
+                return;
+            }
 
             const clans = [];
             data.veriler.forEach(item => {
+                // TiDB Formatı: id(0), name(1), tag(2)
                 clans.push({
-                    id: item.id,
-                    name: item.isim,
-                    tag: item.kisaltma
+                    id: parseInt(item[0]),
+                    name: item[1],
+                    tag: item[2]
                 });
             });
             setWorldClans(clans);
@@ -116,67 +123,78 @@ const FastSupport = () => {
 
         try {
             // 1. API'DEN KLANLARI ÇEK VE KLAN ID BUL
-            const clanApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Klanlar?limit=5000`;
-            const rawClanText = await fetchWithProxy(clanApiUrl);
-            const clanData = JSON.parse(rawClanText);
+            const clanApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Klanlar`;
+            const clanRes = await fetch(clanApiUrl);
+            const clanData = await clanRes.json();
+            
+            if (clanData.hata || !clanData.veriler) {
+                throw new Error(clanData.hata || "Veritabanında klan bilgisi bulunamadı.");
+            }
             
             let clanId = null;
             const searchTag = clanTag.toLocaleLowerCase('tr-TR').trim();
             
             clanData.veriler.forEach(item => {
-                const currentTag = (item.kisaltma || "").toLocaleLowerCase('tr-TR').trim();
+                const currentTag = (item[2] || "").toLocaleLowerCase('tr-TR').trim();
                 if (currentTag === searchTag) {
-                    clanId = parseInt(item.id);
+                    clanId = parseInt(item[0]);
                 }
             });
             if (!clanId) return setStatus(t('fastSupport.step1.status.notFound'));
 
             // 2. API'DEN OYUNCULARI ÇEK VE KLAN ÜYELERİNİ AYIKLA
-            const playerApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Oyuncular?limit=500000`;
-            const rawPlayerText = await fetchWithProxy(playerApiUrl);
-            const playerData = JSON.parse(rawPlayerText);
+            const playerApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Oyuncular`;
+            const playerRes = await fetch(playerApiUrl);
+            const playerData = await playerRes.json();
             
+            if (playerData.hata || !playerData.veriler) {
+                throw new Error("Veritabanında oyuncu bilgisi bulunamadı.");
+            }
+
             const cPlayers = {};
             playerData.veriler.forEach(item => {
-                // Not: API sütun adın klan_id veya benzeri olabilir
-                if (parseInt(item.klan_id || item.ally_id) === clanId) {
-                    cPlayers[parseInt(item.id)] = item.isim;
+                // TiDB Oyuncu: id(0), name(1), ally_id(2)
+                if (parseInt(item[2]) === clanId) {
+                    cPlayers[parseInt(item[0])] = item[1];
                 }
             });
             setClanPlayers(cPlayers); 
-            // storage.set("fs_cache_players", cPlayers); // Kapattık (Hafıza şişmesin)
 
             fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=ops").catch(() => {});
             
             // 3. API'DEN KÖYLERİ ÇEK VE HARİTAYI OLUŞTUR
-            const villageApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Koyler?limit=500000`;
-            const rawVillageText = await fetchWithProxy(villageApiUrl);
-            const villageData = JSON.parse(rawVillageText);
+            const villageApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Koyler`;
+            const villageRes = await fetch(villageApiUrl);
+            const villageData = await villageRes.json();
+
+            if (villageData.hata || !villageData.veriler) {
+                throw new Error("Veritabanında köy bilgisi bulunamadı.");
+            }
 
             const cVils = [];
             const allVils = [];
 
             villageData.veriler.forEach(item => {
-                const vilId = parseInt(item.id);
-                const coord = `${item.x}|${item.y}`;
+                // TiDB Köy: id(0), name(1), x(2), y(3), player_id(4), points(5)
+                const vilId = parseInt(item[0]);
+                const coord = `${item[2]}|${item[3]}`;
                 
                 allVils.push({ id: vilId, coord: coord });
 
-                const pid = parseInt(item.oyuncu_id || item.pid || item.player_id);
+                const pid = parseInt(item[4]);
                 if (cPlayers[pid]) {
                     cVils.push({
                         id: vilId, 
                         coord: coord, 
-                        x: parseInt(item.x), 
-                        y: parseInt(item.y),
+                        x: parseInt(item[2]), 
+                        y: parseInt(item[3]),
                         pid: pid, 
-                        points: parseInt(item.puan || item.points), 
+                        points: parseInt(item[5]) || 0, 
                         playerName: cPlayers[pid]
                     });
                 }
             });
             
-            // YENİ: State'leri güncelle, storage.set işlemlerini kaldır!
             setAllVillages(allVils); 
             setClanVillages(cVils); 
             
