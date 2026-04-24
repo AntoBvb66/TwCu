@@ -14,6 +14,7 @@ from datetime import datetime
 from threading import Thread
 from flask import Flask
 from flask import jsonify
+from flask_cors import CORS
 
 # MySQL / TiDB bağlantısı için SQLAlchemy kullanıyoruz
 from sqlalchemy import create_engine, text
@@ -170,6 +171,7 @@ def run_schedule():
 # 5. FLASK WEB SUNUCUSU
 # ==========================================
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def home():

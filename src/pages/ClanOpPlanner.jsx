@@ -123,17 +123,18 @@ const ClanOpPlanner = () => {
         if (!worldId) return;
 
         try {
-            // FastAPI'ye istek atıyoruz (Tüm klanları çekmek için limiti yüksek tutuyoruz)
-            const targetApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Klanlar?limit=5000`;
-            const rawText = await fetchWithProxy(targetApiUrl);
-            const data = JSON.parse(rawText);
+            // YENİ RENDER API ADRESİMİZ
+            const targetApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Klanlar`;
+            const res = await fetch(targetApiUrl);
+            const data = await res.json();
 
             const clans = [];
+            // TiDB Formatı: id(0), name(1), tag(2)
             data.veriler.forEach(item => {
                 clans.push({
-                    id: item.id,
-                    name: item.isim,  // API'den gelen 'isim'
-                    tag: item.kisaltma // API'den gelen 'kisaltma'
+                    id: parseInt(item[0]),
+                    name: item[1], 
+                    tag: item[2]
                 });
             });
             setWorldClans(clans);
@@ -173,57 +174,54 @@ const ClanOpPlanner = () => {
             }
 
             // 2. API'DEN KLANLARI ÇEK VE KLAN ID BUL
-            const clanApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Klanlar?limit=5000`;
-            const rawClanText = await fetchWithProxy(clanApiUrl);
-            const clanData = JSON.parse(rawClanText);
+            const clanApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Klanlar`;
+            const clanRes = await fetch(clanApiUrl);
+            const clanData = await clanRes.json();
             let clanId = null;
 
-            // Aranan klan etiketini hazırla
             const searchTag = clanTag.toLocaleLowerCase('tr-TR').trim();
 
             clanData.veriler.forEach(item => {
-                // ÖNEMLİ: Artik item[1] yok, item.kisaltma (veya API'den gelen isim) var.
-                // item doğrudan bir obje olduğu için tekrar JSON.parse(item[1]) yapmıyoruz.
-
-                const currentTag = (item.kisaltma || "").toLocaleLowerCase('tr-TR').trim();
-
+                // TiDB Klan: id(0), name(1), tag(2)
+                const currentTag = (item[2] || "").toLocaleLowerCase('tr-TR').trim();
                 if (currentTag === searchTag) {
-                    clanId = parseInt(item.id);
+                    clanId = parseInt(item[0]);
                 }
             });
 
             if (!clanId) return setStatus(t('clanOp.step1.status.notFound'));
 
             // 3. API'DEN OYUNCULARI ÇEK VE KLANA AİT OLANLARI FİLTRELE
-            const playerApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Oyuncular?limit=500000`;
-            const rawPlayerText = await fetchWithProxy(playerApiUrl);
-            const playerData = JSON.parse(rawPlayerText);
+            const playerApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Oyuncular`;
+            const playerRes = await fetch(playerApiUrl);
+            const playerData = await playerRes.json();
             const allPlayers = {}; const cPlayers = {};
 
             playerData.veriler.forEach(item => {
-                // API'den gelen sütun isimlerini buraya yaz (id, isim, klan_id gibi)
-                const pid = parseInt(item.id);
-                const pname = item.isim;
+                // TiDB Oyuncu: id(0), name(1), ally_id(2)
+                const pid = parseInt(item[0]);
+                const pname = item[1];
                 allPlayers[pid] = pname;
-                if (parseInt(item.klan_id) === clanId) cPlayers[pid] = pname;
+                if (parseInt(item[2]) === clanId) cPlayers[pid] = pname;
             });
             setClanPlayers(cPlayers);
 
             // 4. API'DEN KÖYLERİ ÇEK VE KLANA AİT KÖYLERİ AYIR
-            const villageApiUrl = `http://152.70.16.201.sslip.io/api/${worldId}/Koyler?limit=500000`;
-            const rawVillageText = await fetchWithProxy(villageApiUrl);
-            const villageData = JSON.parse(rawVillageText);
+            const villageApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Koyler`;
+            const villageRes = await fetch(villageApiUrl);
+            const villageData = await villageRes.json();
             const cVils = []; const allVils = [];
 
             villageData.veriler.forEach(item => {
-                const pid = parseInt(item.oyuncu_id || item.pid); // API'deki sütun adın neyse o
+                // TiDB Köy: id(0), name(1), x(2), y(3), player_id(4), points(5)
+                const pid = parseInt(item[4]);
                 const vObj = {
-                    id: parseInt(item.id),
-                    coord: `${item.x}|${item.y}`, // Eğer sütun adları x ve y ise
-                    x: parseInt(item.x),
-                    y: parseInt(item.y),
+                    id: parseInt(item[0]),
+                    coord: `${item[2]}|${item[3]}`,
+                    x: parseInt(item[2]),
+                    y: parseInt(item[3]),
                     pid: pid,
-                    points: parseInt(item.puan || item.points),
+                    points: parseInt(item[5]) || 0,
                     playerName: pid === 0 ? "Barbar" : (allPlayers[pid] || t('clanOp.bbcode.unknown'))
                 };
                 allVils.push(vObj);

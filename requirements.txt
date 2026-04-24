@@ -9,3 +9,4 @@ certifi
 pymysql
 cryptography
 SQLAlchemy
+flask-cors
