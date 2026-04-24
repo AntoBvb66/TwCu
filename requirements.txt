@@ -4,7 +4,8 @@ requests
 firebase-admin
 Pillow
 aiohttp
-pymongo
-dnspython
 schedule
 certifi
+pymysql
+cryptography
+SQLAlchemy

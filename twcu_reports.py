@@ -7,15 +7,17 @@ import time
 import schedule
 import gc
 import firebase_admin
+import certifi
 from firebase_admin import credentials, firestore
 from datetime import datetime
-from pymongo import MongoClient, UpdateOne
-from flask import Flask
 from threading import Thread
-import certifi  # BURASI EKLENDİ
+from flask import Flask
+
+# MySQL / TiDB bağlantısı için SQLAlchemy kullanıyoruz
+from sqlalchemy import create_engine, text
 
 # ==========================================
-# 1. BAĞLANTILAR (FIREBASE & MONGODB)
+# 1. BAĞLANTILAR (FIREBASE & TiDB)
 # ==========================================
 # Firebase
 try:
@@ -28,21 +30,25 @@ try:
 except Exception as e:
     print(f"❌ Firebase bağlantı hatası: {e}")
 
-# MongoDB Atlas
-mongo_db = None
+# TiDB (MySQL Serverless)
+db_engine = None
 try:
-    MONGO_URI = os.environ.get("MONGO_URI")
-    if not MONGO_URI:
-        print("❌ HATA: MONGO_URI tanımlanmamış!")
+    TIDB_URI = os.environ.get("TIDB_URI")
+    if not TIDB_URI:
+        print("❌ HATA: TIDB_URI tanımlanmamış! Render panelini kontrol et.")
     else:
         # SSL sertifikası hatasını önlemek için certifi ekliyoruz
-        mongo_client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
-        # Bağlantı testi
-        mongo_client.admin.command('ping')
-        mongo_db = mongo_client["TwCu_Data"]
-        print("✅ MongoDB Atlas bağlantısı başarılı!")
+        ssl_args = {'ssl': {'ca': certifi.where()}}
+        
+        # Bağlantı motorunu oluşturuyoruz (pool_recycle bağlantıların kopmasını engeller)
+        db_engine = create_engine(
+            TIDB_URI, 
+            pool_recycle=3600, 
+            connect_args=ssl_args
+        )
+        print("✅ TiDB (MySQL) Bağlantı Motoru Hazır!")
 except Exception as e:
-    print(f"❌ MongoDB bağlantı hatası: {e}")
+    print(f"❌ TiDB bağlantı hatası: {e}")
 
 # ==========================================
 # 2. AYARLAR
@@ -70,52 +76,61 @@ def get_active_worlds():
         return []
 
 # ==========================================
-# 3. VERİ ÇEKME GÖREVİ
+# 3. VERİ ÇEKME VE TiDB'YE YAZMA GÖREVİ
 # ==========================================
 def ana_arsiv_gorevi():
-    if mongo_db is None:
-        print("⚠️ MongoDB bağlantısı yok, arşivleme yapılamaz!")
+    if db_engine is None:
+        print("⚠️ TiDB bağlantısı yok, arşivleme yapılamaz!")
         return
 
-    print(f"\n[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] SAATLİK ARŞİVLEME BAŞLADI...")
+    print(f"\n[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] SAATLİK ARŞİVLEME BAŞLADI (TiDB)...")
     dunyalar = get_active_worlds()
 
-    for d in dunyalar:
-        d_id = d.get('id')
-        d_url = d.get('url')
-        if not d_id or not d_url: continue
+    # Veritabanı bağlantısını aç
+    with db_engine.connect() as conn:
+        for d in dunyalar:
+            d_id = d.get('id')
+            d_url = d.get('url')
+            if not d_id or not d_url: continue
 
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] {d_id} verisi çekiliyor...")
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] {d_id} verisi çekiliyor...")
 
-        for endpoint, tablo_adi in DOSYALAR.items():
-            koleksiyon_adi = f"{d_id}_{tablo_adi}"
-            koleksiyon = mongo_db[koleksiyon_adi]
+            for endpoint, tablo_adi in DOSYALAR.items():
+                gercek_tablo = f"{d_id}_{tablo_adi}"
+                golge_tablo = f"{gercek_tablo}_temp"
 
-            tam_url = f"{d_url.rstrip('/')}{endpoint}"
-            try:
-                r = requests.get(tam_url, stream=True, timeout=20)
-                if r.status_code == 200:
-                    with gzip.open(io.BytesIO(r.content), 'rt', encoding='utf-8') as f:
-                        toplu_islemler = []
-                        for satir in f:
-                            if satir.strip():
-                                parcalar = satir.strip().split(',')
-                                # MongoDB _id alanını parcalar[0] (id) olarak set ediyoruz
-                                islem = UpdateOne(
-                                    {'_id': str(parcalar[0])}, 
-                                    {'$set': {'veri': json.dumps(parcalar)}}, 
-                                    upsert=True
-                                )
-                                toplu_islemler.append(islem)
+                tam_url = f"{d_url.rstrip('/')}{endpoint}"
+                try:
+                    r = requests.get(tam_url, stream=True, timeout=20)
+                    if r.status_code == 200:
+                        # 1. Eski Gölge tablo kaldıysa sil ve sıfırdan oluştur
+                        conn.execute(text(f"DROP TABLE IF EXISTS {golge_tablo}"))
+                        conn.execute(text(f"CREATE TABLE {golge_tablo} (id VARCHAR(30) PRIMARY KEY, veri JSON)"))
+                        
+                        toplu_veri = []
+                        with gzip.open(io.BytesIO(r.content), 'rt', encoding='utf-8') as f:
+                            for satir in f:
+                                if satir.strip():
+                                    parcalar = satir.strip().split(',')
+                                    # Parametrik sorgu için sözlük yapısı
+                                    toplu_veri.append({"id": str(parcalar[0]), "veri": json.dumps(parcalar)})
 
-                        if toplu_islemler:
-                            koleksiyon.bulk_write(toplu_islemler, ordered=False)
-                            print(f"    {tablo_adi} Atlas'a kaydedildi: {len(toplu_islemler)} kayıt.")
-            except Exception as e:
-                print(f"    HATA ({tablo_adi}): {e}")
+                        if toplu_veri:
+                            # 2. Verileri Gölge Tabloya yaz
+                            sorgu = text(f"INSERT INTO {golge_tablo} (id, veri) VALUES (:id, :veri)")
+                            conn.execute(sorgu, toplu_veri)
+                            
+                            # 3. Gerçek tabloyu uçur ve Gölge tabloyu Gerçek yap (Sıfır Kesinti)
+                            conn.execute(text(f"DROP TABLE IF EXISTS {gercek_tablo}"))
+                            conn.execute(text(f"RENAME TABLE {golge_tablo} TO {gercek_tablo}"))
+                            
+                            conn.commit() # İşlemleri kaydet
+                            print(f"    {tablo_adi} TiDB'ye kaydedildi: {len(toplu_veri)} kayıt (Eskiler temizlendi).")
+                except Exception as e:
+                    print(f"    HATA ({tablo_adi}): {e}")
 
-        time.sleep(2)
-        gc.collect()
+            time.sleep(2)
+            gc.collect()
 
     print(f"[{datetime.now().strftime('%H:%M:%S')}] SAATLİK GÜNCELLEME TAMAMLANDI.")
 
@@ -140,7 +155,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "🚀 TwCu Engine is Running!"
+    return "🚀 TwCu Engine (TiDB Serverless) is Running!"
 
 # Botu arka planda başlat
 print("✅ Arka plan botu tetikleniyor...")
