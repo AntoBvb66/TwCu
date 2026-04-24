@@ -13,6 +13,7 @@ from firebase_admin import credentials, firestore
 from datetime import datetime
 from threading import Thread
 from flask import Flask
+from flask import jsonify
 
 # MySQL / TiDB bağlantısı için SQLAlchemy kullanıyoruz
 from sqlalchemy import create_engine, text
@@ -174,6 +175,34 @@ app = Flask(__name__)
 def home():
     return "🚀 TwCu Engine (TiDB Serverless) is Running!"
 
+@app.route('/api/<world_id>/<tablo_adi>', methods=['GET'])
+def get_world_data(world_id, tablo_adi):
+    # Sadece izin verdiğimiz tablolar sorgulanabilsin (Güvenlik)
+    izin_verilenler = ["Koyler", "Oyuncular", "Klanlar"]
+    if tablo_adi not in izin_verilenler:
+        return jsonify({"hata": "Geçersiz tablo adı"}), 400
+
+    gercek_tablo = f"{world_id}_{tablo_adi}"
+    veriler = []
+
+    if db_engine is None:
+        return jsonify({"hata": "Veritabanı bağlantısı yok"}), 500
+
+    try:
+        with db_engine.connect() as conn:
+            # Tablodaki tüm JSON verilerini çek
+            sorgu = text(f"SELECT veri FROM {gercek_tablo}")
+            sonuclar = conn.execute(sorgu).fetchall()
+
+            for satir in sonuclar:
+                # TiDB'den gelen JSON stringini tekrar diziye (array) çevirip listeye ekle
+                veriler.append(json.loads(satir[0]))
+
+        return jsonify({"veriler": veriler})
+    
+    except Exception as e:
+        return jsonify({"hata": str(e)}), 500
+    
 # Botu arka planda başlat
 print("✅ Arka plan botu tetikleniyor...")
 bot_thread = Thread(target=run_schedule, daemon=True)

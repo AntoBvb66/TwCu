@@ -176,10 +176,14 @@ const MapGenerator = () => {
 
         setStatus(t('mapGenerator.status.fetching'));
         try {
+            // 1. DEĞİŞİM: Artık Oracle IP'si yerine kendi Render API'ne istek atıyorsun
+            // Eğer Render adresin farklıysa "twcu-bot.onrender.com" kısmını kendine göre düzenle
+            const API_BASE = "https://twcu-bot.onrender.com/api";
+            
             const [allyRes, playerRes, villageRes] = await Promise.all([
-                fetchWithProxy(`http://152.70.16.201.sslip.io/api/${worldId}/Klanlar?limit=5000`),
-                fetchWithProxy(`http://152.70.16.201.sslip.io/api/${worldId}/Oyuncular?limit=500000`),
-                fetchWithProxy(`http://152.70.16.201.sslip.io/api/${worldId}/Koyler?limit=500000`)
+                fetchWithProxy(`${API_BASE}/${worldId}/Klanlar`),
+                fetchWithProxy(`${API_BASE}/${worldId}/Oyuncular`),
+                fetchWithProxy(`${API_BASE}/${worldId}/Koyler`)
             ]);
 
             const allyData = JSON.parse(allyRes);
@@ -188,12 +192,22 @@ const MapGenerator = () => {
 
             const tribesDb = {};
             const parsedTribes = [];
+            
+            // 2. DEĞİŞİM: TiDB verileri Array olarak döner. İndekslerle eşleştiriyoruz.
+            // Klan Formatı: id(0), name(1), tag(2), members(3), villages(4), points(5), all_points(6), rank(7)
             allyData.veriler.forEach(item => {
-                const id = parseInt(item.id);
-                const points = parseInt(item.toplam_puan || item.puan || item.points) || 0;
-                const rank = parseInt(item.sira) || 9999;
-
-                const tribeObj = { id, name: item.isim, tag: item.kisaltma, points, rank };
+                const id = parseInt(item[0]);
+                const points = parseInt(item[5]) || 0;
+                const rank = parseInt(item[7]) || 9999;
+                
+                // TiDB'den gelen isimler URL formatında olabilir, decodeTW ile temizliyoruz
+                const tribeObj = { 
+                    id, 
+                    name: decodeTW(item[1]), 
+                    tag: decodeTW(item[2]), 
+                    points, 
+                    rank 
+                };
                 tribesDb[id] = tribeObj;
                 parsedTribes.push({ ...tribeObj, checked: false });
             });
@@ -202,13 +216,15 @@ const MapGenerator = () => {
 
             const playersDb = {};
             const parsedPlayers = [];
+            
+            // Oyuncu Formatı: id(0), name(1), ally_id(2), villages(3), points(4), rank(5)
             playerData.veriler.forEach(item => {
-                const id = parseInt(item.id);
-                const points = parseInt(item.puan || item.points) || 0;
+                const id = parseInt(item[0]);
+                const points = parseInt(item[4]) || 0;
                 const playerObj = {
                     id,
-                    name: item.isim,
-                    tribeId: parseInt(item.klan_id || item.ally_id),
+                    name: decodeTW(item[1]),
+                    tribeId: parseInt(item[2]),
                     points
                 };
                 playersDb[id] = playerObj;
@@ -220,16 +236,18 @@ const MapGenerator = () => {
 
             const villages = [];
             const tribeCenters = {};
+            
+            // Köy Formatı: id(0), name(1), x(2), y(3), player_id(4), points(5), rank(6)
             villageData.veriler.forEach(item => {
-                const x = parseInt(item.x);
-                const y = parseInt(item.y);
-                const pid = parseInt(item.oyuncu_id || item.pid || item.player_id);
+                const x = parseInt(item[2]);
+                const y = parseInt(item[3]);
+                const pid = parseInt(item[4]);
 
                 villages.push({ x, y, pid });
 
                 if (pid !== 0 && playersDb[pid]) {
                     const tid = playersDb[pid].tribeId;
-                    if (tid) {
+                    if (tid !== 0) { // Klanı olmayanları merkeze katma
                         if (!tribeCenters[tid]) tribeCenters[tid] = { sumX: 0, sumY: 0, count: 0 };
                         tribeCenters[tid].sumX += x;
                         tribeCenters[tid].sumY += y;
