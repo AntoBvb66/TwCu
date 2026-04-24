@@ -86,7 +86,6 @@ def ana_arsiv_gorevi():
     print(f"\n[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] SAATLİK ARŞİVLEME BAŞLADI (TiDB)...")
     dunyalar = get_active_worlds()
 
-    # Veritabanı bağlantısını aç
     with db_engine.connect() as conn:
         for d in dunyalar:
             d_id = d.get('id')
@@ -103,37 +102,46 @@ def ana_arsiv_gorevi():
                 try:
                     r = requests.get(tam_url, stream=True, timeout=20)
                     if r.status_code == 200:
-                        # 1. Eski Gölge tablo kaldıysa sil ve sıfırdan oluştur
                         conn.execute(text(f"DROP TABLE IF EXISTS {golge_tablo}"))
                         conn.execute(text(f"CREATE TABLE {golge_tablo} (id VARCHAR(30) PRIMARY KEY, veri JSON)"))
                         
                         toplu_veri = []
+                        CHUNK_SIZE = 2500 # RAM şişmesin diye her 2500 satırda bir göndereceğiz
+                        kaydedilen_toplam = 0
+
                         with gzip.open(io.BytesIO(r.content), 'rt', encoding='utf-8') as f:
                             for satir in f:
                                 if satir.strip():
                                     parcalar = satir.strip().split(',')
-                                    # Parametrik sorgu için sözlük yapısı
                                     toplu_veri.append({"id": str(parcalar[0]), "veri": json.dumps(parcalar)})
+                                    
+                                    # Liste 2500'e ulaştığında TiDB'ye gönder ve listeyi boşalt!
+                                    if len(toplu_veri) >= CHUNK_SIZE:
+                                        sorgu = text(f"INSERT INTO {golge_tablo} (id, veri) VALUES (:id, :veri)")
+                                        conn.execute(sorgu, toplu_veri)
+                                        kaydedilen_toplam += len(toplu_veri)
+                                        toplu_veri.clear() # RAM'i rahatlat
 
+                        # Döngü bitince içeride kalan son küsurat verileri gönder
                         if toplu_veri:
-                            # 2. Verileri Gölge Tabloya yaz
                             sorgu = text(f"INSERT INTO {golge_tablo} (id, veri) VALUES (:id, :veri)")
                             conn.execute(sorgu, toplu_veri)
-                            
-                            # 3. Gerçek tabloyu uçur ve Gölge tabloyu Gerçek yap (Sıfır Kesinti)
+                            kaydedilen_toplam += len(toplu_veri)
+
+                        # Veriler başarıyla yazıldıysa tabloları değiştir (Sıfır Kesinti)
+                        if kaydedilen_toplam > 0:
                             conn.execute(text(f"DROP TABLE IF EXISTS {gercek_tablo}"))
                             conn.execute(text(f"RENAME TABLE {golge_tablo} TO {gercek_tablo}"))
+                            conn.commit()
+                            print(f"    {tablo_adi} TiDB'ye kaydedildi: {kaydedilen_toplam} kayıt.")
                             
-                            conn.commit() # İşlemleri kaydet
-                            print(f"    {tablo_adi} TiDB'ye kaydedildi: {len(toplu_veri)} kayıt (Eskiler temizlendi).")
                 except Exception as e:
                     print(f"    HATA ({tablo_adi}): {e}")
 
-            time.sleep(2)
-            gc.collect()
+            time.sleep(1) # Dünyalar arası ufak mola
+            gc.collect()  # Çöp toplayıcıyı zorla çalıştır
 
     print(f"[{datetime.now().strftime('%H:%M:%S')}] SAATLİK GÜNCELLEME TAMAMLANDI.")
-
 # ==========================================
 # 4. ÇALIŞTIRICI DÖNGÜ
 # ==========================================
