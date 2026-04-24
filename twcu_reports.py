@@ -3,6 +3,7 @@ import requests
 import gzip
 import json
 import io
+import urllib.parse
 import time
 import schedule
 import gc
@@ -113,7 +114,15 @@ def ana_arsiv_gorevi():
                             for satir in f:
                                 if satir.strip():
                                     parcalar = satir.strip().split(',')
-                                    toplu_veri.append({"id": str(parcalar[0]), "veri": json.dumps(parcalar)})
+                                    
+                                    # YENİ EKLENEN KISIM: Tüm diziyi temizle (Decode)
+                                    temiz_parcalar = [urllib.parse.unquote_plus(p) for p in parcalar]
+                                    
+                                    # Temizlenmiş veriyi JSON'a çevirip kaydet
+                                    toplu_veri.append({
+                                        "id": str(temiz_parcalar[0]), 
+                                        "veri": json.dumps(temiz_parcalar)
+                                    })
                                     
                                     # Liste 2500'e ulaştığında TiDB'ye gönder ve listeyi boşalt!
                                     if len(toplu_veri) >= CHUNK_SIZE:
