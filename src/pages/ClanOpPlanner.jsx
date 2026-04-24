@@ -123,23 +123,27 @@ const ClanOpPlanner = () => {
         if (!worldId) return;
 
         try {
-            // YENİ RENDER API ADRESİMİZ
             const targetApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Klanlar`;
             const res = await fetch(targetApiUrl);
             const data = await res.json();
 
+            // GÜVENLİK: API'den hata döndüyse işlemi sessizce durdur
+            if (data.hata || !data.veriler) {
+                console.log("Klan listesi API hatası:", data.hata);
+                return;
+            }
+
             const clans = [];
-            // TiDB Formatı: id(0), name(1), tag(2)
             data.veriler.forEach(item => {
                 clans.push({
                     id: parseInt(item[0]),
-                    name: item[1], 
+                    name: item[1],
                     tag: item[2]
                 });
             });
             setWorldClans(clans);
         } catch (err) {
-            console.log("Klan listesi API'den çekilemedi:", err);
+            console.log("Klan listesi çekilemedi:", err);
         }
     };
 
@@ -177,12 +181,16 @@ const ClanOpPlanner = () => {
             const clanApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Klanlar`;
             const clanRes = await fetch(clanApiUrl);
             const clanData = await clanRes.json();
-            let clanId = null;
 
+            // GÜVENLİK: Eğer API "Böyle bir tablo yok" derse kullanıcıyı uyar
+            if (clanData.hata || !clanData.veriler) {
+                throw new Error(clanData.hata || "Veritabanında klan bilgisi bulunamadı.");
+            }
+
+            let clanId = null;
             const searchTag = clanTag.toLocaleLowerCase('tr-TR').trim();
 
             clanData.veriler.forEach(item => {
-                // TiDB Klan: id(0), name(1), tag(2)
                 const currentTag = (item[2] || "").toLocaleLowerCase('tr-TR').trim();
                 if (currentTag === searchTag) {
                     clanId = parseInt(item[0]);
@@ -195,10 +203,13 @@ const ClanOpPlanner = () => {
             const playerApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Oyuncular`;
             const playerRes = await fetch(playerApiUrl);
             const playerData = await playerRes.json();
-            const allPlayers = {}; const cPlayers = {};
 
+            if (playerData.hata || !playerData.veriler) {
+                throw new Error("Veritabanında oyuncu bilgisi bulunamadı.");
+            }
+
+            const allPlayers = {}; const cPlayers = {};
             playerData.veriler.forEach(item => {
-                // TiDB Oyuncu: id(0), name(1), ally_id(2)
                 const pid = parseInt(item[0]);
                 const pname = item[1];
                 allPlayers[pid] = pname;
@@ -210,10 +221,13 @@ const ClanOpPlanner = () => {
             const villageApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Koyler`;
             const villageRes = await fetch(villageApiUrl);
             const villageData = await villageRes.json();
-            const cVils = []; const allVils = [];
 
+            if (villageData.hata || !villageData.veriler) {
+                throw new Error("Veritabanında köy bilgisi bulunamadı.");
+            }
+
+            const cVils = []; const allVils = [];
             villageData.veriler.forEach(item => {
-                // TiDB Köy: id(0), name(1), x(2), y(3), player_id(4), points(5)
                 const pid = parseInt(item[4]);
                 const vObj = {
                     id: parseInt(item[0]),
@@ -230,7 +244,6 @@ const ClanOpPlanner = () => {
 
             setAllVillagesRaw(allVils);
             setClanVillages(cVils);
-       
 
             setStatus(t('clanOp.step1.status.success', { clanId, memberCount: Object.keys(cPlayers).length, villageCount: cVils.length }));
         } catch (err) {
