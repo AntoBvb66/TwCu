@@ -6,7 +6,6 @@ Pillow
 aiohttp
 schedule
 certifi
-pymysql
 cryptography
-SQLAlchemy
+libsql-client
 flask-cors

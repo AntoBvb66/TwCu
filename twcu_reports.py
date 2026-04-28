@@ -22,6 +22,8 @@ from datetime import datetime, timedelta
 
 import firebase_admin
 from firebase_admin import credentials, firestore
+import libsql_client
+from libsql_client import Statement
 
 from sqlalchemy import create_engine, text
 from flask import Flask, jsonify
@@ -42,17 +44,18 @@ try:
 except Exception as e:
     print(f"❌ Firebase bağlantı hatası: {e}")
 
-db_engine = None
+turso_client = None
 try:
-    TIDB_URI = os.environ.get("TIDB_URI")
-    if not TIDB_URI:
-        print("❌ HATA: TIDB_URI tanımlanmamış!")
+    TURSO_URL = os.environ.get("TURSO_DATABASE_URL")
+    TURSO_TOKEN = os.environ.get("TURSO_AUTH_TOKEN")
+    if not TURSO_URL or not TURSO_TOKEN:
+        print("❌ HATA: TURSO_DATABASE_URL veya TURSO_AUTH_TOKEN tanımlanmamış!")
     else:
-        ssl_args = {'ssl': {'ca': certifi.where()}}
-        db_engine = create_engine(TIDB_URI, pool_recycle=3600, connect_args=ssl_args)
-        print("✅ TiDB (MySQL) bağlantı motoru hazır!")
+        # Render'daki asenkron olmayan Flask/Zamanlayıcı yapımız için sync client kullanıyoruz
+        turso_client = libsql_client.create_client_sync(url=TURSO_URL, auth_token=TURSO_TOKEN)
+        print("✅ Turso bağlantısı başarılı!")
 except Exception as e:
-    print(f"❌ TiDB bağlantı hatası: {e}")
+    print(f"❌ Turso bağlantı hatası: {e}")
 
 
 # ==========================================
@@ -90,8 +93,8 @@ def get_active_worlds():
 # 3. SAATLİK ARŞİVLEME GÖREVİ
 # ==========================================
 def ana_arsiv_gorevi():
-    if db_engine is None:
-        print("⚠ TiDB bağlantısı yok, arşivleme yapılamaz!")
+    if turso_client is None:
+        print("⚠ Turso bağlantısı yok, arşivleme yapılamaz!")
         return
 
     print(f"\n[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] SAATLİK ARŞİVLEME BAŞLADI...")
@@ -105,72 +108,71 @@ def ana_arsiv_gorevi():
 
         print(f"[{datetime.now().strftime('%H:%M:%S')}] {d_id} verisi çekiliyor...")
         try:
-            with db_engine.connect() as conn:
-                for endpoint, tablo_adi in DOSYALAR.items():
-                    gercek_tablo = f"{d_id}_{tablo_adi}"
-                    golge_tablo = f"{gercek_tablo}_temp"
-                    tam_url = f"{d_url.rstrip('/')}{endpoint}"
-                    try:
-                        r = requests.get(tam_url, stream=True, timeout=20)
-                        if r.status_code == 200:
-                            conn.execute(text(f"DROP TABLE IF EXISTS {golge_tablo}"))
-                            conn.execute(text(f"CREATE TABLE {golge_tablo} (id VARCHAR(30) PRIMARY KEY, veri JSON)"))
+            for endpoint, tablo_adi in DOSYALAR.items():
+                gercek_tablo = f"{d_id}_{tablo_adi}"
+                golge_tablo = f"{gercek_tablo}_temp"
+                tam_url = f"{d_url.rstrip('/')}{endpoint}"
+                
+                try:
+                    r = requests.get(tam_url, stream=True, timeout=20)
+                    if r.status_code == 200:
+                        turso_client.execute(f"DROP TABLE IF EXISTS {golge_tablo}")
+                        # SQLite'ta JSON yerine TEXT kullanıyoruz
+                        turso_client.execute(f"CREATE TABLE {golge_tablo} (id TEXT PRIMARY KEY, veri TEXT)")
 
-                            toplu_veri = []
-                            CHUNK_SIZE = 2500
-                            kaydedilen_toplam = 0
+                        toplu_veri = []
+                        CHUNK_SIZE = 1000 # HTTP üzerinden gideceği için limiti makul tutuyoruz
+                        kaydedilen_toplam = 0
 
-                            with gzip.open(io.BytesIO(r.content), 'rt', encoding='utf-8') as f:
-                                for satir in f:
-                                    if satir.strip():
-                                        parcalar = satir.strip().split(',')
-                                        temiz_parcalar = [urllib.parse.unquote_plus(p) for p in parcalar]
-                                        toplu_veri.append({
-                                            "id": str(temiz_parcalar[0]),
-                                            "veri": json.dumps(temiz_parcalar)
-                                        })
-                                        if len(toplu_veri) >= CHUNK_SIZE:
-                                            sorgu = text(f"INSERT INTO {golge_tablo} (id, veri) VALUES (:id, :veri)")
-                                            conn.execute(sorgu, toplu_veri)
-                                            kaydedilen_toplam += len(toplu_veri)
-                                            toplu_veri.clear()
+                        with gzip.open(io.BytesIO(r.content), 'rt', encoding='utf-8') as f:
+                            for satir in f:
+                                if satir.strip():
+                                    parcalar = satir.strip().split(',')
+                                    temiz_parcalar = [urllib.parse.unquote_plus(p) for p in parcalar]
+                                    toplu_veri.append({
+                                        "id": str(temiz_parcalar[0]),
+                                        "veri": json.dumps(temiz_parcalar)
+                                    })
+                                    
+                                    if len(toplu_veri) >= CHUNK_SIZE:
+                                        # Turso Batch Insert işlemi
+                                        stmts = [Statement(f"INSERT INTO {golge_tablo} (id, veri) VALUES (?, ?)", [item["id"], item["veri"]]) for item in toplu_veri]
+                                        turso_client.batch(stmts)
+                                        kaydedilen_toplam += len(toplu_veri)
+                                        toplu_veri.clear()
 
-                            if toplu_veri:
-                                sorgu = text(f"INSERT INTO {golge_tablo} (id, veri) VALUES (:id, :veri)")
-                                conn.execute(sorgu, toplu_veri)
-                                kaydedilen_toplam += len(toplu_veri)
+                        if toplu_veri:
+                            stmts = [Statement(f"INSERT INTO {golge_tablo} (id, veri) VALUES (?, ?)", [item["id"], item["veri"]]) for item in toplu_veri]
+                            turso_client.batch(stmts)
+                            kaydedilen_toplam += len(toplu_veri)
 
-                            if kaydedilen_toplam > 0:
-                                conn.execute(text(f"DROP TABLE IF EXISTS {gercek_tablo}"))
-                                conn.execute(text(f"RENAME TABLE {golge_tablo} TO {gercek_tablo}"))
-                                conn.commit()
-                                print(f"    {tablo_adi} TiDB'ye kaydedildi: {kaydedilen_toplam} kayıt.")
-                    except Exception as e:
-                        conn.rollback()
-                        print(f"    HATA ({tablo_adi}): {e}")
+                        if kaydedilen_toplam > 0:
+                            turso_client.execute(f"DROP TABLE IF EXISTS {gercek_tablo}")
+                            # MySQL RENAME sözdizimi yerine SQLite ALTER TABLE sözdizimi
+                            turso_client.execute(f"ALTER TABLE {golge_tablo} RENAME TO {gercek_tablo}")
+                            print(f"    {tablo_adi} Turso'ya kaydedildi: {kaydedilen_toplam} kayıt.")
+                except Exception as e:
+                    print(f"    HATA ({tablo_adi}): {e}")
         except Exception as genel_hata:
-            print(f"    {d_id} bağlantı hatası: {genel_hata}")
+            print(f"    {d_id} genel işleme hatası: {genel_hata}")
         time.sleep(1)
         gc.collect()
     print(f"[{datetime.now().strftime('%H:%M:%S')}] SAATLİK GÜNCELLEME TAMAMLANDI.")
 
-
 # ==========================================
 # 4. FETİH TARAMA — YARDIMCI FONKSİYONLAR
 # ==========================================
-def get_info_from_tidb(world_id, tablo_adi, doc_id):
-    if not db_engine or str(doc_id) == "0":
+def get_info_from_db(world_id, tablo_adi, doc_id):
+    if not turso_client or str(doc_id) == "0":
         return None
-    sorgu = text(f"SELECT veri FROM {world_id}_{tablo_adi} WHERE id = :doc_id")
     try:
-        with db_engine.connect() as conn:
-            sonuc = conn.execute(sorgu, {"doc_id": str(doc_id)}).fetchone()
-            if sonuc:
-                return json.loads(sonuc[0])
+        # SQLite sorgusunda parametreler ? ile belirtilir
+        rs = turso_client.execute(f"SELECT veri FROM {world_id}_{tablo_adi} WHERE id = ?", [str(doc_id)])
+        if len(rs.rows) > 0:
+            return json.loads(rs.rows[0][0])
     except Exception:
         pass
     return None
-
 
 def get_conquest_type(fetih, active_filters, p_name=None, t_tag=None):
     if fetih["eski_sahip"] == fetih["yeni_sahip"]:
@@ -403,11 +405,11 @@ def fetih_tarama_gorevi():
                 if ts > max_ts:
                     max_ts = ts
 
-                koy = get_info_from_tidb(world_id, "Koyler", v_id)
-                yeni_oy = get_info_from_tidb(world_id, "Oyuncular", new_o)
-                eski_oy = get_info_from_tidb(world_id, "Oyuncular", old_o)
-                y_klan = get_info_from_tidb(world_id, "Klanlar", yeni_oy[2]) if yeni_oy and yeni_oy[2] != "0" else None
-                e_klan = get_info_from_tidb(world_id, "Klanlar", eski_oy[2]) if eski_oy and eski_oy[2] != "0" else None
+                koy = get_info_from_db(world_id, "Koyler", v_id)
+                yeni_oy = get_info_from_db(world_id, "Oyuncular", new_o)
+                eski_oy = get_info_from_db(world_id, "Oyuncular", old_o)
+                y_klan = get_info_from_db(world_id, "Klanlar", yeni_oy[2]) if yeni_oy and yeni_oy[2] != "0" else None
+                e_klan = get_info_from_db(world_id, "Klanlar", eski_oy[2]) if eski_oy and eski_oy[2] != "0" else None
 
                 koordinat, kita, puan, koy_adi = "000|000", "K00", "0", "Bilinmeyen"
                 if koy:
@@ -525,19 +527,19 @@ def get_world_data(world_id, tablo_adi):
     gercek_tablo = f"{world_id}_{tablo_adi}"
     veriler = []
 
-    if db_engine is None:
+    if turso_client is None:
         return jsonify({"hata": "Veritabanı bağlantısı yok"}), 500
 
     try:
-        with db_engine.connect() as conn:
-            sorgu = text(f"SELECT veri FROM {gercek_tablo}")
-            sonuclar = conn.execute(sorgu).fetchall()
-            for satir in sonuclar:
-                veriler.append(json.loads(satir[0]))
+        rs = turso_client.execute(f"SELECT veri FROM {gercek_tablo}")
+        for satir in rs.rows:
+            veriler.append(json.loads(satir[0]))
         return jsonify({"veriler": veriler})
     except Exception as e:
+        # Tablo henüz oluşturulmamışsa (ilk kurulumda) hata vermesin boş dönsün
+        if "no such table" in str(e).lower():
+            return jsonify({"veriler": []})
         return jsonify({"hata": str(e)}), 500
-
 
 # Botu arka planda başlat
 print("✅ Arka plan botu tetikleniyor...")
