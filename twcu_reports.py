@@ -15,7 +15,6 @@ import asyncio
 import threading
 
 import requests
-import certifi
 import schedule
 import aiohttp
 from datetime import datetime, timedelta
@@ -25,7 +24,6 @@ from firebase_admin import credentials, firestore
 import libsql_client
 from libsql_client import Statement
 
-from sqlalchemy import create_engine, text
 from flask import Flask, jsonify
 from flask_cors import CORS
 from PIL import Image, ImageDraw, ImageFont
