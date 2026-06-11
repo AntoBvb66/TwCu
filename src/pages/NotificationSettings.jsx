@@ -354,104 +354,106 @@ const NotificationSettings = () => {
   };
 
  // === 1. HEDEF DOĞRULAMA VE EKLEME ===
-  const validateAndAddEntity = async (cIndex, config, type) => {
-    const targetName = config.newName?.trim();
-    if (!targetName) {
-      alert(t('alerts.enterPlayerOrTribe'));
+const validateAndAddEntity = async (cIndex, config, type) => {
+  const targetName = config.newName?.trim();
+  if (!targetName) {
+    alert(t('alerts.enterPlayerOrTribe'));
+    return;
+  }
+
+  const worldUrl = config.globalSettings?.worldUrl || "https://tr1.klanlar.org";
+  const cleanUrl = worldUrl.replace(/\/$/, "");
+  
+  const worldIdMatch = cleanUrl.match(/https?:\/\/([^.]+)\./);
+  const worldId = worldIdMatch ? worldIdMatch[1] : null;
+
+  if (!worldId) {
+    alert("Geçersiz dünya linki!");
+    return;
+  }
+
+  let allyData = [];
+  let playerData = [];
+
+  const now = Date.now();
+  const lastFetch = parseInt(storage.get("mg_last_fetch", "0"));
+  const lastUrl = storage.get("mg_last_url", "");
+  const cachedData = storage.get("mg_cache_data", null);
+
+  // MapGenerator ile aynı cache kontrolü ve API_BASE yapısı
+  if (cachedData && cachedData.ally && cachedData.player && lastUrl === cleanUrl && (now - lastFetch < 3600000)) {
+    allyData = cachedData.ally;
+    playerData = cachedData.player;
+  } else {
+    try {
+      // ÇALIŞAN NGROK API ADRESİNİZ
+      const API_BASE = "https://chamber-that-smock.ngrok-free.dev/api";
+
+      const [allyRes, playerRes] = await Promise.all([
+        fetch(`${API_BASE}/${worldId}/Klanlar`, { headers: { "ngrok-skip-browser-warning": "true" } }),
+        fetch(`${API_BASE}/${worldId}/Oyuncular`, { headers: { "ngrok-skip-browser-warning": "true" } })
+      ]);
+
+      if (!allyRes.ok || !playerRes.ok) {
+        throw new Error("Veritabanından yanıt alınamadı.");
+      }
+
+      const allyJson = await allyRes.json();
+      const playerJson = await playerRes.json();
+
+      if (!allyJson.veriler || !playerJson.veriler) {
+        throw new Error("Veri bulunamadı.");
+      }
+
+      allyData = allyJson.veriler || [];
+      playerData = playerJson.veriler || [];
+
+      storage.set("mg_cache_data", { ally: allyData, player: playerData });
+      storage.set("mg_last_fetch", now.toString());
+      storage.set("mg_last_url", cleanUrl);
+    } catch (error) {
+      alert(t('alerts.worldDataFetchError') || "Dünya verileri API'den çekilemedi!");
       return;
     }
+  }
 
-    const worldUrl = config.globalSettings?.worldUrl || "https://tr1.klanlar.org";
-    const cleanUrl = worldUrl.replace(/\/$/, "");
-    
-    // URL'den dünya ID'sini buluyoruz
-    const worldIdMatch = cleanUrl.match(/https?:\/\/([^.]+)\./);
-    const worldId = worldIdMatch ? worldIdMatch[1] : null;
+  // Akıllı Arama Mantığı
+  const searchTarget = cleanString(targetName);
+  let exists = false;
+  let officialName = "";
 
-    if (!worldId) {
-      alert("Geçersiz dünya linki!");
-      return;
-    }
+  const targetList = type === 'Player' ? playerData : allyData;
 
-    let allyData = [];
-    let playerData = [];
-
-    const now = Date.now();
-    const lastFetch = parseInt(storage.get("mg_last_fetch", "0"));
-    const lastUrl = storage.get("mg_last_url", "");
-    const cachedData = storage.get("mg_cache_data", null);
-
-    // Cache Kontrolü
-    if (cachedData && cachedData.ally && cachedData.player && lastUrl === cleanUrl && (now - lastFetch < 3600000)) {
-      allyData = cachedData.ally;
-      playerData = cachedData.player;
+  for (let item of targetList) {
+    if (type === 'Player') {
+      const rawName = item[1]; 
+      if (cleanString(rawName) === searchTarget) {
+        exists = true;
+        officialName = rawName;
+        break;
+      }
     } else {
-      try {
-        // YENİ RENDER API İSTEĞİ (Proxy'siz)
-        const allyRes = await fetch(`https://twcu-bot.onrender.com/api/${worldId}/Klanlar`);
-        const playerRes = await fetch(`https://twcu-bot.onrender.com/api/${worldId}/Oyuncular`);
-
-        const allyJson = await allyRes.json();
-        const playerJson = await playerRes.json();
-
-        // GÜVENLİK: Tablo Yoksa
-        if (allyJson.hata || playerJson.hata) {
-          throw new Error(allyJson.hata || playerJson.hata || "Veritabanında veri bulunamadı.");
-        }
-
-        allyData = allyJson.veriler || [];
-        playerData = playerJson.veriler || [];
-
-        storage.set("mg_cache_data", { ally: allyData, player: playerData });
-        storage.set("mg_last_fetch", now.toString());
-        storage.set("mg_last_url", cleanUrl);
-      } catch (error) {
-        alert(t('alerts.worldDataFetchError') || "Dünya verileri API'den çekilemedi!");
-        return;
+      const rawName = item[1];
+      const rawTag = item[2] || "";
+      if (cleanString(rawTag) === searchTarget || cleanString(rawName) === searchTarget) {
+        exists = true;
+        officialName = rawTag;
+        break;
       }
     }
+  }
 
-    // 4. Akıllı Arama Mantığı (TiDB Dizi Formatı)
-    const searchTarget = cleanString(targetName);
-    let exists = false;
-    let officialName = "";
+  if (!exists) {
+    alert(type === 'Player'
+      ? t('alerts.playerNotFound', { name: targetName })
+      : t('alerts.tribeNotFound', { name: targetName })
+    );
+    return;
+  }
 
-    const targetList = type === 'Player' ? playerData : allyData;
-
-    for (let item of targetList) {
-      if (type === 'Player') {
-        // Oyuncu: id(0), name(1), ally_id(2)
-        const rawName = item[1]; 
-        if (cleanString(rawName) === searchTarget) {
-          exists = true;
-          officialName = rawName;
-          break;
-        }
-      } else {
-        // Klan: id(0), name(1), tag(2)
-        const rawName = item[1];
-        const rawTag = item[2] || "";
-        if (cleanString(rawTag) === searchTarget || cleanString(rawName) === searchTarget) {
-          exists = true;
-          officialName = rawTag; // Klan eklendiğinde etiketini (Tag) kullanıyoruz
-          break;
-        }
-      }
-    }
-
-    // 5. Sonuç Ekranı
-    if (!exists) {
-      alert(type === 'Player'
-        ? t('alerts.playerNotFound', { name: targetName })
-        : t('alerts.tribeNotFound', { name: targetName })
-      );
-      return;
-    }
-
-    // 6. Her Şey Başarılıysa Orijinal İsimle Ekle
-    handleAddEntity(cIndex, type, officialName, config.newFilters, config.entities);
-    updateConfig(cIndex, 'newName', null, '');
-  };
+  handleAddEntity(cIndex, type, officialName, config.newFilters, config.entities);
+  updateConfig(cIndex, 'newName', null, '');
+};
 
   const handleToggleVisibility = (cIndex, entityId, currentEntities) => {
     const updatedEntities = currentEntities.map(ent =>
@@ -478,90 +480,92 @@ const NotificationSettings = () => {
   };
 
 
- // === 2. ÖZEL HARİTA İSTATİSTİKLERİ DOĞRULAYICI ===
-  const validateAndAddHighlight = async (cIndex, config) => {
-    const targetName = config.newHighlightName?.trim();
-    if (!targetName) {
-      alert(t('alerts.enterHighlightName'));
+// === 2. ÖZEL HARİTA İSTATİSTİKLERİ DOĞRULAYICI ===
+const validateAndAddHighlight = async (cIndex, config) => {
+  const targetName = config.newHighlightName?.trim();
+  if (!targetName) {
+    alert(t('alerts.enterHighlightName'));
+    return;
+  }
+
+  const type = config.newHighlightType;
+  const worldUrl = config.globalSettings?.worldUrl || "https://tr1.klanlar.org";
+  const cleanUrl = worldUrl.replace(/\/$/, "");
+  
+  const worldIdMatch = cleanUrl.match(/https?:\/\/([^.]+)\./);
+  const worldId = worldIdMatch ? worldIdMatch[1] : null;
+
+  if (!worldId) return;
+
+  let targetData = [];
+  const now = Date.now();
+  const lastFetch = parseInt(storage.get("mg_last_fetch", "0"));
+  const lastUrl = storage.get("mg_last_url", "");
+  const cachedData = storage.get("mg_cache_data", null);
+
+  if (cachedData && cachedData.ally && cachedData.player && lastUrl === cleanUrl && (now - lastFetch < 3600000)) {
+    targetData = type === 'Player' ? cachedData.player : cachedData.ally;
+  } else {
+    try {
+      // ÇALIŞAN NGROK API ADRESİNİZ
+      const API_BASE = "https://chamber-that-smock.ngrok-free.dev/api";
+
+      const [allyRes, playerRes] = await Promise.all([
+        fetch(`${API_BASE}/${worldId}/Klanlar`, { headers: { "ngrok-skip-browser-warning": "true" } }),
+        fetch(`${API_BASE}/${worldId}/Oyuncular`, { headers: { "ngrok-skip-browser-warning": "true" } })
+      ]);
+
+      const allyJson = await allyRes.json();
+      const playerJson = await playerRes.json();
+
+      if (!allyJson.veriler || !playerJson.veriler) {
+        throw new Error("Veri bulunamadı.");
+      }
+
+      const allyData = allyJson.veriler || [];
+      const playerData = playerJson.veriler || [];
+      targetData = type === 'Player' ? playerData : allyData;
+
+      storage.set("mg_cache_data", { ally: allyData, player: playerData });
+      storage.set("mg_last_fetch", now.toString());
+      storage.set("mg_last_url", cleanUrl);
+    } catch (error) {
+      alert(t('alerts.worldDataFetchErrorShort'));
       return;
     }
+  }
 
-    const type = config.newHighlightType; // 'Player' veya 'Tribe'
-    const worldUrl = config.globalSettings?.worldUrl || "https://tr1.klanlar.org";
-    const cleanUrl = worldUrl.replace(/\/$/, "");
-    
-    const worldIdMatch = cleanUrl.match(/https?:\/\/([^.]+)\./);
-    const worldId = worldIdMatch ? worldIdMatch[1] : null;
+  const searchTarget = cleanString(targetName);
+  let exists = false;
+  let officialName = "";
 
-    if (!worldId) return;
-
-    let targetData = [];
-    const now = Date.now();
-    const lastFetch = parseInt(storage.get("mg_last_fetch", "0"));
-    const lastUrl = storage.get("mg_last_url", "");
-    const cachedData = storage.get("mg_cache_data", null);
-
-    // Cache Kontrolü
-    if (cachedData && cachedData.ally && cachedData.player && lastUrl === cleanUrl && (now - lastFetch < 3600000)) {
-      targetData = type === 'Player' ? cachedData.player : cachedData.ally;
+  for (let item of targetData) {
+    if (type === 'Player') {
+      const rawName = item[1];
+      if (cleanString(rawName) === searchTarget) {
+        exists = true;
+        officialName = rawName;
+        break;
+      }
     } else {
-      try {
-        // YENİ RENDER API İSTEĞİ (Proxy'siz)
-        const allyRes = await fetch(`https://twcu-bot.onrender.com/api/${worldId}/Klanlar`);
-        const playerRes = await fetch(`https://twcu-bot.onrender.com/api/${worldId}/Oyuncular`);
-
-        const allyJson = await allyRes.json();
-        const playerJson = await playerRes.json();
-
-        if (allyJson.hata || playerJson.hata) {
-           throw new Error(allyJson.hata || playerJson.hata || "Veritabanında veri bulunamadı.");
-        }
-
-        const allyData = allyJson.veriler || [];
-        const playerData = playerJson.veriler || [];
-        targetData = type === 'Player' ? playerData : allyData;
-
-        storage.set("mg_cache_data", { ally: allyData, player: playerData });
-        storage.set("mg_last_fetch", now.toString());
-        storage.set("mg_last_url", cleanUrl);
-      } catch (error) {
-        alert(t('alerts.worldDataFetchErrorShort'));
-        return;
+      const rawName = item[1];
+      const rawTag = item[2] || "";
+      if (cleanString(rawTag) === searchTarget || cleanString(rawName) === searchTarget) {
+        exists = true;
+        officialName = rawTag;
+        break;
       }
     }
+  }
 
-    // --- Arama Mantığı (TiDB Dizi Formatı) ---
-    const searchTarget = cleanString(targetName);
-    let exists = false;
-    let officialName = "";
-
-    for (let item of targetData) {
-      if (type === 'Player') {
-        const rawName = item[1];
-        if (cleanString(rawName) === searchTarget) {
-          exists = true;
-          officialName = rawName;
-          break;
-        }
-      } else {
-        const rawName = item[1];
-        const rawTag = item[2] || "";
-        if (cleanString(rawTag) === searchTarget || cleanString(rawName) === searchTarget) {
-          exists = true;
-          officialName = rawTag;
-          break;
-        }
-      }
-    }
-
-    if (!exists) {
-      alert(type === 'Player'
-        ? t('alerts.playerNotFound', { name: targetName })
-        : t('alerts.tribeNotFound', { name: targetName })
-      );
-      return;
-    }
-  };
+  if (!exists) {
+    alert(type === 'Player'
+      ? t('alerts.playerNotFound', { name: targetName })
+      : t('alerts.tribeNotFound', { name: targetName })
+    );
+    return;
+  }
+};
 
 
   const handleAddContinent = (cIndex, config) => {
