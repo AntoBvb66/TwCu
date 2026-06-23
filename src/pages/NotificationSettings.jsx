@@ -21,6 +21,15 @@ const IconLosses = () => (
   </svg>
 );
 
+const IconTribeLog = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  </svg>
+);
+
 const IconBarbarian = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M12 2L5 5v6c0 5 3.5 8 7 11 3.5-3 7-6 7-11V5L12 2z" />
@@ -136,7 +145,8 @@ const initialFilters = {
   losses: false,
   barbarian: false,
   selfConquer: false,
-  internal: false
+  internal: false,
+  tribeLog: false
 };
 
 const languages = [
@@ -191,7 +201,8 @@ const NotificationSettings = () => {
     losses: { label: t('filters.losses'), icon: <IconLosses /> },
     barbarian: { label: t('filters.barbarian'), icon: <IconBarbarian /> },
     selfConquer: { label: t('filters.selfConquer'), icon: <IconSelf /> },
-    internal: { label: t('filters.internal'), icon: <IconInternal /> }
+    internal: { label: t('filters.internal'), icon: <IconInternal /> },
+    tribeLog: { label: t('filters.tribeLog') || "Klan Giriş/Çıkış", icon: <IconTribeLog /> }
   };
 
   // --- STATE YÖNETİMİ ---

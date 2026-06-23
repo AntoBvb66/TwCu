@@ -994,7 +994,8 @@
       "losses": "Köy Kayıpları (Losses)",
       "barbarian": "Barbar Köyü Fetihleri (Barbarian)",
       "selfConquer": "Kendi Köyünü Fetih (SelfConquer)",
-      "internal": "Klan İçi Fetihler (Internal)"
+      "internal": "Klan İçi Fetihler (Internal)",
+      "tribeLog": "Klan Giriş-Çıkış Takibi"
     },
     "settings": {
       "basicSettings": "Temel Ayarlar",
