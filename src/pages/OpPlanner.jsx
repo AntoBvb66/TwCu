@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { useTranslation } from 'react-i18next'; // YENİ: Çeviri motoru eklendi
+import { useTranslation } from 'react-i18next';
 import storage from '../utils/storage';
 import './OpPlanner.css';
 
@@ -30,8 +30,11 @@ const formatCustomStr = (dateObj) => {
     return dateObj.toLocaleString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute:'2-digit', second:'2-digit' });
 };
 
+// GÜNCEL API ADRESİ
+const API_BASE = "https://chamber-that-smock.ngrok-free.dev/api";
+
 const OpPlanner = () => {
-    const { t } = useTranslation(); // YENİ: Çeviri kancası
+    const { t } = useTranslation();
 
     // === TEMEL AYAR STATE'LERİ ===
     const [worldUrl, setWorldUrl] = useState(() => storage.get("op_world_url", "https://ptc1.tribalwars.com.pt/"));
@@ -143,9 +146,9 @@ const OpPlanner = () => {
         if (!worldId || worldId.length < 3) return;
 
         try {
-            // YENİ: Oracle yerine doğrudan Render API'mize istek atıyoruz
-            const targetApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Oyuncular`;
-            const res = await fetch(targetApiUrl);
+            // YENİ: Güncel API adresi ve ngrok uyarısını atlama header'ı eklendi
+            const targetApiUrl = `${API_BASE}/${worldId}/Oyuncular`;
+            const res = await fetch(targetApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
             const data = await res.json();
 
             // GÜVENLİK: Eğer veri yoksa veya hata dönerse durdur
@@ -205,8 +208,8 @@ const OpPlanner = () => {
             }
 
             // 2. API'DEN OYUNCULARI ÇEK VE OYUNCU ID'Yİ BUL
-            const playerApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Oyuncular`;
-            const playerRes = await fetch(playerApiUrl);
+            const playerApiUrl = `${API_BASE}/${worldId}/Oyuncular`;
+            const playerRes = await fetch(playerApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
             const playerData = await playerRes.json();
             
             // GÜVENLİK
@@ -228,8 +231,8 @@ const OpPlanner = () => {
             if (!playerId) return setStatus(t('opPlanner.status.playerNotFound'));
 
             // 3. API'DEN KÖYLERİ ÇEK VE OYUNCUYA AİT OLANLARI FİLTRELE
-            const villageApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Koyler`;
-            const villageRes = await fetch(villageApiUrl);
+            const villageApiUrl = `${API_BASE}/${worldId}/Koyler`;
+            const villageRes = await fetch(villageApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
             const villageData = await villageRes.json();
             
             // GÜVENLİK
