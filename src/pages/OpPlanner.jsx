@@ -30,7 +30,16 @@ const formatCustomStr = (dateObj) => {
     return dateObj.toLocaleString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute:'2-digit', second:'2-digit' });
 };
 
-// GÜNCEL API ADRESİ
+// URL Encoded isimleri çözmek için yardımcı fonksiyon
+const decodeTWName = (str) => {
+    if (!str) return "";
+    try {
+        return decodeURIComponent(str.replace(/\+/g, '%20'));
+    } catch(e) {
+        return str.replace(/\+/g, ' ');
+    }
+};
+
 const API_BASE = "https://chamber-that-smock.ngrok-free.dev/api";
 
 const OpPlanner = () => {
@@ -45,6 +54,12 @@ const OpPlanner = () => {
     const [worldPlayers, setWorldPlayers] = useState([]);
     const [clickCount, setClickCount] = useState(0); 
 
+    // === GİZLE / GÖSTER STATE'LERİ ===
+    const [isStep1Open, setIsStep1Open] = useState(true);
+    const [isStep2Open, setIsStep2Open] = useState(true);
+    const [isStep3Open, setIsStep3Open] = useState(true);
+    const [isStep4Open, setIsStep4Open] = useState(true);
+
     // === ZAMAN VE MOD STATE'LERİ ===
     const [timeMode, setTimeMode] = useState('arrival'); 
     const [selectedDateTime, setSelectedDateTime] = useState(() => formatToLocalISO(new Date()));
@@ -55,16 +70,13 @@ const OpPlanner = () => {
     const [unitSpeeds, setUnitSpeeds] = useState(() => storage.get("op_cache_speeds", defaultUnitSpeeds));
     const [parsedTargets, setParsedTargets] = useState([]); 
     
-    // Her kaynak köy için seçilen BİRİMLER (Dizi)
     const [sourceTypes, setSourceTypes] = useState({}); 
     const [planList, setPlanList] = useState([]); 
 
-    // Eşleştirme Motoru
     const [selectedSourceCoord, setSelectedSourceCoord] = useState("");
     const [selectedTargetCoord, setSelectedTargetCoord] = useState("");
     const [selectedUnitMode, setSelectedUnitMode] = useState("");
 
-    // BBCode Sütun Ayarları
     const [bbCols, setBbCols] = useState({
         no: true, source: true, target: true, departure: true, arrival: true, unit: true, distance: false, travelTime: false, attackLink: true
     });
@@ -78,7 +90,6 @@ const OpPlanner = () => {
         storage.set("op_max_snob", maxSnobDist);
     }, [worldUrl, playerName, targetInput, maxSnobDist]);
 
-    // Dinamik Çevrilmiş Sütun İsimleri
     const colDisplayNames = {
         no: t('opPlanner.columns.no'), source: t('opPlanner.columns.source'), 
         target: t('opPlanner.columns.target'), departure: t('opPlanner.columns.departure'), 
@@ -87,7 +98,6 @@ const OpPlanner = () => {
         attackLink: t('opPlanner.columns.attackLink')
     };
 
-    // === YENİ: DİNAMİK FİLTRELEME (KULLANILANLARI GİZLE) ===
     const getUnusedUnits = (coord) => {
         const types = sourceTypes[coord] || [];
         return types.filter(typeStr => !planList.some(p => p.sourceCoord === coord && p.unitType === typeStr));
@@ -95,7 +105,7 @@ const OpPlanner = () => {
 
     const availableSourceVillages = useMemo(() => {
         return playerVillages.filter(v => getUnusedUnits(v.coord).length > 0);
-    }, [playerVillages, sourceTypes, planList]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [playerVillages, sourceTypes, planList]); 
 
     useEffect(() => {
         if (availableSourceVillages.length > 0) {
@@ -120,7 +130,7 @@ const OpPlanner = () => {
         } else {
             setSelectedUnitMode("");
         }
-    }, [selectedSourceCoord, sourceTypes, planList, selectedUnitMode]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [selectedSourceCoord, sourceTypes, planList, selectedUnitMode]); 
 
     useEffect(() => {
         if (parsedTargets.length > 0 && (!selectedTargetCoord || !parsedTargets.find(tObj => tObj.coord === selectedTargetCoord))) {
@@ -129,13 +139,12 @@ const OpPlanner = () => {
     }, [parsedTargets, selectedTargetCoord]);
 
 
-    // === 1. VERİ ÇEKME ===
-    // === 1. ZEKİ VERİ MADENCİLİĞİ ===
     const fetchWithProxy = async (targetUrl) => {
         const res = await fetch(`https://tw-proxy.halimtttt10.workers.dev/?url=${encodeURIComponent(targetUrl)}`);
         if (!res.ok) throw new Error("Veri çekilemedi.");
         return await res.text();
     };
+
     const extractWorldId = (url) => {
         const match = url.match(/https?:\/\/([^.]+)\./);
         return match ? match[1] : null;
@@ -146,22 +155,17 @@ const OpPlanner = () => {
         if (!worldId || worldId.length < 3) return;
 
         try {
-            // YENİ: Güncel API adresi ve ngrok uyarısını atlama header'ı eklendi
             const targetApiUrl = `${API_BASE}/${worldId}/Oyuncular`;
             const res = await fetch(targetApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
             const data = await res.json();
 
-            // GÜVENLİK: Eğer veri yoksa veya hata dönerse durdur
-            if (data.hata || !data.veriler) {
-                console.log("Oyuncu listesi API hatası:", data.hata);
-                return;
-            }
+            if (data.hata || !data.veriler) return;
 
             const players = [];
             data.veriler.forEach(item => {
                 players.push({
-                    id: parseInt(item[0]), // TiDB Formatı: id(0)
-                    name: item[1]          // TiDB Formatı: name(1)
+                    id: parseInt(item[0]), 
+                    name: item[1]          
                 });
             });
             setWorldPlayers(players);
@@ -169,7 +173,6 @@ const OpPlanner = () => {
             console.log("Oyuncu listesi API'den çekilemedi:", err);
         }
     };
-
 
     useEffect(() => {
         if (worldUrl) loadWorldPlayers();
@@ -185,7 +188,6 @@ const OpPlanner = () => {
 
         const newClickCount = clickCount + 1;
         setClickCount(newClickCount);
-
         const now = Date.now();
         const lastFetch = storage.get("op_last_fetch", 0);
         
@@ -196,7 +198,6 @@ const OpPlanner = () => {
 
         setStatus(t('opPlanner.status.fetching'));
         try {
-            // 1. CONFIG ÇEKİMİ (Proxy üzerinden kalmaya devam ediyor)
             try {
                 const configData = await fetchWithProxy(`${cleanUrl}/interface.php?func=get_config`);
                 const distMatch = configData.match(/<max_dist>(\d+)<\/max_dist>/);
@@ -207,12 +208,10 @@ const OpPlanner = () => {
                 console.log("Konfigürasyon çekilemedi, mevcut sınır kullanılacak.");
             }
 
-            // 2. API'DEN OYUNCULARI ÇEK VE OYUNCU ID'Yİ BUL
             const playerApiUrl = `${API_BASE}/${worldId}/Oyuncular`;
             const playerRes = await fetch(playerApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
             const playerData = await playerRes.json();
             
-            // GÜVENLİK
             if (playerData.hata || !playerData.veriler) {
                 throw new Error(playerData.hata || "Veritabanında oyuncu bilgisi bulunamadı.");
             }
@@ -221,7 +220,6 @@ const OpPlanner = () => {
             const searchName = playerName.toLocaleLowerCase('tr-TR').trim();
 
             playerData.veriler.forEach(item => {
-                // TiDB Oyuncu: id(0), name(1), ally_id(2)
                 const currentName = (item[1] || "").toLocaleLowerCase('tr-TR').trim();
                 if (currentName === searchName) {
                     playerId = parseInt(item[0]);
@@ -230,12 +228,10 @@ const OpPlanner = () => {
 
             if (!playerId) return setStatus(t('opPlanner.status.playerNotFound'));
 
-            // 3. API'DEN KÖYLERİ ÇEK VE OYUNCUYA AİT OLANLARI FİLTRELE
             const villageApiUrl = `${API_BASE}/${worldId}/Koyler`;
             const villageRes = await fetch(villageApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
             const villageData = await villageRes.json();
             
-            // GÜVENLİK
             if (villageData.hata || !villageData.veriler) {
                 throw new Error(villageData.hata || "Veritabanında köy bilgisi bulunamadı.");
             }
@@ -243,10 +239,10 @@ const OpPlanner = () => {
             const allVils = []; const pVils = [];
 
             villageData.veriler.forEach(item => {
-                // TiDB Köy: id(0), name(1), x(2), y(3), player_id(4), points(5)
                 const pid = parseInt(item[4]); 
                 const vilObj = { 
                     id: parseInt(item[0]), 
+                    name: decodeTWName(item[1]), // Köy adı şifreden çözülüyor
                     x: parseInt(item[2]), 
                     y: parseInt(item[3]), 
                     pid: pid, 
@@ -256,7 +252,6 @@ const OpPlanner = () => {
                 if (vilObj.pid === playerId) pVils.push(vilObj);
             });
             
-            // 4. BİRİM HIZLARINI ÇEK (Proxy üzerinden devam ediyor)
             try {
                 const unitXml = await fetchWithProxy(`${cleanUrl}/interface.php?func=get_unit_info`);
                 const parser = new DOMParser();
@@ -272,22 +267,22 @@ const OpPlanner = () => {
                 }
             } catch (e) { console.log("Birim hızları varsayılan kalacak."); }
 
-            // 5. YENİ VERİLERİ STATE'E AT VE HAFIZAYI ŞİŞİRMEDEN KAYDET
             setVillages(allVils); 
             setPlayerVillages(pVils);
-            
-            // DİKKAT: QuotaExceededError almamak için büyük dizileri LocalStorage'a kaydetmiyoruz!
-            // storage.set("op_cache_allVils", allVils); 
-            // storage.set("op_cache_pVils", pVils);
-            
             storage.set("op_last_fetch", now);
             setClickCount(0); 
             
             const initTypes = {};
             pVils.forEach(v => initTypes[v.coord] = ['ram']); 
             setSourceTypes(initTypes);
-
             setStatus(t('opPlanner.status.success').replace('{{count}}', pVils.length));
+
+            // Veri çekilince 1'i kapat, 2, 3 ve 4'ü aç
+            setIsStep1Open(false);
+            setIsStep2Open(true);
+            setIsStep3Open(true);
+            setIsStep4Open(true);
+
         } catch (error) {
             setStatus(t('opPlanner.status.error').replace('{{msg}}', error.message));
         }
@@ -304,6 +299,20 @@ const OpPlanner = () => {
         });
     };
 
+    // HIZLI SEÇİM FONKSİYONU
+    const applyQuickRole = (coord, role) => {
+        let unitsToSelect = [];
+        if (role === 'kami') unitsToSelect = ['ram'];
+        // Casus yerine şahmerdan (ram) hızı!
+        if (role === 'fake') unitsToSelect = ['ram']; 
+        if (role === 'mis') unitsToSelect = ['snob'];
+
+        setSourceTypes(prev => ({
+            ...prev,
+            [coord]: unitsToSelect
+        }));
+    };
+
     const clearQueue = () => {
         if(window.confirm(t('opPlanner.alerts.confirmClearQueue'))) {
             setPlanList([]);
@@ -317,10 +326,10 @@ const OpPlanner = () => {
             setTargetInput("");
             setSourceTypes({});
             setPlayerVillages([]);
+            setIsStep1Open(true);
         }
     };
 
-    // === 2. HEDEF KÖYLERİ AYIKLAMA ===
     useEffect(() => {
         const coords = [];
         const regex = /(\d{3})\|(\d{3})/g;
@@ -338,7 +347,6 @@ const OpPlanner = () => {
         setParsedTargets(coords);
     }, [targetInput, villages]);
 
-    // === 3. MATEMATİK VE SÜRE HESAPLAMALARI ===
     const calculateDistance = (x1, y1, x2, y2) => Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
 
     const formatTravelTime = (minutes) => {
@@ -348,7 +356,6 @@ const OpPlanner = () => {
         return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
     };
 
-    // === 4. PLANA EKLEME İŞLEMİ ===
     const addToPlan = () => {
         if (!selectedSourceCoord || !selectedTargetCoord || !selectedUnitMode) return alert(t('opPlanner.alerts.selectMatch'));
 
@@ -400,7 +407,6 @@ const OpPlanner = () => {
         return [...planList].sort((a, b) => a.departureTimestamp - b.departureTimestamp);
     }, [planList]);
 
-    // === 5. CANLI BBCODE ŞABLON MOTORU ===
     const generatedBBCode = useMemo(() => {
         if(sortedPlanList.length === 0) return "";
 
@@ -444,7 +450,6 @@ const OpPlanner = () => {
         return bbcode;
     }, [sortedPlanList, bbCols, worldUrl, t]);
 
-    // === 6. HARİTA ÇİZİMİ ===
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
@@ -534,58 +539,108 @@ const OpPlanner = () => {
             <div className="op-main-grid">
                 {/* SOL PANEL */}
                 <div>
+                    {/* ADIM 1 */}
                     <div className="op-box">
-                        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                            <h3>{t('opPlanner.step1.title')}</h3>
-                            <button className="op-btn-danger" onClick={clearAllData} style={{height: '24px'}}>{t('opPlanner.step1.clearData')}</button>
+                        <div 
+                            style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer'}} 
+                            onClick={() => setIsStep1Open(!isStep1Open)}
+                        >
+                            <h3>{t('opPlanner.step1.title')} {isStep1Open ? '▲' : '▼'}</h3>
+                            <button className="op-btn-danger" onClick={(e) => { e.stopPropagation(); clearAllData(); }} style={{height: '24px'}}>
+                                {t('opPlanner.step1.clearData')}
+                            </button>
                         </div>
-                        <div style={{display: 'flex', gap: '10px', marginBottom: '10px', flexWrap: 'wrap'}}>
-                            <div style={{flex: 1, minWidth: '150px'}}>
-                                <label style={{fontSize: '12px'}}>{t('opPlanner.step1.worldUrl')}</label>
-                                <input 
-                                    type="text" 
-                                    className="op-input" 
-                                    value={worldUrl} 
-                                    onChange={e => setWorldUrl(e.target.value)} 
-                                    onBlur={loadWorldPlayers} 
-                                />
+                        
+                        {isStep1Open && (
+                            <div style={{ marginTop: '15px' }}>
+                                <div style={{display: 'flex', gap: '10px', marginBottom: '10px', flexWrap: 'wrap'}}>
+                                    <div style={{flex: 1, minWidth: '150px'}}>
+                                        <label style={{fontSize: '12px'}}>{t('opPlanner.step1.worldUrl')}</label>
+                                        <input 
+                                            type="text" 
+                                            className="op-input" 
+                                            value={worldUrl} 
+                                            onChange={e => setWorldUrl(e.target.value)} 
+                                            onBlur={loadWorldPlayers} 
+                                        />
+                                    </div>
+                                    <div style={{flex: 1, minWidth: '150px'}}>
+                                        <label style={{fontSize: '12px'}}>{t('opPlanner.step1.playerName')}</label>
+                                        <input 
+                                            type="text" 
+                                            className="op-input" 
+                                            value={playerName} 
+                                            onChange={e => setPlayerName(e.target.value)} 
+                                            list="world-players-list"
+                                        />
+                                        <datalist id="world-players-list">
+                                            {worldPlayers.map(p => (
+                                                <option key={p.id} value={p.name} />
+                                            ))}
+                                        </datalist>
+                                    </div>
+                                </div>
+                                <button className="op-btn" style={{width: '100%'}} onClick={handleFetchData}>{t('opPlanner.step1.fetchBtn')}</button>
+                                <div style={{fontSize: '12px', marginTop: '5px', color: '#aaa'}}>{status}</div>
                             </div>
-                            <div style={{flex: 1, minWidth: '150px'}}>
-                                <label style={{fontSize: '12px'}}>{t('opPlanner.step1.playerName')}</label>
-                                <input 
-                                    type="text" 
-                                    className="op-input" 
-                                    value={playerName} 
-                                    onChange={e => setPlayerName(e.target.value)} 
-                                    list="world-players-list"
-                                />
-                                <datalist id="world-players-list">
-                                    {worldPlayers.map(p => (
-                                        <option key={p.id} value={p.name} />
-                                    ))}
-                                </datalist>
-                            </div>
-                        </div>
-                        <button className="op-btn" style={{width: '100%'}} onClick={handleFetchData}>{t('opPlanner.step1.fetchBtn')}</button>
-                        <div style={{fontSize: '12px', marginTop: '5px', color: '#aaa'}}>{status}</div>
+                        )}
                     </div>
 
+                    {/* ADIM 2 - MOBİL UYUMLU KART TASARIMI */}
                     {playerVillages.length > 0 && (
-                        <div className="op-box" style={{maxHeight: '400px', overflowY: 'auto'}}>
-                            <h3>{t('opPlanner.step2.title').replace('{{count}}', playerVillages.length)}</h3>
-                            <div style={{fontSize: '11px', color: '#aaa', marginBottom: '10px'}}>{t('opPlanner.step2.info')}</div>
-                            <table className="op-table" style={{background: '#fff'}}>
-                                <thead>
-                                    <tr><th>{t('opPlanner.step2.village')}</th><th>{t('opPlanner.step2.unitSelection')}</th></tr>
-                                </thead>
-                                <tbody>
-                                    {playerVillages.map(v => {
-                                        const activeUnits = sourceTypes[v.coord] || [];
-                                        return (
-                                            <tr key={v.coord}>
-                                                <td style={{fontWeight: 'bold', fontSize: '14px'}}>{v.coord}</td>
-                                                <td>
-                                                    <div className="op-unit-list">
+                        <div className="op-box" style={{maxHeight: isStep2Open ? '500px' : 'auto', overflowY: isStep2Open ? 'auto' : 'visible'}}>
+                            <div 
+                                style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer'}}
+                                onClick={() => setIsStep2Open(!isStep2Open)}
+                            >
+                                <h3>{t('opPlanner.step2.title').replace('{{count}}', playerVillages.length)} {isStep2Open ? '▲' : '▼'}</h3>
+                            </div>
+                            
+                            {isStep2Open && (
+                                <div style={{ marginTop: '10px' }}>
+                                    <div style={{fontSize: '11px', color: '#aaa', marginBottom: '15px'}}>{t('opPlanner.step2.info')}</div>
+                                    
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                        {playerVillages.map(v => {
+                                            const activeUnits = sourceTypes[v.coord] || [];
+                                            return (
+                                                <div key={v.coord} style={{
+                                                    background: '#1e1e1e', 
+                                                    border: '1px solid #333', 
+                                                    borderRadius: '8px', 
+                                                    padding: '12px',
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    gap: '10px'
+                                                }}>
+                                                    {/* Köy Bilgisi */}
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #333', paddingBottom: '8px' }}>
+                                                        <div>
+                                                            <span style={{ fontWeight: 'bold', fontSize: '16px', color: '#fff' }}>{v.coord}</span>
+                                                            <div style={{ fontSize: '12px', color: '#aaa', marginTop: '2px' }}>{v.name}</div>
+                                                        </div>
+                                                        {/* Hızlı Seçim Butonları */}
+                                                        <div style={{ display: 'flex', gap: '5px' }}>
+                                                            <button 
+                                                                onClick={() => applyQuickRole(v.coord, 'kami')}
+                                                                style={{ background: '#b8860b', border: 'none', color: '#fff', padding: '4px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '11px', fontWeight: 'bold' }}>
+                                                                KAMI
+                                                            </button>
+                                                            <button 
+                                                                onClick={() => applyQuickRole(v.coord, 'fake')}
+                                                                style={{ background: '#555', border: 'none', color: '#fff', padding: '4px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '11px', fontWeight: 'bold' }}>
+                                                                FAKE
+                                                            </button>
+                                                            <button 
+                                                                onClick={() => applyQuickRole(v.coord, 'mis')}
+                                                                style={{ background: '#8b0000', border: 'none', color: '#fff', padding: '4px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '11px', fontWeight: 'bold' }}>
+                                                                MİS
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    {/* Birim İkonları */}
+                                                    <div className="op-unit-list" style={{ justifyContent: 'center' }}>
                                                         {Object.entries(unitIcons).map(([uKey, url]) => (
                                                             <img 
                                                                 key={uKey} src={url} alt={uKey} 
@@ -595,152 +650,170 @@ const OpPlanner = () => {
                                                             />
                                                         ))}
                                                     </div>
-                                                </td>
-                                            </tr>
-                                        )
-                                    })}
-                                </tbody>
-                            </table>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     )}
                 </div>
 
                 {/* SAĞ PANEL */}
                 <div>
+                    {/* ADIM 3 */}
                     <div className="op-box">
-                        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '5px'}}>
-                            <h3>{t('opPlanner.step3.title')}</h3>
-                            <div style={{fontSize: '12px'}}>
-                                {t('opPlanner.step3.maxSnobDist')} <input type="number" style={{width:'60px', padding:'2px', marginLeft: '5px'}} value={maxSnobDist} onChange={e => setMaxSnobDist(parseInt(e.target.value)||100)} />
+                        <div 
+                            style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', flexWrap: 'wrap', gap: '5px'}}
+                            onClick={() => setIsStep3Open(!isStep3Open)}
+                        >
+                            <h3>{t('opPlanner.step3.title')} {isStep3Open ? '▲' : '▼'}</h3>
+                            <div style={{fontSize: '12px'}} onClick={(e) => e.stopPropagation()}>
+                                {t('opPlanner.step3.maxSnobDist')} 
+                                <input type="number" style={{width:'60px', padding:'2px', marginLeft: '5px'}} value={maxSnobDist} onChange={e => setMaxSnobDist(parseInt(e.target.value)||100)} />
                             </div>
                         </div>
-                        <textarea 
-                            className="op-textarea" rows="3" 
-                            placeholder={t('opPlanner.step3.placeholder')}
-                            value={targetInput} onChange={e => setTargetInput(e.target.value)}
-                        />
-                        <div style={{fontSize: '12px', color: '#5cb85c', fontWeight: 'bold'}}>
-                            {t('opPlanner.step3.detectedTargets').replace('{{count}}', parsedTargets.length)}
-                        </div>
-                    </div>
-
-                    <div className="op-map-container">
-                        <canvas ref={canvasRef} style={{display: 'block'}}></canvas>
-                        <div style={{position: 'absolute', bottom: '10px', left: '10px', background: 'rgba(0,0,0,0.7)', padding: '5px', borderRadius: '4px', fontSize: '10px', display: 'flex', flexWrap: 'wrap', gap: '5px'}}>
-                            <span style={{color: '#d9534f'}}>● {t('opPlanner.step3.mapLegend.target')}</span> | 
-                            <span style={{color: '#5bc0de'}}>● {t('opPlanner.step3.mapLegend.spearLight')}</span> | 
-                            <span style={{color: '#b8860b'}}>● {t('opPlanner.step3.mapLegend.ramKami')}</span> | 
-                            <span style={{color: '#8b0000'}}>● {t('opPlanner.step3.mapLegend.snob')}</span> | 
-                            <span style={{color: '#555'}}>● {t('opPlanner.step3.mapLegend.spy')}</span>
-                        </div>
+                        
+                        {isStep3Open && (
+                            <div style={{ marginTop: '10px' }}>
+                                <textarea 
+                                    className="op-textarea" rows="3" 
+                                    placeholder={t('opPlanner.step3.placeholder')}
+                                    value={targetInput} onChange={e => setTargetInput(e.target.value)}
+                                />
+                                <div style={{fontSize: '12px', color: '#5cb85c', fontWeight: 'bold', marginBottom: '10px'}}>
+                                    {t('opPlanner.step3.detectedTargets').replace('{{count}}', parsedTargets.length)}
+                                </div>
+                                <div className="op-map-container">
+                                    <canvas ref={canvasRef} style={{display: 'block'}}></canvas>
+                                    <div style={{position: 'absolute', bottom: '10px', left: '10px', background: 'rgba(0,0,0,0.7)', padding: '5px', borderRadius: '4px', fontSize: '10px', display: 'flex', flexWrap: 'wrap', gap: '5px'}}>
+                                        <span style={{color: '#d9534f'}}>● {t('opPlanner.step3.mapLegend.target')}</span> | 
+                                        <span style={{color: '#5bc0de'}}>● {t('opPlanner.step3.mapLegend.spearLight')}</span> | 
+                                        <span style={{color: '#b8860b'}}>● {t('opPlanner.step3.mapLegend.ramKami')}</span> | 
+                                        <span style={{color: '#8b0000'}}>● {t('opPlanner.step3.mapLegend.snob')}</span> | 
+                                        <span style={{color: '#555'}}>● {t('opPlanner.step3.mapLegend.spy')}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
 
-            {/* ALT PANEL */}
+            {/* ALT PANEL (ADIM 4) */}
             {playerVillages.length > 0 && parsedTargets.length > 0 && (
                 <div className="op-box">
-                    <h3>{t('opPlanner.step4.title')}</h3>
+                    <div 
+                        style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer'}}
+                        onClick={() => setIsStep4Open(!isStep4Open)}
+                    >
+                        <h3>{t('opPlanner.step4.title')} {isStep4Open ? '▲' : '▼'}</h3>
+                    </div>
                     
-                    <div className="op-time-mode">
-                        <label><input type="radio" name="tmode" checked={timeMode === 'arrival'} onChange={() => setTimeMode('arrival')} /> {t('opPlanner.step4.modeArrival')}</label>
-                        <label><input type="radio" name="tmode" checked={timeMode === 'departure'} onChange={() => setTimeMode('departure')} /> {t('opPlanner.step4.modeDeparture')}</label>
-                        <span style={{marginLeft: 'auto', color: '#814c11'}}>{t('opPlanner.step4.dateTime')}</span>
-                        <input 
-                            type="datetime-local" step="1" 
-                            className="op-datetime-input"
-                            style={{ colorScheme: 'dark', cursor: 'pointer' }} /* YENİ: Karanlık mod takvim ikonu */
-                            value={selectedDateTime}
-                            onChange={e => setSelectedDateTime(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="op-flex-wrap">
-                        <div>
-                            <label style={{fontWeight: 'bold', fontSize: '12px', display: 'block'}}>{t('opPlanner.step4.sourceVillage')}</label>
-                            <select value={selectedSourceCoord} onChange={e => setSelectedSourceCoord(e.target.value)} style={{padding: '6px', width: '100%', fontWeight: 'bold'}}>
-                                {availableSourceVillages.length === 0 ? <option value="">{t('opPlanner.step4.allSourcesUsed')}</option> :
-                                  availableSourceVillages.map(v => <option key={v.coord} value={v.coord}>{v.coord}</option>)
-                                }
-                            </select>
-                        </div>
-                        <div>
-                            <label style={{fontWeight: 'bold', fontSize: '12px', display: 'block'}}>{t('opPlanner.step4.unitToSend')}</label>
-                            <select value={selectedUnitMode} onChange={e => setSelectedUnitMode(e.target.value)} style={{padding: '6px', width: '100%', fontWeight: 'bold'}}>
-                                {!selectedSourceCoord ? <option value="">{t('opPlanner.step4.selectSourceFirst')}</option> : 
-                                 getUnusedUnits(selectedSourceCoord).length === 0 ? <option value="">{t('opPlanner.step4.noUnitsLeft')}</option> :
-                                 getUnusedUnits(selectedSourceCoord).map(u => <option key={u} value={u}>{t(`opPlanner.units.${u}`, {defaultValue: u})}</option>)
-                                }
-                            </select>
-                        </div>
-                        <div>
-                            <label style={{fontWeight: 'bold', fontSize: '12px', display: 'block'}}>{t('opPlanner.step4.target')}</label>
-                            <select value={selectedTargetCoord} onChange={e => setSelectedTargetCoord(e.target.value)} style={{padding: '6px', width: '100%', fontWeight: 'bold'}}>
-                                {parsedTargets.map(v => <option key={v.coord} value={v.coord}>{v.coord}</option>)}
-                            </select>
-                        </div>
-                        <div style={{flex: 'none', width: '100%'}}>
-                            <button className="op-btn" style={{background: '#5cb85c', color: 'white', width: '100%', padding: '10px'}} onClick={addToPlan}>{t('opPlanner.step4.calcAndAddBtn')}</button>
-                        </div>
-                    </div>
-
-                    {sortedPlanList.length > 0 && (
-                        <div className="op-table-wrapper" style={{marginTop: '25px'}}>
-                            <div style={{padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#2a1908', flexWrap: 'wrap', gap: '10px'}}>
-                                <h4 style={{margin: 0, color: '#fff'}}>{t('opPlanner.queue.title').replace('{{count}}', sortedPlanList.length)}</h4>
-                                <button className="op-btn-danger" onClick={clearQueue} style={{padding: '6px 12px'}}>{t('opPlanner.queue.clearQueue')}</button>
+                    {isStep4Open && (
+                        <div style={{ marginTop: '15px' }}>
+                            <div className="op-time-mode">
+                                <label><input type="radio" name="tmode" checked={timeMode === 'arrival'} onChange={() => setTimeMode('arrival')} /> {t('opPlanner.step4.modeArrival')}</label>
+                                <label><input type="radio" name="tmode" checked={timeMode === 'departure'} onChange={() => setTimeMode('departure')} /> {t('opPlanner.step4.modeDeparture')}</label>
+                                <span style={{marginLeft: 'auto', color: '#814c11'}}>{t('opPlanner.step4.dateTime')}</span>
+                                <input 
+                                    type="datetime-local" step="1" 
+                                    className="op-datetime-input"
+                                    style={{ colorScheme: 'dark', cursor: 'pointer' }} 
+                                    value={selectedDateTime}
+                                    onChange={e => setSelectedDateTime(e.target.value)}
+                                />
                             </div>
-                            <table className="op-table">
-                                <thead>
-                                    <tr>
-                                        <th>{t('opPlanner.columns.no')}</th>
-                                        <th>{t('opPlanner.columns.source')}</th>
-                                        <th>{t('opPlanner.columns.target')}</th>
-                                        <th>{t('opPlanner.columns.departure')}</th>
-                                        <th>{t('opPlanner.columns.arrival')}</th>
-                                        <th>{t('opPlanner.columns.unit')}</th>
-                                        <th>{t('opPlanner.columns.distance')}</th>
-                                        <th>{t('opPlanner.columns.travelTime')}</th>
-                                        <th>{t('opPlanner.columns.attackLink')}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {sortedPlanList.map((p, index) => (
-                                        <tr key={p.id}>
-                                            <td style={{fontWeight: 'bold'}}>{index + 1}</td>
-                                            <td style={{fontWeight: 'bold'}}>{p.sourceCoord}</td>
-                                            <td style={{fontWeight: 'bold', color: '#d9534f', fontSize: '14px'}}>{p.targetCoord}</td>
-                                            <td style={{fontWeight: 'bold', color: '#2b542c'}}>{p.departureTime}</td>
-                                            <td style={{fontWeight: 'bold', color: '#d9534f'}}>{p.arrivalTime}</td>
-                                            <td style={{whiteSpace: 'nowrap'}}>
-                                                {unitIcons[p.unitType] && <img src={unitIcons[p.unitType]} alt={p.unitType} style={{verticalAlign: 'middle', marginRight: '5px', width: '16px'}}/>}
-                                                {t(`opPlanner.units.${p.unitType}`, {defaultValue: (p.unitType ? p.unitType.toUpperCase() : "")})}
-                                            </td>
-                                            <td>{p.dist}</td>
-                                            <td>{p.travelTime}</td>
-                                            <td><button className="op-btn-danger" onClick={() => removeFromPlan(p.id)}>{t('opPlanner.queue.delete')}</button></td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
 
-                            {/* CANLI BBCODE ŞABLON KUTUSU */}
-                            <div style={{background: '#faf5eb', padding: '15px', borderTop: '2px solid #dcb589'}}>
-                                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap', gap: '10px'}}>
-                                    <h4 style={{margin: 0, color: '#5a3a18'}}>{t('opPlanner.bbcode.title')}</h4>
-                                    <button className="op-btn" onClick={() => { navigator.clipboard.writeText(generatedBBCode); alert(t('opPlanner.alerts.copied')); }}>{t('opPlanner.bbcode.copyAll')}</button>
+                            <div className="op-flex-wrap">
+                                <div>
+                                    <label style={{fontWeight: 'bold', fontSize: '12px', display: 'block'}}>{t('opPlanner.step4.sourceVillage')}</label>
+                                    <select value={selectedSourceCoord} onChange={e => setSelectedSourceCoord(e.target.value)} style={{padding: '6px', width: '100%', fontWeight: 'bold'}}>
+                                        {availableSourceVillages.length === 0 ? <option value="">{t('opPlanner.step4.allSourcesUsed')}</option> :
+                                          availableSourceVillages.map(v => <option key={v.coord} value={v.coord}>{v.coord}</option>)
+                                        }
+                                    </select>
                                 </div>
-                                <div style={{display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '10px', fontSize: '13px'}}>
-                                    <b style={{color: '#814c11'}}>{t('opPlanner.bbcode.selectCols')}</b>
-                                    {Object.keys(bbCols).map(col => (
-                                        <label key={col} style={{cursor: 'pointer', color: 'black', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '4px'}}>
-                                            <input type="checkbox" checked={bbCols[col]} onChange={() => setBbCols({...bbCols, [col]: !bbCols[col]})} /> 
-                                            {colDisplayNames[col]}
-                                        </label>
-                                    ))}
+                                <div>
+                                    <label style={{fontWeight: 'bold', fontSize: '12px', display: 'block'}}>{t('opPlanner.step4.unitToSend')}</label>
+                                    <select value={selectedUnitMode} onChange={e => setSelectedUnitMode(e.target.value)} style={{padding: '6px', width: '100%', fontWeight: 'bold'}}>
+                                        {!selectedSourceCoord ? <option value="">{t('opPlanner.step4.selectSourceFirst')}</option> : 
+                                         getUnusedUnits(selectedSourceCoord).length === 0 ? <option value="">{t('opPlanner.step4.noUnitsLeft')}</option> :
+                                         getUnusedUnits(selectedSourceCoord).map(u => <option key={u} value={u}>{t(`opPlanner.units.${u}`, {defaultValue: u})}</option>)
+                                        }
+                                    </select>
                                 </div>
-                                <textarea className="op-textarea" style={{height: '150px', background: '#fff', color: '#333'}} value={generatedBBCode} readOnly />
+                                <div>
+                                    <label style={{fontWeight: 'bold', fontSize: '12px', display: 'block'}}>{t('opPlanner.step4.target')}</label>
+                                    <select value={selectedTargetCoord} onChange={e => setSelectedTargetCoord(e.target.value)} style={{padding: '6px', width: '100%', fontWeight: 'bold'}}>
+                                        {parsedTargets.map(v => <option key={v.coord} value={v.coord}>{v.coord}</option>)}
+                                    </select>
+                                </div>
+                                <div style={{flex: 'none', width: '100%'}}>
+                                    <button className="op-btn" style={{background: '#5cb85c', color: 'white', width: '100%', padding: '10px'}} onClick={addToPlan}>{t('opPlanner.step4.calcAndAddBtn')}</button>
+                                </div>
                             </div>
+
+                            {sortedPlanList.length > 0 && (
+                                <div className="op-table-wrapper" style={{marginTop: '25px'}}>
+                                    <div style={{padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#2a1908', flexWrap: 'wrap', gap: '10px'}}>
+                                        <h4 style={{margin: 0, color: '#fff'}}>{t('opPlanner.queue.title').replace('{{count}}', sortedPlanList.length)}</h4>
+                                        <button className="op-btn-danger" onClick={clearQueue} style={{padding: '6px 12px'}}>{t('opPlanner.queue.clearQueue')}</button>
+                                    </div>
+                                    <table className="op-table">
+                                        <thead>
+                                            <tr>
+                                                <th>{t('opPlanner.columns.no')}</th>
+                                                <th>{t('opPlanner.columns.source')}</th>
+                                                <th>{t('opPlanner.columns.target')}</th>
+                                                <th>{t('opPlanner.columns.departure')}</th>
+                                                <th>{t('opPlanner.columns.arrival')}</th>
+                                                <th>{t('opPlanner.columns.unit')}</th>
+                                                <th>{t('opPlanner.columns.distance')}</th>
+                                                <th>{t('opPlanner.columns.travelTime')}</th>
+                                                <th>{t('opPlanner.columns.attackLink')}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {sortedPlanList.map((p, index) => (
+                                                <tr key={p.id}>
+                                                    <td style={{fontWeight: 'bold'}}>{index + 1}</td>
+                                                    <td style={{fontWeight: 'bold'}}>{p.sourceCoord}</td>
+                                                    <td style={{fontWeight: 'bold', color: '#d9534f', fontSize: '14px'}}>{p.targetCoord}</td>
+                                                    <td style={{fontWeight: 'bold', color: '#2b542c'}}>{p.departureTime}</td>
+                                                    <td style={{fontWeight: 'bold', color: '#d9534f'}}>{p.arrivalTime}</td>
+                                                    <td style={{whiteSpace: 'nowrap'}}>
+                                                        {unitIcons[p.unitType] && <img src={unitIcons[p.unitType]} alt={p.unitType} style={{verticalAlign: 'middle', marginRight: '5px', width: '16px'}}/>}
+                                                        {t(`opPlanner.units.${p.unitType}`, {defaultValue: (p.unitType ? p.unitType.toUpperCase() : "")})}
+                                                    </td>
+                                                    <td>{p.dist}</td>
+                                                    <td>{p.travelTime}</td>
+                                                    <td><button className="op-btn-danger" onClick={() => removeFromPlan(p.id)}>{t('opPlanner.queue.delete')}</button></td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+
+                                    {/* CANLI BBCODE ŞABLON KUTUSU */}
+                                    <div style={{background: '#faf5eb', padding: '15px', borderTop: '2px solid #dcb589'}}>
+                                        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap', gap: '10px'}}>
+                                            <h4 style={{margin: 0, color: '#5a3a18'}}>{t('opPlanner.bbcode.title')}</h4>
+                                            <button className="op-btn" onClick={() => { navigator.clipboard.writeText(generatedBBCode); alert(t('opPlanner.alerts.copied')); }}>{t('opPlanner.bbcode.copyAll')}</button>
+                                        </div>
+                                        <div style={{display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '10px', fontSize: '13px'}}>
+                                            <b style={{color: '#814c11'}}>{t('opPlanner.bbcode.selectCols')}</b>
+                                            {Object.keys(bbCols).map(col => (
+                                                <label key={col} style={{cursor: 'pointer', color: 'black', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '4px'}}>
+                                                    <input type="checkbox" checked={bbCols[col]} onChange={() => setBbCols({...bbCols, [col]: !bbCols[col]})} /> 
+                                                    {colDisplayNames[col]}
+                                                </label>
+                                            ))}
+                                        </div>
+                                        <textarea className="op-textarea" style={{height: '150px', background: '#fff', color: '#333'}} value={generatedBBCode} readOnly />
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     )}
                 </div>
