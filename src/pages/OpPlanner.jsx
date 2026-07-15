@@ -731,7 +731,7 @@ const OpPlanner = () => {
                     {/* YENİ: ASKER VERİSİ GİRİŞİ (İSTİHBARAT) */}
                     {playerVillages.length > 0 && (
                         <div className="op-box">
-                            <h3 style={{ margin: '0 0 10px 0', color: '#f0c042', fontSize: '14px' }}>🛡️ Asker Verisi Gir (Toplu Bakış -> Askerler)</h3>
+                            <h3 style={{ margin: '0 0 10px 0', color: '#f0c042', fontSize: '14px' }}>🛡️ Asker Verisi Gir (Toplu Bakış Askerler)</h3>
                             <textarea
                                 className="op-textarea" rows="3"
                                 placeholder="Buraya oyun içindeki asker sayılarını yapıştırırsan, köy kartlarında köylerin gücünü (Kami, Sav vb.) görebilirsin."
