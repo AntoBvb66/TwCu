@@ -12,6 +12,16 @@ const formatCustomStr = (dateObj) => {
     return dateObj.toLocaleString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
 };
 
+// URL Encoded isimleri çözmek için yardımcı fonksiyon
+const decodeTWName = (str) => {
+    if (!str) return "";
+    try {
+        return decodeURIComponent(str.replace(/\+/g, '%20'));
+    } catch(e) {
+        return str.replace(/\+/g, ' ');
+    }
+};
+
 // Orijinal Birim İkonları
 const unitIcons = {
     spear: 'https://dstr.innogamescdn.com/asset/ff124e4b/graphic/unit/unit_spear.webp',
@@ -28,6 +38,9 @@ const unitIcons = {
 
 const defaultUnitSpeeds = { spear: 18, sword: 22, axe: 18, spy: 9, light: 10, heavy: 11, ram: 30, catapult: 30, knight: 10, snob: 35 };
 const mapColors = ['#3498db', '#f0ad4e', '#5cb85c', '#9b59b6', '#00ced1', '#ffb6c1', '#ffa500', '#20b2aa', '#778899', '#ff69b4'];
+
+// GÜNCEL API ADRESİ
+const API_BASE = "https://chamber-that-smock.ngrok-free.dev/api";
 
 // --- ASKERİ ZEKÂ (FARM & GÜÇ HESAPLAMA) ---
 const calculateVillageProfile = (obj, t) => {
@@ -61,6 +74,12 @@ const ClanTroopPlanner = () => {
     const [toastMsg, setToastMsg] = useState("");
     const [worldClans, setWorldClans] = useState([]);
 
+    // === GİZLE / GÖSTER (AKORDEON) STATE'LERİ ===
+    const [isStep1Open, setIsStep1Open] = useState(true);
+    const [isStep2Open, setIsStep2Open] = useState(true);
+    const [isStep3Open, setIsStep3Open] = useState(true);
+    const [isStep4Open, setIsStep4Open] = useState(true);
+
     const [allVillagesRaw, setAllVillagesRaw] = useState([]);
     const [clanPlayers, setClanPlayers] = useState(() => storage.get("ctp_cache_players", {}));
     const [clanVillages, setClanVillages] = useState(() => storage.get("ctp_cache_cVils", []));
@@ -86,6 +105,11 @@ const ClanTroopPlanner = () => {
 
     const [unitSpeedMultiplier, setUnitSpeedMultiplier] = useState(() => storage.get("cop_speed_multi", 1));
 
+    // Manuel Veri Ekleme State'leri
+    const [manualSource, setManualSource] = useState("");
+    const [manualUnit, setManualUnit] = useState("ram");
+    const [manualTarget, setManualTarget] = useState("");
+
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -106,10 +130,10 @@ const ClanTroopPlanner = () => {
         if (window.confirm(t('clanTroop.alerts.confirmClear'))) {
             setPlanList([]); setTargetInput(""); setTroopInput(""); setParsedTargets([]); setParsedTroops({});
             setSelectedTarget(""); setHiddenTargets([]); setHiddenSources([]); showToast(t('clanTroop.alerts.cleared'));
+            setIsStep1Open(true);
         }
     };
 
-    // === 1. ZEKİ VERİ MADENCİLİĞİ ===
     const fetchWithProxy = async (targetUrl) => {
         const res = await fetch(`https://tw-proxy.halimtttt10.workers.dev/?url=${encodeURIComponent(targetUrl)}`);
         if (!res.ok) throw new Error("Veri çekilemedi.");
@@ -126,11 +150,10 @@ const ClanTroopPlanner = () => {
         if (!worldId) return;
 
         try {
-            const targetApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Klanlar`;
-            const res = await fetch(targetApiUrl);
+            const targetApiUrl = `${API_BASE}/${worldId}/Klanlar`;
+            const res = await fetch(targetApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
             const data = await res.json();
 
-            // GÜVENLİK: API'den hata döndüyse işlemi sessizce durdur
             if (data.hata || !data.veriler) {
                 console.log("Klan listesi API hatası:", data.hata);
                 return;
@@ -149,6 +172,7 @@ const ClanTroopPlanner = () => {
             console.log("Klan listesi çekilemedi:", err);
         }
     };
+
     useEffect(() => {
         if (worldUrl) loadWorldClans();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -164,7 +188,6 @@ const ClanTroopPlanner = () => {
         try {
             const cleanUrl = worldUrl.replace(/\/$/, "");
 
-            // --- YENİ: DÜNYA KONFİGÜRASYONUNU VE BİRİMLERİ ÇEK ---
             try {
                 const configData = await fetchWithProxy(`${cleanUrl}/interface.php?func=get_config`);
                 const distMatch = configData.match(/<max_dist>(\d+)<\/max_dist>/);
@@ -190,12 +213,10 @@ const ClanTroopPlanner = () => {
                 if (configUnits.length > 0) setActiveUnits(configUnits);
             } catch (e) { console.log("Birim bilgisi veya sınır çekilemedi, manuel sınır kullanılacak."); }
 
-           // 2. API'DEN KLANLARI ÇEK VE KLAN ID BUL
-            const clanApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Klanlar`;
-            const clanRes = await fetch(clanApiUrl);
+            const clanApiUrl = `${API_BASE}/${worldId}/Klanlar`;
+            const clanRes = await fetch(clanApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
             const clanData = await clanRes.json();
             
-            // GÜVENLİK: Eğer API "Böyle bir tablo yok" derse kullanıcıyı uyar
             if (clanData.hata || !clanData.veriler) {
                 throw new Error(clanData.hata || "Veritabanında klan bilgisi bulunamadı.");
             }
@@ -212,9 +233,8 @@ const ClanTroopPlanner = () => {
 
             if (!clanId) return setStatus(t('clanOp.step1.status.notFound'));
 
-            // 3. API'DEN OYUNCULARI ÇEK VE KLANA AİT OLANLARI FİLTRELE
-            const playerApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Oyuncular`;
-            const playerRes = await fetch(playerApiUrl);
+            const playerApiUrl = `${API_BASE}/${worldId}/Oyuncular`;
+            const playerRes = await fetch(playerApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
             const playerData = await playerRes.json();
 
             if (playerData.hata || !playerData.veriler) {
@@ -230,9 +250,8 @@ const ClanTroopPlanner = () => {
             });
             setClanPlayers(cPlayers);
 
-            // 4. API'DEN KÖYLERİ ÇEK VE KLANA AİT KÖYLERİ AYIR
-            const villageApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Koyler`;
-            const villageRes = await fetch(villageApiUrl);
+            const villageApiUrl = `${API_BASE}/${worldId}/Koyler`;
+            const villageRes = await fetch(villageApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
             const villageData = await villageRes.json();
 
             if (villageData.hata || !villageData.veriler) {
@@ -244,6 +263,7 @@ const ClanTroopPlanner = () => {
                 const pid = parseInt(item[4]);
                 const vObj = {
                     id: parseInt(item[0]),
+                    name: decodeTWName(item[1]), // Köy adı şifreden çözülüyor
                     coord: `${item[2]}|${item[3]}`,
                     x: parseInt(item[2]),
                     y: parseInt(item[3]),
@@ -259,6 +279,11 @@ const ClanTroopPlanner = () => {
             setClanVillages(cVils);
 
             setStatus(t('clanOp.step1.status.success', { clanId, memberCount: Object.keys(cPlayers).length, villageCount: cVils.length }));
+            
+            // Başarılı yükleme sonrası adımları yönet
+            setIsStep1Open(false);
+            setIsStep2Open(true);
+            setIsStep3Open(true);
         } catch (err) {
             setStatus(t('clanTroop.step1.error', { msg: err.message }));
         }
@@ -282,15 +307,13 @@ const ClanTroopPlanner = () => {
                 const parts = line.substring(line.indexOf(',') + 1).split(',');
                 numbers = parts.map(n => parseInt(n.trim(), 10)).filter(n => !isNaN(n));
             } else {
-                // Parantezler, kıtalar ve puanları temizleyen zeki ayrıştırıcı
                 let remainder = line.substring(line.indexOf(coord) + 7);
                 remainder = remainder.replace(/^[)\]\s]*(K\d{2})?\s*/, '');
 
                 const parts = remainder.trim().split(/[\s\t]+/);
 
-                // İlk eleman puan mı kontrol et (nokta içeriyorsa veya birim sayısından fazlaysa)
                 if (parts.length > 0 && (parts[0].includes('.') || parts.length > activeUnits.length)) {
-                    parts.shift(); // Puan (5.390 gibi) kısmını at
+                    parts.shift(); 
                 }
 
                 numbers = parts.map(n => parseInt(n.replace(/\./g, ''), 10)).filter(n => !isNaN(n));
@@ -338,7 +361,15 @@ const ClanTroopPlanner = () => {
             if (!uniqueCheck.has(coord)) {
                 uniqueCheck.add(coord);
                 const vil = allVillagesRaw.find(v => v.coord === coord);
-                coords.push({ coord, x: parseInt(match[1]), y: parseInt(match[2]), id: vil ? vil.id : null, points: vil ? vil.points : 0, owner: vil ? vil.playerName : t('clanTroop.bbcode.unknown') });
+                coords.push({ 
+                    coord, 
+                    x: parseInt(match[1]), 
+                    y: parseInt(match[2]), 
+                    id: vil ? vil.id : null, 
+                    points: vil ? vil.points : 0, 
+                    owner: vil ? vil.playerName : t('clanTroop.bbcode.unknown'),
+                    name: vil ? vil.name : "" 
+                });
             }
         }
         setParsedTargets(coords);
@@ -420,8 +451,8 @@ const ClanTroopPlanner = () => {
         const newPlan = {
             id: Date.now() + Math.random(),
             player: sourceObj.playerName,
-            sourceCoord: sourceObj.coord, sourceId: sourceObj.id, sourcePoints: sourceObj.points,
-            targetCoord: targetObj.coord, targetId: targetObj.id, targetPoints: targetObj.points, targetOwner: targetObj.owner,
+            sourceCoord: sourceObj.coord, sourceId: sourceObj.id, sourcePoints: sourceObj.points, sourceName: sourceObj.name || "",
+            targetCoord: targetObj.coord, targetId: targetObj.id, targetPoints: targetObj.points, targetOwner: targetObj.owner, targetName: targetObj.name || "",
             unitType, dist: dist.toFixed(1),
             travelTime: formatTravelTime(travelMinutes),
             departureTime: formatCustomStr(departureDate),
@@ -431,6 +462,63 @@ const ClanTroopPlanner = () => {
 
         setPlanList([...planList, newPlan]);
         showToast(t('clanTroop.alerts.orderAdded'));
+    };
+
+    // Manuel Plan Ekleme
+    const handleAddManualPlan = () => {
+        const cleanSrc = manualSource.trim();
+        const cleanTgt = manualTarget.trim();
+        const regex = /^\d{3}\|\d{3}$/;
+
+        if (!regex.test(cleanSrc) || !regex.test(cleanTgt)) {
+            return alert("Lütfen geçerli kaynak ve hedef koordinatları girin (Örn: 500|500)");
+        }
+
+        const sourceObj = clanVillages.find(v => v.coord === cleanSrc) || {
+            coord: cleanSrc,
+            x: parseInt(cleanSrc.split('|')[0]),
+            y: parseInt(cleanSrc.split('|')[1]),
+            playerName: "Manuel Tanımlı",
+            id: null,
+            points: 0,
+            name: ""
+        };
+
+        const targetObj = parsedTargets.find(v => v.coord === cleanTgt) || {
+            coord: cleanTgt,
+            x: parseInt(cleanTgt.split('|')[0]),
+            y: parseInt(cleanTgt.split('|')[1]),
+            owner: "Düşman",
+            id: null,
+            points: 0,
+            name: ""
+        };
+
+        const dist = calculateDistance(sourceObj.x, sourceObj.y, targetObj.x, targetObj.y);
+        const baseSpeed = defaultUnitSpeeds[manualUnit] || 30;
+        const realSpeed = baseSpeed / unitSpeedMultiplier;
+        const travelMinutes = dist * realSpeed;
+        const travelMs = travelMinutes * 60 * 1000;
+
+        const baseDate = new Date(selectedDateTime);
+        const departureDate = new Date(baseDate.getTime() - travelMs);
+
+        const newPlan = {
+            id: Date.now() + Math.random(),
+            player: sourceObj.playerName,
+            sourceCoord: sourceObj.coord, sourceId: sourceObj.id, sourcePoints: sourceObj.points, sourceName: sourceObj.name || "",
+            targetCoord: targetObj.coord, targetId: targetObj.id, targetPoints: targetObj.points, targetOwner: targetObj.owner, targetName: targetObj.name || "",
+            unitType: manualUnit, dist: dist.toFixed(1),
+            travelTime: formatTravelTime(travelMinutes),
+            departureTime: formatCustomStr(departureDate),
+            arrivalTime: formatCustomStr(baseDate),
+            timestamp: departureDate.getTime()
+        };
+
+        setPlanList([...planList, newPlan]);
+        showToast(t('clanTroop.alerts.orderAdded'));
+        setManualSource("");
+        setManualTarget("");
     };
 
     const formatTravelTime = (minutes) => {
@@ -469,10 +557,13 @@ const ClanTroopPlanner = () => {
 
             groupedPlans[player].forEach((p, index) => {
                 let row = `[*]`;
+                const sourceNameStr = p.sourceName ? ` (${p.sourceName})` : "";
+                const targetNameStr = p.targetName ? ` (${p.targetName})` : "";
+
                 if (bbCols.no) row += ` ${index + 1} [|]`;
                 if (bbCols.player) row += ` [b]${p.player}[/b] [|]`;
-                if (bbCols.source) row += ` ${p.sourceCoord} [|]`;
-                if (bbCols.target) row += ` ${p.targetCoord} (${p.targetOwner}) [|]`;
+                if (bbCols.source) row += ` ${p.sourceCoord}${sourceNameStr} [|]`;
+                if (bbCols.target) row += ` ${p.targetCoord}${targetNameStr} (${p.targetOwner}) [|]`;
                 if (bbCols.departure) row += ` [b][color=#2b542c]${p.departureTime}[/color][/b] [|]`;
                 if (bbCols.arrival) row += ` [b][color=#ff0000]${p.arrivalTime}[/color][/b] [|]`;
 
@@ -555,208 +646,298 @@ const ClanTroopPlanner = () => {
         arrival: t('clanTroop.columns.arrival'), unit: t('clanTroop.columns.unit'),
         distance: t('clanTroop.columns.distance'), travelTime: t('clanTroop.columns.travelTime'), attackLink: t('clanTroop.columns.attackLink')
     };
+
     return (
         <div className="cop-container">
             <h1 className="cop-header">{t('clanTroop.title')}</h1>
 
             <div className="cop-grid">
+                {/* ADIM 1: KLAN VERİLERİ */}
                 <div className="cop-box">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                        <h3 style={{ margin: 0 }}>{t('clanTroop.step1.title')}</h3>
-                        <button className="cop-btn-danger" style={{ padding: '4px 8px', fontSize: '11px' }} onClick={clearAllData}>{t('clanTroop.step1.clear')}</button>
+                    <div 
+                        style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
+                        onClick={() => setIsStep1Open(!isStep1Open)}
+                    >
+                        <h3 style={{ margin: 0 }}>{t('clanTroop.step1.title')} {isStep1Open ? '▲' : '▼'}</h3>
+                        <button className="cop-btn-danger" style={{ padding: '4px 8px', fontSize: '11px' }} onClick={(e) => { e.stopPropagation(); clearAllData(); }}>{t('clanTroop.step1.clear')}</button>
                     </div>
-                    <div style={{ display: 'flex', gap: '10px' }}>
-                        <input
-                            type="text" className="cop-input" placeholder={t('clanTroop.step1.worldUrl')}
-                            value={worldUrl} onChange={e => setWorldUrl(e.target.value)} onBlur={loadWorldClans}
-                        />
-                        <input
-                            type="text" className="cop-input" placeholder={t('clanTroop.step1.clanTag')}
-                            value={clanTag} onChange={e => setClanTag(e.target.value)} list="world-clans-list"
-                        />
-                        <datalist id="world-clans-list">
-                            {worldClans.map(c => <option key={c.id} value={c.tag}>{c.name}</option>)}
-                        </datalist>
-                    </div>
-                    <button className="cop-btn" style={{ width: '100%' }} onClick={handleFetchClan}>{t('clanTroop.step1.run')}</button>
-                    <div style={{ fontSize: '12px', marginTop: '10px', color: '#5cb85c' }}>{status}</div>
+                    {isStep1Open && (
+                        <div style={{ marginTop: '15px' }}>
+                            <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+                                <input
+                                    type="text" className="cop-input" placeholder={t('clanTroop.step1.worldUrl')}
+                                    value={worldUrl} onChange={e => setWorldUrl(e.target.value)} onBlur={loadWorldClans}
+                                />
+                                <input
+                                    type="text" className="cop-input" placeholder={t('clanTroop.step1.clanTag')}
+                                    value={clanTag} onChange={e => setClanTag(e.target.value)} list="world-clans-list"
+                                />
+                                <datalist id="world-clans-list">
+                                    {worldClans.map(c => <option key={c.id} value={c.tag}>{c.name}</option>)}
+                                </datalist>
+                            </div>
+                            <button className="cop-btn" style={{ width: '100%' }} onClick={handleFetchClan}>{t('clanTroop.step1.run')}</button>
+                            <div style={{ fontSize: '12px', marginTop: '10px', color: '#5cb85c' }}>{status}</div>
+                        </div>
+                    )}
                 </div>
 
+                {/* ADIM 2: HEDEFLER */}
                 <div className="cop-box">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <h3>{t('clanTroop.step2.title')}</h3>
-                        <div style={{ fontSize: '12px' }}>{t('clanTroop.step2.snobLimit')} <input type="number" style={{ width: '40px', padding: '2px', background: '#111', color: '#f0c042', border: '1px solid #814c11' }} value={maxSnobDist} onChange={e => setMaxSnobDist(parseInt(e.target.value) || 100)} /></div>
+                    <div 
+                        style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
+                        onClick={() => setIsStep2Open(!isStep2Open)}
+                    >
+                        <h3 style={{ margin: 0 }}>{t('clanTroop.step2.title')} {isStep2Open ? '▲' : '▼'}</h3>
+                        <div style={{ fontSize: '12px' }} onClick={(e) => e.stopPropagation()}>{t('clanTroop.step2.snobLimit')} <input type="number" style={{ width: '40px', padding: '2px', background: '#111', color: '#f0c042', border: '1px solid #814c11' }} value={maxSnobDist} onChange={e => setMaxSnobDist(parseInt(e.target.value) || 100)} /></div>
                     </div>
-                    <textarea className="cop-textarea" rows="2" placeholder={t('clanTroop.step2.placeholder')} value={targetInput} onChange={e => setTargetInput(e.target.value)} />
+                    {isStep2Open && (
+                        <div style={{ marginTop: '15px' }}>
+                            <textarea className="cop-textarea" rows="2" placeholder={t('clanTroop.step2.placeholder')} value={targetInput} onChange={e => setTargetInput(e.target.value)} />
+                        </div>
+                    )}
                 </div>
             </div>
 
+            {/* ADIM 3: ASKER VERİLERİ GİRİŞİ */}
             {clanVillages.length > 0 && (
                 <div className="cop-box">
-                    <h3>{t('clanTroop.stepTroop.title')}</h3>
-                    <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
-                        <div style={{ flex: 1, minWidth: '300px' }}>
-                            <textarea
-                                className="cop-textarea" rows="6"
-                                placeholder={t('clanTroop.stepTroop.placeholder')}
-                                value={troopInput} onChange={e => setTroopInput(e.target.value)}
-                            />
-                            <div style={{ fontSize: '11px', color: '#aaa' }}>{t('clanTroop.stepTroop.detected').replace('{{count}}', Object.keys(parsedTroops).length)}</div>
-                        </div>
-
-                        {Object.keys(playerTroopSummary).length > 0 && (
-                            <div style={{ flex: 1, minWidth: '250px', background: '#111', border: '1px solid #603000', borderRadius: '4px', padding: '10px', maxHeight: '160px', overflowY: 'auto' }}>
-                                <h4 style={{ color: '#f0c042', margin: '0 0 10px 0', fontSize: '13px', borderBottom: '1px dashed #603000', paddingBottom: '5px' }}>{t('clanTroop.stepTroop.summaryTitle')}</h4>
-                                {Object.entries(playerTroopSummary).map(([player, profiles]) => (
-                                    <div key={player} style={{ marginBottom: '10px' }}>
-                                        <b style={{ color: '#fff', fontSize: '13px' }}>{player}</b>
-                                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '3px' }}>
-                                            {Object.entries(profiles).map(([profName, counts]) => (
-                                                <span key={profName} style={{ fontSize: '11px', background: '#2a1908', padding: '2px 6px', borderRadius: '3px', border: '1px solid #4a2a10', color: '#eaddbd' }}>
-                                                    {profName}: <b style={{ color: '#5cb85c' }}>{counts.total}</b>
-                                                    {counts.total - counts.used > 0 ? <span style={{ color: '#f0c042' }}>{t('clanTroop.stepTroop.idle').replace('{{count}}', counts.total - counts.used)}</span> : <span style={{ color: '#d9534f' }}>{t('clanTroop.stepTroop.depleted')}</span>}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                ))}
+                    <div 
+                        style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
+                        onClick={() => setIsStep3Open(!isStep3Open)}
+                    >
+                        <h3>{t('clanTroop.stepTroop.title')} {isStep3Open ? '▲' : '▼'}</h3>
+                    </div>
+                    {isStep3Open && (
+                        <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', marginTop: '15px' }}>
+                            <div style={{ flex: 1, minWidth: '300px' }}>
+                                <textarea
+                                    className="cop-textarea" rows="6"
+                                    placeholder={t('clanTroop.stepTroop.placeholder')}
+                                    value={troopInput} onChange={e => setTroopInput(e.target.value)}
+                                />
+                                <div style={{ fontSize: '11px', color: '#aaa', marginTop: '5px' }}>{t('clanTroop.stepTroop.detected').replace('{{count}}', Object.keys(parsedTroops).length)}</div>
                             </div>
-                        )}
+
+                            {Object.keys(playerTroopSummary).length > 0 && (
+                                <div style={{ flex: 1, minWidth: '250px', background: '#111', border: '1px solid #603000', borderRadius: '4px', padding: '10px', maxHeight: '160px', overflowY: 'auto' }}>
+                                    <h4 style={{ color: '#f0c042', margin: '0 0 10px 0', fontSize: '13px', borderBottom: '1px dashed #603000', paddingBottom: '5px' }}>{t('clanTroop.stepTroop.summaryTitle')}</h4>
+                                    {Object.entries(playerTroopSummary).map(([player, profiles]) => (
+                                        <div key={player} style={{ marginBottom: '10px' }}>
+                                            <b style={{ color: '#fff', fontSize: '13px' }}>{player}</b>
+                                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '3px' }}>
+                                                {Object.entries(profiles).map(([profName, counts]) => (
+                                                    <span key={profName} style={{ fontSize: '11px', background: '#2a1908', padding: '2px 6px', borderRadius: '3px', border: '1px solid #4a2a10', color: '#eaddbd' }}>
+                                                        {profName}: <b style={{ color: '#5cb85c' }}>{counts.total}</b>
+                                                        {counts.total - counts.used > 0 ? <span style={{ color: '#f0c042' }}>{t('clanTroop.stepTroop.idle').replace('{{count}}', counts.total - counts.used)}</span> : <span style={{ color: '#d9534f' }}>{t('clanTroop.stepTroop.depleted')}</span>}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
+            )}
+
+            {/* MANUEL VERİ GİRME ALANI (YENİ) */}
+            {clanVillages.length > 0 && (
+                <div className="cop-box" style={{ border: '1px solid #603000', background: '#18120c' }}>
+                    <h3 style={{ color: '#f0c042', borderBottom: '1px solid #603000', paddingBottom: '5px' }}>✍️ Manuel Operasyon Ekle</h3>
+                    <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', marginTop: '15px' }}>
+                        <div style={{ flex: 1, minWidth: '150px' }}>
+                            <label style={{ fontSize: '12px', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>Kaynak Köy (Örn: 500|500)</label>
+                            <input 
+                                type="text" 
+                                className="cop-input" 
+                                placeholder="500|500" 
+                                value={manualSource} 
+                                onChange={e => setManualSource(e.target.value)} 
+                            />
+                        </div>
+                        <div style={{ flex: 1, minWidth: '150px' }}>
+                            <label style={{ fontSize: '12px', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>Gönderilecek Birim</label>
+                            <select 
+                                className="cop-input" 
+                                style={{ background: '#111', color: '#f0c042', border: '1px solid #603000', height: '35px' }}
+                                value={manualUnit} 
+                                onChange={e => setManualUnit(e.target.value)}
+                            >
+                                <option value="ram">Şahmerdan (Kami)</option>
+                                <option value="snob">Misyoner</option>
+                                <option value="catapult">Mancınık (Fake)</option>
+                                <option value="spy">Casus</option>
+                                <option value="axe">Balta</option>
+                            </select>
+                        </div>
+                        <div style={{ flex: 1, minWidth: '150px' }}>
+                            <label style={{ fontSize: '12px', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>Hedef Köy (Örn: 501|501)</label>
+                            <input 
+                                type="text" 
+                                className="cop-input" 
+                                placeholder="501|501" 
+                                value={manualTarget} 
+                                onChange={e => setManualTarget(e.target.value)} 
+                            />
+                        </div>
+                        <div style={{ flex: 'none', width: '100%', marginTop: '5px' }}>
+                            <button className="cop-btn" style={{ background: '#5cb85c', border: 'none' }} onClick={handleAddManualPlan}>
+                                ➕ Operasyon Planına Ekle
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
 
+            {/* ADIM 4: PLANLAMA MOTORU */}
             {clanVillages.length > 0 && parsedTargets.length > 0 && (
                 <div className="cop-box">
-                    <div style={{ textAlign: 'center', marginBottom: '20px', borderBottom: '1px dashed #603000', paddingBottom: '15px' }}>
-                        <h3 style={{ borderBottom: 'none', paddingBottom: 0 }}>{t('clanTroop.step3.title')}</h3>
-
-                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgba(0,0,0,0.6)', padding: '10px 20px', borderRadius: '8px', border: '1px solid #814c11', fontSize: '14px', fontWeight: 'bold', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.5)' }}>
-                            <span style={{ color: '#f0c042' }}>{t('clanTroop.step3.arrivalTime')}</span>
-                            <input
-                                type="datetime-local"
-                                step="1"
-                                style={{
-                                    padding: '8px',
-                                    background: '#111',
-                                    color: '#eaddbd',
-                                    border: '1px solid #603000',
-                                    borderRadius: '4px',
-                                    colorScheme: 'dark',
-                                    cursor: 'pointer',
-                                    fontWeight: 'bold'
-                                }}
-                                value={selectedDateTime}
-                                onChange={e => setSelectedDateTime(e.target.value)}
-                            />
+                    <div 
+                        style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
+                        onClick={() => setIsStep4Open(!isStep4Open)}
+                    >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                            <h3 style={{ margin: 0 }}>{t('clanTroop.step3.title')} {isStep4Open ? '▲' : '▼'}</h3>
                         </div>
                     </div>
 
-                    <div className="cop-grid" style={{ marginTop: '15px' }}>
-                        <div>
-                            <div className="cop-inner-box" style={{ marginBottom: '15px' }}>
-                                <h4 style={{ color: '#f0c042', margin: '0 0 10px 0' }}>{t('clanTroop.step3.targetsTitle')}</h4>
-                                <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
-                                    {parsedTargets.map(tObj => {
-                                        const isHidden = hiddenTargets.includes(tObj.coord);
-                                        const k = planList.filter(p => p.targetCoord === tObj.coord && p.unitType === 'ram').length;
-                                        const m = planList.filter(p => p.targetCoord === tObj.coord && p.unitType === 'snob').length;
-                                        const f = planList.filter(p => p.targetCoord === tObj.coord && p.unitType === 'catapult').length;
-
-                                        return (
-                                            <div key={tObj.coord} onClick={() => !isHidden && setSelectedTarget(tObj.coord)} className={`cop-list-item ${selectedTarget === tObj.coord && !isHidden ? 'active' : ''}`} style={{ opacity: isHidden ? 0.4 : 1, cursor: isHidden ? 'default' : 'pointer' }}>
-                                                <div>
-                                                    <b style={{ color: '#d9534f', fontSize: '14px' }}>{tObj.coord}</b> {tObj.owner}
-                                                    <div className="cop-target-stats">
-                                                        <span><img src={unitIcons.ram} alt="Kami" /> {k}</span>
-                                                        <span><img src={unitIcons.snob} alt="Mis" /> {m}</span>
-                                                        <span><img src={unitIcons.catapult} alt="Fake" /> {f}</span>
-                                                    </div>
-                                                </div>
-                                                <button className="cop-hide-btn" title={isHidden ? t('clanTroop.suggestions.show') : t('clanTroop.suggestions.hide')} onClick={(e) => toggleHideTarget(tObj.coord, e)}>{isHidden ? '👁️' : '❌'}</button>
-                                            </div>
-                                        )
-                                    })}
+                    {isStep4Open && (
+                        <div style={{ marginTop: '15px' }}>
+                            <div style={{ textAlign: 'center', marginBottom: '20px', borderBottom: '1px dashed #603000', paddingBottom: '15px' }}>
+                                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgba(0,0,0,0.6)', padding: '10px 20px', borderRadius: '8px', border: '1px solid #814c11', fontSize: '14px', fontWeight: 'bold', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.5)' }}>
+                                    <span style={{ color: '#f0c042' }}>{t('clanTroop.step3.arrivalTime')}</span>
+                                    <input
+                                        type="datetime-local"
+                                        step="1"
+                                        style={{
+                                            padding: '8px',
+                                            background: '#111',
+                                            color: '#eaddbd',
+                                            border: '1px solid #603000',
+                                            borderRadius: '4px',
+                                            colorScheme: 'dark',
+                                            cursor: 'pointer',
+                                            fontWeight: 'bold'
+                                        }}
+                                        value={selectedDateTime}
+                                        onChange={e => setSelectedDateTime(e.target.value)}
+                                    />
                                 </div>
                             </div>
 
-                            <div className="cop-inner-box">
-                                <div className="cop-tabs">
-                                    <button className={`cop-tab-btn ${suggestionMode === 'closest' ? 'active' : ''}`} onClick={() => setSuggestionMode('closest')}>{t('clanTroop.tabs.closest')}</button>
-                                    <button className={`cop-tab-btn ${suggestionMode === 'furthest' ? 'active' : ''}`} onClick={() => setSuggestionMode('furthest')}>{t('clanTroop.tabs.furthest')}</button>
-                                    <button className={`cop-tab-btn ${suggestionMode === 'player' ? 'active' : ''}`} onClick={() => setSuggestionMode('player')}>{t('clanTroop.tabs.player')}</button>
+                            <div className="cop-grid" style={{ marginTop: '15px' }}>
+                                <div>
+                                    <div className="cop-inner-box" style={{ marginBottom: '15px' }}>
+                                        <h4 style={{ color: '#f0c042', margin: '0 0 10px 0' }}>{t('clanTroop.step3.targetsTitle')}</h4>
+                                        <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
+                                            {parsedTargets.map(tObj => {
+                                                const isHidden = hiddenTargets.includes(tObj.coord);
+                                                const k = planList.filter(p => p.targetCoord === tObj.coord && p.unitType === 'ram').length;
+                                                const m = planList.filter(p => p.targetCoord === tObj.coord && p.unitType === 'snob').length;
+                                                const f = planList.filter(p => p.targetCoord === tObj.coord && p.unitType === 'catapult').length;
+
+                                                const villageNameStr = tObj.name ? ` (${tObj.name})` : "";
+
+                                                return (
+                                                    <div key={tObj.coord} onClick={() => !isHidden && setSelectedTarget(tObj.coord)} className={`cop-list-item ${selectedTarget === tObj.coord && !isHidden ? 'active' : ''}`} style={{ opacity: isHidden ? 0.4 : 1, cursor: isHidden ? 'default' : 'pointer' }}>
+                                                        <div>
+                                                            <b style={{ color: '#d9534f', fontSize: '14px' }}>{tObj.coord}{villageNameStr}</b> {tObj.owner}
+                                                            <div className="cop-target-stats">
+                                                                <span><img src={unitIcons.ram} alt="Kami" /> {k}</span>
+                                                                <span><img src={unitIcons.snob} alt="Mis" /> {m}</span>
+                                                                <span><img src={unitIcons.catapult} alt="Fake" /> {f}</span>
+                                                            </div>
+                                                        </div>
+                                                        <button className="cop-hide-btn" title={isHidden ? t('clanTroop.suggestions.show') : t('clanTroop.suggestions.hide')} onClick={(e) => toggleHideTarget(tObj.coord, e)}>{isHidden ? '👁️' : '❌'}</button>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+
+                                    <div className="cop-inner-box">
+                                        <div className="cop-tabs">
+                                            <button className={`cop-tab-btn ${suggestionMode === 'closest' ? 'active' : ''}`} onClick={() => setSuggestionMode('closest')}>{t('clanTroop.tabs.closest')}</button>
+                                            <button className={`cop-tab-btn ${suggestionMode === 'furthest' ? 'active' : ''}`} onClick={() => setSuggestionMode('furthest')}>{t('clanTroop.tabs.furthest')}</button>
+                                            <button className={`cop-tab-btn ${suggestionMode === 'player' ? 'active' : ''}`} onClick={() => setSuggestionMode('player')}>{t('clanTroop.tabs.player')}</button>
+                                        </div>
+
+                                        {suggestionMode === 'player' && (
+                                            <select style={{ width: '100%', padding: '5px', marginBottom: '10px', background: '#111', color: '#f0c042', border: '1px solid #814c11' }} value={selectedPlayer} onChange={e => setSelectedPlayer(e.target.value)}>
+                                                <option value="">{t('clanTroop.tabs.selectPlayer')}</option>
+                                                {Object.values(clanPlayers).sort().map(p => <option key={p} value={p}>{p}</option>)}
+                                            </select>
+                                        )}
+
+                                        <div style={{ maxHeight: '350px', overflowY: 'auto' }}>
+                                            {suggestedSources.length === 0 ? <div style={{ padding: '10px', color: '#777', textAlign: 'center' }}>{t('clanTroop.suggestions.noVillages')}</div> :
+                                                suggestedSources.map(s => {
+                                                    const isHidden = hiddenSources.includes(s.coord);
+                                                    const activeOrders = planList.filter(p => p.sourceCoord === s.coord);
+
+                                                    const sourceNameStr = s.name ? ` (${s.name})` : "";
+
+                                                    return (
+                                                        <div key={s.coord} className="cop-list-item" style={{ opacity: isHidden ? 0.4 : 1 }}>
+                                                            <div>
+                                                                <span className="cop-player-badge">{s.playerName}</span> <b style={{ color: '#fff' }}>{s.coord}{sourceNameStr}</b>
+                                                                <br />
+
+                                                                {s.profile !== "Bilinmiyor" ? (
+                                                                    <div style={{ marginTop: '4px' }}>
+                                                                        <span style={{ fontSize: '11px', background: s.profile.includes(t('clanTroop.profiles.kami')) ? '#8b0000' : '#2b542c', color: 'white', padding: '2px 4px', borderRadius: '3px', fontWeight: 'bold', marginRight: '5px' }}>
+                                                                            [{s.profile}]
+                                                                        </span>
+                                                                        <span style={{ fontSize: '11px', color: '#aaa' }}>{t('clanTroop.step3.distance')} {s.dist.toFixed(1)}</span>
+                                                                        <div style={{ display: 'flex', gap: '6px', fontSize: '11px', color: '#eaddbd', marginTop: '4px', flexWrap: 'wrap' }}>
+                                                                            {s.units && s.units.axe > 0 && <span title="Balta"><img src={unitIcons.axe} style={{ width: '12px' }} alt="" />{s.units.axe}</span>}
+                                                                            {s.units && s.units.light > 0 && <span title="Hafif"><img src={unitIcons.light} style={{ width: '12px' }} alt="" />{s.units.light}</span>}
+                                                                            {s.units && s.units.ram > 0 && <span title="Şah"><img src={unitIcons.ram} style={{ width: '12px' }} alt="" />{s.units.ram}</span>}
+                                                                            {s.units && s.units.snob > 0 && <span title="Mis"><img src={unitIcons.snob} style={{ width: '12px' }} alt="" />{s.units.snob}</span>}
+
+                                                                            {s.profile.includes(t('clanTroop.profiles.sav')) && s.units && s.units.spear > 0 && <span title="Mızrak"><img src={unitIcons.spear} style={{ width: '12px' }} alt="" />{s.units.spear}</span>}
+                                                                            {s.profile.includes(t('clanTroop.profiles.sav')) && s.units && s.units.sword > 0 && <span title="Kılıç"><img src={unitIcons.sword} style={{ width: '12px' }} alt="" />{s.units.sword}</span>}
+                                                                        </div>
+                                                                    </div>
+                                                                ) : (
+                                                                    <span style={{ fontSize: '11px', color: '#aaa' }}>{t('clanTroop.step3.distance')} {s.dist.toFixed(1)} {t('clanTroop.suggestions.noIntel')}</span>
+                                                                )}
+
+                                                                {activeOrders.length > 0 && (
+                                                                    <div style={{ marginTop: '5px', fontSize: '10px', color: '#f0ad4e', background: 'rgba(240, 173, 78, 0.1)', padding: '2px 4px', borderRadius: '3px', borderLeft: '2px solid #f0ad4e' }}>
+                                                                        {activeOrders.map(o => <div key={o.id}>📌 {o.targetCoord} ({t(`clanTroop.units.${o.unitType}`, { defaultValue: o.unitType })})</div>)}
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                            <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+                                                                {!isHidden && (
+                                                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                                                                        <div style={{ display: 'flex', gap: '3px' }}>
+                                                                            <img src={unitIcons.ram} alt="Kami" title={t('clanTroop.suggestions.kami')} className="cop-action-icon" onClick={() => addClanPlan(s, 'ram')} />
+                                                                            <img src={unitIcons.snob} alt="Mis" title={t('clanTroop.suggestions.snob')} className="cop-action-icon" onClick={() => addClanPlan(s, 'snob')} />
+                                                                            <img src={unitIcons.catapult} alt="Fake" title={t('clanTroop.suggestions.fake')} className="cop-action-icon" onClick={() => addClanPlan(s, 'catapult')} />
+                                                                        </div>
+                                                                    </div>
+                                                                )}
+                                                                <button className="cop-hide-btn" title={isHidden ? t('clanTroop.suggestions.show') : t('clanTroop.suggestions.hide')} onClick={(e) => toggleHideSource(s.coord, e)}>{isHidden ? '👁️' : '❌'}</button>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
 
-                                {suggestionMode === 'player' && (
-                                    <select style={{ width: '100%', padding: '5px', marginBottom: '10px', background: '#111', color: '#f0c042', border: '1px solid #814c11' }} value={selectedPlayer} onChange={e => setSelectedPlayer(e.target.value)}>
-                                        <option value="">{t('clanTroop.tabs.selectPlayer')}</option>
-                                        {Object.values(clanPlayers).sort().map(p => <option key={p} value={p}>{p}</option>)}
-                                    </select>
-                                )}
-
-                                <div style={{ maxHeight: '350px', overflowY: 'auto' }}>
-                                    {suggestedSources.length === 0 ? <div style={{ padding: '10px', color: '#777', textAlign: 'center' }}>{t('clanTroop.suggestions.noVillages')}</div> :
-                                        suggestedSources.map(s => {
-                                            const isHidden = hiddenSources.includes(s.coord);
-                                            const activeOrders = planList.filter(p => p.sourceCoord === s.coord);
-
-                                            return (
-                                                <div key={s.coord} className="cop-list-item" style={{ opacity: isHidden ? 0.4 : 1 }}>
-                                                    <div>
-                                                        <span className="cop-player-badge">{s.playerName}</span> <b style={{ color: '#fff' }}>{s.coord}</b>
-                                                        <br />
-
-                                                        {s.profile !== "Bilinmiyor" ? (
-                                                            <div style={{ marginTop: '4px' }}>
-                                                                <span style={{ fontSize: '11px', background: s.profile.includes(t('clanTroop.profiles.kami')) ? '#8b0000' : '#2b542c', color: 'white', padding: '2px 4px', borderRadius: '3px', fontWeight: 'bold', marginRight: '5px' }}>
-                                                                    [{s.profile}]
-                                                                </span>
-                                                                <span style={{ fontSize: '11px', color: '#aaa' }}>{t('clanTroop.step3.distance')} {s.dist.toFixed(1)}</span>
-                                                                <div style={{ display: 'flex', gap: '6px', fontSize: '11px', color: '#eaddbd', marginTop: '4px', flexWrap: 'wrap' }}>
-                                                                    {s.units && s.units.axe > 0 && <span title="Balta"><img src={unitIcons.axe} style={{ width: '12px' }} alt="" />{s.units.axe}</span>}
-                                                                    {s.units && s.units.light > 0 && <span title="Hafif"><img src={unitIcons.light} style={{ width: '12px' }} alt="" />{s.units.light}</span>}
-                                                                    {s.units && s.units.ram > 0 && <span title="Şah"><img src={unitIcons.ram} style={{ width: '12px' }} alt="" />{s.units.ram}</span>}
-                                                                    {s.units && s.units.snob > 0 && <span title="Mis"><img src={unitIcons.snob} style={{ width: '12px' }} alt="" />{s.units.snob}</span>}
-
-                                                                    {/* Savunma Ağırlıklıysa */}
-                                                                    {s.profile.includes(t('clanTroop.profiles.sav')) && s.units && s.units.spear > 0 && <span title="Mızrak"><img src={unitIcons.spear} style={{ width: '12px' }} alt="" />{s.units.spear}</span>}
-                                                                    {s.profile.includes(t('clanTroop.profiles.sav')) && s.units && s.units.sword > 0 && <span title="Kılıç"><img src={unitIcons.sword} style={{ width: '12px' }} alt="" />{s.units.sword}</span>}
-                                                                </div>
-                                                            </div>
-                                                        ) : (
-                                                            <span style={{ fontSize: '11px', color: '#aaa' }}>{t('clanTroop.step3.distance')} {s.dist.toFixed(1)} {t('clanTroop.suggestions.noIntel')}</span>
-                                                        )}
-
-                                                        {activeOrders.length > 0 && (
-                                                            <div style={{ marginTop: '5px', fontSize: '10px', color: '#f0ad4e', background: 'rgba(240, 173, 78, 0.1)', padding: '2px 4px', borderRadius: '3px', borderLeft: '2px solid #f0ad4e' }}>
-                                                                {activeOrders.map(o => <div key={o.id}>📌 {o.targetCoord} ({t(`clanTroop.units.${o.unitType}`, { defaultValue: o.unitType })})</div>)}
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                    <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-                                                        {!isHidden && (
-                                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
-                                                                <div style={{ display: 'flex', gap: '3px' }}>
-                                                                    <img src={unitIcons.ram} alt="Kami" title={t('clanTroop.suggestions.kami')} className="cop-action-icon" onClick={() => addClanPlan(s, 'ram')} />
-                                                                    <img src={unitIcons.snob} alt="Mis" title={t('clanTroop.suggestions.snob')} className="cop-action-icon" onClick={() => addClanPlan(s, 'snob')} />
-                                                                    <img src={unitIcons.catapult} alt="Fake" title={t('clanTroop.suggestions.fake')} className="cop-action-icon" onClick={() => addClanPlan(s, 'catapult')} />
-                                                                </div>
-                                                            </div>
-                                                        )}
-                                                        <button className="cop-hide-btn" title={isHidden ? t('clanTroop.suggestions.show') : t('clanTroop.suggestions.hide')} onClick={(e) => toggleHideSource(s.coord, e)}>{isHidden ? '👁️' : '❌'}</button>
-                                                    </div>
-                                                </div>
-                                            )
-                                        })}
+                                {/* HARİTA */}
+                                <div className="cop-map-container">
+                                    <canvas ref={canvasRef} style={{ display: 'block' }}></canvas>
                                 </div>
                             </div>
                         </div>
-
-                        {/* HARİTA */}
-                        <div className="cop-map-container">
-                            <canvas ref={canvasRef} style={{ display: 'block' }}></canvas>
-                        </div>
-                    </div>
+                    )}
                 </div>
             )}
 
@@ -778,19 +959,24 @@ const ClanTroopPlanner = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {sortedPlanList.map((p, index) => (
-                                <tr key={p.id}>
-                                    <td style={{ fontWeight: 'bold', color: '#eaddbd' }}>{index + 1}</td>
-                                    <td><span className="cop-player-badge">{p.player}</span></td>
-                                    <td style={{ fontWeight: 'bold', color: '#eaddbd' }}>{p.sourceCoord}</td>
-                                    <td style={{ fontWeight: 'bold', color: '#d9534f', fontSize: '13px' }}>{p.targetCoord}</td>
-                                    <td style={{ fontWeight: 'bold', color: '#5cb85c' }}>{p.departureTime}</td>
-                                    <td style={{ fontWeight: 'bold', color: '#d9534f' }}>{p.arrivalTime}</td>
-                                    <td style={{ whiteSpace: 'nowrap', color: '#eaddbd' }}>{t(`clanTroop.units.${p.unitType}`, { defaultValue: p.unitType })}</td>
-                                    <td style={{ color: '#eaddbd' }}>{p.dist}</td>
-                                    <td><button className="cop-btn-danger" onClick={() => setPlanList(planList.filter(x => x.id !== p.id))}>{t('clanTroop.queue.delete')}</button></td>
-                                </tr>
-                            ))}
+                            {sortedPlanList.map((p, index) => {
+                                const sourceNameStr = p.sourceName ? ` (${p.sourceName})` : "";
+                                const targetNameStr = p.targetName ? ` (${p.targetName})` : "";
+
+                                return (
+                                    <tr key={p.id}>
+                                        <td style={{ fontWeight: 'bold', color: '#eaddbd' }}>{index + 1}</td>
+                                        <td><span className="cop-player-badge">{p.player}</span></td>
+                                        <td style={{ fontWeight: 'bold', color: '#eaddbd' }}>{p.sourceCoord}{sourceNameStr}</td>
+                                        <td style={{ fontWeight: 'bold', color: '#d9534f', fontSize: '13px' }}>{p.targetCoord}{targetNameStr}</td>
+                                        <td style={{ fontWeight: 'bold', color: '#5cb85c' }}>{p.departureTime}</td>
+                                        <td style={{ fontWeight: 'bold', color: '#d9534f' }}>{p.arrivalTime}</td>
+                                        <td style={{ whiteSpace: 'nowrap', color: '#eaddbd' }}>{t(`clanTroop.units.${p.unitType}`, { defaultValue: p.unitType })}</td>
+                                        <td style={{ color: '#eaddbd' }}>{p.dist}</td>
+                                        <td><button className="cop-btn-danger" onClick={() => setPlanList(planList.filter(x => x.id !== p.id))}>{t('clanTroop.queue.delete')}</button></td>
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </table>
 
@@ -801,7 +987,6 @@ const ClanTroopPlanner = () => {
                             <button className="cop-btn" onClick={() => { navigator.clipboard.writeText(generatedBBCode); showToast(t('clanTroop.alerts.copied')); }}>{t('clanTroop.bbcode.copyAll')}</button>
                         </div>
 
-                        {/* YENİ EKLENEN: SÜTUN SEÇİCİ */}
                         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '10px', fontSize: '13px' }}>
                             <b style={{ color: '#dcb589' }}>{t('clanTroop.bbcode.selectCols', 'Sütunları Seç:')}</b>
                             {Object.keys(bbCols).map(col => (

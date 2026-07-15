@@ -40,6 +40,26 @@ const decodeTWName = (str) => {
     }
 };
 
+// --- ASKERİ ZEKÂ (FARM & GÜÇ HESAPLAMA) ---
+const calculateVillageProfile = (obj, t) => {
+    const farmValues = { spear: 1, sword: 1, axe: 1, spy: 2, light: 4, heavy: 6, ram: 5, catapult: 8, knight: 1, snob: 100, archer: 1, marcher: 4, militia: 1 };
+
+    const farmSize = Object.keys(farmValues).reduce((sum, unit) => sum + (Number(obj[unit]) || 0) * farmValues[unit], 0);
+
+    let farmCategory = t('clanTroop.profiles.quarter', { defaultValue: 'Çeyrek' });
+    if (farmSize >= 15000) farmCategory = t('clanTroop.profiles.full', { defaultValue: 'Tam' });
+    else if (farmSize >= 10000) farmCategory = t('clanTroop.profiles.threeQuarters', { defaultValue: '3/4' });
+    else if (farmSize >= 5000) farmCategory = t('clanTroop.profiles.half', { defaultValue: 'Yarım' });
+
+    const attackPower = (Number(obj.axe) || 0) * 1 + (Number(obj.light) || 0) * 4 + (Number(obj.ram) || 0) * 5;
+    const defensePower = (Number(obj.spear) || 0) * 1 + (Number(obj.sword) || 0) * 1 + (Number(obj.heavy) || 0) * 6;
+
+    let type = attackPower >= defensePower ? t('clanTroop.profiles.kami', { defaultValue: 'Kami' }) : t('clanTroop.profiles.sav', { defaultValue: 'Sav' });
+    if (farmSize < 1500) { type = t('clanTroop.profiles.empty', { defaultValue: 'Boş' }); farmCategory = ""; }
+
+    return { farmSize, villageType: type, profile: farmCategory ? `${farmCategory} ${type}` : type };
+};
+
 const API_BASE = "https://chamber-that-smock.ngrok-free.dev/api";
 
 const OpPlanner = () => {
@@ -70,12 +90,24 @@ const OpPlanner = () => {
     const [unitSpeeds, setUnitSpeeds] = useState(() => storage.get("op_cache_speeds", defaultUnitSpeeds));
     const [parsedTargets, setParsedTargets] = useState([]); 
     
+    // === YENİ: ASKER VERİSİ GİRİŞİ ===
+    const [troopInput, setTroopInput] = useState(() => storage.get("op_troopInput", ""));
+    const [parsedTroops, setParsedTroops] = useState(() => storage.get("op_parsedTroops", {}));
+    const activeUnits = ['spear', 'sword', 'axe', 'spy', 'light', 'heavy', 'ram', 'catapult', 'knight', 'snob'];
+
+    // Her kaynak köy için seçilen BİRİMLER (Dizi)
     const [sourceTypes, setSourceTypes] = useState({}); 
     const [planList, setPlanList] = useState([]); 
 
+    // Eşleştirme Motoru (Select Box)
     const [selectedSourceCoord, setSelectedSourceCoord] = useState("");
     const [selectedTargetCoord, setSelectedTargetCoord] = useState("");
     const [selectedUnitMode, setSelectedUnitMode] = useState("");
+
+    // Manuel Plan Ekleme State'leri (Yeni)
+    const [manualSource, setManualSource] = useState("");
+    const [manualUnit, setManualUnit] = useState("ram");
+    const [manualTarget, setManualTarget] = useState("");
 
     const [bbCols, setBbCols] = useState({
         no: true, source: true, target: true, departure: true, arrival: true, unit: true, distance: false, travelTime: false, attackLink: true
@@ -88,7 +120,9 @@ const OpPlanner = () => {
         storage.set("op_player", playerName);
         storage.set("op_targets", targetInput);
         storage.set("op_max_snob", maxSnobDist);
-    }, [worldUrl, playerName, targetInput, maxSnobDist]);
+        storage.set("op_troopInput", troopInput);
+        storage.set("op_parsedTroops", parsedTroops);
+    }, [worldUrl, playerName, targetInput, maxSnobDist, troopInput, parsedTroops]);
 
     const colDisplayNames = {
         no: t('opPlanner.columns.no'), source: t('opPlanner.columns.source'), 
@@ -242,7 +276,7 @@ const OpPlanner = () => {
                 const pid = parseInt(item[4]); 
                 const vilObj = { 
                     id: parseInt(item[0]), 
-                    name: decodeTWName(item[1]), // Köy adı şifreden çözülüyor
+                    name: decodeTWName(item[1]), // YENİ: Köy adını şifreden çöz
                     x: parseInt(item[2]), 
                     y: parseInt(item[3]), 
                     pid: pid, 
@@ -277,7 +311,6 @@ const OpPlanner = () => {
             setSourceTypes(initTypes);
             setStatus(t('opPlanner.status.success').replace('{{count}}', pVils.length));
 
-            // Veri çekilince 1'i kapat, 2, 3 ve 4'ü aç
             setIsStep1Open(false);
             setIsStep2Open(true);
             setIsStep3Open(true);
@@ -287,6 +320,51 @@ const OpPlanner = () => {
             setStatus(t('opPlanner.status.error').replace('{{msg}}', error.message));
         }
     };
+
+    // === 2.1. ASKERİ İSTİHBARAT ÇÖZÜCÜSÜ (PARSER) ===
+    useEffect(() => {
+        if (!troopInput) return setParsedTroops({});
+
+        const lines = troopInput.split('\n');
+        const results = {};
+
+        lines.forEach(line => {
+            const coordMatch = line.match(/(\d{3}\|\d{3})/);
+            if (!coordMatch) return;
+            const coord = coordMatch[1];
+
+            let numbers = [];
+
+            if (line.includes(',')) {
+                const parts = line.substring(line.indexOf(',') + 1).split(',');
+                numbers = parts.map(n => parseInt(n.trim(), 10)).filter(n => !isNaN(n));
+            } else {
+                let remainder = line.substring(line.indexOf(coord) + 7);
+                remainder = remainder.replace(/^[)\]\s]*(K\d{2})?\s*/, '');
+
+                const parts = remainder.trim().split(/[\s\t]+/);
+
+                if (parts.length > 0 && (parts[0].includes('.') || parts.length > activeUnits.length)) {
+                    parts.shift(); 
+                }
+
+                numbers = parts.map(n => parseInt(n.replace(/\./g, ''), 10)).filter(n => !isNaN(n));
+                if (numbers.length > activeUnits.length) {
+                    numbers = numbers.slice(0, activeUnits.length);
+                }
+            }
+
+            if (numbers.length > 0) {
+                const unitObj = {};
+                activeUnits.forEach((u, i) => { unitObj[u] = numbers[i] || 0; });
+                const profile = calculateVillageProfile(unitObj, t);
+                results[coord] = { coord, units: unitObj, ...profile };
+            }
+        });
+
+        setParsedTroops(results);
+    }, [troopInput, activeUnits, t]);
+
 
     const toggleUnitForVillage = (coord, unitKey) => {
         setSourceTypes(prev => {
@@ -299,11 +377,9 @@ const OpPlanner = () => {
         });
     };
 
-    // HIZLI SEÇİM FONKSİYONU
     const applyQuickRole = (coord, role) => {
         let unitsToSelect = [];
         if (role === 'kami') unitsToSelect = ['ram'];
-        // Casus yerine şahmerdan (ram) hızı!
         if (role === 'fake') unitsToSelect = ['ram']; 
         if (role === 'mis') unitsToSelect = ['snob'];
 
@@ -326,6 +402,8 @@ const OpPlanner = () => {
             setTargetInput("");
             setSourceTypes({});
             setPlayerVillages([]);
+            setTroopInput("");
+            setParsedTroops({});
             setIsStep1Open(true);
         }
     };
@@ -341,7 +419,8 @@ const OpPlanner = () => {
             if (!uniqueCheck.has(coord)) {
                 uniqueCheck.add(coord);
                 const vil = villages.find(v => v.coord === coord);
-                coords.push({ coord, x: parseInt(match[1]), y: parseInt(match[2]), id: vil ? vil.id : null });
+                // YENİ: village adı da çekiliyor
+                coords.push({ coord, x: parseInt(match[1]), y: parseInt(match[2]), id: vil ? vil.id : null, name: vil ? vil.name : "" });
             }
         }
         setParsedTargets(coords);
@@ -356,6 +435,7 @@ const OpPlanner = () => {
         return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
     };
 
+    // SELECT BOX ÜZERİNDEN EKLEME
     const addToPlan = () => {
         if (!selectedSourceCoord || !selectedTargetCoord || !selectedUnitMode) return alert(t('opPlanner.alerts.selectMatch'));
 
@@ -389,8 +469,8 @@ const OpPlanner = () => {
 
         const newPlan = {
             id: Date.now() + Math.random(),
-            sourceCoord: sourceVil.coord, sourceId: sourceVil.id,
-            targetCoord: targetVil.coord, targetId: targetVil.id,
+            sourceCoord: sourceVil.coord, sourceId: sourceVil.id, sourceName: sourceVil.name || "",
+            targetCoord: targetVil.coord, targetId: targetVil.id, targetName: targetVil.name || "",
             unitType, dist: dist.toFixed(2),
             travelTime: formatTravelTime(travelMinutes),
             departureTime: formatCustomStr(departureDate),
@@ -399,6 +479,63 @@ const OpPlanner = () => {
         };
 
         setPlanList([...planList, newPlan]);
+    };
+
+    // MANUEL YAZARAK EKLEME (YENİ)
+    const handleAddManualPlan = () => {
+        const cleanSrc = manualSource.trim();
+        const cleanTgt = manualTarget.trim();
+        const regex = /^\d{3}\|\d{3}$/;
+
+        if (!regex.test(cleanSrc) || !regex.test(cleanTgt)) {
+            return alert("Lütfen geçerli kaynak ve hedef koordinatları girin (Örn: 500|500)");
+        }
+
+        const sourceObj = playerVillages.find(v => v.coord === cleanSrc) || {
+            coord: cleanSrc,
+            x: parseInt(cleanSrc.split('|')[0]),
+            y: parseInt(cleanSrc.split('|')[1]),
+            id: null,
+            name: ""
+        };
+
+        const targetObj = parsedTargets.find(v => v.coord === cleanTgt) || {
+            coord: cleanTgt,
+            x: parseInt(cleanTgt.split('|')[0]),
+            y: parseInt(cleanTgt.split('|')[1]),
+            id: null,
+            name: ""
+        };
+
+        const dist = calculateDistance(sourceObj.x, sourceObj.y, targetObj.x, targetObj.y);
+        const travelMinutes = dist * (unitSpeeds[manualUnit] || 30);
+        const travelMs = travelMinutes * 60 * 1000;
+
+        const baseDate = new Date(selectedDateTime);
+        let departureDate, arrivalDate;
+
+        if (timeMode === 'arrival') {
+            arrivalDate = new Date(baseDate);
+            departureDate = new Date(baseDate.getTime() - travelMs);
+        } else {
+            departureDate = new Date(baseDate);
+            arrivalDate = new Date(baseDate.getTime() + travelMs);
+        }
+
+        const newPlan = {
+            id: Date.now() + Math.random(),
+            sourceCoord: sourceObj.coord, sourceId: sourceObj.id, sourceName: sourceObj.name || "",
+            targetCoord: targetObj.coord, targetId: targetObj.id, targetName: targetObj.name || "",
+            unitType: manualUnit, dist: dist.toFixed(2),
+            travelTime: formatTravelTime(travelMinutes),
+            departureTime: formatCustomStr(departureDate),
+            arrivalTime: formatCustomStr(arrivalDate),
+            departureTimestamp: departureDate.getTime() 
+        };
+
+        setPlanList([...planList, newPlan]);
+        setManualSource("");
+        setManualTarget("");
     };
 
     const removeFromPlan = (id) => setPlanList(planList.filter(p => p.id !== id));
@@ -425,9 +562,13 @@ const OpPlanner = () => {
 
         sortedPlanList.forEach((p, index) => {
             let row = `[*]`;
+            
+            const sourceNameStr = p.sourceName ? ` (${p.sourceName})` : "";
+            const targetNameStr = p.targetName ? ` (${p.targetName})` : "";
+
             if(bbCols.no) row += ` ${index + 1} [|]`;
-            if(bbCols.source) row += ` ${p.sourceCoord} [|]`;
-            if(bbCols.target) row += ` ${p.targetCoord} [|]`;
+            if(bbCols.source) row += ` ${p.sourceCoord}${sourceNameStr} [|]`;
+            if(bbCols.target) row += ` ${p.targetCoord}${targetNameStr} [|]`;
             if(bbCols.departure) row += ` [b][color=#2b542c]${p.departureTime}[/color][/b] [|]`;
             if(bbCols.arrival) row += ` [b][color=#ff0000]${p.arrivalTime}[/color][/b] [|]`;
 
@@ -439,7 +580,8 @@ const OpPlanner = () => {
             if(bbCols.distance) row += ` ${p.dist} [|]`;
             if(bbCols.travelTime) row += ` ${p.travelTime} [|]`;
 
-            const aLink = `[url=${worldUrl.replace(/\/$/, '')}/game.php?village=${p.sourceId}&screen=place&target=${p.targetId}]${t('opPlanner.bbcode.attack')}[/url]`;
+            let aLink = "-";
+            if (p.sourceId && p.targetId) aLink = `[url=${worldUrl.replace(/\/$/, '')}/game.php?village=${p.sourceId}&screen=place&target=${p.targetId}]${t('opPlanner.bbcode.attack')}[/url]`;
             if(bbCols.attackLink) row += ` [b]${aLink}[/b] [|]`;
 
             row = row.replace(/ \[\|\]$/, '') + `\n`;
@@ -586,6 +728,18 @@ const OpPlanner = () => {
                         )}
                     </div>
 
+                    {/* YENİ: ASKER VERİSİ GİRİŞİ (İSTİHBARAT) */}
+                    {playerVillages.length > 0 && (
+                        <div className="op-box">
+                            <h3 style={{ margin: '0 0 10px 0', color: '#f0c042', fontSize: '14px' }}>🛡️ Asker Verisi Gir (Toplu Bakış -> Askerler)</h3>
+                            <textarea
+                                className="op-textarea" rows="3"
+                                placeholder="Buraya oyun içindeki asker sayılarını yapıştırırsan, köy kartlarında köylerin gücünü (Kami, Sav vb.) görebilirsin."
+                                value={troopInput} onChange={e => setTroopInput(e.target.value)}
+                            />
+                        </div>
+                    )}
+
                     {/* ADIM 2 - MOBİL UYUMLU KART TASARIMI */}
                     {playerVillages.length > 0 && (
                         <div className="op-box" style={{maxHeight: isStep2Open ? '500px' : 'auto', overflowY: isStep2Open ? 'auto' : 'visible'}}>
@@ -603,6 +757,8 @@ const OpPlanner = () => {
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                                         {playerVillages.map(v => {
                                             const activeUnits = sourceTypes[v.coord] || [];
+                                            const troopData = parsedTroops[v.coord]; // YENİ: Köyün asker verisi
+
                                             return (
                                                 <div key={v.coord} style={{
                                                     background: '#1e1e1e', 
@@ -614,10 +770,23 @@ const OpPlanner = () => {
                                                     gap: '10px'
                                                 }}>
                                                     {/* Köy Bilgisi */}
-                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #333', paddingBottom: '8px' }}>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid #333', paddingBottom: '8px' }}>
                                                         <div>
                                                             <span style={{ fontWeight: 'bold', fontSize: '16px', color: '#fff' }}>{v.coord}</span>
                                                             <div style={{ fontSize: '12px', color: '#aaa', marginTop: '2px' }}>{v.name}</div>
+                                                            
+                                                            {/* YENİ: ASKER BİLGİSİ ROZETLERİ */}
+                                                            {troopData && (
+                                                                <div style={{ fontSize: '11px', color: '#eaddbd', marginTop: '6px', display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
+                                                                    <span style={{ background: troopData.profile.includes('Kami') ? '#8b0000' : '#2b542c', color: 'white', padding: '2px 5px', borderRadius: '3px', fontWeight: 'bold' }}>
+                                                                        [{troopData.profile}]
+                                                                    </span>
+                                                                    {troopData.units.axe > 0 && <span title="Balta"><img src={unitIcons.axe} style={{ width: '12px', verticalAlign: 'middle' }} alt="" /> {troopData.units.axe}</span>}
+                                                                    {troopData.units.light > 0 && <span title="Hafif"><img src={unitIcons.light} style={{ width: '12px', verticalAlign: 'middle' }} alt="" /> {troopData.units.light}</span>}
+                                                                    {troopData.units.ram > 0 && <span title="Şah"><img src={unitIcons.ram} style={{ width: '12px', verticalAlign: 'middle' }} alt="" /> {troopData.units.ram}</span>}
+                                                                    {troopData.units.snob > 0 && <span title="Mis"><img src={unitIcons.snob} style={{ width: '12px', verticalAlign: 'middle' }} alt="" /> {troopData.units.snob}</span>}
+                                                                </div>
+                                                            )}
                                                         </div>
                                                         {/* Hızlı Seçim Butonları */}
                                                         <div style={{ display: 'flex', gap: '5px' }}>
@@ -726,12 +895,42 @@ const OpPlanner = () => {
                                 />
                             </div>
 
+                            {/* YENİ MANUEL EKLEME BÖLÜMÜ (DOĞRUDAN YAZARAK) */}
+                            <div style={{ border: '1px dashed #555', padding: '15px', borderRadius: '8px', background: '#181818', marginBottom: '20px' }}>
+                                <h4 style={{ margin: '0 0 10px 0', color: '#f0c042' }}>✍️ Manuel Operasyon Ekle (Seçmek İstemiyorsan Yaz)</h4>
+                                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                                    <div style={{ flex: 1, minWidth: '150px' }}>
+                                        <label style={{ fontSize: '12px', fontWeight: 'bold' }}>Kaynak Köy (Örn: 500|500)</label>
+                                        <input type="text" className="op-input" placeholder="500|500" value={manualSource} onChange={e => setManualSource(e.target.value)} />
+                                    </div>
+                                    <div style={{ flex: 1, minWidth: '150px' }}>
+                                        <label style={{ fontSize: '12px', fontWeight: 'bold' }}>Gönderilecek Birim</label>
+                                        <select className="op-input" style={{ padding: '6px' }} value={manualUnit} onChange={e => setManualUnit(e.target.value)}>
+                                            <option value="ram">Şahmerdan (Kami/Fake)</option>
+                                            <option value="snob">Misyoner</option>
+                                            <option value="catapult">Mancınık</option>
+                                            <option value="spy">Casus</option>
+                                            <option value="axe">Balta</option>
+                                        </select>
+                                    </div>
+                                    <div style={{ flex: 1, minWidth: '150px' }}>
+                                        <label style={{ fontSize: '12px', fontWeight: 'bold' }}>Hedef Köy (Örn: 501|501)</label>
+                                        <input type="text" className="op-input" placeholder="501|501" value={manualTarget} onChange={e => setManualTarget(e.target.value)} />
+                                    </div>
+                                    <div style={{ flex: 'none', width: '100%', marginTop: '5px' }}>
+                                        <button className="op-btn" style={{ background: '#337ab7', width: '100%', padding: '10px' }} onClick={handleAddManualPlan}>➕ Operasyon Planına Ekle</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* DROPDOWN (SELECT) ÜZERİNDEN EKLEME */}
+                            <h4 style={{ margin: '0 0 10px 0', color: '#5cb85c' }}>👉 Listeden Seçerek Ekle</h4>
                             <div className="op-flex-wrap">
                                 <div>
                                     <label style={{fontWeight: 'bold', fontSize: '12px', display: 'block'}}>{t('opPlanner.step4.sourceVillage')}</label>
                                     <select value={selectedSourceCoord} onChange={e => setSelectedSourceCoord(e.target.value)} style={{padding: '6px', width: '100%', fontWeight: 'bold'}}>
                                         {availableSourceVillages.length === 0 ? <option value="">{t('opPlanner.step4.allSourcesUsed')}</option> :
-                                          availableSourceVillages.map(v => <option key={v.coord} value={v.coord}>{v.coord}</option>)
+                                          availableSourceVillages.map(v => <option key={v.coord} value={v.coord}>{v.coord} {v.name ? `(${v.name})` : ''}</option>)
                                         }
                                     </select>
                                 </div>
@@ -747,7 +946,7 @@ const OpPlanner = () => {
                                 <div>
                                     <label style={{fontWeight: 'bold', fontSize: '12px', display: 'block'}}>{t('opPlanner.step4.target')}</label>
                                     <select value={selectedTargetCoord} onChange={e => setSelectedTargetCoord(e.target.value)} style={{padding: '6px', width: '100%', fontWeight: 'bold'}}>
-                                        {parsedTargets.map(v => <option key={v.coord} value={v.coord}>{v.coord}</option>)}
+                                        {parsedTargets.map(v => <option key={v.coord} value={v.coord}>{v.coord} {v.name ? `(${v.name})` : ''}</option>)}
                                     </select>
                                 </div>
                                 <div style={{flex: 'none', width: '100%'}}>
@@ -776,11 +975,21 @@ const OpPlanner = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {sortedPlanList.map((p, index) => (
+                                            {sortedPlanList.map((p, index) => {
+                                                const sourceNameStr = p.sourceName ? ` (${p.sourceName})` : "";
+                                                const targetNameStr = p.targetName ? ` (${p.targetName})` : "";
+                                                
+                                                return (
                                                 <tr key={p.id}>
                                                     <td style={{fontWeight: 'bold'}}>{index + 1}</td>
-                                                    <td style={{fontWeight: 'bold'}}>{p.sourceCoord}</td>
-                                                    <td style={{fontWeight: 'bold', color: '#d9534f', fontSize: '14px'}}>{p.targetCoord}</td>
+                                                    <td style={{fontWeight: 'bold'}}>
+                                                        {p.sourceCoord}
+                                                        <div style={{fontSize:'10px', color:'#aaa', fontWeight:'normal'}}>{p.sourceName}</div>
+                                                    </td>
+                                                    <td style={{fontWeight: 'bold', color: '#d9534f', fontSize: '14px'}}>
+                                                        {p.targetCoord}
+                                                        <div style={{fontSize:'10px', color:'#aaa', fontWeight:'normal'}}>{p.targetName}</div>
+                                                    </td>
                                                     <td style={{fontWeight: 'bold', color: '#2b542c'}}>{p.departureTime}</td>
                                                     <td style={{fontWeight: 'bold', color: '#d9534f'}}>{p.arrivalTime}</td>
                                                     <td style={{whiteSpace: 'nowrap'}}>
@@ -791,7 +1000,7 @@ const OpPlanner = () => {
                                                     <td>{p.travelTime}</td>
                                                     <td><button className="op-btn-danger" onClick={() => removeFromPlan(p.id)}>{t('opPlanner.queue.delete')}</button></td>
                                                 </tr>
-                                            ))}
+                                            )})}
                                         </tbody>
                                     </table>
 
