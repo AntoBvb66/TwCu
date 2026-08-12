@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import storage from '../utils/storage';
+import { fetchWorldData, extractWorldId, cleanWorldUrl, decodeTW, bumpStat } from '../utils/twApi';
 import './MapGenerator.css';
 
 // === 25 ÖZEL RENK PALETİ ===
@@ -123,15 +124,6 @@ const hslToHex = (h, s, l) => {
     return `#${f(0)}${f(8)}${f(4)}`;
 };
 
-const decodeTW = (str) => {
-    if (!str) return "";
-    try {
-        let decoded = decodeURIComponent(str);
-        return decoded.replace(/\+/g, ' ');
-    } catch (e) {
-        return str.replace(/\+/g, ' ');
-    }
-};
 
 const MapGenerator = () => {
     const { t } = useTranslation();
@@ -156,44 +148,25 @@ const MapGenerator = () => {
 
     useEffect(() => { storage.set("mg_world_url", worldUrl); }, [worldUrl]);
 
-    const extractWorldId = (url) => {
-        const match = url.match(/https?:\/\/([^.]+)\./);
-        return match ? match[1] : null;
-    };
-
     const handleFetchData = async () => {
-        const worldId = extractWorldId(worldUrl);
-        if (!worldId) return alert(t('mapGenerator.status.noUrl'));
+        const cleanUrl = cleanWorldUrl(worldUrl);
+        if (!extractWorldId(cleanUrl)) return alert(t('mapGenerator.status.noUrl'));
 
         setStatus(t('mapGenerator.status.fetching'));
         try {
-            // YENİ RENDER API ADRESİN (Doğrudan istek)
-            const API_BASE = "https://chamber-that-smock.ngrok-free.dev/api";
+            // Merkezî veri katmanı (ortak önbellek — diğer sayfalarla paylaşılır)
+            const { ally: allyRows, player: playerRows, village: villageRows } =
+                await fetchWorldData(cleanUrl, { villages: true });
 
-            const [allyRes, playerRes, villageRes] = await Promise.all([
-                fetch(`${API_BASE}/${worldId}/Klanlar`, { headers: { "ngrok-skip-browser-warning": "true" } }),
-                fetch(`${API_BASE}/${worldId}/Oyuncular`, { headers: { "ngrok-skip-browser-warning": "true" } }),
-                fetch(`${API_BASE}/${worldId}/Koyler`, { headers: { "ngrok-skip-browser-warning": "true" } })
-            ]);
-
-            if (!allyRes.ok || !playerRes.ok || !villageRes.ok) {
-                throw new Error("Veritabanından yanıt alınamadı.");
-            }
-
-            const allyData = await allyRes.json();
-            const playerData = await playerRes.json();
-            const villageData = await villageRes.json();
-
-            // Veritabanı henüz boşsa veya tablo yoksa
-            if (!allyData.veriler || !playerData.veriler || !villageData.veriler) {
-                throw new Error("Bu dünya için veri bulunamadı. Lütfen botun verileri çekmesini bekleyin.");
+            if (!villageRows || villageRows.length === 0) {
+                throw new Error('WORLD_EMPTY');
             }
 
             const tribesDb = {};
             const parsedTribes = [];
 
             // Klan Formatı: id(0), name(1), tag(2), members(3), villages(4), points(5), all_points(6), rank(7)
-            allyData.veriler.forEach(item => {
+            allyRows.forEach(item => {
                 const id = parseInt(item[0]);
                 const points = parseInt(item[5]) || 0;
                 const rank = parseInt(item[7]) || 9999;
@@ -215,7 +188,7 @@ const MapGenerator = () => {
             const parsedPlayers = [];
 
             // Oyuncu Formatı: id(0), name(1), ally_id(2), villages(3), points(4), rank(5)
-            playerData.veriler.forEach(item => {
+            playerRows.forEach(item => {
                 const id = parseInt(item[0]);
                 const points = parseInt(item[4]) || 0;
                 const playerObj = {
@@ -235,7 +208,7 @@ const MapGenerator = () => {
             const tribeCenters = {};
 
             // Köy Formatı: id(0), name(1), x(2), y(3), player_id(4), points(5), rank(6)
-            villageData.veriler.forEach(item => {
+            villageRows.forEach(item => {
                 const x = parseInt(item[2]);
                 const y = parseInt(item[3]);
                 const pid = parseInt(item[4]);
@@ -273,7 +246,11 @@ const MapGenerator = () => {
 
             setStatus(t('mapGenerator.status.success'));
         } catch (error) {
-            setStatus(t('mapGenerator.status.error').replace('{{msg}}', error.message));
+            const msg =
+                error.message === 'INVALID_WORLD_URL' ? t('common.invalidWorldUrl')
+                : error.message === 'WORLD_EMPTY' ? t('common.worldEmpty')
+                : error.message;
+            setStatus(t('mapGenerator.status.error').replace('{{msg}}', msg));
         }
     };
 
@@ -334,8 +311,7 @@ const MapGenerator = () => {
     });
 
     const generateMap = () => {
-        // İstatistik sayacı isteğe bağlı, Cloudflare tarafında tutuyorsan kalabilir
-        fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=maps").catch(() => { });
+        bumpStat('maps');
 
         const canvas = canvasRef.current;
         if (!canvas) return;

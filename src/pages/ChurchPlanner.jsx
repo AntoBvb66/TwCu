@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next'; // YENİ: Çeviri motoru eklendi
+import { bumpStat } from '../utils/twApi';
 import storage from '../utils/storage';
 import './ChurchPlanner.css';
 
@@ -144,12 +145,12 @@ const ChurchPlanner = () => {
 
         setResults({ churches: plannedChurches, allVillages, totalUncovered: uncovered.length });
         drawMap(plannedChurches, allVillages);
-        fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=churches").catch(()=>console.log("sayac hatasi"));
+        bumpStat("churches");
     };
 
     // === GÖRSEL HARİTA ÇİZİMİ ===
     const drawMap = (churches, villages) => {
-        fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=maps").catch(() => {});
+        bumpStat("maps");
         const canvas = canvasRef.current;
         if (!canvas || villages.length === 0) return;
         const ctx = canvas.getContext("2d");

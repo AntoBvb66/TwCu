@@ -24,7 +24,11 @@
       "fastSupport": "Hızlı Destek Planlama",
       "scavengingPlanner": "Temizlik Süreleri Hesaplama",
       "notificationSettings": "Bildirim Ayarları"
-    }
+    },
+    "toggle": "Menüyü aç/kapat",
+    "expand": "Genişlet",
+    "collapse": "Daralt",
+    "changeLanguage": "Dili değiştir"
   },
   "home": {
     "hero": {
@@ -338,7 +342,9 @@
       "unlocked": "Açıksa",
       "infoTitle": "💡 Kritik Dönüm Noktaları (Başa Baş Noktaları)",
       "be1": "🔸 {{cap}} Kapasiteyi geçtikten sonra: 1-2-3-4 taktiği, 2-3-4 taktiğini sollayarak daha kazançlı hale gelir.",
-      "be2": "🔸 {{cap}} Kapasiteyi geçtikten sonra: 1-2-3 taktiği, 2-3 taktiğini sollar."
+      "be2": "🔸 {{cap}} Kapasiteyi geçtikten sonra: 1-2-3 taktiği, 2-3 taktiğini sollar.",
+      "dailyMining": "■ Günlük Maden Üretimi",
+      "dailyScavenging": "■ Günlük Toplayıcılık Ganimeti"
     }
   },
   "churchPlanner": {
@@ -436,7 +442,8 @@
       "manualAdded": "✅ Serbest Atama Eklendi!",
       "confirmClearQueue": "Tüm kuyruğu temizlemek istediğinize emin misiniz?",
       "queueCleared": "🗑️ Kuyruk Temizlendi!",
-      "copied": "Kopyalandı!"
+      "copied": "Kopyalandı!",
+      "enterTribeTag": "Lütfen Klan Kısaltmasını girin!"
     },
     "columns": {
       "no": "Sıra",
@@ -529,7 +536,8 @@
       "copyAll": "Hepsini Kopyala",
       "ordersFor": "--- {{player}} İÇİN EMİRLER ---",
       "attack": "Saldır",
-      "unknown": "BİLİNMİYOR"
+      "unknown": "BİLİNMİYOR",
+      "selectCols": "Sütunları Seç:"
     },
     "alerts": {
       "confirmClear": "İstihbarat dahil tüm planlar silinecek. Emin misiniz?",
@@ -540,7 +548,8 @@
       "orderAdded": "✅ Emir Eklendi!",
       "confirmClearQueue": "Tüm kuyruğu temizlemek istediğinize emin misiniz?",
       "queueCleared": "🗑️ Kuyruk Temizlendi!",
-      "copied": "Kopyalandı!"
+      "copied": "Kopyalandı!",
+      "enterTribeTag": "Lütfen Klan Kısaltmasını girin!"
     },
     "columns": {
       "no": "Sıra",
@@ -625,7 +634,8 @@
       "title": "Yetişebilen Destekler ({{count}})",
       "allClan": "Tüm Klan",
       "noVillages": "Bu hedefe, seçili zamanda yetişebilecek köy bulunamadı!",
-      "mapTarget": "🛡️ Hedef"
+      "mapTarget": "🛡️ Hedef",
+      "allTribe": "Tüm Klan"
     },
     "bbcode": {
       "title": "📋 Forum Çağrısı (BBCode)",
@@ -638,7 +648,8 @@
     },
     "alerts": {
       "enterClanTag": "Lütfen Klan Kısaltmasını girin!",
-      "copied": "Kopyalandı!"
+      "copied": "Kopyalandı!",
+      "enterTribeTag": "Lütfen Klan Kısaltmasını girin!"
     },
     "columns": {
       "player": "Oyuncu",
@@ -672,7 +683,8 @@
       "analyzing": "İndirme tamam, analiz ediliyor...",
       "empty": "İşlenecek veri bulunamadı!",
       "success": "BAŞARILI: {{villages}} köy, {{players}} oyuncu yüklendi.",
-      "cleared": "Depo tamamen temizlendi."
+      "cleared": "Depo tamamen temizlendi.",
+      "errorShort": "HATA"
     },
     "timeMsg": {
       "cached": "⏳ Önbellek verisi gösteriliyor. Son çekim: {{time}}",
@@ -814,6 +826,9 @@
       "archer": "Okçu",
       "marcher": "Atlı Okçu",
       "militia": "Milis"
+    },
+    "troopInput": {
+      "title": "🛡️ Asker Verisi Gir (Toplu Bakış Askerler)"
     }
   },
   "productionData": {
@@ -1060,7 +1075,13 @@
       "saveSuccess": "{{count}} profil başarıyla buluta kaydedildi!",
       "saveError": "{{count}} profil kaydedilirken hata oluştu!",
       "saveNoData": "Kaydedilecek profil bulunamadı!",
-      "enterSpecialId": "Lütfen Özel Erişim Kimliği girin!"
+      "enterSpecialId": "Lütfen Özel Erişim Kimliği girin!",
+      "deleteError": "Profil silinemedi!",
+      "enterHighlightName": "Bir oyuncu veya klan adı girin!",
+      "confirmRemoteDelete": "Bu Special ID'ye ait tüm veriler kalıcı olarak silinecek. Emin misiniz?",
+      "remoteDeleteSuccess": "Profil veritabanından başarıyla silindi.",
+      "remoteDeleteError": "Silme sırasında bir hata oluştu. ID'yi kontrol edin.",
+      "idGenerateError": "Bağlantı hatası! ID üretilemedi."
     },
     "common": {
       "add": "Ekle",
@@ -1081,5 +1102,23 @@
       "continentPrefix": "Kıta",
       "noContinentAdded": "Henüz kıta eklenmedi."
     }
+  },
+  "common": {
+    "invalidWorldUrl": "Geçersiz dünya linki! Lütfen adresi kontrol edin.",
+    "barbarian": "Barbar",
+    "worldEmpty": "Bu dünya için henüz veri yok. Botun verileri toplamasını bekleyin."
+  },
+  "manualPlan": {
+    "title": "✍️ Manuel Operasyon Ekle (listeden seçmek istemiyorsan yaz)",
+    "sourceVillage": "Kaynak Köy (Örn: 500|500)",
+    "targetVillage": "Hedef Köy (Örn: 501|501)",
+    "unitToSend": "Gönderilecek Birim",
+    "ramKami": "Şahmerdan (Kami)",
+    "ramKamiFake": "Şahmerdan (Kami/Fake)",
+    "catapult": "Mancınık",
+    "catapultFake": "Mancınık (Fake)",
+    "addToPlan": "➕ Operasyon Planına Ekle",
+    "addFromList": "👉 Listeden Seçerek Ekle",
+    "invalidCoords": "Lütfen geçerli kaynak ve hedef koordinatları girin (Örn: 500|500)"
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next'; // YENİ: Çeviri motoru eklendi
+import { bumpStat } from '../utils/twApi';
 import storage from '../utils/storage';
 import './BuildingPlanner.css';
 
@@ -141,7 +142,7 @@ function formatClock(seconds, t) {
 
 const BuildingPlanner = () => {
     const { t } = useTranslation(); // YENİ: Çeviri fonksiyonu
-    fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=sims").catch(() => {});
+    bumpStat("sims");
     // Tablo sütunları çeviriden dinamik olarak oluşturuluyor
     const getColumns = () => [
         t('buildingPlanner.columns.order'), t('buildingPlanner.columns.expectedWait'), t('buildingPlanner.columns.building'),

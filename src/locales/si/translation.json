@@ -22,8 +22,13 @@
       "clanOp": "Načrtovalec operacij plemena",
       "clanTroop": "Načrtovalec operacij plemena (napredno)",
       "fastSupport": "Načrtovanje hitre podpore",
-      "scavengingPlanner": "Kalkulator časa brskanja"
-    }
+      "scavengingPlanner": "Kalkulator časa brskanja",
+      "notificationSettings": "Nastavitve obvestil"
+    },
+    "toggle": "Odpri/zapri meni",
+    "expand": "Razširi",
+    "collapse": "Skrči",
+    "changeLanguage": "Spremeni jezik"
   },
   "home": {
     "hero": {
@@ -31,19 +36,62 @@
       "subtitle": "Zmaga se skriva v podrobnostih in brezhibnem načrtovanju. Prihranite čas na vaši poti v Vojni plemen in osnujte strateške načrte, ki bodo vaše pleme vodili do zmage. Izberite orodje za začetek."
     },
     "tools": {
-      "opPlanner": { "title": "Osebni načrtovalec operacij", "desc": "Povežite izvorne in ciljne vasi, da pripravite brezhibno predlogo operacije (BBCode)." },
-      "buildingPlanner": { "title": "Načrtovalec gradnje", "desc": "Korak za korakom oblikujte načrt gradnje vaše vasi z napredno simulacijo vrste." },
-      "unitCalculator": { "title": "Kalkulator proizvodnje čet", "desc": "Izračunajte čas proizvodnje enot za vojašnico, konjušnico in delavnico, vključno z bonusi." },
-      "mapGenerator": { "title": "Generator zemljevidov", "desc": "Ustvarite posodobljene, barvne dinamične zemljevide sveta za forume plemena." },
-      "mapAnalysis": { "title": "Analiza celine", "desc": "Analizirajte prevlado plemena in igralcev na celinah na zemljevidu sveta." },
-      "productionData": { "title": "Kalkulator proizvodnje", "desc": "Optimizirajte stopnje proizvodnje v rudnikih, zmogljivosti skladišča in čas polnjenja." },
-      "coinMinter": { "title": "Načrtovalec zlatih kovancev", "desc": "Izračunajte najbolj idealno vas za kovanje zlatih kovancev." },
-      "churchPlanner": { "title": "Načrtovalec cerkve", "desc": "Optimizirajte območja pokritosti z vašimi cerkvami na zemljevidu z algoritmom za varčevanje s prebivalstvom." },
-      "buildingTimes": { "title": "Kalkulator časa gradnje", "desc": "Izračunajte in primerjajte čase gradnje stavb na različnih stopnjah, natančno do sekunde." },
-      "clanOp": { "title": "Načrtovalec operacij plemena", "desc": "Analizirajte vse vasi plemena in naredite pametne dodelitve. Razdelite personalizirana BBCode navodila članom z obveščevalno podporo osebja, podprto z zemljevidom." },
-      "clanTroop": { "title": "Načrtovalec operacij plemena (s četami)", "desc": "Analizirajte vse čete plemena in naredite pametne dodelitve. Razdelite personalizirana BBCode navodila članom z obveščevalno podporo osebja, podprto z zemljevidom." },
-      "fastSupport": { "title": "Iskalnik hitre podpore", "desc": "Ustvarite zahtevo za podporo, da dobite hitro pomoč." },
-      "scavengingPlanner": { "title": "Kalkulator časa brskanja", "desc": "Podrobno primerjajte čase brskanja." }
+      "opPlanner": {
+        "title": "Osebni načrtovalec operacij",
+        "desc": "Povežite izvorne in ciljne vasi, da pripravite brezhibno predlogo operacije (BBCode)."
+      },
+      "buildingPlanner": {
+        "title": "Načrtovalec gradnje",
+        "desc": "Korak za korakom oblikujte načrt gradnje vaše vasi z napredno simulacijo vrste."
+      },
+      "unitCalculator": {
+        "title": "Kalkulator proizvodnje čet",
+        "desc": "Izračunajte čas proizvodnje enot za vojašnico, konjušnico in delavnico, vključno z bonusi."
+      },
+      "mapGenerator": {
+        "title": "Generator zemljevidov",
+        "desc": "Ustvarite posodobljene, barvne dinamične zemljevide sveta za forume plemena."
+      },
+      "mapAnalysis": {
+        "title": "Analiza celine",
+        "desc": "Analizirajte prevlado plemena in igralcev na celinah na zemljevidu sveta."
+      },
+      "productionData": {
+        "title": "Kalkulator proizvodnje",
+        "desc": "Optimizirajte stopnje proizvodnje v rudnikih, zmogljivosti skladišča in čas polnjenja."
+      },
+      "coinMinter": {
+        "title": "Načrtovalec zlatih kovancev",
+        "desc": "Izračunajte najbolj idealno vas za kovanje zlatih kovancev."
+      },
+      "churchPlanner": {
+        "title": "Načrtovalec cerkve",
+        "desc": "Optimizirajte območja pokritosti z vašimi cerkvami na zemljevidu z algoritmom za varčevanje s prebivalstvom."
+      },
+      "buildingTimes": {
+        "title": "Kalkulator časa gradnje",
+        "desc": "Izračunajte in primerjajte čase gradnje stavb na različnih stopnjah, natančno do sekunde."
+      },
+      "clanOp": {
+        "title": "Načrtovalec operacij plemena",
+        "desc": "Analizirajte vse vasi plemena in naredite pametne dodelitve. Razdelite personalizirana BBCode navodila članom z obveščevalno podporo osebja, podprto z zemljevidom."
+      },
+      "clanTroop": {
+        "title": "Načrtovalec operacij plemena (s četami)",
+        "desc": "Analizirajte vse čete plemena in naredite pametne dodelitve. Razdelite personalizirana BBCode navodila članom z obveščevalno podporo osebja, podprto z zemljevidom."
+      },
+      "fastSupport": {
+        "title": "Iskalnik hitre podpore",
+        "desc": "Ustvarite zahtevo za podporo, da dobite hitro pomoč."
+      },
+      "scavengingPlanner": {
+        "title": "Kalkulator časa brskanja",
+        "desc": "Podrobno primerjajte čase brskanja."
+      },
+      "notificationSettings": {
+        "title": "Nastavitve obvestil",
+        "desc": "Prilagodite prikaz obvestil."
+      }
     }
   },
   "footer": {
@@ -58,8 +106,8 @@
     "title": "O nas",
     "p1": "Pozdravljeni, sem Anto Bvb 66.",
     "p2": "TW Cobre je elitna taktična plošča in poveljniško središče, razvito neodvisno za obdelavo surovih podatkov igralcev Vojne plemen (Tribal Wars) in jim pomaga pridobiti strateško premoč.",
-    "p3": "Od načrtovanja operacij do analize čiščenja so vsi moduli zasnovani za reševanje izračunov v nekaj sekundah, ki bi igralcu vzeli ure. Zmaga se skriva v podrobnostih!"
-  ,"contactTitle": "Poročila o napakah in stik",
+    "p3": "Od načrtovanja operacij do analize čiščenja so vsi moduli zasnovani za reševanje izračunov v nekaj sekundah, ki bi igralcu vzeli ure. Zmaga se skriva v podrobnostih!",
+    "contactTitle": "Poročila o napakah in stik",
     "contactDesc": "Napake, pomanjkljivosti ali predloge za izboljšave, ki jih naletite na naši strani, mi lahko sporočite neposredno po e-pošti.",
     "emailButton": "Pošlji e-pošto"
   },
@@ -201,10 +249,27 @@
       "zero": "0 sek"
     },
     "buildings": [
-      "Glavna stavba", "Vojašnica", "Konjušnica", "Delavnica", "Prva cerkev", "Cerkev",
-      "Opazovalni stolp", "Akademija", "Kovačnica", "Zbirališče", "Kip", "Tržnica",
-      "Gozdar", "Kop za glino", "Rudnik železa", "Kmetija", "Skladišče", "Skrivališče",
-      "Plemič", "Zlati kovanec", "Zid"
+      "Glavna stavba",
+      "Vojašnica",
+      "Konjušnica",
+      "Delavnica",
+      "Prva cerkev",
+      "Cerkev",
+      "Opazovalni stolp",
+      "Akademija",
+      "Kovačnica",
+      "Zbirališče",
+      "Kip",
+      "Tržnica",
+      "Gozdar",
+      "Kop za glino",
+      "Rudnik železa",
+      "Kmetija",
+      "Skladišče",
+      "Skrivališče",
+      "Plemič",
+      "Zlati kovanec",
+      "Zid"
     ]
   },
   "scavenging": {
@@ -277,7 +342,9 @@
       "unlocked": "Odklenjeno",
       "infoTitle": "💡 Kritične prelomne točke",
       "be1": "🔸 Po zmogljivosti {{cap}}: Taktika 1-2-3-4 prehiti 2-3-4 in postane bolj donosna.",
-      "be2": "🔸 Po zmogljivosti {{cap}}: Taktika 1-2-3 prehiti 2-3."
+      "be2": "🔸 Po zmogljivosti {{cap}}: Taktika 1-2-3 prehiti 2-3.",
+      "dailyMining": "■ Dnevna proizvodnja surovin",
+      "dailyScavenging": "■ Dnevni plen nabiranja"
     }
   },
   "churchPlanner": {
@@ -375,7 +442,8 @@
       "manualAdded": "✅ Prosta dodelitev dodana!",
       "confirmClearQueue": "Ste prepričani, da želite počistiti celotno vrsto?",
       "queueCleared": "🗑️ Vrsta počiščena!",
-      "copied": "Kopirano!"
+      "copied": "Kopirano!",
+      "enterClanTag": "Prosimo, vnesite oznako plemena!"
     },
     "columns": {
       "no": "Št",
@@ -390,9 +458,19 @@
       "attackLink": "Povezava do akcije"
     },
     "units": {
-      "spear": "Sulicar", "sword": "Sabljevalec", "axe": "Sekirolec", "spy": "Oglednik",
-      "light": "Lahka konjenica", "heavy": "Težka konjenica", "ram": "Oven", "catapult": "Katapult",
-      "knight": "Paladin", "snob": "Plemič", "archer": "Lokostrelec", "marcher": "Lokostrelec na konju", "militia": "Milica"
+      "spear": "Sulicar",
+      "sword": "Sabljevalec",
+      "axe": "Sekirolec",
+      "spy": "Oglednik",
+      "light": "Lahka konjenica",
+      "heavy": "Težka konjenica",
+      "ram": "Oven",
+      "catapult": "Katapult",
+      "knight": "Paladin",
+      "snob": "Plemič",
+      "archer": "Lokostrelec",
+      "marcher": "Lokostrelec na konju",
+      "militia": "Milica"
     },
     "shortUnits": {
       "ram": "Nuke",
@@ -458,7 +536,8 @@
       "copyAll": "Kopiraj vse",
       "ordersFor": "--- UKAZI ZA {{player}} ---",
       "attack": "Napad",
-      "unknown": "NEZNANO"
+      "unknown": "NEZNANO",
+      "selectCols": "Izberite stolpce:"
     },
     "alerts": {
       "confirmClear": "Vsi načrti vključno z informacijami bodo izbrisani. Ste prepričani?",
@@ -469,7 +548,8 @@
       "orderAdded": "✅ Ukaz dodan!",
       "confirmClearQueue": "Ste prepričani, da želite počistiti celotno vrsto?",
       "queueCleared": "🗑️ Vrsta počiščena!",
-      "copied": "Kopirano!"
+      "copied": "Kopirano!",
+      "enterClanTag": "Prosimo, vnesite oznako plemena!"
     },
     "columns": {
       "no": "Št",
@@ -484,9 +564,16 @@
       "attackLink": "Akcija"
     },
     "units": {
-      "spear": "Sulicar", "sword": "Sabljevalec", "axe": "Sekirolec", "spy": "Oglednik",
-      "light": "Lahka", "heavy": "Težka", "ram": "Oven", "catapult": "Katapult",
-      "knight": "Paladin", "snob": "Plemič"
+      "spear": "Sulicar",
+      "sword": "Sabljevalec",
+      "axe": "Sekirolec",
+      "spy": "Oglednik",
+      "light": "Lahka",
+      "heavy": "Težka",
+      "ram": "Oven",
+      "catapult": "Katapult",
+      "knight": "Paladin",
+      "snob": "Plemič"
     },
     "profiles": {
       "quarter": "Četrtina",
@@ -547,7 +634,8 @@
       "title": "Na voljo podpore ({{count}})",
       "allTribe": "Celotno pleme",
       "noVillages": "Ni bilo mogoče najti vasi, ki bi lahko dosegle ta cilj ob izbranem času!",
-      "mapTarget": "🛡️ Cilj"
+      "mapTarget": "🛡️ Cilj",
+      "allClan": "Celotno pleme"
     },
     "bbcode": {
       "title": "📋 Klic na forumu (BBCode)",
@@ -560,7 +648,8 @@
     },
     "alerts": {
       "enterTribeTag": "Prosimo, vnesite oznako plemena!",
-      "copied": "Kopirano!"
+      "copied": "Kopirano!",
+      "enterClanTag": "Prosimo, vnesite oznako plemena!"
     },
     "columns": {
       "player": "Igralec",
@@ -570,7 +659,13 @@
       "departure": "Čas odhoda"
     },
     "units": {
-      "spear": "Sulicar", "sword": "Sabljevalec", "archer": "Lokostrelec", "spy": "Oglednik", "heavy": "Težka", "catapult": "Katapult", "knight": "Paladin"
+      "spear": "Sulicar",
+      "sword": "Sabljevalec",
+      "archer": "Lokostrelec",
+      "spy": "Oglednik",
+      "heavy": "Težka",
+      "catapult": "Katapult",
+      "knight": "Paladin"
     }
   },
   "mapAnalysis": {
@@ -588,7 +683,8 @@
       "analyzing": "Prenos končan, analiziranje...",
       "empty": "Ni najdenih podatkov za obdelavo!",
       "success": "USPEH: {{villages}} vasi, {{players}} igralcev naloženih.",
-      "cleared": "Shramba popolnoma počiščena."
+      "cleared": "Shramba popolnoma počiščena.",
+      "errorShort": "NAPAKA"
     },
     "timeMsg": {
       "cached": "⏳ Prikazujem predpomnjene podatke. Zadnje pridobivanje: {{time}}",
@@ -717,9 +813,22 @@
       "attackLink": "Povezava do akcije"
     },
     "units": {
-      "spear": "Sulicar", "sword": "Sabljevalec", "axe": "Sekirolec", "spy": "Oglednik",
-      "light": "Lahka konjenica", "heavy": "Težka konjenica", "ram": "Oven", "catapult": "Katapult",
-      "knight": "Paladin", "snob": "Plemič", "archer": "Lokostrelec", "marcher": "Lokostrelec na konju", "militia": "Milica"
+      "spear": "Sulicar",
+      "sword": "Sabljevalec",
+      "axe": "Sekirolec",
+      "spy": "Oglednik",
+      "light": "Lahka konjenica",
+      "heavy": "Težka konjenica",
+      "ram": "Oven",
+      "catapult": "Katapult",
+      "knight": "Paladin",
+      "snob": "Plemič",
+      "archer": "Lokostrelec",
+      "marcher": "Lokostrelec na konju",
+      "militia": "Milica"
+    },
+    "troopInput": {
+      "title": "🛡️ Vnesi podatke o enotah (iz skupnega pregleda)"
     }
   },
   "productionData": {
@@ -808,9 +917,16 @@
       "none": "-"
     },
     "units": {
-      "spear": "Sulicar", "sword": "Sabljevalec", "axe": "Sekirolec", "archer": "Lokostrelec",
-      "spy": "Oglednik", "lc": "Lahka konjenica", "ma": "Lokostrelec na konju", "hc": "Težka konjenica",
-      "ram": "Oven", "cat": "Katapult"
+      "spear": "Sulicar",
+      "sword": "Sabljevalec",
+      "axe": "Sekirolec",
+      "archer": "Lokostrelec",
+      "spy": "Oglednik",
+      "lc": "Lahka konjenica",
+      "ma": "Lokostrelec na konju",
+      "hc": "Težka konjenica",
+      "ram": "Oven",
+      "cat": "Katapult"
     }
   },
   "mapGenerator": {
@@ -856,5 +972,153 @@
       "noData": "Podatki še niso bili pridobljeni.",
       "deleteBtn": "Izbriši"
     }
+  },
+  "common": {
+    "invalidWorldUrl": "Neveljavna povezava sveta! Preverite naslov.",
+    "barbarian": "Barbar",
+    "worldEmpty": "Za ta svet še ni podatkov. Počakajte, da jih bot zbere."
+  },
+  "notificationSettings": {
+    "alerts": {
+      "deleteError": "Profila ni bilo mogoče izbrisati!",
+      "enterHighlightName": "Vnesite ime igralca ali plemena!",
+      "confirmRemoteDelete": "Vsi podatki tega Special ID bodo trajno izbrisani. Ste prepričani?",
+      "remoteDeleteSuccess": "Profil je bil uspešno izbrisan iz baze.",
+      "remoteDeleteError": "Pri brisanju je prišlo do napake. Preverite ID.",
+      "enterSpecialId": "Vnesite svoj poseben dostopni ID!",
+      "enterPlayerOrTribe": "Vnesi ime igralca ali oznako plemena!",
+      "worldDataFetchError": "Podatkov sveta ni bilo mogoče pridobiti. Preveri povezavo.",
+      "invalidDataReceived": "Prejeti neveljavni podatki:",
+      "worldDataReadError": "NAPAKA: Podatkov sveta ni mogoče prebrati!\n\nPreveri, ali si v zavihku »Osnovne nastavitve« vnesel veljavno in aktivno povezavo sveta (npr.: https://ptc1.tribalwars.com.pt).",
+      "playerNotFound": "NAPAKA: Igralca z imenom »{{name}}« v tem svetu ni! Preveri, ali si ime pravilno vnesel.",
+      "tribeNotFound": "NAPAKA: Plemena z oznako ali imenom »{{name}}« v tem svetu ni!",
+      "enterBothTribes": "Vnesi oznako/ime plemena za obe strani!",
+      "worldDataCorrupted": "NAPAKA: Podatki sveta so poškodovani ali neberljivi!",
+      "tribesNotFoundList": "Naslednja plemena v tem svetu niso bila najdena:",
+      "worldDataFetchErrorShort": "Podatkov sveta ni bilo mogoče pridobiti.",
+      "invalidContinent": "Vnesi veljavno številko celine med 0 in 99 (npr.: 44).",
+      "continentAlreadyAdded": "Ta celina je že dodana!",
+      "confirmDeleteProfile": "Si prepričan, da želiš popolnoma izbrisati te nastavitve sveta?",
+      "idExists": "ID že obstaja! Če želiš novega, najprej izprazni polje.",
+      "emptyTargetName": "Najprej vnesi ime ali oznako plemena.",
+      "targetExists": "Vneseni cilji so že na seznamu spremljanja!",
+      "profileNameEmpty": "Vnesti moraš ime za profil {{index}}!",
+      "specialIdEmpty": "Za profil »{{name}}« manjka ali ni ustvarjen Special ID!",
+      "saveSuccess": "Uspešno shranjenih profilov v oblak: {{count}}!",
+      "saveError": "Pri shranjevanju profilov je prišlo do napake: {{count}}!",
+      "saveNoData": "Ni bilo najdenega nobenega profila za shranjevanje!",
+      "idGenerateError": "Napaka povezave! ID ni bilo mogoče ustvariti."
+    },
+    "filters": {
+      "tribeLog": "Sledenje vstopom/izstopom iz plemena",
+      "gains": "Osvojitve vasi (pridobitve)",
+      "losses": "Izgube vasi (izgube)",
+      "barbarian": "Osvojitve barbarskih vasi (Barbarian)",
+      "selfConquer": "Samoosvojitev vasi (SelfConquer)",
+      "internal": "Osvojitve znotraj plemena (Internal)"
+    },
+    "settings": {
+      "remoteDeleteToggle": "Izbriši zapis v oblaku",
+      "notificationTypeLabel": "Vrste obvestil",
+      "typeImage": "Obvestilo s sliko",
+      "typeText": "Besedilno obvestilo",
+      "basicSettings": "Osnovne nastavitve",
+      "profileNameLabel": "Ime profila (vzdevek / uporabnik)",
+      "required": "*Obvezno",
+      "profileNamePlaceholder": "Primer: Anto Bvb 66 - Klanlar Tr1",
+      "fieldCannotBeEmpty": "To polje ne sme ostati prazno.",
+      "specialIdLabel": "Poseben dostopni ID",
+      "specialIdPlaceholder": "Vnesi svoj 66-znakovni licenčni ID ali ga ustvari",
+      "generateIdBtn": "Ustvari",
+      "worldLinkLabel": "Povezava sveta",
+      "worldLinkPlaceholder": "https://tr1.klanlar.org/",
+      "botTokenLabel": "Telegram bot žeton",
+      "botTokenPlaceholder": "123456789:ABCDEF...",
+      "chatIdLabel": "Telegram Chat ID",
+      "chatIdPlaceholder": "primer: 1135068175",
+      "saveAllConfigs": "Shrani vse nastavitve",
+      "languageLabel": "Jezik",
+      "languagePlaceholder": "Izberi jezik"
+    },
+    "header": {
+      "title": "Središče obvestil TwCu",
+      "subtitle": "Tukaj lahko upravljaš nastavitve obvestil za vse svetove, v katerih igraš.",
+      "hideInfo": "Skrij informacije",
+      "showInfo": "Prikaži informacije"
+    },
+    "infoPanel": {
+      "title": "Kako se uporablja?",
+      "profileNameTitle": "Ime profila:",
+      "profileNameDesc": "To je ime, ki ga daš tej skupini nastavitev, da si jo lažje zapomniš. <u>Ne sme biti prazno</u> in je glavna oznaka, ki te določa v sistemu.",
+      "specialIdTitle": "Poseben dostopni ID (Special ID):",
+      "specialIdDesc": "To je edinstvena koda, po kateri te sistem prepozna. Če je nimaš, klikni gumb <em>Ustvari ID</em> za naključno kodo.",
+      "worldLinkTitle": "Povezava sveta:",
+      "worldLinkDesc": "To je osnovni naslov sveta, v katerem igraš (npr.: <code>https://tr1.klanlar.org/</code>). Bot prek tega naslova prejema vse podatke.",
+      "botTokenTitle": "Telegram bot žeton in Chat ID:",
+      "botTokenDesc": "Potrebna za obvestila. <strong>Chat ID:</strong> dobiš tako, da pošlješ <code>/start</code> botu <code>@userinfobot</code> na Telegramu. <strong>Bot žeton:</strong> ustvari svojega bota s pošiljanjem <code>/newbot</code> botu <code>@BotFather</code>.",
+      "filtersInfo": "Filtri obvestil:",
+      "filtersInfoDesc": "Izbereš lahko vrste dogodkov, za katere želiš obvestila. Na primer samo za osvojitve vasi (pridobitve) ali za izgube. Ko izbereš filtre, boš ob dogodkih, povezanih s tvojimi cilji, takoj prejel obvestilo na Telegramu. Tako ne boš zamudil pomembnih dogajanj.",
+      "continentTrackingTitle": "Sledenje celinam:",
+      "continentTrackingDesc": "Osvojitve lahko spremljaš samo v določenih celinah (npr.: 44,45,54).",
+      "fullTrackingTitle": "Sledenje celotnemu svetu:",
+      "fullTrackingDesc": "Omogoči sledenje vsem osvojitvam vasi v svetu v realnem času. <strong>Opozorilo:</strong> to lahko povzroči zelo veliko sporočil."
+    },
+    "profile": {
+      "mainProfile": "Glavni profil",
+      "newProfile": "Nov profil",
+      "unknownWorld": "Neznan svet",
+      "delete": "Izbriši",
+      "createNewProfile": "Ustvari nov profil"
+    },
+    "targets": {
+      "addNewTarget": "Dodaj nov cilj",
+      "inputLabel": "Ime igralca ali oznaka plemena",
+      "inputPlaceholder": "Primer: Igralec1, Igralec2 ali PLEME1,PLEME2",
+      "selectFilters": "Izberi filtre obvestil",
+      "clearAll": "Počisti vse",
+      "selectAll": "Izberi vse",
+      "addAsPlayer": "+ Dodaj kot igralca",
+      "addAsTribe": "+ Dodaj kot pleme",
+      "manageTargets": "Upravljanje seznama ciljev",
+      "emptyState": "Noben cilj še ni spremljan.",
+      "show": "Prikaži",
+      "hide": "Skrij",
+      "delete": "Izbriši",
+      "deleteConfirm": "Si prepričan, da želiš izbrisati ta cilj?",
+      "playerBadge": "👤 Igralec",
+      "tribeBadge": "🛡️ Pleme"
+    },
+    "common": {
+      "add": "Dodaj",
+      "delete": "Izbriši",
+      "show": "Prikaži",
+      "hide": "Skrij"
+    },
+    "fullTracking": {
+      "title": "Takojšnje popolno sledenje",
+      "description": "Spremljaj vse osvojitve vasi po celotnem svetu v realnem času.",
+      "active": "Aktivno (spremlja se ves svet)",
+      "inactive": "Neaktivno"
+    },
+    "continentTracking": {
+      "title": "Takojšnje sledenje celinam",
+      "description": "Spremljaj spremembe vasi samo v izbranih celinah.",
+      "placeholder": "Primer: 44",
+      "continentPrefix": "Celina",
+      "noContinentAdded": "Nobena celina še ni dodana."
+    }
+  },
+  "manualPlan": {
+    "title": "✍️ Ročno dodaj operacijo (vpiši, če ne želiš izbirati s seznama)",
+    "sourceVillage": "Izvorna vas (npr. 500|500)",
+    "targetVillage": "Ciljna vas (npr. 501|501)",
+    "unitToSend": "Enota za pošiljanje",
+    "ramKami": "Oven (Kami)",
+    "ramKamiFake": "Oven (Kami/Fake)",
+    "catapult": "Katapult",
+    "catapultFake": "Katapult (Fake)",
+    "addToPlan": "➕ Dodaj v načrt operacije",
+    "addFromList": "👉 Dodaj z izbiro s seznama",
+    "invalidCoords": "Vnesite veljavne izvorne in ciljne koordinate (npr. 500|500)"
   }
 }

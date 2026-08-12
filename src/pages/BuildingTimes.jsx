@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next'; // YENİ: Çeviri motoru eklendi
+import { bumpStat } from '../utils/twApi';
 import storage from '../utils/storage';
 import './BuildingTimes.css';
 
@@ -119,7 +120,7 @@ const BuildingTimes = () => {
     // Orijinal verileri kullanarak İki Seviye Arası Toplam Süreyi Hesapla
     const calculateTotal = (comp) => {
         if (comp.from >= comp.to) return 0;
-        fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=sims").catch(() => {});
+        bumpStat("sims");
         let totalSeconds = 0;
         const hqMod = hqModifiers[comp.hq] || 1.0;
 

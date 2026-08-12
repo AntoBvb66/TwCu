@@ -1,6 +1,16 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import storage from '../utils/storage';
+import {
+    fetchWorldData,
+    fetchWorldConfig,
+    fetchWithProxy,
+    extractWorldId,
+    cleanWorldUrl,
+    decodeTW,
+    findPlayerByName,
+    bumpStat,
+} from '../utils/twApi';
 import './OpPlanner.css';
 
 // Oyunun Orijinal Birim İkonları
@@ -30,15 +40,8 @@ const formatCustomStr = (dateObj) => {
     return dateObj.toLocaleString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute:'2-digit', second:'2-digit' });
 };
 
-// URL Encoded isimleri çözmek için yardımcı fonksiyon
-const decodeTWName = (str) => {
-    if (!str) return "";
-    try {
-        return decodeURIComponent(str.replace(/\+/g, '%20'));
-    } catch(e) {
-        return str.replace(/\+/g, ' ');
-    }
-};
+// URL Encoded isimleri çözmek için ortak yardımcı (bkz. utils/twApi.js)
+const decodeTWName = decodeTW;
 
 // --- ASKERİ ZEKÂ (FARM & GÜÇ HESAPLAMA) ---
 const calculateVillageProfile = (obj, t) => {
@@ -60,7 +63,6 @@ const calculateVillageProfile = (obj, t) => {
     return { farmSize, villageType: type, profile: farmCategory ? `${farmCategory} ${type}` : type };
 };
 
-const API_BASE = "https://chamber-that-smock.ngrok-free.dev/api";
 
 const OpPlanner = () => {
     const { t } = useTranslation();
@@ -173,38 +175,18 @@ const OpPlanner = () => {
     }, [parsedTargets, selectedTargetCoord]);
 
 
-    const fetchWithProxy = async (targetUrl) => {
-        const res = await fetch(`https://tw-proxy.halimtttt10.workers.dev/?url=${encodeURIComponent(targetUrl)}`);
-        if (!res.ok) throw new Error("Veri çekilemedi.");
-        return await res.text();
-    };
-
-    const extractWorldId = (url) => {
-        const match = url.match(/https?:\/\/([^.]+)\./);
-        return match ? match[1] : null;
-    };
-
     const loadWorldPlayers = async () => {
         const worldId = extractWorldId(worldUrl);
         if (!worldId || worldId.length < 3) return;
 
         try {
-            const targetApiUrl = `${API_BASE}/${worldId}/Oyuncular`;
-            const res = await fetch(targetApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
-            const data = await res.json();
-
-            if (data.hata || !data.veriler) return;
-
-            const players = [];
-            data.veriler.forEach(item => {
-                players.push({
-                    id: parseInt(item[0]), 
-                    name: item[1]          
-                });
-            });
-            setWorldPlayers(players);
+            const { player } = await fetchWorldData(worldUrl);
+            setWorldPlayers(player.map(item => ({
+                id: parseInt(item[0]),
+                name: decodeTWName(item[1]),
+            })));
         } catch (err) {
-            console.log("Oyuncu listesi API'den çekilemedi:", err);
+            console.log("Oyuncu listesi API'den çekilemedi:", err.message);
         }
     };
 
@@ -214,65 +196,38 @@ const OpPlanner = () => {
     }, []);
 
    const handleFetchData = async () => {
-        const cleanUrl = worldUrl.replace(/\/$/, "");
-        const worldId = extractWorldId(worldUrl);
-        
+        const cleanUrl = cleanWorldUrl(worldUrl);
+        const worldId = extractWorldId(cleanUrl);
+
         if (!cleanUrl || !worldId) return alert(t('opPlanner.alerts.enterWorldUrl'));
         if (!playerName) return alert(t('opPlanner.alerts.enterPlayerName'));
 
+        // 13 kez üst üste tıklamak önbelleği zorla atlar (gizli tazeleme).
         const newClickCount = clickCount + 1;
         setClickCount(newClickCount);
-        const now = Date.now();
-        const lastFetch = storage.get("op_last_fetch", 0);
-        
-        if (playerVillages.length > 0 && (now - lastFetch < 3600000) && newClickCount < 13) {
-            setStatus(t('opPlanner.status.cached'));
-            return;
-        }
+        const forceRefresh = newClickCount >= 13;
 
         setStatus(t('opPlanner.status.fetching'));
         try {
-            try {
-                const configData = await fetchWithProxy(`${cleanUrl}/interface.php?func=get_config`);
-                const distMatch = configData.match(/<max_dist>(\d+)<\/max_dist>/);
-                if (distMatch && distMatch[1]) {
-                    setMaxSnobDist(parseInt(distMatch[1]));
-                }
-            } catch (err) {
-                console.log("Konfigürasyon çekilemedi, mevcut sınır kullanılacak.");
-            }
+            const config = await fetchWorldConfig(cleanUrl);
+            if (config.maxSnobDist !== null) setMaxSnobDist(config.maxSnobDist);
 
-            const playerApiUrl = `${API_BASE}/${worldId}/Oyuncular`;
-            const playerRes = await fetch(playerApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
-            const playerData = await playerRes.json();
-            
-            if (playerData.hata || !playerData.veriler) {
-                throw new Error(playerData.hata || "Veritabanında oyuncu bilgisi bulunamadı.");
-            }
-            
-            let playerId = null;
-            const searchName = playerName.toLocaleLowerCase('tr-TR').trim();
-
-            playerData.veriler.forEach(item => {
-                const currentName = (item[1] || "").toLocaleLowerCase('tr-TR').trim();
-                if (currentName === searchName) {
-                    playerId = parseInt(item[0]);
-                }
+            const { player, village, fromCache } = await fetchWorldData(cleanUrl, {
+                villages: true,
+                force: forceRefresh,
             });
 
-            if (!playerId) return setStatus(t('opPlanner.status.playerNotFound'));
-
-            const villageApiUrl = `${API_BASE}/${worldId}/Koyler`;
-            const villageRes = await fetch(villageApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
-            const villageData = await villageRes.json();
-            
-            if (villageData.hata || !villageData.veriler) {
-                throw new Error(villageData.hata || "Veritabanında köy bilgisi bulunamadı.");
+            if (fromCache && playerVillages.length > 0) {
+                setStatus(t('opPlanner.status.cached'));
             }
-            
+
+            const found = findPlayerByName(player, playerName);
+            if (!found) return setStatus(t('opPlanner.status.playerNotFound'));
+            const playerId = found.id;
+
             const allVils = []; const pVils = [];
 
-            villageData.veriler.forEach(item => {
+            (village || []).forEach(item => {
                 const pid = parseInt(item[4]); 
                 const vilObj = { 
                     id: parseInt(item[0]), 
@@ -301,13 +256,13 @@ const OpPlanner = () => {
                 }
             } catch (e) { console.log("Birim hızları varsayılan kalacak."); }
 
-            setVillages(allVils); 
+            setVillages(allVils);
             setPlayerVillages(pVils);
-            storage.set("op_last_fetch", now);
-            setClickCount(0); 
-            
+            storage.set("op_last_fetch", Date.now());
+            setClickCount(0);
+
             const initTypes = {};
-            pVils.forEach(v => initTypes[v.coord] = ['ram']); 
+            pVils.forEach(v => initTypes[v.coord] = ['ram']);
             setSourceTypes(initTypes);
             setStatus(t('opPlanner.status.success').replace('{{count}}', pVils.length));
 
@@ -317,7 +272,11 @@ const OpPlanner = () => {
             setIsStep4Open(true);
 
         } catch (error) {
-            setStatus(t('opPlanner.status.error').replace('{{msg}}', error.message));
+            const msg =
+                error.message === 'INVALID_WORLD_URL' ? t('common.invalidWorldUrl')
+                : error.message === 'WORLD_EMPTY' ? t('common.worldEmpty')
+                : error.message;
+            setStatus(t('opPlanner.status.error').replace('{{msg}}', msg));
         }
     };
 
@@ -439,7 +398,7 @@ const OpPlanner = () => {
     const addToPlan = () => {
         if (!selectedSourceCoord || !selectedTargetCoord || !selectedUnitMode) return alert(t('opPlanner.alerts.selectMatch'));
 
-        fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=ops").catch(() => {});
+        bumpStat("ops");
         const sourceVil = playerVillages.find(v => v.coord === selectedSourceCoord);
         const targetVil = parsedTargets.find(v => v.coord === selectedTargetCoord);
         
@@ -488,7 +447,7 @@ const OpPlanner = () => {
         const regex = /^\d{3}\|\d{3}$/;
 
         if (!regex.test(cleanSrc) || !regex.test(cleanTgt)) {
-            return alert("Lütfen geçerli kaynak ve hedef koordinatları girin (Örn: 500|500)");
+            return alert(t('manualPlan.invalidCoords'));
         }
 
         const sourceObj = playerVillages.find(v => v.coord === cleanSrc) || {
@@ -731,7 +690,7 @@ const OpPlanner = () => {
                     {/* YENİ: ASKER VERİSİ GİRİŞİ (İSTİHBARAT) */}
                     {playerVillages.length > 0 && (
                         <div className="op-box">
-                            <h3 style={{ margin: '0 0 10px 0', color: '#f0c042', fontSize: '14px' }}>🛡️ Asker Verisi Gir (Toplu Bakış Askerler)</h3>
+                            <h3 style={{ margin: '0 0 10px 0', color: '#f0c042', fontSize: '14px' }}>{t('opPlanner.troopInput.title')}</h3>
                             <textarea
                                 className="op-textarea" rows="3"
                                 placeholder="Buraya oyun içindeki asker sayılarını yapıştırırsan, köy kartlarında köylerin gücünü (Kami, Sav vb.) görebilirsin."
@@ -897,34 +856,34 @@ const OpPlanner = () => {
 
                             {/* YENİ MANUEL EKLEME BÖLÜMÜ (DOĞRUDAN YAZARAK) */}
                             <div style={{ border: '1px dashed #555', padding: '15px', borderRadius: '8px', background: '#181818', marginBottom: '20px' }}>
-                                <h4 style={{ margin: '0 0 10px 0', color: '#f0c042' }}>✍️ Manuel Operasyon Ekle (Seçmek İstemiyorsan Yaz)</h4>
+                                <h4 style={{ margin: '0 0 10px 0', color: '#f0c042' }}>{t('manualPlan.title')}</h4>
                                 <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                                     <div style={{ flex: 1, minWidth: '150px' }}>
-                                        <label style={{ fontSize: '12px', fontWeight: 'bold' }}>Kaynak Köy (Örn: 500|500)</label>
+                                        <label style={{ fontSize: '12px', fontWeight: 'bold' }}>{t('manualPlan.sourceVillage')}</label>
                                         <input type="text" className="op-input" placeholder="500|500" value={manualSource} onChange={e => setManualSource(e.target.value)} />
                                     </div>
                                     <div style={{ flex: 1, minWidth: '150px' }}>
-                                        <label style={{ fontSize: '12px', fontWeight: 'bold' }}>Gönderilecek Birim</label>
+                                        <label style={{ fontSize: '12px', fontWeight: 'bold' }}>{t('manualPlan.unitToSend')}</label>
                                         <select className="op-input" style={{ padding: '6px' }} value={manualUnit} onChange={e => setManualUnit(e.target.value)}>
-                                            <option value="ram">Şahmerdan (Kami/Fake)</option>
+                                            <option value="ram">{t('manualPlan.ramKamiFake')}</option>
                                             <option value="snob">Misyoner</option>
-                                            <option value="catapult">Mancınık</option>
+                                            <option value="catapult">{t('manualPlan.catapult')}</option>
                                             <option value="spy">Casus</option>
                                             <option value="axe">Balta</option>
                                         </select>
                                     </div>
                                     <div style={{ flex: 1, minWidth: '150px' }}>
-                                        <label style={{ fontSize: '12px', fontWeight: 'bold' }}>Hedef Köy (Örn: 501|501)</label>
+                                        <label style={{ fontSize: '12px', fontWeight: 'bold' }}>{t('manualPlan.targetVillage')}</label>
                                         <input type="text" className="op-input" placeholder="501|501" value={manualTarget} onChange={e => setManualTarget(e.target.value)} />
                                     </div>
                                     <div style={{ flex: 'none', width: '100%', marginTop: '5px' }}>
-                                        <button className="op-btn" style={{ background: '#337ab7', width: '100%', padding: '10px' }} onClick={handleAddManualPlan}>➕ Operasyon Planına Ekle</button>
+                                        <button className="op-btn" style={{ background: '#337ab7', width: '100%', padding: '10px' }} onClick={handleAddManualPlan}>{t('manualPlan.addToPlan')}</button>
                                     </div>
                                 </div>
                             </div>
 
                             {/* DROPDOWN (SELECT) ÜZERİNDEN EKLEME */}
-                            <h4 style={{ margin: '0 0 10px 0', color: '#5cb85c' }}>👉 Listeden Seçerek Ekle</h4>
+                            <h4 style={{ margin: '0 0 10px 0', color: '#5cb85c' }}>{t('manualPlan.addFromList')}</h4>
                             <div className="op-flex-wrap">
                                 <div>
                                     <label style={{fontWeight: 'bold', fontSize: '12px', display: 'block'}}>{t('opPlanner.step4.sourceVillage')}</label>

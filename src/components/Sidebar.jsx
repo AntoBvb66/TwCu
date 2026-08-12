@@ -1,21 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { changeAppLanguage } from '../i18n';
 import './Sidebar.css';
 
 function Sidebar() {
     const location = useLocation();
     const { t, i18n } = useTranslation();
 
-    const [isOpen, setIsOpen] = useState(false);        
-    const [isCollapsed, setIsCollapsed] = useState(false); 
-    const [isLangOpen, setIsLangOpen] = useState(false); // YENİ: Dil menüsü aç/kapa state'i
+    const [isOpen, setIsOpen] = useState(false);
+    const [isCollapsed, setIsCollapsed] = useState(() => localStorage.getItem('sidebarCollapsed') === '1');
+    const [isLangOpen, setIsLangOpen] = useState(false); // Dil menüsü aç/kapa state'i
 
-    const changeLanguage = (lng) => {
-        i18n.changeLanguage(lng);
-        localStorage.setItem('appLanguage', lng);
+    // Dil dosyası artık ihtiyaç anında indiriliyor (bkz. src/i18n.js)
+    const changeLanguage = async (lng) => {
+        await changeAppLanguage(lng);
         setIsLangOpen(false); // Seçim yapınca menüyü kapat
     };
+
+    const toggleCollapsed = () => {
+        setIsCollapsed(prev => {
+            localStorage.setItem('sidebarCollapsed', prev ? '0' : '1');
+            return !prev;
+        });
+    };
+
+    // Çekmece açıkken arka planın kaymasını engelle (mobil)
+    useEffect(() => {
+        document.body.classList.toggle('drawer-open', isOpen);
+        return () => document.body.classList.remove('drawer-open');
+    }, [isOpen]);
+
+    // Rota değişince çekmeceyi kapat
+    useEffect(() => { setIsOpen(false); }, [location.pathname]);
+
+    // ESC ile kapat
+    useEffect(() => {
+        if (!isOpen) return;
+        const onKey = (e) => { if (e.key === 'Escape') setIsOpen(false); };
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, [isOpen]);
 
     // Desteklenen Diller Listesi
 const languages = [
@@ -69,13 +94,24 @@ const languages = [
 
     return (
         <>
-            <div className="mobile-topbar" style={{ display: window.innerWidth <= 768 ? 'flex' : 'none' }}>
-                <button className="hamburger" onClick={() => setIsOpen(!isOpen)}>☰</button>
+            {/* Görünürlük CSS ile yönetilir; window.innerWidth ile değil
+                (yeniden boyutlandırma/ekran döndürmede kilitlenmesin diye). */}
+            <div className="mobile-topbar">
+                <button
+                    className="hamburger"
+                    onClick={() => setIsOpen(!isOpen)}
+                    aria-label={t('menu.toggle')}
+                    aria-expanded={isOpen}
+                >
+                    ☰
+                </button>
                 <div className="logo">
-                    <img 
-                        src={`${import.meta.env.BASE_URL}logo192.png`} 
-                        alt="TW" 
-                        style={{ width: '32px', height: '32px', borderRadius: '6px' }} 
+                    <img
+                        src={`${import.meta.env.BASE_URL}logo192.png`}
+                        alt="TW"
+                        width="32"
+                        height="32"
+                        style={{ borderRadius: '6px' }}
                     />
                     <span>{t('menu.title')}</span>
                 </div>
@@ -95,8 +131,9 @@ const languages = [
                     {/* YENİ: CSS sınıfına bağlandı, inline style temizlendi */}
                     <button
                         className="collapse-btn"
-                        onClick={() => setIsCollapsed(!isCollapsed)}
-                        title={isCollapsed ? "Genişlet" : "Daralt"}
+                        onClick={toggleCollapsed}
+                        title={isCollapsed ? t('menu.expand') : t('menu.collapse')}
+                        aria-label={isCollapsed ? t('menu.expand') : t('menu.collapse')}
                     >
                         {isCollapsed ? '→' : '←'}
                     </button>
@@ -104,10 +141,11 @@ const languages = [
 
                 {/* YENİ: AÇILIR (DROPDOWN) DİL SEÇİCİ */}
                 <div className="language-switcher">
-                    <button 
-                        className="lang-btn-main" 
+                    <button
+                        className="lang-btn-main"
                         onClick={() => setIsLangOpen(!isLangOpen)}
-                        title="Dili Değiştir"
+                        title={t('menu.changeLanguage')}
+                        aria-expanded={isLangOpen}
                     >
                         <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                             <img src={`https://flagcdn.com/w20/${currentLang.flag}.png`} alt={currentLang.label} className="lang-flag" />
@@ -153,11 +191,9 @@ const languages = [
                 </div>
             </nav>
 
-            {isOpen && window.innerWidth <= 768 && (
-                <div 
-                    style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.65)', zIndex: 1090 }}
-                    onClick={() => setIsOpen(false)}
-                />
+            {/* Karartma katmanı: sadece mobilde ve çekmece açıkken görünür (CSS) */}
+            {isOpen && (
+                <div className="sidebar-overlay" onClick={() => setIsOpen(false)} />
             )}
         </>
     );

@@ -1,25 +1,30 @@
 {
-  "short_name": "Tw Anto",
-  "name": "Tw Anto World",
+  "short_name": "TW Cobre",
+  "name": "TW Cobre - Tribal Wars Araç Merkezi",
+  "description": "Klanlar (Tribal Wars) için gelişmiş harita, analiz, operasyon ve bildirim araçları.",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "favicon.png",
+      "type": "image/png",
+      "sizes": "64x64"
     },
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any"
     }
   ],
-  "start_url": ".",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "orientation": "any",
+  "theme_color": "#2a1908",
+  "background_color": "#fff6d9"
 }

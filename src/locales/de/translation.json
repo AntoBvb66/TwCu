@@ -22,8 +22,13 @@
       "clanOp": "Stammesoperationsplaner",
       "clanTroop": "Stammesoperationsplaner (Erweitert)",
       "fastSupport": "Schnellunterstützungsplanung",
-      "scavengingPlanner": "Plündungszeitenrechner"
-    }
+      "scavengingPlanner": "Plündungszeitenrechner",
+      "notificationSettings": "Benachrichtigungseinstellungen"
+    },
+    "toggle": "Menü öffnen/schließen",
+    "expand": "Ausklappen",
+    "collapse": "Einklappen",
+    "changeLanguage": "Sprache ändern"
   },
   "home": {
     "hero": {
@@ -82,6 +87,10 @@
       "scavengingPlanner": {
         "title": "Plündungszeitenrechner",
         "desc": "Vergleiche Plündungszeiten im Detail."
+      },
+      "notificationSettings": {
+        "title": "Benachrichtigungseinstellungen",
+        "desc": "Lege fest, wie Benachrichtigungen angezeigt werden."
       }
     }
   },
@@ -97,10 +106,11 @@
     "title": "Über",
     "p1": "Hallo, ich bin Anto Bvb 66.",
     "p2": "TW Cobre ist ein eigenständig entwickeltes taktisches Elitepanel und Kommandozentrum, das Rohdaten von Clans (Tribal Wars) Spielern verarbeitet und ihnen hilft, strategische Überlegenheit zu erlangen.",
-    "p3": "Von Operationsplanung bis Aufräumanalyse sind alle Module darauf ausgelegt, Berechnungen zu lösen, für die ein Spieler sonst Stunden bräuchte – in Sekunden. Der Sieg liegt in den Details!"
-  ,"contactTitle": "Fehlermeldung & Kontakt",
+    "p3": "Von Operationsplanung bis Aufräumanalyse sind alle Module darauf ausgelegt, Berechnungen zu lösen, für die ein Spieler sonst Stunden bräuchte – in Sekunden. Der Sieg liegt in den Details!",
+    "contactTitle": "Fehlermeldung & Kontakt",
     "contactDesc": "Fehler, Mängel oder Verbesserungsvorschläge, die Ihnen auf unserer Website auffallen, können Sie mir direkt per E-Mail mitteilen.",
-    "emailButton": "E-Mail senden"},
+    "emailButton": "E-Mail senden"
+  },
   "privacyPage": {
     "title": "Datenschutzrichtlinie und KVKK",
     "p1": "TW Cobre respektiert die Privatsphäre der Nutzer auf höchstem Niveau. In Übereinstimmung mit Datenschutzgesetzen (DSGVO) und internationalen Standards lautet unsere Datenverarbeitungsrichtlinie wie folgt:",
@@ -332,7 +342,9 @@
       "unlocked": "Freigeschaltet",
       "infoTitle": "💡 Kritische Wendepunkte (Break-Even)",
       "be1": "🔸 Nach {{cap}} Kapazität überholt die 1-2-3-4-Taktik 2-3-4 und wird profitabler.",
-      "be2": "🔸 Nach {{cap}} Kapazität überholt die 1-2-3-Taktik 2-3."
+      "be2": "🔸 Nach {{cap}} Kapazität überholt die 1-2-3-Taktik 2-3.",
+      "dailyMining": "■ Tägliche Rohstoffproduktion",
+      "dailyScavenging": "■ Täglicher Sammel-Ertrag"
     }
   },
   "churchPlanner": {
@@ -430,7 +442,8 @@
       "manualAdded": "✅ Freie Zuweisung hinzugefügt!",
       "confirmClearQueue": "Bist du sicher, dass du die gesamte Warteschlange löschen möchtest?",
       "queueCleared": "🗑️ Warteschlange gelöscht!",
-      "copied": "Kopiert!"
+      "copied": "Kopiert!",
+      "enterClanTag": "Bitte gib das Stammeskürzel ein!"
     },
     "columns": {
       "no": "Nr.",
@@ -523,7 +536,8 @@
       "copyAll": "Alles kopieren",
       "ordersFor": "--- BEFEHLE FÜR {{player}} ---",
       "attack": "Angriff",
-      "unknown": "UNBEKANNT"
+      "unknown": "UNBEKANNT",
+      "selectCols": "Spalten auswählen:"
     },
     "alerts": {
       "confirmClear": "Alle Pläne einschließlich Aufklärung werden gelöscht. Bist du sicher?",
@@ -534,7 +548,8 @@
       "orderAdded": "✅ Befehl hinzugefügt!",
       "confirmClearQueue": "Bist du sicher, dass du die gesamte Warteschlange löschen möchtest?",
       "queueCleared": "🗑️ Warteschlange gelöscht!",
-      "copied": "Kopiert!"
+      "copied": "Kopiert!",
+      "enterClanTag": "Bitte gib das Stammeskürzel ein!"
     },
     "columns": {
       "no": "Nr.",
@@ -619,7 +634,8 @@
       "title": "Verfügbare Unterstützungen ({{count}})",
       "allTribe": "Gesamter Stamm",
       "noVillages": "Keine Dörfer gefunden, die dieses Ziel zur gewählten Zeit erreichen können!",
-      "mapTarget": "🛡️ Ziel"
+      "mapTarget": "🛡️ Ziel",
+      "allClan": "Gesamter Stamm"
     },
     "bbcode": {
       "title": "📋 Forum-Aufruf (BBCode)",
@@ -632,7 +648,8 @@
     },
     "alerts": {
       "enterTribeTag": "Bitte gib das Stammeskürzel ein!",
-      "copied": "Kopiert!"
+      "copied": "Kopiert!",
+      "enterClanTag": "Bitte gib das Stammeskürzel ein!"
     },
     "columns": {
       "player": "Spieler",
@@ -666,7 +683,8 @@
       "analyzing": "Download abgeschlossen, analysiere...",
       "empty": "Keine Daten zum Verarbeiten gefunden!",
       "success": "ERFOLG: {{villages}} Dörfer, {{players}} Spieler geladen.",
-      "cleared": "Speicher vollständig gelöscht."
+      "cleared": "Speicher vollständig gelöscht.",
+      "errorShort": "FEHLER"
     },
     "timeMsg": {
       "cached": "⏳ Zeige zwischengespeicherte Daten. Letzter Abruf: {{time}}",
@@ -808,6 +826,9 @@
       "archer": "Bogenschütze",
       "marcher": "Marschierer",
       "militia": "Miliz"
+    },
+    "troopInput": {
+      "title": "🛡️ Truppendaten eingeben (aus der Gruppenübersicht)"
     }
   },
   "productionData": {
@@ -988,7 +1009,8 @@
       "losses": "Dorfverluste (Verluste)",
       "barbarian": "Eroberungen von Barbarendörfern (Barbaren)",
       "selfConquer": "Eigene Dorferoberung (SelfConquer)",
-      "internal": "Interne Stammeseroberungen (Intern)"
+      "internal": "Interne Stammeseroberungen (Intern)",
+      "tribeLog": "Stamm Beitritt/Austritt verfolgen"
     },
     "settings": {
       "basicSettings": "Grundeinstellungen",
@@ -1007,7 +1029,11 @@
       "chatIdPlaceholder": "Beispiel: 1135068175",
       "saveAllConfigs": "Alle Einstellungen speichern",
       "languageLabel": "Sprache",
-      "languagePlaceholder": "Sprache auswählen"
+      "languagePlaceholder": "Sprache auswählen",
+      "remoteDeleteToggle": "Cloud-Eintrag löschen",
+      "notificationTypeLabel": "Benachrichtigungsarten",
+      "typeImage": "Bild-Benachrichtigung",
+      "typeText": "Text-Benachrichtigung"
     },
     "targets": {
       "addNewTarget": "Neues Ziel hinzufügen",
@@ -1048,7 +1074,14 @@
       "specialIdEmpty": "Die spezielle ID fehlt oder wurde für das Profil '{{name}}' nicht generiert!",
       "saveSuccess": "{{count}} Profil(e) erfolgreich in der Cloud gespeichert!",
       "saveError": "Fehler beim Speichern von {{count}} Profil(en)!",
-      "saveNoData": "Keine Profile zum Speichern gefunden!"
+      "saveNoData": "Keine Profile zum Speichern gefunden!",
+      "deleteError": "Profil konnte nicht gelöscht werden!",
+      "enterHighlightName": "Gib einen Spieler- oder Stammesnamen ein!",
+      "confirmRemoteDelete": "Alle Daten dieser Special ID werden endgültig gelöscht. Bist du sicher?",
+      "remoteDeleteSuccess": "Profil wurde erfolgreich aus der Datenbank gelöscht.",
+      "remoteDeleteError": "Beim Löschen ist ein Fehler aufgetreten. Prüfe die ID.",
+      "enterSpecialId": "Gib deine spezielle Zugangs-ID ein!",
+      "idGenerateError": "Verbindungsfehler! ID konnte nicht erzeugt werden."
     },
     "common": {
       "add": "Hinzufügen",
@@ -1069,5 +1102,23 @@
       "continentPrefix": "Kontinent",
       "noContinentAdded": "Noch kein Kontinent hinzugefügt."
     }
+  },
+  "common": {
+    "invalidWorldUrl": "Ungültiger Welt-Link! Bitte Adresse prüfen.",
+    "barbarian": "Barbar",
+    "worldEmpty": "Für diese Welt gibt es noch keine Daten. Warte, bis der Bot sie sammelt."
+  },
+  "manualPlan": {
+    "title": "✍️ Operation manuell hinzufügen (tippe sie ein, wenn du nicht aus der Liste wählen willst)",
+    "sourceVillage": "Startdorf (z. B. 500|500)",
+    "targetVillage": "Zieldorf (z. B. 501|501)",
+    "unitToSend": "Zu sendende Einheit",
+    "ramKami": "Ramme (Kami)",
+    "ramKamiFake": "Ramme (Kami/Fake)",
+    "catapult": "Katapult",
+    "catapultFake": "Katapult (Fake)",
+    "addToPlan": "➕ Zum Operationsplan hinzufügen",
+    "addFromList": "👉 Aus der Liste auswählen und hinzufügen",
+    "invalidCoords": "Bitte gültige Start- und Zielkoordinaten eingeben (z. B. 500|500)"
   }
 }

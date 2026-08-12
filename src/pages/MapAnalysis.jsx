@@ -1,24 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next'; 
+import { useTranslation } from 'react-i18next';
 import storage from '../utils/storage';
+import {
+    fetchWorldData,
+    extractWorldId,
+    cleanWorldUrl,
+    decodeTW,
+    bumpStat,
+    getCacheTime,
+} from '../utils/twApi';
 import './MapAnalysis.css';
 
 const calculateContinent = (x, y) => Math.floor(y / 100) * 10 + Math.floor(x / 100);
 
-const decodeTW = (str) => {
-    if (!str) return "";
-    try {
-        let decoded = decodeURIComponent(str);
-        return decoded.replace(/\+/g, ' ');
-    } catch (e) {
-        return str.replace(/\+/g, ' ');
-    }
-};
-
-const extractWorldId = (url) => {
-    const match = url.match(/https?:\/\/([^.]+)\./);
-    return match ? match[1] : null;
-};
+/** Manuel yapıştırılan CSV metnini API'nin satır formatına çevirir. */
+const textToRows = (txt) =>
+    (txt || '')
+        .split('\n')
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .map((line) => line.split(','));
 
 
 const MapAnalysis = () => {
@@ -67,81 +68,70 @@ const MapAnalysis = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [t]);
 
-    const fetchWithProxy = async (targetUrl) => {
-        const myProxy = "https://tw-proxy.halimtttt10.workers.dev";
-        const finalUrl = `${myProxy}/?url=${encodeURIComponent(targetUrl)}`;
-        const res = await fetch(finalUrl);
-        if (!res.ok) throw new Error("Ağ Hatası");
-        return await res.text();
-    };
-
     const handleAutoFetch = async () => {
-        fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=maps").catch(() => {});
-        const cleanUrl = worldUrl.replace(/\/$/, "");
+        bumpStat('maps');
+        const cleanUrl = cleanWorldUrl(worldUrl);
         if (!cleanUrl) return alert(t('mapAnalysis.enterWorldUrl'));
-        
+
         const worldId = extractWorldId(cleanUrl);
-        if (!worldId) return alert("Geçersiz dünya URL'si.");
-
-        const now = Date.now();
-        const lastFetch = storage.get("tw_last_fetch_time", 0);
-        const cachedData = storage.get("tw_cache_data", null);
-        const lastUrl = storage.get("lastWorldUrl", "");
-
-        if (!bypassMode && cachedData && (lastUrl === cleanUrl) && (now - lastFetch < 3600000)) {
-            setStatus({ type: 'ready', msg: t('mapAnalysis.status.cached').replace('{{time}}', new Date(lastFetch).toLocaleTimeString()) });
-            setAllyTxt(cachedData.ally); setPlayerTxt(cachedData.player); setVillageTxt(cachedData.village);
-            
-            setTimeout(() => processData(cachedData.ally, cachedData.player, cachedData.village, true), 100);
-            return;
-        }
+        if (!worldId) return alert(t('common.invalidWorldUrl'));
 
         setStatus({ type: 'loading', msg: t('mapAnalysis.status.downloading') });
-        
+
         try {
-            // YENİ RENDER API İSTEKLERİ
-            const API_BASE = `https://twcu-bot.onrender.com/api/${worldId}`;
-            
-            const [allyRes, playerRes, villageRes] = await Promise.all([
-                fetch(`${API_BASE}/Klanlar`),
-                fetch(`${API_BASE}/Oyuncular`),
-                fetch(`${API_BASE}/Koyler`)
-            ]);
+            // Merkezî veri katmanı: önbellek, ngrok başlığı ve hata yönetimi tek yerde.
+            const { ally, player, village, fetchedAt, fromCache } = await fetchWorldData(cleanUrl, {
+                villages: true,
+                force: bypassMode,
+            });
 
-            const allyJson = await allyRes.json();
-            const playerJson = await playerRes.json();
-            const villageJson = await villageRes.json();
-
-            // GÜVENLİK
-            if (allyJson.hata || playerJson.hata || villageJson.hata) {
-                throw new Error(allyJson.hata || playerJson.hata || villageJson.hata || "Veritabanında veri bulunamadı.");
+            if (!village || village.length === 0) {
+                throw new Error(t('common.worldEmpty'));
             }
 
-            // MÜKEMMEL HİLE: TiDB'den gelen JSON dizilerini tekrar eski TXT virgüllü formatına çeviriyoruz!
-            // Böylece processData fonksiyonu ve Manuel Text kutuları HİÇ bozulmadan çalışmaya devam eder.
-            const allyData = allyJson.veriler.map(row => row.join(",")).join("\n");
-            const playerData = playerJson.veriler.map(row => row.join(",")).join("\n");
-            const villageData = villageJson.veriler.map(row => row.join(",")).join("\n");
+            storage.set('tw_last_fetch_time', fetchedAt);
 
-            setAllyTxt(allyData); setPlayerTxt(playerData); setVillageTxt(villageData);
-            
-            storage.set("tw_last_fetch_time", now);
-            storage.set("tw_cache_data", { ally: allyData, player: playerData, village: villageData });
+            // Manuel metin kutuları geriye dönük çalışsın diye satırları CSV'ye yansıtıyoruz.
+            setAllyTxt(ally.map((r) => r.join(',')).join('\n'));
+            setPlayerTxt(player.map((r) => r.join(',')).join('\n'));
+            setVillageTxt(village.map((r) => r.join(',')).join('\n'));
 
-            setStatus({ type: 'loading', msg: t('mapAnalysis.status.analyzing') });
-            setTimeout(() => processData(allyData, playerData, villageData, false), 100);
+            if (fromCache) {
+                setStatus({
+                    type: 'ready',
+                    msg: t('mapAnalysis.status.cached').replace(
+                        '{{time}}',
+                        new Date(fetchedAt).toLocaleTimeString()
+                    ),
+                });
+            } else {
+                setStatus({ type: 'loading', msg: t('mapAnalysis.status.analyzing') });
+            }
+
+            // Ağır işi bir sonraki kareye bırak ki arayüz donmasın.
+            setTimeout(() => processRows(ally, player, village, fromCache), 0);
         } catch (error) {
-            setStatus({ type: 'empty', msg: 'HATA' });
-            alert(t('mapAnalysis.fetchError').replace('{{error}}', error.message));
+            setStatus({ type: 'empty', msg: t('mapAnalysis.status.errorShort') });
+            const msg =
+                error.message === 'INVALID_WORLD_URL' ? t('common.invalidWorldUrl')
+                : error.message === 'WORLD_EMPTY' ? t('common.worldEmpty')
+                : error.message;
+            alert(t('mapAnalysis.fetchError').replace('{{error}}', msg));
         }
     };
 
+    /** Manuel yapıştırılan metni işler (satırlara çevirip aynı motora verir). */
     const processData = (aTxt = allyTxt, pTxt = playerTxt, vTxt = villageTxt, isFromCache = false) => {
         if (!vTxt.trim()) return setStatus({ type: 'empty', msg: t('mapAnalysis.status.empty') });
+        return processRows(textToRows(aTxt), textToRows(pTxt), textToRows(vTxt), isFromCache);
+    };
+
+    const processRows = (allyRows = [], playerRows = [], villageRows = [], isFromCache = false) => {
+        if (!villageRows.length) return setStatus({ type: 'empty', msg: t('mapAnalysis.status.empty') });
 
         const ALLIES = {}, PLAYERS = {};
         const now = Date.now();
-        const lastActualFetch = storage.get("tw_last_fetch_time", now);
+        const lastActualFetch = getCacheTime(worldUrl) || storage.get("tw_last_fetch_time", now);
 
         let timeMsg = isFromCache 
             ? t('mapAnalysis.timeMsg.cached').replace('{{time}}', new Date(lastActualFetch).toLocaleTimeString())
@@ -156,28 +146,22 @@ const MapAnalysis = () => {
         }
         setTimeDiffMsg(timeMsg);
 
-        aTxt.split("\n").forEach(l => {
-            if (!l.trim()) return;
-            const parts = l.split(",");
+        allyRows.forEach(parts => {
             const id = parseInt(parts[0]);
             if (!isNaN(id)) ALLIES[id] = { id, name: decodeTW(parts[1]), tag: decodeTW(parts[2]) };
         });
 
-        pTxt.split("\n").forEach(l => {
-            if (!l.trim()) return;
-            const parts = l.split(",");
+        playerRows.forEach(parts => {
             const id = parseInt(parts[0]);
             const allyId = parseInt(parts[2]) || 0;
             if (!isNaN(id)) PLAYERS[id] = { id, name: decodeTW(parts[1]), allyId, allyTag: ALLIES[allyId] ? ALLIES[allyId].tag : "—" };
         });
 
         const newVillages = {}, contData = {};
-        let newFoundTeleports = []; 
+        let newFoundTeleports = [];
         const oldVillages = storage.get("tw_villages_db", {});
 
-        vTxt.split("\n").forEach(row => {
-            if (!row.trim()) return;
-            const p = row.split(",");
+        villageRows.forEach(p => {
             if (p.length < 4) return;
             const id = p[0], name = decodeTW(p[1]), x = parseInt(p[2]), y = parseInt(p[3]), pid = parseInt(p[4]);
             if (isNaN(x) || isNaN(y) || isNaN(pid)) return;

@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { bumpStat } from '../utils/twApi';
 import storage from '../utils/storage';
 import './ScavengingPlanner.css';
 
@@ -36,7 +37,7 @@ const formatClock = (totalSeconds) => {
 };
 
 const ScavengingPlanner = () => {
-    fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=sims").catch(() => { });
+    bumpStat("sims");
     const { t } = useTranslation();
 
     const [worldSpeed, setWorldSpeed] = useState(() => storage.get("scav_worldSpeed", 1));
@@ -332,8 +333,8 @@ const ScavengingPlanner = () => {
                             ))}
                         </div>
                         <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '20px', fontSize: '12px', fontWeight: 'bold' }}>
-                            <span style={{ color: '#5cb85c' }}>■ Günlük Maden Üretimi</span>
-                            <span style={{ color: '#f0ad4e' }}>■ Günlük Toplayıcılık Ganimeti</span>
+                            <span style={{ color: '#5cb85c' }}>{t('scavenging.chart.dailyMining')}</span>
+                            <span style={{ color: '#f0ad4e' }}>{t('scavenging.chart.dailyScavenging')}</span>
                         </div>
                     </div>
 

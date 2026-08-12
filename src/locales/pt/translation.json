@@ -22,8 +22,13 @@
       "clanOp": "Planejador de Operação de Tribo",
       "clanTroop": "Planejador de Operação de Tribo (Avançado)",
       "fastSupport": "Planeamento de Apoio Rápido",
-      "scavengingPlanner": "Calculadora de Tempos de Saque"
-    }
+      "scavengingPlanner": "Calculadora de Tempos de Saque",
+      "notificationSettings": "Definições de notificação"
+    },
+    "toggle": "Abrir/fechar menu",
+    "expand": "Expandir",
+    "collapse": "Recolher",
+    "changeLanguage": "Alterar idioma"
   },
   "home": {
     "hero": {
@@ -31,19 +36,62 @@
       "subtitle": "A vitória está escondida nos detalhes e no planeamento impecável. Poupe tempo na sua jornada no Tribal Wars e elabore planos estratégicos que levarão a sua tribo à vitória. Escolha uma ferramenta para começar."
     },
     "tools": {
-      "opPlanner": { "title": "Planejador de Operação Pessoal", "desc": "Combine aldeias de origem e destino para preparar um modelo de operação impecável (BBCode)." },
-      "buildingPlanner": { "title": "Planejador de Construção", "desc": "Desenhe o plano de construção da sua aldeia passo a passo com simulação avançada de fila." },
-      "unitCalculator": { "title": "Calculadora de Produção de Tropas", "desc": "Calcule os tempos de produção de tropas para Quartéis, Estábulo e Oficina, incluindo bónus." },
-      "mapGenerator": { "title": "Gerador de Mapas", "desc": "Gere mapas mundiais dinâmicos e coloridos atualizados para fóruns de clãs." },
-      "mapAnalysis": { "title": "Análise de Continente", "desc": "Analise as dominações de clãs e jogadores no mapa mundial." },
-      "productionData": { "title": "Calculadora de Produção", "desc": "Otimize as taxas de produção de minas, capacidades de armazenamento e tempos de enchimento." },
-      "coinMinter": { "title": "Planejador de Moedas de Ouro", "desc": "Calcule a aldeia ideal para cunhar Moedas de Ouro." },
-      "churchPlanner": { "title": "Planejador de Igrejas", "desc": "Otimize as áreas de cobertura das suas igrejas no mapa com um algoritmo que poupa população." },
-      "buildingTimes": { "title": "Calculadora de Tempos de Construção", "desc": "Calcule e compare os tempos de construção de edifícios a diferentes níveis até ao segundo." },
-      "clanOp": { "title": "Planejador de Operação de Tribo", "desc": "Analise todas as aldeias do clã e faça atribuições inteligentes. Distribua ordens BBCode personalizadas aos membros com inteligência de pessoal suportada por mapa." },
-      "clanTroop": { "title": "Planejador de Operação de Tribo (Com Tropas)", "desc": "Analise todas as tropas do clã e faça atribuições inteligentes. Distribua ordens BBCode personalizadas aos membros com inteligência de pessoal suportada por mapa." },
-      "fastSupport": { "title": "Localizador de Apoio Rápido", "desc": "Crie um pedido de apoio para obter apoio rápido." },
-      "scavengingPlanner": { "title": "Calculadora de Tempos de Saque", "desc": "Compare os tempos de saque em detalhe." }
+      "opPlanner": {
+        "title": "Planejador de Operação Pessoal",
+        "desc": "Combine aldeias de origem e destino para preparar um modelo de operação impecável (BBCode)."
+      },
+      "buildingPlanner": {
+        "title": "Planejador de Construção",
+        "desc": "Desenhe o plano de construção da sua aldeia passo a passo com simulação avançada de fila."
+      },
+      "unitCalculator": {
+        "title": "Calculadora de Produção de Tropas",
+        "desc": "Calcule os tempos de produção de tropas para Quartéis, Estábulo e Oficina, incluindo bónus."
+      },
+      "mapGenerator": {
+        "title": "Gerador de Mapas",
+        "desc": "Gere mapas mundiais dinâmicos e coloridos atualizados para fóruns de clãs."
+      },
+      "mapAnalysis": {
+        "title": "Análise de Continente",
+        "desc": "Analise as dominações de clãs e jogadores no mapa mundial."
+      },
+      "productionData": {
+        "title": "Calculadora de Produção",
+        "desc": "Otimize as taxas de produção de minas, capacidades de armazenamento e tempos de enchimento."
+      },
+      "coinMinter": {
+        "title": "Planejador de Moedas de Ouro",
+        "desc": "Calcule a aldeia ideal para cunhar Moedas de Ouro."
+      },
+      "churchPlanner": {
+        "title": "Planejador de Igrejas",
+        "desc": "Otimize as áreas de cobertura das suas igrejas no mapa com um algoritmo que poupa população."
+      },
+      "buildingTimes": {
+        "title": "Calculadora de Tempos de Construção",
+        "desc": "Calcule e compare os tempos de construção de edifícios a diferentes níveis até ao segundo."
+      },
+      "clanOp": {
+        "title": "Planejador de Operação de Tribo",
+        "desc": "Analise todas as aldeias do clã e faça atribuições inteligentes. Distribua ordens BBCode personalizadas aos membros com inteligência de pessoal suportada por mapa."
+      },
+      "clanTroop": {
+        "title": "Planejador de Operação de Tribo (Com Tropas)",
+        "desc": "Analise todas as tropas do clã e faça atribuições inteligentes. Distribua ordens BBCode personalizadas aos membros com inteligência de pessoal suportada por mapa."
+      },
+      "fastSupport": {
+        "title": "Localizador de Apoio Rápido",
+        "desc": "Crie um pedido de apoio para obter apoio rápido."
+      },
+      "scavengingPlanner": {
+        "title": "Calculadora de Tempos de Saque",
+        "desc": "Compare os tempos de saque em detalhe."
+      },
+      "notificationSettings": {
+        "title": "Definições de notificação",
+        "desc": "Personalize a forma como as notificações são apresentadas."
+      }
     }
   },
   "footer": {
@@ -58,10 +106,11 @@
     "title": "Sobre",
     "p1": "Olá, sou Anto Bvb 66.",
     "p2": "TW Cobre é um painel tático e centro de comando de elite desenvolvido de forma independente para processar dados brutos de jogadores de Clãs (Tribal Wars) e ajudá-los a ganhar superioridade estratégica.",
-    "p3": "Desde o planeamento de operações até à análise de limpeza, todos os módulos são concebidos para resolver cálculos que levariam horas a um jogador em segundos. A vitória está escondida nos detalhes!"
- ,"contactTitle": "Relato de Erros e Contato",
+    "p3": "Desde o planeamento de operações até à análise de limpeza, todos os módulos são concebidos para resolver cálculos que levariam horas a um jogador em segundos. A vitória está escondida nos detalhes!",
+    "contactTitle": "Relato de Erros e Contato",
     "contactDesc": "Você pode enviar erros, omissões ou sugestões de desenvolvimento que encontrar em nosso site diretamente por e-mail.",
-    "emailButton": "Enviar e-mail" },
+    "emailButton": "Enviar e-mail"
+  },
   "privacyPage": {
     "title": "Política de Privacidade e KVKK",
     "p1": "TW Cobre respeita a privacidade do utilizador ao mais alto nível. De acordo com as leis de proteção de dados (GDPR) e padrões internacionais, a nossa política de processamento de dados é a seguinte:",
@@ -200,10 +249,27 @@
       "zero": "0 segs"
     },
     "buildings": [
-      "Quartel-General (QG)", "Quartéis", "Estábulo", "Oficina", "Primeira Igreja", "Igreja",
-      "Torre de Vigia", "Academia", "Ferreiro", "Ponto de Reunião", "Estátua", "Mercado",
-      "Bosque", "Poço de Barro", "Mina de Ferro", "Quinta", "Armazém", "Esconderijo",
-      "Nobre", "Moeda de Ouro", "Muralha"
+      "Quartel-General (QG)",
+      "Quartéis",
+      "Estábulo",
+      "Oficina",
+      "Primeira Igreja",
+      "Igreja",
+      "Torre de Vigia",
+      "Academia",
+      "Ferreiro",
+      "Ponto de Reunião",
+      "Estátua",
+      "Mercado",
+      "Bosque",
+      "Poço de Barro",
+      "Mina de Ferro",
+      "Quinta",
+      "Armazém",
+      "Esconderijo",
+      "Nobre",
+      "Moeda de Ouro",
+      "Muralha"
     ]
   },
   "scavenging": {
@@ -276,7 +342,9 @@
       "unlocked": "Desbloqueado",
       "infoTitle": "💡 Pontos Críticos de Viragem (Equilíbrios)",
       "be1": "🔸 Após {{cap}} Capacidade: a tática 1-2-3-4 ultrapassa 2-3-4 e torna-se mais rentável.",
-      "be2": "🔸 Após {{cap}} Capacidade: a tática 1-2-3 ultrapassa 2-3."
+      "be2": "🔸 Após {{cap}} Capacidade: a tática 1-2-3 ultrapassa 2-3.",
+      "dailyMining": "■ Produção diária de recursos",
+      "dailyScavenging": "■ Saque diário de recolha"
     }
   },
   "churchPlanner": {
@@ -374,7 +442,8 @@
       "manualAdded": "✅ Atribuição Manual Adicionada!",
       "confirmClearQueue": "Tem a certeza de que quer limpar a fila inteira?",
       "queueCleared": "🗑️ Fila Limpa!",
-      "copied": "Copiado!"
+      "copied": "Copiado!",
+      "enterClanTag": "Introduza a Etiqueta da Tribo!"
     },
     "columns": {
       "no": "Nº",
@@ -389,9 +458,19 @@
       "attackLink": "Ligação de Ação"
     },
     "units": {
-      "spear": "Lanceiro", "sword": "Espadachim", "axe": "Machadeiro", "spy": "Batedor",
-      "light": "Cavalaria Ligeira", "heavy": "Cavalaria Pesada", "ram": "Aríete", "catapult": "Catapulta",
-      "knight": "Paladino", "snob": "Nobre", "archer": "Arqueiro", "marcher": "Arqueiro Montado", "militia": "Milícia"
+      "spear": "Lanceiro",
+      "sword": "Espadachim",
+      "axe": "Machadeiro",
+      "spy": "Batedor",
+      "light": "Cavalaria Ligeira",
+      "heavy": "Cavalaria Pesada",
+      "ram": "Aríete",
+      "catapult": "Catapulta",
+      "knight": "Paladino",
+      "snob": "Nobre",
+      "archer": "Arqueiro",
+      "marcher": "Arqueiro Montado",
+      "militia": "Milícia"
     },
     "shortUnits": {
       "ram": "Nuke",
@@ -457,7 +536,8 @@
       "copyAll": "Copiar Tudo",
       "ordersFor": "--- ORDENS PARA {{player}} ---",
       "attack": "Ataque",
-      "unknown": "DESCONHECIDO"
+      "unknown": "DESCONHECIDO",
+      "selectCols": "Selecionar Colunas:"
     },
     "alerts": {
       "confirmClear": "Todos os planos incluindo inteligência serão eliminados. Tem a certeza?",
@@ -468,7 +548,8 @@
       "orderAdded": "✅ Ordem Adicionada!",
       "confirmClearQueue": "Tem a certeza de que quer limpar a fila inteira?",
       "queueCleared": "🗑️ Fila Limpa!",
-      "copied": "Copiado!"
+      "copied": "Copiado!",
+      "enterClanTag": "Introduza a Etiqueta da Tribo!"
     },
     "columns": {
       "no": "Nº",
@@ -483,9 +564,16 @@
       "attackLink": "Ação"
     },
     "units": {
-      "spear": "Lanceiro", "sword": "Espadachim", "axe": "Machadeiro", "spy": "Batedor",
-      "light": "Cavalaria Ligeira", "heavy": "Cavalaria Pesada", "ram": "Aríete", "catapult": "Catapulta",
-      "knight": "Paladino", "snob": "Nobre"
+      "spear": "Lanceiro",
+      "sword": "Espadachim",
+      "axe": "Machadeiro",
+      "spy": "Batedor",
+      "light": "Cavalaria Ligeira",
+      "heavy": "Cavalaria Pesada",
+      "ram": "Aríete",
+      "catapult": "Catapulta",
+      "knight": "Paladino",
+      "snob": "Nobre"
     },
     "profiles": {
       "quarter": "Quarto",
@@ -546,7 +634,8 @@
       "title": "Apoios Disponíveis ({{count}})",
       "allTribe": "Toda a Tribo",
       "noVillages": "Nenhumas aldeias encontradas que possam chegar a este alvo na hora selecionada!",
-      "mapTarget": "🛡️ Alvo"
+      "mapTarget": "🛡️ Alvo",
+      "allClan": "Toda a Tribo"
     },
     "bbcode": {
       "title": "📋 Chamada de Fórum (BBCode)",
@@ -559,7 +648,8 @@
     },
     "alerts": {
       "enterTribeTag": "Introduza a Etiqueta da Tribo!",
-      "copied": "Copiado!"
+      "copied": "Copiado!",
+      "enterClanTag": "Introduza a Etiqueta da Tribo!"
     },
     "columns": {
       "player": "Jogador",
@@ -569,7 +659,13 @@
       "departure": "Hora de Partida"
     },
     "units": {
-      "spear": "Lanceiro", "sword": "Espadachim", "archer": "Arqueiro", "spy": "Batedor", "heavy": "Cavalaria Pesada", "catapult": "Catapulta", "knight": "Paladino"
+      "spear": "Lanceiro",
+      "sword": "Espadachim",
+      "archer": "Arqueiro",
+      "spy": "Batedor",
+      "heavy": "Cavalaria Pesada",
+      "catapult": "Catapulta",
+      "knight": "Paladino"
     }
   },
   "mapAnalysis": {
@@ -587,7 +683,8 @@
       "analyzing": "Descarga completa, a analisar...",
       "empty": "Nenhum dado encontrado para processar!",
       "success": "SUCESSO: {{villages}} aldeias, {{players}} jogadores carregados.",
-      "cleared": "Armazenamento completamente limpo."
+      "cleared": "Armazenamento completamente limpo.",
+      "errorShort": "ERRO"
     },
     "timeMsg": {
       "cached": "⏳ A mostrar dados em cache. Última obtenção: {{time}}",
@@ -716,9 +813,22 @@
       "attackLink": "Ligação de Ação"
     },
     "units": {
-      "spear": "Lanceiro", "sword": "Espadachim", "axe": "Machadeiro", "spy": "Batedor",
-      "light": "Cavalaria Ligeira", "heavy": "Cavalaria Pesada", "ram": "Aríete", "catapult": "Catapulta",
-      "knight": "Paladino", "snob": "Nobre", "archer": "Arqueiro", "marcher": "Arqueiro Montado", "militia": "Milícia"
+      "spear": "Lanceiro",
+      "sword": "Espadachim",
+      "axe": "Machadeiro",
+      "spy": "Batedor",
+      "light": "Cavalaria Ligeira",
+      "heavy": "Cavalaria Pesada",
+      "ram": "Aríete",
+      "catapult": "Catapulta",
+      "knight": "Paladino",
+      "snob": "Nobre",
+      "archer": "Arqueiro",
+      "marcher": "Arqueiro Montado",
+      "militia": "Milícia"
+    },
+    "troopInput": {
+      "title": "🛡️ Introduzir dados de tropas (da vista geral em grupo)"
     }
   },
   "productionData": {
@@ -807,9 +917,16 @@
       "none": "-"
     },
     "units": {
-      "spear": "Lanceiro", "sword": "Espadachim", "axe": "Machadeiro", "archer": "Arqueiro",
-      "spy": "Batedor", "lc": "Cavalaria Ligeira", "ma": "Arqueiro Montado", "hc": "Cavalaria Pesada",
-      "ram": "Aríete", "cat": "Catapulta"
+      "spear": "Lanceiro",
+      "sword": "Espadachim",
+      "axe": "Machadeiro",
+      "archer": "Arqueiro",
+      "spy": "Batedor",
+      "lc": "Cavalaria Ligeira",
+      "ma": "Arqueiro Montado",
+      "hc": "Cavalaria Pesada",
+      "ram": "Aríete",
+      "cat": "Catapulta"
     }
   },
   "mapGenerator": {
@@ -857,121 +974,151 @@
     }
   },
   "notificationSettings": {
-  "header": {
-    "title": "TwCu Centro de Notificações",
-    "subtitle": "Pode gerir as suas definições de notificação para todos os mundos em que joga aqui.",
-    "hideInfo": "Ocultar Info",
-    "showInfo": "Mostrar Info"
-  },
-  "infoPanel": {
-    "title": "Como Utilizar?",
-    "profileNameTitle": "Nome do Perfil:",
-    "profileNameDesc": "Este é o nome que atribui a este grupo de definições para o lembrar facilmente. <u>Não pode ficar vazio</u> e serve como o rótulo principal que o identifica no sistema.",
-    "specialIdTitle": "ID de Acesso Especial (Special ID):",
-    "specialIdDesc": "Este é o código único que permite ao sistema fazer a correspondência consigo. Se não tiver um, clique no botão <em>Gerar ID</em> para criar um aleatório.",
-    "worldLinkTitle": "Link do Mundo:",
-    "worldLinkDesc": "Este é o endereço base do mundo em que está a jogar (ex.: <code>https://pt1.tribalwars.com.pt/</code>). O bot recebe todo o fluxo de dados através deste endereço.",
-    "botTokenTitle": "Token do Bot de Telegram & Chat ID:",
-    "botTokenDesc": "Necessário para as notificações. <strong>Chat ID:</strong> Pode obtê-lo enviando <code>/start</code> para <code>@userinfobot</code> no Telegram. <strong>Bot Token:</strong> Crie o seu próprio bot enviando <code>/newbot</code> para <code>@BotFather</code>.",
-    "filtersInfo": "Filtros de Notificação:",
-    "filtersInfoDesc": "Pode selecionar os tipos de movimentos para os quais deseja receber notificações. Por exemplo, pode receber notificações apenas para conquistas de aldeias (ganhos) ou perdas. Assim que selecionar os seus filtros, receberá notificações instantâneas no Telegram quando ocorrerem movimentos relacionados com os seus alvos.",
-    "continentTrackingTitle": "Rastreio de Continente:",
-    "continentTrackingDesc": "Pode rastrear movimentos de conquista apenas em continentes específicos (ex.: 44,45,54).",
-    "fullTrackingTitle": "Rastreio Total do Mundo:",
-    "fullTrackingDesc": "Ativa o rastreio em tempo real de todas as conquistas de aldeias no mundo. <strong>Aviso:</strong> Isto pode gerar um tráfego excessivo de mensagens."
-  },
-  "profile": {
-    "mainProfile": "Perfil Principal",
-    "newProfile": "Novo Perfil",
-    "unknownWorld": "Mundo Desconhecido",
-    "delete": "Eliminar",
-    "createNewProfile": "Criar Novo Perfil"
-  },
-  "filters": {
-    "gains": "Conquistas de Aldeias (Ganhos)",
-    "losses": "Perdas de Aldeias (Perdas)",
-    "barbarian": "Conquistas de Aldeias Bárbaras (Bárbaras)",
-    "selfConquer": "Autoconquista (SelfConquer)",
-    "internal": "Conquistas Internas da Tribo (Internas)"
-  },
-  "settings": {
-    "basicSettings": "Definições Básicas",
-    "profileNameLabel": "Nome do Perfil (Nick / Nome de Utilizador)",
-    "required": "*Obrigatório",
-    "profileNamePlaceholder": "Exemplo: Anto Bvb 66 - TribalWars Pt1",
-    "fieldCannotBeEmpty": "Este campo não pode ficar vazio.",
-    "specialIdLabel": "ID de Acesso Especial",
-    "specialIdPlaceholder": "Introduza o seu ID de licença de 66 caracteres ou gere um",
-    "generateIdBtn": "Gerar",
-    "worldLinkLabel": "Link do Mundo",
-    "worldLinkPlaceholder": "https://pt1.tribalwars.com.pt/",
-    "botTokenLabel": "Token do Bot de Telegram",
-    "botTokenPlaceholder": "123456789:ABCDEF...",
-    "chatIdLabel": "Telegram Chat ID",
-    "chatIdPlaceholder": "exemplo: 1135068175",
-    "saveAllConfigs": "Guardar Todas as Definições",
-    "languageLabel": "Idioma",
-    "languagePlaceholder": "Selecionar Idioma"
-  },
-  "targets": {
-    "addNewTarget": "Adicionar Novo Alvo",
-    "inputLabel": "Nome de Jogador ou Tag de Tribo",
-    "inputPlaceholder": "Exemplo: Jogador1, Jogador2 ou TRIBO1, TRIBO2",
-    "selectFilters": "Selecionar Filtros de Notificação",
-    "clearAll": "Limpar Tudo",
-    "selectAll": "Selecionar Tudo",
-    "addAsPlayer": "+ Adicionar como Jogador",
-    "addAsTribe": "+ Adicionar como Tribu",
-    "manageTargets": "Gerir Lista de Alvos",
-    "emptyState": "Ainda não existem alvos a ser rastreados.",
-    "show": "Mostrar",
-    "hide": "Ocultar",
-    "delete": "Eliminar",
-    "deleteConfirm": "Tem a certeza de que deseja eliminar este alvo?",
-    "playerBadge": "👤 Jogador",
-    "tribeBadge": "🛡️ Tribo"
-  },
-  "alerts": {
-    "enterPlayerOrTribe": "Por favor, introduza um nome de jogador ou tag de tribo!",
-    "worldDataFetchError": "Não foi possível obter os dados do mundo. Por favor, verifique a sua ligação.",
-    "invalidDataReceived": "Dados Recebidos Inválidos:",
-    "worldDataReadError": "ERRO: Os dados do mundo não puderam ser lidos!\n\nPor favor, certifique-se de que introduziu um link de mundo válido e ativo (ex.: https://pt1.tribalwars.com.pt) no separador 'Definições Básicas'.",
-    "playerNotFound": "ERRO: Nenhum jogador com o nome \"{{name}}\" foi encontrado neste mundo! Certifique-se de que escreveu o nome corretamente.",
-    "tribeNotFound": "ERRO: Nenhuma tribo com a tag ou nome \"{{name}}\" foi encontrada neste mundo!",
-    "enterBothTribes": "Por favor, introduza a tag/nome da tribo para ambos os lados!",
-    "worldDataCorrupted": "ERRO: Os dados do mundo estão corrompidos ou não podem ser lidos!",
-    "tribesNotFoundList": "As seguintes tribos não foram encontradas neste mundo:",
-    "worldDataFetchErrorShort": "Não foi possível obter os dados do mundo.",
-    "invalidContinent": "Por favor, introduza um número de continente válido entre 0 e 99 (ex.: 44).",
-    "continentAlreadyAdded": "Este continente já foi adicionado!",
-    "confirmDeleteProfile": "Tem a certeza de que deseja eliminar completamente estas definições de mundo?",
-    "idExists": "Já existe um ID! Limpe a caixa primeiro se desejar um novo.",
-    "emptyTargetName": "Por favor, introduza um nome ou tag de tribo primeiro.",
-    "targetExists": "Os alvos que introduziu já se encontram na lista de rastreio!",
-    "profileNameEmpty": "Deve introduzir um nome para o perfil {{index}}!",
-    "specialIdEmpty": "O ID Especial está em falta ou não foi gerado para o perfil '{{name}}'!",
-    "saveSuccess": "{{count}} perfil(is) guardado(s) com sucesso na cloud!",
-    "saveError": "Ocorreu um erro ao guardar {{count}} perfil(is)!",
-    "saveNoData": "Nenhum perfil encontrado para guardar!"
+    "header": {
+      "title": "TwCu Centro de Notificações",
+      "subtitle": "Pode gerir as suas definições de notificação para todos os mundos em que joga aqui.",
+      "hideInfo": "Ocultar Info",
+      "showInfo": "Mostrar Info"
+    },
+    "infoPanel": {
+      "title": "Como Utilizar?",
+      "profileNameTitle": "Nome do Perfil:",
+      "profileNameDesc": "Este é o nome que atribui a este grupo de definições para o lembrar facilmente. <u>Não pode ficar vazio</u> e serve como o rótulo principal que o identifica no sistema.",
+      "specialIdTitle": "ID de Acesso Especial (Special ID):",
+      "specialIdDesc": "Este é o código único que permite ao sistema fazer a correspondência consigo. Se não tiver um, clique no botão <em>Gerar ID</em> para criar um aleatório.",
+      "worldLinkTitle": "Link do Mundo:",
+      "worldLinkDesc": "Este é o endereço base do mundo em que está a jogar (ex.: <code>https://pt1.tribalwars.com.pt/</code>). O bot recebe todo o fluxo de dados através deste endereço.",
+      "botTokenTitle": "Token do Bot de Telegram & Chat ID:",
+      "botTokenDesc": "Necessário para as notificações. <strong>Chat ID:</strong> Pode obtê-lo enviando <code>/start</code> para <code>@userinfobot</code> no Telegram. <strong>Bot Token:</strong> Crie o seu próprio bot enviando <code>/newbot</code> para <code>@BotFather</code>.",
+      "filtersInfo": "Filtros de Notificação:",
+      "filtersInfoDesc": "Pode selecionar os tipos de movimentos para os quais deseja receber notificações. Por exemplo, pode receber notificações apenas para conquistas de aldeias (ganhos) ou perdas. Assim que selecionar os seus filtros, receberá notificações instantâneas no Telegram quando ocorrerem movimentos relacionados com os seus alvos.",
+      "continentTrackingTitle": "Rastreio de Continente:",
+      "continentTrackingDesc": "Pode rastrear movimentos de conquista apenas em continentes específicos (ex.: 44,45,54).",
+      "fullTrackingTitle": "Rastreio Total do Mundo:",
+      "fullTrackingDesc": "Ativa o rastreio em tempo real de todas as conquistas de aldeias no mundo. <strong>Aviso:</strong> Isto pode gerar um tráfego excessivo de mensagens."
+    },
+    "profile": {
+      "mainProfile": "Perfil Principal",
+      "newProfile": "Novo Perfil",
+      "unknownWorld": "Mundo Desconhecido",
+      "delete": "Eliminar",
+      "createNewProfile": "Criar Novo Perfil"
+    },
+    "filters": {
+      "gains": "Conquistas de Aldeias (Ganhos)",
+      "losses": "Perdas de Aldeias (Perdas)",
+      "barbarian": "Conquistas de Aldeias Bárbaras (Bárbaras)",
+      "selfConquer": "Autoconquista (SelfConquer)",
+      "internal": "Conquistas Internas da Tribo (Internas)",
+      "tribeLog": "Seguimento de entradas/saídas da tribo"
+    },
+    "settings": {
+      "basicSettings": "Definições Básicas",
+      "profileNameLabel": "Nome do Perfil (Nick / Nome de Utilizador)",
+      "required": "*Obrigatório",
+      "profileNamePlaceholder": "Exemplo: Anto Bvb 66 - TribalWars Pt1",
+      "fieldCannotBeEmpty": "Este campo não pode ficar vazio.",
+      "specialIdLabel": "ID de Acesso Especial",
+      "specialIdPlaceholder": "Introduza o seu ID de licença de 66 caracteres ou gere um",
+      "generateIdBtn": "Gerar",
+      "worldLinkLabel": "Link do Mundo",
+      "worldLinkPlaceholder": "https://pt1.tribalwars.com.pt/",
+      "botTokenLabel": "Token do Bot de Telegram",
+      "botTokenPlaceholder": "123456789:ABCDEF...",
+      "chatIdLabel": "Telegram Chat ID",
+      "chatIdPlaceholder": "exemplo: 1135068175",
+      "saveAllConfigs": "Guardar Todas as Definições",
+      "languageLabel": "Idioma",
+      "languagePlaceholder": "Selecionar Idioma",
+      "remoteDeleteToggle": "Eliminar registo na nuvem",
+      "notificationTypeLabel": "Tipos de notificação",
+      "typeImage": "Notificação com imagem",
+      "typeText": "Notificação de texto"
+    },
+    "targets": {
+      "addNewTarget": "Adicionar Novo Alvo",
+      "inputLabel": "Nome de Jogador ou Tag de Tribo",
+      "inputPlaceholder": "Exemplo: Jogador1, Jogador2 ou TRIBO1, TRIBO2",
+      "selectFilters": "Selecionar Filtros de Notificação",
+      "clearAll": "Limpar Tudo",
+      "selectAll": "Selecionar Tudo",
+      "addAsPlayer": "+ Adicionar como Jogador",
+      "addAsTribe": "+ Adicionar como Tribu",
+      "manageTargets": "Gerir Lista de Alvos",
+      "emptyState": "Ainda não existem alvos a ser rastreados.",
+      "show": "Mostrar",
+      "hide": "Ocultar",
+      "delete": "Eliminar",
+      "deleteConfirm": "Tem a certeza de que deseja eliminar este alvo?",
+      "playerBadge": "👤 Jogador",
+      "tribeBadge": "🛡️ Tribo"
+    },
+    "alerts": {
+      "enterPlayerOrTribe": "Por favor, introduza um nome de jogador ou tag de tribo!",
+      "worldDataFetchError": "Não foi possível obter os dados do mundo. Por favor, verifique a sua ligação.",
+      "invalidDataReceived": "Dados Recebidos Inválidos:",
+      "worldDataReadError": "ERRO: Os dados do mundo não puderam ser lidos!\n\nPor favor, certifique-se de que introduziu um link de mundo válido e ativo (ex.: https://pt1.tribalwars.com.pt) no separador 'Definições Básicas'.",
+      "playerNotFound": "ERRO: Nenhum jogador com o nome \"{{name}}\" foi encontrado neste mundo! Certifique-se de que escreveu o nome corretamente.",
+      "tribeNotFound": "ERRO: Nenhuma tribo com a tag ou nome \"{{name}}\" foi encontrada neste mundo!",
+      "enterBothTribes": "Por favor, introduza a tag/nome da tribo para ambos os lados!",
+      "worldDataCorrupted": "ERRO: Os dados do mundo estão corrompidos ou não podem ser lidos!",
+      "tribesNotFoundList": "As seguintes tribos não foram encontradas neste mundo:",
+      "worldDataFetchErrorShort": "Não foi possível obter os dados do mundo.",
+      "invalidContinent": "Por favor, introduza um número de continente válido entre 0 e 99 (ex.: 44).",
+      "continentAlreadyAdded": "Este continente já foi adicionado!",
+      "confirmDeleteProfile": "Tem a certeza de que deseja eliminar completamente estas definições de mundo?",
+      "idExists": "Já existe um ID! Limpe a caixa primeiro se desejar um novo.",
+      "emptyTargetName": "Por favor, introduza um nome ou tag de tribo primeiro.",
+      "targetExists": "Os alvos que introduziu já se encontram na lista de rastreio!",
+      "profileNameEmpty": "Deve introduzir um nome para o perfil {{index}}!",
+      "specialIdEmpty": "O ID Especial está em falta ou não foi gerado para o perfil '{{name}}'!",
+      "saveSuccess": "{{count}} perfil(is) guardado(s) com sucesso na cloud!",
+      "saveError": "Ocorreu um erro ao guardar {{count}} perfil(is)!",
+      "saveNoData": "Nenhum perfil encontrado para guardar!",
+      "deleteError": "Não foi possível eliminar o perfil!",
+      "enterHighlightName": "Introduza o nome de um jogador ou tribo!",
+      "confirmRemoteDelete": "Todos os dados deste Special ID serão eliminados permanentemente. Tem a certeza?",
+      "remoteDeleteSuccess": "Perfil eliminado da base de dados com sucesso.",
+      "remoteDeleteError": "Ocorreu um erro ao eliminar. Verifique o ID.",
+      "enterSpecialId": "Introduza o seu ID de acesso especial!",
+      "idGenerateError": "Erro de ligação! Não foi possível gerar o ID."
+    },
+    "common": {
+      "add": "Adicionar",
+      "delete": "Eliminar",
+      "show": "Mostrar",
+      "hide": "Ocultar"
+    },
+    "fullTracking": {
+      "title": "Rastreio Total Instantâneo",
+      "description": "Rastreie todas as conquistas de aldeias em todo o mundo em tempo real.",
+      "active": "Ativo (Todo o mundo está a ser rastreado)",
+      "inactive": "Inativo"
+    },
+    "continentTracking": {
+      "title": "Rastreio de Continente Instantâneo",
+      "description": "Rastreie alterações de aldeias apenas nos continentes selecionados.",
+      "placeholder": "Exemplo: 44",
+      "continentPrefix": "Continente",
+      "noContinentAdded": "Ainda não foi adicionado nenhum continente."
+    }
   },
   "common": {
-    "add": "Adicionar",
-    "delete": "Eliminar",
-    "show": "Mostrar",
-    "hide": "Ocultar"
+    "invalidWorldUrl": "Ligação do mundo inválida! Verifique o endereço.",
+    "barbarian": "Bárbaro",
+    "worldEmpty": "Ainda não há dados para este mundo. Aguarde o bot recolhê-los."
   },
-  "fullTracking": {
-    "title": "Rastreio Total Instantâneo",
-    "description": "Rastreie todas as conquistas de aldeias em todo o mundo em tempo real.",
-    "active": "Ativo (Todo o mundo está a ser rastreado)",
-    "inactive": "Inativo"
-  },
-  "continentTracking": {
-    "title": "Rastreio de Continente Instantâneo",
-    "description": "Rastreie alterações de aldeias apenas nos continentes selecionados.",
-    "placeholder": "Exemplo: 44",
-    "continentPrefix": "Continente",
-    "noContinentAdded": "Ainda não foi adicionado nenhum continente."
+  "manualPlan": {
+    "title": "✍️ Adicionar operação manualmente (escreva se não quiser escolher da lista)",
+    "sourceVillage": "Aldeia de origem (ex. 500|500)",
+    "targetVillage": "Aldeia alvo (ex. 501|501)",
+    "unitToSend": "Unidade a enviar",
+    "ramKami": "Aríete (Kami)",
+    "ramKamiFake": "Aríete (Kami/Fake)",
+    "catapult": "Catapulta",
+    "catapultFake": "Catapulta (Fake)",
+    "addToPlan": "➕ Adicionar ao plano de operação",
+    "addFromList": "👉 Adicionar escolhendo da lista",
+    "invalidCoords": "Introduza coordenadas de origem e alvo válidas (ex. 500|500)"
   }
-}
 }

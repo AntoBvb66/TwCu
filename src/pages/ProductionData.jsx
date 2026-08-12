@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next'; // YENİ: Çeviri motoru eklendi
+import { bumpStat } from '../utils/twApi';
 import storage from '../utils/storage';
 import './ProductionData.css';
 
@@ -29,7 +30,7 @@ const getFarmCapacity = (level) => {
 
 const ProductionData = () => {
     const { t } = useTranslation(); // YENİ: Çeviri kancası
-    fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=sims").catch(() => {});
+    bumpStat("sims");
 
     const [worldSpeed, setWorldSpeed] = useState(() => storage.get("prod_worldSpeed", 1));
     const [mineSpeed, setMineSpeed] = useState(() => storage.get("prod_mineSpeed", 1));

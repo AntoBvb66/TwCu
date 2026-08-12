@@ -1,6 +1,16 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import storage from '../utils/storage';
+import {
+    fetchWorldData,
+    fetchWorldConfig,
+    fetchWithProxy,
+    extractWorldId,
+    cleanWorldUrl,
+    decodeTW,
+    findAllyByTag,
+    bumpStat,
+} from '../utils/twApi';
 import './ClanOpPlanner.css'; // Aynı CSS'i kullanıyoruz
 
 const formatToLocalISO = (date) => {
@@ -39,8 +49,6 @@ const unitIcons = {
 const defaultUnitSpeeds = { spear: 18, sword: 22, axe: 18, spy: 9, light: 10, heavy: 11, ram: 30, catapult: 30, knight: 10, snob: 35 };
 const mapColors = ['#3498db', '#f0ad4e', '#5cb85c', '#9b59b6', '#00ced1', '#ffb6c1', '#ffa500', '#20b2aa', '#778899', '#ff69b4'];
 
-// GÜNCEL API ADRESİ
-const API_BASE = "https://chamber-that-smock.ngrok-free.dev/api";
 
 // --- ASKERİ ZEKÂ (FARM & GÜÇ HESAPLAMA) ---
 const calculateVillageProfile = (obj, t) => {
@@ -134,42 +142,18 @@ const ClanTroopPlanner = () => {
         }
     };
 
-    const fetchWithProxy = async (targetUrl) => {
-        const res = await fetch(`https://tw-proxy.halimtttt10.workers.dev/?url=${encodeURIComponent(targetUrl)}`);
-        if (!res.ok) throw new Error("Veri çekilemedi.");
-        return await res.text();
-    };
-
-    const extractWorldId = (url) => {
-        const match = url.match(/https?:\/\/([^.]+)\./);
-        return match ? match[1] : null;
-    };
-
     const loadWorldClans = async () => {
-        const worldId = extractWorldId(worldUrl);
-        if (!worldId) return;
+        if (!extractWorldId(worldUrl)) return;
 
         try {
-            const targetApiUrl = `${API_BASE}/${worldId}/Klanlar`;
-            const res = await fetch(targetApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
-            const data = await res.json();
-
-            if (data.hata || !data.veriler) {
-                console.log("Klan listesi API hatası:", data.hata);
-                return;
-            }
-
-            const clans = [];
-            data.veriler.forEach(item => {
-                clans.push({
-                    id: parseInt(item[0]),
-                    name: item[1], 
-                    tag: item[2]
-                });
-            });
-            setWorldClans(clans);
+            const { ally } = await fetchWorldData(worldUrl);
+            setWorldClans(ally.map(item => ({
+                id: parseInt(item[0]),
+                name: decodeTW(item[1]),
+                tag: decodeTW(item[2]),
+            })));
         } catch (err) {
-            console.log("Klan listesi çekilemedi:", err);
+            console.log("Klan listesi çekilemedi:", err.message);
         }
     };
 
@@ -180,86 +164,46 @@ const ClanTroopPlanner = () => {
 
     const handleFetchClan = async () => {
         if (!clanTag) return alert(t('clanOp.alerts.enterClanTag'));
+
+        const cleanUrl = cleanWorldUrl(worldUrl);
+        if (!extractWorldId(cleanUrl)) return setStatus(t('common.invalidWorldUrl'));
+
         setStatus(t('clanOp.step1.status.gathering'));
 
-        const worldId = extractWorldId(worldUrl);
-        if (!worldId) return setStatus("Geçersiz dünya URL'si. Lütfen kontrol edin.");
-
         try {
-            const cleanUrl = worldUrl.replace(/\/$/, "");
+            // Dünya ayarları (hız + akademi mesafesi) — çekilemezse varsayılanla devam.
+            const config = await fetchWorldConfig(cleanUrl);
+            if (config.ok) {
+                if (config.maxSnobDist !== null) setMaxSnobDist(config.maxSnobDist);
+                setUnitSpeedMultiplier(config.multiplier);
+            }
 
+            // Dünyada aktif olan birimleri öğren (arkeoloji dünyalarında farklı olabilir).
             try {
-                const configData = await fetchWithProxy(`${cleanUrl}/interface.php?func=get_config`);
-                const distMatch = configData.match(/<max_dist>(\d+)<\/max_dist>/);
-                if (distMatch && distMatch[1]) setMaxSnobDist(parseInt(distMatch[1]));
-
-                const speedMatch = configData.match(/<speed>([\d.]+)<\/speed>/);
-                const unitSpeedMatch = configData.match(/<unit_speed>([\d.]+)<\/unit_speed>/);
-
-                let s_speed = 1;
-                let u_speed = 1;
-
-                if (speedMatch && speedMatch[1]) s_speed = parseFloat(speedMatch[1]);
-                if (unitSpeedMatch && unitSpeedMatch[1]) u_speed = parseFloat(unitSpeedMatch[1]);
-
-                const totalMultiplier = s_speed * u_speed;
-                setUnitSpeedMultiplier(totalMultiplier);
-
                 const unitXml = await fetchWithProxy(`${cleanUrl}/interface.php?func=get_unit_info`);
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(unitXml, "text/xml");
-                const configUnits = [];
-                Array.from(xmlDoc.documentElement.children).forEach(node => { configUnits.push(node.nodeName); });
+                const xmlDoc = new DOMParser().parseFromString(unitXml, "text/xml");
+                const configUnits = Array.from(xmlDoc.documentElement.children).map(node => node.nodeName);
                 if (configUnits.length > 0) setActiveUnits(configUnits);
-            } catch (e) { console.log("Birim bilgisi veya sınır çekilemedi, manuel sınır kullanılacak."); }
-
-            const clanApiUrl = `${API_BASE}/${worldId}/Klanlar`;
-            const clanRes = await fetch(clanApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
-            const clanData = await clanRes.json();
-            
-            if (clanData.hata || !clanData.veriler) {
-                throw new Error(clanData.hata || "Veritabanında klan bilgisi bulunamadı.");
+            } catch (e) {
+                console.log("Birim bilgisi çekilemedi, varsayılan birimler kullanılacak.");
             }
 
-            let clanId = null;
-            const searchTag = clanTag.toLocaleLowerCase('tr-TR').trim();
+            const { ally, player, village } = await fetchWorldData(cleanUrl, { villages: true });
 
-            clanData.veriler.forEach(item => {
-                const currentTag = (item[2] || "").toLocaleLowerCase('tr-TR').trim();
-                if (currentTag === searchTag) {
-                    clanId = parseInt(item[0]);
-                }
-            });
-
-            if (!clanId) return setStatus(t('clanOp.step1.status.notFound'));
-
-            const playerApiUrl = `${API_BASE}/${worldId}/Oyuncular`;
-            const playerRes = await fetch(playerApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
-            const playerData = await playerRes.json();
-
-            if (playerData.hata || !playerData.veriler) {
-                throw new Error("Veritabanında oyuncu bilgisi bulunamadı.");
-            }
+            const clan = findAllyByTag(ally, clanTag);
+            if (!clan) return setStatus(t('clanOp.step1.status.notFound'));
 
             const allPlayers = {}; const cPlayers = {};
-            playerData.veriler.forEach(item => {
+            player.forEach(item => {
                 const pid = parseInt(item[0]);
-                const pname = item[1];
+                const pname = decodeTW(item[1]);
                 allPlayers[pid] = pname;
-                if (parseInt(item[2]) === clanId) cPlayers[pid] = pname;
+                if (parseInt(item[2]) === clan.id) cPlayers[pid] = pname;
             });
             setClanPlayers(cPlayers);
 
-            const villageApiUrl = `${API_BASE}/${worldId}/Koyler`;
-            const villageRes = await fetch(villageApiUrl, { headers: { "ngrok-skip-browser-warning": "true" } });
-            const villageData = await villageRes.json();
-
-            if (villageData.hata || !villageData.veriler) {
-                throw new Error("Veritabanında köy bilgisi bulunamadı.");
-            }
-
             const cVils = []; const allVils = [];
-            villageData.veriler.forEach(item => {
+            (village || []).forEach(item => {
                 const pid = parseInt(item[4]);
                 const vObj = {
                     id: parseInt(item[0]),
@@ -269,7 +213,7 @@ const ClanTroopPlanner = () => {
                     y: parseInt(item[3]),
                     pid: pid,
                     points: parseInt(item[5]) || 0,
-                    playerName: pid === 0 ? "Barbar" : (allPlayers[pid] || t('clanOp.bbcode.unknown'))
+                    playerName: pid === 0 ? t('common.barbarian') : (allPlayers[pid] || t('clanOp.bbcode.unknown'))
                 };
                 allVils.push(vObj);
                 if (cPlayers[pid]) cVils.push({ ...vObj, playerName: cPlayers[pid] });
@@ -278,7 +222,7 @@ const ClanTroopPlanner = () => {
             setAllVillagesRaw(allVils);
             setClanVillages(cVils);
 
-            setStatus(t('clanOp.step1.status.success', { clanId, memberCount: Object.keys(cPlayers).length, villageCount: cVils.length }));
+            setStatus(t('clanOp.step1.status.success', { clanId: clan.id, memberCount: Object.keys(cPlayers).length, villageCount: cVils.length }));
             
             // Başarılı yükleme sonrası adımları yönet
             setIsStep1Open(false);
@@ -431,7 +375,7 @@ const ClanTroopPlanner = () => {
     }, [selectedTarget, suggestionMode, selectedPlayer, clanVillages, planList, parsedTroops]);
 
     const addClanPlan = (sourceObj, unitType) => {
-        fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=ops").catch(() => { });
+        bumpStat("ops");
         const targetObj = parsedTargets.find(v => v.coord === selectedTarget);
         if (!targetObj) return alert(t('clanTroop.alerts.selectTarget'));
 
@@ -471,7 +415,7 @@ const ClanTroopPlanner = () => {
         const regex = /^\d{3}\|\d{3}$/;
 
         if (!regex.test(cleanSrc) || !regex.test(cleanTgt)) {
-            return alert("Lütfen geçerli kaynak ve hedef koordinatları girin (Örn: 500|500)");
+            return alert(t('manualPlan.invalidCoords'));
         }
 
         const sourceObj = clanVillages.find(v => v.coord === cleanSrc) || {
@@ -748,7 +692,7 @@ const ClanTroopPlanner = () => {
                     <h3 style={{ color: '#f0c042', borderBottom: '1px solid #603000', paddingBottom: '5px' }}>✍️ Manuel Operasyon Ekle</h3>
                     <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', marginTop: '15px' }}>
                         <div style={{ flex: 1, minWidth: '150px' }}>
-                            <label style={{ fontSize: '12px', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>Kaynak Köy (Örn: 500|500)</label>
+                            <label style={{ fontSize: '12px', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>{t('manualPlan.sourceVillage')}</label>
                             <input 
                                 type="text" 
                                 className="cop-input" 
@@ -758,22 +702,22 @@ const ClanTroopPlanner = () => {
                             />
                         </div>
                         <div style={{ flex: 1, minWidth: '150px' }}>
-                            <label style={{ fontSize: '12px', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>Gönderilecek Birim</label>
+                            <label style={{ fontSize: '12px', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>{t('manualPlan.unitToSend')}</label>
                             <select 
                                 className="cop-input" 
                                 style={{ background: '#111', color: '#f0c042', border: '1px solid #603000', height: '35px' }}
                                 value={manualUnit} 
                                 onChange={e => setManualUnit(e.target.value)}
                             >
-                                <option value="ram">Şahmerdan (Kami)</option>
+                                <option value="ram">{t('manualPlan.ramKami')}</option>
                                 <option value="snob">Misyoner</option>
-                                <option value="catapult">Mancınık (Fake)</option>
+                                <option value="catapult">{t('manualPlan.catapultFake')}</option>
                                 <option value="spy">Casus</option>
                                 <option value="axe">Balta</option>
                             </select>
                         </div>
                         <div style={{ flex: 1, minWidth: '150px' }}>
-                            <label style={{ fontSize: '12px', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>Hedef Köy (Örn: 501|501)</label>
+                            <label style={{ fontSize: '12px', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>{t('manualPlan.targetVillage')}</label>
                             <input 
                                 type="text" 
                                 className="cop-input" 
@@ -784,7 +728,7 @@ const ClanTroopPlanner = () => {
                         </div>
                         <div style={{ flex: 'none', width: '100%', marginTop: '5px' }}>
                             <button className="cop-btn" style={{ background: '#5cb85c', border: 'none' }} onClick={handleAddManualPlan}>
-                                ➕ Operasyon Planına Ekle
+                                {t('manualPlan.addToPlan')}
                             </button>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next'; // YENİ: Çeviri motoru eklendi
+import { bumpStat } from '../utils/twApi';
 import storage from '../utils/storage';
 import './CoinMinter.css';
 
@@ -10,7 +11,7 @@ const getClusterColor = (index, total) => {
 
 const CoinMinter = () => {
     const { t } = useTranslation(); // YENİ: Çeviri kancası
-    fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=sims").catch(() => {});
+    bumpStat("sims");
 
     const [villagesInput, setVillagesInput] = useState(() => storage.get('cm_villages', ''));
     const [hubCount, setHubCount] = useState(() => storage.get('cm_hubs', 3));
@@ -112,7 +113,7 @@ const CoinMinter = () => {
         setResults(clusters);
         drawMap(clusters, villages);
 
-        fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=maps").catch(()=>console.log("sayac hatasi"));
+        bumpStat("maps");
     };
 
     const drawMap = (clusters, allVillages) => {

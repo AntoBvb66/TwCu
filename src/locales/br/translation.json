@@ -22,8 +22,13 @@
       "clanOp": "Planejador de Operação de Tribo",
       "clanTroop": "Planejador de Operação de Tribo (Avançado)",
       "fastSupport": "Planejamento de Suporte Rápido",
-      "scavengingPlanner": "Calculadora de Tempos de Saque"
-    }
+      "scavengingPlanner": "Calculadora de Tempos de Saque",
+      "notificationSettings": "Configurações de notificação"
+    },
+    "toggle": "Abrir/fechar menu",
+    "expand": "Expandir",
+    "collapse": "Recolher",
+    "changeLanguage": "Alterar idioma"
   },
   "home": {
     "hero": {
@@ -82,6 +87,10 @@
       "scavengingPlanner": {
         "title": "Calculadora de Tempos de Saque",
         "desc": "Compare tempos de saque em detalhe."
+      },
+      "notificationSettings": {
+        "title": "Configurações de notificação",
+        "desc": "Personalize como as notificações são exibidas."
       }
     }
   },
@@ -97,10 +106,10 @@
     "title": "Sobre",
     "p1": "Olá, eu sou Anto Bvb 66.",
     "p2": "TW Cobre é um painel tático e centro de comando de elite desenvolvido de forma independente para processar dados brutos de jogadores de Clãs (Tribal Wars) e ajudá-los a obter superioridade estratégica.",
-    "p3": "Da preparação de operações à análise de limpeza, todos os módulos são projetados para resolver cálculos que levariam horas para um jogador em segundos. A vitória está escondida nos detalhes!"
-  ,"contactTitle": "Relatar Erro e Contato",
-  "contactDesc": "Você pode me enviar por e-mail diretamente os erros, faltas ou sugestões de melhoria que encontrar no site.",
-  "emailButton": "Enviar e-mail"
+    "p3": "Da preparação de operações à análise de limpeza, todos os módulos são projetados para resolver cálculos que levariam horas para um jogador em segundos. A vitória está escondida nos detalhes!",
+    "contactTitle": "Relatar Erro e Contato",
+    "contactDesc": "Você pode me enviar por e-mail diretamente os erros, faltas ou sugestões de melhoria que encontrar no site.",
+    "emailButton": "Enviar e-mail"
   },
   "privacyPage": {
     "title": "Política de Privacidade e LGPD",
@@ -333,7 +342,9 @@
       "unlocked": "Desbloqueado",
       "infoTitle": "💡 Pontos Críticos de Virada (Ponto de Equilíbrio)",
       "be1": "🔸 Após {{cap}} de capacidade: a tática 1-2-3-4 supera 2-3-4 e se torna mais lucrativa.",
-      "be2": "🔸 Após {{cap}} de capacidade: a tática 1-2-3 supera 2-3."
+      "be2": "🔸 Após {{cap}} de capacidade: a tática 1-2-3 supera 2-3.",
+      "dailyMining": "■ Produção diária de recursos",
+      "dailyScavenging": "■ Saque diário de coleta"
     }
   },
   "churchPlanner": {
@@ -431,7 +442,8 @@
       "manualAdded": "✅ Atribuição Livre Adicionada!",
       "confirmClearQueue": "Tem certeza de que deseja limpar toda a fila?",
       "queueCleared": "🗑️ Fila Limpa!",
-      "copied": "Copiado!"
+      "copied": "Copiado!",
+      "enterClanTag": "Por favor, insira a Tag da Tribo!"
     },
     "columns": {
       "no": "Nº",
@@ -524,7 +536,8 @@
       "copyAll": "Copiar Tudo",
       "ordersFor": "--- ORDENS PARA {{player}} ---",
       "attack": "Atacar",
-      "unknown": "DESCONHECIDO"
+      "unknown": "DESCONHECIDO",
+      "selectCols": "Selecionar Colunas:"
     },
     "alerts": {
       "confirmClear": "Todos os planos, incluindo inteligência, serão excluídos. Tem certeza?",
@@ -535,7 +548,8 @@
       "orderAdded": "✅ Ordem Adicionada!",
       "confirmClearQueue": "Tem certeza de que deseja limpar toda a fila?",
       "queueCleared": "🗑️ Fila Limpa!",
-      "copied": "Copiado!"
+      "copied": "Copiado!",
+      "enterClanTag": "Por favor, insira a Tag da Tribo!"
     },
     "columns": {
       "no": "Nº",
@@ -620,7 +634,8 @@
       "title": "Suportes Disponíveis ({{count}})",
       "allTribe": "Tribo Inteira",
       "noVillages": "Nenhuma aldeia encontrada que possa alcançar esse alvo na hora selecionada!",
-      "mapTarget": "🛡️ Alvo"
+      "mapTarget": "🛡️ Alvo",
+      "allClan": "Tribo Inteira"
     },
     "bbcode": {
       "title": "📋 Chamada para Fórum (BBCode)",
@@ -633,7 +648,8 @@
     },
     "alerts": {
       "enterTribeTag": "Por favor, insira a Tag da Tribo!",
-      "copied": "Copiado!"
+      "copied": "Copiado!",
+      "enterClanTag": "Por favor, insira a Tag da Tribo!"
     },
     "columns": {
       "player": "Jogador",
@@ -667,7 +683,8 @@
       "analyzing": "Download completo, analisando...",
       "empty": "Nenhum dado encontrado para processar!",
       "success": "SUCESSO: {{villages}} aldeias, {{players}} jogadores carregados.",
-      "cleared": "Armazenamento completamente limpo."
+      "cleared": "Armazenamento completamente limpo.",
+      "errorShort": "ERRO"
     },
     "timeMsg": {
       "cached": "⏳ Mostrando dados do cache. Última busca: {{time}}",
@@ -809,6 +826,9 @@
       "archer": "Arqueiro",
       "marcher": "Marchador",
       "militia": "Milícia"
+    },
+    "troopInput": {
+      "title": "🛡️ Inserir dados de tropas (da visão geral em grupo)"
     }
   },
   "productionData": {
@@ -989,7 +1009,8 @@
       "losses": "Perdas de Aldeias (Perdas)",
       "barbarian": "Conquistas de Aldeias Bárbaras (Bárbaro)",
       "selfConquer": "Conquista Própria de Aldeia (SelfConquer)",
-      "internal": "Conquistas Internas da Tribo (Interno)"
+      "internal": "Conquistas Internas da Tribo (Interno)",
+      "tribeLog": "Rastreamento de entrada/saída da tribo"
     },
     "settings": {
       "basicSettings": "Configurações Básicas",
@@ -1008,7 +1029,11 @@
       "chatIdPlaceholder": "exemplo: 1135068175",
       "saveAllConfigs": "Salvar Todas as Configurações",
       "languageLabel": "Idioma",
-      "languagePlaceholder": "Selecionar Idioma"
+      "languagePlaceholder": "Selecionar Idioma",
+      "remoteDeleteToggle": "Excluir registro na nuvem",
+      "notificationTypeLabel": "Tipos de notificação",
+      "typeImage": "Notificação com imagem",
+      "typeText": "Notificação de texto"
     },
     "targets": {
       "addNewTarget": "Adicionar Novo Alvo",
@@ -1049,7 +1074,14 @@
       "specialIdEmpty": "O ID especial está ausente ou não foi gerado para o perfil '{{name}}'!",
       "saveSuccess": "{{count}} perfil(is) salvo(s) com sucesso na nuvem!",
       "saveError": "Ocorreu um erro ao salvar {{count}} perfil(is)!",
-      "saveNoData": "Nenhum perfil encontrado para salvar!"
+      "saveNoData": "Nenhum perfil encontrado para salvar!",
+      "deleteError": "Não foi possível excluir o perfil!",
+      "enterHighlightName": "Digite o nome de um jogador ou tribo!",
+      "confirmRemoteDelete": "Todos os dados deste Special ID serão excluídos permanentemente. Tem certeza?",
+      "remoteDeleteSuccess": "Perfil excluído do banco de dados com sucesso.",
+      "remoteDeleteError": "Ocorreu um erro ao excluir. Verifique o ID.",
+      "enterSpecialId": "Digite seu ID de acesso especial!",
+      "idGenerateError": "Erro de conexão! Não foi possível gerar o ID."
     },
     "common": {
       "add": "Adicionar",
@@ -1070,5 +1102,23 @@
       "continentPrefix": "Continente",
       "noContinentAdded": "Nenhum continente adicionado ainda."
     }
+  },
+  "common": {
+    "invalidWorldUrl": "Link do mundo inválido! Verifique o endereço.",
+    "barbarian": "Bárbaro",
+    "worldEmpty": "Ainda não há dados para este mundo. Aguarde o bot coletá-los."
+  },
+  "manualPlan": {
+    "title": "✍️ Adicionar operação manualmente (digite se não quiser escolher da lista)",
+    "sourceVillage": "Aldeia de origem (ex. 500|500)",
+    "targetVillage": "Aldeia alvo (ex. 501|501)",
+    "unitToSend": "Unidade a enviar",
+    "ramKami": "Aríete (Kami)",
+    "ramKamiFake": "Aríete (Kami/Fake)",
+    "catapult": "Catapulta",
+    "catapultFake": "Catapulta (Fake)",
+    "addToPlan": "➕ Adicionar ao plano de operação",
+    "addFromList": "👉 Adicionar escolhendo da lista",
+    "invalidCoords": "Digite coordenadas de origem e alvo válidas (ex. 500|500)"
   }
 }

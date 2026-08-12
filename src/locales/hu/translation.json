@@ -22,8 +22,13 @@
       "clanOp": "Планирач за операции на племето",
       "clanTroop": "Планирач за операции на племето (Напреден)",
       "fastSupport": "Планирање на брза поддршка",
-      "scavengingPlanner": "Калкулатор за време на собирање"
-    }
+      "scavengingPlanner": "Калкулатор за време на собирање",
+      "notificationSettings": "Értesítési beállítások"
+    },
+    "toggle": "Menü megnyitása/bezárása",
+    "expand": "Kibontás",
+    "collapse": "Összecsukás",
+    "changeLanguage": "Nyelv váltása"
   },
   "home": {
     "hero": {
@@ -31,19 +36,62 @@
       "subtitle": "Победата е скриена во деталите и беспрекорното планирање. Заштедете време во вашето патување во Tribal Wars и изработете стратешки планови кои ќе го водат вашето племе кон победа. Изберете алатка за да започнете."
     },
     "tools": {
-      "opPlanner": { "title": "Индивидуален планирач за операции", "desc": "Споредете изворни и целни села за да подготвите беспрекорен шаблон за операција (BBCode)." },
-      "buildingPlanner": { "title": "Планирач за градење", "desc": "Дизајнирајте го планот за градење на вашето село чекор по чекор со напредна симулација на редот." },
-      "unitCalculator": { "title": "Калкулатор за производство на единици", "desc": "Пресметајте времиња за производство на единици за Барки, Стабла и Работилница, вклучувајќи бонуси." },
-      "mapGenerator": { "title": "Генератор на мапи", "desc": "Генерирајте ажурирани, обоени динамични светски мапи за форуми на кланови." },
-      "mapAnalysis": { "title": "Анализа на континент", "desc": "Анализирајте доминации на кланови и играчи на светската мапа." },
-      "productionData": { "title": "Калкулатор за производство", "desc": "Оптимизирајте стапки на производство на рудници, капацитети на складиште и времиња на полнење." },
-      "coinMinter": { "title": "Планирач за златни монети", "desc": "Пресметајте го најдоброто село за сечење златни монети." },
-      "churchPlanner": { "title": "Планирач за цркви", "desc": "Оптимизирајте ги областите за покривање на црквите на мапата со алгоритам за заштеда на население." },
-      "buildingTimes": { "title": "Калкулатор за време на градење", "desc": "Пресметајте и споредете времиња за градење на различни нивоа до секунда." },
-      "clanOp": { "title": "Планирач за операции на племето", "desc": "Анализирајте ги сите села на клан и направете паметни додели. Дистрибуирајте персонализирани BBCode наредби до членовите со мапа-поддржана интелигенција." },
-      "clanTroop": { "title": "Планирач за операции на племето (Со единици)", "desc": "Анализирајте ги сите единици на клан и направете паметни додели. Дистрибуирајте персонализирани BBCode наредби до членовите со мапа-поддржана интелигенција." },
-      "fastSupport": { "title": "Планирач за брза поддршка", "desc": "Создадете барање за поддршка за да добиете брза поддршка." },
-      "scavengingPlanner": { "title": "Калкулатор за време на собирање", "desc": "Споредете времиња на собирање во детали." }
+      "opPlanner": {
+        "title": "Индивидуален планирач за операции",
+        "desc": "Споредете изворни и целни села за да подготвите беспрекорен шаблон за операција (BBCode)."
+      },
+      "buildingPlanner": {
+        "title": "Планирач за градење",
+        "desc": "Дизајнирајте го планот за градење на вашето село чекор по чекор со напредна симулација на редот."
+      },
+      "unitCalculator": {
+        "title": "Калкулатор за производство на единици",
+        "desc": "Пресметајте времиња за производство на единици за Барки, Стабла и Работилница, вклучувајќи бонуси."
+      },
+      "mapGenerator": {
+        "title": "Генератор на мапи",
+        "desc": "Генерирајте ажурирани, обоени динамични светски мапи за форуми на кланови."
+      },
+      "mapAnalysis": {
+        "title": "Анализа на континент",
+        "desc": "Анализирајте доминации на кланови и играчи на светската мапа."
+      },
+      "productionData": {
+        "title": "Калкулатор за производство",
+        "desc": "Оптимизирајте стапки на производство на рудници, капацитети на складиште и времиња на полнење."
+      },
+      "coinMinter": {
+        "title": "Планирач за златни монети",
+        "desc": "Пресметајте го најдоброто село за сечење златни монети."
+      },
+      "churchPlanner": {
+        "title": "Планирач за цркви",
+        "desc": "Оптимизирајте ги областите за покривање на црквите на мапата со алгоритам за заштеда на население."
+      },
+      "buildingTimes": {
+        "title": "Калкулатор за време на градење",
+        "desc": "Пресметајте и споредете времиња за градење на различни нивоа до секунда."
+      },
+      "clanOp": {
+        "title": "Планирач за операции на племето",
+        "desc": "Анализирајте ги сите села на клан и направете паметни додели. Дистрибуирајте персонализирани BBCode наредби до членовите со мапа-поддржана интелигенција."
+      },
+      "clanTroop": {
+        "title": "Планирач за операции на племето (Со единици)",
+        "desc": "Анализирајте ги сите единици на клан и направете паметни додели. Дистрибуирајте персонализирани BBCode наредби до членовите со мапа-поддржана интелигенција."
+      },
+      "fastSupport": {
+        "title": "Планирач за брза поддршка",
+        "desc": "Создадете барање за поддршка за да добиете брза поддршка."
+      },
+      "scavengingPlanner": {
+        "title": "Калкулатор за време на собирање",
+        "desc": "Споредете времиња на собирање во детали."
+      },
+      "notificationSettings": {
+        "title": "Értesítési beállítások",
+        "desc": "Állítsd be, hogyan jelenjenek meg az értesítések."
+      }
     }
   },
   "footer": {
@@ -58,10 +106,11 @@
     "title": "За нас",
     "p1": "Здраво, јас сум Anto Bvb 66.",
     "p2": "TW Cobre е елитна тактичка панела и команден центар развиен независно за да ги обработува сурови податоци од играчи на кланови (Tribal Wars) и да им помогне да добијат стратешка супериорност.",
-    "p3": "Од планирање операции до анализа на чистење, сите модули се дизајнирани да решат пресметки кои би му одземале часови на играчот во секунди. Победата е скриена во деталите!"
-  ,"contactTitle": "Hibajelentés és Kapcsolat",
+    "p3": "Од планирање операции до анализа на чистење, сите модули се дизајнирани да решат пресметки кои би му одземале часови на играчот во секунди. Победата е скриена во деталите!",
+    "contactTitle": "Hibajelentés és Kapcsolat",
     "contactDesc": "Az oldalunkon tapasztalt hibákat, hiányosságokat vagy fejlesztési javaslatokat közvetlenül e-mailben küldheti el nekem.",
-    "emailButton": "E-mail küldése"},
+    "emailButton": "E-mail küldése"
+  },
   "privacyPage": {
     "title": "Политика за приватност и KVKK",
     "p1": "TW Cobre го почитува приватноста на корисниците на највисоко ниво. Во согласност со законите за заштита на податоци (GDPR) и меѓународни стандарди, нашата политика за обработка на податоци е следна:",
@@ -200,10 +249,27 @@
       "zero": "0 с"
     },
     "buildings": [
-      "Главен штаб (HQ)", "Барки", "Стабла", "Работилница", "Прва црква", "Црква",
-      "Стражарница", "Академија", "Ковачница", "Место за собирање", "Статуа", "Пазар",
-      "Дрварница", "Глиница", "Рудник за железо", "Фарма", "Складиште", "Скривалиште",
-      "Нобле", "Златна монета", "Ѕид"
+      "Главен штаб (HQ)",
+      "Барки",
+      "Стабла",
+      "Работилница",
+      "Прва црква",
+      "Црква",
+      "Стражарница",
+      "Академија",
+      "Ковачница",
+      "Место за собирање",
+      "Статуа",
+      "Пазар",
+      "Дрварница",
+      "Глиница",
+      "Рудник за железо",
+      "Фарма",
+      "Складиште",
+      "Скривалиште",
+      "Нобле",
+      "Златна монета",
+      "Ѕид"
     ]
   },
   "scavenging": {
@@ -276,7 +342,9 @@
       "unlocked": "Отклучено",
       "infoTitle": "💡 Критични точки на изедначување (Break-Even)",
       "be1": "🔸 После {{cap}} капацитет: тактиката 1-2-3-4 го надминува 2-3-4 и станува поисплатлива.",
-      "be2": "🔸 После {{cap}} капацитет: тактиката 1-2-3 го надминува 2-3."
+      "be2": "🔸 После {{cap}} капацитет: тактиката 1-2-3 го надминува 2-3.",
+      "dailyMining": "■ Napi nyersanyagtermelés",
+      "dailyScavenging": "■ Napi gyűjtögetés zsákmánya"
     }
   },
   "churchPlanner": {
@@ -374,7 +442,8 @@
       "manualAdded": "✅ Слободна додела додадена!",
       "confirmClearQueue": "Дали сте сигурни дека сакате да го исчистите целиот ред?",
       "queueCleared": "🗑️ Редот исчистен!",
-      "copied": "Копирано!"
+      "copied": "Копирано!",
+      "enterClanTag": "Внесете ознака на племето!"
     },
     "columns": {
       "no": "Бр",
@@ -389,9 +458,19 @@
       "attackLink": "Линк за акција"
     },
     "units": {
-      "spear": "Копјаник", "sword": "Мечар", "axe": "Секирач", "spy": "Извидник",
-      "light": "Лесна коњица", "heavy": "Тешка коњица", "ram": "Овен", "catapult": "Катapult",
-      "knight": "Паладин", "snob": "Нобле", "archer": "Стрелец", "marcher": "Маршер", "militia": "Милиција"
+      "spear": "Копјаник",
+      "sword": "Мечар",
+      "axe": "Секирач",
+      "spy": "Извидник",
+      "light": "Лесна коњица",
+      "heavy": "Тешка коњица",
+      "ram": "Овен",
+      "catapult": "Катapult",
+      "knight": "Паладин",
+      "snob": "Нобле",
+      "archer": "Стрелец",
+      "marcher": "Маршер",
+      "militia": "Милиција"
     },
     "shortUnits": {
       "ram": "Нук",
@@ -457,7 +536,8 @@
       "copyAll": "Копирај се",
       "ordersFor": "--- НАРЕДБИ ЗА {{player}} ---",
       "attack": "Напад",
-      "unknown": "НЕПОЗНАТО"
+      "unknown": "НЕПОЗНАТО",
+      "selectCols": "Избери колони:"
     },
     "alerts": {
       "confirmClear": "Сите планови вклучувајќи интелигенција ќе бидат избришани. Дали сте сигурни?",
@@ -468,7 +548,8 @@
       "orderAdded": "✅ Наредба додадена!",
       "confirmClearQueue": "Дали сте сигурни дека сакате да го исчистите целиот ред?",
       "queueCleared": "🗑️ Редот исчистен!",
-      "copied": "Копирано!"
+      "copied": "Копирано!",
+      "enterClanTag": "Внесете ознака на племето!"
     },
     "columns": {
       "no": "Бр",
@@ -483,9 +564,16 @@
       "attackLink": "Акција"
     },
     "units": {
-      "spear": "Копје", "sword": "Меч", "axe": "Секира", "spy": "Извидник",
-      "light": "Лесна", "heavy": "Тешка", "ram": "Овен", "catapult": "Кат",
-      "knight": "Паладин", "snob": "Нобле"
+      "spear": "Копје",
+      "sword": "Меч",
+      "axe": "Секира",
+      "spy": "Извидник",
+      "light": "Лесна",
+      "heavy": "Тешка",
+      "ram": "Овен",
+      "catapult": "Кат",
+      "knight": "Паладин",
+      "snob": "Нобле"
     },
     "profiles": {
       "quarter": "Четвртина",
@@ -546,7 +634,8 @@
       "title": "Достапни поддршки ({{count}})",
       "allTribe": "Целото племе",
       "noVillages": "Не се пронајдени села кои можат да стигнат до оваа цел во избраното време!",
-      "mapTarget": "🛡️ Цел"
+      "mapTarget": "🛡️ Цел",
+      "allClan": "Целото племе"
     },
     "bbcode": {
       "title": "📋 Форум повик (BBCode)",
@@ -559,7 +648,8 @@
     },
     "alerts": {
       "enterTribeTag": "Внесете ознака на племето!",
-      "copied": "Копирано!"
+      "copied": "Копирано!",
+      "enterClanTag": "Внесете ознака на племето!"
     },
     "columns": {
       "player": "Играч",
@@ -569,7 +659,13 @@
       "departure": "Време на заминување"
     },
     "units": {
-      "spear": "Копје", "sword": "Меч", "archer": "Стрелец", "spy": "Извидник", "heavy": "Тешка", "catapult": "Катapult", "knight": "Паладин"
+      "spear": "Копје",
+      "sword": "Меч",
+      "archer": "Стрелец",
+      "spy": "Извидник",
+      "heavy": "Тешка",
+      "catapult": "Катapult",
+      "knight": "Паладин"
     }
   },
   "mapAnalysis": {
@@ -587,7 +683,8 @@
       "analyzing": "Преземањето заврши, анализирање...",
       "empty": "Нема податоци за обработка!",
       "success": "УСПЕХ: {{villages}} села, {{players}} играчи вчитани.",
-      "cleared": "Складиштето целосно исчистено."
+      "cleared": "Складиштето целосно исчистено.",
+      "errorShort": "HIBA"
     },
     "timeMsg": {
       "cached": "⏳ Прикажување кеширани податоци. Последно преземање: {{time}}",
@@ -716,9 +813,22 @@
       "attackLink": "Линк за акција"
     },
     "units": {
-      "spear": "Копјаник", "sword": "Мечар", "axe": "Секирач", "spy": "Извидник",
-      "light": "Лесна коњица", "heavy": "Тешка коњица", "ram": "Овен", "catapult": "Катapult",
-      "knight": "Паладин", "snob": "Нобле", "archer": "Стрелец", "marcher": "Маршер", "militia": "Милиција"
+      "spear": "Копјаник",
+      "sword": "Мечар",
+      "axe": "Секирач",
+      "spy": "Извидник",
+      "light": "Лесна коњица",
+      "heavy": "Тешка коњица",
+      "ram": "Овен",
+      "catapult": "Катapult",
+      "knight": "Паладин",
+      "snob": "Нобле",
+      "archer": "Стрелец",
+      "marcher": "Маршер",
+      "militia": "Милиција"
+    },
+    "troopInput": {
+      "title": "🛡️ Csapatadatok megadása (a csoportos áttekintésből)"
     }
   },
   "productionData": {
@@ -807,9 +917,16 @@
       "none": "-"
     },
     "units": {
-      "spear": "Копјаник", "sword": "Мечар", "axe": "Секирач", "archer": "Стрелец",
-      "spy": "Извидник", "lc": "Лесна коњица", "ma": "Стрелец на коњ", "hc": "Тешка коњица",
-      "ram": "Овен", "cat": "Катapult"
+      "spear": "Копјаник",
+      "sword": "Мечар",
+      "axe": "Секирач",
+      "archer": "Стрелец",
+      "spy": "Извидник",
+      "lc": "Лесна коњица",
+      "ma": "Стрелец на коњ",
+      "hc": "Тешка коњица",
+      "ram": "Овен",
+      "cat": "Катapult"
     }
   },
   "mapGenerator": {
@@ -855,5 +972,153 @@
       "noData": "Сè уште нема преземени податоци.",
       "deleteBtn": "Избриши"
     }
+  },
+  "common": {
+    "invalidWorldUrl": "Érvénytelen világ-hivatkozás! Ellenőrizd a címet.",
+    "barbarian": "Barbár",
+    "worldEmpty": "Ehhez a világhoz még nincs adat. Várd meg, amíg a bot összegyűjti."
+  },
+  "notificationSettings": {
+    "alerts": {
+      "deleteError": "A profilt nem sikerült törölni!",
+      "enterHighlightName": "Adj meg egy játékos- vagy törzsnevet!",
+      "confirmRemoteDelete": "A Special ID összes adata véglegesen törlődik. Biztos vagy benne?",
+      "remoteDeleteSuccess": "A profil sikeresen törölve az adatbázisból.",
+      "remoteDeleteError": "Hiba történt a törlés során. Ellenőrizd az azonosítót.",
+      "enterSpecialId": "Add meg a speciális hozzáférési azonosítót!",
+      "enterPlayerOrTribe": "Adj meg egy játékosnevet vagy törzsrövidítést!",
+      "worldDataFetchError": "A világ adatait nem sikerült lekérni. Ellenőrizd a kapcsolatot.",
+      "invalidDataReceived": "Érvénytelen adat érkezett:",
+      "worldDataReadError": "HIBA: A világ adatai nem olvashatók!\n\nGyőződj meg róla, hogy az „Alapbeállítások” fülön érvényes és aktív világ-hivatkozást adtál meg (pl.: https://ptc1.tribalwars.com.pt).",
+      "playerNotFound": "HIBA: „{{name}}” nevű játékos nem található ebben a világban! Ellenőrizd a név helyességét.",
+      "tribeNotFound": "HIBA: „{{name}}” rövidítésű vagy nevű törzs nem található ebben a világban!",
+      "enterBothTribes": "Add meg mindkét oldal törzsrövidítését/nevét!",
+      "worldDataCorrupted": "HIBA: A világ adatai sérültek vagy olvashatatlanok!",
+      "tribesNotFoundList": "A következő törzsek nem találhatók ebben a világban:",
+      "worldDataFetchErrorShort": "A világ adatait nem sikerült lekérni.",
+      "invalidContinent": "Adj meg egy érvényes kontinensszámot 0 és 99 között (pl.: 44).",
+      "continentAlreadyAdded": "Ez a kontinens már hozzá van adva!",
+      "confirmDeleteProfile": "Biztosan teljesen törölni szeretnéd ezeket a világbeállításokat?",
+      "idExists": "Már létezik azonosító! Ha újat szeretnél, előbb ürítsd a mezőt.",
+      "emptyTargetName": "Előbb adj meg egy nevet vagy törzsrövidítést.",
+      "targetExists": "A megadott célok már szerepelnek a követési listán!",
+      "profileNameEmpty": "Meg kell adnod egy nevet a(z) {{index}}. profilhoz!",
+      "specialIdEmpty": "A(z) „{{name}}” profilhoz hiányzik vagy nincs generálva Special ID!",
+      "saveSuccess": "{{count}} profil sikeresen elmentve a felhőbe!",
+      "saveError": "Hiba történt {{count}} profil mentése közben!",
+      "saveNoData": "Nem található menthető profil!",
+      "idGenerateError": "Kapcsolati hiba! Az azonosítót nem sikerült létrehozni."
+    },
+    "filters": {
+      "tribeLog": "Törzsbe belépés/kilépés követése",
+      "gains": "Faluhódítások (nyereségek)",
+      "losses": "Faluveszteségek (veszteségek)",
+      "barbarian": "Barbár falvak elfoglalása (Barbarian)",
+      "selfConquer": "Saját falu elfoglalása (SelfConquer)",
+      "internal": "Törzsön belüli hódítások (Internal)"
+    },
+    "settings": {
+      "remoteDeleteToggle": "Felhőbeli bejegyzés törlése",
+      "notificationTypeLabel": "Értesítés típusa",
+      "typeImage": "Képes értesítés",
+      "typeText": "Szöveges értesítés",
+      "basicSettings": "Alapbeállítások",
+      "profileNameLabel": "Profil neve (becenév / felhasználónév)",
+      "required": "*Kötelező",
+      "profileNamePlaceholder": "Példa: Anto Bvb 66 - Klanlar Tr1",
+      "fieldCannotBeEmpty": "Ez a mező nem maradhat üresen.",
+      "specialIdLabel": "Speciális hozzáférési azonosító",
+      "specialIdPlaceholder": "Add meg a 66 karakteres licencazonosítót, vagy generálj egyet",
+      "generateIdBtn": "Generálás",
+      "worldLinkLabel": "Világ hivatkozása",
+      "worldLinkPlaceholder": "https://tr1.klanlar.org/",
+      "botTokenLabel": "Telegram bot token",
+      "botTokenPlaceholder": "123456789:ABCDEF...",
+      "chatIdLabel": "Telegram Chat ID",
+      "chatIdPlaceholder": "példa: 1135068175",
+      "saveAllConfigs": "Összes beállítás mentése",
+      "languageLabel": "Nyelv",
+      "languagePlaceholder": "Válassz nyelvet"
+    },
+    "header": {
+      "title": "TwCu Értesítési Központ",
+      "subtitle": "Itt kezelheted az értesítési beállításaidat minden világhoz, amelyben játszol.",
+      "hideInfo": "Információ elrejtése",
+      "showInfo": "Információ megjelenítése"
+    },
+    "infoPanel": {
+      "title": "Hogyan használd?",
+      "profileNameTitle": "Profil neve:",
+      "profileNameDesc": "Ez az a név, amit ennek a beállításcsoportnak adsz, hogy könnyen megjegyezd. <u>Nem maradhat üresen</u>, és ez a fő címke, amely azonosít téged a rendszerben.",
+      "specialIdTitle": "Speciális hozzáférési azonosító (Special ID):",
+      "specialIdDesc": "Ez az egyedi kód, amellyel a rendszer felismer téged. Ha nincs ilyened, kattints az <em>Azonosító generálása</em> gombra egy véletlenszerű létrehozásához.",
+      "worldLinkTitle": "Világ hivatkozása:",
+      "worldLinkDesc": "Ez annak a világnak az alapcíme, ahol játszol (pl.: <code>https://tr1.klanlar.org/</code>). A bot ezen a címen keresztül kapja az összes adatot.",
+      "botTokenTitle": "Telegram bot token és Chat ID:",
+      "botTokenDesc": "Az értesítésekhez szükségesek. <strong>Chat ID:</strong> a Telegramon a <code>@userinfobot</code> botnak küldött <code>/start</code> paranccsal kapod meg. <strong>Bot token:</strong> hozd létre saját botodat a <code>@BotFather</code> botnak küldött <code>/newbot</code> paranccsal.",
+      "filtersInfo": "Értesítési szűrők:",
+      "filtersInfoDesc": "Kiválaszthatod, milyen típusú mozgásokról szeretnél értesítést kapni. Például csak faluhódításokról (nyereségekről) vagy csak veszteségekről. A szűrők beállítása után azonnali Telegram-értesítést kapsz, amikor a céljaidhoz kapcsolódó mozgás történik. Így nem maradsz le a fontos fejleményekről.",
+      "continentTrackingTitle": "Kontinens követése:",
+      "continentTrackingDesc": "Csak meghatározott kontinenseken követheted a hódításokat (pl.: 44,45,54).",
+      "fullTrackingTitle": "Teljes világ követése:",
+      "fullTrackingDesc": "Bekapcsolja a világ összes faluhódításának valós idejű követését. <strong>Figyelem:</strong> ez rendkívül sok üzenetet generálhat."
+    },
+    "profile": {
+      "mainProfile": "Fő profil",
+      "newProfile": "Új profil",
+      "unknownWorld": "Ismeretlen világ",
+      "delete": "Törlés",
+      "createNewProfile": "Új profil létrehozása"
+    },
+    "targets": {
+      "addNewTarget": "Új cél hozzáadása",
+      "inputLabel": "Játékosnév vagy törzs rövidítése",
+      "inputPlaceholder": "Példa: Jatekos1, Jatekos2 vagy TORZS1,TORZS2",
+      "selectFilters": "Válaszd ki az értesítési szűrőket",
+      "clearAll": "Összes törlése",
+      "selectAll": "Összes kijelölése",
+      "addAsPlayer": "+ Hozzáadás játékosként",
+      "addAsTribe": "+ Hozzáadás törzsként",
+      "manageTargets": "Céllista kezelése",
+      "emptyState": "Még nincs követett cél.",
+      "show": "Mutat",
+      "hide": "Elrejt",
+      "delete": "Törlés",
+      "deleteConfirm": "Biztosan törölni szeretnéd ezt a célt?",
+      "playerBadge": "👤 Játékos",
+      "tribeBadge": "🛡️ Törzs"
+    },
+    "common": {
+      "add": "Hozzáadás",
+      "delete": "Törlés",
+      "show": "Mutat",
+      "hide": "Elrejt"
+    },
+    "fullTracking": {
+      "title": "Azonnali teljes követés",
+      "description": "Kövesd valós időben az egész világ összes faluhódítását.",
+      "active": "Aktív (az egész világ követés alatt)",
+      "inactive": "Inaktív"
+    },
+    "continentTracking": {
+      "title": "Azonnali kontinenskövetés",
+      "description": "Csak a kiválasztott kontinensek faluváltozásait kövesd.",
+      "placeholder": "Példa: 44",
+      "continentPrefix": "Kontinens",
+      "noContinentAdded": "Még nincs hozzáadva kontinens."
+    }
+  },
+  "manualPlan": {
+    "title": "✍️ Művelet hozzáadása kézzel (írd be, ha nem listából választanál)",
+    "sourceVillage": "Forrásfalu (pl. 500|500)",
+    "targetVillage": "Célfalu (pl. 501|501)",
+    "unitToSend": "Küldendő egység",
+    "ramKami": "Faltörő kos (Kami)",
+    "ramKamiFake": "Faltörő kos (Kami/Fake)",
+    "catapult": "Katapult",
+    "catapultFake": "Katapult (Fake)",
+    "addToPlan": "➕ Hozzáadás a műveleti tervhez",
+    "addFromList": "👉 Hozzáadás listából választva",
+    "invalidCoords": "Adj meg érvényes forrás- és célkoordinátákat (pl. 500|500)"
   }
 }

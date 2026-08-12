@@ -5,6 +5,7 @@ import { doc, setDoc, deleteDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useTranslation } from 'react-i18next'; // i18n import edildi
 import storage from '../utils/storage';
+import { fetchWorldData, extractWorldId, cleanWorldUrl, cleanString } from '../utils/twApi';
 import './NotificationSettings.css';
 
 const IconGains = () => (
@@ -194,6 +195,8 @@ const createEmptyConfig = () => ({
 
 const NotificationSettings = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'notificationSettings' });
+  // Sayfa dışı (genel) anahtarlar için ön eksiz çevirici
+  const { t: tGlobal } = useTranslation();
 
   // Filtre tanımlamaları çeviriye erişebilmek için bileşen içine alındı
   const filterDefinitions = {
@@ -292,7 +295,7 @@ const NotificationSettings = () => {
         }
       } catch (error) {
         console.error("ID kontrolü sırasında Firebase hatası:", error);
-        alert("Bağlantı hatası! ID üretilemedi.");
+        alert(t('alerts.idGenerateError'));
         return; // Hata durumunda sonsuz döngüyü engellemek için fonksiyonu durdur.
       }
     }
@@ -373,59 +376,24 @@ const validateAndAddEntity = async (cIndex, config, type) => {
   }
 
   const worldUrl = config.globalSettings?.worldUrl || "https://tr1.klanlar.org";
-  const cleanUrl = worldUrl.replace(/\/$/, "");
-  
-  const worldIdMatch = cleanUrl.match(/https?:\/\/([^.]+)\./);
-  const worldId = worldIdMatch ? worldIdMatch[1] : null;
+  const cleanUrl = cleanWorldUrl(worldUrl);
 
-  if (!worldId) {
-    alert("Geçersiz dünya linki!");
+  if (!extractWorldId(cleanUrl)) {
+    alert(tGlobal('common.invalidWorldUrl'));
     return;
   }
 
   let allyData = [];
   let playerData = [];
 
-  const now = Date.now();
-  const lastFetch = parseInt(storage.get("mg_last_fetch", "0"));
-  const lastUrl = storage.get("mg_last_url", "");
-  const cachedData = storage.get("mg_cache_data", null);
-
-  // MapGenerator ile aynı cache kontrolü ve API_BASE yapısı
-  if (cachedData && cachedData.ally && cachedData.player && lastUrl === cleanUrl && (now - lastFetch < 3600000)) {
-    allyData = cachedData.ally;
-    playerData = cachedData.player;
-  } else {
-    try {
-      // ÇALIŞAN NGROK API ADRESİNİZ
-      const API_BASE = "https://chamber-that-smock.ngrok-free.dev/api";
-
-      const [allyRes, playerRes] = await Promise.all([
-        fetch(`${API_BASE}/${worldId}/Klanlar`, { headers: { "ngrok-skip-browser-warning": "true" } }),
-        fetch(`${API_BASE}/${worldId}/Oyuncular`, { headers: { "ngrok-skip-browser-warning": "true" } })
-      ]);
-
-      if (!allyRes.ok || !playerRes.ok) {
-        throw new Error("Veritabanından yanıt alınamadı.");
-      }
-
-      const allyJson = await allyRes.json();
-      const playerJson = await playerRes.json();
-
-      if (!allyJson.veriler || !playerJson.veriler) {
-        throw new Error("Veri bulunamadı.");
-      }
-
-      allyData = allyJson.veriler || [];
-      playerData = playerJson.veriler || [];
-
-      storage.set("mg_cache_data", { ally: allyData, player: playerData });
-      storage.set("mg_last_fetch", now.toString());
-      storage.set("mg_last_url", cleanUrl);
-    } catch (error) {
-      alert(t('alerts.worldDataFetchError') || "Dünya verileri API'den çekilemedi!");
-      return;
-    }
+  try {
+    // Merkezî veri katmanı: önbellek + ngrok başlığı tek yerde (utils/twApi.js)
+    const data = await fetchWorldData(cleanUrl);
+    allyData = data.ally;
+    playerData = data.player;
+  } catch (error) {
+    alert(t('alerts.worldDataFetchError'));
+    return;
   }
 
   // Akıllı Arama Mantığı
@@ -474,23 +442,6 @@ const validateAndAddEntity = async (cIndex, config, type) => {
     updateConfig(cIndex, 'entities', null, updatedEntities);
   };
 
-  // Klanlar verisinde '+' işareti boşluk demektir. Önce onu %20 yapıp sonra decode etmek en garantisidir.
-  const decodeTW = (str) => {
-    if (!str) return "";
-    try {
-      return decodeURIComponent(str.replace(/\+/g, '%20'));
-    } catch (e) {
-      return str.replace(/\+/g, ' ');
-    }
-  };
-
-  // Karşılaştırma yaparken hataları (fazla boşluk, büyük/küçük harf) sıfıra indirir
-  const cleanString = (str) => {
-    if (!str) return "";
-    return str.replace(/\s+/g, ' ').trim().toLocaleLowerCase('tr-TR');
-  };
-
-
 // === 2. ÖZEL HARİTA İSTATİSTİKLERİ DOĞRULAYICI ===
 const validateAndAddHighlight = async (cIndex, config) => {
   const targetName = config.newHighlightName?.trim();
@@ -501,49 +452,17 @@ const validateAndAddHighlight = async (cIndex, config) => {
 
   const type = config.newHighlightType;
   const worldUrl = config.globalSettings?.worldUrl || "https://tr1.klanlar.org";
-  const cleanUrl = worldUrl.replace(/\/$/, "");
-  
-  const worldIdMatch = cleanUrl.match(/https?:\/\/([^.]+)\./);
-  const worldId = worldIdMatch ? worldIdMatch[1] : null;
+  const cleanUrl = cleanWorldUrl(worldUrl);
 
-  if (!worldId) return;
+  if (!extractWorldId(cleanUrl)) return;
 
   let targetData = [];
-  const now = Date.now();
-  const lastFetch = parseInt(storage.get("mg_last_fetch", "0"));
-  const lastUrl = storage.get("mg_last_url", "");
-  const cachedData = storage.get("mg_cache_data", null);
-
-  if (cachedData && cachedData.ally && cachedData.player && lastUrl === cleanUrl && (now - lastFetch < 3600000)) {
-    targetData = type === 'Player' ? cachedData.player : cachedData.ally;
-  } else {
-    try {
-      // ÇALIŞAN NGROK API ADRESİNİZ
-      const API_BASE = "https://chamber-that-smock.ngrok-free.dev/api";
-
-      const [allyRes, playerRes] = await Promise.all([
-        fetch(`${API_BASE}/${worldId}/Klanlar`, { headers: { "ngrok-skip-browser-warning": "true" } }),
-        fetch(`${API_BASE}/${worldId}/Oyuncular`, { headers: { "ngrok-skip-browser-warning": "true" } })
-      ]);
-
-      const allyJson = await allyRes.json();
-      const playerJson = await playerRes.json();
-
-      if (!allyJson.veriler || !playerJson.veriler) {
-        throw new Error("Veri bulunamadı.");
-      }
-
-      const allyData = allyJson.veriler || [];
-      const playerData = playerJson.veriler || [];
-      targetData = type === 'Player' ? playerData : allyData;
-
-      storage.set("mg_cache_data", { ally: allyData, player: playerData });
-      storage.set("mg_last_fetch", now.toString());
-      storage.set("mg_last_url", cleanUrl);
-    } catch (error) {
-      alert(t('alerts.worldDataFetchErrorShort'));
-      return;
-    }
+  try {
+    const { ally, player } = await fetchWorldData(cleanUrl);
+    targetData = type === 'Player' ? player : ally;
+  } catch (error) {
+    alert(t('alerts.worldDataFetchErrorShort'));
+    return;
   }
 
   const searchTarget = cleanString(targetName);

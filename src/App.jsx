@@ -1,27 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom'; 
-import { useTranslation } from 'react-i18next'; 
+import React, { useState, useEffect, Suspense, lazy } from 'react';
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-// Bileşen İçe Aktarmaları
 import Sidebar from './components/Sidebar';
-import BuildingTimes from './pages/BuildingTimes';
-import MapAnalysis from './pages/MapAnalysis';
-import MapGenerator from './pages/MapGenerator';
-import ProductionData from './pages/ProductionData';
-import ChurchPlanner from './pages/ChurchPlanner';
-import CoinMinter from './pages/CoinMinter';
-import BuildingPlanner from './pages/BuildingPlanner';
-import UnitCalculator from './pages/UnitCalculator';
-import OpPlanner from './pages/OpPlanner';
-import ClanOpPlanner from './pages/ClanOpPlanner';
-import ClanTroopPlanner from './pages/ClanTroopPlanner';
-import FastSupport from './pages/FastSupport';
-import ScavengingPlanner from './pages/ScavengingPlanner';
-import About from './pages/About';
-import Privacy from './pages/Privacy';
-import NotificationSettings from './pages/NotificationSettings'; // YENİ EKLENDİ    
+import { bumpStat, fetchStats } from './utils/twApi';
 
-import './App.css'; 
+// Sayfalar tembel yüklenir: ilk açılışta sadece açılan sayfanın kodu iner.
+// (Öncesinde 16 sayfa tek pakette geliyordu -> ~1.6 MB ilk yükleme.)
+const BuildingTimes = lazy(() => import('./pages/BuildingTimes'));
+const MapAnalysis = lazy(() => import('./pages/MapAnalysis'));
+const MapGenerator = lazy(() => import('./pages/MapGenerator'));
+const ProductionData = lazy(() => import('./pages/ProductionData'));
+const ChurchPlanner = lazy(() => import('./pages/ChurchPlanner'));
+const CoinMinter = lazy(() => import('./pages/CoinMinter'));
+const BuildingPlanner = lazy(() => import('./pages/BuildingPlanner'));
+const UnitCalculator = lazy(() => import('./pages/UnitCalculator'));
+const OpPlanner = lazy(() => import('./pages/OpPlanner'));
+const ClanOpPlanner = lazy(() => import('./pages/ClanOpPlanner'));
+const ClanTroopPlanner = lazy(() => import('./pages/ClanTroopPlanner'));
+const FastSupport = lazy(() => import('./pages/FastSupport'));
+const ScavengingPlanner = lazy(() => import('./pages/ScavengingPlanner'));
+const About = lazy(() => import('./pages/About'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const NotificationSettings = lazy(() => import('./pages/NotificationSettings'));
+
+import './App.css';
+
+const PageLoader = () => (
+    <div className="page-loader" role="status" aria-live="polite">
+        <div className="page-loader-spinner" />
+    </div>
+);
 
 const Home = () => {
     const { t } = useTranslation();
@@ -78,21 +87,19 @@ function App() {
     const [stats, setStats] = useState({ visits: '...', maps: '...', ops: '...', sims: '...' });
 
     useEffect(() => {
-        const fetchStats = async () => {
+        const loadStats = async () => {
             try {
-                const hasVisited = sessionStorage.getItem("tw_visited");
-                if (!hasVisited) {
-                    await fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=visits");
+                if (!sessionStorage.getItem("tw_visited")) {
+                    bumpStat('visits');
                     sessionStorage.setItem("tw_visited", "true");
                 }
-                const res = await fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=get_all");
-                const data = await res.json();
-                setStats(data);
+                setStats(await fetchStats());
             } catch (err) {
-                console.log("Stats yüklenemedi");
+                // İstatistikler kritik değil; sayfa çalışmaya devam eder.
+                setStats({ visits: '–', maps: '–', ops: '–', sims: '–' });
             }
         };
-        fetchStats();
+        loadStats();
     }, []);
 
     return (
@@ -101,6 +108,7 @@ function App() {
                 <Sidebar />
                 <main className="main-content">
                     <div className="page-wrapper">
+                    <Suspense fallback={<PageLoader />}>
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
@@ -120,7 +128,8 @@ function App() {
                         <Route path="/scavenging" element={<ScavengingPlanner />} />
                         <Route path="/notification-settings" element={<NotificationSettings />} />
                     </Routes>
-                    </div> 
+                    </Suspense>
+                    </div>
                     
                     {/* YENİ VE BÜTÜNLEŞİK FOOTER */}
                     <footer className="global-footer">

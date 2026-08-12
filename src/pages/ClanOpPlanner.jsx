@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useTranslation } from 'react-i18next'; // YENİ: Çeviri motoru eklendi
 import storage from '../utils/storage';
+import {
+    fetchWorldData,
+    fetchWorldConfig,
+    extractWorldId,
+    cleanWorldUrl,
+    decodeTW,
+    findAllyByTag,
+    bumpStat,
+} from '../utils/twApi';
 import './ClanOpPlanner.css';
 
 const formatToLocalISO = (date) => {
@@ -108,42 +117,20 @@ const ClanOpPlanner = () => {
     };
 
     // === 1. ZEKİ VERİ MADENCİLİĞİ ===
-    const fetchWithProxy = async (targetUrl) => {
-        const res = await fetch(`https://tw-proxy.halimtttt10.workers.dev/?url=${encodeURIComponent(targetUrl)}`);
-        if (!res.ok) throw new Error("Veri çekilemedi.");
-        return await res.text();
-    };
-    const extractWorldId = (url) => {
-        const match = url.match(/https?:\/\/([^.]+)\./);
-        return match ? match[1] : null;
-    };
+    // Tüm veri erişimi src/utils/twApi.js üzerinden yapılır (tek önbellek, tek API).
 
     const loadWorldClans = async () => {
-        const worldId = extractWorldId(worldUrl);
-        if (!worldId) return;
-
         try {
-            const targetApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Klanlar`;
-            const res = await fetch(targetApiUrl);
-            const data = await res.json();
-
-            // GÜVENLİK: API'den hata döndüyse işlemi sessizce durdur
-            if (data.hata || !data.veriler) {
-                console.log("Klan listesi API hatası:", data.hata);
-                return;
-            }
-
-            const clans = [];
-            data.veriler.forEach(item => {
-                clans.push({
+            const { ally } = await fetchWorldData(worldUrl);
+            setWorldClans(
+                ally.map(item => ({
                     id: parseInt(item[0]),
-                    name: item[1],
-                    tag: item[2]
-                });
-            });
-            setWorldClans(clans);
+                    name: decodeTW(item[1]),
+                    tag: decodeTW(item[2]),
+                }))
+            );
         } catch (err) {
-            console.log("Klan listesi çekilemedi:", err);
+            console.log("Klan listesi çekilemedi:", err.message);
         }
     };
 
@@ -154,80 +141,37 @@ const ClanOpPlanner = () => {
 
     const handleFetchClan = async () => {
         if (!clanTag) return alert(t('clanOp.alerts.enterClanTag'));
+
+        const cleanUrl = cleanWorldUrl(worldUrl);
+        if (!extractWorldId(cleanUrl)) return setStatus(t('common.invalidWorldUrl'));
+
         setStatus(t('clanOp.step1.status.gathering'));
 
-        const worldId = extractWorldId(worldUrl);
-        if (!worldId) return setStatus("Geçersiz dünya URL'si. Lütfen kontrol edin.");
-
         try {
-            // 1. CONFIG ÇEKİMİ (Veritabanında olmadığı için proxy ile çekiyoruz)
-            const cleanUrl = worldUrl.replace(/\/$/, "");
-            try {
-                const configData = await fetchWithProxy(`${cleanUrl}/interface.php?func=get_config`);
-                const distMatch = configData.match(/<max_dist>(\d+)<\/max_dist>/);
-                if (distMatch && distMatch[1]) setMaxSnobDist(parseInt(distMatch[1]));
-
-                const speedMatch = configData.match(/<speed>([\d.]+)<\/speed>/);
-                const unitSpeedMatch = configData.match(/<unit_speed>([\d.]+)<\/unit_speed>/);
-                let s_speed = 1; let u_speed = 1;
-                if (speedMatch && speedMatch[1]) s_speed = parseFloat(speedMatch[1]);
-                if (unitSpeedMatch && unitSpeedMatch[1]) u_speed = parseFloat(unitSpeedMatch[1]);
-                setUnitSpeedMultiplier(s_speed * u_speed);
-            } catch (err) {
-                console.log("Konfigürasyon proxy'den çekilemedi, manuel sınır kullanılacak.");
+            // 1. DÜNYA AYARLARI (hız çarpanı + akademi mesafesi) — kritik değil, patlamaz
+            const config = await fetchWorldConfig(cleanUrl);
+            if (config.ok) {
+                if (config.maxSnobDist !== null) setMaxSnobDist(config.maxSnobDist);
+                setUnitSpeedMultiplier(config.multiplier);
             }
 
-            // 2. API'DEN KLANLARI ÇEK VE KLAN ID BUL
-            const clanApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Klanlar`;
-            const clanRes = await fetch(clanApiUrl);
-            const clanData = await clanRes.json();
+            // 2. KLAN / OYUNCU / KÖY VERİSİ (tek çağrı, ortak önbellek)
+            const { ally, player, village } = await fetchWorldData(cleanUrl, { villages: true });
 
-            // GÜVENLİK: Eğer API "Böyle bir tablo yok" derse kullanıcıyı uyar
-            if (clanData.hata || !clanData.veriler) {
-                throw new Error(clanData.hata || "Veritabanında klan bilgisi bulunamadı.");
-            }
-
-            let clanId = null;
-            const searchTag = clanTag.toLocaleLowerCase('tr-TR').trim();
-
-            clanData.veriler.forEach(item => {
-                const currentTag = (item[2] || "").toLocaleLowerCase('tr-TR').trim();
-                if (currentTag === searchTag) {
-                    clanId = parseInt(item[0]);
-                }
-            });
-
-            if (!clanId) return setStatus(t('clanOp.step1.status.notFound'));
-
-            // 3. API'DEN OYUNCULARI ÇEK VE KLANA AİT OLANLARI FİLTRELE
-            const playerApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Oyuncular`;
-            const playerRes = await fetch(playerApiUrl);
-            const playerData = await playerRes.json();
-
-            if (playerData.hata || !playerData.veriler) {
-                throw new Error("Veritabanında oyuncu bilgisi bulunamadı.");
-            }
+            const clan = findAllyByTag(ally, clanTag);
+            if (!clan) return setStatus(t('clanOp.step1.status.notFound'));
 
             const allPlayers = {}; const cPlayers = {};
-            playerData.veriler.forEach(item => {
+            player.forEach(item => {
                 const pid = parseInt(item[0]);
-                const pname = item[1];
+                const pname = decodeTW(item[1]);
                 allPlayers[pid] = pname;
-                if (parseInt(item[2]) === clanId) cPlayers[pid] = pname;
+                if (parseInt(item[2]) === clan.id) cPlayers[pid] = pname;
             });
             setClanPlayers(cPlayers);
 
-            // 4. API'DEN KÖYLERİ ÇEK VE KLANA AİT KÖYLERİ AYIR
-            const villageApiUrl = `https://twcu-bot.onrender.com/api/${worldId}/Koyler`;
-            const villageRes = await fetch(villageApiUrl);
-            const villageData = await villageRes.json();
-
-            if (villageData.hata || !villageData.veriler) {
-                throw new Error("Veritabanında köy bilgisi bulunamadı.");
-            }
-
             const cVils = []; const allVils = [];
-            villageData.veriler.forEach(item => {
+            (village || []).forEach(item => {
                 const pid = parseInt(item[4]);
                 const vObj = {
                     id: parseInt(item[0]),
@@ -236,7 +180,7 @@ const ClanOpPlanner = () => {
                     y: parseInt(item[3]),
                     pid: pid,
                     points: parseInt(item[5]) || 0,
-                    playerName: pid === 0 ? "Barbar" : (allPlayers[pid] || t('clanOp.bbcode.unknown'))
+                    playerName: pid === 0 ? t('common.barbarian') : (allPlayers[pid] || t('clanOp.bbcode.unknown'))
                 };
                 allVils.push(vObj);
                 if (cPlayers[pid]) cVils.push({ ...vObj, playerName: cPlayers[pid] });
@@ -245,9 +189,13 @@ const ClanOpPlanner = () => {
             setAllVillagesRaw(allVils);
             setClanVillages(cVils);
 
-            setStatus(t('clanOp.step1.status.success', { clanId, memberCount: Object.keys(cPlayers).length, villageCount: cVils.length }));
+            setStatus(t('clanOp.step1.status.success', { clanId: clan.id, memberCount: Object.keys(cPlayers).length, villageCount: cVils.length }));
         } catch (err) {
-            setStatus(t('clanOp.step1.status.error', { msg: err.message }));
+            const msg =
+                err.message === 'INVALID_WORLD_URL' ? t('common.invalidWorldUrl')
+                : err.message === 'WORLD_EMPTY' ? t('common.worldEmpty')
+                : err.message;
+            setStatus(t('clanOp.step1.status.error', { msg }));
         }
     };
 
@@ -334,7 +282,7 @@ const ClanOpPlanner = () => {
     }, [selectedTarget, suggestionMode, selectedPlayer, clanVillages, planList]);
 
     const addClanPlan = (sourceObj, unitType) => {
-        fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=ops").catch(() => { });
+        bumpStat("ops");
         const targetObj = parsedTargets.find(v => v.coord === selectedTarget);
         if (!targetObj) return alert(t('clanOp.alerts.selectTarget'));
 
@@ -370,7 +318,7 @@ const ClanOpPlanner = () => {
     };
 
     const addManualPlan = () => {
-        fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=ops").catch(() => { });
+        bumpStat("ops");
         const targetObj = parsedTargets.find(v => v.coord === selectedTarget);
         if (!targetObj) return alert(t('clanOp.alerts.selectTargetLeft'));
         if (!manualPlayer) return alert(t('clanOp.alerts.selectPlayer'));

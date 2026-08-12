@@ -22,8 +22,13 @@
       "clanOp": "Stammoperationsplanerare",
       "clanTroop": "Stammoperationsplanerare (Avancerad)",
       "fastSupport": "Snabb Stödplanering",
-      "scavengingPlanner": "Plundringstidsräknare"
-    }
+      "scavengingPlanner": "Plundringstidsräknare",
+      "notificationSettings": "Aviseringsinställningar"
+    },
+    "toggle": "Öppna/stäng meny",
+    "expand": "Expandera",
+    "collapse": "Fäll ihop",
+    "changeLanguage": "Byt språk"
   },
   "home": {
     "hero": {
@@ -31,19 +36,62 @@
       "subtitle": "Seger är gömd i detaljerna och felfri planering. Spara tid på din Tribal Wars-resa och utarbeta strategiska planer som leder din stam till seger. Välj ett verktyg för att komma igång."
     },
     "tools": {
-      "opPlanner": { "title": "Personlig Operationsplanerare", "desc": "Matcha käll- och målbyar för att förbereda en felfri operationsmall (BBCode)." },
-      "buildingPlanner": { "title": "Byggplaner", "desc": "Designa din bys byggplan steg för steg med avancerad kösimulerare." },
-      "unitCalculator": { "title": "Truppproduktionsräknare", "desc": "Beräkna enhetersproduceringstider för Baracker, Stall och Verkstad, inklusive bonusar." },
-      "mapGenerator": { "title": "Kartgenerator", "desc": "Generera uppdaterade, färgade dynamiska världskartor för stammforum." },
-      "mapAnalysis": { "title": "Kontinentanalys", "desc": "Analysera stam- och spelare-kontinentkontroll på världskartan." },
-      "productionData": { "title": "Produktionsräknare", "desc": "Optimera gruvetproduktionshastigheter, lagringskapacitet och fylltider." },
-      "coinMinter": { "title": "Guldmyntplanerare", "desc": "Beräkna den mest idealiska byn för prägling av guldmynt." },
-      "churchPlanner": { "title": "Kyrkoplanerare", "desc": "Optimera dina kyrkkoverageområden på kartan med en populationssparande algoritm." },
-      "buildingTimes": { "title": "Byggnadstidsräknare", "desc": "Beräkna och jämför byggnadsbyggtider på olika nivåer ned till sekunden." },
-      "clanOp": { "title": "Stammoperationsplanerare", "desc": "Analysera alla stammbyar och gör smarta tilldelningar. Distribuera personaliserade BBCode-order till medlemmar med kartunderstödd stabsintelligens." },
-      "clanTroop": { "title": "Stammoperationsplanerare (Med Trupper)", "desc": "Analysera alla stammtrupper och gör smarta tilldelningar. Distribuera personaliserade BBCode-order till medlemmar med kartunderstödd stabsintelligens." },
-      "fastSupport": { "title": "Snabb Stödfinnare", "desc": "Skapa en stödbegäran för att få snabb support." },
-      "scavengingPlanner": { "title": "Plundringstidsräknare", "desc": "Jämför plundringstider i detalj." }
+      "opPlanner": {
+        "title": "Personlig Operationsplanerare",
+        "desc": "Matcha käll- och målbyar för att förbereda en felfri operationsmall (BBCode)."
+      },
+      "buildingPlanner": {
+        "title": "Byggplaner",
+        "desc": "Designa din bys byggplan steg för steg med avancerad kösimulerare."
+      },
+      "unitCalculator": {
+        "title": "Truppproduktionsräknare",
+        "desc": "Beräkna enhetersproduceringstider för Baracker, Stall och Verkstad, inklusive bonusar."
+      },
+      "mapGenerator": {
+        "title": "Kartgenerator",
+        "desc": "Generera uppdaterade, färgade dynamiska världskartor för stammforum."
+      },
+      "mapAnalysis": {
+        "title": "Kontinentanalys",
+        "desc": "Analysera stam- och spelare-kontinentkontroll på världskartan."
+      },
+      "productionData": {
+        "title": "Produktionsräknare",
+        "desc": "Optimera gruvetproduktionshastigheter, lagringskapacitet och fylltider."
+      },
+      "coinMinter": {
+        "title": "Guldmyntplanerare",
+        "desc": "Beräkna den mest idealiska byn för prägling av guldmynt."
+      },
+      "churchPlanner": {
+        "title": "Kyrkoplanerare",
+        "desc": "Optimera dina kyrkkoverageområden på kartan med en populationssparande algoritm."
+      },
+      "buildingTimes": {
+        "title": "Byggnadstidsräknare",
+        "desc": "Beräkna och jämför byggnadsbyggtider på olika nivåer ned till sekunden."
+      },
+      "clanOp": {
+        "title": "Stammoperationsplanerare",
+        "desc": "Analysera alla stammbyar och gör smarta tilldelningar. Distribuera personaliserade BBCode-order till medlemmar med kartunderstödd stabsintelligens."
+      },
+      "clanTroop": {
+        "title": "Stammoperationsplanerare (Med Trupper)",
+        "desc": "Analysera alla stammtrupper och gör smarta tilldelningar. Distribuera personaliserade BBCode-order till medlemmar med kartunderstödd stabsintelligens."
+      },
+      "fastSupport": {
+        "title": "Snabb Stödfinnare",
+        "desc": "Skapa en stödbegäran för att få snabb support."
+      },
+      "scavengingPlanner": {
+        "title": "Plundringstidsräknare",
+        "desc": "Jämför plundringstider i detalj."
+      },
+      "notificationSettings": {
+        "title": "Aviseringsinställningar",
+        "desc": "Anpassa hur aviseringar visas."
+      }
     }
   },
   "footer": {
@@ -58,8 +106,8 @@
     "title": "Om",
     "p1": "Hej, jag är Anto Bvb 66.",
     "p2": "TW Cobre är en elitlogistikpanel och kommandocental utvecklad oberoende för att bearbeta rådata från Stammars (Tribal Wars) spelare och hjälpa dem att uppnå strategisk överlägsenhet.",
-    "p3": "Från operationsplanering till rengöringsanalys är alla moduler designade för att lösa beräkningar som skulle ta en spelare timmar på sekunder. Seger är gömd i detaljerna!"
-  ,"contactTitle": "Felrapport & Kontakt",
+    "p3": "Från operationsplanering till rengöringsanalys är alla moduler designade för att lösa beräkningar som skulle ta en spelare timmar på sekunder. Seger är gömd i detaljerna!",
+    "contactTitle": "Felrapport & Kontakt",
     "contactDesc": "Du kan rapportera fel, brister eller utvecklingsförslag du stöter på på vår webbplats direkt till mig via e-post.",
     "emailButton": "Skicka E-post"
   },
@@ -201,10 +249,27 @@
       "zero": "0 sek"
     },
     "buildings": [
-      "Huvudkontor (HQ)", "Baracker", "Stall", "Verkstad", "Första Kyrka", "Kyrka",
-      "Vakttorn", "Akademi", "Smedja", "Samlingsplats", "Staty", "Marknad",
-      "Trälager", "Lerabrud", "Järngruva", "Gård", "Magasin", "Gömstal",
-      "Adelsman", "Guldmynt", "Vägg"
+      "Huvudkontor (HQ)",
+      "Baracker",
+      "Stall",
+      "Verkstad",
+      "Första Kyrka",
+      "Kyrka",
+      "Vakttorn",
+      "Akademi",
+      "Smedja",
+      "Samlingsplats",
+      "Staty",
+      "Marknad",
+      "Trälager",
+      "Lerabrud",
+      "Järngruva",
+      "Gård",
+      "Magasin",
+      "Gömstal",
+      "Adelsman",
+      "Guldmynt",
+      "Vägg"
     ]
   },
   "scavenging": {
@@ -277,7 +342,9 @@
       "unlocked": "Olåst",
       "infoTitle": "💡 Kritiska Vändpunkter (Brytpunkt)",
       "be1": "🔸 Efter {{cap}} Kapacitet: 1-2-3-4 taktik övertar 2-3-4 och blir mer lönsam.",
-      "be2": "🔸 Efter {{cap}} Kapacitet: 1-2-3 taktik övertar 2-3."
+      "be2": "🔸 Efter {{cap}} Kapacitet: 1-2-3 taktik övertar 2-3.",
+      "dailyMining": "■ Daglig resursproduktion",
+      "dailyScavenging": "■ Dagligt insamlingsbyte"
     }
   },
   "churchPlanner": {
@@ -375,7 +442,8 @@
       "manualAdded": "✅ Fri Tilldelning Tilllagd!",
       "confirmClearQueue": "Är du säker på att du vill rensa hela kön?",
       "queueCleared": "🗑️ Kö Rensad!",
-      "copied": "Kopierat!"
+      "copied": "Kopierat!",
+      "enterClanTag": "Vänligen ange Stammtag!"
     },
     "columns": {
       "no": "Nr",
@@ -390,9 +458,19 @@
       "attackLink": "Åtgärdslänk"
     },
     "units": {
-      "spear": "Spjutman", "sword": "Svärdsman", "axe": "Yxman", "spy": "Spion",
-      "light": "Lätt kavalleri", "heavy": "Tungt kavalleri", "ram": "Ram", "catapult": "Katapult",
-      "knight": "Paladin", "snob": "Adelsman", "archer": "Bågskytt", "marcher": "Ridarskyttar", "militia": "Milits"
+      "spear": "Spjutman",
+      "sword": "Svärdsman",
+      "axe": "Yxman",
+      "spy": "Spion",
+      "light": "Lätt kavalleri",
+      "heavy": "Tungt kavalleri",
+      "ram": "Ram",
+      "catapult": "Katapult",
+      "knight": "Paladin",
+      "snob": "Adelsman",
+      "archer": "Bågskytt",
+      "marcher": "Ridarskyttar",
+      "militia": "Milits"
     },
     "shortUnits": {
       "ram": "Nuke",
@@ -458,7 +536,8 @@
       "copyAll": "Kopiera Allt",
       "ordersFor": "--- ORDER FÖR {{player}} ---",
       "attack": "Anfall",
-      "unknown": "OKÄND"
+      "unknown": "OKÄND",
+      "selectCols": "Välj Kolumner:"
     },
     "alerts": {
       "confirmClear": "Alla planer inklusive intelligens kommer att raderas. Är du säker?",
@@ -469,7 +548,8 @@
       "orderAdded": "✅ Order Tilllagd!",
       "confirmClearQueue": "Är du säker på att du vill rensa hela kön?",
       "queueCleared": "🗑️ Kö Rensad!",
-      "copied": "Kopierat!"
+      "copied": "Kopierat!",
+      "enterClanTag": "Vänligen ange Stammtag!"
     },
     "columns": {
       "no": "Nr",
@@ -484,9 +564,16 @@
       "attackLink": "Åtgärd"
     },
     "units": {
-      "spear": "Spjut", "sword": "Svärd", "axe": "Yxa", "spy": "Spion",
-      "light": "Lätt", "heavy": "Tungt", "ram": "Ram", "catapult": "Kat",
-      "knight": "Paladin", "snob": "Adelsman"
+      "spear": "Spjut",
+      "sword": "Svärd",
+      "axe": "Yxa",
+      "spy": "Spion",
+      "light": "Lätt",
+      "heavy": "Tungt",
+      "ram": "Ram",
+      "catapult": "Kat",
+      "knight": "Paladin",
+      "snob": "Adelsman"
     },
     "profiles": {
       "quarter": "Fjärdedel",
@@ -547,7 +634,8 @@
       "title": "Tillgängligt Stöd ({{count}})",
       "allTribe": "Hela Stammen",
       "noVillages": "Inga byar hittades som kan nå detta mål vid den valda tiden!",
-      "mapTarget": "🛡️ Mål"
+      "mapTarget": "🛡️ Mål",
+      "allClan": "Hela Stammen"
     },
     "bbcode": {
       "title": "📋 Forumuppmaning (BBCode)",
@@ -560,7 +648,8 @@
     },
     "alerts": {
       "enterTribeTag": "Vänligen ange Stammtag!",
-      "copied": "Kopierat!"
+      "copied": "Kopierat!",
+      "enterClanTag": "Vänligen ange Stammtag!"
     },
     "columns": {
       "player": "Spelare",
@@ -570,7 +659,13 @@
       "departure": "Avgångstid"
     },
     "units": {
-      "spear": "Spjut", "sword": "Svärd", "archer": "Bågskytt", "spy": "Spion", "heavy": "Tungt", "catapult": "Katapult", "knight": "Paladin"
+      "spear": "Spjut",
+      "sword": "Svärd",
+      "archer": "Bågskytt",
+      "spy": "Spion",
+      "heavy": "Tungt",
+      "catapult": "Katapult",
+      "knight": "Paladin"
     }
   },
   "mapAnalysis": {
@@ -588,7 +683,8 @@
       "analyzing": "Nedladdning slutförd, analyserar...",
       "empty": "Ingen data hittad att bearbeta!",
       "success": "FRAMGÅNG: {{villages}} byar, {{players}} spelare inladdade.",
-      "cleared": "Lagringen helt renssad."
+      "cleared": "Lagringen helt renssad.",
+      "errorShort": "FEL"
     },
     "timeMsg": {
       "cached": "⏳ Visar cachad data. Senaste hämtning: {{time}}",
@@ -717,9 +813,22 @@
       "attackLink": "Åtgärdslänk"
     },
     "units": {
-      "spear": "Spjutman", "sword": "Svärdsman", "axe": "Yxman", "spy": "Spion",
-      "light": "Lätt kavalleri", "heavy": "Tungt kavalleri", "ram": "Ram", "catapult": "Katapult",
-      "knight": "Paladin", "snob": "Adelsman", "archer": "Bågskytt", "marcher": "Ridarskyttar", "militia": "Milits"
+      "spear": "Spjutman",
+      "sword": "Svärdsman",
+      "axe": "Yxman",
+      "spy": "Spion",
+      "light": "Lätt kavalleri",
+      "heavy": "Tungt kavalleri",
+      "ram": "Ram",
+      "catapult": "Katapult",
+      "knight": "Paladin",
+      "snob": "Adelsman",
+      "archer": "Bågskytt",
+      "marcher": "Ridarskyttar",
+      "militia": "Milits"
+    },
+    "troopInput": {
+      "title": "🛡️ Ange truppdata (från gruppöversikten)"
     }
   },
   "productionData": {
@@ -808,9 +917,16 @@
       "none": "-"
     },
     "units": {
-      "spear": "Spjutman", "sword": "Svärdsman", "axe": "Yxman", "archer": "Bågskytt",
-      "spy": "Spion", "lc": "Lätt kavalleri", "ma": "Ridarskyttar", "hc": "Tungt kavalleri",
-      "ram": "Ram", "cat": "Katapult"
+      "spear": "Spjutman",
+      "sword": "Svärdsman",
+      "axe": "Yxman",
+      "archer": "Bågskytt",
+      "spy": "Spion",
+      "lc": "Lätt kavalleri",
+      "ma": "Ridarskyttar",
+      "hc": "Tungt kavalleri",
+      "ram": "Ram",
+      "cat": "Katapult"
     }
   },
   "mapGenerator": {
@@ -856,5 +972,153 @@
       "noData": "Ingen data hämtad ännu.",
       "deleteBtn": "Radera"
     }
+  },
+  "common": {
+    "invalidWorldUrl": "Ogiltig världslänk! Kontrollera adressen.",
+    "barbarian": "Barbar",
+    "worldEmpty": "Inga data för den här världen ännu. Vänta tills boten hämtar dem."
+  },
+  "notificationSettings": {
+    "alerts": {
+      "deleteError": "Profilen kunde inte raderas!",
+      "enterHighlightName": "Ange ett spelar- eller stamnamn!",
+      "confirmRemoteDelete": "All data för detta Special ID raderas permanent. Är du säker?",
+      "remoteDeleteSuccess": "Profilen raderades från databasen.",
+      "remoteDeleteError": "Ett fel uppstod vid radering. Kontrollera ID:t.",
+      "enterSpecialId": "Ange ditt speciella åtkomst-ID!",
+      "enterPlayerOrTribe": "Ange ett spelarnamn eller en stamtagg!",
+      "worldDataFetchError": "Kunde inte hämta världsdata. Kontrollera din anslutning.",
+      "invalidDataReceived": "Ogiltiga data mottagna:",
+      "worldDataReadError": "FEL: Världsdata kunde inte läsas!\n\nSe till att du har angett en giltig och aktiv världslänk (t.ex.: https://ptc1.tribalwars.com.pt) på fliken ”Grundinställningar”.",
+      "playerNotFound": "FEL: Ingen spelare med namnet ”{{name}}” hittades i den här världen! Kontrollera att du skrivit namnet rätt.",
+      "tribeNotFound": "FEL: Ingen stam med taggen eller namnet ”{{name}}” hittades i den här världen!",
+      "enterBothTribes": "Ange stamtagg/namn för båda sidor!",
+      "worldDataCorrupted": "FEL: Världsdata är skadade eller kan inte läsas!",
+      "tribesNotFoundList": "Följande stammar hittades inte i den här världen:",
+      "worldDataFetchErrorShort": "Kunde inte hämta världsdata.",
+      "invalidContinent": "Ange ett giltigt kontinentnummer mellan 0 och 99 (t.ex.: 44).",
+      "continentAlreadyAdded": "Den här kontinenten är redan tillagd!",
+      "confirmDeleteProfile": "Är du säker på att du helt vill radera dessa världsinställningar?",
+      "idExists": "Ett ID finns redan! Töm fältet först om du vill ha ett nytt.",
+      "emptyTargetName": "Ange först ett namn eller en stamtagg.",
+      "targetExists": "Målen du angav finns redan i spårningslistan!",
+      "profileNameEmpty": "Du måste ange ett namn för profil {{index}}!",
+      "specialIdEmpty": "Special ID saknas eller har inte genererats för profilen ”{{name}}”!",
+      "saveSuccess": "{{count}} profil(er) sparades till molnet!",
+      "saveError": "Ett fel uppstod när {{count}} profil(er) skulle sparas!",
+      "saveNoData": "Ingen profil att spara hittades!",
+      "idGenerateError": "Anslutningsfel! ID kunde inte genereras."
+    },
+    "filters": {
+      "tribeLog": "Spårning av stam in/ut",
+      "gains": "Byerövringar (vinster)",
+      "losses": "Byförluster (förluster)",
+      "barbarian": "Erövringar av barbarbyar (Barbarian)",
+      "selfConquer": "Egen byerövring (SelfConquer)",
+      "internal": "Interna stamerövringar (Internal)"
+    },
+    "settings": {
+      "remoteDeleteToggle": "Radera molnpost",
+      "notificationTypeLabel": "Aviseringstyper",
+      "typeImage": "Bildavisering",
+      "typeText": "Textavisering",
+      "basicSettings": "Grundinställningar",
+      "profileNameLabel": "Profilnamn (smeknamn / användarnamn)",
+      "required": "*Obligatoriskt",
+      "profileNamePlaceholder": "Exempel: Anto Bvb 66 - Klanlar Tr1",
+      "fieldCannotBeEmpty": "Detta fält får inte lämnas tomt.",
+      "specialIdLabel": "Särskilt åtkomst-ID",
+      "specialIdPlaceholder": "Ange ditt 66 tecken långa licens-ID eller generera ett",
+      "generateIdBtn": "Generera",
+      "worldLinkLabel": "Världslänk",
+      "worldLinkPlaceholder": "https://tr1.klanlar.org/",
+      "botTokenLabel": "Telegram bot-token",
+      "botTokenPlaceholder": "123456789:ABCDEF...",
+      "chatIdLabel": "Telegram Chat ID",
+      "chatIdPlaceholder": "exempel: 1135068175",
+      "saveAllConfigs": "Spara alla inställningar",
+      "languageLabel": "Språk",
+      "languagePlaceholder": "Välj språk"
+    },
+    "header": {
+      "title": "TwCu Aviseringscenter",
+      "subtitle": "Här kan du hantera dina aviseringsinställningar för alla världar du spelar i.",
+      "hideInfo": "Dölj information",
+      "showInfo": "Visa information"
+    },
+    "infoPanel": {
+      "title": "Hur använder man det?",
+      "profileNameTitle": "Profilnamn:",
+      "profileNameDesc": "Detta är namnet du ger den här inställningsgruppen för att lätt komma ihåg den. <u>Får inte lämnas tomt</u> och fungerar som huvudetiketten som identifierar dig i systemet.",
+      "specialIdTitle": "Särskilt åtkomst-ID (Special ID):",
+      "specialIdDesc": "Detta är den unika koden som gör att systemet känner igen dig. Om du inte har någon, klicka på knappen <em>Generera ID</em> för att skapa ett slumpmässigt.",
+      "worldLinkTitle": "Världslänk:",
+      "worldLinkDesc": "Detta är rotadressen till världen du spelar i (t.ex.: <code>https://tr1.klanlar.org/</code>). Boten tar emot allt dataflöde via denna adress.",
+      "botTokenTitle": "Telegram bot-token och Chat ID:",
+      "botTokenDesc": "Krävs för aviseringar. <strong>Chat ID:</strong> du får det genom att skicka <code>/start</code> till <code>@userinfobot</code> på Telegram. <strong>Bot-token:</strong> skapa din egen bot genom att skicka <code>/newbot</code> till <code>@BotFather</code>.",
+      "filtersInfo": "Aviseringsfilter:",
+      "filtersInfoDesc": "Du kan välja vilka typer av rörelser du vill få aviseringar om. Du kan till exempel få aviseringar bara för byerövringar (vinster) eller förluster. När du har valt dina filter får du omedelbara Telegram-aviseringar när rörelser som rör dina mål inträffar. På så sätt missar du inga viktiga händelser.",
+      "continentTrackingTitle": "Kontinentspårning:",
+      "continentTrackingDesc": "Du kan spåra erövringar endast i vissa kontinenter (t.ex.: 44,45,54).",
+      "fullTrackingTitle": "Spårning av hela världen:",
+      "fullTrackingDesc": "Aktiverar realtidsspårning av alla byerövringar i världen. <strong>Varning:</strong> detta kan skapa mycket stor meddelandetrafik."
+    },
+    "profile": {
+      "mainProfile": "Huvudprofil",
+      "newProfile": "Ny profil",
+      "unknownWorld": "Okänd värld",
+      "delete": "Radera",
+      "createNewProfile": "Skapa ny profil"
+    },
+    "targets": {
+      "addNewTarget": "Lägg till nytt mål",
+      "inputLabel": "Spelarnamn eller stamtagg",
+      "inputPlaceholder": "Exempel: Spelare1, Spelare2 eller STAM1,STAM2",
+      "selectFilters": "Välj aviseringsfilter",
+      "clearAll": "Rensa allt",
+      "selectAll": "Välj alla",
+      "addAsPlayer": "+ Lägg till som spelare",
+      "addAsTribe": "+ Lägg till som stam",
+      "manageTargets": "Hantera mållista",
+      "emptyState": "Inga mål spåras ännu.",
+      "show": "Visa",
+      "hide": "Dölj",
+      "delete": "Radera",
+      "deleteConfirm": "Är du säker på att du vill radera det här målet?",
+      "playerBadge": "👤 Spelare",
+      "tribeBadge": "🛡️ Stam"
+    },
+    "common": {
+      "add": "Lägg till",
+      "delete": "Radera",
+      "show": "Visa",
+      "hide": "Dölj"
+    },
+    "fullTracking": {
+      "title": "Omedelbar fullständig spårning",
+      "description": "Spåra alla byerövringar i hela världen i realtid.",
+      "active": "Aktiv (hela världen spåras)",
+      "inactive": "Inaktiv"
+    },
+    "continentTracking": {
+      "title": "Omedelbar kontinentspårning",
+      "description": "Spåra byförändringar endast i valda kontinenter.",
+      "placeholder": "Exempel: 44",
+      "continentPrefix": "Kontinent",
+      "noContinentAdded": "Ingen kontinent tillagd ännu."
+    }
+  },
+  "manualPlan": {
+    "title": "✍️ Lägg till operation manuellt (skriv den om du inte vill välja från listan)",
+    "sourceVillage": "Källby (t.ex. 500|500)",
+    "targetVillage": "Målby (t.ex. 501|501)",
+    "unitToSend": "Enhet att skicka",
+    "ramKami": "Murbräcka (Kami)",
+    "ramKamiFake": "Murbräcka (Kami/Fake)",
+    "catapult": "Katapult",
+    "catapultFake": "Katapult (Fake)",
+    "addToPlan": "➕ Lägg till i operationsplanen",
+    "addFromList": "👉 Lägg till genom att välja från listan",
+    "invalidCoords": "Ange giltiga käll- och målkoordinater (t.ex. 500|500)"
   }
 }

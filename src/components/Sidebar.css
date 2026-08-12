@@ -1,4 +1,11 @@
 /* =========================================
+   MOBİL ÜST BAR & KARARTMA — GÖRÜNÜRLÜK SADECE CSS İLE
+   (JS'te window.innerWidth okunmuyor; ekran döndürmede kilitlenmiyor)
+   ========================================= */
+.mobile-topbar { display: none; }
+.sidebar-overlay { display: none; }
+
+/* =========================================
    ANA YAN MENÜ (SIDEBAR)
    ========================================= */
 .sidebar {
@@ -317,11 +324,32 @@
     .sidebar.collapsed { display: none; } /* Mobilde mini mod iptal */
     .collapse-btn { display: none; }
 
+    /* Çekmece açıkken arka plan kaymasın */
+    body.drawer-open { overflow: hidden; }
+
+    /* Karartma katmanı */
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.65);
+        z-index: 1090;
+        animation: sidebar-fade-in 0.25s ease;
+    }
+
+    @keyframes sidebar-fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
     /* Mobil Üst Bar (Topbar) */
     .mobile-topbar {
         position: fixed;
         top: 0; left: 0; right: 0;
         height: 60px;
+        /* Çentikli telefonlarda üst bar durum çubuğunun altında kalmasın */
+        height: calc(60px + env(safe-area-inset-top));
+        padding-top: env(safe-area-inset-top);
         background: linear-gradient(180deg, #2a1908 0%, #1e150d 100%);
         border-bottom: 2px solid #5c3516;
         display: flex;

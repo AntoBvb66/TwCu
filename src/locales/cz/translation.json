@@ -22,8 +22,13 @@
       "clanOp": "Plánovač kmenových operací",
       "clanTroop": "Plánovač kmenových operací (pokročilý)",
       "fastSupport": "Plánování rychlé podpory",
-      "scavengingPlanner": "Kalkulačka časů plenění"
-    }
+      "scavengingPlanner": "Kalkulačka časů plenění",
+      "notificationSettings": "Nastavení oznámení"
+    },
+    "toggle": "Otevřít/zavřít menu",
+    "expand": "Rozbalit",
+    "collapse": "Sbalit",
+    "changeLanguage": "Změnit jazyk"
   },
   "home": {
     "hero": {
@@ -82,6 +87,10 @@
       "scavengingPlanner": {
         "title": "Kalkulačka časů plenění",
         "desc": "Podrobně porovnejte časy plenění."
+      },
+      "notificationSettings": {
+        "title": "Nastavení oznámení",
+        "desc": "Přizpůsobte si způsob zobrazení oznámení."
       }
     }
   },
@@ -101,7 +110,7 @@
     "contactTitle": "Chybová hláška a kontakt",
     "contactDesc": "Můžeš mi přímo poslat e-mail, když najdeš chybu, něco chybí nebo máš návrh na vylepšení.",
     "emailButton": "Poslat e-mail"
-    },
+  },
   "privacyPage": {
     "title": "Zásady ochrany osobních údajů a KVKK",
     "p1": "TW Cobre respektuje soukromí uživatelů na nejvyšší úrovni. V souladu se zákony na ochranu osobních údajů (GDPR) a mezinárodními standardy jsou naše zásady zpracování dat následující:",
@@ -333,7 +342,9 @@
       "unlocked": "Odemčeno",
       "infoTitle": "💡 Kritické body obratu (bod zvratu)",
       "be1": "🔸 Po kapacitě {{cap}}: taktika 1-2-3-4 předčí 2-3-4 a stává se ziskovější.",
-      "be2": "🔸 Po kapacitě {{cap}}: taktika 1-2-3 předčí 2-3."
+      "be2": "🔸 Po kapacitě {{cap}}: taktika 1-2-3 předčí 2-3.",
+      "dailyMining": "■ Denní produkce surovin",
+      "dailyScavenging": "■ Denní kořist ze sběru"
     }
   },
   "churchPlanner": {
@@ -431,7 +442,8 @@
       "manualAdded": "✅ Volné přiřazení přidáno!",
       "confirmClearQueue": "Jste si jistý, že chcete vymazat celou frontu?",
       "queueCleared": "🗑️ Fronta vymazána!",
-      "copied": "Zkopírováno!"
+      "copied": "Zkopírováno!",
+      "enterClanTag": "Zadejte prosím značku kmene!"
     },
     "columns": {
       "no": "Č.",
@@ -524,7 +536,8 @@
       "copyAll": "Kopírovat vše",
       "ordersFor": "--- PŘÍKAZY PRO {{player}} ---",
       "attack": "Útok",
-      "unknown": "NEZNÁMÝ"
+      "unknown": "NEZNÁMÝ",
+      "selectCols": "Vyberte sloupce:"
     },
     "alerts": {
       "confirmClear": "Všechny plány včetně průzkumu budou smazány. Jste si jistý?",
@@ -535,7 +548,8 @@
       "orderAdded": "✅ Příkaz přidán!",
       "confirmClearQueue": "Jste si jistý, že chcete vymazat celou frontu?",
       "queueCleared": "🗑️ Fronta vymazána!",
-      "copied": "Zkopírováno!"
+      "copied": "Zkopírováno!",
+      "enterClanTag": "Zadejte prosím značku kmene!"
     },
     "columns": {
       "no": "Č.",
@@ -620,7 +634,8 @@
       "title": "Dostupné podpory ({{count}})",
       "allTribe": "Celý kmen",
       "noVillages": "Nebyly nalezeny vesnice, které by mohly dorazit v tento čas!",
-      "mapTarget": "🛡️ Cíl"
+      "mapTarget": "🛡️ Cíl",
+      "allClan": "Celý kmen"
     },
     "bbcode": {
       "title": "📋 Fórumový výzva (BBCode)",
@@ -633,7 +648,8 @@
     },
     "alerts": {
       "enterTribeTag": "Zadejte prosím značku kmene!",
-      "copied": "Zkopírováno!"
+      "copied": "Zkopírováno!",
+      "enterClanTag": "Zadejte prosím značku kmene!"
     },
     "columns": {
       "player": "Hráč",
@@ -667,7 +683,8 @@
       "analyzing": "Stahování dokončeno, analyzuji...",
       "empty": "Nebyla nalezena žádná data ke zpracování!",
       "success": "ÚSPĚCH: načteno {{villages}} vesnic, {{players}} hráčů.",
-      "cleared": "Úložiště bylo kompletně vymazáno."
+      "cleared": "Úložiště bylo kompletně vymazáno.",
+      "errorShort": "CHYBA"
     },
     "timeMsg": {
       "cached": "⏳ Zobrazují se data z mezipaměti. Poslední načtení: {{time}}",
@@ -809,6 +826,9 @@
       "archer": "Lučištník",
       "marcher": "Pochodník",
       "militia": "Milice"
+    },
+    "troopInput": {
+      "title": "🛡️ Zadej data o jednotkách (ze skupinového přehledu)"
     }
   },
   "productionData": {
@@ -989,7 +1009,8 @@
       "losses": "Ztráty vesnic (ztráty)",
       "barbarian": "Dobytí barbarských vesnic (barbaři)",
       "selfConquer": "Vlastní dobytí vesnice (SelfConquer)",
-      "internal": "Interní dobytí kmene (interní)"
+      "internal": "Interní dobytí kmene (interní)",
+      "tribeLog": "Sledování vstupu/odchodu z kmene"
     },
     "settings": {
       "basicSettings": "Základní nastavení",
@@ -1008,7 +1029,11 @@
       "chatIdPlaceholder": "např.: 1135068175",
       "saveAllConfigs": "Uložit všechna nastavení",
       "languageLabel": "Jazyk",
-      "languagePlaceholder": "Vyberte jazyk"
+      "languagePlaceholder": "Vyberte jazyk",
+      "remoteDeleteToggle": "Smazat záznam v cloudu",
+      "notificationTypeLabel": "Typy oznámení",
+      "typeImage": "Obrázkové oznámení",
+      "typeText": "Textové oznámení"
     },
     "targets": {
       "addNewTarget": "Přidat nový cíl",
@@ -1049,7 +1074,14 @@
       "specialIdEmpty": "Speciální ID chybí nebo nebylo vygenerováno pro profil '{{name}}'!",
       "saveSuccess": "{{count}} profil(ů) bylo úspěšně uloženo do cloudu!",
       "saveError": "Při ukládání {{count}} profil(ů) došlo k chybě!",
-      "saveNoData": "Žádné profily k uložení!"
+      "saveNoData": "Žádné profily k uložení!",
+      "deleteError": "Profil se nepodařilo smazat!",
+      "enterHighlightName": "Zadejte jméno hráče nebo kmene!",
+      "confirmRemoteDelete": "Všechna data tohoto Special ID budou trvale smazána. Jste si jisti?",
+      "remoteDeleteSuccess": "Profil byl úspěšně smazán z databáze.",
+      "remoteDeleteError": "Při mazání došlo k chybě. Zkontrolujte ID.",
+      "enterSpecialId": "Zadejte svůj speciální přístupový ID!",
+      "idGenerateError": "Chyba spojení! ID se nepodařilo vygenerovat."
     },
     "common": {
       "add": "Přidat",
@@ -1070,5 +1102,23 @@
       "continentPrefix": "Kontinent",
       "noContinentAdded": "Zatím nebyl přidán žádný kontinent."
     }
+  },
+  "common": {
+    "invalidWorldUrl": "Neplatný odkaz na svět! Zkontrolujte adresu.",
+    "barbarian": "Barbar",
+    "worldEmpty": "Pro tento svět zatím nejsou data. Počkejte, až je bot načte."
+  },
+  "manualPlan": {
+    "title": "✍️ Ručně přidat operaci (napiš, pokud nechceš vybírat ze seznamu)",
+    "sourceVillage": "Zdrojová vesnice (např. 500|500)",
+    "targetVillage": "Cílová vesnice (např. 501|501)",
+    "unitToSend": "Jednotka k odeslání",
+    "ramKami": "Beranidlo (Kami)",
+    "ramKamiFake": "Beranidlo (Kami/Fake)",
+    "catapult": "Katapult",
+    "catapultFake": "Katapult (Fake)",
+    "addToPlan": "➕ Přidat do plánu operace",
+    "addFromList": "👉 Přidat výběrem ze seznamu",
+    "invalidCoords": "Zadejte platné zdrojové a cílové souřadnice (např. 500|500)"
   }
 }

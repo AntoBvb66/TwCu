@@ -22,8 +22,13 @@
       "clanOp": "Planer operacji plemienia",
       "clanTroop": "Planer operacji plemienia (zaawansowany)",
       "fastSupport": "Planowanie szybkiego wsparcia",
-      "scavengingPlanner": "Kalkulator czasu zbierania"
-    }
+      "scavengingPlanner": "Kalkulator czasu zbierania",
+      "notificationSettings": "Ustawienia powiadomień"
+    },
+    "toggle": "Otwórz/zamknij menu",
+    "expand": "Rozwiń",
+    "collapse": "Zwiń",
+    "changeLanguage": "Zmień język"
   },
   "home": {
     "hero": {
@@ -31,19 +36,62 @@
       "subtitle": "Zwycięstwo ukrywa się w szczegółach i doskonałym planowaniu. Oszczędź czas w swojej podróży po Tribal Wars i opracuj strategiczne plany, które poprowadzą twoje plemię do zwycięstwa. Wybierz narzędzie, aby zacząć."
     },
     "tools": {
-      "opPlanner": { "title": "Osobisty planer operacji", "desc": "Dopasuj wioski źródłowe i docelowe, aby przygotować doskonały szablon operacji (BBCode)." },
-      "buildingPlanner": { "title": "Planer budowy", "desc": "Zaprojektuj plan budowy swojej wioski krok po kroku z zaawansowaną symulacją kolejki." },
-      "unitCalculator": { "title": "Kalkulator produkcji jednostek", "desc": "Oblicz czasy produkcji jednostek dla Koszar, Stajni i Warsztatu, w tym bonusy." },
-      "mapGenerator": { "title": "Generator mapy", "desc": "Generuj aktualne, kolorowe dynamiczne mapy świata dla forów plemiennych." },
-      "mapAnalysis": { "title": "Analiza kontynentu", "desc": "Analizuj dominacje plemion i graczy na mapie świata." },
-      "productionData": { "title": "Kalkulator produkcji", "desc": "Optymalizuj stawki produkcji kopalń, pojemności magazynów i czasy napełniania." },
-      "coinMinter": { "title": "Planer monet złota", "desc": "Oblicz najbardziej idealną wioskę do bicia monet złota." },
-      "churchPlanner": { "title": "Planer kościoła", "desc": "Optymalizuj zasięg pokrycia kościoła na mapie z algorytmem oszczędzającym populację." },
-      "buildingTimes": { "title": "Kalkulator czasu budowy", "desc": "Oblicz i porównaj czasy budowy budynków na różnych poziomach do sekundy." },
-      "clanOp": { "title": "Planer operacji plemienia", "desc": "Analizuj wszystkie wioski plemienia i dokonaj inteligentnych przypisań. Rozdystrybuuj spersonalizowane zamówienia BBCode do członków z wsparciem mapy." },
-      "clanTroop": { "title": "Planer operacji plemienia (z jednostkami)", "desc": "Analizuj wszystkie jednostki plemienia i dokonaj inteligentnych przypisań. Rozdystrybuuj spersonalizowane zamówienia BBCode do członków z wsparciem mapy." },
-      "fastSupport": { "title": "Znajdź szybkie wsparcie", "desc": "Utwórz prośbę o wsparcie, aby uzyskać szybkie wsparcie." },
-      "scavengingPlanner": { "title": "Kalkulator czasu zbierania", "desc": "Porównaj czasy zbierania szczegółowo." }
+      "opPlanner": {
+        "title": "Osobisty planer operacji",
+        "desc": "Dopasuj wioski źródłowe i docelowe, aby przygotować doskonały szablon operacji (BBCode)."
+      },
+      "buildingPlanner": {
+        "title": "Planer budowy",
+        "desc": "Zaprojektuj plan budowy swojej wioski krok po kroku z zaawansowaną symulacją kolejki."
+      },
+      "unitCalculator": {
+        "title": "Kalkulator produkcji jednostek",
+        "desc": "Oblicz czasy produkcji jednostek dla Koszar, Stajni i Warsztatu, w tym bonusy."
+      },
+      "mapGenerator": {
+        "title": "Generator mapy",
+        "desc": "Generuj aktualne, kolorowe dynamiczne mapy świata dla forów plemiennych."
+      },
+      "mapAnalysis": {
+        "title": "Analiza kontynentu",
+        "desc": "Analizuj dominacje plemion i graczy na mapie świata."
+      },
+      "productionData": {
+        "title": "Kalkulator produkcji",
+        "desc": "Optymalizuj stawki produkcji kopalń, pojemności magazynów i czasy napełniania."
+      },
+      "coinMinter": {
+        "title": "Planer monet złota",
+        "desc": "Oblicz najbardziej idealną wioskę do bicia monet złota."
+      },
+      "churchPlanner": {
+        "title": "Planer kościoła",
+        "desc": "Optymalizuj zasięg pokrycia kościoła na mapie z algorytmem oszczędzającym populację."
+      },
+      "buildingTimes": {
+        "title": "Kalkulator czasu budowy",
+        "desc": "Oblicz i porównaj czasy budowy budynków na różnych poziomach do sekundy."
+      },
+      "clanOp": {
+        "title": "Planer operacji plemienia",
+        "desc": "Analizuj wszystkie wioski plemienia i dokonaj inteligentnych przypisań. Rozdystrybuuj spersonalizowane zamówienia BBCode do członków z wsparciem mapy."
+      },
+      "clanTroop": {
+        "title": "Planer operacji plemienia (z jednostkami)",
+        "desc": "Analizuj wszystkie jednostki plemienia i dokonaj inteligentnych przypisań. Rozdystrybuuj spersonalizowane zamówienia BBCode do członków z wsparciem mapy."
+      },
+      "fastSupport": {
+        "title": "Znajdź szybkie wsparcie",
+        "desc": "Utwórz prośbę o wsparcie, aby uzyskać szybkie wsparcie."
+      },
+      "scavengingPlanner": {
+        "title": "Kalkulator czasu zbierania",
+        "desc": "Porównaj czasy zbierania szczegółowo."
+      },
+      "notificationSettings": {
+        "title": "Ustawienia powiadomień",
+        "desc": "Dostosuj sposób wyświetlania powiadomień."
+      }
     }
   },
   "footer": {
@@ -58,10 +106,11 @@
     "title": "O nas",
     "p1": "Cześć, jestem Anto Bvb 66.",
     "p2": "TW Cobre to elitarny panel taktyczny i centrum dowodzenia opracowany niezależnie, aby przetwarzać surowe dane graczy plemion (Tribal Wars) i pomagać im osiągnąć przewagę strategiczną.",
-    "p3": "Od planowania operacji po analizę czyszczenia, wszystkie moduły są zaprojektowane, aby rozwiązywać obliczenia, które zajęłyby graczowi godziny w sekundach. Zwycięstwo ukrywa się w szczegółach!"
-  ,"contactTitle": "Zgłaszanie błędów i Kontakt",
+    "p3": "Od planowania operacji po analizę czyszczenia, wszystkie moduły są zaprojektowane, aby rozwiązywać obliczenia, które zajęłyby graczowi godziny w sekundach. Zwycięstwo ukrywa się w szczegółach!",
+    "contactTitle": "Zgłaszanie błędów i Kontakt",
     "contactDesc": "Błędy, pominięcia lub sugestie ulepszeń napotkane na naszej stronie można przesyłać bezpośrednio do mnie pocztą elektroniczną.",
-    "emailButton": "Wyślij e-mail"},
+    "emailButton": "Wyślij e-mail"
+  },
   "privacyPage": {
     "title": "Polityka prywatności i KVKK",
     "p1": "TW Cobre szanuje prywatność użytkowników na najwyższym poziomie. Zgodnie z prawami ochrony danych (GDPR) i międzynarodowymi standardami, nasza polityka przetwarzania danych jest następująca:",
@@ -196,13 +245,31 @@
       "day": "d",
       "hour": "godz",
       "minute": "min",
-      "second": "sek"
+      "second": "sek",
+      "zero": "0 sek"
     },
     "buildings": [
-      "Kwatera główna (HQ)", "Koszar", "Stajnia", "Warsztat", "Pierwszy kościół", "Kościół",
-      "Wieża strażnicza", "Akademia", "Kuźnia", "Miejsce zbiórki", "Posąg", "Rynek",
-      "Tartak", "Kopalnia gliny", "Huta żelaza", "Farma", "Magazyn", "Kryjówka",
-      "Szlachcic", "Moneta złota", "Mur"
+      "Kwatera główna (HQ)",
+      "Koszar",
+      "Stajnia",
+      "Warsztat",
+      "Pierwszy kościół",
+      "Kościół",
+      "Wieża strażnicza",
+      "Akademia",
+      "Kuźnia",
+      "Miejsce zbiórki",
+      "Posąg",
+      "Rynek",
+      "Tartak",
+      "Kopalnia gliny",
+      "Huta żelaza",
+      "Farma",
+      "Magazyn",
+      "Kryjówka",
+      "Szlachcic",
+      "Moneta złota",
+      "Mur"
     ]
   },
   "scavenging": {
@@ -275,7 +342,9 @@
       "unlocked": "Odblokowane",
       "infoTitle": "💡 Krytyczne punkty zwrotne (równowagi)",
       "be1": "🔸 Po pojemności {{cap}}: taktyka 1-2-3-4 przewyższa 2-3-4 i staje się bardziej dochodowa.",
-      "be2": "🔸 Po pojemności {{cap}}: taktyka 1-2-3 przewyższa 2-3."
+      "be2": "🔸 Po pojemności {{cap}}: taktyka 1-2-3 przewyższa 2-3.",
+      "dailyMining": "■ Dzienna produkcja surowców",
+      "dailyScavenging": "■ Dzienny łup ze zbieractwa"
     }
   },
   "churchPlanner": {
@@ -373,7 +442,8 @@
       "manualAdded": "✅ Ręczne przypisanie dodane!",
       "confirmClearQueue": "Czy na pewno chcesz wyczyścić całą kolejkę?",
       "queueCleared": "🗑️ Kolejka wyczyszczona!",
-      "copied": "Skopiowano!"
+      "copied": "Skopiowano!",
+      "enterClanTag": "Wprowadź tag plemienia!"
     },
     "columns": {
       "no": "Nr",
@@ -388,9 +458,19 @@
       "attackLink": "Link akcji"
     },
     "units": {
-      "spear": "Włócznik", "sword": "Miecznik", "axe": "Topornik", "spy": "Zwiadowca",
-      "light": "Lekka kawaleria", "heavy": "Ciężka kawaleria", "ram": "Taran", "catapult": "Katapulta",
-      "knight": "Paladyn", "snob": "Szlachcic", "archer": "Łucznik", "marcher": "Marszowiec", "militia": "Milicyjny"
+      "spear": "Włócznik",
+      "sword": "Miecznik",
+      "axe": "Topornik",
+      "spy": "Zwiadowca",
+      "light": "Lekka kawaleria",
+      "heavy": "Ciężka kawaleria",
+      "ram": "Taran",
+      "catapult": "Katapulta",
+      "knight": "Paladyn",
+      "snob": "Szlachcic",
+      "archer": "Łucznik",
+      "marcher": "Marszowiec",
+      "militia": "Milicyjny"
     },
     "shortUnits": {
       "ram": "Nuke",
@@ -456,7 +536,8 @@
       "copyAll": "Kopiuj wszystko",
       "ordersFor": "--- ZAMÓWIENIA DLA {{player}} ---",
       "attack": "Atak",
-      "unknown": "NIEZNANY"
+      "unknown": "NIEZNANY",
+      "selectCols": "Wybierz kolumny:"
     },
     "alerts": {
       "confirmClear": "Wszystkie plany wraz z inteligencją zostaną usunięte. Czy na pewno?",
@@ -467,7 +548,8 @@
       "orderAdded": "✅ Zamówienie dodane!",
       "confirmClearQueue": "Czy na pewno chcesz wyczyścić całą kolejkę?",
       "queueCleared": "🗑️ Kolejka wyczyszczona!",
-      "copied": "Skopiowano!"
+      "copied": "Skopiowano!",
+      "enterClanTag": "Wprowadź tag plemienia!"
     },
     "columns": {
       "no": "Nr",
@@ -482,9 +564,16 @@
       "attackLink": "Akcja"
     },
     "units": {
-      "spear": "Włócznik", "sword": "Miecznik", "axe": "Topornik", "spy": "Zwiadowca",
-      "light": "Lekka", "heavy": "Ciężka", "ram": "Taran", "catapult": "Katapulta",
-      "knight": "Paladyn", "snob": "Szlachcic"
+      "spear": "Włócznik",
+      "sword": "Miecznik",
+      "axe": "Topornik",
+      "spy": "Zwiadowca",
+      "light": "Lekka",
+      "heavy": "Ciężka",
+      "ram": "Taran",
+      "catapult": "Katapulta",
+      "knight": "Paladyn",
+      "snob": "Szlachcic"
     },
     "profiles": {
       "quarter": "Ćwierć",
@@ -545,7 +634,8 @@
       "title": "Dostępne wsparcia ({{count}})",
       "allTribe": "Całe plemię",
       "noVillages": "Nie znaleziono wiosek, które mogą dotrzeć do tego celu w wybranym czasie!",
-      "mapTarget": "🛡️ Cel"
+      "mapTarget": "🛡️ Cel",
+      "allClan": "Całe plemię"
     },
     "bbcode": {
       "title": "📋 Wezwanie na forum (BBCode)",
@@ -558,7 +648,8 @@
     },
     "alerts": {
       "enterTribeTag": "Wprowadź tag plemienia!",
-      "copied": "Skopiowano!"
+      "copied": "Skopiowano!",
+      "enterClanTag": "Wprowadź tag plemienia!"
     },
     "columns": {
       "player": "Gracz",
@@ -568,7 +659,13 @@
       "departure": "Czas wyjazdu"
     },
     "units": {
-      "spear": "Włócznik", "sword": "Miecznik", "archer": "Łucznik", "spy": "Zwiadowca", "heavy": "Ciężka", "catapult": "Katapulta", "knight": "Paladyn"
+      "spear": "Włócznik",
+      "sword": "Miecznik",
+      "archer": "Łucznik",
+      "spy": "Zwiadowca",
+      "heavy": "Ciężka",
+      "catapult": "Katapulta",
+      "knight": "Paladyn"
     }
   },
   "mapAnalysis": {
@@ -586,7 +683,8 @@
       "analyzing": "Pobieranie zakończone, analizowanie...",
       "empty": "Brak danych do przetworzenia!",
       "success": "SUKCES: {{villages}} wiosek, {{players}} graczy załadowanych.",
-      "cleared": "Pamięć całkowicie wyczyszczona."
+      "cleared": "Pamięć całkowicie wyczyszczona.",
+      "errorShort": "BŁĄD"
     },
     "timeMsg": {
       "cached": "⏳ Wyświetlanie danych z pamięci podręcznej. Ostatnie pobranie: {{time}}",
@@ -715,9 +813,22 @@
       "attackLink": "Link akcji"
     },
     "units": {
-      "spear": "Włócznik", "sword": "Miecznik", "axe": "Topornik", "spy": "Zwiadowca",
-      "light": "Lekka kawaleria", "heavy": "Ciężka kawaleria", "ram": "Taran", "catapult": "Katapulta",
-      "knight": "Paladyn", "snob": "Szlachcic", "archer": "Łucznik", "marcher": "Marszowiec", "militia": "Milicyjny"
+      "spear": "Włócznik",
+      "sword": "Miecznik",
+      "axe": "Topornik",
+      "spy": "Zwiadowca",
+      "light": "Lekka kawaleria",
+      "heavy": "Ciężka kawaleria",
+      "ram": "Taran",
+      "catapult": "Katapulta",
+      "knight": "Paladyn",
+      "snob": "Szlachcic",
+      "archer": "Łucznik",
+      "marcher": "Marszowiec",
+      "militia": "Milicyjny"
+    },
+    "troopInput": {
+      "title": "🛡️ Wprowadź dane wojsk (z widoku zbiorczego)"
     }
   },
   "productionData": {
@@ -806,9 +917,16 @@
       "none": "-"
     },
     "units": {
-      "spear": "Włócznik", "sword": "Miecznik", "axe": "Topornik", "archer": "Łucznik",
-      "spy": "Zwiadowca", "lc": "Lekka kawaleria", "ma": "Konny łucznik", "hc": "Ciężka kawaleria",
-      "ram": "Taran", "cat": "Katapulta"
+      "spear": "Włócznik",
+      "sword": "Miecznik",
+      "axe": "Topornik",
+      "archer": "Łucznik",
+      "spy": "Zwiadowca",
+      "lc": "Lekka kawaleria",
+      "ma": "Konny łucznik",
+      "hc": "Ciężka kawaleria",
+      "ram": "Taran",
+      "cat": "Katapulta"
     }
   },
   "mapGenerator": {
@@ -856,121 +974,151 @@
     }
   },
   "notificationSettings": {
-  "header": {
-    "title": "Centrum Powiadomień TwCu",
-    "subtitle": "Tutaj możesz zarządzać ustawieniami powiadomień dla wszystkich światów, na których grasz.",
-    "hideInfo": "Ukryj Info",
-    "showInfo": "Pokaż Info"
-  },
-  "infoPanel": {
-    "title": "Jak używać?",
-    "profileNameTitle": "Nazwa Profilu:",
-    "profileNameDesc": "Jest to nazwa przypisana do tej grupy ustawień, aby łatwo ją zapamiętać. <u>Nie może być pusta</u> i służy jako główna etykieta identyfikująca Cię w systemie.",
-    "specialIdTitle": "Specjalny ID Dostępu (Special ID):",
-    "specialIdDesc": "Jest to unikalny kod, który pozwala systemowi dopasować dane do Ciebie. Jeśli go nie masz, kliknij przycisk <em>Generuj ID</em>, aby utworzyć losowy kod.",
-    "worldLinkTitle": "Link do Świata:",
-    "worldLinkDesc": "Jest to główny adres świata, na którym grasz (np.: <code>https://pl1.plemiona.pl/</code>). Bot odbiera wszystkie dane za pośrednictwem tego adresu.",
-    "botTokenTitle": "Token Bota Telegram i Chat ID:",
-    "botTokenDesc": "Wymagane do powiadomień. <strong>Chat ID:</strong> Możesz go uzyskać, wysyłając <code>/start</code> do <code>@userinfobot</code> na Telegramie. <strong>Bot Token:</strong> Stwórz własnego bota, wysyłając <code>/newbot</code> do <code>@BotFather</code>.",
-    "filtersInfo": "Filtry Powiadomień:",
-    "filtersInfoDesc": "Możesz wybrać rodzaje akcji, o których chcesz otrzymywać powiadomienia. Na przykład możesz otrzymywać powiadomienia tylko o przejęciach wiosek (zyski) lub stratach. Po wybraniu filtrów będziesz otrzymywać natychmiastowe powiadomienia na Telegramie, gdy wystąpią zdarzenia związane z Twoimi celami.",
-    "continentTrackingTitle": "Śledzenie Kontynentu:",
-    "continentTrackingDesc": "Możesz śledzić przejęcia tylko na konkretnych kontynentach (np.: 44, 45, 54).",
-    "fullTrackingTitle": "Śledzenie Całego Świata:",
-    "fullTrackingDesc": "Włącza śledzenie wszystkich przejęć wiosek na świecie w czasie rzeczywistym. <strong>Ostrzeżenie:</strong> Może to generować bardzo dużą liczbę wiadomości."
-  },
-  "profile": {
-    "mainProfile": "Profil Główny",
-    "newProfile": "Nowy Profil",
-    "unknownWorld": "Nieznany Świat",
-    "delete": "Usuń",
-    "createNewProfile": "Utwórz Nowy Profil"
-  },
-  "filters": {
-    "gains": "Przejęcia Wiosek (Zyski)",
-    "losses": "Straty Wiosek (Straty)",
-    "barbarian": "Przejęcia Wiosek Barbarzyńskich (Barbarzyńcy)",
-    "selfConquer": "Samoprzejęcie (SelfConquer)",
-    "internal": "Przejęcia Wewnętrzne Plemienia (Internal)"
-  },
-  "settings": {
-    "basicSettings": "Ustawienia Podstawowe",
-    "profileNameLabel": "Nazwa Profilu (Nick / Użytkownik)",
-    "required": "*Wymagane",
-    "profileNamePlaceholder": "Przykład: Anto Bvb 66 - Plemiona Pl1",
-    "fieldCannotBeEmpty": "To pole nie może być puste.",
-    "specialIdLabel": "Specjalny ID Dostępu",
-    "specialIdPlaceholder": "Wprowadź swój 66-znakowy ID licencji lub wygeneruj nowy",
-    "generateIdBtn": "Generuj",
-    "worldLinkLabel": "Link do Świata",
-    "worldLinkPlaceholder": "https://pl1.plemiona.pl/",
-    "botTokenLabel": "Token Bota Telegram",
-    "botTokenPlaceholder": "123456789:ABCDEF...",
-    "chatIdLabel": "Telegram Chat ID",
-    "chatIdPlaceholder": "przykład: 1135068175",
-    "saveAllConfigs": "Zapisz Wszystkie Ustawienia",
-    "languageLabel": "Język",
-    "languagePlaceholder": "Wybierz Język"
-  },
-  "targets": {
-    "addNewTarget": "Dodaj Nowy Cel",
-    "inputLabel": "Nazwa Gracza lub Skrót Plemienia",
-    "inputPlaceholder": "Przykład: Gracz1, Gracz2 lub TAG1, TAG2",
-    "selectFilters": "Wybierz Filtry Powiadomień",
-    "clearAll": "Wyczyść Wszystko",
-    "selectAll": "Zaznacz Wszystko",
-    "addAsPlayer": "+ Dodaj jako Gracza",
-    "addAsTribe": "+ Dodaj jako Plemię",
-    "manageTargets": "Zarządzaj Listą Celów",
-    "emptyState": "Żadne cele nie są jeszcze śledzone.",
-    "show": "Pokaż",
-    "hide": "Ukryj",
-    "delete": "Usuń",
-    "deleteConfirm": "Czy na pewno chcesz usunąć ten cel?",
-    "playerBadge": "👤 Gracz",
-    "tribeBadge": "🛡️ Plemię"
-  },
-  "alerts": {
-    "enterPlayerOrTribe": "Proszę wprowadzić nazwę gracza lub tag plemienia!",
-    "worldDataFetchError": "Nie udało się pobrać danych świata. Sprawdź połączenie.",
-    "invalidDataReceived": "Otrzymano nieprawidłowe dane:",
-    "worldDataReadError": "BŁĄD: Nie można odczytać danych świata!\n\nUpewnij się, że w zakładce 'Ustawienia Podstawowe' wpisano poprawny i aktywny link do świata (np.: https://pl1.plemiona.pl).",
-    "playerNotFound": "BŁĄD: Nie znaleziono gracza o nazwie \"{{name}}\" na tym świecie! Upewnij się, że nazwa jest poprawna.",
-    "tribeNotFound": "BŁĄD: Nie znaleziono plemienia o tagu lub nazwie \"{{name}}\" na tym świecie!",
-    "enterBothTribes": "Proszę wprowadzić tag/nazwę plemienia dla obu stron!",
-    "worldDataCorrupted": "BŁĄD: Dane świata są uszkodzone lub nieczytelne!",
-    "tribesNotFoundList": "Następujące plemiona nie zostały znalezione na tym świecie:",
-    "worldDataFetchErrorShort": "Nie udało się pobrać danych świata.",
-    "invalidContinent": "Proszę podać poprawny numer kontynentu od 0 do 99 (np.: 44).",
-    "continentAlreadyAdded": "Ten kontynent jest już dodany!",
-    "confirmDeleteProfile": "Czy na pewno chcesz całkowicie usunąć ustawienia dla tego świata?",
-    "idExists": "ID już istnieje! Opróżnij pole, jeśli chcesz wygenerować nowy.",
-    "emptyTargetName": "Proszę najpierw wprowadzić nazwę lub tag plemienia.",
-    "targetExists": "Wprowadzone cele znajdują się już na liście śledzenia!",
-    "profileNameEmpty": "Musisz podać nazwę dla profilu {{index}}!",
-    "specialIdEmpty": "Brakuje Special ID lub nie został wygenerowany dla profilu '{{name}}'!",
-    "saveSuccess": "{{count}} profil(i) pomyślnie zapisano w chmurze!",
-    "saveError": "Wystąpił błąd podczas zapisywania {{count}} profil(i)!",
-    "saveNoData": "Nie znaleziono profilu do zapisania!"
+    "header": {
+      "title": "Centrum Powiadomień TwCu",
+      "subtitle": "Tutaj możesz zarządzać ustawieniami powiadomień dla wszystkich światów, na których grasz.",
+      "hideInfo": "Ukryj Info",
+      "showInfo": "Pokaż Info"
+    },
+    "infoPanel": {
+      "title": "Jak używać?",
+      "profileNameTitle": "Nazwa Profilu:",
+      "profileNameDesc": "Jest to nazwa przypisana do tej grupy ustawień, aby łatwo ją zapamiętać. <u>Nie może być pusta</u> i służy jako główna etykieta identyfikująca Cię w systemie.",
+      "specialIdTitle": "Specjalny ID Dostępu (Special ID):",
+      "specialIdDesc": "Jest to unikalny kod, który pozwala systemowi dopasować dane do Ciebie. Jeśli go nie masz, kliknij przycisk <em>Generuj ID</em>, aby utworzyć losowy kod.",
+      "worldLinkTitle": "Link do Świata:",
+      "worldLinkDesc": "Jest to główny adres świata, na którym grasz (np.: <code>https://pl1.plemiona.pl/</code>). Bot odbiera wszystkie dane za pośrednictwem tego adresu.",
+      "botTokenTitle": "Token Bota Telegram i Chat ID:",
+      "botTokenDesc": "Wymagane do powiadomień. <strong>Chat ID:</strong> Możesz go uzyskać, wysyłając <code>/start</code> do <code>@userinfobot</code> na Telegramie. <strong>Bot Token:</strong> Stwórz własnego bota, wysyłając <code>/newbot</code> do <code>@BotFather</code>.",
+      "filtersInfo": "Filtry Powiadomień:",
+      "filtersInfoDesc": "Możesz wybrać rodzaje akcji, o których chcesz otrzymywać powiadomienia. Na przykład możesz otrzymywać powiadomienia tylko o przejęciach wiosek (zyski) lub stratach. Po wybraniu filtrów będziesz otrzymywać natychmiastowe powiadomienia na Telegramie, gdy wystąpią zdarzenia związane z Twoimi celami.",
+      "continentTrackingTitle": "Śledzenie Kontynentu:",
+      "continentTrackingDesc": "Możesz śledzić przejęcia tylko na konkretnych kontynentach (np.: 44, 45, 54).",
+      "fullTrackingTitle": "Śledzenie Całego Świata:",
+      "fullTrackingDesc": "Włącza śledzenie wszystkich przejęć wiosek na świecie w czasie rzeczywistym. <strong>Ostrzeżenie:</strong> Może to generować bardzo dużą liczbę wiadomości."
+    },
+    "profile": {
+      "mainProfile": "Profil Główny",
+      "newProfile": "Nowy Profil",
+      "unknownWorld": "Nieznany Świat",
+      "delete": "Usuń",
+      "createNewProfile": "Utwórz Nowy Profil"
+    },
+    "filters": {
+      "gains": "Przejęcia Wiosek (Zyski)",
+      "losses": "Straty Wiosek (Straty)",
+      "barbarian": "Przejęcia Wiosek Barbarzyńskich (Barbarzyńcy)",
+      "selfConquer": "Samoprzejęcie (SelfConquer)",
+      "internal": "Przejęcia Wewnętrzne Plemienia (Internal)",
+      "tribeLog": "Śledzenie wejść/wyjść z plemienia"
+    },
+    "settings": {
+      "basicSettings": "Ustawienia Podstawowe",
+      "profileNameLabel": "Nazwa Profilu (Nick / Użytkownik)",
+      "required": "*Wymagane",
+      "profileNamePlaceholder": "Przykład: Anto Bvb 66 - Plemiona Pl1",
+      "fieldCannotBeEmpty": "To pole nie może być puste.",
+      "specialIdLabel": "Specjalny ID Dostępu",
+      "specialIdPlaceholder": "Wprowadź swój 66-znakowy ID licencji lub wygeneruj nowy",
+      "generateIdBtn": "Generuj",
+      "worldLinkLabel": "Link do Świata",
+      "worldLinkPlaceholder": "https://pl1.plemiona.pl/",
+      "botTokenLabel": "Token Bota Telegram",
+      "botTokenPlaceholder": "123456789:ABCDEF...",
+      "chatIdLabel": "Telegram Chat ID",
+      "chatIdPlaceholder": "przykład: 1135068175",
+      "saveAllConfigs": "Zapisz Wszystkie Ustawienia",
+      "languageLabel": "Język",
+      "languagePlaceholder": "Wybierz Język",
+      "remoteDeleteToggle": "Usuń wpis w chmurze",
+      "notificationTypeLabel": "Rodzaje powiadomień",
+      "typeImage": "Powiadomienie graficzne",
+      "typeText": "Powiadomienie tekstowe"
+    },
+    "targets": {
+      "addNewTarget": "Dodaj Nowy Cel",
+      "inputLabel": "Nazwa Gracza lub Skrót Plemienia",
+      "inputPlaceholder": "Przykład: Gracz1, Gracz2 lub TAG1, TAG2",
+      "selectFilters": "Wybierz Filtry Powiadomień",
+      "clearAll": "Wyczyść Wszystko",
+      "selectAll": "Zaznacz Wszystko",
+      "addAsPlayer": "+ Dodaj jako Gracza",
+      "addAsTribe": "+ Dodaj jako Plemię",
+      "manageTargets": "Zarządzaj Listą Celów",
+      "emptyState": "Żadne cele nie są jeszcze śledzone.",
+      "show": "Pokaż",
+      "hide": "Ukryj",
+      "delete": "Usuń",
+      "deleteConfirm": "Czy na pewno chcesz usunąć ten cel?",
+      "playerBadge": "👤 Gracz",
+      "tribeBadge": "🛡️ Plemię"
+    },
+    "alerts": {
+      "enterPlayerOrTribe": "Proszę wprowadzić nazwę gracza lub tag plemienia!",
+      "worldDataFetchError": "Nie udało się pobrać danych świata. Sprawdź połączenie.",
+      "invalidDataReceived": "Otrzymano nieprawidłowe dane:",
+      "worldDataReadError": "BŁĄD: Nie można odczytać danych świata!\n\nUpewnij się, że w zakładce 'Ustawienia Podstawowe' wpisano poprawny i aktywny link do świata (np.: https://pl1.plemiona.pl).",
+      "playerNotFound": "BŁĄD: Nie znaleziono gracza o nazwie \"{{name}}\" na tym świecie! Upewnij się, że nazwa jest poprawna.",
+      "tribeNotFound": "BŁĄD: Nie znaleziono plemienia o tagu lub nazwie \"{{name}}\" na tym świecie!",
+      "enterBothTribes": "Proszę wprowadzić tag/nazwę plemienia dla obu stron!",
+      "worldDataCorrupted": "BŁĄD: Dane świata są uszkodzone lub nieczytelne!",
+      "tribesNotFoundList": "Następujące plemiona nie zostały znalezione na tym świecie:",
+      "worldDataFetchErrorShort": "Nie udało się pobrać danych świata.",
+      "invalidContinent": "Proszę podać poprawny numer kontynentu od 0 do 99 (np.: 44).",
+      "continentAlreadyAdded": "Ten kontynent jest już dodany!",
+      "confirmDeleteProfile": "Czy na pewno chcesz całkowicie usunąć ustawienia dla tego świata?",
+      "idExists": "ID już istnieje! Opróżnij pole, jeśli chcesz wygenerować nowy.",
+      "emptyTargetName": "Proszę najpierw wprowadzić nazwę lub tag plemienia.",
+      "targetExists": "Wprowadzone cele znajdują się już na liście śledzenia!",
+      "profileNameEmpty": "Musisz podać nazwę dla profilu {{index}}!",
+      "specialIdEmpty": "Brakuje Special ID lub nie został wygenerowany dla profilu '{{name}}'!",
+      "saveSuccess": "{{count}} profil(i) pomyślnie zapisano w chmurze!",
+      "saveError": "Wystąpił błąd podczas zapisywania {{count}} profil(i)!",
+      "saveNoData": "Nie znaleziono profilu do zapisania!",
+      "deleteError": "Nie udało się usunąć profilu!",
+      "enterHighlightName": "Podaj nazwę gracza lub plemienia!",
+      "confirmRemoteDelete": "Wszystkie dane tego Special ID zostaną trwale usunięte. Na pewno?",
+      "remoteDeleteSuccess": "Profil został usunięty z bazy danych.",
+      "remoteDeleteError": "Wystąpił błąd podczas usuwania. Sprawdź ID.",
+      "enterSpecialId": "Podaj swój specjalny identyfikator dostępu!",
+      "idGenerateError": "Błąd połączenia! Nie udało się wygenerować ID."
+    },
+    "common": {
+      "add": "Dodaj",
+      "delete": "Usuń",
+      "show": "Pokaż",
+      "hide": "Ukryj"
+    },
+    "fullTracking": {
+      "title": "Natychmiastowe Śledzenie Świata",
+      "description": "Śledź wszystkie przejęcia wiosek na całym świecie w czasie rzeczywistym.",
+      "active": "Aktywne (Cały świat jest śledzony)",
+      "inactive": "Nieaktywne"
+    },
+    "continentTracking": {
+      "title": "Natychmiastowe Śledzenie Kontynentu",
+      "description": "Śledź zmiany wiosek tylko na wybranych kontynentach.",
+      "placeholder": "Przykład: 44",
+      "continentPrefix": "Kontynent",
+      "noContinentAdded": "Nie dodano jeszcze żadnego kontynentu."
+    }
   },
   "common": {
-    "add": "Dodaj",
-    "delete": "Usuń",
-    "show": "Pokaż",
-    "hide": "Ukryj"
+    "invalidWorldUrl": "Nieprawidłowy link świata! Sprawdź adres.",
+    "barbarian": "Barbarzyńca",
+    "worldEmpty": "Brak danych dla tego świata. Poczekaj, aż bot je pobierze."
   },
-  "fullTracking": {
-    "title": "Natychmiastowe Śledzenie Świata",
-    "description": "Śledź wszystkie przejęcia wiosek na całym świecie w czasie rzeczywistym.",
-    "active": "Aktywne (Cały świat jest śledzony)",
-    "inactive": "Nieaktywne"
-  },
-  "continentTracking": {
-    "title": "Natychmiastowe Śledzenie Kontynentu",
-    "description": "Śledź zmiany wiosek tylko na wybranych kontynentach.",
-    "placeholder": "Przykład: 44",
-    "continentPrefix": "Kontynent",
-    "noContinentAdded": "Nie dodano jeszcze żadnego kontynentu."
+  "manualPlan": {
+    "title": "✍️ Dodaj operację ręcznie (wpisz, jeśli nie chcesz wybierać z listy)",
+    "sourceVillage": "Wioska źródłowa (np. 500|500)",
+    "targetVillage": "Wioska docelowa (np. 501|501)",
+    "unitToSend": "Jednostka do wysłania",
+    "ramKami": "Taran (Kami)",
+    "ramKamiFake": "Taran (Kami/Fake)",
+    "catapult": "Katapulta",
+    "catapultFake": "Katapulta (Fake)",
+    "addToPlan": "➕ Dodaj do planu operacji",
+    "addFromList": "👉 Dodaj wybierając z listy",
+    "invalidCoords": "Podaj prawidłowe współrzędne źródła i celu (np. 500|500)"
   }
-}
 }

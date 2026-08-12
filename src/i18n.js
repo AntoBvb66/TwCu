@@ -1,72 +1,100 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-// 1. Tüm dil dosyalarını içe aktar (import)
-import translationTR from './locales/tr/translation.json';
-import translationEN from './locales/en/translation.json';
-import translationHR from './locales/hr/translation.json';
-import translationCZ from './locales/cz/translation.json';
-import translationDK from './locales/dk/translation.json';
-import translationNL from './locales/nl/translation.json';
-import translationFR from './locales/fr/translation.json';
-import translationDE from './locales/de/translation.json';
-import translationGR from './locales/gr/translation.json';
-import translationHU from './locales/hu/translation.json';
-import translationIT from './locales/it/translation.json';
-import translationNO from './locales/no/translation.json';
-import translationPL from './locales/pl/translation.json';
-import translationBR from './locales/br/translation.json';
-import translationPT from './locales/pt/translation.json';
-import translationRO from './locales/ro/translation.json';
-import translationRU from './locales/ru/translation.json';
-import translationSK from './locales/sk/translation.json';
-import translationSI from './locales/si/translation.json';
-import translationES from './locales/es/translation.json';
-import translationSE from './locales/se/translation.json';
-import translationCH from './locales/ch/translation.json';
-import translationTH from './locales/th/translation.json';
-import translationUA from './locales/ua/translation.json';
+// ---------------------------------------------------------------------------
+// DİL YÜKLEME
+//
+// Önceden 24 dil dosyasının tamamı ana pakete gömülüyordu (~1 MB). Artık
+// sadece kullanılan dil indiriliyor, diğerleri ihtiyaç anında yükleniyor.
+// Vite bu glob'u derleme sırasında ayrı parçalara böler.
+// ---------------------------------------------------------------------------
 
-// 2. Kaynakları i18next formatında tanımla
-const resources = {
-  tr: { translation: translationTR },
-  en: { translation: translationEN },
-  hr: { translation: translationHR },
-  cz: { translation: translationCZ },
-  dk: { translation: translationDK },
-  nl: { translation: translationNL },
-  fr: { translation: translationFR },
-  de: { translation: translationDE },
-  gr: { translation: translationGR },
-  hu: { translation: translationHU },
-  it: { translation: translationIT },
-  no: { translation: translationNO },
-  pl: { translation: translationPL },
-  br: { translation: translationBR },
-  pt: { translation: translationPT },
-  ro: { translation: translationRO },
-  ru: { translation: translationRU },
-  sk: { translation: translationSK },
-  si: { translation: translationSI },
-  es: { translation: translationES },
-  se: { translation: translationSE },
-  ch: { translation: translationCH },
-  th: { translation: translationTH },
-  ua: { translation: translationUA }
+const localeLoaders = import.meta.glob('./locales/*/translation.json');
+
+export const SUPPORTED_LANGUAGES = [
+    'tr', 'en', 'hr', 'cz', 'dk', 'nl', 'fr', 'de', 'gr', 'hu', 'it', 'no',
+    'pl', 'br', 'pt', 'ro', 'ru', 'sk', 'si', 'es', 'se', 'ch', 'th', 'ua',
+];
+
+const loadLocale = async (lng) => {
+    const loader = localeLoaders[`./locales/${lng}/translation.json`];
+    if (!loader) return null;
+    const mod = await loader();
+    return mod.default || mod;
 };
 
-// Daha önce seçilen dili Local Storage'dan al, yoksa Türkçe başla
-const savedLanguage = localStorage.getItem('appLanguage') || 'tr';
+/** Bir dili (ve gerekiyorsa yedek dili) yükleyip i18next'e ekler. */
+export const ensureLanguage = async (lng) => {
+    if (!SUPPORTED_LANGUAGES.includes(lng)) lng = 'en';
+
+    if (!i18n.hasResourceBundle(lng, 'translation')) {
+        const resource = await loadLocale(lng);
+        if (resource) i18n.addResourceBundle(lng, 'translation', resource, true, true);
+    }
+
+    // Eksik anahtarlar İngilizceye düşsün diye yedek dil de hazır olmalı.
+    if (lng !== 'en' && !i18n.hasResourceBundle('en', 'translation')) {
+        const fallback = await loadLocale('en');
+        if (fallback) i18n.addResourceBundle('en', 'translation', fallback, true, true);
+    }
+
+    return lng;
+};
+
+/** Dili değiştirir; gerekirse önce dosyasını indirir. */
+export const changeAppLanguage = async (lng) => {
+    const resolved = await ensureLanguage(lng);
+    localStorage.setItem('appLanguage', resolved);
+    document.documentElement.lang = resolved === 'br' ? 'pt' : resolved;
+    return i18n.changeLanguage(resolved);
+};
+
+/** Tarayıcı dilini destekliyorsak onu seç, yoksa İngilizce. */
+const detectLanguage = () => {
+    const saved = localStorage.getItem('appLanguage');
+    if (saved && SUPPORTED_LANGUAGES.includes(saved)) return saved;
+
+    const browser = (navigator.language || 'en').toLowerCase();
+    const primary = browser.split('-')[0];
+
+    // Tarayıcı kodu ile bizim kodumuz farklı olan diller
+    const aliases = {
+        cs: 'cz', da: 'dk', el: 'gr', nb: 'no', nn: 'no', sv: 'se',
+        sl: 'si', uk: 'ua', 'pt-br': 'br',
+    };
+
+    if (aliases[browser]) return aliases[browser];
+    if (aliases[primary]) return aliases[primary];
+    if (SUPPORTED_LANGUAGES.includes(primary)) return primary;
+    return 'en';
+};
+
+const initialLanguage = detectLanguage();
+
+document.documentElement.lang = initialLanguage === 'br' ? 'pt' : initialLanguage;
 
 i18n
-  .use(initReactI18next)
-  .init({
-    resources,
-    lng: savedLanguage, 
-    fallbackLng: 'en', // Bilinmeyen bir dil gelirse İngilizce aç
-    interpolation: {
-      escapeValue: false 
-    }
-  });
+    .use(initReactI18next)
+    .init({
+        resources: {},
+        lng: initialLanguage,
+        fallbackLng: 'en', // Bilinmeyen bir anahtar gelirse İngilizceye düş
+        supportedLngs: SUPPORTED_LANGUAGES,
+        interpolation: {
+            escapeValue: false,
+        },
+        react: {
+            useSuspense: false,
+        },
+    });
+
+/**
+ * Açılışta sadece seçili dil (+ gerekiyorsa İngilizce yedek) indirilir.
+ * index.jsx bu söz (promise) çözülünce uygulamayı çizer; böylece ilk karede
+ * çeviri yerine ham anahtar görünmez.
+ */
+export const i18nReady = ensureLanguage(initialLanguage).catch((err) => {
+    console.error('Dil dosyası yüklenemedi:', err);
+});
 
 export default i18n;

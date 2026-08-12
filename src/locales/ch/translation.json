@@ -22,8 +22,13 @@
       "clanOp": "Stamm-Operations-Planer",
       "clanTroop": "Stamm-Operations-Planer (Erweitert)",
       "fastSupport": "Schnell-Support-Planung",
-      "scavengingPlanner": "Plünderziite-Rechner"
-    }
+      "scavengingPlanner": "Plünderziite-Rechner",
+      "notificationSettings": "Benachrichtigungs-Iistellige"
+    },
+    "toggle": "Menü uf-/zueklappe",
+    "expand": "Uufklappe",
+    "collapse": "Zueklappe",
+    "changeLanguage": "Sprach wächsle"
   },
   "home": {
     "hero": {
@@ -31,19 +36,62 @@
       "subtitle": "Der Sieg isch verborge i de Details und em perfekte Plan. Spar Ziit i dinnere Tribal Wars-Räis und erstell strategischi Plän, wo dinnere Stamm zum Sieg füere. Wähl e Tool us, zum Aafange."
     },
     "tools": {
-      "opPlanner": { "title": "Persönliche Operations-Planer", "desc": "Pass Quell- und Ziel-Dörfer a, zum e perfekte Operations-Vorlag erstelle (BBCode)." },
-      "buildingPlanner": { "title": "Bau-Planer", "desc": "Design din Dorf-Bauplan Schritt für Schritt mit erweiterte Queue-Simulation." },
-      "unitCalculator": { "title": "Truppe-Produktions-Rechner", "desc": "Berech Truppe-Produktionsziite für Kasern, Stall und Wärkstatt, inklusive Bonusse." },
-      "mapGenerator": { "title": "Karten-Generator", "desc": "Generier aktuelli, gfärbti dynamischi Weltkarte für Stamm-Foren." },
-      "mapAnalysis": { "title": "Kontinent-Analyse", "desc": "Analysier Stamm- und Spieler-Kontinent-Dominanze uf de Weltkart." },
-      "productionData": { "title": "Produktions-Rechner", "desc": "Optimier Mine-Produktionsrate, Speicher-Kapazitäte und Füllziite." },
-      "coinMinter": { "title": "Goldmünz-Planer", "desc": "Find das ideale Dorf für Goldmünz-Prägung." },
-      "churchPlanner": { "title": "Kirche-Planer", "desc": "Optimier dini Kirchen-Abdeckung uf de Kart mit ere Bevölkerung-sparende Algorithmus." },
-      "buildingTimes": { "title": "Bauziite-Rechner", "desc": "Berech und verglich Bauziite für verschideni Level bis uf d Sekund." },
-      "clanOp": { "title": "Stamm-Operations-Planer", "desc": "Analysier alli Stamm-Dörfer und mach intelligenti Zuweisunge. Verteilt personalisiert BBCode-Befehl a d Mitglieder mit kart-unterstützte Staff-Intelligence." },
-      "clanTroop": { "title": "Stamm-Operations-Planer (mit Truppe)", "desc": "Analysier alli Stamm-Truppe und mach intelligenti Zuweisunge. Verteilt personalisiert BBCode-Befehl a d Mitglieder mit kart-unterstützte Staff-Intelligence." },
-      "fastSupport": { "title": "Schnell-Support-Finder", "desc": "Erstell e Support-Aaforderung, zum schnäll Support z bekomme." },
-      "scavengingPlanner": { "title": "Plünderziite-Rechner", "desc": "Verglich Plünderziite im Detail." }
+      "opPlanner": {
+        "title": "Persönliche Operations-Planer",
+        "desc": "Pass Quell- und Ziel-Dörfer a, zum e perfekte Operations-Vorlag erstelle (BBCode)."
+      },
+      "buildingPlanner": {
+        "title": "Bau-Planer",
+        "desc": "Design din Dorf-Bauplan Schritt für Schritt mit erweiterte Queue-Simulation."
+      },
+      "unitCalculator": {
+        "title": "Truppe-Produktions-Rechner",
+        "desc": "Berech Truppe-Produktionsziite für Kasern, Stall und Wärkstatt, inklusive Bonusse."
+      },
+      "mapGenerator": {
+        "title": "Karten-Generator",
+        "desc": "Generier aktuelli, gfärbti dynamischi Weltkarte für Stamm-Foren."
+      },
+      "mapAnalysis": {
+        "title": "Kontinent-Analyse",
+        "desc": "Analysier Stamm- und Spieler-Kontinent-Dominanze uf de Weltkart."
+      },
+      "productionData": {
+        "title": "Produktions-Rechner",
+        "desc": "Optimier Mine-Produktionsrate, Speicher-Kapazitäte und Füllziite."
+      },
+      "coinMinter": {
+        "title": "Goldmünz-Planer",
+        "desc": "Find das ideale Dorf für Goldmünz-Prägung."
+      },
+      "churchPlanner": {
+        "title": "Kirche-Planer",
+        "desc": "Optimier dini Kirchen-Abdeckung uf de Kart mit ere Bevölkerung-sparende Algorithmus."
+      },
+      "buildingTimes": {
+        "title": "Bauziite-Rechner",
+        "desc": "Berech und verglich Bauziite für verschideni Level bis uf d Sekund."
+      },
+      "clanOp": {
+        "title": "Stamm-Operations-Planer",
+        "desc": "Analysier alli Stamm-Dörfer und mach intelligenti Zuweisunge. Verteilt personalisiert BBCode-Befehl a d Mitglieder mit kart-unterstützte Staff-Intelligence."
+      },
+      "clanTroop": {
+        "title": "Stamm-Operations-Planer (mit Truppe)",
+        "desc": "Analysier alli Stamm-Truppe und mach intelligenti Zuweisunge. Verteilt personalisiert BBCode-Befehl a d Mitglieder mit kart-unterstützte Staff-Intelligence."
+      },
+      "fastSupport": {
+        "title": "Schnell-Support-Finder",
+        "desc": "Erstell e Support-Aaforderung, zum schnäll Support z bekomme."
+      },
+      "scavengingPlanner": {
+        "title": "Plünderziite-Rechner",
+        "desc": "Verglich Plünderziite im Detail."
+      },
+      "notificationSettings": {
+        "title": "Benachrichtigungs-Iistellige",
+        "desc": "Stell ii, wie d Benachrichtigunge azeigt werded."
+      }
     }
   },
   "footer": {
@@ -58,10 +106,10 @@
     "title": "Über",
     "p1": "Hallo, ich bin Anto Bvb 66.",
     "p2": "TW Cobre isch e elite Taktik-Panel und Kommando-Zentrale, entwickelt für d Verarbeitung vo Rohdate vo Clan (Tribal Wars) Spieler und hilft ihne, strategischi Überlegenheit z erlange.",
-    "p3": "Vo Operations-Planung bis Räumungs-Analyse, alli Modul sind so designet, dass si Berechnunge löse, wo e Spieler Stunde bruuche würd, i Sekunde. Der Sieg isch i de Details verborge!"
-  ,"contactTitle": "Fehler-Meldig & Kontakt",
-  "contactDesc": "Du chasch mer direkt e E-Mail schicke, wenn du e Fehler gfundä hesch, öppis fehlt oder du e Verbesserigsvorschlag hesch.",
-  "emailButton": "E-Mail sende"
+    "p3": "Vo Operations-Planung bis Räumungs-Analyse, alli Modul sind so designet, dass si Berechnunge löse, wo e Spieler Stunde bruuche würd, i Sekunde. Der Sieg isch i de Details verborge!",
+    "contactTitle": "Fehler-Meldig & Kontakt",
+    "contactDesc": "Du chasch mer direkt e E-Mail schicke, wenn du e Fehler gfundä hesch, öppis fehlt oder du e Verbesserigsvorschlag hesch.",
+    "emailButton": "E-Mail sende"
   },
   "privacyPage": {
     "title": "Datenschutz-Richtlinie und KVKK",
@@ -201,10 +249,27 @@
       "zero": "0 Sek"
     },
     "buildings": [
-      "Hauptquartier (HQ)", "Kasern", "Stall", "Wärkstatt", "Ersti Kirche", "Kirche",
-      "Wachturm", "Akademie", "Schmied", "Sammelplatz", "Statue", "Markt",
-      "Holzfäller", "Lehmgrueb", "Eisegrueb", "Farm", "Speicher", "Versteck",
-      "Adliger", "Goldmünz", "Muur"
+      "Hauptquartier (HQ)",
+      "Kasern",
+      "Stall",
+      "Wärkstatt",
+      "Ersti Kirche",
+      "Kirche",
+      "Wachturm",
+      "Akademie",
+      "Schmied",
+      "Sammelplatz",
+      "Statue",
+      "Markt",
+      "Holzfäller",
+      "Lehmgrueb",
+      "Eisegrueb",
+      "Farm",
+      "Speicher",
+      "Versteck",
+      "Adliger",
+      "Goldmünz",
+      "Muur"
     ]
   },
   "scavenging": {
@@ -277,7 +342,9 @@
       "unlocked": "Freigschaltet",
       "infoTitle": "💡 Kritische Umkehr-Punkt (Break-Even)",
       "be1": "🔸 Nach {{cap}} Kapazität: 1-2-3-4 Taktik überholt 2-3-4 und wird profitabler.",
-      "be2": "🔸 Nach {{cap}} Kapazität: 1-2-3 Taktik überholt 2-3."
+      "be2": "🔸 Nach {{cap}} Kapazität: 1-2-3 Taktik überholt 2-3.",
+      "dailyMining": "■ Täglichi Rohstoffproduktion",
+      "dailyScavenging": "■ Täglichi Sammel-Büüti"
     }
   },
   "churchPlanner": {
@@ -375,7 +442,8 @@
       "manualAdded": "✅ Freii Zuweisung zuegfüegt!",
       "confirmClearQueue": "Bisch sicher, dass du d ganz Queue lösche wottsch?",
       "queueCleared": "🗑️ Queue glöscht!",
-      "copied": "Kopiert!"
+      "copied": "Kopiert!",
+      "enterClanTag": "Bitte Stamm-Tag ii füege!"
     },
     "columns": {
       "no": "Nr",
@@ -390,9 +458,19 @@
       "attackLink": "Aktion-Link"
     },
     "units": {
-      "spear": "Speerträger", "sword": "Schwertkämpfer", "axe": "Axtkämpfer", "spy": "Späher",
-      "light": "Leichte Kavallerie", "heavy": "Schwere Kavallerie", "ram": "Ram", "catapult": "Katapult",
-      "knight": "Paladin", "snob": "Adliger", "archer": "Bogenschütze", "marcher": "Marschierer", "militia": "Miliz"
+      "spear": "Speerträger",
+      "sword": "Schwertkämpfer",
+      "axe": "Axtkämpfer",
+      "spy": "Späher",
+      "light": "Leichte Kavallerie",
+      "heavy": "Schwere Kavallerie",
+      "ram": "Ram",
+      "catapult": "Katapult",
+      "knight": "Paladin",
+      "snob": "Adliger",
+      "archer": "Bogenschütze",
+      "marcher": "Marschierer",
+      "militia": "Miliz"
     },
     "shortUnits": {
       "ram": "Nuke",
@@ -458,7 +536,8 @@
       "copyAll": "Alli kopiere",
       "ordersFor": "--- BEFEHL FÜR {{player}} ---",
       "attack": "Angriff",
-      "unknown": "UNBEKANNT"
+      "unknown": "UNBEKANNT",
+      "selectCols": "Spalte wäle:"
     },
     "alerts": {
       "confirmClear": "Alli Plän inklusive Intelligence werde glöscht. Bisch sicher?",
@@ -469,7 +548,8 @@
       "orderAdded": "✅ Befehl zuegfüegt!",
       "confirmClearQueue": "Bisch sicher, dass du d ganz Queue lösche wottsch?",
       "queueCleared": "🗑️ Queue glöscht!",
-      "copied": "Kopiert!"
+      "copied": "Kopiert!",
+      "enterClanTag": "Bitte Stamm-Tag ii füege!"
     },
     "columns": {
       "no": "Nr",
@@ -484,9 +564,16 @@
       "attackLink": "Aktion"
     },
     "units": {
-      "spear": "Speer", "sword": "Schwert", "axe": "Axt", "spy": "Späher",
-      "light": "Leicht", "heavy": "Schwer", "ram": "Ram", "catapult": "Kat",
-      "knight": "Paladin", "snob": "Adlige"
+      "spear": "Speer",
+      "sword": "Schwert",
+      "axe": "Axt",
+      "spy": "Späher",
+      "light": "Leicht",
+      "heavy": "Schwer",
+      "ram": "Ram",
+      "catapult": "Kat",
+      "knight": "Paladin",
+      "snob": "Adlige"
     },
     "profiles": {
       "quarter": "Viertel",
@@ -547,7 +634,8 @@
       "title": "Verfüegbar Support ({{count}})",
       "allTribe": "Ganze Stamm",
       "noVillages": "Kei Dörfer gfunde, wo zu dem Ziitpunkt zum Ziel chönnte!",
-      "mapTarget": "🛡️ Ziel"
+      "mapTarget": "🛡️ Ziel",
+      "allClan": "Ganze Stamm"
     },
     "bbcode": {
       "title": "📋 Forum-Aufruf (BBCode)",
@@ -560,7 +648,8 @@
     },
     "alerts": {
       "enterTribeTag": "Bitte Stamm-Tag ii füege!",
-      "copied": "Kopiert!"
+      "copied": "Kopiert!",
+      "enterClanTag": "Bitte Stamm-Tag ii füege!"
     },
     "columns": {
       "player": "Spieler",
@@ -570,7 +659,13 @@
       "departure": "Abgangsziit"
     },
     "units": {
-      "spear": "Speer", "sword": "Schwert", "archer": "Bogenschütze", "spy": "Späher", "heavy": "Schwer", "catapult": "Katapult", "knight": "Paladin"
+      "spear": "Speer",
+      "sword": "Schwert",
+      "archer": "Bogenschütze",
+      "spy": "Späher",
+      "heavy": "Schwer",
+      "catapult": "Katapult",
+      "knight": "Paladin"
     }
   },
   "mapAnalysis": {
@@ -588,7 +683,8 @@
       "analyzing": "Abelade fertig, analysiere...",
       "empty": "Kei Date zum Verarbeite gfunde!",
       "success": "ERFOLG: {{villages}} Dörfer, {{players}} Spieler glade.",
-      "cleared": "Speicher komplett glöscht."
+      "cleared": "Speicher komplett glöscht.",
+      "errorShort": "FÄHLER"
     },
     "timeMsg": {
       "cached": "⏳ Zeigt Cache-Date. Letschte Abgrüef: {{time}}",
@@ -717,9 +813,22 @@
       "attackLink": "Aktion-Link"
     },
     "units": {
-      "spear": "Speerträger", "sword": "Schwertkämpfer", "axe": "Axtkämpfer", "spy": "Späher",
-      "light": "Leichte Kavallerie", "heavy": "Schwere Kavallerie", "ram": "Ram", "catapult": "Katapult",
-      "knight": "Paladin", "snob": "Adliger", "archer": "Bogenschütze", "marcher": "Marschierer", "militia": "Miliz"
+      "spear": "Speerträger",
+      "sword": "Schwertkämpfer",
+      "axe": "Axtkämpfer",
+      "spy": "Späher",
+      "light": "Leichte Kavallerie",
+      "heavy": "Schwere Kavallerie",
+      "ram": "Ram",
+      "catapult": "Katapult",
+      "knight": "Paladin",
+      "snob": "Adliger",
+      "archer": "Bogenschütze",
+      "marcher": "Marschierer",
+      "militia": "Miliz"
+    },
+    "troopInput": {
+      "title": "🛡️ Truppedate iigeh (us de Gruppeübersicht)"
     }
   },
   "productionData": {
@@ -808,9 +917,16 @@
       "none": "-"
     },
     "units": {
-      "spear": "Speerträger", "sword": "Schwertkämpfer", "axe": "Axtkämpfer", "archer": "Bogenschütze",
-      "spy": "Späher", "lc": "Leichte Kavallerie", "ma": "Berittene Bogenschütze", "hc": "Schwere Kavallerie",
-      "ram": "Ram", "cat": "Katapult"
+      "spear": "Speerträger",
+      "sword": "Schwertkämpfer",
+      "axe": "Axtkämpfer",
+      "archer": "Bogenschütze",
+      "spy": "Späher",
+      "lc": "Leichte Kavallerie",
+      "ma": "Berittene Bogenschütze",
+      "hc": "Schwere Kavallerie",
+      "ram": "Ram",
+      "cat": "Katapult"
     }
   },
   "mapGenerator": {
@@ -893,7 +1009,8 @@
       "losses": "Dorfverluste (Verluste)",
       "barbarian": "Eroberung von Barbarendörfern (Barbaren)",
       "selfConquer": "Eigene Dorferoberung (SelfConquer)",
-      "internal": "Interne Stammeseroberungen (Intern)"
+      "internal": "Interne Stammeseroberungen (Intern)",
+      "tribeLog": "Stamm Iitritt/Uustritt verfolge"
     },
     "settings": {
       "basicSettings": "Grundeinstellungen",
@@ -912,7 +1029,11 @@
       "chatIdPlaceholder": "z.B.: 1135068175",
       "saveAllConfigs": "Alle Einstellungen speichern",
       "languageLabel": "Sprache",
-      "languagePlaceholder": "Sprache auswählen"
+      "languagePlaceholder": "Sprache auswählen",
+      "remoteDeleteToggle": "Cloud-Iitrag lösche",
+      "notificationTypeLabel": "Benachrichtigungs-Arte",
+      "typeImage": "Bild-Benachrichtigung",
+      "typeText": "Text-Benachrichtigung"
     },
     "targets": {
       "addNewTarget": "Neues Ziel hinzufügen",
@@ -953,7 +1074,14 @@
       "specialIdEmpty": "Die spezielle ID fehlt oder wurde für das Profil '{{name}}' nicht generiert!",
       "saveSuccess": "{{count}} Profil(e) erfolgreich in der Cloud gespeichert!",
       "saveError": "Fehler beim Speichern von {{count}} Profil(en)!",
-      "saveNoData": "Keine Profile zum Speichern gefunden!"
+      "saveNoData": "Keine Profile zum Speichern gefunden!",
+      "deleteError": "S Profil het nöd chöne glöscht werde!",
+      "enterHighlightName": "Gib en Spiler- oder Stammname i!",
+      "confirmRemoteDelete": "Alli Date vo dere Special ID werded für immer glöscht. Bisch sicher?",
+      "remoteDeleteSuccess": "S Profil isch us de Datebank glöscht worde.",
+      "remoteDeleteError": "Bim Lösche isch en Fähler passiert. Prüef d'ID.",
+      "enterSpecialId": "Gib dini spezielli Zuegangs-ID i!",
+      "idGenerateError": "Verbindigsfähler! D ID het nöd chöne generiert werde."
     },
     "common": {
       "add": "Hinzufügen",
@@ -974,5 +1102,23 @@
       "continentPrefix": "Kontinent",
       "noContinentAdded": "Noch kein Kontinent hinzugefügt."
     }
+  },
+  "common": {
+    "invalidWorldUrl": "Ungültige Wält-Link! Bitte d'Adress prüefe.",
+    "barbarian": "Barbar",
+    "worldEmpty": "Für die Wält git's no kei Date. Wart, bis de Bot si sammlet."
+  },
+  "manualPlan": {
+    "title": "✍️ Operation vo Hand zuefüege (tipp si i, wenn d nöd us de Lischte wähle wottsch)",
+    "sourceVillage": "Uusgangsdorf (z. B. 500|500)",
+    "targetVillage": "Zieldorf (z. B. 501|501)",
+    "unitToSend": "Iiheit zum Schicke",
+    "ramKami": "Ramme (Kami)",
+    "ramKamiFake": "Ramme (Kami/Fake)",
+    "catapult": "Katapult",
+    "catapultFake": "Katapult (Fake)",
+    "addToPlan": "➕ Zum Operationsplan zuefüege",
+    "addFromList": "👉 Us de Lischte uuswähle und zuefüege",
+    "invalidCoords": "Bitte gültigi Start- und Zielkoordinate iigeh (z. B. 500|500)"
   }
 }

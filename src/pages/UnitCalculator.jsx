@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next'; // YENİ: Çeviri motoru
+import { bumpStat } from '../utils/twApi';
 import './UnitCalculator.css';
 
 // === EXCEL'DEKİ O KÜSURATLI BİNA SEVİYE ÇARPANLARI (1'den 25'e) ===
@@ -46,7 +47,7 @@ const formatClock = (totalSeconds, t) => {
 
 const UnitCalculator = () => {
     const { t } = useTranslation(); // YENİ: Çeviri kancası
-fetch("https://tw-proxy.halimtttt10.workers.dev/?stat=sims").catch(() => {});
+bumpStat("sims");
     // --- STATE'LER ---
     const [worldSpeed, setWorldSpeed] = useState(1);
     

@@ -22,8 +22,13 @@
       "clanOp": "Stammeoperationsplanlægger",
       "clanTroop": "Stammeoperationsplanlægger (avanceret)",
       "fastSupport": "Hurtig støtteplanlægning",
-      "scavengingPlanner": "Plundringstidsberegner"
-    }
+      "scavengingPlanner": "Plundringstidsberegner",
+      "notificationSettings": "Notifikationsindstillinger"
+    },
+    "toggle": "Åbn/luk menu",
+    "expand": "Udvid",
+    "collapse": "Skjul",
+    "changeLanguage": "Skift sprog"
   },
   "home": {
     "hero": {
@@ -31,19 +36,62 @@
       "subtitle": "Sejr gemmer sig i detaljerne og fejlfri planlægning. Spar tid på din Tribal Wars-rejse og udarbejd strategiske planer, der fører din stamme til sejr. Vælg et værktøj for at komme i gang."
     },
     "tools": {
-      "opPlanner": { "title": "Personlig operationsplanlægger", "desc": "Match kildesogne og målsogne for at forberede en fejlfri operationstemplate (BBCode)." },
-      "buildingPlanner": { "title": "Bygningsplanlægger", "desc": "Design din landsbys byggekø trin for trin med avanceret kø-simulering." },
-      "unitCalculator": { "title": "Hærproduktionsberegner", "desc": "Beregn produktionstider for enheder i Kaserne, Stald og Værksted, inklusive bonusser." },
-      "mapGenerator": { "title": "Kortgenerator", "desc": "Generér opdaterede, farvede dynamiske verdenskort til klanfora." },
-      "mapAnalysis": { "title": "Kontinentanalyse", "desc": "Analyser dominans på kontinent og kort for klaner og spillere." },
-      "productionData": { "title": "Produktionsberegner", "desc": "Optimer mineproduktion, lagerkapaciteter og fyldningstider." },
-      "coinMinter": { "title": "Guldmøntplanlægger", "desc": "Beregn den mest ideelle landsby til at prægge guldmønter." },
-      "churchPlanner": { "title": "Kirkeberegner", "desc": "Optimer dine kirkedækningsområder på kortet med en befolkningsbesparende algoritme." },
-      "buildingTimes": { "title": "Byggetidsberegner", "desc": "Beregn og sammenlign byggetider på forskellige niveauer ned til sekunder." },
-      "clanOp": { "title": "Stammeoperationsplanlægger", "desc": "Analyser alle klansogne og lav smarte tildelinger. Fordel personlige BBCode-ordrer til medlemmer med kortunderstøttet efterretningshjælp." },
-      "clanTroop": { "title": "Stammeoperationsplanlægger (med tropper)", "desc": "Analyser alle klantropper og lav smarte tildelinger. Fordel personlige BBCode-ordrer til medlemmer med kortunderstøttet efterretningshjælp." },
-      "fastSupport": { "title": "Hurtig støttefinder", "desc": "Opret en støtteanmodning for at få hurtig støtte." },
-      "scavengingPlanner": { "title": "Plundringstidsberegner", "desc": "Sammenlign plundringstider i detaljer." }
+      "opPlanner": {
+        "title": "Personlig operationsplanlægger",
+        "desc": "Match kildesogne og målsogne for at forberede en fejlfri operationstemplate (BBCode)."
+      },
+      "buildingPlanner": {
+        "title": "Bygningsplanlægger",
+        "desc": "Design din landsbys byggekø trin for trin med avanceret kø-simulering."
+      },
+      "unitCalculator": {
+        "title": "Hærproduktionsberegner",
+        "desc": "Beregn produktionstider for enheder i Kaserne, Stald og Værksted, inklusive bonusser."
+      },
+      "mapGenerator": {
+        "title": "Kortgenerator",
+        "desc": "Generér opdaterede, farvede dynamiske verdenskort til klanfora."
+      },
+      "mapAnalysis": {
+        "title": "Kontinentanalyse",
+        "desc": "Analyser dominans på kontinent og kort for klaner og spillere."
+      },
+      "productionData": {
+        "title": "Produktionsberegner",
+        "desc": "Optimer mineproduktion, lagerkapaciteter og fyldningstider."
+      },
+      "coinMinter": {
+        "title": "Guldmøntplanlægger",
+        "desc": "Beregn den mest ideelle landsby til at prægge guldmønter."
+      },
+      "churchPlanner": {
+        "title": "Kirkeberegner",
+        "desc": "Optimer dine kirkedækningsområder på kortet med en befolkningsbesparende algoritme."
+      },
+      "buildingTimes": {
+        "title": "Byggetidsberegner",
+        "desc": "Beregn og sammenlign byggetider på forskellige niveauer ned til sekunder."
+      },
+      "clanOp": {
+        "title": "Stammeoperationsplanlægger",
+        "desc": "Analyser alle klansogne og lav smarte tildelinger. Fordel personlige BBCode-ordrer til medlemmer med kortunderstøttet efterretningshjælp."
+      },
+      "clanTroop": {
+        "title": "Stammeoperationsplanlægger (med tropper)",
+        "desc": "Analyser alle klantropper og lav smarte tildelinger. Fordel personlige BBCode-ordrer til medlemmer med kortunderstøttet efterretningshjælp."
+      },
+      "fastSupport": {
+        "title": "Hurtig støttefinder",
+        "desc": "Opret en støtteanmodning for at få hurtig støtte."
+      },
+      "scavengingPlanner": {
+        "title": "Plundringstidsberegner",
+        "desc": "Sammenlign plundringstider i detaljer."
+      },
+      "notificationSettings": {
+        "title": "Notifikationsindstillinger",
+        "desc": "Tilpas hvordan notifikationer vises."
+      }
     }
   },
   "footer": {
@@ -58,10 +106,11 @@
     "title": "Om",
     "p1": "Hej, jeg er Anto Bvb 66.",
     "p2": "TW Cobre er et elite taktisk panel og kommandocenter udviklet uafhængigt til at behandle rå data fra Clans (Tribal Wars) spillere og hjælpe dem med at opnå strategisk overlegenhed.",
-    "p3": "Fra operationsplanlægning til opryddelsesanalyse er alle moduler designet til at løse beregninger, der ville tage en spiller timer, på få sekunder. Sejren gemmer sig i detaljerne!"
-  ,"contactTitle": "Fejlrapportering & Kontakt",
+    "p3": "Fra operationsplanlægning til opryddelsesanalyse er alle moduler designet til at løse beregninger, der ville tage en spiller timer, på få sekunder. Sejren gemmer sig i detaljerne!",
+    "contactTitle": "Fejlrapportering & Kontakt",
     "contactDesc": "Du kan sende fejl, mangler eller forslag til udvikling, som du støder på på vores side, direkte til mig via e-mail.",
-    "emailButton": "Send e-mail"},
+    "emailButton": "Send e-mail"
+  },
   "privacyPage": {
     "title": "Privatlivspolitik og KVKK",
     "p1": "TW Cobre respekterer brugerens privatliv på højeste niveau. I overensstemmelse med databeskyttelseslove (GDPR) og internationale standarder er vores datapolitik som følger:",
@@ -200,10 +249,27 @@
       "zero": "0 sek"
     },
     "buildings": [
-      "Hovedkvarter (HQ)", "Kaserne", "Stald", "Værksted", "Første kirke", "Kirke",
-      "Vagttårn", "Akademi", "Smedje", "Sjakkelpunkt", "Statue", "Marked",
-      "Tømmerlejr", "Lerbrud", "Jernmine", "Farm", "Lagerhus", "Gemmen",
-      "Adelsmand", "Guldmønt", "Mur"
+      "Hovedkvarter (HQ)",
+      "Kaserne",
+      "Stald",
+      "Værksted",
+      "Første kirke",
+      "Kirke",
+      "Vagttårn",
+      "Akademi",
+      "Smedje",
+      "Sjakkelpunkt",
+      "Statue",
+      "Marked",
+      "Tømmerlejr",
+      "Lerbrud",
+      "Jernmine",
+      "Farm",
+      "Lagerhus",
+      "Gemmen",
+      "Adelsmand",
+      "Guldmønt",
+      "Mur"
     ]
   },
   "scavenging": {
@@ -276,7 +342,9 @@
       "unlocked": "Låst op",
       "infoTitle": "💡 Kritiske vendepunkter (break-even)",
       "be1": "🔸 Efter {{cap}} kapacitet: 1-2-3-4 taktikken går forbi 2-3-4 og bliver mere rentabel.",
-      "be2": "🔸 Efter {{cap}} kapacitet: 1-2-3 taktikken går forbi 2-3."
+      "be2": "🔸 Efter {{cap}} kapacitet: 1-2-3 taktikken går forbi 2-3.",
+      "dailyMining": "■ Daglig ressourceproduktion",
+      "dailyScavenging": "■ Dagligt indsamlingsbytte"
     }
   },
   "churchPlanner": {
@@ -374,7 +442,8 @@
       "manualAdded": "✅ Fri tildeling tilføjet!",
       "confirmClearQueue": "Er du sikker på, at du vil rydde hele køen?",
       "queueCleared": "🗑️ Kø ryddet!",
-      "copied": "Kopieret!"
+      "copied": "Kopieret!",
+      "enterClanTag": "Indtast venligst stamme-taget!"
     },
     "columns": {
       "no": "Nr.",
@@ -389,9 +458,19 @@
       "attackLink": "Handlingslink"
     },
     "units": {
-      "spear": "Spydkriger", "sword": "Sværdmand", "axe": "Øksemager", "spy": "Spejder",
-      "light": "Lys kavaleri", "heavy": "Tung kavaleri", "ram": "Battering ram", "catapult": "Katapult",
-      "knight": "Paladin", "snob": "Adelsmand", "archer": "Buemand", "marcher": "Marcher", "militia": "Milits"
+      "spear": "Spydkriger",
+      "sword": "Sværdmand",
+      "axe": "Øksemager",
+      "spy": "Spejder",
+      "light": "Lys kavaleri",
+      "heavy": "Tung kavaleri",
+      "ram": "Battering ram",
+      "catapult": "Katapult",
+      "knight": "Paladin",
+      "snob": "Adelsmand",
+      "archer": "Buemand",
+      "marcher": "Marcher",
+      "militia": "Milits"
     },
     "shortUnits": {
       "ram": "Nuke",
@@ -457,7 +536,8 @@
       "copyAll": "Kopiér alle",
       "ordersFor": "--- ORDRER TIL {{player}} ---",
       "attack": "Angreb",
-      "unknown": "UKENDT"
+      "unknown": "UKENDT",
+      "selectCols": "Vælg kolonner:"
     },
     "alerts": {
       "confirmClear": "Alle planer inklusive efterretninger vil blive slettet. Er du sikker?",
@@ -468,7 +548,8 @@
       "orderAdded": "✅ Ordre tilføjet!",
       "confirmClearQueue": "Er du sikker på, at du vil rydde hele køen?",
       "queueCleared": "🗑️ Kø ryddet!",
-      "copied": "Kopieret!"
+      "copied": "Kopieret!",
+      "enterClanTag": "Indtast venligst stamme-taget!"
     },
     "columns": {
       "no": "Nr.",
@@ -483,9 +564,16 @@
       "attackLink": "Handling"
     },
     "units": {
-      "spear": "Spyd", "sword": "Sværd", "axe": "Økse", "spy": "Spejder",
-      "light": "Let", "heavy": "Tung", "ram": "Ram", "catapult": "Kata",
-      "knight": "Paladin", "snob": "Adelsmand"
+      "spear": "Spyd",
+      "sword": "Sværd",
+      "axe": "Økse",
+      "spy": "Spejder",
+      "light": "Let",
+      "heavy": "Tung",
+      "ram": "Ram",
+      "catapult": "Kata",
+      "knight": "Paladin",
+      "snob": "Adelsmand"
     },
     "profiles": {
       "quarter": "Kvart",
@@ -546,7 +634,8 @@
       "title": "Tilgængelige støtte ({{count}})",
       "allTribe": "Hele stammen",
       "noVillages": "Ingen landsbyer kan nå dette mål på det valgte tidspunkt!",
-      "mapTarget": "🛡️ Mål"
+      "mapTarget": "🛡️ Mål",
+      "allClan": "Hele stammen"
     },
     "bbcode": {
       "title": "📋 Forumopkald (BBCode)",
@@ -559,7 +648,8 @@
     },
     "alerts": {
       "enterTribeTag": "Indtast venligst stamme-taget!",
-      "copied": "Kopieret!"
+      "copied": "Kopieret!",
+      "enterClanTag": "Indtast venligst stamme-taget!"
     },
     "columns": {
       "player": "Spiller",
@@ -569,7 +659,13 @@
       "departure": "Afgangstid"
     },
     "units": {
-      "spear": "Spyd", "sword": "Sværd", "archer": "Buemand", "spy": "Spejder", "heavy": "Tung", "catapult": "Katapult", "knight": "Paladin"
+      "spear": "Spyd",
+      "sword": "Sværd",
+      "archer": "Buemand",
+      "spy": "Spejder",
+      "heavy": "Tung",
+      "catapult": "Katapult",
+      "knight": "Paladin"
     }
   },
   "mapAnalysis": {
@@ -587,7 +683,8 @@
       "analyzing": "Download fuldført, analyserer...",
       "empty": "Ingen data fundet til behandling!",
       "success": "SUCCES: {{villages}} landsbyer, {{players}} spillere indlæst.",
-      "cleared": "Lagring fuldstændig ryddet."
+      "cleared": "Lagring fuldstændig ryddet.",
+      "errorShort": "FEJL"
     },
     "timeMsg": {
       "cached": "⏳ Viser cachelagrede data. Sidste hentning: {{time}}",
@@ -716,9 +813,22 @@
       "attackLink": "Handlingslink"
     },
     "units": {
-      "spear": "Spydkriger", "sword": "Sværdmand", "axe": "Øksemager", "spy": "Spejder",
-      "light": "Let kavaleri", "heavy": "Tung kavaleri", "ram": "Ram", "catapult": "Katapult",
-      "knight": "Paladin", "snob": "Adelsmand", "archer": "Buemand", "marcher": "Marcher", "militia": "Milits"
+      "spear": "Spydkriger",
+      "sword": "Sværdmand",
+      "axe": "Øksemager",
+      "spy": "Spejder",
+      "light": "Let kavaleri",
+      "heavy": "Tung kavaleri",
+      "ram": "Ram",
+      "catapult": "Katapult",
+      "knight": "Paladin",
+      "snob": "Adelsmand",
+      "archer": "Buemand",
+      "marcher": "Marcher",
+      "militia": "Milits"
+    },
+    "troopInput": {
+      "title": "🛡️ Indtast troppedata (fra gruppeoversigten)"
     }
   },
   "productionData": {
@@ -807,9 +917,16 @@
       "none": "-"
     },
     "units": {
-      "spear": "Spydkriger", "sword": "Sværdmand", "axe": "Øksemager", "archer": "Buemand",
-      "spy": "Spejder", "lc": "Let kavaleri", "ma": "Rytterbuemand", "hc": "Tung kavaleri",
-      "ram": "Ram", "cat": "Katapult"
+      "spear": "Spydkriger",
+      "sword": "Sværdmand",
+      "axe": "Øksemager",
+      "archer": "Buemand",
+      "spy": "Spejder",
+      "lc": "Let kavaleri",
+      "ma": "Rytterbuemand",
+      "hc": "Tung kavaleri",
+      "ram": "Ram",
+      "cat": "Katapult"
     }
   },
   "mapGenerator": {
@@ -892,7 +1009,8 @@
       "losses": "Landsbytab (tab)",
       "barbarian": "Erobring af barbarlandsbyer (barbarer)",
       "selfConquer": "Egen landsbyerobring (SelfConquer)",
-      "internal": "Interne stammeerobringer (internt)"
+      "internal": "Interne stammeerobringer (internt)",
+      "tribeLog": "Sporing af stamme ind/ud"
     },
     "settings": {
       "basicSettings": "Grundlæggende indstillinger",
@@ -911,7 +1029,11 @@
       "chatIdPlaceholder": "eksempel: 1135068175",
       "saveAllConfigs": "Gem alle indstillinger",
       "languageLabel": "Sprog",
-      "languagePlaceholder": "Vælg sprog"
+      "languagePlaceholder": "Vælg sprog",
+      "remoteDeleteToggle": "Slet skyoptegnelse",
+      "notificationTypeLabel": "Notifikationstyper",
+      "typeImage": "Billednotifikation",
+      "typeText": "Tekstnotifikation"
     },
     "targets": {
       "addNewTarget": "Tilføj nyt mål",
@@ -952,7 +1074,14 @@
       "specialIdEmpty": "Specielt ID mangler eller er ikke genereret for profilen '{{name}}'!",
       "saveSuccess": "{{count}} profil(er) blev gemt i skyen!",
       "saveError": "Fejl ved lagring af {{count}} profil(er)!",
-      "saveNoData": "Ingen profiler at gemme!"
+      "saveNoData": "Ingen profiler at gemme!",
+      "deleteError": "Profilen kunne ikke slettes!",
+      "enterHighlightName": "Indtast et spiller- eller stammenavn!",
+      "confirmRemoteDelete": "Alle data for dette Special ID slettes permanent. Er du sikker?",
+      "remoteDeleteSuccess": "Profilen blev slettet fra databasen.",
+      "remoteDeleteError": "Der opstod en fejl under sletning. Kontrollér ID'et.",
+      "enterSpecialId": "Indtast dit specielle adgangs-ID!",
+      "idGenerateError": "Forbindelsesfejl! ID kunne ikke genereres."
     },
     "common": {
       "add": "Tilføj",
@@ -973,5 +1102,23 @@
       "continentPrefix": "Kontinent",
       "noContinentAdded": "Ingen kontinenter tilføjet endnu."
     }
+  },
+  "common": {
+    "invalidWorldUrl": "Ugyldigt verdenslink! Kontrollér adressen.",
+    "barbarian": "Barbar",
+    "worldEmpty": "Der er endnu ingen data for denne verden. Vent på, at botten henter dem."
+  },
+  "manualPlan": {
+    "title": "✍️ Tilføj operation manuelt (skriv, hvis du ikke vil vælge fra listen)",
+    "sourceVillage": "Kildeby (f.eks. 500|500)",
+    "targetVillage": "Målby (f.eks. 501|501)",
+    "unitToSend": "Enhed der sendes",
+    "ramKami": "Rambuk (Kami)",
+    "ramKamiFake": "Rambuk (Kami/Fake)",
+    "catapult": "Katapult",
+    "catapultFake": "Katapult (Fake)",
+    "addToPlan": "➕ Føj til operationsplan",
+    "addFromList": "👉 Tilføj ved at vælge fra listen",
+    "invalidCoords": "Indtast gyldige kilde- og målkoordinater (f.eks. 500|500)"
   }
 }
