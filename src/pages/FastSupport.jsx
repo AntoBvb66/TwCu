@@ -289,27 +289,27 @@ const FastSupport = () => {
                         </datalist>
                     </div>
                     <button className="cop-btn" style={{ width: '100%' }} onClick={handleFetchClan}>{t('fastSupport.step1.updateBtn')}</button>
-                    <div style={{ fontSize: '12px', marginTop: '10px', color: '#5cb85c' }}>{status}</div>
+                    <div style={{ fontSize: '12px', marginTop: '10px', color: 'var(--success)' }}>{status}</div>
                 </div>
 
                 <div className="cop-box">
-                    <h3 style={{ color: '#5bc0de' }}>{t('fastSupport.step2.title')}</h3>
+                    <h3 style={{ color: 'var(--info)' }}>{t('fastSupport.step2.title')}</h3>
                     <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                         <div style={{ flex: 1 }}>
-                            <label style={{ fontSize: '12px', color: '#aaa', fontWeight: 'bold' }}>{t('fastSupport.step2.targetCoord')}</label>
+                            <label style={{ fontSize: '12px', color: 'var(--text-2)', fontWeight: 'bold' }}>{t('fastSupport.step2.targetCoord')}</label>
                             <input type="text" className="cop-input" placeholder={t('fastSupport.step2.targetPlaceholder')} value={targetInput} onChange={e => setTargetInput(e.target.value)} />
                         </div>
                         <div style={{ flex: 1 }}>
-                            <label style={{ fontSize: '12px', color: '#aaa', fontWeight: 'bold' }}>{t('fastSupport.step2.arrivalTime')}</label>
+                            <label style={{ fontSize: '12px', color: 'var(--text-2)', fontWeight: 'bold' }}>{t('fastSupport.step2.arrivalTime')}</label>
                             <input type="datetime-local" step="1" className="cop-input" value={selectedDateTime} onChange={e => setSelectedDateTime(e.target.value)} />
                         </div>
                     </div>
 
                     <div style={{ marginTop: '10px' }}>
-                        <label style={{ fontSize: '12px', color: '#aaa', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>{t('fastSupport.step2.slowestUnit')}</label>
-                        <div style={{ display: 'flex', gap: '10px', background: '#111', padding: '10px', borderRadius: '4px', border: '1px solid #814c11', flexWrap: 'wrap' }}>
+                        <label style={{ fontSize: '12px', color: 'var(--text-2)', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>{t('fastSupport.step2.slowestUnit')}</label>
+                        <div style={{ display: 'flex', gap: '10px', background: 'var(--ink-850)', padding: '10px', borderRadius: '4px', border: '1px solid var(--line-2)', flexWrap: 'wrap' }}>
                             {Object.keys(unitIcons).map(u => (
-                                <label key={u} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px', color: selectedUnit === u ? '#f0c042' : '#aaa', fontWeight: selectedUnit === u ? 'bold' : 'normal' }}>
+                                <label key={u} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px', color: selectedUnit === u ? 'var(--gold)' : 'var(--text-2)', fontWeight: selectedUnit === u ? 'bold' : 'normal' }}>
                                     <input type="radio" name="unitSpeed" value={u} checked={selectedUnit === u} onChange={() => setSelectedUnit(u)} />
                                     <img src={unitIcons[u]} alt={u} style={{ width: '16px' }} /> {t(`fastSupport.units.${u}`)}
                                 </label>
@@ -323,16 +323,16 @@ const FastSupport = () => {
                 <div className="cop-grid" style={{ marginTop: '15px' }}>
                     <div className="cop-box" style={{ marginBottom: 0 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
-                            <h3 style={{ margin: 0, color: '#5cb85c' }}>{t('fastSupport.results.title').replace('{{count}}', availableSupports.length)}</h3>
-                            <select style={{ padding: '5px', background: '#111', color: '#f0c042', border: '1px solid #814c11', borderRadius: '3px' }} value={selectedPlayer} onChange={e => setSelectedPlayer(e.target.value)}>
+                            <h3 style={{ margin: 0, color: 'var(--success)' }}>{t('fastSupport.results.title').replace('{{count}}', availableSupports.length)}</h3>
+                            <select style={{ padding: '5px', background: 'var(--ink-850)', color: 'var(--gold)', border: '1px solid var(--line-2)', borderRadius: '3px' }} value={selectedPlayer} onChange={e => setSelectedPlayer(e.target.value)}>
                                 <option value="">{t('fastSupport.results.allClan')}</option>
                                 {Object.values(clanPlayers).sort().map(p => <option key={p} value={p}>{p}</option>)}
                             </select>
                         </div>
 
-                        <div style={{ maxHeight: '400px', overflowY: 'auto', background: '#1a1a1a', border: '1px solid #603000', borderRadius: '4px' }}>
+                        <div style={{ maxHeight: '400px', overflowY: 'auto', background: 'var(--surface-2)', border: '1px solid var(--line)', borderRadius: '4px' }}>
                             {availableSupports.length === 0 ? (
-                                <div style={{ padding: '20px', textAlign: 'center', color: '#d9534f', fontWeight: 'bold' }}>{t('fastSupport.results.noVillages')}</div>
+                                <div style={{ padding: '20px', textAlign: 'center', color: 'var(--danger)', fontWeight: 'bold' }}>{t('fastSupport.results.noVillages')}</div>
                             ) : (
                                 <table className="cop-table">
                                     <thead>
@@ -349,7 +349,7 @@ const FastSupport = () => {
                                                 <td><span className="cop-player-badge">{s.playerName}</span></td>
                                                 <td><b>{s.coord}</b></td>
                                                 <td>{s.travelTime}</td>
-                                                <td style={{ color: '#5cb85c', fontWeight: 'bold' }}>{s.departureStr}</td>
+                                                <td style={{ color: 'var(--success)', fontWeight: 'bold' }}>{s.departureStr}</td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -364,8 +364,8 @@ const FastSupport = () => {
                         </div>
 
                         <div className="cop-box" style={{ flex: 1, marginBottom: 0 }}>
-                            <h3 style={{ color: '#f0c042' }}>{t('fastSupport.bbcode.title')}</h3>
-                            <textarea className="cop-textarea" style={{ height: '140px', fontSize: '11px', background: '#0a0a0a' }} value={generatedBBCode} readOnly />
+                            <h3 style={{ color: 'var(--gold)' }}>{t('fastSupport.bbcode.title')}</h3>
+                            <textarea className="cop-textarea" style={{ height: '140px', fontSize: '11px', background: 'var(--ink-900)' }} value={generatedBBCode} readOnly />
                             <button className="cop-btn" style={{ width: '100%', marginTop: '5px' }} onClick={() => { navigator.clipboard.writeText(generatedBBCode); alert(t('fastSupport.alerts.copied')); }}>{t('fastSupport.bbcode.copyAll')}</button>
                         </div>
                     </div>

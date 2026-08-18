@@ -31,6 +31,10 @@ const defaultUnitSpeeds = {
     spear: 18, sword: 22, axe: 18, spy: 9, light: 10, heavy: 11, ram: 30, catapult: 30, knight: 10, snob: 35
 };
 
+// Oyun içi asker sütun sırası. Bileşenin DIŞINDA durmalı: içeride tanımlanırsa
+// her render'da yeni bir dizi olur ve bağımlısı olan useEffect sonsuz döner.
+const activeUnits = ['spear', 'sword', 'axe', 'spy', 'light', 'heavy', 'ram', 'catapult', 'knight', 'snob'];
+
 const formatToLocalISO = (date) => {
     const offset = date.getTimezoneOffset() * 60000;
     return (new Date(date.getTime() - offset)).toISOString().slice(0, 19);
@@ -95,7 +99,6 @@ const OpPlanner = () => {
     // === YENİ: ASKER VERİSİ GİRİŞİ ===
     const [troopInput, setTroopInput] = useState(() => storage.get("op_troopInput", ""));
     const [parsedTroops, setParsedTroops] = useState(() => storage.get("op_parsedTroops", {}));
-    const activeUnits = ['spear', 'sword', 'axe', 'spy', 'light', 'heavy', 'ram', 'catapult', 'knight', 'snob'];
 
     // Her kaynak köy için seçilen BİRİMLER (Dizi)
     const [sourceTypes, setSourceTypes] = useState({}); 
@@ -282,7 +285,7 @@ const OpPlanner = () => {
 
     // === 2.1. ASKERİ İSTİHBARAT ÇÖZÜCÜSÜ (PARSER) ===
     useEffect(() => {
-        if (!troopInput) return setParsedTroops({});
+        if (!troopInput) return setParsedTroops(prev => (Object.keys(prev).length ? {} : prev));
 
         const lines = troopInput.split('\n');
         const results = {};
@@ -322,7 +325,7 @@ const OpPlanner = () => {
         });
 
         setParsedTroops(results);
-    }, [troopInput, activeUnits, t]);
+    }, [troopInput, t]);
 
 
     const toggleUnitForVillage = (coord, unitKey) => {
@@ -682,7 +685,7 @@ const OpPlanner = () => {
                                     </div>
                                 </div>
                                 <button className="op-btn" style={{width: '100%'}} onClick={handleFetchData}>{t('opPlanner.step1.fetchBtn')}</button>
-                                <div style={{fontSize: '12px', marginTop: '5px', color: '#aaa'}}>{status}</div>
+                                <div style={{fontSize: '12px', marginTop: '5px', color: 'var(--text-2)'}}>{status}</div>
                             </div>
                         )}
                     </div>
@@ -690,7 +693,7 @@ const OpPlanner = () => {
                     {/* YENİ: ASKER VERİSİ GİRİŞİ (İSTİHBARAT) */}
                     {playerVillages.length > 0 && (
                         <div className="op-box">
-                            <h3 style={{ margin: '0 0 10px 0', color: '#f0c042', fontSize: '14px' }}>{t('opPlanner.troopInput.title')}</h3>
+                            <h3 style={{ margin: '0 0 10px 0', color: 'var(--gold)', fontSize: '14px' }}>{t('opPlanner.troopInput.title')}</h3>
                             <textarea
                                 className="op-textarea" rows="3"
                                 placeholder="Buraya oyun içindeki asker sayılarını yapıştırırsan, köy kartlarında köylerin gücünü (Kami, Sav vb.) görebilirsin."
@@ -711,7 +714,7 @@ const OpPlanner = () => {
                             
                             {isStep2Open && (
                                 <div style={{ marginTop: '10px' }}>
-                                    <div style={{fontSize: '11px', color: '#aaa', marginBottom: '15px'}}>{t('opPlanner.step2.info')}</div>
+                                    <div style={{fontSize: '11px', color: 'var(--text-2)', marginBottom: '15px'}}>{t('opPlanner.step2.info')}</div>
                                     
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                                         {playerVillages.map(v => {
@@ -720,8 +723,8 @@ const OpPlanner = () => {
 
                                             return (
                                                 <div key={v.coord} style={{
-                                                    background: '#1e1e1e', 
-                                                    border: '1px solid #333', 
+                                                    background: 'var(--surface-2)', 
+                                                    border: '1px solid var(--line)', 
                                                     borderRadius: '8px', 
                                                     padding: '12px',
                                                     display: 'flex',
@@ -729,15 +732,15 @@ const OpPlanner = () => {
                                                     gap: '10px'
                                                 }}>
                                                     {/* Köy Bilgisi */}
-                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid #333', paddingBottom: '8px' }}>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid var(--line)', paddingBottom: '8px' }}>
                                                         <div>
                                                             <span style={{ fontWeight: 'bold', fontSize: '16px', color: '#fff' }}>{v.coord}</span>
-                                                            <div style={{ fontSize: '12px', color: '#aaa', marginTop: '2px' }}>{v.name}</div>
+                                                            <div style={{ fontSize: '12px', color: 'var(--text-2)', marginTop: '2px' }}>{v.name}</div>
                                                             
                                                             {/* YENİ: ASKER BİLGİSİ ROZETLERİ */}
                                                             {troopData && (
-                                                                <div style={{ fontSize: '11px', color: '#eaddbd', marginTop: '6px', display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
-                                                                    <span style={{ background: troopData.profile.includes('Kami') ? '#8b0000' : '#2b542c', color: 'white', padding: '2px 5px', borderRadius: '3px', fontWeight: 'bold' }}>
+                                                                <div style={{ fontSize: '11px', color: 'var(--text)', marginTop: '6px', display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
+                                                                    <span style={{ background: troopData.profile.includes('Kami') ? 'var(--danger-solid)' : 'var(--success-solid)', color: 'white', padding: '2px 5px', borderRadius: '3px', fontWeight: 'bold' }}>
                                                                         [{troopData.profile}]
                                                                     </span>
                                                                     {troopData.units.axe > 0 && <span title="Balta"><img src={unitIcons.axe} style={{ width: '12px', verticalAlign: 'middle' }} alt="" /> {troopData.units.axe}</span>}
@@ -810,17 +813,17 @@ const OpPlanner = () => {
                                     placeholder={t('opPlanner.step3.placeholder')}
                                     value={targetInput} onChange={e => setTargetInput(e.target.value)}
                                 />
-                                <div style={{fontSize: '12px', color: '#5cb85c', fontWeight: 'bold', marginBottom: '10px'}}>
+                                <div style={{fontSize: '12px', color: 'var(--success)', fontWeight: 'bold', marginBottom: '10px'}}>
                                     {t('opPlanner.step3.detectedTargets').replace('{{count}}', parsedTargets.length)}
                                 </div>
                                 <div className="op-map-container">
                                     <canvas ref={canvasRef} style={{display: 'block'}}></canvas>
                                     <div style={{position: 'absolute', bottom: '10px', left: '10px', background: 'rgba(0,0,0,0.7)', padding: '5px', borderRadius: '4px', fontSize: '10px', display: 'flex', flexWrap: 'wrap', gap: '5px'}}>
-                                        <span style={{color: '#d9534f'}}>● {t('opPlanner.step3.mapLegend.target')}</span> | 
-                                        <span style={{color: '#5bc0de'}}>● {t('opPlanner.step3.mapLegend.spearLight')}</span> | 
-                                        <span style={{color: '#b8860b'}}>● {t('opPlanner.step3.mapLegend.ramKami')}</span> | 
-                                        <span style={{color: '#8b0000'}}>● {t('opPlanner.step3.mapLegend.snob')}</span> | 
-                                        <span style={{color: '#555'}}>● {t('opPlanner.step3.mapLegend.spy')}</span>
+                                        <span style={{color: 'var(--danger)'}}>● {t('opPlanner.step3.mapLegend.target')}</span> | 
+                                        <span style={{color: 'var(--info)'}}>● {t('opPlanner.step3.mapLegend.spearLight')}</span> | 
+                                        <span style={{color: 'var(--gold-deep)'}}>● {t('opPlanner.step3.mapLegend.ramKami')}</span> | 
+                                        <span style={{color: 'var(--danger)'}}>● {t('opPlanner.step3.mapLegend.snob')}</span> | 
+                                        <span style={{color: 'var(--text-3)'}}>● {t('opPlanner.step3.mapLegend.spy')}</span>
                                     </div>
                                 </div>
                             </div>
@@ -855,8 +858,8 @@ const OpPlanner = () => {
                             </div>
 
                             {/* YENİ MANUEL EKLEME BÖLÜMÜ (DOĞRUDAN YAZARAK) */}
-                            <div style={{ border: '1px dashed #555', padding: '15px', borderRadius: '8px', background: '#181818', marginBottom: '20px' }}>
-                                <h4 style={{ margin: '0 0 10px 0', color: '#f0c042' }}>{t('manualPlan.title')}</h4>
+                            <div style={{ border: '1px dashed #555', padding: '15px', borderRadius: '8px', background: 'var(--surface-2)', marginBottom: '20px' }}>
+                                <h4 style={{ margin: '0 0 10px 0', color: 'var(--gold)' }}>{t('manualPlan.title')}</h4>
                                 <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                                     <div style={{ flex: 1, minWidth: '150px' }}>
                                         <label style={{ fontSize: '12px', fontWeight: 'bold' }}>{t('manualPlan.sourceVillage')}</label>
@@ -883,7 +886,7 @@ const OpPlanner = () => {
                             </div>
 
                             {/* DROPDOWN (SELECT) ÜZERİNDEN EKLEME */}
-                            <h4 style={{ margin: '0 0 10px 0', color: '#5cb85c' }}>{t('manualPlan.addFromList')}</h4>
+                            <h4 style={{ margin: '0 0 10px 0', color: 'var(--success)' }}>{t('manualPlan.addFromList')}</h4>
                             <div className="op-flex-wrap">
                                 <div>
                                     <label style={{fontWeight: 'bold', fontSize: '12px', display: 'block'}}>{t('opPlanner.step4.sourceVillage')}</label>
@@ -909,13 +912,13 @@ const OpPlanner = () => {
                                     </select>
                                 </div>
                                 <div style={{flex: 'none', width: '100%'}}>
-                                    <button className="op-btn" style={{background: '#5cb85c', color: 'white', width: '100%', padding: '10px'}} onClick={addToPlan}>{t('opPlanner.step4.calcAndAddBtn')}</button>
+                                    <button className="op-btn" style={{background: 'var(--success-solid)', color: 'white', width: '100%', padding: '10px'}} onClick={addToPlan}>{t('opPlanner.step4.calcAndAddBtn')}</button>
                                 </div>
                             </div>
 
                             {sortedPlanList.length > 0 && (
                                 <div className="op-table-wrapper" style={{marginTop: '25px'}}>
-                                    <div style={{padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#2a1908', flexWrap: 'wrap', gap: '10px'}}>
+                                    <div style={{padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--surface-2)', flexWrap: 'wrap', gap: '10px'}}>
                                         <h4 style={{margin: 0, color: '#fff'}}>{t('opPlanner.queue.title').replace('{{count}}', sortedPlanList.length)}</h4>
                                         <button className="op-btn-danger" onClick={clearQueue} style={{padding: '6px 12px'}}>{t('opPlanner.queue.clearQueue')}</button>
                                     </div>
@@ -943,14 +946,14 @@ const OpPlanner = () => {
                                                     <td style={{fontWeight: 'bold'}}>{index + 1}</td>
                                                     <td style={{fontWeight: 'bold'}}>
                                                         {p.sourceCoord}
-                                                        <div style={{fontSize:'10px', color:'#aaa', fontWeight:'normal'}}>{p.sourceName}</div>
+                                                        <div style={{fontSize:'10px', color: 'var(--text-2)', fontWeight:'normal'}}>{p.sourceName}</div>
                                                     </td>
-                                                    <td style={{fontWeight: 'bold', color: '#d9534f', fontSize: '14px'}}>
+                                                    <td style={{fontWeight: 'bold', color: 'var(--danger)', fontSize: '14px'}}>
                                                         {p.targetCoord}
-                                                        <div style={{fontSize:'10px', color:'#aaa', fontWeight:'normal'}}>{p.targetName}</div>
+                                                        <div style={{fontSize:'10px', color: 'var(--text-2)', fontWeight:'normal'}}>{p.targetName}</div>
                                                     </td>
-                                                    <td style={{fontWeight: 'bold', color: '#2b542c'}}>{p.departureTime}</td>
-                                                    <td style={{fontWeight: 'bold', color: '#d9534f'}}>{p.arrivalTime}</td>
+                                                    <td style={{fontWeight: 'bold', color: 'var(--success)'}}>{p.departureTime}</td>
+                                                    <td style={{fontWeight: 'bold', color: 'var(--danger)'}}>{p.arrivalTime}</td>
                                                     <td style={{whiteSpace: 'nowrap'}}>
                                                         {unitIcons[p.unitType] && <img src={unitIcons[p.unitType]} alt={p.unitType} style={{verticalAlign: 'middle', marginRight: '5px', width: '16px'}}/>}
                                                         {t(`opPlanner.units.${p.unitType}`, {defaultValue: (p.unitType ? p.unitType.toUpperCase() : "")})}
@@ -964,9 +967,9 @@ const OpPlanner = () => {
                                     </table>
 
                                     {/* CANLI BBCODE ŞABLON KUTUSU */}
-                                    <div style={{background: '#faf5eb', padding: '15px', borderTop: '2px solid #dcb589'}}>
+                                    <div style={{background: 'var(--surface-2)', padding: '15px', borderTop: '2px solid #dcb589'}}>
                                         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap', gap: '10px'}}>
-                                            <h4 style={{margin: 0, color: '#5a3a18'}}>{t('opPlanner.bbcode.title')}</h4>
+                                            <h4 style={{margin: 0, color: 'var(--gold)'}}>{t('opPlanner.bbcode.title')}</h4>
                                             <button className="op-btn" onClick={() => { navigator.clipboard.writeText(generatedBBCode); alert(t('opPlanner.alerts.copied')); }}>{t('opPlanner.bbcode.copyAll')}</button>
                                         </div>
                                         <div style={{display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '10px', fontSize: '13px'}}>
@@ -978,7 +981,7 @@ const OpPlanner = () => {
                                                 </label>
                                             ))}
                                         </div>
-                                        <textarea className="op-textarea" style={{height: '150px', background: '#fff', color: '#333'}} value={generatedBBCode} readOnly />
+                                        <textarea className="op-textarea" style={{height: '150px', background: 'var(--ink-850)', color: 'var(--text-2)'}} value={generatedBBCode} readOnly />
                                     </div>
                                 </div>
                             )}

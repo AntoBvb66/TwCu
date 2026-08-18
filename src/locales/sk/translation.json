@@ -35,6 +35,12 @@
       "title": "Vítajte v TW Meď",
       "subtitle": "Víťazstvo sa skrýva v detailoch a bezchybnom plánovaní. Ušetrite čas vo svojej ceste hrou Tribal Wars a navrhujte strategické plány, ktoré privedu váš kmeň k víťazstvu. Vyberte si nástroj na začiatok."
     },
+    "categories": {
+      "ops": "Operácie a armáda",
+      "build": "Budovy a dedina",
+      "eco": "Ekonomika a suroviny",
+      "intel": "Mapa a prieskum"
+    },
     "tools": {
       "opPlanner": {
         "title": "Plánovač osobných operácií",

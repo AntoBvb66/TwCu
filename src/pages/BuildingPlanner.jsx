@@ -415,7 +415,7 @@ const BuildingPlanner = () => {
                 
                 {showTemplateModal && (
                     <div className="bp-template-area">
-                        <h3 style={{marginTop: 0, color: '#5a3a18'}}>
+                        <h3 style={{marginTop: 0, color: 'var(--gold)'}}>
                             {templateMode === 'import' ? t('buildingPlanner.modal.importTitle') : t('buildingPlanner.modal.exportTitle')}
                         </h3>
                         <textarea 
@@ -428,7 +428,7 @@ const BuildingPlanner = () => {
                         <div>
                             {templateMode === 'import' && <button onClick={handleImportSubmit} className="bp-btn-action">{t('buildingPlanner.btn.addQueue')}</button>}
                             {templateMode === 'export' && <button onClick={() => { navigator.clipboard.writeText(templateText); alert(t('buildingPlanner.modal.copied')); }} className="bp-btn-action">{t('buildingPlanner.btn.copyBoard')}</button>}
-                            <button onClick={() => setShowTemplateModal(false)} className="bp-btn-secondary" style={{background: '#d9534f'}}>{t('buildingPlanner.btn.close')}</button>
+                            <button onClick={() => setShowTemplateModal(false)} className="bp-btn-secondary" style={{background: 'var(--danger-solid)'}}>{t('buildingPlanner.btn.close')}</button>
                         </div>
                     </div>
                 )}
@@ -449,19 +449,19 @@ const BuildingPlanner = () => {
             </div>
 
             {simulationRows.length > 0 && (
-                <details className="bp-details" style={{background: '#faf5eb', border: '2px solid #eaddbd', marginBottom: '15px'}}>
-                    <summary className="bp-summary" style={{fontSize: '15px', borderBottom: '1px dashed #dcb589', paddingBottom: '5px', color: '#d9534f'}}>
+                <details className="bp-details" style={{background: 'var(--surface-2)', border: '2px solid var(--line-2)', marginBottom: '15px'}}>
+                    <summary className="bp-summary" style={{fontSize: '15px', borderBottom: '1px dashed #dcb589', paddingBottom: '5px', color: 'var(--danger)'}}>
                         {t('buildingPlanner.analysis.title')}
                     </summary>
                     <div style={{marginTop: '10px'}}>
-                        <div style={{display: 'flex', gap: '20px', marginBottom: '15px', fontWeight: 'bold', fontSize: '14px', background: '#fff', padding: '10px', borderRadius: '4px', border: '1px solid #ccc', flexWrap: 'wrap'}}>
-                            <div style={{color: '#d9534f'}}>{t('buildingPlanner.analysis.withWait')} {formatClock(totalTimeWithWait, t)}</div>
-                            <div style={{color: '#2b542c'}}>{t('buildingPlanner.analysis.withoutWait')} {formatClock(totalBuildTimeOnly, t)}</div>
+                        <div style={{display: 'flex', gap: '20px', marginBottom: '15px', fontWeight: 'bold', fontSize: '14px', background: 'var(--ink-850)', padding: '10px', borderRadius: '4px', border: '1px solid var(--line-2)', flexWrap: 'wrap'}}>
+                            <div style={{color: 'var(--danger)'}}>{t('buildingPlanner.analysis.withWait')} {formatClock(totalTimeWithWait, t)}</div>
+                            <div style={{color: 'var(--success)'}}>{t('buildingPlanner.analysis.withoutWait')} {formatClock(totalBuildTimeOnly, t)}</div>
                         </div>
 
                         {bottlenecks.length > 0 ? (
                             <div style={{fontSize: '13px'}}>
-                                <h4 style={{margin: '0 0 8px 0', color: '#5a3a18'}}>{t('buildingPlanner.analysis.bottleneckTitle')}</h4>
+                                <h4 style={{margin: '0 0 8px 0', color: 'var(--gold)'}}>{t('buildingPlanner.analysis.bottleneckTitle')}</h4>
                                 <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
                                     {bottlenecks.map(b => {
                                         const missingDetails = [];
@@ -470,10 +470,10 @@ const BuildingPlanner = () => {
                                         if(b.missingIron > 0) missingDetails.push(`${t('buildingPlanner.analysis.iron')}: ${b.missingIron.toLocaleString()}`);
 
                                         return (
-                                            <li key={b.index} style={{background: '#ffe8e8', padding: '8px 10px', border: '1px solid #dca7a7', marginBottom: '5px', borderRadius: '4px', color: '#a94442'}}>
+                                            <li key={b.index} style={{background: 'var(--danger-bg)', padding: '8px 10px', border: '1px solid var(--danger)', marginBottom: '5px', borderRadius: '4px', color: 'var(--danger)'}}>
                                                 <b>{b.index + 1}. {t('buildingPlanner.analysis.order')} ({t(`buildingPlanner.buildings.${b.bldgId}`)} {t('buildingPlanner.analysis.level')} {b.targetLvl}):</b> 
                                                 <br/> {t('buildingPlanner.analysis.waitingFor')} <b>{formatClock(b.maxWait, t)}</b> {t('buildingPlanner.analysis.waitingSuffix')} 
-                                                <span style={{marginLeft: '10px', fontSize: '12px', color: '#666', fontStyle: 'italic'}}>
+                                                <span style={{marginLeft: '10px', fontSize: '12px', color: 'var(--text-3)', fontStyle: 'italic'}}>
                                                     ({t('buildingPlanner.analysis.missing')}: {missingDetails.join(' | ')})
                                                 </span>
                                             </li>
@@ -482,7 +482,7 @@ const BuildingPlanner = () => {
                                 </ul>
                             </div>
                         ) : (
-                            <div style={{fontSize: '13px', color: '#2b542c', fontWeight: 'bold', padding: '10px', background: '#e2ecd9', border: '1px solid #c3d9b0', borderRadius: '4px'}}>
+                            <div style={{fontSize: '13px', color: 'var(--success)', fontWeight: 'bold', padding: '10px', background: 'var(--success-bg)', border: '1px solid var(--success)', borderRadius: '4px'}}>
                                 {t('buildingPlanner.analysis.perfect')}
                             </div>
                         )}
@@ -561,8 +561,8 @@ const BuildingPlanner = () => {
                                 )}
                                 {visibleCols[3] && <td>{row.targetLvl}</td>}
                                 {visibleCols[4] && <td>{formatClock(row.buildTime, t)}</td>}
-                                {visibleCols[5] && <td style={{background:'#fcf8f2'}}>{formatClock(row.startTime, t)}</td>}
-                                {visibleCols[6] && <td style={{background:'#e2ecd9', fontWeight:'bold'}}>{formatClock(row.endTime, t)}</td>}
+                                {visibleCols[5] && <td style={{background: 'var(--surface-2)'}}>{formatClock(row.startTime, t)}</td>}
+                                {visibleCols[6] && <td style={{background: 'var(--success-bg)', fontWeight:'bold'}}>{formatClock(row.endTime, t)}</td>}
                                 {visibleCols[7] && <td>{row.pts}</td>}
                                 {visibleCols[8] && <td><span className="bp-wood">{row.reqW}</span> / <span className="bp-clay">{row.reqC}</span> / <span className="bp-iron">{row.reqI}</span></td>}
                                 {visibleCols[9] && (
@@ -597,7 +597,7 @@ const BuildingPlanner = () => {
                                     </datalist>
                                 </td>
                             )}
-                            <td colSpan={columns.filter((_, i) => visibleCols[i] && i > 2).length} style={{textAlign: 'left', color: '#5a3a18', fontSize: '13px'}}>
+                            <td colSpan={columns.filter((_, i) => visibleCols[i] && i > 2).length} style={{textAlign: 'left', color: 'var(--gold)', fontSize: '13px'}}>
                                 ⬅️ <b>{t('buildingPlanner.fastAdd.modeActive')}</b> {t('buildingPlanner.fastAdd.info')}
                             </td>
                         </tr>

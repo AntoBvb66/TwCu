@@ -35,6 +35,12 @@
       "title": "Bine ai venit la TW Cobre",
       "subtitle": "Victoria este ascunsă în detalii și planificare impecabilă. Economisește timp în călătoria ta Tribal Wars și concepe strategii care vor duce tribul tău la victorie. Alege un instrument pentru a începe."
     },
+    "categories": {
+      "ops": "Operațiuni și militar",
+      "build": "Clădiri și sat",
+      "eco": "Economie și resurse",
+      "intel": "Hartă și informații"
+    },
     "tools": {
       "opPlanner": {
         "title": "Planificator Operațiuni Personal",

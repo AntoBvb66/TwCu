@@ -35,6 +35,12 @@
       "title": "Witaj w TW Cobre",
       "subtitle": "Zwycięstwo ukrywa się w szczegółach i doskonałym planowaniu. Oszczędź czas w swojej podróży po Tribal Wars i opracuj strategiczne plany, które poprowadzą twoje plemię do zwycięstwa. Wybierz narzędzie, aby zacząć."
     },
+    "categories": {
+      "ops": "Operacje i wojsko",
+      "build": "Budynki i wioska",
+      "eco": "Ekonomia i surowce",
+      "intel": "Mapa i wywiad"
+    },
     "tools": {
       "opPlanner": {
         "title": "Osobisty planer operacji",

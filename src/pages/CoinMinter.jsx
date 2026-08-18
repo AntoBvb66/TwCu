@@ -212,7 +212,7 @@ const CoinMinter = () => {
 
                     {results && (
                         <div>
-                            <h3 style={{color: '#f0c042', marginBottom: '10px'}}>{t('coinMinter.resultsTitle').replace('{{count}}', results.length)}</h3>
+                            <h3 style={{color: 'var(--gold)', marginBottom: '10px'}}>{t('coinMinter.resultsTitle').replace('{{count}}', results.length)}</h3>
                             {results.map((cluster, idx) => (
                                 <div key={idx} className="hub-card" style={{borderColor: cluster.color}}>
                                     <div className="hub-card-header" style={{color: cluster.color}}>
@@ -226,7 +226,7 @@ const CoinMinter = () => {
                                         {cluster.villages.filter(v => v.key !== cluster.center.key).map((v, i) => (
                                             <span key={i} className="hub-village">{v.key}</span>
                                         ))}
-                                        {cluster.villages.length === 1 && <i style={{color: '#777'}}>{t('coinMinter.onlySelf')}</i>}
+                                        {cluster.villages.length === 1 && <i style={{color: 'var(--text-3)'}}>{t('coinMinter.onlySelf')}</i>}
                                     </div>
                                 </div>
                             ))}
@@ -239,7 +239,7 @@ const CoinMinter = () => {
                         <canvas ref={canvasRef} style={{width: '100%', height: '100%', display: 'block'}}></canvas>
                         
                         {results && (
-                            <div style={{position: 'absolute', bottom: '10px', left: '10px', background: 'rgba(0,0,0,0.7)', padding: '10px', borderRadius: '6px', border: '1px solid #333', fontSize: '12px', textAlign: 'left'}}>
+                            <div style={{position: 'absolute', bottom: '10px', left: '10px', background: 'rgba(0,0,0,0.7)', padding: '10px', borderRadius: '6px', border: '1px solid var(--line)', fontSize: '12px', textAlign: 'left'}}>
                                 <b>{t('coinMinter.mapInfoTitle')}</b><br/>
                                 <span style={{color: '#fff'}}>{t('coinMinter.mapInfoCenter')}</span> {t('coinMinter.mapInfoCenterDesc')}<br/>
                                 <span>{t('coinMinter.mapInfoSender')}</span> {t('coinMinter.mapInfoSenderDesc')}<br/>

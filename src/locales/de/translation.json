@@ -35,6 +35,12 @@
       "title": "Willkommen bei TW Cobre",
       "subtitle": "Der Sieg liegt in den Details und perfekter Planung verborgen. Spare Zeit auf deiner Tribal Wars-Reise und entwickle strategische Pläne, die deinen Stamm zum Sieg führen. Wähle ein Werkzeug, um zu beginnen."
     },
+    "categories": {
+      "ops": "Operationen & Militär",
+      "build": "Gebäude & Dorf",
+      "eco": "Wirtschaft & Rohstoffe",
+      "intel": "Karte & Aufklärung"
+    },
     "tools": {
       "opPlanner": {
         "title": "Persönlicher Operationsplaner",

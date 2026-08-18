@@ -35,6 +35,12 @@
       "title": "Willkomme bi TW Cobre",
       "subtitle": "Der Sieg isch verborge i de Details und em perfekte Plan. Spar Ziit i dinnere Tribal Wars-Räis und erstell strategischi Plän, wo dinnere Stamm zum Sieg füere. Wähl e Tool us, zum Aafange."
     },
+    "categories": {
+      "ops": "Operationen & Militär",
+      "build": "Gebäude & Dorf",
+      "eco": "Wirtschaft & Rohstoffe",
+      "intel": "Karte & Aufklärung"
+    },
     "tools": {
       "opPlanner": {
         "title": "Persönliche Operations-Planer",

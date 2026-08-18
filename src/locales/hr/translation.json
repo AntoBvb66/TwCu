@@ -35,6 +35,12 @@
       "title": "Dobrodošli u TW Cobre",
       "subtitle": "Pobjeda se skriva u detaljima i savršenom planiranju. Uštedite vrijeme u svojoj Tribal Wars avanturi i osmislite strateške planove koji će vašem plemenu donijeti pobjedu. Odaberite alat za početak."
     },
+    "categories": {
+      "ops": "Operacije i vojska",
+      "build": "Građevine i selo",
+      "eco": "Ekonomija i sirovine",
+      "intel": "Karta i izviđanje"
+    },
     "tools": {
       "opPlanner": {
         "title": "Osobni planer operacija",

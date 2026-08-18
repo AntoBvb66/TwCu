@@ -35,6 +35,12 @@
       "title": "TW Cobre'ye Hoş Geldiniz",
       "subtitle": "Zafer, detaylarda ve kusursuz planlamalarda gizlidir. Klanlar serüveninizde size zaman kazandıracak ve klanınızı zafere taşıyacak strateji planlamalar yapın. Başlamak için bir araç seçin."
     },
+    "categories": {
+      "ops": "Operasyon & Askeri",
+      "build": "Yapılar & Köy",
+      "eco": "Ekonomi & Kaynaklar",
+      "intel": "Harita & İstihbarat"
+    },
     "tools": {
       "opPlanner": {
         "title": "Kişisel Operasyon Planlayıcı",

@@ -35,6 +35,12 @@
       "title": "Welkom bij TW Cobre",
       "subtitle": "Overwinning ligt verborgen in de details en perfect plannen. Bespaar tijd in je Tribal Wars reis en ontwikkel strategische plannen die je stam naar de overwinning leiden. Kies een tool om te beginnen."
     },
+    "categories": {
+      "ops": "Operaties & Militair",
+      "build": "Gebouwen & Dorp",
+      "eco": "Economie & Grondstoffen",
+      "intel": "Kaart & Verkenning"
+    },
     "tools": {
       "opPlanner": {
         "title": "Persoonlijke Operatie Planner",

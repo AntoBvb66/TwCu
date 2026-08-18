@@ -1,13 +1,277 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* =========================================================================
+   TW COBRE — TASARIM SİSTEMİ (SARI / SİYAH)
+   Tek kaynak: renkler, yüzeyler, kenarlıklar, gölgeler ve temel öğeler
+   burada tanımlanır. Sayfalar bu değişkenleri kullanır; sabit renk (hex)
+   yazmak yerine token kullanmak temanın tek yerden değişmesini sağlar.
+   ========================================================================= */
+
+:root {
+    /* --- ZEMİN: sıcak tonlu siyah (nötr griden daha "Klanlar" hissi verir) --- */
+    --ink-900: #08070a;
+    --ink-850: #0b0a0c;
+    --ink-800: #101014;
+    --ink-700: #16161b;
+    --ink-600: #1c1c22;
+    --ink-500: #24242c;
+
+    /* --- YÜZEYLER --- */
+    --surface: #121216;
+    --surface-2: #17171d;
+    --surface-3: #1e1e25;
+    --surface-glass: rgba(22, 22, 28, 0.78);
+
+    /* --- ÇİZGİLER --- */
+    --line: #26262e;
+    --line-2: #34343f;
+    --line-gold: rgba(253, 225, 0, 0.22);
+
+    /* --- VURGU: ana sarı + tamamlayıcı bakır --- */
+    --gold: #fde100;
+    --gold-soft: #ffee7a;
+    --gold-deep: #c9a800;
+    --gold-dark: #8a7300;
+    --copper: #e08b3c;
+    --copper-deep: #a35f1e;
+
+    /* Saydam sarı katmanlar (glow, arka plan, kenarlık) */
+    --gold-a06: rgba(253, 225, 0, 0.06);
+    --gold-a10: rgba(253, 225, 0, 0.10);
+    --gold-a18: rgba(253, 225, 0, 0.18);
+    --gold-a35: rgba(253, 225, 0, 0.35);
+
+    /* --- METİN --- */
+    --text: #f2f2f4;
+    --text-2: #b6b6c0;
+    --text-3: #8b8b98;
+    --text-on-gold: #1a1600;
+
+    /* --- DURUM RENKLERİ --- */
+    --success: #45d67d;
+    --success-bg: rgba(69, 214, 125, 0.12);
+    --success-solid: #1f7a45;
+    --success-solid-hover: #186237;
+    --danger: #ff5a52;
+    --danger-bg: rgba(255, 90, 82, 0.12);
+    /* Dolgu butonlar için: --danger üzerinde beyaz metin okunmuyor */
+    --danger-solid: #cc352d;
+    --danger-solid-hover: #a92721;
+    --warn: #ffb445;
+    --warn-bg: rgba(255, 180, 69, 0.12);
+    --info: #45b6ff;
+    --info-bg: rgba(69, 182, 255, 0.12);
+
+    /* --- KAYNAK RENKLERİ (oyun içi karşılıkları) --- */
+    --res-wood: #a9c46c;
+    --res-clay: #d98e5a;
+    --res-iron: #b9bec7;
+    --res-pop: #7fd4a8;
+
+    /* --- YARIÇAP --- */
+    --r-sm: 6px;
+    --r-md: 10px;
+    --r-lg: 14px;
+    --r-xl: 20px;
+    --r-pill: 999px;
+
+    /* --- GÖLGE --- */
+    --sh-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+    --sh-md: 0 6px 18px rgba(0, 0, 0, 0.45);
+    --sh-lg: 0 18px 45px rgba(0, 0, 0, 0.55);
+    --sh-gold: 0 0 0 3px var(--gold-a18);
+
+    /* --- HAREKET --- */
+    --ease: cubic-bezier(0.32, 0.72, 0, 1);
+    --t-fast: 0.15s var(--ease);
+    --t: 0.25s var(--ease);
+
+    /* --- TİPOGRAFİ --- */
+    --font: 'Segoe UI', system-ui, -apple-system, 'Inter', Roboto, Arial, sans-serif;
+    --font-mono: ui-monospace, 'Cascadia Mono', Consolas, 'Courier New', monospace;
+
+    color-scheme: dark;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* =========================================================================
+   SIFIRLAMA
+   ========================================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font);
+    background-color: var(--ink-900);
+    color: var(--text);
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: var(--gold-a18);
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: var(--font-mono);
+}
+
+::selection {
+    background: var(--gold-a35);
+    color: #fff;
+}
+
+/* Klavye ile gezenler için görünür odak halkası (fare tıklamasında çıkmaz) */
+:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* =========================================================================
+   TEMEL FORM ÖĞELERİ
+   Sayfa CSS'leri bunları ezebilir; buradaki amaç hiçbir sayfada beyaz
+   kutu / okunmaz metin kalmamasını garanti etmek.
+   ========================================================================= */
+
+input,
+select,
+textarea,
+button {
+    font-family: inherit;
+    font-size: 14px;
+}
+
+input:where(:not([type='checkbox'], [type='radio'], [type='color'])),
+select,
+textarea {
+    background: var(--ink-850);
+    border: 1px solid var(--line-2);
+    color: var(--text);
+    border-radius: var(--r-sm);
+    padding: 8px 10px;
+    transition: border-color var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
+}
+
+input:where(:not([type='checkbox'], [type='radio'], [type='color'])):focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: var(--sh-gold);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-3);
+}
+
+input:where([type='checkbox'], [type='radio']) {
+    accent-color: var(--gold);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+input:where([type='color']) {
+    background: var(--ink-850);
+    border: 1px solid var(--line-2);
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    padding: 2px;
+}
+
+/* Takvim / saat ikonlarını karanlık temada görünür kıl */
+input[type='date']::-webkit-calendar-picker-indicator,
+input[type='time']::-webkit-calendar-picker-indicator,
+input[type='datetime-local']::-webkit-calendar-picker-indicator {
+    filter: invert(0.85) sepia(1) saturate(6) hue-rotate(5deg);
+    cursor: pointer;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Açılır listelerin seçenekleri (Windows/Chrome beyaz zemin sorunu) */
+option,
+optgroup {
+    background: var(--ink-800);
+    color: var(--text);
+}
+
+a {
+    color: var(--gold);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 18px 0;
+}
+
+/* =========================================================================
+   KAYDIRMA ÇUBUĞU (tüm uygulama)
+   ========================================================================= */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-2) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--line-2);
+    border: 2px solid transparent;
+    background-clip: content-box;
+    border-radius: var(--r-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-dark);
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* =========================================================================
+   HAREKET AZALTMA TERCİHİ
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

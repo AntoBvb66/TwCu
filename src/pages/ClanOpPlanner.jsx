@@ -552,14 +552,14 @@ const ClanOpPlanner = () => {
                         </datalist>
                     </div>
                     <button className="cop-btn" style={{ width: '100%' }} onClick={handleFetchClan}>{t('clanOp.step1.runIntel')}</button>
-                    <div style={{ fontSize: '12px', marginTop: '10px', color: '#5cb85c' }}>{status}</div>
+                    <div style={{ fontSize: '12px', marginTop: '10px', color: 'var(--success)' }}>{status}</div>
                 </div>
 
                 <div className="cop-box">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <h3>{t('clanOp.step2.title')}</h3>
                         <div style={{ fontSize: '12px' }}>
-                            {t('clanOp.step2.snobLimit')} <input type="number" style={{ width: '50px', padding: '2px', background: '#111', color: '#f0c042', border: '1px solid #814c11' }} value={maxSnobDist} onChange={e => setMaxSnobDist(parseInt(e.target.value) || 100)} />
+                            {t('clanOp.step2.snobLimit')} <input type="number" style={{ width: '50px', padding: '2px', background: 'var(--ink-850)', color: 'var(--gold)', border: '1px solid var(--line-2)' }} value={maxSnobDist} onChange={e => setMaxSnobDist(parseInt(e.target.value) || 100)} />
                         </div>
                     </div>
                     <textarea
@@ -567,26 +567,26 @@ const ClanOpPlanner = () => {
                         placeholder={t('clanOp.step2.placeholder')}
                         value={targetInput} onChange={e => setTargetInput(e.target.value)}
                     />
-                    <div style={{ fontSize: '12px', color: '#aaa' }}>{t('clanOp.step2.foundTargets').replace('{{count}}', parsedTargets.length)}</div>
+                    <div style={{ fontSize: '12px', color: 'var(--text-2)' }}>{t('clanOp.step2.foundTargets').replace('{{count}}', parsedTargets.length)}</div>
                 </div>
             </div>
 
             {clanVillages.length > 0 && parsedTargets.length > 0 && (
                 <div className="cop-box">
-                    <div style={{ textAlign: 'center', marginBottom: '20px', borderBottom: '1px dashed #603000', paddingBottom: '15px' }}>
+                    <div style={{ textAlign: 'center', marginBottom: '20px', borderBottom: '1px dashed var(--line)', paddingBottom: '15px' }}>
                         <h3 style={{ borderBottom: 'none', paddingBottom: 0 }}>{t('clanOp.step3.title')}</h3>
 
                         {/* YENİ: Ortalı ve Karanlık Mod Uyumlu Takvim */}
-                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgba(0,0,0,0.6)', padding: '10px 20px', borderRadius: '8px', border: '1px solid #814c11', fontSize: '14px', fontWeight: 'bold', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.5)' }}>
-                            <span style={{ color: '#f0c042' }}>{t('clanOp.step3.arrivalTime')}</span>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgba(0,0,0,0.6)', padding: '10px 20px', borderRadius: '8px', border: '1px solid var(--line-2)', fontSize: '14px', fontWeight: 'bold', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.5)' }}>
+                            <span style={{ color: 'var(--gold)' }}>{t('clanOp.step3.arrivalTime')}</span>
                             <input
                                 type="datetime-local"
                                 step="1"
                                 style={{
                                     padding: '8px',
-                                    background: '#111',
-                                    color: '#eaddbd',
-                                    border: '1px solid #603000',
+                                    background: 'var(--ink-850)',
+                                    color: 'var(--text)',
+                                    border: '1px solid var(--line)',
                                     borderRadius: '4px',
                                     colorScheme: 'dark', /* YENİ: Tarayıcıya ikonları BEYAZ yapmasını söyler */
                                     cursor: 'pointer',
@@ -602,7 +602,7 @@ const ClanOpPlanner = () => {
                         {/* HEDEFLER */}
                         <div>
                             <div className="cop-inner-box" style={{ marginBottom: '15px' }}>
-                                <h4 style={{ color: '#f0c042', margin: '0 0 10px 0' }}>{t('clanOp.step3.targetsTitle')}</h4>
+                                <h4 style={{ color: 'var(--gold)', margin: '0 0 10px 0' }}>{t('clanOp.step3.targetsTitle')}</h4>
                                 <div style={{ maxHeight: '250px', overflowY: 'auto' }}>
                                     {parsedTargets.map(targetObj => {
                                         const isHidden = hiddenTargets.includes(targetObj.coord);
@@ -618,7 +618,7 @@ const ClanOpPlanner = () => {
                                                 style={{ opacity: isHidden ? 0.4 : 1, cursor: isHidden ? 'default' : 'pointer' }}
                                             >
                                                 <div>
-                                                    <b style={{ color: '#d9534f', fontSize: '14px' }}>{targetObj.coord}</b> {targetObj.owner} <span className="cop-points">({targetObj.points.toLocaleString('tr-TR')} {t('clanOp.step3.p')})</span>
+                                                    <b style={{ color: 'var(--danger)', fontSize: '14px' }}>{targetObj.coord}</b> {targetObj.owner} <span className="cop-points">({targetObj.points.toLocaleString('tr-TR')} {t('clanOp.step3.p')})</span>
                                                     <div className="cop-target-stats">
                                                         <span><img src={unitIcons.ram} alt="Kami" /> {kamiCount}</span>
                                                         <span><img src={unitIcons.snob} alt="Mis" /> {misCount}</span>
@@ -636,13 +636,13 @@ const ClanOpPlanner = () => {
 
                             {/* Serbest Oyuncu Atama */}
                             <div className="cop-inner-box" style={{ marginBottom: '15px', borderLeft: '3px solid #5bc0de' }}>
-                                <h4 style={{ color: '#5bc0de', margin: '0 0 10px 0' }}>{t('clanOp.manualAssign.title')}</h4>
+                                <h4 style={{ color: 'var(--info)', margin: '0 0 10px 0' }}>{t('clanOp.manualAssign.title')}</h4>
                                 <div style={{ display: 'flex', gap: '5px', alignItems: 'center', flexWrap: 'wrap' }}>
-                                    <select style={{ flex: 1, padding: '5px', background: '#111', color: '#f0c042', border: '1px solid #814c11' }} value={manualPlayer} onChange={e => setManualPlayer(e.target.value)}>
+                                    <select style={{ flex: 1, padding: '5px', background: 'var(--ink-850)', color: 'var(--gold)', border: '1px solid var(--line-2)' }} value={manualPlayer} onChange={e => setManualPlayer(e.target.value)}>
                                         <option value="">{t('clanOp.manualAssign.selectPlayer')}</option>
                                         {Object.values(clanPlayers).sort().map(p => <option key={p} value={p}>{p}</option>)}
                                     </select>
-                                    <select style={{ width: '90px', padding: '5px', background: '#111', color: '#f0c042', border: '1px solid #814c11' }} value={manualUnit} onChange={e => setManualUnit(e.target.value)}>
+                                    <select style={{ width: '90px', padding: '5px', background: 'var(--ink-850)', color: 'var(--gold)', border: '1px solid var(--line-2)' }} value={manualUnit} onChange={e => setManualUnit(e.target.value)}>
                                         <option value="ram">{t('clanOp.shortUnits.ram')}</option>
                                         <option value="snob">{t('clanOp.shortUnits.snob')}</option>
                                         <option value="catapult">{t('clanOp.shortUnits.catapult')}</option>
@@ -650,7 +650,7 @@ const ClanOpPlanner = () => {
                                     </select>
                                     <button className="cop-btn" style={{ background: '#5bc0de', color: '#fff' }} onClick={addManualPlan}>{t('clanOp.manualAssign.assignBtn')}</button>
                                 </div>
-                                <div style={{ fontSize: '10px', color: '#aaa', marginTop: '5px' }}>{t('clanOp.manualAssign.info')}</div>
+                                <div style={{ fontSize: '10px', color: 'var(--text-2)', marginTop: '5px' }}>{t('clanOp.manualAssign.info')}</div>
                             </div>
 
                             {/* Taktiksel Öneriler */}
@@ -662,7 +662,7 @@ const ClanOpPlanner = () => {
                                 </div>
 
                                 {suggestionMode === 'player' && (
-                                    <select style={{ width: '100%', padding: '5px', marginBottom: '10px', background: '#111', color: '#f0c042', border: '1px solid #814c11' }} value={selectedPlayer} onChange={e => setSelectedPlayer(e.target.value)}>
+                                    <select style={{ width: '100%', padding: '5px', marginBottom: '10px', background: 'var(--ink-850)', color: 'var(--gold)', border: '1px solid var(--line-2)' }} value={selectedPlayer} onChange={e => setSelectedPlayer(e.target.value)}>
                                         <option value="">{t('clanOp.manualAssign.selectPlayer')}</option>
                                         {Object.values(clanPlayers).sort().map(p => <option key={p} value={p}>{p}</option>)}
                                     </select>
@@ -670,7 +670,7 @@ const ClanOpPlanner = () => {
 
                                 <div style={{ maxHeight: '280px', overflowY: 'auto' }}>
                                     {suggestedSources.length === 0 ? (
-                                        <div style={{ padding: '10px', color: '#777', textAlign: 'center', fontSize: '12px' }}>{t('clanOp.suggestions.noVillages')}</div>
+                                        <div style={{ padding: '10px', color: 'var(--text-3)', textAlign: 'center', fontSize: '12px' }}>{t('clanOp.suggestions.noVillages')}</div>
                                     ) : suggestedSources.map(s => {
                                         const isHidden = hiddenSources.includes(s.coord);
                                         const activeOrders = planList.filter(p => p.sourceCoord === s.coord);
@@ -681,10 +681,10 @@ const ClanOpPlanner = () => {
                                                     <span className="cop-color-dot" style={{ background: s.mapColor }}></span>
                                                     <span className="cop-player-badge">{s.playerName}</span><br />
                                                     <b>{s.coord}</b> <span className="cop-points">({s.points.toLocaleString('tr-TR')} {t('clanOp.step3.p')})</span><br />
-                                                    <span style={{ fontSize: '11px', color: '#aaa' }}>{t('clanOp.step3.distance')} {s.dist.toFixed(1)}</span>
+                                                    <span style={{ fontSize: '11px', color: 'var(--text-2)' }}>{t('clanOp.step3.distance')} {s.dist.toFixed(1)}</span>
 
                                                     {activeOrders.length > 0 && (
-                                                        <div style={{ marginTop: '5px', fontSize: '10px', color: '#f0ad4e', background: 'rgba(240, 173, 78, 0.1)', padding: '2px 4px', borderRadius: '3px', borderLeft: '2px solid #f0ad4e' }}>
+                                                        <div style={{ marginTop: '5px', fontSize: '10px', color: 'var(--warn)', background: 'rgba(240, 173, 78, 0.1)', padding: '2px 4px', borderRadius: '3px', borderLeft: '2px solid #f0ad4e' }}>
                                                             {activeOrders.map(o => (
                                                                 <div key={o.id}>📌 {o.targetCoord} ({t(`clanOp.units.${o.unitType}`, { defaultValue: o.unitType })})</div>
                                                             ))}
@@ -721,7 +721,7 @@ const ClanOpPlanner = () => {
             {/* OPERASYON KUYRUĞU */}
             {sortedPlanList.length > 0 && (
                 <div className="cop-table-wrapper" style={{ marginTop: '25px' }}>
-                    <div style={{ padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#2a1908', flexWrap: 'wrap', gap: '10px' }}>
+                    <div style={{ padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--surface-2)', flexWrap: 'wrap', gap: '10px' }}>
                         <h4 style={{ margin: 0, color: '#fff' }}>{t('clanOp.queue.title').replace('{{count}}', sortedPlanList.length)}</h4>
                         <button className="cop-btn-danger" onClick={clearQueue} style={{ padding: '6px 12px' }}>{t('clanOp.queue.clear')}</button>
                     </div>
@@ -744,19 +744,19 @@ const ClanOpPlanner = () => {
                         <tbody>
                             {sortedPlanList.map((p, index) => (
                                 <tr key={p.id}>
-                                    <td style={{ fontWeight: 'bold', color: '#eaddbd' }}>{index + 1}</td>
+                                    <td style={{ fontWeight: 'bold', color: 'var(--text)' }}>{index + 1}</td>
                                     <td><span className="cop-player-badge">{p.player}</span></td>
-                                    <td style={{ fontWeight: 'bold', color: '#eaddbd' }}>{p.sourceCoord}</td>
-                                    <td style={{ fontWeight: 'bold', color: '#d9534f', fontSize: '13px' }}>{p.targetCoord}</td>
-                                    <td style={{ fontWeight: 'bold', color: '#dcb589' }}>{p.targetOwner}</td>
-                                    <td style={{ fontWeight: 'bold', color: '#5cb85c' }}>{p.departureTime}</td>
-                                    <td style={{ fontWeight: 'bold', color: '#d9534f' }}>{p.arrivalTime}</td>
-                                    <td style={{ whiteSpace: 'nowrap', color: '#eaddbd' }}>
+                                    <td style={{ fontWeight: 'bold', color: 'var(--text)' }}>{p.sourceCoord}</td>
+                                    <td style={{ fontWeight: 'bold', color: 'var(--danger)', fontSize: '13px' }}>{p.targetCoord}</td>
+                                    <td style={{ fontWeight: 'bold', color: 'var(--copper)' }}>{p.targetOwner}</td>
+                                    <td style={{ fontWeight: 'bold', color: 'var(--success)' }}>{p.departureTime}</td>
+                                    <td style={{ fontWeight: 'bold', color: 'var(--danger)' }}>{p.arrivalTime}</td>
+                                    <td style={{ whiteSpace: 'nowrap', color: 'var(--text)' }}>
                                         {unitIcons[p.unitType] && <img src={unitIcons[p.unitType]} alt={p.unitType} style={{ verticalAlign: 'middle', marginRight: '5px', width: '16px' }} />}
                                         {t(`clanOp.units.${p.unitType}`, { defaultValue: p.unitType })}
                                     </td>
-                                    <td style={{ color: '#eaddbd' }}>{p.dist}</td>
-                                    <td style={{ color: '#eaddbd' }}>{p.travelTime}</td>
+                                    <td style={{ color: 'var(--text)' }}>{p.dist}</td>
+                                    <td style={{ color: 'var(--text)' }}>{p.travelTime}</td>
                                     <td><button className="cop-btn-danger" onClick={() => setPlanList(planList.filter(x => x.id !== p.id))}>{t('clanOp.queue.delete')}</button></td>
                                 </tr>
                             ))}
@@ -764,21 +764,21 @@ const ClanOpPlanner = () => {
                     </table>
 
                     {/* CANLI BBCODE ŞABLON KUTUSU */}
-                    <div style={{ background: '#1a1a1a', padding: '15px', borderTop: '2px solid #603000' }}>
+                    <div style={{ background: 'var(--surface-2)', padding: '15px', borderTop: '2px solid var(--line)' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap', gap: '10px' }}>
-                            <h4 style={{ margin: 0, color: '#f0c042' }}>{t('clanOp.bbcode.title')}</h4>
+                            <h4 style={{ margin: 0, color: 'var(--gold)' }}>{t('clanOp.bbcode.title')}</h4>
                             <button className="cop-btn" onClick={() => { navigator.clipboard.writeText(generatedBBCode); showToast(t('clanOp.alerts.copied')); }}>{t('clanOp.bbcode.copyAll')}</button>
                         </div>
                         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '10px', fontSize: '13px' }}>
-                            <b style={{ color: '#dcb589' }}>{t('clanOp.bbcode.selectCols')}</b>
+                            <b style={{ color: 'var(--copper)' }}>{t('clanOp.bbcode.selectCols')}</b>
                             {Object.keys(bbCols).map(col => (
-                                <label key={col} style={{ cursor: 'pointer', color: '#eaddbd', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                <label key={col} style={{ cursor: 'pointer', color: 'var(--text)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '4px' }}>
                                     <input type="checkbox" checked={bbCols[col]} onChange={() => setBbCols({ ...bbCols, [col]: !bbCols[col] })} />
                                     {bbColLabels[col]}
                                 </label>
                             ))}
                         </div>
-                        <textarea className="cop-textarea" style={{ height: '250px', background: '#0a0a0a', color: '#f0c042' }} value={generatedBBCode} readOnly />
+                        <textarea className="cop-textarea" style={{ height: '250px', background: 'var(--ink-900)', color: 'var(--gold)' }} value={generatedBBCode} readOnly />
                     </div>
                 </div>
             )}

@@ -35,6 +35,12 @@
       "title": "Welcome to TW Cobre",
       "subtitle": "Victory is hidden in the details and flawless planning. Save time in your Tribal Wars journey and devise strategic plans that will lead your tribe to victory. Choose a tool to get started."
     },
+    "categories": {
+      "ops": "Operations & Military",
+      "build": "Buildings & Village",
+      "eco": "Economy & Resources",
+      "intel": "Map & Intelligence"
+    },
     "tools": {
       "opPlanner": {
         "title": "Personal Operation Planner",

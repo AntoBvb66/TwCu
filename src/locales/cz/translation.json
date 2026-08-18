@@ -35,6 +35,12 @@
       "title": "Vítejte v TW Cobre",
       "subtitle": "Vítězství se skrývá v detailech a bezchybné taktice. Ušetřete čas na své cestě v Tribal Wars a vytvořte strategické plány, které přivedou váš kmen k vítězství. Vyberte nástroj a začněte."
     },
+    "categories": {
+      "ops": "Operace a armáda",
+      "build": "Budovy a vesnice",
+      "eco": "Ekonomika a suroviny",
+      "intel": "Mapa a průzkum"
+    },
     "tools": {
       "opPlanner": {
         "title": "Osobní plánovač operací",

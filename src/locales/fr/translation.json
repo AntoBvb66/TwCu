@@ -35,6 +35,12 @@
       "title": "Bienvenue sur TW Cobre",
       "subtitle": "La victoire est cachée dans les détails et une planification sans faille. Gagnez du temps dans votre voyage Tribal Wars et élaborez des plans stratégiques qui mèneront votre tribu à la victoire. Choisissez un outil pour commencer."
     },
+    "categories": {
+      "ops": "Opérations & Militaire",
+      "build": "Bâtiments & Village",
+      "eco": "Économie & Ressources",
+      "intel": "Carte & Renseignement"
+    },
     "tools": {
       "opPlanner": {
         "title": "Planificateur d'Opération Personnel",

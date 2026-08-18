@@ -1,15 +1,15 @@
 /* --- ANA KONTEYNER --- */
 .cp-container {
     padding: 25px;
-    background: linear-gradient(145deg, #1e150d 0%, #110904 100%);
-    color: #eaddbd;
-    border-radius: 10px;
-    border: 1px solid #5c3516;
+    background: linear-gradient(145deg, var(--surface) 0%, var(--ink-900) 100%);
+    color: var(--text);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
     max-width: 1200px;
     margin: 0 auto 40px auto; /* YENİ: Mobilde alta yapışmaması için 40px eklendi */
-    box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
     box-sizing: border-box;
-    animation: fadeIn 0.4s ease-in-out;
+    animation: fadeIn 0.4s var(--ease);
 }
 
 @keyframes fadeIn {
@@ -20,43 +20,43 @@
 /* --- BAŞLIK --- */
 .cp-header {
     font-size: 26px;
-    color: #f0c042;
-    border-bottom: 3px solid #814c11;
+    color: var(--gold);
+    border-bottom: 1px solid var(--line);
     padding-bottom: 12px;
     margin-top: 0;
     margin-bottom: 25px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
 }
 
 /* --- ANA IZGARA (BİLGİSAYAR) --- */
 .cp-grid {
     display: grid;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 350px minmax(0, 1fr);
     gap: 25px;
     align-items: start;
 }
 
+.cp-grid > * { min-width: 0; }
+
 /* --- KUTULAR (PANELLER) --- */
 .cp-box {
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid #4a2a10;
+    background: var(--ink-850);
+    border: 1px solid var(--line);
     padding: 20px;
-    border-radius: 8px;
+    border-radius: var(--r-md);
     margin-bottom: 20px;
-    box-shadow: inset 0 1px 3px rgba(255,255,255,0.05);
-    transition: all 0.3s ease;
+    transition: all 0.25s var(--ease);
 }
 
 .cp-box:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5), inset 0 1px 3px rgba(255,255,255,0.05);
-    border-color: #603000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+    border-color: var(--line);
 }
 
 .cp-box h3 {
     margin-top: 0;
-    color: #f0c042;
+    color: var(--gold);
     font-size: 16px;
-    border-bottom: 1px dashed #814c11;
+    border-bottom: 1px solid var(--line);
     padding-bottom: 8px;
     margin-bottom: 15px;
 }
@@ -64,7 +64,7 @@
 /* --- FORM ELEMANLARI (GİRDİLER) --- */
 .cp-label {
     font-size: 13px;
-    color: #ccc;
+    color: var(--text-2);
     display: block;
     margin-bottom: 6px;
     font-weight: bold;
@@ -72,45 +72,45 @@
 
 .cp-textarea {
     width: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid #814c11;
-    color: #f0c042;
+    background: var(--ink-900);
+    border: 1px solid var(--line-2);
+    color: var(--gold);
     padding: 12px;
-    border-radius: 6px;
+    border-radius: var(--r-sm);
     box-sizing: border-box;
-    font-family: monospace;
+    font-family: var(--font-mono);
     font-size: 13px;
     resize: vertical;
     margin-bottom: 15px;
-    transition: all 0.3s ease;
+    transition: all 0.25s var(--ease);
 }
 
 .cp-textarea:focus {
     outline: none;
-    border-color: #f0c042;
-    background: rgba(0, 0, 0, 0.8);
-    box-shadow: 0 0 8px rgba(240, 192, 66, 0.3);
+    border-color: var(--gold);
+    background: var(--ink-900);
+    box-shadow: 0 0 8px rgba(253, 225, 0, 0.3);
 }
 
 /* --- AKSİYON BUTONU --- */
 .cp-btn {
-    background: linear-gradient(to bottom, #d9b972 0%, #c19c4d 100%);
-    color: #311800;
-    border: 1px solid #814c11;
+    background: linear-gradient(to bottom, var(--gold) 0%, var(--gold-deep) 100%);
+    color: var(--text-on-gold);
+    border: 1px solid var(--line-2);
     padding: 12px 15px;
-    border-radius: 6px;
+    border-radius: var(--r-sm);
     font-weight: 800;
     cursor: pointer;
     width: 100%;
     font-size: 15px;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    transition: all 0.15s var(--ease);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.45);
 }
 
 .cp-btn:hover {
-    background: linear-gradient(to bottom, #e3d5b3 0%, #d9b972 100%);
+    background: linear-gradient(to bottom, var(--gold-soft) 0%, var(--gold) 100%);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
 }
 
 .cp-btn:active {
@@ -126,19 +126,19 @@
 }
 
 .cp-result-item { margin-bottom: 8px; }
-.tag-first { color: #ff6b6b; font-weight: bold; }
-.tag-normal { color: #69db7c; font-weight: bold; }
-.tag-exist { color: #888; font-style: italic; }
+.tag-first { color: var(--danger); font-weight: bold; }
+.tag-normal { color: var(--success); font-weight: bold; }
+.tag-exist { color: var(--text-3); font-style: italic; }
 
 /* --- HARİTA / CANVAS ALANI --- */
 .cp-canvas-container {
     text-align: center;
-    background: #0a0a0a;
-    border: 2px solid #5c3516;
-    border-radius: 8px;
+    background: var(--ink-900);
+    border: 2px solid var(--line);
+    border-radius: var(--r-md);
     overflow: hidden;
     position: relative;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
     width: 100%;
 }
 
@@ -148,14 +148,14 @@
     justify-content: center;
     gap: 15px;
     padding: 12px;
-    background: #111;
-    border-bottom: 2px solid #5c3516;
+    background: var(--ink-850);
+    border-bottom: 2px solid var(--line);
     font-size: 13px;
-    color: #ccc;
+    color: var(--text-2);
 }
 
 .legend-item { display: flex; align-items: center; gap: 6px; }
-.legend-color { width: 14px; height: 14px; border-radius: 50%; border: 1px solid #333; }
+.legend-color { width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--line-2); }
 
 
 /* =========================================
@@ -165,7 +165,7 @@
 /* TABLET (1024px ve altı) */
 @media (max-width: 1024px) {
     .cp-grid {
-        grid-template-columns: 280px 1fr;
+        grid-template-columns: 1fr;
         gap: 20px;
     }
 }

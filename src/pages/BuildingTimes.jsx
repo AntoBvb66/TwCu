@@ -205,7 +205,7 @@ const BuildingTimes = () => {
                         <input type="number" className="bt-input" value={comp1.to} onChange={e => handleChange(setComp1, comp1, 'to', e.target.value)} />
                     </div>
                     <div className="bt-result">
-                        {t('buildingTimes.totalTime')} <span style={{color: '#f0c042'}}>{formatTimeFriendly(time1, t)}</span>
+                        {t('buildingTimes.totalTime')} <span style={{color: 'var(--gold)'}}>{formatTimeFriendly(time1, t)}</span>
                     </div>
                 </div>
 
@@ -233,7 +233,7 @@ const BuildingTimes = () => {
                         <input type="number" className="bt-input" value={comp2.to} onChange={e => handleChange(setComp2, comp2, 'to', e.target.value)} />
                     </div>
                     <div className="bt-result">
-                        {t('buildingTimes.totalTime')} <span style={{color: '#f0c042'}}>{formatTimeFriendly(time2, t)}</span>
+                        {t('buildingTimes.totalTime')} <span style={{color: 'var(--gold)'}}>{formatTimeFriendly(time2, t)}</span>
                     </div>
                 </div>
             </div>
@@ -251,7 +251,7 @@ const BuildingTimes = () => {
 
             {/* ORİJİNAL SÜRÜKLE-BIRAK TABLO */}
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '30px'}}>
-                <h3 style={{color: '#f0c042', margin: 0}}>{t('buildingTimes.tableTitle')}</h3>
+                <h3 style={{color: 'var(--gold)', margin: 0}}>{t('buildingTimes.tableTitle')}</h3>
                 <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
                     <span style={{fontSize: '13px'}}>{t('buildingTimes.tableHqLevel')}</span>
                     <select className="bt-select" style={{width: '70px', padding: '4px'}} value={tableHqLevel} onChange={(e) => setTableHqLevel(parseInt(e.target.value))}>
@@ -262,11 +262,11 @@ const BuildingTimes = () => {
                 </div>
             </div>
             <div className="bt-checkbox-container">
-                <span style={{width: '100%', fontSize: '12px', color: '#aaa', marginBottom: '5px', borderBottom: '1px dashed #444', paddingBottom: '5px'}}>
+                <span style={{width: '100%', fontSize: '12px', color: 'var(--text-2)', marginBottom: '5px', borderBottom: '1px dashed var(--line-2)', paddingBottom: '5px'}}>
                     Gösterilecek Binaları Seçin:
                 </span>
                 {buildingNames.map((name, idx) => (
-                    <label key={idx} style={{ fontSize: '11px', color: visibleColumns[idx] ? '#f0c042' : '#777', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <label key={idx} style={{ fontSize: '11px', color: visibleColumns[idx] ? 'var(--gold)' : 'var(--text-3)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
                         <input 
                             type="checkbox" 
                             checked={visibleColumns[idx]} 
@@ -321,7 +321,7 @@ const BuildingTimes = () => {
                     </tbody>
                 </table>
             </div>
-            <div style={{fontSize: '12px', color: '#888', marginTop: '10px', textAlign: 'center'}}>
+            <div style={{fontSize: '12px', color: 'var(--text-3)', marginTop: '10px', textAlign: 'center'}}>
                 {t('buildingTimes.tip')}
             </div>
         </div>

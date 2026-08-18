@@ -35,6 +35,12 @@
       "title": "Velkommen til TW Cobre",
       "subtitle": "Seieren ligger i detaljene og feilfri planlegging. Spar tid i Tribal Wars-reisen og utarbeid strategiske planer som fører stammen din til seier. Velg et verktøy for å komme i gang."
     },
+    "categories": {
+      "ops": "Operasjoner & Militær",
+      "build": "Bygninger & Landsby",
+      "eco": "Økonomi & Ressurser",
+      "intel": "Kart & Etterretning"
+    },
     "tools": {
       "opPlanner": {
         "title": "Personlig operasjonsplanlegger",

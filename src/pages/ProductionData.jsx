@@ -120,7 +120,7 @@ const ProductionData = () => {
             <div className="prod-settings">
                 <label>{t('productionData.worldSpeed')} <input type="number" step="0.1" className="prod-input" value={worldSpeed} onChange={e => setWorldSpeed(parseFloat(e.target.value) || 1)} /></label>
                 <label>{t('productionData.mineSpeed')} <input type="number" step="0.1" className="prod-input" value={mineSpeed} onChange={e => setMineSpeed(parseFloat(e.target.value) || 1)} /></label>
-                <div style={{marginLeft: 'auto', fontWeight: 'bold', color: '#f0c042'}}>{t('productionData.totalFactor').replace('{{speed}}', overallSpeed.toFixed(2))}</div>
+                <div style={{marginLeft: 'auto', fontWeight: 'bold', color: 'var(--gold)'}}>{t('productionData.totalFactor').replace('{{speed}}', overallSpeed.toFixed(2))}</div>
             </div>
 
             <div className="prod-totals-board">
@@ -142,7 +142,7 @@ const ProductionData = () => {
             </div>
 
             <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '15px'}}>
-                <h3 style={{color: '#f0c042', margin: 0}}>{t('productionData.villageManagement')}</h3>
+                <h3 style={{color: 'var(--gold)', margin: 0}}>{t('productionData.villageManagement')}</h3>
                 <div>
                     <button className="prod-btn-clear" onClick={clearAll} style={{marginRight: '10px'}}>{t('productionData.resetBtn')}</button>
                     <button className="prod-btn" onClick={addVillage}>{t('productionData.newVillageBtn')}</button>
@@ -232,9 +232,9 @@ const ProductionData = () => {
                                 {levels.slice(1).map(l => (
                                     <tr key={l}>
                                         <td><span className="prod-lvl-badge">{l}</span></td>
-                                        <td style={{color: '#5cb85c', fontWeight: 'bold'}}>{Math.round(calculateBaseProd(l, overallSpeed)).toLocaleString()} {t('productionData.referenceTable.perHour')}</td>
-                                        <td style={{color: '#f0ad4e'}}>{getStorageCapacity(l).toLocaleString()}</td>
-                                        <td style={{color: '#dcb589'}}>{getFarmCapacity(l).toLocaleString()}</td>
+                                        <td style={{color: 'var(--success)', fontWeight: 'bold'}}>{Math.round(calculateBaseProd(l, overallSpeed)).toLocaleString()} {t('productionData.referenceTable.perHour')}</td>
+                                        <td style={{color: 'var(--warn)'}}>{getStorageCapacity(l).toLocaleString()}</td>
+                                        <td style={{color: 'var(--copper)'}}>{getFarmCapacity(l).toLocaleString()}</td>
                                     </tr>
                                 ))}
                             </tbody>

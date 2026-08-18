@@ -167,7 +167,7 @@ bumpStat("sims");
                         <div style={{marginTop: '15px', textAlign: 'center'}}>
                             <button 
                                 onClick={() => setCounts(unitsDB.reduce((acc, u) => ({ ...acc, [u.id]: '' }), {}))}
-                                style={{background: '#d9534f', color: '#fff', border: 'none', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold'}}
+                                style={{background: 'var(--danger-solid)', color: '#fff', border: 'none', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold'}}
                             >
                                 {t('unitCalculator.settings.resetBtn')}
                             </button>
@@ -193,7 +193,7 @@ bumpStat("sims");
                     <tbody>
                         {calculations.rows.map(row => (
                             <tr key={row.id}>
-                                <td style={{fontWeight: 'bold', color: '#5a3a18', textAlign: 'left'}}>{t(`unitCalculator.units.${row.id}`)}</td>
+                                <td style={{fontWeight: 'bold', color: 'var(--gold)', textAlign: 'left'}}>{t(`unitCalculator.units.${row.id}`)}</td>
                                 <td>
                                     <input 
                                         type="number" 
@@ -217,7 +217,7 @@ bumpStat("sims");
             {/* GENEL TOPLAM BİLGİ KUTUSU */}
             <div className="uc-summary-box">
                 <div>
-                    <h3 style={{marginTop: 0, borderBottom: '1px solid #603000', paddingBottom: '5px', color: '#f0c042'}}>{t('unitCalculator.summary.costTitle')}</h3>
+                    <h3 style={{marginTop: 0, borderBottom: '1px solid var(--line)', paddingBottom: '5px', color: 'var(--gold)'}}>{t('unitCalculator.summary.costTitle')}</h3>
                     <div className="uc-summary-item">{t('unitCalculator.summary.woodReq')} <span>{calculations.totalW.toLocaleString()}</span></div>
                     <div className="uc-summary-item">{t('unitCalculator.summary.clayReq')} <span>{calculations.totalC.toLocaleString()}</span></div>
                     <div className="uc-summary-item">{t('unitCalculator.summary.ironReq')} <span>{calculations.totalI.toLocaleString()}</span></div>
@@ -225,10 +225,10 @@ bumpStat("sims");
                 </div>
 
                 <div className="uc-queue-times">
-                    <h3 style={{marginTop: 0, borderBottom: '1px dashed #603000', paddingBottom: '5px', color: '#fff'}}>{t('unitCalculator.summary.queueTitle')}</h3>
-                    <div className="uc-summary-item" style={{color: '#ccc'}}>{t('unitCalculator.summary.barracksTotal')} <span style={{color: '#d9534f'}}>{formatClock(calculations.timeBarracks, t)}</span></div>
-                    <div className="uc-summary-item" style={{color: '#ccc'}}>{t('unitCalculator.summary.stableTotal')} <span style={{color: '#d9534f'}}>{formatClock(calculations.timeStable, t)}</span></div>
-                    <div className="uc-summary-item" style={{color: '#ccc'}}>{t('unitCalculator.summary.workshopTotal')} <span style={{color: '#d9534f'}}>{formatClock(calculations.timeWorkshop, t)}</span></div>
+                    <h3 style={{marginTop: 0, borderBottom: '1px dashed var(--line)', paddingBottom: '5px', color: '#fff'}}>{t('unitCalculator.summary.queueTitle')}</h3>
+                    <div className="uc-summary-item" style={{color: 'var(--text-2)'}}>{t('unitCalculator.summary.barracksTotal')} <span style={{color: 'var(--danger)'}}>{formatClock(calculations.timeBarracks, t)}</span></div>
+                    <div className="uc-summary-item" style={{color: 'var(--text-2)'}}>{t('unitCalculator.summary.stableTotal')} <span style={{color: 'var(--danger)'}}>{formatClock(calculations.timeStable, t)}</span></div>
+                    <div className="uc-summary-item" style={{color: 'var(--text-2)'}}>{t('unitCalculator.summary.workshopTotal')} <span style={{color: 'var(--danger)'}}>{formatClock(calculations.timeWorkshop, t)}</span></div>
                 </div>
             </div>
 

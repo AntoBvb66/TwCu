@@ -621,7 +621,7 @@ const ClanTroopPlanner = () => {
                                 </datalist>
                             </div>
                             <button className="cop-btn" style={{ width: '100%' }} onClick={handleFetchClan}>{t('clanTroop.step1.run')}</button>
-                            <div style={{ fontSize: '12px', marginTop: '10px', color: '#5cb85c' }}>{status}</div>
+                            <div style={{ fontSize: '12px', marginTop: '10px', color: 'var(--success)' }}>{status}</div>
                         </div>
                     )}
                 </div>
@@ -633,7 +633,7 @@ const ClanTroopPlanner = () => {
                         onClick={() => setIsStep2Open(!isStep2Open)}
                     >
                         <h3 style={{ margin: 0 }}>{t('clanTroop.step2.title')} {isStep2Open ? '▲' : '▼'}</h3>
-                        <div style={{ fontSize: '12px' }} onClick={(e) => e.stopPropagation()}>{t('clanTroop.step2.snobLimit')} <input type="number" style={{ width: '40px', padding: '2px', background: '#111', color: '#f0c042', border: '1px solid #814c11' }} value={maxSnobDist} onChange={e => setMaxSnobDist(parseInt(e.target.value) || 100)} /></div>
+                        <div style={{ fontSize: '12px' }} onClick={(e) => e.stopPropagation()}>{t('clanTroop.step2.snobLimit')} <input type="number" style={{ width: '40px', padding: '2px', background: 'var(--ink-850)', color: 'var(--gold)', border: '1px solid var(--line-2)' }} value={maxSnobDist} onChange={e => setMaxSnobDist(parseInt(e.target.value) || 100)} /></div>
                     </div>
                     {isStep2Open && (
                         <div style={{ marginTop: '15px' }}>
@@ -660,20 +660,20 @@ const ClanTroopPlanner = () => {
                                     placeholder={t('clanTroop.stepTroop.placeholder')}
                                     value={troopInput} onChange={e => setTroopInput(e.target.value)}
                                 />
-                                <div style={{ fontSize: '11px', color: '#aaa', marginTop: '5px' }}>{t('clanTroop.stepTroop.detected').replace('{{count}}', Object.keys(parsedTroops).length)}</div>
+                                <div style={{ fontSize: '11px', color: 'var(--text-2)', marginTop: '5px' }}>{t('clanTroop.stepTroop.detected').replace('{{count}}', Object.keys(parsedTroops).length)}</div>
                             </div>
 
                             {Object.keys(playerTroopSummary).length > 0 && (
-                                <div style={{ flex: 1, minWidth: '250px', background: '#111', border: '1px solid #603000', borderRadius: '4px', padding: '10px', maxHeight: '160px', overflowY: 'auto' }}>
-                                    <h4 style={{ color: '#f0c042', margin: '0 0 10px 0', fontSize: '13px', borderBottom: '1px dashed #603000', paddingBottom: '5px' }}>{t('clanTroop.stepTroop.summaryTitle')}</h4>
+                                <div style={{ flex: 1, minWidth: '250px', background: 'var(--ink-850)', border: '1px solid var(--line)', borderRadius: '4px', padding: '10px', maxHeight: '160px', overflowY: 'auto' }}>
+                                    <h4 style={{ color: 'var(--gold)', margin: '0 0 10px 0', fontSize: '13px', borderBottom: '1px dashed var(--line)', paddingBottom: '5px' }}>{t('clanTroop.stepTroop.summaryTitle')}</h4>
                                     {Object.entries(playerTroopSummary).map(([player, profiles]) => (
                                         <div key={player} style={{ marginBottom: '10px' }}>
                                             <b style={{ color: '#fff', fontSize: '13px' }}>{player}</b>
                                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '3px' }}>
                                                 {Object.entries(profiles).map(([profName, counts]) => (
-                                                    <span key={profName} style={{ fontSize: '11px', background: '#2a1908', padding: '2px 6px', borderRadius: '3px', border: '1px solid #4a2a10', color: '#eaddbd' }}>
-                                                        {profName}: <b style={{ color: '#5cb85c' }}>{counts.total}</b>
-                                                        {counts.total - counts.used > 0 ? <span style={{ color: '#f0c042' }}>{t('clanTroop.stepTroop.idle').replace('{{count}}', counts.total - counts.used)}</span> : <span style={{ color: '#d9534f' }}>{t('clanTroop.stepTroop.depleted')}</span>}
+                                                    <span key={profName} style={{ fontSize: '11px', background: 'var(--surface-2)', padding: '2px 6px', borderRadius: '3px', border: '1px solid var(--line)', color: 'var(--text)' }}>
+                                                        {profName}: <b style={{ color: 'var(--success)' }}>{counts.total}</b>
+                                                        {counts.total - counts.used > 0 ? <span style={{ color: 'var(--gold)' }}>{t('clanTroop.stepTroop.idle').replace('{{count}}', counts.total - counts.used)}</span> : <span style={{ color: 'var(--danger)' }}>{t('clanTroop.stepTroop.depleted')}</span>}
                                                     </span>
                                                 ))}
                                             </div>
@@ -688,8 +688,8 @@ const ClanTroopPlanner = () => {
 
             {/* MANUEL VERİ GİRME ALANI (YENİ) */}
             {clanVillages.length > 0 && (
-                <div className="cop-box" style={{ border: '1px solid #603000', background: '#18120c' }}>
-                    <h3 style={{ color: '#f0c042', borderBottom: '1px solid #603000', paddingBottom: '5px' }}>✍️ Manuel Operasyon Ekle</h3>
+                <div className="cop-box" style={{ border: '1px solid var(--line)', background: 'var(--surface-2)' }}>
+                    <h3 style={{ color: 'var(--gold)', borderBottom: '1px solid var(--line)', paddingBottom: '5px' }}>✍️ Manuel Operasyon Ekle</h3>
                     <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', marginTop: '15px' }}>
                         <div style={{ flex: 1, minWidth: '150px' }}>
                             <label style={{ fontSize: '12px', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>{t('manualPlan.sourceVillage')}</label>
@@ -705,7 +705,7 @@ const ClanTroopPlanner = () => {
                             <label style={{ fontSize: '12px', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>{t('manualPlan.unitToSend')}</label>
                             <select 
                                 className="cop-input" 
-                                style={{ background: '#111', color: '#f0c042', border: '1px solid #603000', height: '35px' }}
+                                style={{ background: 'var(--ink-850)', color: 'var(--gold)', border: '1px solid var(--line)', height: '35px' }}
                                 value={manualUnit} 
                                 onChange={e => setManualUnit(e.target.value)}
                             >
@@ -727,7 +727,7 @@ const ClanTroopPlanner = () => {
                             />
                         </div>
                         <div style={{ flex: 'none', width: '100%', marginTop: '5px' }}>
-                            <button className="cop-btn" style={{ background: '#5cb85c', border: 'none' }} onClick={handleAddManualPlan}>
+                            <button className="cop-btn" style={{ background: 'var(--success-solid)', border: 'none' }} onClick={handleAddManualPlan}>
                                 {t('manualPlan.addToPlan')}
                             </button>
                         </div>
@@ -749,17 +749,17 @@ const ClanTroopPlanner = () => {
 
                     {isStep4Open && (
                         <div style={{ marginTop: '15px' }}>
-                            <div style={{ textAlign: 'center', marginBottom: '20px', borderBottom: '1px dashed #603000', paddingBottom: '15px' }}>
-                                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgba(0,0,0,0.6)', padding: '10px 20px', borderRadius: '8px', border: '1px solid #814c11', fontSize: '14px', fontWeight: 'bold', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.5)' }}>
-                                    <span style={{ color: '#f0c042' }}>{t('clanTroop.step3.arrivalTime')}</span>
+                            <div style={{ textAlign: 'center', marginBottom: '20px', borderBottom: '1px dashed var(--line)', paddingBottom: '15px' }}>
+                                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgba(0,0,0,0.6)', padding: '10px 20px', borderRadius: '8px', border: '1px solid var(--line-2)', fontSize: '14px', fontWeight: 'bold', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.5)' }}>
+                                    <span style={{ color: 'var(--gold)' }}>{t('clanTroop.step3.arrivalTime')}</span>
                                     <input
                                         type="datetime-local"
                                         step="1"
                                         style={{
                                             padding: '8px',
-                                            background: '#111',
-                                            color: '#eaddbd',
-                                            border: '1px solid #603000',
+                                            background: 'var(--ink-850)',
+                                            color: 'var(--text)',
+                                            border: '1px solid var(--line)',
                                             borderRadius: '4px',
                                             colorScheme: 'dark',
                                             cursor: 'pointer',
@@ -774,7 +774,7 @@ const ClanTroopPlanner = () => {
                             <div className="cop-grid" style={{ marginTop: '15px' }}>
                                 <div>
                                     <div className="cop-inner-box" style={{ marginBottom: '15px' }}>
-                                        <h4 style={{ color: '#f0c042', margin: '0 0 10px 0' }}>{t('clanTroop.step3.targetsTitle')}</h4>
+                                        <h4 style={{ color: 'var(--gold)', margin: '0 0 10px 0' }}>{t('clanTroop.step3.targetsTitle')}</h4>
                                         <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
                                             {parsedTargets.map(tObj => {
                                                 const isHidden = hiddenTargets.includes(tObj.coord);
@@ -787,7 +787,7 @@ const ClanTroopPlanner = () => {
                                                 return (
                                                     <div key={tObj.coord} onClick={() => !isHidden && setSelectedTarget(tObj.coord)} className={`cop-list-item ${selectedTarget === tObj.coord && !isHidden ? 'active' : ''}`} style={{ opacity: isHidden ? 0.4 : 1, cursor: isHidden ? 'default' : 'pointer' }}>
                                                         <div>
-                                                            <b style={{ color: '#d9534f', fontSize: '14px' }}>{tObj.coord}{villageNameStr}</b> {tObj.owner}
+                                                            <b style={{ color: 'var(--danger)', fontSize: '14px' }}>{tObj.coord}{villageNameStr}</b> {tObj.owner}
                                                             <div className="cop-target-stats">
                                                                 <span><img src={unitIcons.ram} alt="Kami" /> {k}</span>
                                                                 <span><img src={unitIcons.snob} alt="Mis" /> {m}</span>
@@ -809,14 +809,14 @@ const ClanTroopPlanner = () => {
                                         </div>
 
                                         {suggestionMode === 'player' && (
-                                            <select style={{ width: '100%', padding: '5px', marginBottom: '10px', background: '#111', color: '#f0c042', border: '1px solid #814c11' }} value={selectedPlayer} onChange={e => setSelectedPlayer(e.target.value)}>
+                                            <select style={{ width: '100%', padding: '5px', marginBottom: '10px', background: 'var(--ink-850)', color: 'var(--gold)', border: '1px solid var(--line-2)' }} value={selectedPlayer} onChange={e => setSelectedPlayer(e.target.value)}>
                                                 <option value="">{t('clanTroop.tabs.selectPlayer')}</option>
                                                 {Object.values(clanPlayers).sort().map(p => <option key={p} value={p}>{p}</option>)}
                                             </select>
                                         )}
 
                                         <div style={{ maxHeight: '350px', overflowY: 'auto' }}>
-                                            {suggestedSources.length === 0 ? <div style={{ padding: '10px', color: '#777', textAlign: 'center' }}>{t('clanTroop.suggestions.noVillages')}</div> :
+                                            {suggestedSources.length === 0 ? <div style={{ padding: '10px', color: 'var(--text-3)', textAlign: 'center' }}>{t('clanTroop.suggestions.noVillages')}</div> :
                                                 suggestedSources.map(s => {
                                                     const isHidden = hiddenSources.includes(s.coord);
                                                     const activeOrders = planList.filter(p => p.sourceCoord === s.coord);
@@ -831,11 +831,11 @@ const ClanTroopPlanner = () => {
 
                                                                 {s.profile !== "Bilinmiyor" ? (
                                                                     <div style={{ marginTop: '4px' }}>
-                                                                        <span style={{ fontSize: '11px', background: s.profile.includes(t('clanTroop.profiles.kami')) ? '#8b0000' : '#2b542c', color: 'white', padding: '2px 4px', borderRadius: '3px', fontWeight: 'bold', marginRight: '5px' }}>
+                                                                        <span style={{ fontSize: '11px', background: s.profile.includes(t('clanTroop.profiles.kami')) ? 'var(--danger-solid)' : 'var(--success-solid)', color: 'white', padding: '2px 4px', borderRadius: '3px', fontWeight: 'bold', marginRight: '5px' }}>
                                                                             [{s.profile}]
                                                                         </span>
-                                                                        <span style={{ fontSize: '11px', color: '#aaa' }}>{t('clanTroop.step3.distance')} {s.dist.toFixed(1)}</span>
-                                                                        <div style={{ display: 'flex', gap: '6px', fontSize: '11px', color: '#eaddbd', marginTop: '4px', flexWrap: 'wrap' }}>
+                                                                        <span style={{ fontSize: '11px', color: 'var(--text-2)' }}>{t('clanTroop.step3.distance')} {s.dist.toFixed(1)}</span>
+                                                                        <div style={{ display: 'flex', gap: '6px', fontSize: '11px', color: 'var(--text)', marginTop: '4px', flexWrap: 'wrap' }}>
                                                                             {s.units && s.units.axe > 0 && <span title="Balta"><img src={unitIcons.axe} style={{ width: '12px' }} alt="" />{s.units.axe}</span>}
                                                                             {s.units && s.units.light > 0 && <span title="Hafif"><img src={unitIcons.light} style={{ width: '12px' }} alt="" />{s.units.light}</span>}
                                                                             {s.units && s.units.ram > 0 && <span title="Şah"><img src={unitIcons.ram} style={{ width: '12px' }} alt="" />{s.units.ram}</span>}
@@ -846,11 +846,11 @@ const ClanTroopPlanner = () => {
                                                                         </div>
                                                                     </div>
                                                                 ) : (
-                                                                    <span style={{ fontSize: '11px', color: '#aaa' }}>{t('clanTroop.step3.distance')} {s.dist.toFixed(1)} {t('clanTroop.suggestions.noIntel')}</span>
+                                                                    <span style={{ fontSize: '11px', color: 'var(--text-2)' }}>{t('clanTroop.step3.distance')} {s.dist.toFixed(1)} {t('clanTroop.suggestions.noIntel')}</span>
                                                                 )}
 
                                                                 {activeOrders.length > 0 && (
-                                                                    <div style={{ marginTop: '5px', fontSize: '10px', color: '#f0ad4e', background: 'rgba(240, 173, 78, 0.1)', padding: '2px 4px', borderRadius: '3px', borderLeft: '2px solid #f0ad4e' }}>
+                                                                    <div style={{ marginTop: '5px', fontSize: '10px', color: 'var(--warn)', background: 'rgba(240, 173, 78, 0.1)', padding: '2px 4px', borderRadius: '3px', borderLeft: '2px solid #f0ad4e' }}>
                                                                         {activeOrders.map(o => <div key={o.id}>📌 {o.targetCoord} ({t(`clanTroop.units.${o.unitType}`, { defaultValue: o.unitType })})</div>)}
                                                                     </div>
                                                                 )}
@@ -888,7 +888,7 @@ const ClanTroopPlanner = () => {
             {/* OPERASYON KUYRUĞU */}
             {sortedPlanList.length > 0 && (
                 <div className="cop-table-wrapper" style={{ marginTop: '25px' }}>
-                    <div style={{ padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#2a1908' }}>
+                    <div style={{ padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--surface-2)' }}>
                         <h4 style={{ margin: 0, color: '#fff' }}>{t('clanTroop.queue.title').replace('{{count}}', sortedPlanList.length)}</h4>
                         <button className="cop-btn-danger" onClick={clearQueue} style={{ padding: '6px 12px' }}>{t('clanTroop.queue.clear')}</button>
                     </div>
@@ -909,14 +909,14 @@ const ClanTroopPlanner = () => {
 
                                 return (
                                     <tr key={p.id}>
-                                        <td style={{ fontWeight: 'bold', color: '#eaddbd' }}>{index + 1}</td>
+                                        <td style={{ fontWeight: 'bold', color: 'var(--text)' }}>{index + 1}</td>
                                         <td><span className="cop-player-badge">{p.player}</span></td>
-                                        <td style={{ fontWeight: 'bold', color: '#eaddbd' }}>{p.sourceCoord}{sourceNameStr}</td>
-                                        <td style={{ fontWeight: 'bold', color: '#d9534f', fontSize: '13px' }}>{p.targetCoord}{targetNameStr}</td>
-                                        <td style={{ fontWeight: 'bold', color: '#5cb85c' }}>{p.departureTime}</td>
-                                        <td style={{ fontWeight: 'bold', color: '#d9534f' }}>{p.arrivalTime}</td>
-                                        <td style={{ whiteSpace: 'nowrap', color: '#eaddbd' }}>{t(`clanTroop.units.${p.unitType}`, { defaultValue: p.unitType })}</td>
-                                        <td style={{ color: '#eaddbd' }}>{p.dist}</td>
+                                        <td style={{ fontWeight: 'bold', color: 'var(--text)' }}>{p.sourceCoord}{sourceNameStr}</td>
+                                        <td style={{ fontWeight: 'bold', color: 'var(--danger)', fontSize: '13px' }}>{p.targetCoord}{targetNameStr}</td>
+                                        <td style={{ fontWeight: 'bold', color: 'var(--success)' }}>{p.departureTime}</td>
+                                        <td style={{ fontWeight: 'bold', color: 'var(--danger)' }}>{p.arrivalTime}</td>
+                                        <td style={{ whiteSpace: 'nowrap', color: 'var(--text)' }}>{t(`clanTroop.units.${p.unitType}`, { defaultValue: p.unitType })}</td>
+                                        <td style={{ color: 'var(--text)' }}>{p.dist}</td>
                                         <td><button className="cop-btn-danger" onClick={() => setPlanList(planList.filter(x => x.id !== p.id))}>{t('clanTroop.queue.delete')}</button></td>
                                     </tr>
                                 )
@@ -925,23 +925,23 @@ const ClanTroopPlanner = () => {
                     </table>
 
                     {/* BBCODE */}
-                    <div style={{ background: '#1a1a1a', padding: '15px', borderTop: '2px solid #603000' }}>
+                    <div style={{ background: 'var(--surface-2)', padding: '15px', borderTop: '2px solid var(--line)' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap', gap: '10px' }}>
-                            <h4 style={{ margin: 0, color: '#f0c042' }}>{t('clanTroop.bbcode.title')}</h4>
+                            <h4 style={{ margin: 0, color: 'var(--gold)' }}>{t('clanTroop.bbcode.title')}</h4>
                             <button className="cop-btn" onClick={() => { navigator.clipboard.writeText(generatedBBCode); showToast(t('clanTroop.alerts.copied')); }}>{t('clanTroop.bbcode.copyAll')}</button>
                         </div>
 
                         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '10px', fontSize: '13px' }}>
-                            <b style={{ color: '#dcb589' }}>{t('clanTroop.bbcode.selectCols', 'Sütunları Seç:')}</b>
+                            <b style={{ color: 'var(--copper)' }}>{t('clanTroop.bbcode.selectCols', 'Sütunları Seç:')}</b>
                             {Object.keys(bbCols).map(col => (
-                                <label key={col} style={{ cursor: 'pointer', color: '#eaddbd', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                <label key={col} style={{ cursor: 'pointer', color: 'var(--text)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '4px' }}>
                                     <input type="checkbox" checked={bbCols[col]} onChange={() => setBbCols({ ...bbCols, [col]: !bbCols[col] })} />
                                     {bbColLabels[col]}
                                 </label>
                             ))}
                         </div>
 
-                        <textarea className="cop-textarea" style={{ height: '250px', background: '#0a0a0a', color: '#f0c042' }} value={generatedBBCode} readOnly />
+                        <textarea className="cop-textarea" style={{ height: '250px', background: 'var(--ink-900)', color: 'var(--gold)' }} value={generatedBBCode} readOnly />
                     </div>
                 </div>
             )}

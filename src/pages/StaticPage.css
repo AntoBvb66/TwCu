@@ -1,0 +1,138 @@
+/* =========================================================================
+   METİN SAYFALARI (Hakkımda / Gizlilik)
+   Bu sayfalar önceden ScavengingPlanner.css sınıflarını kullanıyordu ama o
+   dosyayı içe aktarmıyorlardı; /about veya /privacy adresine doğrudan
+   girildiğinde stiller hiç yüklenmiyordu. Artık kendi dosyaları var.
+   ========================================================================= */
+
+.static-page {
+    max-width: 880px;
+    margin: 0 auto 40px auto;
+    width: 100%;
+    animation: static-fade 0.4s var(--ease);
+}
+
+@keyframes static-fade {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.static-page-header {
+    margin: 0 0 26px 0;
+    padding-bottom: 16px;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 800;
+    letter-spacing: -0.4px;
+    color: var(--gold);
+    border-bottom: 1px solid var(--line);
+}
+
+.static-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 26px;
+    margin-bottom: 20px;
+    box-shadow: var(--sh-md);
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--text-2);
+}
+
+.static-card:last-child { margin-bottom: 0; }
+
+.static-card h2 {
+    margin: 0 0 16px 0;
+    padding-bottom: 10px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--gold);
+    border-bottom: 1px solid var(--line);
+}
+
+.static-card p { margin: 0 0 14px 0; }
+.static-card p:last-child { margin-bottom: 0; }
+
+.static-lead {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+/* --- Gizlilik maddeleri --- */
+.static-list {
+    list-style: none;
+    margin: 18px 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.static-list li {
+    position: relative;
+    background: var(--ink-850);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--gold);
+    border-radius: var(--r-sm);
+    padding: 14px 16px;
+    font-size: 13.5px;
+    line-height: 1.7;
+}
+
+.static-note {
+    margin-top: 18px;
+    padding: 14px 16px;
+    background: var(--success-bg);
+    border: 1px solid rgba(69, 214, 125, 0.25);
+    border-radius: var(--r-sm);
+    color: var(--success);
+    font-weight: 600;
+}
+
+/* --- İletişim --- */
+.static-contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.static-mail-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 22px;
+    background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+    color: var(--text-on-gold);
+    border: 1px solid var(--gold-deep);
+    border-radius: var(--r-sm);
+    font-weight: 800;
+    font-size: 14px;
+    text-decoration: none;
+    box-shadow: var(--sh-sm);
+    transition: transform var(--t-fast), box-shadow var(--t-fast), filter var(--t-fast);
+}
+
+.static-mail-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+    box-shadow: 0 6px 18px rgba(253, 225, 0, 0.18);
+}
+
+.static-mail-btn:active { transform: translateY(0); }
+
+.static-mail-address {
+    color: var(--copper);
+    font-weight: 700;
+    font-size: 14.5px;
+    font-family: var(--font-mono);
+    user-select: all;
+    cursor: text;
+}
+
+@media (max-width: 768px) {
+    .static-card { padding: 18px; border-radius: var(--r-md); }
+    .static-mail-btn { width: 100%; justify-content: center; }
+}

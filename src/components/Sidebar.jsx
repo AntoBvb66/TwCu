@@ -72,24 +72,26 @@ const languages = [
 
     const currentLang = languages.find(l => l.code === i18n.language) || languages[0];
 
+    // group: ana sayfadaki kategorilerle aynı sıralama. Grup değişince
+    // menüde ince bir ayraç çizgisi çıkar (bkz. .menu-item.group-start).
     const menuItems = [
-        { path: '/clan-op', label: t('menu.items.clanOp'), icon: '📜' },
-        { path: '/clan-troop-op', label: t('menu.items.clanTroop'), icon: '🪖' },
-        { path: '/op-planner', label: t('menu.items.opPlanner'), icon: '🎯' },
-        { path: '/fast-support', label: t('menu.items.fastSupport'), icon: '🛡️' },
+        { path: '/clan-op', label: t('menu.items.clanOp'), icon: '📜', group: 'ops' },
+        { path: '/clan-troop-op', label: t('menu.items.clanTroop'), icon: '🪖', group: 'ops' },
+        { path: '/op-planner', label: t('menu.items.opPlanner'), icon: '🎯', group: 'ops' },
+        { path: '/fast-support', label: t('menu.items.fastSupport'), icon: '🛡️', group: 'ops' },
 
-        { path: '/building-planner', label: t('menu.items.buildingPlanner'), icon: '🏰' },
-        { path: '/building-times', label: t('menu.items.buildingTimes'), icon: '⏳' },
-        { path: '/unit-calculator', label: t('menu.items.unitCalculator'), icon: '⚔️' },
+        { path: '/building-planner', label: t('menu.items.buildingPlanner'), icon: '🏰', group: 'build' },
+        { path: '/building-times', label: t('menu.items.buildingTimes'), icon: '⏳', group: 'build' },
+        { path: '/unit-calculator', label: t('menu.items.unitCalculator'), icon: '⚔️', group: 'build' },
 
-        { path: '/scavenging', label: t('scavenging.title'), icon: '🏕️' },
-        { path: '/production-data', label: t('menu.items.productionData'), icon: '⛏️' },
-        { path: '/coin-minter', label: t('menu.items.coinMinter'), icon: '💰' },
+        { path: '/scavenging', label: t('scavenging.title'), icon: '🏕️', group: 'eco' },
+        { path: '/production-data', label: t('menu.items.productionData'), icon: '⛏️', group: 'eco' },
+        { path: '/coin-minter', label: t('menu.items.coinMinter'), icon: '💰', group: 'eco' },
 
-        { path: '/map-generator', label: t('menu.items.mapGenerator'), icon: '🌍' },
-        { path: '/map-analysis', label: t('menu.items.mapAnalysis'), icon: '🧭' },
-        { path: '/church-planner', label: t('menu.items.churchPlanner'), icon: '⛪' },
-        { path: '/notification-settings', label: t('menu.items.notificationSettings'), icon: '🔔' }
+        { path: '/map-generator', label: t('menu.items.mapGenerator'), icon: '🌍', group: 'intel' },
+        { path: '/map-analysis', label: t('menu.items.mapAnalysis'), icon: '🧭', group: 'intel' },
+        { path: '/church-planner', label: t('menu.items.churchPlanner'), icon: '⛪', group: 'intel' },
+        { path: '/notification-settings', label: t('menu.items.notificationSettings'), icon: '🔔', group: 'intel' }
     ];
 
     return (
@@ -108,23 +110,19 @@ const languages = [
                 <div className="logo">
                     <img
                         src={`${import.meta.env.BASE_URL}logo192.png`}
-                        alt="TW"
+                        alt="TW Cobre"
                         width="32"
                         height="32"
-                        style={{ borderRadius: '6px' }}
+                        className="topbar-logo-img"
                     />
                     <span>{t('menu.title')}</span>
                 </div>
             </div>
 
             <nav className={`sidebar ${isCollapsed ? 'collapsed' : ''} ${isOpen ? 'open' : ''}`}>
-               <div className="sidebar-header" style={{ position: 'relative' }}>
-                    <Link 
-                        to="/" 
-                        style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }} 
-                        onClick={() => setIsOpen(false)}
-                    >
-                        <img src={`${import.meta.env.BASE_URL}logo192.png`} alt="TW Logo" className="sidebar-logo-img" />
+               <div className="sidebar-header">
+                    <Link to="/" className="sidebar-brand" onClick={() => setIsOpen(false)}>
+                        <img src={`${import.meta.env.BASE_URL}logo192.png`} alt="TW Cobre" className="sidebar-logo-img" width="62" height="62" />
                         <h1 className="sidebar-logo-text">{t('menu.title')}</h1>
                     </Link>
 
@@ -147,11 +145,11 @@ const languages = [
                         title={t('menu.changeLanguage')}
                         aria-expanded={isLangOpen}
                     >
-                        <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                        <span className="lang-current">
                             <img src={`https://flagcdn.com/w20/${currentLang.flag}.png`} alt={currentLang.label} className="lang-flag" />
                             <span className="lang-text">{currentLang.label}</span>
-                        </div>
-                        <span className="lang-arrow" style={{ fontSize: '10px' }}>{isLangOpen ? '▲' : '▼'}</span>
+                        </span>
+                        <span className="lang-arrow">{isLangOpen ? '▲' : '▼'}</span>
                     </button>
 
                     {isLangOpen && (
@@ -171,12 +169,15 @@ const languages = [
                 </div>
 
                 <ul className="sidebar-menu">
-                    {menuItems.map((item) => (
-                        <li key={item.path} className="menu-item">
+                    {menuItems.map((item, index) => (
+                        <li
+                            key={item.path}
+                            className={`menu-item ${index > 0 && menuItems[index - 1].group !== item.group ? 'group-start' : ''}`}
+                        >
                             <Link 
                                 to={item.path} 
                                 className={`menu-link ${location.pathname === item.path ? 'active' : ''}`}
-                                data-tooltip={item.label}
+                                title={item.label}
                                 onClick={() => setIsOpen(false)}
                             >
                                 <span className="menu-icon">{item.icon}</span>

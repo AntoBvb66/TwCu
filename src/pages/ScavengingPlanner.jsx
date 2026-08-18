@@ -242,24 +242,24 @@ const ScavengingPlanner = () => {
                     </div>
 
                     <div style={{ marginTop: 'auto', paddingTop: '15px' }}>
-                        <div style={{ padding: '10px', background: '#111', borderRadius: '4px', border: '1px solid #603000', fontSize: '13px' }}>
-                            <div style={{ color: '#f0c042', marginBottom: '5px', fontWeight: 'bold' }}>{t('scavenging.settings.resHourly')}</div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#eaddbd', fontSize: '12px' }}>
+                        <div style={{ padding: '10px', background: 'var(--ink-850)', borderRadius: '4px', border: '1px solid var(--line)', fontSize: '13px' }}>
+                            <div style={{ color: 'var(--gold)', marginBottom: '5px', fontWeight: 'bold' }}>{t('scavenging.settings.resHourly')}</div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text)', fontSize: '12px' }}>
                                 <span><img src={resIcons.wood} alt="W" style={{ width: '12px' }} /> {Math.round(math.baseW / 60).toLocaleString()} {t('scavenging.production.perMin')}</span>
                                 <span>{Math.round(math.baseW).toLocaleString()} {t('scavenging.production.perHour')}</span>
                                 <span>{Math.round(math.baseW * 24).toLocaleString()} {t('scavenging.production.perDay')}</span>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#eaddbd', fontSize: '12px', marginTop: '3px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text)', fontSize: '12px', marginTop: '3px' }}>
                                 <span><img src={resIcons.clay} alt="C" style={{ width: '12px' }} /> {Math.round(math.baseC / 60).toLocaleString()} {t('scavenging.production.perMin')}</span>
                                 <span>{Math.round(math.baseC).toLocaleString()} {t('scavenging.production.perHour')}</span>
                                 <span>{Math.round(math.baseC * 24).toLocaleString()} {t('scavenging.production.perDay')}</span>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#eaddbd', fontSize: '12px', marginTop: '3px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text)', fontSize: '12px', marginTop: '3px' }}>
                                 <span><img src={resIcons.iron} alt="I" style={{ width: '12px' }} /> {Math.round(math.baseI / 60).toLocaleString()} {t('scavenging.production.perMin')}</span>
                                 <span>{Math.round(math.baseI).toLocaleString()} {t('scavenging.production.perHour')}</span>
                                 <span>{Math.round(math.baseI * 24).toLocaleString()} {t('scavenging.production.perDay')}</span>
                             </div>
-                            <div style={{ borderTop: '1px dashed #444', marginTop: '5px', paddingTop: '5px', display: 'flex', justifyContent: 'space-between', color: '#5cb85c' }}>
+                            <div style={{ borderTop: '1px dashed var(--line-2)', marginTop: '5px', paddingTop: '5px', display: 'flex', justifyContent: 'space-between', color: 'var(--success)' }}>
                                 <b>{t('scavenging.settings.worldConstant')}</b> <span>{math.worldConstant.toFixed(10)}</span>
                             </div>
                         </div>
@@ -281,27 +281,27 @@ const ScavengingPlanner = () => {
 
                     <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                         <div style={{ flex: 1 }}>
-                            <label style={{ fontSize: '11px', fontWeight: 'bold', color: '#f0c042' }}>{t('scavenging.troops.carryFlag')}</label>
+                            <label style={{ fontSize: '11px', fontWeight: 'bold', color: 'var(--gold)' }}>{t('scavenging.troops.carryFlag')}</label>
                             <input type="number" step="1" className="scav-input" value={carryFlag} onChange={e => setCarryFlag(e.target.value)} />
                         </div>
                         <div style={{ flex: 1 }}>
-                            <label style={{ fontSize: '11px', fontWeight: 'bold', color: '#5cb85c' }}>{t('scavenging.troops.resFlag')}</label>
+                            <label style={{ fontSize: '11px', fontWeight: 'bold', color: 'var(--success)' }}>{t('scavenging.troops.resFlag')}</label>
                             <input type="number" step="1" className="scav-input" value={resFlag} onChange={e => setResFlag(e.target.value)} />
                         </div>
                     </div>
 
                     <div style={{ marginTop: 'auto', paddingTop: '15px' }}>
-                        <div style={{ padding: '10px', background: '#1a1a1a', borderRadius: '4px', border: '1px solid #333', fontSize: '13px' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#aaa', marginBottom: '5px' }}>
+                        <div style={{ padding: '10px', background: 'var(--surface-2)', borderRadius: '4px', border: '1px solid var(--line)', fontSize: '13px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-2)', marginBottom: '5px' }}>
                                 <span>{t('scavenging.troops.totalCap')}</span> <b>{math.baseCapacity.toLocaleString()}</b>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#f0c042', marginBottom: '10px', paddingBottom: '10px', borderBottom: '1px dashed #444' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--gold)', marginBottom: '10px', paddingBottom: '10px', borderBottom: '1px dashed var(--line-2)' }}>
                                 <span>{t('scavenging.troops.totalCapFlag')}</span> <b>{math.totalCapacityWithFlag.toLocaleString()}</b>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#aaa', marginBottom: '5px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-2)', marginBottom: '5px' }}>
                                 <span>{t('scavenging.troops.totalRes')}</span> <b>{Math.round(math.totalBaseHourly).toLocaleString()} {t('scavenging.production.perHour')}</b>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#5cb85c' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--success)' }}>
                                 <span>{t('scavenging.troops.totalResFlag')}</span> <b>{Math.round(math.totalResFlagHourly).toLocaleString()} {t('scavenging.production.perHour')}</b>
                             </div>
                         </div>
@@ -313,15 +313,15 @@ const ScavengingPlanner = () => {
             {math.baseCapacity > 0 ? (
                 <div className="scav-bottom-grid">
 
-                    <div className="scav-box" style={{ background: '#111', border: '1px solid #333' }}>
-                        <h3 style={{ color: '#fff', borderBottom: '1px solid #444', paddingBottom: '10px' }}>{t('scavenging.results.chartTitle')}</h3>
+                    <div className="scav-box" style={{ background: 'var(--ink-850)', border: '1px solid var(--line)' }}>
+                        <h3 style={{ color: '#fff', borderBottom: '1px solid var(--line-2)', paddingBottom: '10px' }}>{t('scavenging.results.chartTitle')}</h3>
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginTop: '10px', flexGrow: 1 }}>
                             {math.allStrategies.slice(0, 10).map((strat, index) => (
                                 <div key={strat.id} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                    <div style={{ width: '25px', color: '#f0c042', fontSize: '14px', fontWeight: 'bold', textAlign: 'right' }}>#{index + 1}</div>
-                                    <div style={{ flex: 1, background: '#222', height: '32px', borderRadius: '6px', position: 'relative', display: 'flex', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.5)' }}>
-                                        <div style={{ width: `${(strat.resDaily / maxChartValue) * 100}%`, background: 'linear-gradient(90deg, #1b381b, #4cae4c)', height: '100%', borderRadius: strat.scavDaily === 0 ? '6px' : '6px 0 0 6px' }}></div>
+                                    <div style={{ width: '25px', color: 'var(--gold)', fontSize: '14px', fontWeight: 'bold', textAlign: 'right' }}>#{index + 1}</div>
+                                    <div style={{ flex: 1, background: 'var(--surface-3)', height: '32px', borderRadius: '6px', position: 'relative', display: 'flex', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.5)' }}>
+                                        <div style={{ width: `${(strat.resDaily / maxChartValue) * 100}%`, background: 'linear-gradient(90deg, var(--success-bg), #4cae4c)', height: '100%', borderRadius: strat.scavDaily === 0 ? '6px' : '6px 0 0 6px' }}></div>
                                         <div style={{ width: `${(strat.scavDaily / maxChartValue) * 100}%`, background: 'linear-gradient(90deg, #8b6508, #f0ad4e)', height: '100%', borderLeft: '1px solid rgba(0,0,0,0.5)', borderRadius: strat.resDaily === 0 ? '6px' : '0 6px 6px 0' }}></div>
 
                                         <div style={{ position: 'absolute', width: '100%', height: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 10px', fontSize: '12px', color: '#fff', fontWeight: 'bold', textShadow: '1px 1px 2px #000' }}>
@@ -333,55 +333,55 @@ const ScavengingPlanner = () => {
                             ))}
                         </div>
                         <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '20px', fontSize: '12px', fontWeight: 'bold' }}>
-                            <span style={{ color: '#5cb85c' }}>{t('scavenging.chart.dailyMining')}</span>
-                            <span style={{ color: '#f0ad4e' }}>{t('scavenging.chart.dailyScavenging')}</span>
+                            <span style={{ color: 'var(--success)' }}>{t('scavenging.chart.dailyMining')}</span>
+                            <span style={{ color: 'var(--warn)' }}>{t('scavenging.chart.dailyScavenging')}</span>
                         </div>
                     </div>
 
-                    <div className="scav-box" style={{ background: '#1a1a1a', border: '1px solid #333' }}>
-                        <h3 style={{ color: '#f0c042' }}>{t('scavenging.results.title')}</h3>
+                    <div className="scav-box" style={{ background: 'var(--surface-2)', border: '1px solid var(--line)' }}>
+                        <h3 style={{ color: 'var(--gold)' }}>{t('scavenging.results.title')}</h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px', maxHeight: '460px', overflowY: 'auto', paddingRight: '5px' }}>
                             {math.allStrategies.map((strat, index) => (
-                                <div key={strat.id} style={{ background: '#111', border: '1px solid #444', borderRadius: '6px', padding: '10px', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                                    <div style={{ width: '30px', fontSize: '18px', fontWeight: 'bold', color: '#555', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>#{index + 1}</div>
+                                <div key={strat.id} style={{ background: 'var(--ink-850)', border: '1px solid var(--line-2)', borderRadius: '6px', padding: '10px', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                                    <div style={{ width: '30px', fontSize: '18px', fontWeight: 'bold', color: 'var(--text-3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>#{index + 1}</div>
 
                                     <div style={{ flex: 2, minWidth: '140px' }}>
-                                        <div style={{ color: '#eaddbd', fontWeight: 'bold', fontSize: '14px' }}>{strat.modeName}</div>
-                                        <div style={{ color: '#aaa', fontSize: '12px' }}>{strat.confName}</div>
-                                        <div style={{ marginTop: '4px', fontSize: '11px', display: 'inline-block', padding: '2px 6px', borderRadius: '3px', background: strat.flagId === 'carry' ? '#8b0000' : strat.flagId === 'res' ? '#2b542c' : '#444', color: '#fff' }}>
+                                        <div style={{ color: 'var(--text)', fontWeight: 'bold', fontSize: '14px' }}>{strat.modeName}</div>
+                                        <div style={{ color: 'var(--text-2)', fontSize: '12px' }}>{strat.confName}</div>
+                                        <div style={{ marginTop: '4px', fontSize: '11px', display: 'inline-block', padding: '2px 6px', borderRadius: '3px', background: strat.flagId === 'carry' ? '#8b0000' : strat.flagId === 'res' ? '#2b542c' : 'var(--line-2)', color: '#fff' }}>
                                             {strat.flagName}
                                         </div>
                                     </div>
 
                                     {/* YENİ: GÜNLÜK, SAATLİK, DAKİKALIK DETAY TABLOSU */}
-                                    <div style={{ flex: 3, minWidth: '220px', fontSize: '11px', borderLeft: '1px dashed #333', paddingLeft: '10px' }}>
-                                        <table style={{ width: '100%', borderCollapse: 'collapse', color: '#ccc', fontSize: '11px' }}>
+                                    <div style={{ flex: 3, minWidth: '220px', fontSize: '11px', borderLeft: '1px dashed var(--line)', paddingLeft: '10px' }}>
+                                        <table style={{ width: '100%', borderCollapse: 'collapse', color: 'var(--text-2)', fontSize: '11px' }}>
                                             <tbody>
                                                 <tr>
-                                                    <td style={{ paddingBottom: '4px', color: '#f0ad4e' }}><b>{t('scavenging.results.scavenge')}:</b></td>
-                                                    <td style={{ paddingBottom: '4px', textAlign: 'right' }}>{Math.round(strat.scavDaily).toLocaleString()}<span style={{ color: '#777' }}>{t('scavenging.results.dayShort')}</span></td>
-                                                    <td style={{ paddingBottom: '4px', textAlign: 'right' }}>{Math.round(strat.scavDaily / 24).toLocaleString()}<span style={{ color: '#777' }}>{t('scavenging.results.hourShort')}</span></td>
-                                                    <td style={{ paddingBottom: '4px', textAlign: 'right' }}>{Math.round(strat.scavDaily / 1440).toLocaleString()}<span style={{ color: '#777' }}>{t('scavenging.results.minShort')}</span></td>
+                                                    <td style={{ paddingBottom: '4px', color: 'var(--warn)' }}><b>{t('scavenging.results.scavenge')}:</b></td>
+                                                    <td style={{ paddingBottom: '4px', textAlign: 'right' }}>{Math.round(strat.scavDaily).toLocaleString()}<span style={{ color: 'var(--text-3)' }}>{t('scavenging.results.dayShort')}</span></td>
+                                                    <td style={{ paddingBottom: '4px', textAlign: 'right' }}>{Math.round(strat.scavDaily / 24).toLocaleString()}<span style={{ color: 'var(--text-3)' }}>{t('scavenging.results.hourShort')}</span></td>
+                                                    <td style={{ paddingBottom: '4px', textAlign: 'right' }}>{Math.round(strat.scavDaily / 1440).toLocaleString()}<span style={{ color: 'var(--text-3)' }}>{t('scavenging.results.minShort')}</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td style={{ paddingBottom: '6px', color: '#5cb85c' }}><b>{t('scavenging.results.resource')}:</b></td>
-                                                    <td style={{ paddingBottom: '6px', textAlign: 'right' }}>{Math.round(strat.resDaily).toLocaleString()}<span style={{ color: '#777' }}>{t('scavenging.results.dayShort')}</span></td>
-                                                    <td style={{ paddingBottom: '6px', textAlign: 'right' }}>{Math.round(strat.resDaily / 24).toLocaleString()}<span style={{ color: '#777' }}>{t('scavenging.results.hourShort')}</span></td>
-                                                    <td style={{ paddingBottom: '6px', textAlign: 'right' }}>{Math.round(strat.resDaily / 1440).toLocaleString()}<span style={{ color: '#777' }}>{t('scavenging.results.minShort')}</span></td>
+                                                    <td style={{ paddingBottom: '6px', color: 'var(--success)' }}><b>{t('scavenging.results.resource')}:</b></td>
+                                                    <td style={{ paddingBottom: '6px', textAlign: 'right' }}>{Math.round(strat.resDaily).toLocaleString()}<span style={{ color: 'var(--text-3)' }}>{t('scavenging.results.dayShort')}</span></td>
+                                                    <td style={{ paddingBottom: '6px', textAlign: 'right' }}>{Math.round(strat.resDaily / 24).toLocaleString()}<span style={{ color: 'var(--text-3)' }}>{t('scavenging.results.hourShort')}</span></td>
+                                                    <td style={{ paddingBottom: '6px', textAlign: 'right' }}>{Math.round(strat.resDaily / 1440).toLocaleString()}<span style={{ color: 'var(--text-3)' }}>{t('scavenging.results.minShort')}</span></td>
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <div style={{ color: '#aaa', borderTop: '1px dashed #444', paddingTop: '4px' }}>
+                                        <div style={{ color: 'var(--text-2)', borderTop: '1px dashed var(--line-2)', paddingTop: '4px' }}>
                                             <b>{t('scavenging.results.maxTrip')}:</b> <span style={{ color: '#fff' }}>{formatClock(strat.maxTime)}</span>
                                         </div>
                                     </div>
 
-                                    <div style={{ flex: 1, minWidth: '100px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end', borderLeft: '1px dashed #333' }}>
-                                        <span style={{ fontSize: '10px', color: '#aaa' }}>{t('scavenging.results.totalDaily')}</span>
-                                        <span style={{ fontSize: '18px', fontWeight: 'bold', color: index === 0 ? '#5cb85c' : '#fff' }}>
+                                    <div style={{ flex: 1, minWidth: '100px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end', borderLeft: '1px dashed var(--line)' }}>
+                                        <span style={{ fontSize: '10px', color: 'var(--text-2)' }}>{t('scavenging.results.totalDaily')}</span>
+                                        <span style={{ fontSize: '18px', fontWeight: 'bold', color: index === 0 ? 'var(--success)' : '#fff' }}>
                                             {Math.round(strat.totalDaily).toLocaleString()}
                                         </span>
-                                        <span style={{ fontSize: '10px', color: '#777', marginTop: '2px' }}>
+                                        <span style={{ fontSize: '10px', color: 'var(--text-3)', marginTop: '2px' }}>
                                             ({Math.round(strat.totalDaily / 24).toLocaleString()}{t('scavenging.results.hourShort')} | {Math.round(strat.totalDaily / 1440).toLocaleString()}{t('scavenging.results.minShort')})
                                         </span>
                                     </div>
@@ -392,29 +392,29 @@ const ScavengingPlanner = () => {
 
                 </div>
             ) : (
-                <div className="scav-box" style={{ background: '#1a1a1a' }}>
-                    <h3 style={{ color: '#5bc0de' }}>{t('scavenging.reference.title')}</h3>
-                    <p style={{ fontSize: '11px', color: '#aaa' }}>{t('scavenging.reference.info')}</p>
+                <div className="scav-box" style={{ background: 'var(--surface-2)' }}>
+                    <h3 style={{ color: 'var(--info)' }}>{t('scavenging.reference.title')}</h3>
+                    <p style={{ fontSize: '11px', color: 'var(--text-2)' }}>{t('scavenging.reference.info')}</p>
                     <table className="scav-table" style={{ marginTop: '10px', background: 'transparent' }}>
                         <thead>
                             <tr>
-                                <th style={{ background: '#222', color: '#fff', border: '1px solid #444' }}>{t('scavenging.reference.cap')}</th>
-                                <th style={{ background: '#222', color: '#fff', border: '1px solid #444' }}>{t('scavenging.reference.eqTimeDaily')}</th>
-                                <th style={{ background: '#222', color: '#fff', border: '1px solid #444' }}>{t('scavenging.reference.eqCapDaily')}</th>
-                                <th style={{ background: '#222', color: '#fff', border: '1px solid #444' }}>{t('scavenging.reference.winner')}</th>
+                                <th style={{ background: 'var(--surface-3)', color: '#fff', border: '1px solid var(--line-2)' }}>{t('scavenging.reference.cap')}</th>
+                                <th style={{ background: 'var(--surface-3)', color: '#fff', border: '1px solid var(--line-2)' }}>{t('scavenging.reference.eqTimeDaily')}</th>
+                                <th style={{ background: 'var(--surface-3)', color: '#fff', border: '1px solid var(--line-2)' }}>{t('scavenging.reference.eqCapDaily')}</th>
+                                <th style={{ background: 'var(--surface-3)', color: '#fff', border: '1px solid var(--line-2)' }}>{t('scavenging.reference.winner')}</th>
                             </tr>
                         </thead>
                         <tbody>
                             {math.referenceTable.map(row => (
                                 <tr key={row.cap}>
-                                    <td style={{ fontWeight: 'bold', color: '#fff', borderBottom: '1px solid #333' }}>{row.cap.toLocaleString()}</td>
-                                    <td style={{ color: row.eqTimeDaily > row.eqCapDaily ? '#5cb85c' : '#ccc', fontWeight: row.eqTimeDaily > row.eqCapDaily ? 'bold' : 'normal', borderBottom: '1px solid #333' }}>
+                                    <td style={{ fontWeight: 'bold', color: '#fff', borderBottom: '1px solid var(--line)' }}>{row.cap.toLocaleString()}</td>
+                                    <td style={{ color: row.eqTimeDaily > row.eqCapDaily ? 'var(--success)' : 'var(--text-2)', fontWeight: row.eqTimeDaily > row.eqCapDaily ? 'bold' : 'normal', borderBottom: '1px solid var(--line)' }}>
                                         {Math.round(row.eqTimeDaily).toLocaleString()}
                                     </td>
-                                    <td style={{ color: row.eqCapDaily > row.eqTimeDaily ? '#5cb85c' : '#ccc', fontWeight: row.eqCapDaily > row.eqTimeDaily ? 'bold' : 'normal', borderBottom: '1px solid #333' }}>
+                                    <td style={{ color: row.eqCapDaily > row.eqTimeDaily ? 'var(--success)' : 'var(--text-2)', fontWeight: row.eqCapDaily > row.eqTimeDaily ? 'bold' : 'normal', borderBottom: '1px solid var(--line)' }}>
                                         {Math.round(row.eqCapDaily).toLocaleString()}
                                     </td>
-                                    <td style={{ color: '#f0c042', fontSize: '11px', borderBottom: '1px solid #333' }}>
+                                    <td style={{ color: 'var(--gold)', fontSize: '11px', borderBottom: '1px solid var(--line)' }}>
                                         {row.eqTimeDaily > row.eqCapDaily
                                             ? `🏆 ${t('scavenging.results.modes.eqTime')}`
                                             : `🏆 ${t('scavenging.results.modes.eqCap')}`}
@@ -425,11 +425,11 @@ const ScavengingPlanner = () => {
                     </table>
                 </div>
             )}
-            <div className="scav-box" style={{ background: '#111', border: '1px solid #333', marginTop: '20px', overflowX: 'auto' }}>
-                <h3 style={{ color: '#fff', borderBottom: '1px solid #444', paddingBottom: '10px' }}>
+            <div className="scav-box" style={{ background: 'var(--ink-850)', border: '1px solid var(--line)', marginTop: '20px', overflowX: 'auto' }}>
+                <h3 style={{ color: '#fff', borderBottom: '1px solid var(--line-2)', paddingBottom: '10px' }}>
                     {t('scavenging.chart.title')}
                 </h3>
-                <div style={{ fontSize: '12px', color: '#aaa', marginBottom: '15px' }}>
+                <div style={{ fontSize: '12px', color: 'var(--text-2)', marginBottom: '15px' }}>
                     <span dangerouslySetInnerHTML={{ __html: t('scavenging.chart.worldConstantInfo').replace('{{constant}}', `<b style="color:#f0c042">${math.worldConstant.toFixed(10)}</b>`) }} />
                 </div>
 
@@ -492,9 +492,9 @@ const ScavengingPlanner = () => {
                 </div>
 
                 {/* BİLGİ NOTU: BAŞA BAŞ (DÖNÜM) NOKTALARI */}
-                <div style={{ marginTop: '20px', background: '#1a1a1a', padding: '15px', borderRadius: '6px', borderLeft: '4px solid #f0c042' }}>
-                    <h4 style={{ margin: '0 0 10px 0', color: '#f0c042' }}>{t('scavenging.chart.infoTitle')}</h4>
-                    <div style={{ fontSize: '13px', color: '#eaddbd', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ marginTop: '20px', background: 'var(--surface-2)', padding: '15px', borderRadius: '6px', borderLeft: '4px solid var(--gold)' }}>
+                    <h4 style={{ margin: '0 0 10px 0', color: 'var(--gold)' }}>{t('scavenging.chart.infoTitle')}</h4>
+                    <div style={{ fontSize: '13px', color: 'var(--text)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                         {math.be1234_vs_234 && (
                             <div dangerouslySetInnerHTML={{ __html: t('scavenging.chart.be1').replace('{{cap}}', `<b style="color: #ffc107">${math.be1234_vs_234.toLocaleString()}</b>`) }} />
                         )}

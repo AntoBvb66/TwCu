@@ -662,13 +662,13 @@ const validateAndAddHighlight = async (cIndex, config) => {
         {/* --- BİLGİLENDİRME PANELİ --- */}
         {showInfoPanel && (
           <div style={{
-            backgroundColor: '#262626',
+            backgroundColor: 'var(--surface-3)',
             borderLeft: '4px solid #ef4444',
             padding: '16px 24px',
             marginBottom: '24px',
             borderRadius: '0 8px 8px 0',
             fontSize: '14px',
-            color: '#d1d5db',
+            color: 'var(--text-2)',
             lineHeight: '1.7',
             boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
           }}>
@@ -686,13 +686,13 @@ const validateAndAddHighlight = async (cIndex, config) => {
               </ul>
 
               {/* Yeni Özellikler Ayırıcı */}
-              <div style={{ height: '1px', backgroundColor: '#404040', margin: '4px 0' }}></div>
+              <div style={{ height: '1px', backgroundColor: 'var(--surface-3)', margin: '4px 0' }}></div>
 
               {/* Takip ve Modüller */}
               <ul style={{ margin: 0, paddingLeft: '24px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <li><strong style={{ color: '#e6c43e' }}>{t('infoPanel.filtersInfo')}</strong>{t('infoPanel.filtersInfoDesc')}</li>
-                <li><strong style={{ color: '#facc15' }}>{t('infoPanel.continentTrackingTitle')}</strong> {t('infoPanel.continentTrackingDesc')}</li>
-                <li><strong style={{ color: '#fb923c' }}>{t('infoPanel.fullTrackingTitle')}</strong> <span dangerouslySetInnerHTML={{ __html: t('infoPanel.fullTrackingDesc') }} /></li>
+                <li><strong style={{ color: 'var(--gold)' }}>{t('infoPanel.filtersInfo')}</strong>{t('infoPanel.filtersInfoDesc')}</li>
+                <li><strong style={{ color: 'var(--gold)' }}>{t('infoPanel.continentTrackingTitle')}</strong> {t('infoPanel.continentTrackingDesc')}</li>
+                <li><strong style={{ color: 'var(--copper)' }}>{t('infoPanel.fullTrackingTitle')}</strong> <span dangerouslySetInnerHTML={{ __html: t('infoPanel.fullTrackingDesc') }} /></li>
               </ul>
             </div>
 
@@ -701,20 +701,20 @@ const validateAndAddHighlight = async (cIndex, config) => {
 
         {/* --- AKORDEON DÖNGÜSÜ --- */}
         {configs.map((config, cIndex) => (
-          <div key={config.uiId} style={{ marginBottom: '20px', border: '1px solid #444', borderRadius: '10px', overflow: 'hidden', backgroundColor: '#1e1e1e' }}>
+          <div key={config.uiId} style={{ marginBottom: '20px', border: '1px solid var(--line-2)', borderRadius: '10px', overflow: 'hidden', backgroundColor: 'var(--surface-2)' }}>
 
             <div
-              style={{ padding: '15px 20px', backgroundColor: '#2a2a2a', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', borderBottom: config.isExpanded ? '1px solid #444' : 'none' }}
+              style={{ padding: '15px 20px', backgroundColor: 'var(--surface-3)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', borderBottom: config.isExpanded ? '1px solid #444' : 'none' }}
               onClick={() => toggleAccordion(cIndex)}
             >
-              <h3 style={{ margin: 0, color: '#e0e0e0', fontSize: '18px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <span style={{ color: '#ff4d4d' }}>⚙️ {config.profileName || `${t('profile.newProfile')} ${cIndex + 1}`}</span>
-                <span style={{ color: '#888', fontSize: '14px' }}>({getWorldName(config.globalSettings.worldUrl)})</span>
+              <h3 style={{ margin: 0, color: 'var(--text-2)', fontSize: '18px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <span style={{ color: 'var(--danger)' }}>⚙️ {config.profileName || `${t('profile.newProfile')} ${cIndex + 1}`}</span>
+                <span style={{ color: 'var(--text-3)', fontSize: '14px' }}>({getWorldName(config.globalSettings.worldUrl)})</span>
               </h3>
               <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <button
                   onClick={(e) => { e.stopPropagation(); removeProfile(cIndex); }}
-                  style={{ background: 'none', border: 'none', color: '#ff4d4d', cursor: 'pointer', fontSize: '14px', textDecoration: 'underline' }}
+                  style={{ background: 'none', border: 'none', color: 'var(--danger)', cursor: 'pointer', fontSize: '14px', textDecoration: 'underline' }}
                 >
                   {t('profile.delete')}
                 </button>
@@ -823,9 +823,9 @@ const validateAndAddHighlight = async (cIndex, config) => {
                           onClick={() => updateConfig(cIndex, 'globalSettings', 'notificationType', 'image')}
                           style={{
                             flex: 1, padding: '10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s',
-                            backgroundColor: config.globalSettings.notificationType === 'image' ? '#ef4444' : '#2a2a2a',
-                            border: config.globalSettings.notificationType === 'image' ? '1px solid #ef4444' : '1px solid #555',
-                            color: config.globalSettings.notificationType === 'image' ? '#fff' : '#888',
+                            backgroundColor: config.globalSettings.notificationType === 'image' ? 'var(--danger-solid)' : 'var(--surface-3)',
+                            border: config.globalSettings.notificationType === 'image' ? '1px solid var(--danger-solid)' : '1px solid var(--line-2)',
+                            color: config.globalSettings.notificationType === 'image' ? '#fff' : 'var(--text-3)',
                             display: 'flex', justifyContent: 'center', alignItems: 'center'
                           }}
                           title={t('settings.typeImage') || "Görsel (Resimli) Bildirim"}
@@ -837,9 +837,9 @@ const validateAndAddHighlight = async (cIndex, config) => {
                           onClick={() => updateConfig(cIndex, 'globalSettings', 'notificationType', 'text')}
                           style={{
                             flex: 1, padding: '10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s',
-                            backgroundColor: config.globalSettings.notificationType === 'text' || !config.globalSettings.notificationType ? '#ef4444' : '#2a2a2a',
-                            border: config.globalSettings.notificationType === 'text' || !config.globalSettings.notificationType ? '1px solid #ef4444' : '1px solid #555',
-                            color: config.globalSettings.notificationType === 'text' || !config.globalSettings.notificationType ? '#fff' : '#888',
+                            backgroundColor: config.globalSettings.notificationType === 'text' || !config.globalSettings.notificationType ? 'var(--danger-solid)' : 'var(--surface-3)',
+                            border: config.globalSettings.notificationType === 'text' || !config.globalSettings.notificationType ? '1px solid var(--danger-solid)' : '1px solid var(--line-2)',
+                            color: config.globalSettings.notificationType === 'text' || !config.globalSettings.notificationType ? '#fff' : 'var(--text-3)',
                             display: 'flex', justifyContent: 'center', alignItems: 'center'
                           }}
                           title={t('settings.typeText') || "Metin (Yazılı) Bildirim"}
@@ -1041,10 +1041,10 @@ const validateAndAddHighlight = async (cIndex, config) => {
 
                     {/* ================= SOL TARAF: FULL TAKİP ================= */}
                     <div style={{ flex: '1 1 300px', borderRight: '1px dashed rgba(255, 77, 77, 0.3)', paddingRight: '20px' }}>
-                      <h3 className="section-title" style={{ color: '#ff4d4d', marginBottom: '8px' }}>
+                      <h3 className="section-title" style={{ color: 'var(--danger)', marginBottom: '8px' }}>
                         {t('fullTracking.title')}
                       </h3>
-                      <p style={{ fontSize: '13px', color: '#a1a1aa', margin: '0 0 16px 0' }}>
+                      <p style={{ fontSize: '13px', color: 'var(--text-2)', margin: '0 0 16px 0' }}>
                         {t('fullTracking.description')}
                       </p>
 
@@ -1054,8 +1054,8 @@ const validateAndAddHighlight = async (cIndex, config) => {
                           checked={config.fullTracking}
                           onChange={(e) => updateConfig(cIndex, 'fullTracking', null, e.target.checked)}
                         />
-                        <div className="toggle-slider" style={{ backgroundColor: config.fullTracking ? '#ff4d4d' : '' }}></div>
-                        <span className="toggle-label" style={{ color: config.fullTracking ? '#ff4d4d' : '#e2e8f0', fontWeight: config.fullTracking ? 'bold' : 'normal' }}>
+                        <div className="toggle-slider" style={{ backgroundColor: config.fullTracking ? 'var(--danger-solid)' : '' }}></div>
+                        <span className="toggle-label" style={{ color: config.fullTracking ? 'var(--danger)' : 'var(--text)', fontWeight: config.fullTracking ? 'bold' : 'normal' }}>
                           {config.fullTracking ? t('fullTracking.active') : t('fullTracking.inactive')}
                         </span>
                       </label>
@@ -1063,10 +1063,10 @@ const validateAndAddHighlight = async (cIndex, config) => {
 
                     {/* ================= SAĞ TARAF: KITA TAKİBİ ================= */}
                     <div style={{ flex: '1 1 300px' }}>
-                      <h3 className="section-title" style={{ color: '#ff4d4d', marginBottom: '8px' }}>
+                      <h3 className="section-title" style={{ color: 'var(--danger)', marginBottom: '8px' }}>
                         {t('continentTracking.title')}
                       </h3>
-                      <p style={{ fontSize: '13px', color: '#a1a1aa', margin: '0 0 16px 0' }}>
+                      <p style={{ fontSize: '13px', color: 'var(--text-2)', margin: '0 0 16px 0' }}>
                         {t('continentTracking.description')}
                       </p>
 
@@ -1086,7 +1086,7 @@ const validateAndAddHighlight = async (cIndex, config) => {
                         <button
                           className="btn"
                           onClick={() => handleAddContinent(cIndex, config)}
-                          style={{ background: '#ff4d4d', color: '#fff' }}
+                          style={{ background: 'var(--danger-solid)', color: '#fff' }}
                         >
                           {t('common.add')}
                         </button>
@@ -1114,7 +1114,7 @@ const validateAndAddHighlight = async (cIndex, config) => {
                         })}
 
                         {(!config.selectedContinents || config.selectedContinents.trim() === "") && (
-                          <span style={{ fontSize: '13px', color: '#555', fontStyle: 'italic' }}>{t('continentTracking.noContinentAdded')}</span>
+                          <span style={{ fontSize: '13px', color: 'var(--text-3)', fontStyle: 'italic' }}>{t('continentTracking.noContinentAdded')}</span>
                         )}
                       </div>
 
@@ -1132,9 +1132,9 @@ const validateAndAddHighlight = async (cIndex, config) => {
         <div
           style={{
             marginBottom: '20px',
-            border: '1px dashed #444',
+            border: '1px dashed var(--line-2)',
             borderRadius: '10px',
-            backgroundColor: '#1a1a1a',
+            backgroundColor: 'var(--surface-2)',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
@@ -1147,7 +1147,7 @@ const validateAndAddHighlight = async (cIndex, config) => {
           onMouseLeave={(e) => e.currentTarget.style.opacity = '0.7'}
           onClick={addNewProfile}
         >
-          <span style={{ color: '#888', display: 'flex', alignItems: 'center', gap: '10px', fontSize: '16px' }}>
+          <span style={{ color: 'var(--text-3)', display: 'flex', alignItems: 'center', gap: '10px', fontSize: '16px' }}>
             <IconPlus /> {t('profile.createNewProfile')}
           </span>
         </div>
@@ -1163,7 +1163,7 @@ const validateAndAddHighlight = async (cIndex, config) => {
             style={{
               background: 'none',
               border: 'none',
-              color: '#888',
+              color: 'var(--text-3)',
               textDecoration: 'underline',
               cursor: 'pointer',
               fontSize: '14px',
@@ -1179,7 +1179,7 @@ const validateAndAddHighlight = async (cIndex, config) => {
             <div style={{
               marginTop: '15px',
               padding: '15px',
-              backgroundColor: '#1e1e1e',
+              backgroundColor: 'var(--surface-2)',
               border: '1px solid #ef4444',
               borderRadius: '8px',
               display: 'flex',

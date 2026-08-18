@@ -35,6 +35,12 @@
       "title": "Dobrodošli v TW Cobre",
       "subtitle": "Zmaga se skriva v podrobnostih in brezhibnem načrtovanju. Prihranite čas na vaši poti v Vojni plemen in osnujte strateške načrte, ki bodo vaše pleme vodili do zmage. Izberite orodje za začetek."
     },
+    "categories": {
+      "ops": "Operacije in vojska",
+      "build": "Zgradbe in vas",
+      "eco": "Ekonomija in surovine",
+      "intel": "Zemljevid in izvidništvo"
+    },
     "tools": {
       "opPlanner": {
         "title": "Osebni načrtovalec operacij",

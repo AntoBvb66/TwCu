@@ -280,7 +280,7 @@ const ChurchPlanner = () => {
                             <div className="legend-item"><div className="legend-color" style={{background: 'rgba(150,150,150,0.8)'}}></div> {t('churchPlanner.existing')}</div>
                             <div className="legend-item"><div className="legend-color" style={{background: 'rgba(255,100,100,0.8)'}}></div> {t('churchPlanner.firstChurch')}</div>
                             <div className="legend-item"><div className="legend-color" style={{background: 'rgba(100,255,100,0.8)'}}></div> {t('churchPlanner.normalChurch')}</div>
-                            <div className="legend-item" style={{marginLeft: '10px'}}><div className="legend-color" style={{background: '#f0c042', width: '8px', height: '8px'}}></div> {t('churchPlanner.coveredVillage')}</div>
+                            <div className="legend-item" style={{marginLeft: '10px'}}><div className="legend-color" style={{background: 'var(--gold)', width: '8px', height: '8px'}}></div> {t('churchPlanner.coveredVillage')}</div>
                             <div className="legend-item"><div className="legend-color" style={{background: '#ff0000', width: '8px', height: '8px'}}></div> {t('churchPlanner.uncoveredVillage')}</div>
                         </div>
                         <canvas ref={canvasRef} width="600" height="600" style={{maxWidth: '100%', height: 'auto', display: 'block', margin: '0 auto'}}></canvas>

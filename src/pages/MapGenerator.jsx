@@ -64,7 +64,7 @@ const CustomColorPicker = ({ color, onChange }) => {
                     {/* Arka plan tıklamasını yakalayıp menüyü kapatmak için görünmez katman */}
                     <div style={{ position: 'fixed', inset: 0, zIndex: 99 }} onClick={() => setIsOpen(false)} />
 
-                    <div style={{ position: 'absolute', top: '30px', left: '0', zIndex: 100, background: '#262626', border: '1px solid #444', padding: '10px', borderRadius: '8px', width: '200px', boxShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
+                    <div style={{ position: 'absolute', top: '30px', left: '0', zIndex: 100, background: 'var(--surface-3)', border: '1px solid var(--line-2)', padding: '10px', borderRadius: '8px', width: '200px', boxShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
 
                         {/* Hex Input ve Yerleşik Renk Tekerleği */}
                         <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
@@ -79,7 +79,7 @@ const CustomColorPicker = ({ color, onChange }) => {
                                 type="text"
                                 value={hexValue}
                                 onChange={handleHexChange}
-                                style={{ flexGrow: 1, background: '#1e1e1e', color: '#fff', border: '1px solid #555', borderRadius: '4px', padding: '0 8px', fontSize: '14px', outline: 'none' }}
+                                style={{ flexGrow: 1, background: 'var(--surface-2)', color: '#fff', border: '1px solid #555', borderRadius: '4px', padding: '0 8px', fontSize: '14px', outline: 'none' }}
                             />
                         </div>
 
@@ -440,11 +440,19 @@ const MapGenerator = () => {
         <div className="map-gen-container">
             <h1 className="map-gen-header">{t('mapGenerator.title')}</h1>
 
-            <div className="mg-box" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                <label>{t('mapGenerator.worldUrl')}</label>
-                <input type="text" className="mg-input" value={worldUrl} onChange={e => setWorldUrl(e.target.value)} style={{ width: '400px' }} />
-                <button className="mg-btn" style={{ width: 'auto' }} onClick={handleFetchData}>{t('mapGenerator.fetchBtn')}</button>
-                <span style={{ fontSize: '12px', color: '#aaa' }}>{status}</span>
+            {/* Sabit 400px girdi dar ekranda taşıyordu; satır artık sarıyor ve
+                girdi kalan alanı esneyerek dolduruyor. */}
+            <div className="mg-box mg-world-row">
+                <label htmlFor="mg-world-url">{t('mapGenerator.worldUrl')}</label>
+                <input
+                    id="mg-world-url"
+                    type="text"
+                    className="mg-input mg-world-input"
+                    value={worldUrl}
+                    onChange={e => setWorldUrl(e.target.value)}
+                />
+                <button className="mg-btn mg-btn-inline" onClick={handleFetchData}>{t('mapGenerator.fetchBtn')}</button>
+                <span className="mg-status">{status}</span>
             </div>
 
             <div className="map-gen-grid">
@@ -464,15 +472,33 @@ const MapGenerator = () => {
                                         <input type="number" className="mg-input mg-input-small" value={settings.centerY} onChange={e => setSettings({ ...settings, centerY: e.target.value })} />
                                     </td>
                                 </tr>
-                                <tr><td>{t('mapGenerator.settings.markersOnly')}</td><td><input type="checkbox" checked={settings.markersOnly} onChange={e => setSettings({ ...settings, markersOnly: e.target.checked })} /></td></tr>
-                                <tr><td>{t('mapGenerator.settings.showAbandons')}</td><td><input type="checkbox" checked={settings.showAbandons} onChange={e => setSettings({ ...settings, showAbandons: e.target.checked })} /></td></tr>
-                                <tr><td>{t('mapGenerator.settings.largerMarkers')}</td><td><input type="checkbox" checked={settings.largerMarkers} onChange={e => setSettings({ ...settings, largerMarkers: e.target.checked })} /></td></tr>
+                                <tr>
+                                    <td><label className="mg-check-label" htmlFor="mg-markersOnly">{t('mapGenerator.settings.markersOnly')}</label></td>
+                                    <td><input id="mg-markersOnly" type="checkbox" checked={settings.markersOnly} onChange={e => setSettings({ ...settings, markersOnly: e.target.checked })} /></td>
+                                </tr>
+                                <tr>
+                                    <td><label className="mg-check-label" htmlFor="mg-showAbandons">{t('mapGenerator.settings.showAbandons')}</label></td>
+                                    <td><input id="mg-showAbandons" type="checkbox" checked={settings.showAbandons} onChange={e => setSettings({ ...settings, showAbandons: e.target.checked })} /></td>
+                                </tr>
+                                <tr>
+                                    <td><label className="mg-check-label" htmlFor="mg-largerMarkers">{t('mapGenerator.settings.largerMarkers')}</label></td>
+                                    <td><input id="mg-largerMarkers" type="checkbox" checked={settings.largerMarkers} onChange={e => setSettings({ ...settings, largerMarkers: e.target.checked })} /></td>
+                                </tr>
                                 <tr><td>{t('mapGenerator.settings.bgColor')}</td><td>
                                     <CustomColorPicker color={settings.bgColor} onChange={newColor => setSettings({ ...settings, bgColor: newColor })} />
                                 </td></tr>
-                                <tr><td>{t('mapGenerator.settings.dullBg')}</td><td><input type="checkbox" checked={settings.dullBg} onChange={e => setSettings({ ...settings, dullBg: e.target.checked })} /></td></tr>
-                                <tr><td>{t('mapGenerator.settings.showGrid')}</td><td><input type="checkbox" checked={settings.showGrid} onChange={e => setSettings({ ...settings, showGrid: e.target.checked })} /></td></tr>
-                                <tr><td>{t('mapGenerator.settings.showContinentNums')}</td><td><input type="checkbox" checked={settings.showContinentNums} onChange={e => setSettings({ ...settings, showContinentNums: e.target.checked })} /></td></tr>
+                                <tr>
+                                    <td><label className="mg-check-label" htmlFor="mg-dullBg">{t('mapGenerator.settings.dullBg')}</label></td>
+                                    <td><input id="mg-dullBg" type="checkbox" checked={settings.dullBg} onChange={e => setSettings({ ...settings, dullBg: e.target.checked })} /></td>
+                                </tr>
+                                <tr>
+                                    <td><label className="mg-check-label" htmlFor="mg-showGrid">{t('mapGenerator.settings.showGrid')}</label></td>
+                                    <td><input id="mg-showGrid" type="checkbox" checked={settings.showGrid} onChange={e => setSettings({ ...settings, showGrid: e.target.checked })} /></td>
+                                </tr>
+                                <tr>
+                                    <td><label className="mg-check-label" htmlFor="mg-showContinentNums">{t('mapGenerator.settings.showContinentNums')}</label></td>
+                                    <td><input id="mg-showContinentNums" type="checkbox" checked={settings.showContinentNums} onChange={e => setSettings({ ...settings, showContinentNums: e.target.checked })} /></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -493,7 +519,7 @@ const MapGenerator = () => {
                                 <ul className="autocomplete-list">
                                     {playerSuggestions.map(sug => (
                                         <li key={sug.id} onMouseDown={() => selectPlayerSuggestion(sug)}>
-                                            {sug.name} <span style={{ color: '#777', fontSize: '11px' }}>({sug.points.toLocaleString()} {t('mapGenerator.players.points')})</span>
+                                            {sug.name} <span style={{ color: 'var(--text-3)', fontSize: '11px' }}>({sug.points.toLocaleString()} {t('mapGenerator.players.points')})</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -507,10 +533,10 @@ const MapGenerator = () => {
                         </div>
 
                         <div className="tribe-list" style={{ marginTop: '10px' }}>
-                            {players.length === 0 ? <div style={{ padding: '5px', color: '#aaa', fontSize: '12px' }}>{t('mapGenerator.players.noPlayers')}</div> : null}
+                            {players.length === 0 ? <div style={{ padding: '5px', color: 'var(--text-2)', fontSize: '12px' }}>{t('mapGenerator.players.noPlayers')}</div> : null}
                             {players.map((p, index) => (
                                 <div key={p.id} className="tribe-item" style={{ display: 'flex', alignItems: 'center' }}>
-                                    <span style={{ color: '#777', width: '25px' }}>{index + 1}.</span>
+                                    <span style={{ color: 'var(--text-3)', width: '25px' }}>{index + 1}.</span>
                                     <CustomColorPicker color={p.color} onChange={(newColor) => updatePlayerColor(p.id, newColor)} />
 
                                     <span style={{ flexGrow: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={p.name}>
@@ -534,10 +560,10 @@ const MapGenerator = () => {
                         </div>
 
                         <div className="tribe-list">
-                            {tribes.length === 0 ? <div style={{ padding: '10px', color: '#aaa' }}>{t('mapGenerator.tribes.noData')}</div> : null}
+                            {tribes.length === 0 ? <div style={{ padding: '10px', color: 'var(--text-2)' }}>{t('mapGenerator.tribes.noData')}</div> : null}
                             {filteredTribes.map((tObj, index) => (
                                 <div key={tObj.id} className="tribe-item" style={{ display: 'flex', alignItems: 'center' }}>
-                                    <span style={{ color: '#777', width: '25px' }}>{index + 1}.</span>
+                                    <span style={{ color: 'var(--text-3)', width: '25px' }}>{index + 1}.</span>
                                     <input type="checkbox" checked={tObj.checked} onChange={e => updateTribe(tObj.id, 'checked', e.target.checked)} style={{ marginRight: '8px' }} />
 
                                     <CustomColorPicker color={tObj.color} onChange={(newColor) => updateTribe(tObj.id, 'color', newColor)} />

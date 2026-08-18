@@ -35,6 +35,12 @@
       "title": "Добредојдовте во TW Cobre",
       "subtitle": "Победата е скриена во деталите и беспрекорното планирање. Заштедете време во вашето патување во Tribal Wars и изработете стратешки планови кои ќе го водат вашето племе кон победа. Изберете алатка за да започнете."
     },
+    "categories": {
+      "ops": "Hadműveletek és katonaság",
+      "build": "Épületek és falu",
+      "eco": "Gazdaság és nyersanyagok",
+      "intel": "Térkép és felderítés"
+    },
     "tools": {
       "opPlanner": {
         "title": "Индивидуален планирач за операции",

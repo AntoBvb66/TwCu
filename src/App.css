@@ -1,23 +1,7 @@
-/* src/App.css */
-
-/* --- TEMEL AYARLAR --- */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    background-color: #f4e4bc;
-    color: #412202;
-    height: 100vh;
-    height: 100dvh; /* Mobil tarayıcı çubuğu açılıp kapanınca zıplamasın */
-    overflow: hidden;
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: rgba(240, 192, 66, 0.25);
-}
+/* =========================================================================
+   TW COBRE — UYGULAMA KABUĞU & ANA SAYFA
+   Renkler src/index.css içindeki token'lardan gelir.
+   ========================================================================= */
 
 .app-container {
     display: flex;
@@ -26,317 +10,401 @@ body {
     width: 100%;
     max-width: 100vw;
     overflow-x: hidden;
+    background: var(--ink-900);
 }
 
+/* --- İÇERİK ALANI ---
+   Üstte hafif bir altın hâlesi var; sayfa kaydırılırken sabit kalması için
+   background-attachment kullanılmaz, bunun yerine ::before katmanı sabittir. */
 .main-content {
-    flex: 1; 
-    padding: 20px;
-    overflow-y: auto; 
-    background-color: #fff6d9; 
-    border-left: 2px solid #603000; 
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    padding: 28px 30px 0 30px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--ink-900);
     display: flex;
     flex-direction: column;
 }
 
-/* --- ANA SAYFA (HOME) TASARIMI --- */
-.home-container {
-    max-width: 1300px;
-    margin: 0 auto;
-    width: 100%;
-    animation: fadeIn 0.5s ease-in-out;
+.main-content::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        radial-gradient(900px 420px at 62% -8%, rgba(253, 225, 0, 0.055), transparent 70%),
+        radial-gradient(700px 500px at 100% 100%, rgba(224, 139, 60, 0.045), transparent 70%);
 }
 
+.page-wrapper {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    width: 100%;
+}
+
+/* =========================================================================
+   ANA SAYFA
+   ========================================================================= */
+
+.home-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    width: 100%;
+    animation: fadeIn 0.45s var(--ease);
+}
+
+/* --- KAHRAMAN BÖLÜMÜ --- */
 .home-hero {
+    position: relative;
+    overflow: hidden;
     text-align: center;
-    background: linear-gradient(135deg, #fcf8f2 0%, #eaddbd 100%);
-    border: 2px solid #c89666;
-    border-bottom: 4px solid #814c11;
-    border-radius: 12px;
-    padding: 40px 20px;
+    background:
+        radial-gradient(600px 260px at 50% 0%, rgba(253, 225, 0, 0.10), transparent 72%),
+        linear-gradient(180deg, var(--surface-2) 0%, var(--ink-850) 100%);
+    border: 1px solid var(--line);
+    border-radius: var(--r-xl);
+    padding: 52px 28px 46px;
     margin-bottom: 40px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    box-shadow: var(--sh-lg);
+}
+
+/* Üst kenarda ince altın şerit */
+.home-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 12%;
+    right: 12%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.75;
+}
+
+.home-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    margin-bottom: 20px;
+    border: 1px solid var(--line-gold);
+    border-radius: var(--r-pill);
+    background: var(--gold-a06);
+    color: var(--gold);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+.home-hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 10px var(--gold);
+    animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
 }
 
 .home-title {
-    color: #5a3a18;
-    margin: 0 0 15px 0;
-    font-size: 32px;
-    text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+    margin: 0 0 16px 0;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    letter-spacing: -0.6px;
+    line-height: 1.15;
+    background: linear-gradient(180deg, #fffbe0 0%, var(--gold) 55%, var(--gold-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--gold);
 }
 
 .home-subtitle {
-    color: #664928;
-    font-size: 16px;
-    line-height: 1.6;
+    color: var(--text-2);
+    font-size: 15.5px;
+    line-height: 1.7;
     margin: 0 auto;
-    max-width: 900px;
+    max-width: 780px;
 }
 
-/* --- İÇERİK IZGARASI (GRID) --- */
-.home-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 25px;
-    padding-bottom: 30px;
+/* --- KATEGORİ BAŞLIĞI --- */
+.home-section {
+    margin-bottom: 34px;
 }
 
-/* --- KART TASARIMLARI --- */
-.home-card {
+.home-section-title {
     display: flex;
     align-items: center;
-    background: #ffffff;
-    border: 1px solid #e0c8a0;
-    border-left: 5px solid #b87333; /* TW Cobre (Bakır) Vurgusu */
-    border-radius: 10px;
-    padding: 20px;
+    gap: 12px;
+    margin: 0 0 18px 0;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--text-3);
+}
+
+.home-section-title::before {
+    content: '';
+    width: 3px;
+    height: 16px;
+    border-radius: 2px;
+    background: var(--gold);
+    box-shadow: 0 0 12px var(--gold-a35);
+    flex-shrink: 0;
+}
+
+.home-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--line), transparent);
+}
+
+/* --- IZGARA --- */
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(330px, 100%), 1fr));
+    gap: 18px;
+}
+
+/* --- KARTLAR --- */
+.home-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 18px;
     text-decoration: none;
-    color: #333;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+    color: inherit;
+    overflow: hidden;
+    transition: transform var(--t), border-color var(--t), box-shadow var(--t), background var(--t);
+}
+
+/* Sol kenardaki altın vurgu — normalde gizli, hover'da açılır */
+.home-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 18px;
+    bottom: 18px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: center;
+    transition: transform var(--t);
 }
 
 .home-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(184, 115, 51, 0.15);
-    border-color: #b87333;
-    background: #fdfbf7;
+    transform: translateY(-3px);
+    background: var(--surface-2);
+    border-color: var(--line-gold);
+    box-shadow: var(--sh-md), 0 0 0 1px var(--gold-a10);
 }
 
-/* --- ŞIK İKON KUTULARI (MADALYON) --- */
+.home-card:hover::before {
+    transform: scaleY(1);
+}
+
+/* --- İKON MADALYONU --- */
 .home-card-icon {
-    font-size: 32px;
-    margin-right: 18px;
-    background: linear-gradient(135deg, #fff6d9 0%, #e8cd9c 100%);
-    width: 65px;
-    height: 65px;
+    flex-shrink: 0;
+    width: 54px;
+    height: 54px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 14px; 
-    border: 2px solid #c89666;
-    box-shadow: 2px 4px 8px rgba(0,0,0,0.1), inset 0px 2px 4px rgba(255,255,255,0.8);
-    flex-shrink: 0;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    font-size: 26px;
+    line-height: 1;
+    border-radius: var(--r-md);
+    background: linear-gradient(160deg, var(--surface-3), var(--ink-800));
+    border: 1px solid var(--line-2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: border-color var(--t), transform var(--t), box-shadow var(--t);
 }
 
 .home-card:hover .home-card-icon {
-    transform: scale(1.08) rotate(-5deg);
-    border-color: #8b0000;
+    border-color: var(--gold-a35);
+    transform: scale(1.06);
+    box-shadow: 0 0 20px var(--gold-a10), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.home-card-content {
+    min-width: 0;
 }
 
 .home-card-content h3 {
-    margin: 0 0 6px 0;
-    color: #8b0000; 
-    font-size: 17px;
+    margin: 0 0 5px 0;
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--text);
+    transition: color var(--t);
+}
+
+.home-card:hover .home-card-content h3 {
+    color: var(--gold);
 }
 
 .home-card-content p {
     margin: 0;
-    font-size: 13px;
-    color: #666;
-    line-height: 1.4;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--text-3);
 }
 
 .home-card-arrow {
     margin-left: auto;
-    font-size: 24px;
-    color: #dcb589;
-    transition: transform 0.3s ease, color 0.3s ease;
-    padding-left: 10px;
+    padding-left: 8px;
+    font-size: 18px;
+    color: var(--text-3);
+    opacity: 0.5;
+    transition: transform var(--t), color var(--t), opacity var(--t);
 }
 
 .home-card:hover .home-card-arrow {
-    color: #8b0000;
-    transform: translateX(6px);
+    color: var(--gold);
+    opacity: 1;
+    transform: translateX(4px);
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
+    from { opacity: 0; transform: translateY(14px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- RESPONSIVE (EKRAN UYUMLULUĞU) --- */
-
-/* TABLET (1024px ve altı) */
-@media screen and (max-width: 1024px) {
-    .home-grid {
-        grid-template-columns: repeat(2, 1fr); /* Tablette 2 sütuna zorla */
-    }
-}
-
-/* MOBİL (768px ve altı) */
-@media screen and (max-width: 768px) {
-    .app-container {
-        flex-direction: column; 
-    }
-    
-    .main-content {
-        border-left: none;
-       padding: 80px 15px 15px 15px;
-    }
-
-    .home-hero {
-        padding: 25px 15px;
-        margin-bottom: 25px;
-    }
-
-    .home-title {
-        font-size: 24px;
-    }
-
-    .home-subtitle {
-        font-size: 14px;
-    }
-
-    .home-grid {
-        grid-template-columns: 1fr; /* Mobilde tek sütun alt alta */
-        gap: 15px;
-    }
-
-    .home-card {
-        padding: 15px;
-    }
-
-    .home-card-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 24px;
-        border-radius: 10px;
-        margin-right: 15px;
-    }
-}
+/* =========================================================================
+   ALT BİLGİ (FOOTER)
+   ========================================================================= */
 
 .global-footer {
-    margin-top: auto; /* Sayfanın en altına iter */
-    background: linear-gradient(to bottom, #2a1908, #1a0f07);
-    border-top: 3px solid #603000;
-    border-radius: 12px 12px 0 0;
-    padding: 20px 0;
-    color: #aaa;
+    position: relative;
+    z-index: 1;
+    margin: 48px -30px 0 -30px;
+    padding: 30px 30px 26px;
+    background: linear-gradient(180deg, var(--ink-850), var(--ink-900));
+    border-top: 1px solid var(--line);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
-    box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+    gap: 22px;
 }
 
-/* --- KÜRESEL İSTATİSTİK ÇUBUĞU (BÜYÜK 4'LÜ) --- */
+/* --- İSTATİSTİK ÇUBUĞU --- */
 .app-global-stats {
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-top: auto; 
-    padding: 12px 25px;
-    background: linear-gradient(135deg, #2a1908 0%, #1a0f07 100%); /* Premium koyu arka plan */
-    border: 2px solid #603000;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 2px 5px rgba(255,255,255,0.05);
-    max-width: 750px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 25px;
+    align-items: stretch;
+    gap: 6px;
+    padding: 8px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--sh-md);
 }
 
 .stat-item {
     display: flex;
     align-items: center;
     gap: 10px;
-    cursor: help; /* Fareyle üzerine gelince soru işareti/bilgi çıkar */
-    transition: transform 0.2s ease;
+    padding: 10px 22px;
+    border-radius: var(--r-md);
+    cursor: help;
+    transition: background var(--t-fast);
 }
 
 .stat-item:hover {
-    transform: translateY(-3px); /* Hafifçe yukarı zıplama efekti */
+    background: var(--gold-a06);
 }
 
 .stat-icon {
-    font-size: 22px;
-    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.8));
+    font-size: 18px;
+    line-height: 1;
+    opacity: 0.9;
 }
 
 .stat-value {
-    font-size: 18px;
-    font-weight: 900;
-    color: #eaddbd;
-    letter-spacing: 0.5px;
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: 0.3px;
+    font-variant-numeric: tabular-nums;
 }
 
 .stat-divider {
-    width: 2px;
-    height: 30px;
-    background: linear-gradient(to bottom, transparent, #814c11, transparent);
-    margin: 0 20px;
+    width: 1px;
+    align-self: center;
+    height: 22px;
+    background: var(--line-2);
 }
 
-/* --- MOBİL UYUM --- */
-@media (max-width: 768px) {
-    .app-global-stats {
-        flex-wrap: wrap;
-        gap: 15px;
-        padding: 15px;
-        border-radius: 8px;
-    }
-    
-    .stat-divider {
-        display: none; /* Mobilde ayraç çizgilerini gizle */
-    }
-    
-    .stat-item {
-        flex: 1 1 40%; /* Mobilde 2x2 ızgara şeklinde dizer */
-        justify-content: center;
-    }
-}
-
-
-/* Linkler Bloğu */
+/* --- LİNKLER --- */
 .footer-links {
     display: flex;
-    gap: 20px;
+    gap: 26px;
     font-size: 13px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .footer-links a {
-    color: #dcb589;
+    position: relative;
+    color: var(--text-2);
     text-decoration: none;
-    transition: color 0.2s ease;
+    padding-bottom: 3px;
+    transition: color var(--t-fast);
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform var(--t);
 }
 
 .footer-links a:hover {
-    color: #f0c042;
-    text-decoration: underline;
+    color: var(--gold);
 }
 
-/* Copyright Bloğu */
+.footer-links a:hover::after {
+    transform: scaleX(1);
+}
+
+/* --- TELİF --- */
 .footer-copyright {
     text-align: center;
     font-size: 12px;
-    color: #777;
-    border-top: 1px dashed #4a2a10;
-    width: 80%;
-    padding-top: 15px;
+    color: var(--text-3);
+    border-top: 1px solid var(--line);
+    width: min(560px, 90%);
+    padding-top: 18px;
+    line-height: 1.6;
 }
 
 .footer-copyright p {
-    margin: 4px 0;
+    margin: 3px 0;
 }
 
-/* Mobilde boşluk bırakma kuralı aynen kalıyor */
-@media (max-width: 768px) {
-    .global-footer {
-        padding-bottom: 90px;
-        margin-top: 30px;
-        border-radius: 0;
-    }
-    .footer-links {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-    }
-}
-/* =========================================
+/* =========================================================================
    SAYFA YÜKLENİYOR GÖSTERGESİ (tembel yükleme)
-   ========================================= */
+   ========================================================================= */
+
 .page-loader {
     display: flex;
     align-items: center;
@@ -346,12 +414,12 @@ body {
 }
 
 .page-loader-spinner {
-    width: 42px;
-    height: 42px;
-    border: 4px solid rgba(129, 76, 17, 0.2);
-    border-top-color: #814c11;
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--line-2);
+    border-top-color: var(--gold);
     border-radius: 50%;
-    animation: page-loader-spin 0.8s linear infinite;
+    animation: page-loader-spin 0.75s linear infinite;
 }
 
 @keyframes page-loader-spin {
@@ -359,18 +427,17 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .page-loader-spinner { animation-duration: 2.5s; }
-    * { scroll-behavior: auto !important; }
+    /* Dönme tamamen durursa "yükleniyor" hissi kaybolur; sadece yavaşlatılır. */
+    .page-loader-spinner { animation-duration: 2.5s !important; }
 }
 
-/* =========================================
-   GENEL MOBİL DÜZELTMELERİ
+/* =========================================================================
+   ORTAK MOBİL / TAŞMA DÜZELTMELERİ
    Sayfaların ortak sorunları: geniş tablolar yatay taşıyor, dokunma
-   hedefleri küçük, iOS'ta 16px altı yazı tipi girdi alanına odaklanınca
+   hedefleri küçük, iOS'ta 16px altı yazı tipi girdiye odaklanınca
    ekranı yakınlaştırıyor.
-   ========================================= */
+   ========================================================================= */
 
-/* Tablolar kendi kutusunda yatay kaysın; sayfa gövdesi kaymasın. */
 .main-content table {
     max-width: 100%;
 }
@@ -382,13 +449,95 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
-/* Resim ve tuval taşmasın */
 .main-content img,
 .main-content canvas {
     max-width: 100%;
 }
 
+/* =========================================================================
+   CİHAZ UYUMU
+   ========================================================================= */
+
+@media (max-width: 1024px) {
+    .main-content {
+        padding: 22px 20px 0 20px;
+    }
+
+    .global-footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .home-grid {
+        grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    }
+}
+
 @media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .main-content {
+        padding: calc(72px + env(safe-area-inset-top)) max(14px, env(safe-area-inset-left)) 0
+            max(14px, env(safe-area-inset-right));
+    }
+
+    .home-hero {
+        padding: 32px 18px 28px;
+        margin-bottom: 28px;
+        border-radius: var(--r-lg);
+    }
+
+    .home-subtitle {
+        font-size: 14px;
+    }
+
+    .home-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .home-card {
+        padding: 14px;
+        gap: 13px;
+    }
+
+    .home-card-icon {
+        width: 46px;
+        height: 46px;
+        font-size: 22px;
+    }
+
+    .global-footer {
+        margin: 34px -14px 0 -14px;
+        padding: 24px 14px calc(90px + env(safe-area-inset-bottom));
+        border-radius: 0;
+    }
+
+    .app-global-stats {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .stat-item {
+        flex: 1 1 40%;
+        justify-content: center;
+        padding: 10px 8px;
+    }
+
+    .stat-divider {
+        display: none;
+    }
+
+    .footer-links {
+        gap: 18px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
     /* iOS Safari 16px altındaki girdilerde otomatik yakınlaştırma yapar */
     .main-content input,
     .main-content select,
@@ -403,18 +552,79 @@ body {
         min-height: 40px;
     }
 
-    /* Üst bar çentikli ekranlarda içeriği örtmesin */
-    .main-content {
-        padding-top: calc(80px + env(safe-area-inset-top));
-        padding-left: max(12px, env(safe-area-inset-left));
-        padding-right: max(12px, env(safe-area-inset-right));
-    }
-
-    /* Geniş tabloları olan bölümler yatay kayabilsin */
+    /* Geniş tablolar kendi kutusunda yatay kaysın */
     .main-content table {
         display: block;
         overflow-x: auto;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* =========================================================================
+   OYUN İKONLARI (Innogames CDN)
+   Bu sprite'lar oyunun açık renkli arayüzü için çizilmiş; koyu konturları
+   siyah zeminde kayboluyordu. İnce açık bir hâle ikonu zeminden ayırır,
+   renklerini bozmadan okunur kılar.
+   ========================================================================= */
+
+.main-content img[src*="innogamescdn"] {
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.75))
+            drop-shadow(0 0 2px rgba(255, 255, 255, 0.35));
+}
+
+/* Seçili olmayan birim ikonları zaten gri tonlanıyor; hâle onları da
+   fazladan soluklaştırmasın. */
+.main-content .op-unit-icon:not(.active) {
+    filter: grayscale(100%);
+}
+
+/* =========================================================================
+   DOKUNMATİK CİHAZLAR
+   Daha önce dokunma hedefi büyütmeleri sadece "max-width: 768px" altında
+   uygulanıyordu; tablet (820px) parmakla kullanıldığı hâlde 24px'lik
+   düğmelerle kalıyordu. Ölçüt artık ekran genişliği değil, işaretleme
+   aygıtının türü.
+   ========================================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+    /* iOS Safari, 16px altındaki girdiye odaklanınca sayfayı yakınlaştırır */
+    .main-content input,
+    .main-content select,
+    .main-content textarea {
+        font-size: 16px;
+    }
+
+    .main-content button,
+    .main-content .btn,
+    .main-content select,
+    .main-content a.static-mail-btn {
+        min-height: 40px;
+    }
+
+    /* Onay kutuları parmakla isabet ettirilebilsin */
+    .main-content input[type='checkbox'],
+    .main-content input[type='radio'] {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Alt bilgi bağlantıları 20px yükseklikte kalıyordu */
+    .footer-links a {
+        padding: 10px 4px;
+    }
+
+    .footer-links a::after {
+        bottom: 6px;
+    }
+}
+
+/* Onay kutusu satırları: kutu 20px olsa da tıklanabilir alan etiketin
+   tamamıdır; dokunmatikte satırı rahat basılabilir yüksekliğe çıkarır. */
+@media (hover: none) and (pointer: coarse) {
+    .main-content label:has(> input[type='checkbox']),
+    .main-content label:has(> input[type='radio']) {
+        min-height: 36px;
+        padding: 4px 2px;
     }
 }

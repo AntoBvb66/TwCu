@@ -280,7 +280,7 @@ const MapAnalysis = () => {
                 <div>
                     <h3>{t('mapAnalysis.sections.autoFetch')}</h3>
                     <div className="ma-box">
-                        <label style={{fontSize: '12px', color: '#ccc'}}>{t('mapAnalysis.sections.worldUrlLabel')}</label>
+                        <label style={{fontSize: '12px', color: 'var(--text-2)'}}>{t('mapAnalysis.sections.worldUrlLabel')}</label>
                         <input type="text" className="ma-input" value={worldUrl} onChange={e => setWorldUrl(e.target.value)} />
                         <button className="ma-btn ma-btn-primary" onClick={handleAutoFetch}>{t('mapAnalysis.sections.downloadBtn')}</button>
                     </div>
@@ -308,7 +308,7 @@ const MapAnalysis = () => {
                     <h3>{t('mapAnalysis.teleports.title').replace('{{count}}', teleports.length)}</h3>
                     <div className="ma-box">
                         <div className="teleport-time">⏳ {timeDiffMsg}</div>
-                        <p style={{fontSize: '11px', color: '#aaa', marginTop: '-5px', marginBottom: '15px'}}>
+                        <p style={{fontSize: '11px', color: 'var(--text-2)', marginTop: '-5px', marginBottom: '15px'}}>
         {t('mapAnalysis.teleports.info')}
     </p>
                         
@@ -318,19 +318,19 @@ const MapAnalysis = () => {
                                 
                                 {Object.keys(groupedTeleports).sort((a,b)=>a-b).map(c => (
                                     <div key={c} style={{marginTop: '15px'}}>
-                                        <h4 style={{color:'#f0c042', margin:'5px 0', borderBottom:'1px dashed #603000'}}>
+                                        <h4 style={{color: 'var(--gold)', margin:'5px 0', borderBottom: '1px dashed var(--line)'}}>
                                             {t('mapAnalysis.teleports.continentTitle').replace('{{cont}}', c).replace('{{count}}', groupedTeleports[c].length)}
                                         </h4>
                                         <ul className="teleport-list">
                                             {groupedTeleports[c].map((tObj) => (
                                                 <li key={tObj.id} className="teleport-item">
                                                     <div>
-                                                        <b>{tObj.player}</b> <span style={{color:'#f0c042'}}>[{tObj.tag}]</span> 
-                                                        <span style={{fontSize: '10px', color: '#888', marginLeft: '10px'}}>
+                                                        <b>{tObj.player}</b> <span style={{color: 'var(--gold)'}}>[{tObj.tag}]</span> 
+                                                        <span style={{fontSize: '10px', color: 'var(--text-3)', marginLeft: '10px'}}>
         {t('mapAnalysis.teleports.datePrefix')} {tObj.date}
     </span><br/>
                                                         
-                                                        <span style={{color:'#aaa', fontSize:'11px'}}>{t('mapAnalysis.teleports.old')} ({tObj.oldX}|{tObj.oldY}) K{tObj.oldC}</span> ➔ <b style={{color:'#ff9999'}}>{t('mapAnalysis.teleports.new')} ({tObj.newX}|{tObj.newY})</b>
+                                                        <span style={{color: 'var(--text-2)', fontSize:'11px'}}>{t('mapAnalysis.teleports.old')} ({tObj.oldX}|{tObj.oldY}) K{tObj.oldC}</span> ➔ <b style={{color: 'var(--danger)'}}>{t('mapAnalysis.teleports.new')} ({tObj.newX}|{tObj.newY})</b>
                                                     </div>
                                                     <button className="ma-btn" style={{width:'auto', padding:'4px 8px', fontSize:'11px'}} onClick={() => drawMap([tObj])}>{t('mapAnalysis.teleports.showBtn')}</button>
                                                 </li>
@@ -340,7 +340,7 @@ const MapAnalysis = () => {
                                 ))}
                             </>
                         ) : (
-                            <p style={{color: '#aaa'}}>{t('mapAnalysis.teleports.none')}</p>
+                            <p style={{color: 'var(--text-2)'}}>{t('mapAnalysis.teleports.none')}</p>
                         )}
                     </div>
 
@@ -356,15 +356,15 @@ const MapAnalysis = () => {
                             return (
                                 <div key={c} className="ma-box" style={{margin:0}}>
                                     <h3 style={{margin:0, border:'none'}}>K{c}</h3>
-                                    <div style={{fontSize:'13px', color:'#aaa', marginBottom:'10px', paddingBottom: '10px', borderBottom: '1px solid #4a2a10'}}>
-                                        <b>{t('mapAnalysis.analysis.player')}:</b> <span style={{color: '#eaddbd'}}>{continentData[c].players.size}</span> | <b>{t('mapAnalysis.analysis.barbarian')}:</b> <span style={{color: '#eaddbd'}}>{bCount}</span>
+                                    <div style={{fontSize:'13px', color: 'var(--text-2)', marginBottom:'10px', paddingBottom: '10px', borderBottom: '1px solid var(--line)'}}>
+                                        <b>{t('mapAnalysis.analysis.player')}:</b> <span style={{color: 'var(--text)'}}>{continentData[c].players.size}</span> | <b>{t('mapAnalysis.analysis.barbarian')}:</b> <span style={{color: 'var(--text)'}}>{bCount}</span>
                                         <br/>
-                                        <span style={{color: farmRatio > 20 ? '#5cb85c' : '#d9534f', fontSize: '11px'}}>
+                                        <span style={{color: farmRatio > 20 ? 'var(--success)' : 'var(--danger)', fontSize: '11px'}}>
         {t('mapAnalysis.analysis.farmRatio')} <b>{farmRatio}</b>
     </span>
                                     </div>
                                     <ul style={{margin:0, paddingLeft:'20px'}}>
-                                        {tribes.map(([tribeTag, count]) => <li key={tribeTag} style={{fontSize: '13px'}}><b style={{color:'#f0c042'}}>{tribeTag}</b>: {count} {t('mapAnalysis.analysis.villages')}</li>)}
+                                        {tribes.map(([tribeTag, count]) => <li key={tribeTag} style={{fontSize: '13px'}}><b style={{color: 'var(--gold)'}}>{tribeTag}</b>: {count} {t('mapAnalysis.analysis.villages')}</li>)}
                                     </ul>
                                 </div>
                             );
@@ -374,12 +374,12 @@ const MapAnalysis = () => {
             )}
 
             {isMapVisible && (
-                <div style={{marginTop: '30px', textAlign: 'center', background: '#fff', padding: '10px', borderRadius: '8px', border: '2px solid #603000'}}>
-                    <h3 style={{color: '#333', borderBottom: '1px solid #ccc', margin: '0 0 10px 0'}}>{t('mapAnalysis.map.title')}</h3>
-                    <p style={{color: '#555', fontSize: '12px', marginBottom: '10px'}}>
+                <div style={{marginTop: '30px', textAlign: 'center', background: 'var(--ink-850)', padding: '10px', borderRadius: '8px', border: '2px solid var(--line)'}}>
+                    <h3 style={{color: 'var(--text-2)', borderBottom: '1px solid var(--line-2)', margin: '0 0 10px 0'}}>{t('mapAnalysis.map.title')}</h3>
+                    <p style={{color: 'var(--text-3)', fontSize: '12px', marginBottom: '10px'}}>
                         <b>{t('mapAnalysis.map.gray')}</b> {t('mapAnalysis.map.oldPos')} &nbsp;|&nbsp; <b style={{color:'red'}}>{t('mapAnalysis.map.red')}</b> {t('mapAnalysis.map.newPos')}
                     </p>
-                    <canvas ref={canvasRef} width="1000" height="1000" style={{border: '1px solid #ccc', width: '100%', maxWidth: '600px'}}></canvas>
+                    <canvas ref={canvasRef} width="1000" height="1000" style={{border: '1px solid var(--line-2)', width: '100%', maxWidth: '600px'}}></canvas>
                     <button className="ma-btn ma-btn-danger" style={{marginTop: '10px'}} onClick={() => setIsMapVisible(false)}>{t('mapAnalysis.map.closeBtn')}</button>
                 </div>
             )}
