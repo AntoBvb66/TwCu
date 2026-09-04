@@ -328,3 +328,19 @@
     color: var(--gold);
 }
 .bp-export-opt input { cursor: pointer; }
+
+/* --- HESAP YÖNETİCİSİ KODU --- */
+.bp-am-hint {
+    font-size: 12px; line-height: 1.5; margin-bottom: 12px;
+    padding: 8px 10px; border-left: 3px solid var(--gold);
+    background: var(--ink-900); border-radius: var(--r-sm);
+}
+.bp-am-name {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 12px; font-size: 13px; color: var(--gold);
+}
+.bp-am-name input {
+    flex: 0 1 240px; padding: 6px 8px; border: 1px solid var(--line-2);
+    border-radius: var(--r-sm); background: var(--ink-900); color: var(--gold);
+}
+.bp-am-name input:focus { outline: none; border-color: var(--gold); }

@@ -139,7 +139,8 @@
       "addQueue": "Lade",
       "copyBoard": "I d Zwischenablage kopiere",
       "close": "Schliesse",
-      "delete": "Lösche"
+      "delete": "Lösche",
+      "amCode": "🏛️ Kontoverwaltigs-Code"
     },
     "modal": {
       "importTitle": "📥 Füeg d kopierti Bau-Queue vom Spiel ii",
@@ -152,7 +153,10 @@
       "levelLabel": "Level",
       "pointsLabel": "Punkte",
       "includeStart": "Start-Gebäudestufe au usgäh",
-      "includeStartHint": "Fuegt d Usbaue, wo es läärs Dorf uf dini Startstufe bringed, Stuef für Stuef am Afang vo de Usgab i."
+      "includeStartHint": "Fuegt d Usbaue, wo es läärs Dorf uf dini Startstufe bringed, Stuef für Stuef am Afang vo de Usgab i.",
+      "amTitle": "🏛️ Kontoverwaltig Vorlage-Code",
+      "amName": "Vorlage-Name:",
+      "amHint": "Setz de Code i s Userscript i, wo Kontoverwaltigs-Vorlage importiert. Wil d Stufe i de Kontoverwaltig absolut sind, werded dini Start-Gebäudestufe immer mitgrächnet."
     },
     "levelsTitle": "🏠 Aktuelli Gebäude-Level (Zeig / Versteck)",
     "analysis": {

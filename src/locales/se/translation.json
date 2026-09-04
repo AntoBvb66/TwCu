@@ -139,7 +139,8 @@
       "addQueue": "Ladda",
       "copyBoard": "Kopiera till Urklipp",
       "close": "Stäng",
-      "delete": "Radera"
+      "delete": "Radera",
+      "amCode": "🏛️ Kontohanterarkod"
     },
     "modal": {
       "importTitle": "📥 Klistra in Byggkön Kopierad från Spelet",
@@ -152,7 +153,10 @@
       "levelLabel": "Nivå",
       "pointsLabel": "Poäng",
       "includeStart": "Ta även med startnivåerna för byggnader",
-      "includeStartHint": "Lägger till högst upp i utmatningen, en nivå i taget, de utbyggnader som tar en tom by upp till dina startnivåer."
+      "includeStartHint": "Lägger till högst upp i utmatningen, en nivå i taget, de utbyggnader som tar en tom by upp till dina startnivåer.",
+      "amTitle": "🏛️ Kontohanterarens mallkod",
+      "amName": "Mallnamn:",
+      "amHint": "Klistra in den här koden i det userscript som importerar kontohanterarens mallar. Eftersom nivåerna där är absoluta inkluderas dina startnivåer alltid i koden."
     },
     "levelsTitle": "🏠 Startbyggnadsnivåer (Dölj / Visa)",
     "analysis": {

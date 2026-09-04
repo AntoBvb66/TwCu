@@ -139,7 +139,8 @@
       "addQueue": "Yükle",
       "copyBoard": "Panoya Kopyala",
       "close": "Kapat",
-      "delete": "Sil"
+      "delete": "Sil",
+      "amCode": "🏛️ Hesap Yöneticisi Kodu"
     },
     "modal": {
       "importTitle": "📥 Oyundan Kopyalanan İnşa kuyruğu listesini yapıştırın",
@@ -152,7 +153,10 @@
       "levelLabel": "Seviye",
       "pointsLabel": "Puan",
       "includeStart": "Başlangıç bina seviyelerini de ekle",
-      "includeStartHint": "Boş köyden girdiğiniz başlangıç seviyelerine ulaşan inşaatlar, tek tek çıktının başına eklenir."
+      "includeStartHint": "Boş köyden girdiğiniz başlangıç seviyelerine ulaşan inşaatlar, tek tek çıktının başına eklenir.",
+      "amTitle": "🏛️ Hesap Yöneticisi Şablon Kodu",
+      "amName": "Şablon adı:",
+      "amHint": "Bu kodu, Hesap Yöneticisi şablonlarını içe aktaran kullanıcı scriptine yapıştırın. Hesap Yöneticisi'ndeki seviyeler mutlak olduğu için başlangıç bina seviyeleriniz koda her zaman dahil edilir."
     },
     "levelsTitle": "🏠 Başlangıç Bina Seviyeleri (Gizle / Göster)",
     "analysis": {

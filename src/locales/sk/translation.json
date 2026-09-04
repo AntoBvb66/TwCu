@@ -139,7 +139,8 @@
       "addQueue": "Načítať",
       "copyBoard": "Kopírovať do schránky",
       "close": "Zatvoriť",
-      "delete": "Odstrániť"
+      "delete": "Odstrániť",
+      "amCode": "🏛️ Kód správcu účtu"
     },
     "modal": {
       "importTitle": "📥 Vložte frontu budovania skopírovanú zo hry",
@@ -152,7 +153,10 @@
       "levelLabel": "Úroveň",
       "pointsLabel": "Body",
       "includeStart": "Pridať aj počiatočné úrovne budov",
-      "includeStartHint": "Na začiatok výstupu pridá po jednej úrovni stavby, ktoré dovedú prázdnu dedinu na vaše počiatočné úrovne."
+      "includeStartHint": "Na začiatok výstupu pridá po jednej úrovni stavby, ktoré dovedú prázdnu dedinu na vaše počiatočné úrovne.",
+      "amTitle": "🏛️ Kód šablóny správcu účtu",
+      "amName": "Názov šablóny:",
+      "amHint": "Vložte tento kód do používateľského skriptu, ktorý importuje šablóny správcu účtu. Keďže úrovne sú tam absolútne, vaše počiatočné úrovne budov sú v kóde vždy zahrnuté."
     },
     "levelsTitle": "🏠 Počiatočné úrovne budov (Skryť / Zobraziť)",
     "analysis": {

@@ -139,7 +139,8 @@
       "addQueue": "Načíst",
       "copyBoard": "Kopírovat do schránky",
       "close": "Zavřít",
-      "delete": "Smazat"
+      "delete": "Smazat",
+      "amCode": "🏛️ Kód správce účtu"
     },
     "modal": {
       "importTitle": "📥 Vložte frontu budov zkopírovanou ze hry",
@@ -152,7 +153,10 @@
       "levelLabel": "Úroveň",
       "pointsLabel": "Body",
       "includeStart": "Přidat i počáteční úrovně budov",
-      "includeStartHint": "Na začátek výstupu přidá po jedné úrovni stavby, které dovedou prázdnou vesnici na vaše počáteční úrovně."
+      "includeStartHint": "Na začátek výstupu přidá po jedné úrovni stavby, které dovedou prázdnou vesnici na vaše počáteční úrovně.",
+      "amTitle": "🏛️ Kód šablony správce účtu",
+      "amName": "Název šablony:",
+      "amHint": "Vložte tento kód do uživatelského skriptu, který importuje šablony správce účtu. Protože úrovně jsou tam absolutní, vaše počáteční úrovně budov jsou v kódu vždy zahrnuty."
     },
     "levelsTitle": "🏠 Počáteční úrovně budov (skrýt / zobrazit)",
     "analysis": {

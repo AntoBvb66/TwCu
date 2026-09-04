@@ -139,7 +139,8 @@
       "addQueue": "Załaduj",
       "copyBoard": "Kopiuj do schowka",
       "close": "Zamknij",
-      "delete": "Usuń"
+      "delete": "Usuń",
+      "amCode": "🏛️ Kod menedżera konta"
     },
     "modal": {
       "importTitle": "📥 Wklej kolejkę budowy skopiowaną z gry",
@@ -152,7 +153,10 @@
       "levelLabel": "Poziom",
       "pointsLabel": "Punkty",
       "includeStart": "Dodaj też początkowe poziomy budynków",
-      "includeStartHint": "Na początku wyniku dodaje, poziom po poziomie, rozbudowy prowadzące pustą wioskę do Twoich poziomów początkowych."
+      "includeStartHint": "Na początku wyniku dodaje, poziom po poziomie, rozbudowy prowadzące pustą wioskę do Twoich poziomów początkowych.",
+      "amTitle": "🏛️ Kod szablonu menedżera konta",
+      "amName": "Nazwa szablonu:",
+      "amHint": "Wklej ten kod do skryptu użytkownika importującego szablony menedżera konta. Ponieważ poziomy są tam bezwzględne, Twoje początkowe poziomy budynków są zawsze zawarte w kodzie."
     },
     "levelsTitle": "🏠 Początkowe poziomy budynków (Ukryj / Pokaż)",
     "analysis": {

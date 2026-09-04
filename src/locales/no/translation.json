@@ -139,7 +139,8 @@
       "addQueue": "Last inn",
       "copyBoard": "Kopier til utklippstavle",
       "close": "Lukk",
-      "delete": "Slett"
+      "delete": "Slett",
+      "amCode": "🏛️ Kontobehandler-kode"
     },
     "modal": {
       "importTitle": "📥 Lim inn byggekø kopiert fra spillet",
@@ -152,7 +153,10 @@
       "levelLabel": "Nivå",
       "pointsLabel": "Poeng",
       "includeStart": "Ta også med startnivåene for bygninger",
-      "includeStartHint": "Legger til øverst i utdataene, ett nivå om gangen, oppgraderingene som tar en tom landsby opp til startnivåene dine."
+      "includeStartHint": "Legger til øverst i utdataene, ett nivå om gangen, oppgraderingene som tar en tom landsby opp til startnivåene dine.",
+      "amTitle": "🏛️ Kontobehandler malkode",
+      "amName": "Malnavn:",
+      "amHint": "Lim denne koden inn i userscriptet som importerer kontobehandler-maler. Siden nivåene der er absolutte, tas startnivåene dine alltid med i koden."
     },
     "levelsTitle": "🏠 Startnivåer for bygninger (Skjul / Vis)",
     "analysis": {

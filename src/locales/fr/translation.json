@@ -139,7 +139,8 @@
       "addQueue": "Charger",
       "copyBoard": "Copier dans le Presse-Papiers",
       "close": "Fermer",
-      "delete": "Supprimer"
+      "delete": "Supprimer",
+      "amCode": "🏛️ Code du gestionnaire de compte"
     },
     "modal": {
       "importTitle": "📥 Collez la File d'Attente de Construction Copiée du Jeu",
@@ -152,7 +153,10 @@
       "levelLabel": "Niveau",
       "pointsLabel": "Points",
       "includeStart": "Inclure aussi les niveaux de départ",
-      "includeStartHint": "Ajoute en tête de la sortie, niveau par niveau, les constructions qui amènent un village vide à vos niveaux de départ."
+      "includeStartHint": "Ajoute en tête de la sortie, niveau par niveau, les constructions qui amènent un village vide à vos niveaux de départ.",
+      "amTitle": "🏛️ Code de modèle du gestionnaire de compte",
+      "amName": "Nom du modèle :",
+      "amHint": "Collez ce code dans le script utilisateur qui importe les modèles du gestionnaire de compte. Les niveaux y étant absolus, vos niveaux de départ sont toujours inclus dans le code."
     },
     "levelsTitle": "🏠 Niveaux de Bâtiments de Départ (Masquer / Afficher)",
     "analysis": {

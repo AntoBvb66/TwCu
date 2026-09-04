@@ -139,7 +139,8 @@
       "addQueue": "Indlæs",
       "copyBoard": "Kopiér til udklipsholder",
       "close": "Luk",
-      "delete": "Slet"
+      "delete": "Slet",
+      "amCode": "🏛️ Kontostyringskode"
     },
     "modal": {
       "importTitle": "📥 Indsæt byggekøen kopieret fra spillet",
@@ -152,7 +153,10 @@
       "levelLabel": "Niveau",
       "pointsLabel": "Point",
       "includeStart": "Medtag også startniveauer for bygninger",
-      "includeStartHint": "Tilføjer øverst i outputtet, ét niveau ad gangen, de opgraderinger der bringer en tom landsby op til dine startniveauer."
+      "includeStartHint": "Tilføjer øverst i outputtet, ét niveau ad gangen, de opgraderinger der bringer en tom landsby op til dine startniveauer.",
+      "amTitle": "🏛️ Kontostyring skabelonkode",
+      "amName": "Skabelonnavn:",
+      "amHint": "Indsæt denne kode i det userscript, der importerer kontostyringsskabeloner. Da niveauerne der er absolutte, medtages dine startniveauer altid i koden."
     },
     "levelsTitle": "🏠 Startniveauer for bygninger (Skjul / Vis)",
     "analysis": {

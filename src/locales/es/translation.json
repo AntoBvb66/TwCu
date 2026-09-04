@@ -139,7 +139,8 @@
       "addQueue": "Cargar",
       "copyBoard": "Copiar al Portapapeles",
       "close": "Cerrar",
-      "delete": "Eliminar"
+      "delete": "Eliminar",
+      "amCode": "🏛️ Código del gestor de cuenta"
     },
     "modal": {
       "importTitle": "📥 Pega la Cola de Construcción Copiada del Juego",
@@ -152,7 +153,10 @@
       "levelLabel": "Nivel",
       "pointsLabel": "Puntos",
       "includeStart": "Incluir también los niveles iniciales",
-      "includeStartHint": "Añade al principio de la salida, nivel a nivel, las mejoras que llevan una aldea vacía hasta tus niveles iniciales."
+      "includeStartHint": "Añade al principio de la salida, nivel a nivel, las mejoras que llevan una aldea vacía hasta tus niveles iniciales.",
+      "amTitle": "🏛️ Código de plantilla del gestor de cuenta",
+      "amName": "Nombre de la plantilla:",
+      "amHint": "Pega este código en el userscript que importa plantillas del gestor de cuenta. Como allí los niveles son absolutos, tus niveles iniciales siempre se incluyen en el código."
     },
     "levelsTitle": "🏠 Niveles de Edificios Iniciales (Ocultar / Mostrar)",
     "analysis": {

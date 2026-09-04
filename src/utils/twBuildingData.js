@@ -168,4 +168,48 @@ function buildStartupQueue(startLevels) {
     return queue;
 }
 
-export { buildTimes, hqModifiers, db, icons, dictionary, timeToSeconds, calc, getFarmCapacity, getWareCapacity, getProduction, getTotalPop, getTotalPts, BASE_LEVELS, getBaseLevels, buildStartupQueue };
+// --- HESAP YONETICISI SABLON KODU ------------------------------------------
+// Oyunun Hesap Yoneticisi > Insaat ekranindaki sablonu ice/disa aktaran
+// scriptin kod bicimi. Gercek bir sablon kodu cozulerek dogrulandi:
+//
+//   0x7C 0x02                     -> baslik ('|' + surum 2)
+//   (binaId, seviyeAdedi) x N     -> kuyruk, sirasiyla; her emir 1 seviye
+//   0x00 0x00                     -> kuyruk sonu
+//   U+100000 <sablon adi> U+100000 '4'
+//
+// Tum dizi UTF-8'e cevrilip base64'lenir.
+const AM_SEPARATOR = String.fromCodePoint(0x100000);
+
+// Bina sirasi. 0-3 ve 7-18 gercek kodla dogrulandi; 4/5/6 (kiliseler ve kule)
+// buildTimes sutun sirasindan geliyor, kiliseli olmayan dunyalarda kullanilmaz.
+const AM_BUILDING_IDS = {
+    hq: 0, barracks: 1, stable: 2, workshop: 3,
+    first_church: 4, church: 5, watchtower: 6,
+    academy: 7, smithy: 8, rally: 9, statue: 10, market: 11,
+    wood: 12, clay: 13, iron: 14, farm: 15, ware: 16, hiding: 17, wall: 18
+};
+
+function utf8ToBase64(str) {
+    const bytes = new TextEncoder().encode(str);
+    let binary = '';
+    for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+    return btoa(binary);
+}
+
+/**
+ * Bina kuyrugunu Hesap Yoneticisi sablon koduna cevirir.
+ * Kuyruktaki her eleman tek bir seviye yukseltmesidir.
+ */
+function buildAccountManagerCode(queueIds, templateName) {
+    let str = String.fromCharCode(0x7C, 0x02);
+    for (const id of queueIds) {
+        const bid = AM_BUILDING_IDS[id];
+        if (bid === undefined) continue;
+        str += String.fromCharCode(bid, 0x01);
+    }
+    str += String.fromCharCode(0x00, 0x00);
+    str += AM_SEPARATOR + (templateName || 'TW Cu') + AM_SEPARATOR + '4';
+    return utf8ToBase64(str);
+}
+
+export { buildTimes, hqModifiers, db, icons, dictionary, timeToSeconds, calc, getFarmCapacity, getWareCapacity, getProduction, getTotalPop, getTotalPts, BASE_LEVELS, getBaseLevels, buildStartupQueue, AM_BUILDING_IDS, buildAccountManagerCode };

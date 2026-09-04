@@ -139,7 +139,8 @@
       "addQueue": "Вчитај",
       "copyBoard": "Копирај во табла",
       "close": "Затвори",
-      "delete": "Избриши"
+      "delete": "Избриши",
+      "amCode": "🏛️ Fiókkezelő kód"
     },
     "modal": {
       "importTitle": "📥 Залепете го редот за градење копиран од играта",
@@ -152,7 +153,10 @@
       "levelLabel": "Ниво",
       "pointsLabel": "Поени",
       "includeStart": "A kezdő épületszintek is kerüljenek bele",
-      "includeStartHint": "A kimenet elejére szintenként hozzáadja azokat az építéseket, amelyek egy üres falut a kezdő szintjeidre visznek."
+      "includeStartHint": "A kimenet elejére szintenként hozzáadja azokat az építéseket, amelyek egy üres falut a kezdő szintjeidre visznek.",
+      "amTitle": "🏛️ Fiókkezelő sablonkód",
+      "amName": "Sablon neve:",
+      "amHint": "Illeszd be ezt a kódot a fiókkezelő sablonjait importáló userscriptbe. Mivel ott a szintek abszolútak, a kezdő épületszintjeid mindig benne vannak a kódban."
     },
     "levelsTitle": "🏠 Почетни нивоа на згради (Сокриј / Покажи)",
     "analysis": {

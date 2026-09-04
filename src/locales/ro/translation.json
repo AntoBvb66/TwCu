@@ -139,7 +139,8 @@
       "addQueue": "Încarcă",
       "copyBoard": "Copiază în Clipboard",
       "close": "Închide",
-      "delete": "Șterge"
+      "delete": "Șterge",
+      "amCode": "🏛️ Cod manager de cont"
     },
     "modal": {
       "importTitle": "📥 LiPește Coada de Construcții Copiată din Joc",
@@ -152,7 +153,10 @@
       "levelLabel": "Nivel",
       "pointsLabel": "Puncte",
       "includeStart": "Include și nivelurile inițiale ale clădirilor",
-      "includeStartHint": "Adaugă la începutul rezultatului, nivel cu nivel, construcțiile care duc un sat gol la nivelurile tale inițiale."
+      "includeStartHint": "Adaugă la începutul rezultatului, nivel cu nivel, construcțiile care duc un sat gol la nivelurile tale inițiale.",
+      "amTitle": "🏛️ Cod șablon manager de cont",
+      "amName": "Numele șablonului:",
+      "amHint": "Lipește acest cod în userscriptul care importă șabloane din managerul de cont. Deoarece acolo nivelurile sunt absolute, nivelurile tale inițiale sunt întotdeauna incluse în cod."
     },
     "levelsTitle": "🏠 Nivelurile Inițiale ale Clădirilor (Ascunde / Afișează)",
     "analysis": {

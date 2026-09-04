@@ -139,7 +139,8 @@
       "addQueue": "Laden",
       "copyBoard": "Kopiëren naar Klembord",
       "close": "Sluiten",
-      "delete": "Verwijderen"
+      "delete": "Verwijderen",
+      "amCode": "🏛️ Accountmanager-code"
     },
     "modal": {
       "importTitle": "📥 Plak de Gebouw Wachtrij Gekopieerd van het Spel",
@@ -152,7 +153,10 @@
       "levelLabel": "Niveau",
       "pointsLabel": "Punten",
       "includeStart": "Ook startniveaus van gebouwen toevoegen",
-      "includeStartHint": "Voegt de upgrades die een leeg dorp naar je startniveaus brengen stap voor stap bovenaan de uitvoer toe."
+      "includeStartHint": "Voegt de upgrades die een leeg dorp naar je startniveaus brengen stap voor stap bovenaan de uitvoer toe.",
+      "amTitle": "🏛️ Accountmanager sjablooncode",
+      "amName": "Sjabloonnaam:",
+      "amHint": "Plak deze code in het userscript dat Accountmanager-sjablonen importeert. Omdat de niveaus in de Accountmanager absoluut zijn, worden je startniveaus altijd meegenomen."
     },
     "levelsTitle": "🏠 Start Gebouw Niveaus (Verbergen / Tonen)",
     "analysis": {

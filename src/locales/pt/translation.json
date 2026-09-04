@@ -139,7 +139,8 @@
       "addQueue": "Carregar",
       "copyBoard": "Copiar para Área de Transferência",
       "close": "Fechar",
-      "delete": "Eliminar"
+      "delete": "Eliminar",
+      "amCode": "🏛️ Código do gestor de conta"
     },
     "modal": {
       "importTitle": "📥 Cole a Fila de Construção Copiada do Jogo",
@@ -152,7 +153,10 @@
       "levelLabel": "Nível",
       "pointsLabel": "Pontos",
       "includeStart": "Incluir também os níveis iniciais",
-      "includeStartHint": "Adiciona no início da saída, nível a nível, as construções que levam uma aldeia vazia até aos teus níveis iniciais."
+      "includeStartHint": "Adiciona no início da saída, nível a nível, as construções que levam uma aldeia vazia até aos teus níveis iniciais.",
+      "amTitle": "🏛️ Código de modelo do gestor de conta",
+      "amName": "Nome do modelo:",
+      "amHint": "Cola este código no userscript que importa modelos do gestor de conta. Como os níveis aí são absolutos, os teus níveis iniciais são sempre incluídos no código."
     },
     "levelsTitle": "🏠 Níveis de Edifícios Iniciais (Ocultar / Mostrar)",
     "analysis": {

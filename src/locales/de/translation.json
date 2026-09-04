@@ -139,7 +139,8 @@
       "addQueue": "Laden",
       "copyBoard": "In die Zwischenablage kopieren",
       "close": "Schließen",
-      "delete": "Löschen"
+      "delete": "Löschen",
+      "amCode": "🏛️ Kontenverwaltungs-Code"
     },
     "modal": {
       "importTitle": "📥 Füge die aus dem Spiel kopierte Bauwarteschlange ein",
@@ -152,7 +153,10 @@
       "levelLabel": "Level",
       "pointsLabel": "Punkte",
       "includeStart": "Start-Gebäudestufen mit ausgeben",
-      "includeStartHint": "Fügt die Ausbauten, die ein leeres Dorf auf deine Startstufen bringen, Stufe für Stufe am Anfang der Ausgabe ein."
+      "includeStartHint": "Fügt die Ausbauten, die ein leeres Dorf auf deine Startstufen bringen, Stufe für Stufe am Anfang der Ausgabe ein.",
+      "amTitle": "🏛️ Kontenverwaltung Vorlagen-Code",
+      "amName": "Vorlagenname:",
+      "amHint": "Füge diesen Code in das Userscript ein, das Kontenverwaltungs-Vorlagen importiert. Da die Stufen in der Kontenverwaltung absolut sind, werden deine Start-Gebäudestufen immer mit eingerechnet."
     },
     "levelsTitle": "🏠 Anfangsgebäude-Level (Verstecken / Anzeigen)",
     "analysis": {

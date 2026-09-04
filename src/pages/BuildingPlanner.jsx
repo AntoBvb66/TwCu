@@ -7,7 +7,7 @@ import './BuildingPlanner.css';
 import {
     buildTimes, hqModifiers, db, icons, dictionary,
     timeToSeconds, calc, getFarmCapacity, getWareCapacity, getProduction, getTotalPop, getTotalPts,
-    getBaseLevels, buildStartupQueue
+    getBaseLevels, buildStartupQueue, buildAccountManagerCode
 } from '../utils/twBuildingData';
 import { optimizeToAcademy } from '../utils/academyOptimizer';
 
@@ -58,6 +58,8 @@ const BuildingPlanner = () => {
     const [templateText, setTemplateText] = useState('');
     // Ciktiya baslangic seviyelerine ulasan insaatlar da eklensin mi?
     const [includeStartLevels, setIncludeStartLevels] = useState(() => storage.get('bp_export_start', true));
+    // Hesap Yoneticisi sablonuna verilecek isim
+    const [amName, setAmName] = useState(() => storage.get('bp_am_name', 'TW Cu'));
 
     // Akademi optimizasyonu: hesap durumu ve onay bekleyen sonuc
     const [optimizing, setOptimizing] = useState(false);
@@ -73,7 +75,8 @@ const BuildingPlanner = () => {
         storage.set('bp_queue', queue);
         storage.set('bp_cols', visibleCols);
         storage.set('bp_export_start', includeStartLevels);
-    }, [worldSpeed, mineSpeed, startLevels, queue, visibleCols, includeStartLevels]);
+        storage.set('bp_am_name', amName);
+    }, [worldSpeed, mineSpeed, startLevels, queue, visibleCols, includeStartLevels, amName]);
 
     const handleLevelChange = (key, val) => {
         let parsed = parseInt(val) || 0;
@@ -331,6 +334,23 @@ const BuildingPlanner = () => {
         setTemplateText(buildExportText(checked));
     };
 
+    // Hesap Yoneticisi sablonundaki seviyeler mutlaktir: bir binanin N. emri
+    // o binanin N. seviyesidir. Bu yuzden baslangic seviyeleri her zaman
+    // basa eklenir, yoksa sablon eksik seviyede biter.
+    const buildAmCode = (name) =>
+        buildAccountManagerCode([...buildStartupQueue(startLevels), ...queue], name);
+
+    const handleOpenAmCode = () => {
+        setTemplateMode('amcode');
+        setTemplateText(buildAmCode(amName));
+        setShowTemplateModal(true);
+    };
+
+    const changeAmName = (name) => {
+        setAmName(name);
+        setTemplateText(buildAmCode(name));
+    };
+
     const handleImportSubmit = () => {
         const lines = templateText.split('\n');
         const importedQueue = [];
@@ -371,7 +391,8 @@ const BuildingPlanner = () => {
                     
                     <div style={{marginLeft: 'auto'}}>
                         <button onClick={handleOpenImport} className="bp-btn-secondary">{t('buildingPlanner.btn.import')}</button>
-                        <button onClick={handleOpenExport} className="bp-btn-secondary" style={{marginRight: '15px'}}>{t('buildingPlanner.btn.export')}</button>
+                        <button onClick={handleOpenExport} className="bp-btn-secondary">{t('buildingPlanner.btn.export')}</button>
+                        <button onClick={handleOpenAmCode} className="bp-btn-secondary" style={{marginRight: '15px'}}>{t('buildingPlanner.btn.amCode')}</button>
                         <button onClick={() => setQueue([])} className="bp-btn-clear">{t('buildingPlanner.btn.clear')}</button>
                     </div>
                 </div>
@@ -434,8 +455,20 @@ const BuildingPlanner = () => {
                 {showTemplateModal && (
                     <div className="bp-template-area">
                         <h3 style={{marginTop: 0, color: 'var(--gold)'}}>
-                            {templateMode === 'import' ? t('buildingPlanner.modal.importTitle') : t('buildingPlanner.modal.exportTitle')}
+                            {templateMode === 'import' && t('buildingPlanner.modal.importTitle')}
+                            {templateMode === 'export' && t('buildingPlanner.modal.exportTitle')}
+                            {templateMode === 'amcode' && t('buildingPlanner.modal.amTitle')}
                         </h3>
+                        {templateMode === 'amcode' && (
+                            <>
+                                <div className="bp-am-hint">{t('buildingPlanner.modal.amHint')}</div>
+                                <label className="bp-am-name">
+                                    {t('buildingPlanner.modal.amName')}
+                                    <input type="text" value={amName} maxLength={40}
+                                        onChange={e => changeAmName(e.target.value)} />
+                                </label>
+                            </>
+                        )}
                         {templateMode === 'export' && (
                             <label className="bp-export-opt" title={t('buildingPlanner.modal.includeStartHint')}>
                                 <input type="checkbox" checked={includeStartLevels}
@@ -448,11 +481,11 @@ const BuildingPlanner = () => {
                             value={templateText} 
                             onChange={e => setTemplateText(e.target.value)}
                             placeholder={templateMode === 'import' ? t('buildingPlanner.modal.importPlaceholder') : ""}
-                            readOnly={templateMode === 'export'}
+                            readOnly={templateMode !== 'import'}
                         />
                         <div>
                             {templateMode === 'import' && <button onClick={handleImportSubmit} className="bp-btn-action">{t('buildingPlanner.btn.addQueue')}</button>}
-                            {templateMode === 'export' && <button onClick={() => { navigator.clipboard.writeText(templateText); alert(t('buildingPlanner.modal.copied')); }} className="bp-btn-action">{t('buildingPlanner.btn.copyBoard')}</button>}
+                            {templateMode !== 'import' && <button onClick={() => { navigator.clipboard.writeText(templateText); alert(t('buildingPlanner.modal.copied')); }} className="bp-btn-action">{t('buildingPlanner.btn.copyBoard')}</button>}
                             <button onClick={() => setShowTemplateModal(false)} className="bp-btn-secondary" style={{background: 'var(--danger-solid)'}}>{t('buildingPlanner.btn.close')}</button>
                         </div>
                     </div>

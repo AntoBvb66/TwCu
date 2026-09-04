@@ -139,7 +139,8 @@
       "addQueue": "Load",
       "copyBoard": "Copy to Clipboard",
       "close": "Close",
-      "delete": "Delete"
+      "delete": "Delete",
+      "amCode": "🏛️ Account Manager Code"
     },
     "modal": {
       "importTitle": "📥 Paste the Building Queue Copied from the Game",
@@ -152,7 +153,10 @@
       "levelLabel": "Level",
       "pointsLabel": "Points",
       "includeStart": "Also include starting building levels",
-      "includeStartHint": "Adds the upgrades that take an empty village up to your starting levels, one level at a time, to the top of the output."
+      "includeStartHint": "Adds the upgrades that take an empty village up to your starting levels, one level at a time, to the top of the output.",
+      "amTitle": "🏛️ Account Manager Template Code",
+      "amName": "Template name:",
+      "amHint": "Paste this code into the userscript that imports Account Manager templates. Because Account Manager levels are absolute, your starting building levels are always included in the code."
     },
     "levelsTitle": "🏠 Starting Building Levels (Hide / Show)",
     "analysis": {

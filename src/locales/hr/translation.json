@@ -139,7 +139,8 @@
       "addQueue": "Učitaj",
       "copyBoard": "Kopiraj u međuspremnik",
       "close": "Zatvori",
-      "delete": "Izbriši"
+      "delete": "Izbriši",
+      "amCode": "🏛️ Kod upravitelja računa"
     },
     "modal": {
       "importTitle": "📥 Zalijepi red gradnje kopiran iz igre",
@@ -152,7 +153,10 @@
       "levelLabel": "Razina",
       "pointsLabel": "Bodovi",
       "includeStart": "Dodaj i početne razine zgrada",
-      "includeStartHint": "Na početak ispisa dodaje, razinu po razinu, gradnje koje prazno selo dovode do tvojih početnih razina."
+      "includeStartHint": "Na početak ispisa dodaje, razinu po razinu, gradnje koje prazno selo dovode do tvojih početnih razina.",
+      "amTitle": "🏛️ Kod predloška upravitelja računa",
+      "amName": "Naziv predloška:",
+      "amHint": "Zalijepi ovaj kod u korisničku skriptu koja uvozi predloške upravitelja računa. Budući da su razine ondje apsolutne, tvoje početne razine zgrada uvijek su uključene u kod."
     },
     "levelsTitle": "🏠 Početne razine zgrada (Sakrij / Prikaži)",
     "analysis": {

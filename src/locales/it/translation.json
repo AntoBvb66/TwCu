@@ -139,7 +139,8 @@
       "addQueue": "Carica",
       "copyBoard": "Copia negli Appunti",
       "close": "Chiudi",
-      "delete": "Elimina"
+      "delete": "Elimina",
+      "amCode": "🏛️ Codice gestore account"
     },
     "modal": {
       "importTitle": "📥 Incolla la Coda Costruzioni Copiata dal Gioco",
@@ -152,7 +153,10 @@
       "levelLabel": "Livello",
       "pointsLabel": "Punti",
       "includeStart": "Includi anche i livelli iniziali",
-      "includeStartHint": "Aggiunge all'inizio dell'output, livello per livello, le costruzioni che portano un villaggio vuoto ai tuoi livelli iniziali."
+      "includeStartHint": "Aggiunge all'inizio dell'output, livello per livello, le costruzioni che portano un villaggio vuoto ai tuoi livelli iniziali.",
+      "amTitle": "🏛️ Codice modello gestore account",
+      "amName": "Nome del modello:",
+      "amHint": "Incolla questo codice nello userscript che importa i modelli del gestore account. Poiché lì i livelli sono assoluti, i tuoi livelli iniziali sono sempre inclusi nel codice."
     },
     "levelsTitle": "🏠 Livelli Edifici Iniziali (Nascondi / Mostra)",
     "analysis": {

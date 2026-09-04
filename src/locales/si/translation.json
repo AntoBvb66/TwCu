@@ -139,7 +139,8 @@
       "addQueue": "Naloži",
       "copyBoard": "Kopiraj v odložišče",
       "close": "Zapri",
-      "delete": "Izbriši"
+      "delete": "Izbriši",
+      "amCode": "🏛️ Koda upravitelja računa"
     },
     "modal": {
       "importTitle": "📥 Prilepite vrsto gradnje, kopirano iz igre",
@@ -152,7 +153,10 @@
       "levelLabel": "Stopnja",
       "pointsLabel": "Točke",
       "includeStart": "Dodaj tudi začetne stopnje zgradb",
-      "includeStartHint": "Na začetek izpisa doda po eno stopnjo gradnje, ki prazno vas pripeljejo do vaših začetnih stopenj."
+      "includeStartHint": "Na začetek izpisa doda po eno stopnjo gradnje, ki prazno vas pripeljejo do vaših začetnih stopenj.",
+      "amTitle": "🏛️ Koda predloge upravitelja računa",
+      "amName": "Ime predloge:",
+      "amHint": "To kodo prilepite v uporabniško skripto, ki uvaža predloge upravitelja računa. Ker so stopnje tam absolutne, so vaše začetne stopnje zgradb vedno vključene v kodo."
     },
     "levelsTitle": "🏠 Začetne stopnje stavb (Skrij / Pokaži)",
     "analysis": {
