@@ -150,7 +150,9 @@
       "copied": "Skopiowano!",
       "exportPrefix": "Kolejka budowy",
       "levelLabel": "Poziom",
-      "pointsLabel": "Punkty"
+      "pointsLabel": "Punkty",
+      "includeStart": "Dodaj też początkowe poziomy budynków",
+      "includeStartHint": "Na początku wyniku dodaje, poziom po poziomie, rozbudowy prowadzące pustą wioskę do Twoich poziomów początkowych."
     },
     "levelsTitle": "🏠 Początkowe poziomy budynków (Ukryj / Pokaż)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Magazyn",
       "hiding": "Kryjówka",
       "wall": "Mur"
+    },
+    "optimizer": {
+      "title": "🤖 Kalkulator Najszybszej Akademii",
+      "desc": "Oblicza kolejność budowy, która najszybciej pozwala zbudować akademię (pierwszego szlachcica), na podstawie szybkości świata, współczynnika produkcji i obecnych poziomów budynków. Sam równoważy inwestycje w kopalnie, magazyn i farmę.",
+      "button": "⚡ Oblicz kolejkę",
+      "calculating": "Obliczanie... krok",
+      "deep": "Głębokie wyszukiwanie",
+      "deepHint": "Szuka szerzej: nieco lepszy wynik, około 3x dłużej.",
+      "totalTime": "⏱️ Całkowity czas:",
+      "stepCount": "{{count}} budynków",
+      "apply": "✅ Zastosuj do kolejki",
+      "discard": "Anuluj",
+      "overwriteWarn": "Zastosowanie zastąpi twoją obecną kolejkę budowy.",
+      "noSolution": "❌ Nie znaleziono kolejki prowadzącej do akademii przy tych poziomach początkowych. Sprawdź poziomy budynków.",
+      "alreadyDone": "✅ Ta wioska spełnia już wszystkie wymagania akademii.",
+      "failed": "❌ Wystąpił błąd podczas obliczeń."
     }
   },
   "buildingTimes": {

@@ -150,7 +150,9 @@
       "copied": "Copied!",
       "exportPrefix": "Construction queue",
       "levelLabel": "Level",
-      "pointsLabel": "Points"
+      "pointsLabel": "Points",
+      "includeStart": "Also include starting building levels",
+      "includeStartHint": "Adds the upgrades that take an empty village up to your starting levels, one level at a time, to the top of the output."
     },
     "levelsTitle": "🏠 Starting Building Levels (Hide / Show)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Warehouse",
       "hiding": "Hiding place",
       "wall": "Wall"
+    },
+    "optimizer": {
+      "title": "🤖 Fastest Academy Calculator",
+      "desc": "Calculates the build order that reaches the academy (first noble) in the shortest time, based on your world speed, resource production factor and current building levels. It balances mine, warehouse and farm investments on its own.",
+      "button": "⚡ Calculate Queue",
+      "calculating": "Calculating... step",
+      "deep": "Deep search",
+      "deepHint": "Searches wider: slightly better result, about 3x longer.",
+      "totalTime": "⏱️ Total time:",
+      "stepCount": "{{count}} buildings",
+      "apply": "✅ Apply to Queue",
+      "discard": "Discard",
+      "overwriteWarn": "Applying this will replace your current build queue.",
+      "noSolution": "❌ No queue reaching the academy was found with these starting levels. Please check your building levels.",
+      "alreadyDone": "✅ This village already has everything required for the academy.",
+      "failed": "❌ An error occurred during the calculation."
     }
   },
   "buildingTimes": {

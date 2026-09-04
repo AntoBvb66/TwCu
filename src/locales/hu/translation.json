@@ -150,7 +150,9 @@
       "copied": "Копирано!",
       "exportPrefix": "Ред за градење",
       "levelLabel": "Ниво",
-      "pointsLabel": "Поени"
+      "pointsLabel": "Поени",
+      "includeStart": "A kezdő épületszintek is kerüljenek bele",
+      "includeStartHint": "A kimenet elejére szintenként hozzáadja azokat az építéseket, amelyek egy üres falut a kezdő szintjeidre visznek."
     },
     "levelsTitle": "🏠 Почетни нивоа на згради (Сокриј / Покажи)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Складиште",
       "hiding": "Скривалиште",
       "wall": "Ѕид"
+    },
+    "optimizer": {
+      "title": "🤖 Leggyorsabb Akadémia Kalkulátor",
+      "desc": "Kiszámolja azt az építési sorrendet, amellyel a legrövidebb idő alatt éred el az akadémiát (első nemest) — a világsebesség, a nyersanyag-termelési szorzó és a jelenlegi épületszintek alapján. A bányákba, raktárba és tanyába való befektetést magától egyensúlyozza.",
+      "button": "⚡ Sor kiszámítása",
+      "calculating": "Számolás... lépés",
+      "deep": "Mély keresés",
+      "deepHint": "Szélesebben keres: valamivel jobb eredmény, kb. 3x hosszabb ideig.",
+      "totalTime": "⏱️ Teljes idő:",
+      "stepCount": "{{count}} épület",
+      "apply": "✅ Alkalmazás a sorra",
+      "discard": "Elvetés",
+      "overwriteWarn": "Az alkalmazás felülírja a jelenlegi építési sorodat.",
+      "noSolution": "❌ Ezekkel a kezdőszintekkel nem található az akadémiához vezető sor. Ellenőrizd az épületszinteket.",
+      "alreadyDone": "✅ Ez a falu már mindent teljesít az akadémiához.",
+      "failed": "❌ Hiba történt a számítás során."
     }
   },
   "buildingTimes": {

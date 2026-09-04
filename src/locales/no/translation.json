@@ -150,7 +150,9 @@
       "copied": "Kopiert!",
       "exportPrefix": "Byggekø",
       "levelLabel": "Nivå",
-      "pointsLabel": "Poeng"
+      "pointsLabel": "Poeng",
+      "includeStart": "Ta også med startnivåene for bygninger",
+      "includeStartHint": "Legger til øverst i utdataene, ett nivå om gangen, oppgraderingene som tar en tom landsby opp til startnivåene dine."
     },
     "levelsTitle": "🏠 Startnivåer for bygninger (Skjul / Vis)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Lager",
       "hiding": "Skjulested",
       "wall": "Mur"
+    },
+    "optimizer": {
+      "title": "🤖 Raskeste Akademi-kalkulator",
+      "desc": "Beregner byggerekkefølgen som når akademiet (første adelsmann) på kortest tid, basert på verdenshastighet, produksjonsfaktor og nåværende bygningsnivåer. Investeringer i gruver, lager og gård avveies automatisk.",
+      "button": "⚡ Beregn kø",
+      "calculating": "Beregner... steg",
+      "deep": "Dypt søk",
+      "deepHint": "Søker bredere: litt bedre resultat, omtrent 3x lengre.",
+      "totalTime": "⏱️ Total tid:",
+      "stepCount": "{{count}} bygninger",
+      "apply": "✅ Bruk på kø",
+      "discard": "Avbryt",
+      "overwriteWarn": "Å bruke dette erstatter din nåværende byggekø.",
+      "noSolution": "❌ Fant ingen kø til akademiet med disse startnivåene. Sjekk bygningsnivåene dine.",
+      "alreadyDone": "✅ Denne landsbyen har allerede alt som kreves for akademiet.",
+      "failed": "❌ Det oppsto en feil under beregningen."
     }
   },
   "buildingTimes": {

@@ -150,7 +150,9 @@
       "copied": "Kopierat!",
       "exportPrefix": "Byggkö",
       "levelLabel": "Nivå",
-      "pointsLabel": "Poäng"
+      "pointsLabel": "Poäng",
+      "includeStart": "Ta även med startnivåerna för byggnader",
+      "includeStartHint": "Lägger till högst upp i utmatningen, en nivå i taget, de utbyggnader som tar en tom by upp till dina startnivåer."
     },
     "levelsTitle": "🏠 Startbyggnadsnivåer (Dölj / Visa)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Magasin",
       "hiding": "Gömstal",
       "wall": "Vägg"
+    },
+    "optimizer": {
+      "title": "🤖 Snabbaste Akademi-kalkylatorn",
+      "desc": "Beräknar byggordningen som når akademin (första adelsmannen) på kortast tid, utifrån världshastighet, produktionsfaktor och nuvarande byggnadsnivåer. Investeringar i gruvor, lager och bondgård vägs av automatiskt.",
+      "button": "⚡ Beräkna kö",
+      "calculating": "Beräknar... steg",
+      "deep": "Djup sökning",
+      "deepHint": "Söker bredare: något bättre resultat, cirka 3x längre.",
+      "totalTime": "⏱️ Total tid:",
+      "stepCount": "{{count}} byggnader",
+      "apply": "✅ Tillämpa på kö",
+      "discard": "Avbryt",
+      "overwriteWarn": "Att tillämpa detta ersätter din nuvarande byggkö.",
+      "noSolution": "❌ Ingen kö till akademin hittades med dessa startnivåer. Kontrollera dina byggnadsnivåer.",
+      "alreadyDone": "✅ Den här byn har redan allt som krävs för akademin.",
+      "failed": "❌ Ett fel uppstod under beräkningen."
     }
   },
   "buildingTimes": {

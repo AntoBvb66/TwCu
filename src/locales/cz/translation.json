@@ -150,7 +150,9 @@
       "copied": "Zkopírováno!",
       "exportPrefix": "Stavební fronta",
       "levelLabel": "Úroveň",
-      "pointsLabel": "Body"
+      "pointsLabel": "Body",
+      "includeStart": "Přidat i počáteční úrovně budov",
+      "includeStartHint": "Na začátek výstupu přidá po jedné úrovni stavby, které dovedou prázdnou vesnici na vaše počáteční úrovně."
     },
     "levelsTitle": "🏠 Počáteční úrovně budov (skrýt / zobrazit)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Sklad",
       "hiding": "Úkryt",
       "wall": "Hradby"
+    },
+    "optimizer": {
+      "title": "🤖 Kalkulačka Nejrychlejší Akademie",
+      "desc": "Vypočítá pořadí stavby, které nejrychleji dovede k akademii (prvnímu šlechtici), podle rychlosti světa, faktoru produkce a současných úrovní budov. Investice do dolů, skladu a farmy vyvažuje sama.",
+      "button": "⚡ Vypočítat frontu",
+      "calculating": "Počítám... krok",
+      "deep": "Hluboké hledání",
+      "deepHint": "Hledá šířeji: mírně lepší výsledek, asi 3x déle.",
+      "totalTime": "⏱️ Celkový čas:",
+      "stepCount": "{{count}} budov",
+      "apply": "✅ Použít na frontu",
+      "discard": "Zrušit",
+      "overwriteWarn": "Použitím nahradíte svou současnou frontu staveb.",
+      "noSolution": "❌ S těmito počátečními úrovněmi nebyla nalezena žádná fronta k akademii. Zkontrolujte úrovně budov.",
+      "alreadyDone": "✅ Tato vesnice už splňuje vše potřebné pro akademii.",
+      "failed": "❌ Během výpočtu došlo k chybě."
     }
   },
   "buildingTimes": {

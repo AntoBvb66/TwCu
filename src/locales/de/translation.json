@@ -150,7 +150,9 @@
       "copied": "Kopiert!",
       "exportPrefix": "Bauwarteschlange",
       "levelLabel": "Level",
-      "pointsLabel": "Punkte"
+      "pointsLabel": "Punkte",
+      "includeStart": "Start-Gebäudestufen mit ausgeben",
+      "includeStartHint": "Fügt die Ausbauten, die ein leeres Dorf auf deine Startstufen bringen, Stufe für Stufe am Anfang der Ausgabe ein."
     },
     "levelsTitle": "🏠 Anfangsgebäude-Level (Verstecken / Anzeigen)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Speicher",
       "hiding": "Versteck",
       "wall": "Wall"
+    },
+    "optimizer": {
+      "title": "🤖 Schnellster-Akademie-Rechner",
+      "desc": "Berechnet die Baureihenfolge, die die Akademie (erster Adliger) in kürzester Zeit erreicht — auf Basis deiner Weltgeschwindigkeit, des Rohstofffaktors und der aktuellen Gebäudestufen. Investitionen in Minen, Speicher und Bauernhof werden selbst ausbalanciert.",
+      "button": "⚡ Warteschlange berechnen",
+      "calculating": "Berechne... Schritt",
+      "deep": "Tiefensuche",
+      "deepHint": "Sucht breiter: etwas besseres Ergebnis, etwa 3x länger.",
+      "totalTime": "⏱️ Gesamtzeit:",
+      "stepCount": "{{count}} Gebäude",
+      "apply": "✅ In Warteschlange übernehmen",
+      "discard": "Verwerfen",
+      "overwriteWarn": "Beim Übernehmen wird deine aktuelle Bauschleife ersetzt.",
+      "noSolution": "❌ Mit diesen Startstufen wurde keine Warteschlange zur Akademie gefunden. Bitte prüfe deine Gebäudestufen.",
+      "alreadyDone": "✅ Dieses Dorf erfüllt bereits alle Voraussetzungen für die Akademie.",
+      "failed": "❌ Bei der Berechnung ist ein Fehler aufgetreten."
     }
   },
   "buildingTimes": {

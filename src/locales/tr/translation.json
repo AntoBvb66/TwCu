@@ -150,7 +150,9 @@
       "copied": "Kopyalandı!",
       "exportPrefix": "İnşa kuyruğu",
       "levelLabel": "Seviye",
-      "pointsLabel": "Puan"
+      "pointsLabel": "Puan",
+      "includeStart": "Başlangıç bina seviyelerini de ekle",
+      "includeStartHint": "Boş köyden girdiğiniz başlangıç seviyelerine ulaşan inşaatlar, tek tek çıktının başına eklenir."
     },
     "levelsTitle": "🏠 Başlangıç Bina Seviyeleri (Gizle / Göster)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Depo",
       "hiding": "Gizli Depo",
       "wall": "Sur"
+    },
+    "optimizer": {
+      "title": "🤖 En Hızlı Akademi Hesaplayıcı",
+      "desc": "Girdiğiniz dünya hızı, üretim faktörü ve mevcut bina seviyelerine göre akademiye (ilk soylu) en kısa sürede ulaştıran inşaat sırasını hesaplar. Ocak, depo ve çiftlik yatırımlarını kendisi dengeler.",
+      "button": "⚡ Kuyruğu Hesapla",
+      "calculating": "Hesaplanıyor... adım",
+      "deep": "Detaylı arama",
+      "deepHint": "Daha geniş arama yapar: biraz daha iyi sonuç, yaklaşık 3 kat uzun süre.",
+      "totalTime": "⏱️ Toplam süre:",
+      "stepCount": "{{count}} bina",
+      "apply": "✅ Kuyruğa Uygula",
+      "discard": "Vazgeç",
+      "overwriteWarn": "Uygularsanız mevcut inşaat kuyruğunuz bu sonuçla değiştirilir.",
+      "noSolution": "❌ Bu başlangıç seviyeleriyle akademiye ulaşan bir kuyruk bulunamadı. Bina seviyelerini kontrol edin.",
+      "alreadyDone": "✅ Bu köyde akademi için gereken her şey zaten hazır.",
+      "failed": "❌ Hesaplama sırasında bir hata oluştu."
     }
   },
   "buildingTimes": {

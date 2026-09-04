@@ -150,7 +150,9 @@
       "copied": "Skopírované!",
       "exportPrefix": "Fronta výstavby",
       "levelLabel": "Úroveň",
-      "pointsLabel": "Body"
+      "pointsLabel": "Body",
+      "includeStart": "Pridať aj počiatočné úrovne budov",
+      "includeStartHint": "Na začiatok výstupu pridá po jednej úrovni stavby, ktoré dovedú prázdnu dedinu na vaše počiatočné úrovne."
     },
     "levelsTitle": "🏠 Počiatočné úrovne budov (Skryť / Zobraziť)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Sklad",
       "hiding": "Skrývačka",
       "wall": "Múr"
+    },
+    "optimizer": {
+      "title": "🤖 Kalkulačka Najrýchlejšej Akadémie",
+      "desc": "Vypočíta poradie stavby, ktoré najrýchlejšie dovedie k akadémii (prvému šľachticovi), podľa rýchlosti sveta, faktora produkcie a súčasných úrovní budov. Investície do baní, skladu a farmy vyvažuje sama.",
+      "button": "⚡ Vypočítať front",
+      "calculating": "Počítam... krok",
+      "deep": "Hlboké hľadanie",
+      "deepHint": "Hľadá širšie: mierne lepší výsledok, asi 3x dlhšie.",
+      "totalTime": "⏱️ Celkový čas:",
+      "stepCount": "{{count}} budov",
+      "apply": "✅ Použiť na front",
+      "discard": "Zrušiť",
+      "overwriteWarn": "Použitím nahradíte svoj súčasný front stavieb.",
+      "noSolution": "❌ S týmito počiatočnými úrovňami sa nenašiel žiadny front k akadémii. Skontrolujte úrovne budov.",
+      "alreadyDone": "✅ Táto dedina už spĺňa všetko potrebné pre akadémiu.",
+      "failed": "❌ Počas výpočtu došlo k chybe."
     }
   },
   "buildingTimes": {

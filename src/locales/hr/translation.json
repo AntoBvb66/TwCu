@@ -150,7 +150,9 @@
       "copied": "Kopirano!",
       "exportPrefix": "Red gradnje",
       "levelLabel": "Razina",
-      "pointsLabel": "Bodovi"
+      "pointsLabel": "Bodovi",
+      "includeStart": "Dodaj i početne razine zgrada",
+      "includeStartHint": "Na početak ispisa dodaje, razinu po razinu, gradnje koje prazno selo dovode do tvojih početnih razina."
     },
     "levelsTitle": "🏠 Početne razine zgrada (Sakrij / Prikaži)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Skladište",
       "hiding": "Sklonište",
       "wall": "Zid"
+    },
+    "optimizer": {
+      "title": "🤖 Kalkulator najbrže akademije",
+      "desc": "Računa redoslijed gradnje koji najbrže dovodi do akademije (prvog plemića), na temelju brzine svijeta, faktora proizvodnje i trenutnih razina zgrada. Ulaganja u rudnike, skladište i farmu uravnotežuje sam.",
+      "button": "⚡ Izračunaj red",
+      "calculating": "Računam... korak",
+      "deep": "Duboko pretraživanje",
+      "deepHint": "Pretražuje šire: nešto bolji rezultat, otprilike 3x dulje.",
+      "totalTime": "⏱️ Ukupno vrijeme:",
+      "stepCount": "{{count}} zgrada",
+      "apply": "✅ Primijeni na red",
+      "discard": "Odustani",
+      "overwriteWarn": "Primjena će zamijeniti tvoj trenutni red gradnje.",
+      "noSolution": "❌ S ovim početnim razinama nije pronađen red koji vodi do akademije. Provjeri razine zgrada.",
+      "alreadyDone": "✅ Ovo selo već ispunjava sve uvjete za akademiju.",
+      "failed": "❌ Došlo je do pogreške tijekom izračuna."
     }
   },
   "buildingTimes": {

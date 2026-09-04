@@ -150,7 +150,9 @@
       "copied": "Copié !",
       "exportPrefix": "File d'attente de construction",
       "levelLabel": "Niveau",
-      "pointsLabel": "Points"
+      "pointsLabel": "Points",
+      "includeStart": "Inclure aussi les niveaux de départ",
+      "includeStartHint": "Ajoute en tête de la sortie, niveau par niveau, les constructions qui amènent un village vide à vos niveaux de départ."
     },
     "levelsTitle": "🏠 Niveaux de Bâtiments de Départ (Masquer / Afficher)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Entrepôt",
       "hiding": "Cachette",
       "wall": "Mur"
+    },
+    "optimizer": {
+      "title": "🤖 Calculateur d'Académie la Plus Rapide",
+      "desc": "Calcule l'ordre de construction qui atteint l'académie (premier noble) le plus rapidement, selon votre vitesse de monde, le facteur de production et vos niveaux de bâtiments actuels. Les investissements en mines, entrepôt et ferme sont équilibrés automatiquement.",
+      "button": "⚡ Calculer la file",
+      "calculating": "Calcul... étape",
+      "deep": "Recherche approfondie",
+      "deepHint": "Recherche plus large : résultat légèrement meilleur, environ 3x plus long.",
+      "totalTime": "⏱️ Durée totale :",
+      "stepCount": "{{count}} bâtiments",
+      "apply": "✅ Appliquer à la file",
+      "discard": "Annuler",
+      "overwriteWarn": "Appliquer remplacera votre file de construction actuelle.",
+      "noSolution": "❌ Aucune file atteignant l'académie n'a été trouvée avec ces niveaux de départ. Vérifiez vos niveaux de bâtiments.",
+      "alreadyDone": "✅ Ce village remplit déjà toutes les conditions pour l'académie.",
+      "failed": "❌ Une erreur s'est produite pendant le calcul."
     }
   },
   "buildingTimes": {

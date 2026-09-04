@@ -256,3 +256,75 @@
     
     .bp-table th, .bp-table td { padding: 8px 4px; font-size: 11px; } /* Mobilde tabloyu sığdırmak için */
 }
+/* ---- Akademi kuyrugu optimizasyonu ---- */
+.bp-optimizer {
+    margin-top: 15px;
+    padding: 12px 15px;
+    background: var(--surface-2);
+    border: 1px solid var(--line-2);
+    border-left: 4px solid var(--gold);
+    border-radius: var(--r-sm);
+}
+
+.bp-optimizer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.bp-optimizer-title { font-weight: bold; color: var(--gold); font-size: 15px; }
+.bp-optimizer-desc { font-size: 12px; opacity: 0.8; margin-top: 3px; max-width: 620px; line-height: 1.45; }
+
+.bp-optimizer-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.bp-optimizer-deep {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; cursor: pointer; white-space: nowrap;
+}
+.bp-optimizer-deep input { cursor: pointer; }
+
+.bp-optimizer-error {
+    margin-top: 12px; padding: 8px 10px; font-size: 13px;
+    background: var(--ink-850); border: 1px solid var(--danger-solid);
+    border-radius: var(--r-sm); color: var(--danger);
+}
+
+.bp-optimizer-result {
+    margin-top: 12px; padding-top: 12px;
+    border-top: 1px dashed var(--line-2);
+}
+
+.bp-optimizer-stats {
+    display: flex; gap: 18px; flex-wrap: wrap;
+    font-size: 14px; font-weight: bold; margin-bottom: 10px;
+}
+.bp-optimizer-time { color: var(--success); }
+
+.bp-optimizer-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+
+.bp-optimizer-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 8px; font-size: 12px;
+    background: var(--ink-850); border: 1px solid var(--line-2);
+    border-radius: var(--r-sm);
+}
+.bp-optimizer-chip img { width: 16px; height: 16px; }
+.bp-optimizer-chip b { color: var(--gold); }
+
+.bp-optimizer-note { font-size: 12px; opacity: 0.75; margin-bottom: 10px; }
+
+@media (max-width: 640px) {
+    .bp-optimizer-head { flex-direction: column; align-items: stretch; }
+    .bp-optimizer-actions { justify-content: space-between; }
+    .bp-optimizer-desc { max-width: none; }
+}
+
+/* --- ÇIKTI SEÇENEĞİ (başlangıç seviyelerini de yaz) --- */
+.bp-export-opt {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-bottom: 12px; font-size: 13px; cursor: pointer;
+    color: var(--gold);
+}
+.bp-export-opt input { cursor: pointer; }

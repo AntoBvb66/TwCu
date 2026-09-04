@@ -150,7 +150,9 @@
       "copied": "Kopiert!",
       "exportPrefix": "Bau-Queue",
       "levelLabel": "Level",
-      "pointsLabel": "Punkte"
+      "pointsLabel": "Punkte",
+      "includeStart": "Start-Gebäudestufe au usgäh",
+      "includeStartHint": "Fuegt d Usbaue, wo es läärs Dorf uf dini Startstufe bringed, Stuef für Stuef am Afang vo de Usgab i."
     },
     "levelsTitle": "🏠 Aktuelli Gebäude-Level (Zeig / Versteck)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Speicher",
       "hiding": "Versteck",
       "wall": "Muur"
+    },
+    "optimizer": {
+      "title": "🤖 Schnellschti-Akademie-Rächner",
+      "desc": "Rächnet d Bauriehefolg us, wo d Akademie (erschte Adlige) am schnellschte erreicht — uf Basis vo dinere Wältgschwindigkeit, em Rohstofffaktor und de aktuelle Gebäudestufe. Investitione i Mine, Speicher und Burehof wärde selber uusbalanciert.",
+      "button": "⚡ Warteschlange berächne",
+      "calculating": "Rächne... Schritt",
+      "deep": "Tüüfi Suech",
+      "deepHint": "Suecht breiter: chli besseres Ergäbnis, öppe 3x länger.",
+      "totalTime": "⏱️ Gsamtziit:",
+      "stepCount": "{{count}} Gebäude",
+      "apply": "✅ I d Warteschlange übernäh",
+      "discard": "Verwerfe",
+      "overwriteWarn": "Bim Übernäh wird dini aktuelli Bauschleife ersetzt.",
+      "noSolution": "❌ Mit dene Startstufe isch kei Warteschlange zur Akademie gfunde worde. Bitte prüef dini Gebäudestufe.",
+      "alreadyDone": "✅ Das Dorf erfüllt scho alli Voruussetzige für d Akademie.",
+      "failed": "❌ Bi de Berächnig isch en Fähler ufträte."
     }
   },
   "buildingTimes": {

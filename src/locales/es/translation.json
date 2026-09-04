@@ -150,7 +150,9 @@
       "copied": "¡Copiado!",
       "exportPrefix": "Cola de construcción",
       "levelLabel": "Nivel",
-      "pointsLabel": "Puntos"
+      "pointsLabel": "Puntos",
+      "includeStart": "Incluir también los niveles iniciales",
+      "includeStartHint": "Añade al principio de la salida, nivel a nivel, las mejoras que llevan una aldea vacía hasta tus niveles iniciales."
     },
     "levelsTitle": "🏠 Niveles de Edificios Iniciales (Ocultar / Mostrar)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Almacén",
       "hiding": "Escondite",
       "wall": "Muralla"
+    },
+    "optimizer": {
+      "title": "🤖 Calculadora de Academia Más Rápida",
+      "desc": "Calcula el orden de construcción que alcanza la academia (primer noble) en el menor tiempo, según la velocidad del mundo, el factor de producción y los niveles actuales de tus edificios. Equilibra por sí sola las inversiones en minas, almacén y granja.",
+      "button": "⚡ Calcular cola",
+      "calculating": "Calculando... paso",
+      "deep": "Búsqueda profunda",
+      "deepHint": "Busca más ampliamente: resultado algo mejor, unas 3 veces más lento.",
+      "totalTime": "⏱️ Tiempo total:",
+      "stepCount": "{{count}} edificios",
+      "apply": "✅ Aplicar a la cola",
+      "discard": "Descartar",
+      "overwriteWarn": "Al aplicarlo se reemplazará tu cola de construcción actual.",
+      "noSolution": "❌ No se encontró ninguna cola que llegue a la academia con estos niveles iniciales. Revisa los niveles de tus edificios.",
+      "alreadyDone": "✅ Esta aldea ya cumple todo lo necesario para la academia.",
+      "failed": "❌ Se produjo un error durante el cálculo."
     }
   },
   "buildingTimes": {

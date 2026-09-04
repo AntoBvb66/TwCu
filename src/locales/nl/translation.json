@@ -150,7 +150,9 @@
       "copied": "Gekopieerd!",
       "exportPrefix": "Constructie wachtrij",
       "levelLabel": "Niveau",
-      "pointsLabel": "Punten"
+      "pointsLabel": "Punten",
+      "includeStart": "Ook startniveaus van gebouwen toevoegen",
+      "includeStartHint": "Voegt de upgrades die een leeg dorp naar je startniveaus brengen stap voor stap bovenaan de uitvoer toe."
     },
     "levelsTitle": "🏠 Start Gebouw Niveaus (Verbergen / Tonen)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Opslagplaats",
       "hiding": "Verstopplaats",
       "wall": "Muur"
+    },
+    "optimizer": {
+      "title": "🤖 Snelste Academie Calculator",
+      "desc": "Berekent de bouwvolgorde die de academie (eerste adelman) in de kortste tijd bereikt, op basis van je wereldsnelheid, grondstoffenfactor en huidige gebouwniveaus. Investeringen in mijnen, pakhuis en boerderij worden zelf afgewogen.",
+      "button": "⚡ Wachtrij berekenen",
+      "calculating": "Berekenen... stap",
+      "deep": "Diepe zoekopdracht",
+      "deepHint": "Zoekt breder: iets beter resultaat, ongeveer 3x langer.",
+      "totalTime": "⏱️ Totale tijd:",
+      "stepCount": "{{count}} gebouwen",
+      "apply": "✅ Toepassen op wachtrij",
+      "discard": "Annuleren",
+      "overwriteWarn": "Toepassen vervangt je huidige bouwwachtrij.",
+      "noSolution": "❌ Met deze startniveaus is geen wachtrij naar de academie gevonden. Controleer je gebouwniveaus.",
+      "alreadyDone": "✅ Dit dorp heeft al alles wat nodig is voor de academie.",
+      "failed": "❌ Er is een fout opgetreden tijdens de berekening."
     }
   },
   "buildingTimes": {

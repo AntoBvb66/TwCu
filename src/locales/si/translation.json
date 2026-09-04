@@ -150,7 +150,9 @@
       "copied": "Kopirano!",
       "exportPrefix": "Vrsta za gradnjo",
       "levelLabel": "Stopnja",
-      "pointsLabel": "Točke"
+      "pointsLabel": "Točke",
+      "includeStart": "Dodaj tudi začetne stopnje zgradb",
+      "includeStartHint": "Na začetek izpisa doda po eno stopnjo gradnje, ki prazno vas pripeljejo do vaših začetnih stopenj."
     },
     "levelsTitle": "🏠 Začetne stopnje stavb (Skrij / Pokaži)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Skladišče",
       "hiding": "Skrivališče",
       "wall": "Zid"
+    },
+    "optimizer": {
+      "title": "🤖 Kalkulator najhitrejše akademije",
+      "desc": "Izračuna vrstni red gradnje, ki najhitreje pripelje do akademije (prvega plemiča), glede na hitrost sveta, faktor proizvodnje in trenutne stopnje zgradb. Vlaganja v rudnike, skladišče in kmetijo uravnoteži sam.",
+      "button": "⚡ Izračunaj vrsto",
+      "calculating": "Računam... korak",
+      "deep": "Poglobljeno iskanje",
+      "deepHint": "Išče širše: nekoliko boljši rezultat, približno 3x dlje.",
+      "totalTime": "⏱️ Skupni čas:",
+      "stepCount": "{{count}} zgradb",
+      "apply": "✅ Uporabi za vrsto",
+      "discard": "Prekliči",
+      "overwriteWarn": "Uporaba bo zamenjala tvojo trenutno gradbeno vrsto.",
+      "noSolution": "❌ S temi začetnimi stopnjami ni bilo mogoče najti vrste do akademije. Preveri stopnje zgradb.",
+      "alreadyDone": "✅ Ta vas že izpolnjuje vse pogoje za akademijo.",
+      "failed": "❌ Med izračunom je prišlo do napake."
     }
   },
   "buildingTimes": {

@@ -150,7 +150,9 @@
       "copied": "Copiat!",
       "exportPrefix": "Coada de construcții",
       "levelLabel": "Nivel",
-      "pointsLabel": "Puncte"
+      "pointsLabel": "Puncte",
+      "includeStart": "Include și nivelurile inițiale ale clădirilor",
+      "includeStartHint": "Adaugă la începutul rezultatului, nivel cu nivel, construcțiile care duc un sat gol la nivelurile tale inițiale."
     },
     "levelsTitle": "🏠 Nivelurile Inițiale ale Clădirilor (Ascunde / Afișează)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Depozit",
       "hiding": "Ascunzătoare",
       "wall": "Zid"
+    },
+    "optimizer": {
+      "title": "🤖 Calculator Academie Cea Mai Rapidă",
+      "desc": "Calculează ordinea de construcție care ajunge la academie (primul nobil) în cel mai scurt timp, în funcție de viteza lumii, factorul de producție și nivelurile actuale ale clădirilor. Echilibrează singur investițiile în mine, depozit și fermă.",
+      "button": "⚡ Calculează coada",
+      "calculating": "Se calculează... pasul",
+      "deep": "Căutare aprofundată",
+      "deepHint": "Caută mai larg: rezultat puțin mai bun, de aproximativ 3 ori mai lent.",
+      "totalTime": "⏱️ Timp total:",
+      "stepCount": "{{count}} clădiri",
+      "apply": "✅ Aplică la coadă",
+      "discard": "Renunță",
+      "overwriteWarn": "Aplicarea va înlocui coada ta de construcție actuală.",
+      "noSolution": "❌ Nu s-a găsit nicio coadă care să ajungă la academie cu aceste niveluri inițiale. Verifică nivelurile clădirilor.",
+      "alreadyDone": "✅ Acest sat îndeplinește deja tot ce este necesar pentru academie.",
+      "failed": "❌ A apărut o eroare în timpul calculului."
     }
   },
   "buildingTimes": {

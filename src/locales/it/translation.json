@@ -150,7 +150,9 @@
       "copied": "Copiato!",
       "exportPrefix": "Coda costruzioni",
       "levelLabel": "Livello",
-      "pointsLabel": "Punti"
+      "pointsLabel": "Punti",
+      "includeStart": "Includi anche i livelli iniziali",
+      "includeStartHint": "Aggiunge all'inizio dell'output, livello per livello, le costruzioni che portano un villaggio vuoto ai tuoi livelli iniziali."
     },
     "levelsTitle": "🏠 Livelli Edifici Iniziali (Nascondi / Mostra)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Magazzino",
       "hiding": "Nascondiglio",
       "wall": "Muro"
+    },
+    "optimizer": {
+      "title": "🤖 Calcolatore Accademia Più Veloce",
+      "desc": "Calcola l'ordine di costruzione che raggiunge l'accademia (primo nobile) nel minor tempo, in base alla velocità del mondo, al fattore di produzione e ai livelli attuali degli edifici. Bilancia da solo gli investimenti in miniere, magazzino e fattoria.",
+      "button": "⚡ Calcola coda",
+      "calculating": "Calcolo... passo",
+      "deep": "Ricerca approfondita",
+      "deepHint": "Cerca più ampiamente: risultato leggermente migliore, circa 3 volte più lento.",
+      "totalTime": "⏱️ Tempo totale:",
+      "stepCount": "{{count}} edifici",
+      "apply": "✅ Applica alla coda",
+      "discard": "Annulla",
+      "overwriteWarn": "Applicando sostituirai la tua coda di costruzione attuale.",
+      "noSolution": "❌ Nessuna coda che raggiunge l'accademia trovata con questi livelli iniziali. Controlla i livelli dei tuoi edifici.",
+      "alreadyDone": "✅ Questo villaggio soddisfa già tutti i requisiti per l'accademia.",
+      "failed": "❌ Si è verificato un errore durante il calcolo."
     }
   },
   "buildingTimes": {

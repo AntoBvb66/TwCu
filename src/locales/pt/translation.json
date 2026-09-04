@@ -150,7 +150,9 @@
       "copied": "Copiado!",
       "exportPrefix": "Fila de construção",
       "levelLabel": "Nível",
-      "pointsLabel": "Pontos"
+      "pointsLabel": "Pontos",
+      "includeStart": "Incluir também os níveis iniciais",
+      "includeStartHint": "Adiciona no início da saída, nível a nível, as construções que levam uma aldeia vazia até aos teus níveis iniciais."
     },
     "levelsTitle": "🏠 Níveis de Edifícios Iniciais (Ocultar / Mostrar)",
     "analysis": {
@@ -227,6 +229,22 @@
       "ware": "Armazém",
       "hiding": "Esconderijo",
       "wall": "Muralha"
+    },
+    "optimizer": {
+      "title": "🤖 Calculadora de Academia Mais Rápida",
+      "desc": "Calcula a ordem de construção que alcança a academia (primeiro nobre) no menor tempo, com base na velocidade do mundo, no fator de produção e nos níveis atuais dos edifícios. Equilibra sozinha os investimentos em minas, armazém e fazenda.",
+      "button": "⚡ Calcular fila",
+      "calculating": "A calcular... passo",
+      "deep": "Pesquisa profunda",
+      "deepHint": "Pesquisa mais amplamente: resultado ligeiramente melhor, cerca de 3x mais lento.",
+      "totalTime": "⏱️ Tempo total:",
+      "stepCount": "{{count}} edifícios",
+      "apply": "✅ Aplicar à fila",
+      "discard": "Cancelar",
+      "overwriteWarn": "Ao aplicar, a sua fila de construção atual será substituída.",
+      "noSolution": "❌ Não foi encontrada nenhuma fila que chegue à academia com estes níveis iniciais. Verifique os níveis dos seus edifícios.",
+      "alreadyDone": "✅ Esta aldeia já cumpre tudo o que é preciso para a academia.",
+      "failed": "❌ Ocorreu um erro durante o cálculo."
     }
   },
   "buildingTimes": {
