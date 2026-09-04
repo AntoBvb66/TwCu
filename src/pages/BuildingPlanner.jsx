@@ -7,7 +7,7 @@ import './BuildingPlanner.css';
 import {
     buildTimes, hqModifiers, db, icons, dictionary,
     timeToSeconds, calc, getFarmCapacity, getWareCapacity, getProduction, getTotalPop, getTotalPts,
-    getBaseLevels, buildStartupQueue, buildAccountManagerCode
+    getBaseLevels, getDefaultStartLevels, buildStartupQueue, buildAccountManagerCode
 } from '../utils/twBuildingData';
 import { optimizeToAcademy } from '../utils/academyOptimizer';
 
@@ -39,7 +39,7 @@ const BuildingPlanner = () => {
     const [worldSpeed, setWorldSpeed] = useState(() => storage.get('bp_ws', 5.0));
     const [mineSpeed, setMineSpeed] = useState(() => storage.get('bp_ms', 1.5));
     
-    const defaultLevels = getBaseLevels();
+    const defaultLevels = getDefaultStartLevels();
     const [startLevels, setStartLevels] = useState(() => storage.get('bp_levels', defaultLevels));
     
     const [queue, setQueue] = useState(() => storage.get('bp_queue', []));

@@ -125,13 +125,26 @@ function getProduction(level, resSpeed) { return level === 0 ? 5 * resSpeed : Ma
 function getTotalPop(levels) { let t=0; for(let b in db) if(levels[b]>0) t+=calc(db[b].pB, db[b].pF, levels[b]); return t; }
 function getTotalPts(levels) { let t=0; for(let b in db) if(levels[b]>0) t+=calc(db[b].ptsB, 1.2, levels[b]); return t; }
 
-// Oyun basinda her koyde hazir gelen seviyeler; listede olmayan bina 0'dir.
-const BASE_LEVELS = { hq: 1, farm: 1, ware: 1, rally: 1 };
+// Kuyruk sifirdan sayilir: hicbir bina hazir kabul edilmez. Ana bina, ciftlik,
+// depo ve ictima meydani oyunda 1. seviye gelse de kuyrukta 1. seviyeleri de
+// yazilir; oyunun Hesap Yoneticisi sablonlari da boyle ("Ana bina +1 (Seviye 1)").
+const BASE_LEVELS = {};
 
-// Bos bir koyun tam seviye tablosu.
+// Sifir seviye tablosu; kuyruk uretimi bunun uzerinden ilerler.
 function getBaseLevels() {
     const lv = {};
-    for (const key in db) lv[key] = BASE_LEVELS[key] || 0;
+    for (const key in db) lv[key] = 0;
+    return lv;
+}
+
+// Yeni kurulan bir koyde hazir gelen seviyeler. Planlayicinin baslangic
+// girdileri buradan doluyor: ciftlik 0 olsa nufus tavani 0 cikar ve simulasyon
+// her satiri "ciftlik siniri" diye isaretlerdi.
+const DEFAULT_START_LEVELS = { hq: 1, farm: 1, ware: 1, rally: 1 };
+
+function getDefaultStartLevels() {
+    const lv = {};
+    for (const key in db) lv[key] = DEFAULT_START_LEVELS[key] || 0;
     return lv;
 }
 
@@ -212,4 +225,4 @@ function buildAccountManagerCode(queueIds, templateName) {
     return utf8ToBase64(str);
 }
 
-export { buildTimes, hqModifiers, db, icons, dictionary, timeToSeconds, calc, getFarmCapacity, getWareCapacity, getProduction, getTotalPop, getTotalPts, BASE_LEVELS, getBaseLevels, buildStartupQueue, AM_BUILDING_IDS, buildAccountManagerCode };
+export { buildTimes, hqModifiers, db, icons, dictionary, timeToSeconds, calc, getFarmCapacity, getWareCapacity, getProduction, getTotalPop, getTotalPts, BASE_LEVELS, getBaseLevels, DEFAULT_START_LEVELS, getDefaultStartLevels, buildStartupQueue, AM_BUILDING_IDS, buildAccountManagerCode };
