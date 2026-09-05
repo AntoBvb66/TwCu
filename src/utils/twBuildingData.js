@@ -182,15 +182,20 @@ function buildStartupQueue(startLevels) {
 }
 
 // --- HESAP YONETICISI SABLON KODU ------------------------------------------
-// Oyunun Hesap Yoneticisi > Insaat ekranindaki sablonu ice/disa aktaran
-// scriptin kod bicimi. Gercek bir sablon kodu cozulerek dogrulandi:
+// Oyunun Hesap Yoneticisi > Insaat ekranindaki sablonu ice/disa aktaran kod
+// bicimi. Iki gercek sablon kodu ("depo" ve "Hammadde (Ozan)") cozulerek
+// dogrulandi:
 //
-//   0x7C 0x02                     -> baslik ('|' + surum 2)
-//   (binaId, seviyeAdedi) x N     -> kuyruk, sirasiyla; her emir 1 seviye
-//   0x00 0x00                     -> kuyruk sonu
+//   uint16 LE                     -> kuyruk blogunun bayt uzunlugu (2 x emir sayisi)
+//   (binaId, seviyeAdedi) x N     -> kuyruk, sirasiyla
+//   ciftlik onceligi bayti        -> 0 = kapali, 5/10/15/20 = "% den az nufus"
+//   oto yikim bayti               -> "Gereksiz bina seviyelerini yik" 0/1
 //   U+100000 <sablon adi> U+100000 '4'
 //
-// Tum dizi UTF-8'e cevrilip base64'lenir.
+// Kuyruk ve bayrak baytlari ham bayt, sablon adi ile ayirac UTF-8 olarak
+// yazilir; tum dizi base64'lenir. (Eskiden basliktaki 0x7C 0x02 sabit bir
+// "magic" saniliyordu; aslinda 636 = 2 x 318 emirlik tam koy sablonunun
+// uzunlugu imis.)
 const AM_SEPARATOR = String.fromCodePoint(0x100000);
 
 // Bina sirasi. 0-3 ve 7-18 gercek kodla dogrulandi; 4/5/6 (kiliseler ve kule)
@@ -202,8 +207,7 @@ const AM_BUILDING_IDS = {
     wood: 12, clay: 13, iron: 14, farm: 15, ware: 16, hiding: 17, wall: 18
 };
 
-function utf8ToBase64(str) {
-    const bytes = new TextEncoder().encode(str);
+function bytesToBase64(bytes) {
     let binary = '';
     for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
     return btoa(binary);
@@ -212,17 +216,23 @@ function utf8ToBase64(str) {
 /**
  * Bina kuyrugunu Hesap Yoneticisi sablon koduna cevirir.
  * Kuyruktaki her eleman tek bir seviye yukseltmesidir.
+ * options: { farmPriority: 0|5|10|15|20, autoDemolish: bool }
  */
-function buildAccountManagerCode(queueIds, templateName) {
-    let str = String.fromCharCode(0x7C, 0x02);
+function buildAccountManagerCode(queueIds, templateName, options) {
+    const opts = options || {};
+    const orders = [];
     for (const id of queueIds) {
         const bid = AM_BUILDING_IDS[id];
         if (bid === undefined) continue;
-        str += String.fromCharCode(bid, 0x01);
+        orders.push(bid, 0x01); // her emir tek seviye
     }
-    str += String.fromCharCode(0x00, 0x00);
-    str += AM_SEPARATOR + (templateName || 'TW Cu') + AM_SEPARATOR + '4';
-    return utf8ToBase64(str);
+    const bytes = [orders.length & 0xFF, (orders.length >> 8) & 0xFF];
+    for (let i = 0; i < orders.length; i++) bytes.push(orders[i]);
+    bytes.push(opts.farmPriority || 0);
+    bytes.push(opts.autoDemolish ? 1 : 0);
+    const tail = new TextEncoder().encode(AM_SEPARATOR + (templateName || 'TW Cu') + AM_SEPARATOR + '4');
+    for (let i = 0; i < tail.length; i++) bytes.push(tail[i]);
+    return bytesToBase64(bytes);
 }
 
 export { buildTimes, hqModifiers, db, icons, dictionary, timeToSeconds, calc, getFarmCapacity, getWareCapacity, getProduction, getTotalPop, getTotalPts, BASE_LEVELS, getBaseLevels, DEFAULT_START_LEVELS, getDefaultStartLevels, buildStartupQueue, AM_BUILDING_IDS, buildAccountManagerCode };
