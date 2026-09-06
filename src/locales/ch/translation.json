@@ -235,8 +235,13 @@
       "wall": "Muur"
     },
     "optimizer": {
-      "title": "🤖 Schnellschti-Akademie-Rächner",
-      "desc": "Rächnet d Bauriehefolg us, wo d Akademie (erschte Adlige) am schnellschte erreicht — uf Basis vo dinere Wältgschwindigkeit, em Rohstofffaktor und de aktuelle Gebäudestufe. Investitione i Mine, Speicher und Burehof wärde selber uusbalanciert.",
+      "title": "🤖 Schnellschti-Warteschlange-Rächner",
+      "modeAcademy": "Akademie (erschte Adlige)",
+      "modeFull": "Alli Gebäude",
+      "modeRes": "Rohstoff 30/30/30",
+      "descAcademy": "Rächnet d Bauriehefolg us, wo d Akademie (erschte Adlige) am schnellschte erreicht — uf Basis vo dinere Wältgschwindigkeit, em Rohstofffaktor und de aktuelle Gebäudestufe. Investitione i Mine, Speicher und Burehof wärde selber uusbalanciert.",
+      "descFull": "Rächnet d Bauriehefolg us, wo alli Gebäude im Dorf (ohni Chile und Wachturm) i chürzischter Zit uf d Maximalstufe bringt. Investitione i Rohstoffgebäude, Speicher und Buurehof wägt er sälber ab.",
+      "descRes": "Rächnet d Bauriehefolg us, wo Holzfäller, Lehmgrueb und Isemine i chürzischter Zit uf Stufe 30 bringt. D nötige Stufe vo Hauptgebäude, Speicher und Buurehof fügt er sälber zue.",
       "button": "⚡ Warteschlange berächne",
       "calculating": "Rächne... Schritt",
       "deep": "Tüüfi Suech",
@@ -246,8 +251,8 @@
       "apply": "✅ I d Warteschlange übernäh",
       "discard": "Verwerfe",
       "overwriteWarn": "Bim Übernäh wird dini aktuelli Bauschleife ersetzt.",
-      "noSolution": "❌ Mit dene Startstufe isch kei Warteschlange zur Akademie gfunde worde. Bitte prüef dini Gebäudestufe.",
-      "alreadyDone": "✅ Das Dorf erfüllt scho alli Voruussetzige für d Akademie.",
+      "noSolution": "❌ Mit dene Startstufe isch kei Warteschlange zum Ziel gfunde worde. Bitte prüef d Gebäudestufe.",
+      "alreadyDone": "✅ I dem Dorf isch scho alles für das Ziel vorhande.",
       "failed": "❌ Bi de Berächnig isch en Fähler ufträte."
     }
   },

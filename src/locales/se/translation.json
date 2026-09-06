@@ -235,8 +235,13 @@
       "wall": "Vägg"
     },
     "optimizer": {
-      "title": "🤖 Snabbaste Akademi-kalkylatorn",
-      "desc": "Beräknar byggordningen som når akademin (första adelsmannen) på kortast tid, utifrån världshastighet, produktionsfaktor och nuvarande byggnadsnivåer. Investeringar i gruvor, lager och bondgård vägs av automatiskt.",
+      "title": "🤖 Snabbaste Kö-kalkylatorn",
+      "modeAcademy": "Akademi (första adelsmannen)",
+      "modeFull": "Alla byggnader",
+      "modeRes": "Resurser 30/30/30",
+      "descAcademy": "Beräknar byggordningen som når akademin (första adelsmannen) på kortast tid, utifrån världshastighet, produktionsfaktor och nuvarande byggnadsnivåer. Investeringar i gruvor, lager och bondgård vägs av automatiskt.",
+      "descFull": "Beräknar den byggordning som får alla byggnader i byn (utom kyrka och vakttorn) till maxnivå på kortast möjliga tid. Den väger själv av investeringarna i gruvor, lager och gård.",
+      "descRes": "Beräknar den byggordning som får timmerläger, lergrop och järngruva till nivå 30 på kortast möjliga tid. Den lägger själv till de nivåer av huvudbyggnad, lager och gård som behövs.",
       "button": "⚡ Beräkna kö",
       "calculating": "Beräknar... steg",
       "deep": "Djup sökning",
@@ -246,8 +251,8 @@
       "apply": "✅ Tillämpa på kö",
       "discard": "Avbryt",
       "overwriteWarn": "Att tillämpa detta ersätter din nuvarande byggkö.",
-      "noSolution": "❌ Ingen kö till akademin hittades med dessa startnivåer. Kontrollera dina byggnadsnivåer.",
-      "alreadyDone": "✅ Den här byn har redan allt som krävs för akademin.",
+      "noSolution": "❌ Ingen kö som når målet hittades med dessa startnivåer. Kontrollera byggnadsnivåerna.",
+      "alreadyDone": "✅ I den här byn finns redan allt som behövs för det här målet.",
       "failed": "❌ Ett fel uppstod under beräkningen."
     }
   },

@@ -235,8 +235,13 @@
       "wall": "Muralla"
     },
     "optimizer": {
-      "title": "🤖 Calculadora de Academia Más Rápida",
-      "desc": "Calcula el orden de construcción que alcanza la academia (primer noble) en el menor tiempo, según la velocidad del mundo, el factor de producción y los niveles actuales de tus edificios. Equilibra por sí sola las inversiones en minas, almacén y granja.",
+      "title": "🤖 Calculadora de Cola Más Rápida",
+      "modeAcademy": "Academia (primer noble)",
+      "modeFull": "Todos los edificios",
+      "modeRes": "Recursos 30/30/30",
+      "descAcademy": "Calcula el orden de construcción que alcanza la academia (primer noble) en el menor tiempo, según la velocidad del mundo, el factor de producción y los niveles actuales de tus edificios. Equilibra por sí sola las inversiones en minas, almacén y granja.",
+      "descFull": "Calcula el orden de construcción que lleva todos los edificios de la aldea (excepto iglesia y torre de vigilancia) al nivel máximo en el menor tiempo. Equilibra por sí sola las inversiones en minas, almacén y granja.",
+      "descRes": "Calcula el orden de construcción que lleva leñador, barrera de arcilla y mina de hierro al nivel 30 en el menor tiempo. Añade por sí sola los niveles necesarios de edificio principal, almacén y granja.",
       "button": "⚡ Calcular cola",
       "calculating": "Calculando... paso",
       "deep": "Búsqueda profunda",
@@ -246,8 +251,8 @@
       "apply": "✅ Aplicar a la cola",
       "discard": "Descartar",
       "overwriteWarn": "Al aplicarlo se reemplazará tu cola de construcción actual.",
-      "noSolution": "❌ No se encontró ninguna cola que llegue a la academia con estos niveles iniciales. Revisa los niveles de tus edificios.",
-      "alreadyDone": "✅ Esta aldea ya cumple todo lo necesario para la academia.",
+      "noSolution": "❌ No se ha encontrado ninguna cola que alcance el objetivo con estos niveles iniciales. Revisa los niveles de los edificios.",
+      "alreadyDone": "✅ En esta aldea ya está todo lo necesario para este objetivo.",
       "failed": "❌ Se produjo un error durante el cálculo."
     }
   },

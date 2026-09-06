@@ -235,8 +235,13 @@
       "wall": "Zid"
     },
     "optimizer": {
-      "title": "🤖 Kalkulator najbrže akademije",
-      "desc": "Računa redoslijed gradnje koji najbrže dovodi do akademije (prvog plemića), na temelju brzine svijeta, faktora proizvodnje i trenutnih razina zgrada. Ulaganja u rudnike, skladište i farmu uravnotežuje sam.",
+      "title": "🤖 Kalkulator najbržeg reda",
+      "modeAcademy": "Akademija (prvi plemić)",
+      "modeFull": "Sve zgrade",
+      "modeRes": "Sirovine 30/30/30",
+      "descAcademy": "Računa redoslijed gradnje koji najbrže dovodi do akademije (prvog plemića), na temelju brzine svijeta, faktora proizvodnje i trenutnih razina zgrada. Ulaganja u rudnike, skladište i farmu uravnotežuje sam.",
+      "descFull": "Izračunava redoslijed gradnje koji u najkraćem vremenu diže sve zgrade u selu (osim crkve i osmatračnice) na najvišu razinu. Ulaganja u rudnike, skladište i farmu sam uravnotežuje.",
+      "descRes": "Izračunava redoslijed gradnje koji u najkraćem vremenu diže drvosječu, glinokop i rudnik željeza na razinu 30. Potrebne razine glavne zgrade, skladišta i farme sam dodaje.",
       "button": "⚡ Izračunaj red",
       "calculating": "Računam... korak",
       "deep": "Duboko pretraživanje",
@@ -246,8 +251,8 @@
       "apply": "✅ Primijeni na red",
       "discard": "Odustani",
       "overwriteWarn": "Primjena će zamijeniti tvoj trenutni red gradnje.",
-      "noSolution": "❌ S ovim početnim razinama nije pronađen red koji vodi do akademije. Provjeri razine zgrada.",
-      "alreadyDone": "✅ Ovo selo već ispunjava sve uvjete za akademiju.",
+      "noSolution": "❌ S ovim početnim razinama nije pronađen red koji doseže cilj. Provjeri razine zgrada.",
+      "alreadyDone": "✅ U ovom selu već postoji sve što je potrebno za ovaj cilj.",
       "failed": "❌ Došlo je do pogreške tijekom izračuna."
     }
   },

@@ -235,8 +235,13 @@
       "wall": "Hradby"
     },
     "optimizer": {
-      "title": "🤖 Kalkulačka Nejrychlejší Akademie",
-      "desc": "Vypočítá pořadí stavby, které nejrychleji dovede k akademii (prvnímu šlechtici), podle rychlosti světa, faktoru produkce a současných úrovní budov. Investice do dolů, skladu a farmy vyvažuje sama.",
+      "title": "🤖 Kalkulačka Nejrychlejší Fronty",
+      "modeAcademy": "Akademie (první šlechtic)",
+      "modeFull": "Všechny budovy",
+      "modeRes": "Suroviny 30/30/30",
+      "descAcademy": "Vypočítá pořadí stavby, které nejrychleji dovede k akademii (prvnímu šlechtici), podle rychlosti světa, faktoru produkce a současných úrovní budov. Investice do dolů, skladu a farmy vyvažuje sama.",
+      "descFull": "Vypočítá pořadí stavby, které v nejkratším čase dovede všechny budovy vesnice (bez kostela a strážní věže) na maximální úroveň. Investice do dolů, skladu a farmy si vyváží sama.",
+      "descRes": "Vypočítá pořadí stavby, které v nejkratším čase dovede dřevorubce, hliniště a železný důl na úroveň 30. Potřebné úrovně hlavní budovy, skladu a farmy si doplní sama.",
       "button": "⚡ Vypočítat frontu",
       "calculating": "Počítám... krok",
       "deep": "Hluboké hledání",
@@ -246,8 +251,8 @@
       "apply": "✅ Použít na frontu",
       "discard": "Zrušit",
       "overwriteWarn": "Použitím nahradíte svou současnou frontu staveb.",
-      "noSolution": "❌ S těmito počátečními úrovněmi nebyla nalezena žádná fronta k akademii. Zkontrolujte úrovně budov.",
-      "alreadyDone": "✅ Tato vesnice už splňuje vše potřebné pro akademii.",
+      "noSolution": "❌ S těmito počátečními úrovněmi nebyla nalezena žádná fronta vedoucí k cíli. Zkontroluj úrovně budov.",
+      "alreadyDone": "✅ V této vesnici už je vše potřebné pro tento cíl hotové.",
       "failed": "❌ Během výpočtu došlo k chybě."
     }
   },

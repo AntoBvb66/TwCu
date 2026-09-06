@@ -235,8 +235,13 @@
       "wall": "Muralha"
     },
     "optimizer": {
-      "title": "🤖 Calculadora da Academia Mais Rápida",
-      "desc": "Calcula a ordem de construção que alcança a academia (primeiro nobre) no menor tempo, com base na velocidade do mundo, no fator de produção e nos níveis atuais dos edifícios. Equilibra sozinha os investimentos em minas, armazém e fazenda.",
+      "title": "🤖 Calculadora da Fila Mais Rápida",
+      "modeAcademy": "Academia (primeiro nobre)",
+      "modeFull": "Todos os edifícios",
+      "modeRes": "Recursos 30/30/30",
+      "descAcademy": "Calcula a ordem de construção que alcança a academia (primeiro nobre) no menor tempo, com base na velocidade do mundo, no fator de produção e nos níveis atuais dos edifícios. Equilibra sozinha os investimentos em minas, armazém e fazenda.",
+      "descFull": "Calcula a ordem de construção que leva todos os edifícios da aldeia (exceto igreja e torre de vigia) ao nível máximo no menor tempo. Ele mesmo equilibra os investimentos em minas, armazém e fazenda.",
+      "descRes": "Calcula a ordem de construção que leva bosque, poço de argila e mina de ferro ao nível 30 no menor tempo. Ele mesmo adiciona os níveis necessários de edifício principal, armazém e fazenda.",
       "button": "⚡ Calcular fila",
       "calculating": "Calculando... passo",
       "deep": "Busca profunda",
@@ -246,8 +251,8 @@
       "apply": "✅ Aplicar na fila",
       "discard": "Cancelar",
       "overwriteWarn": "Ao aplicar, sua fila de construção atual será substituída.",
-      "noSolution": "❌ Nenhuma fila que chegue à academia foi encontrada com esses níveis iniciais. Verifique os níveis dos seus edifícios.",
-      "alreadyDone": "✅ Esta aldeia já tem tudo o que é preciso para a academia.",
+      "noSolution": "❌ Nenhuma fila que alcance o objetivo foi encontrada com esses níveis iniciais. Verifique os níveis dos edifícios.",
+      "alreadyDone": "✅ Nesta aldeia já existe tudo o que é necessário para este objetivo.",
       "failed": "❌ Ocorreu um erro durante o cálculo."
     }
   },

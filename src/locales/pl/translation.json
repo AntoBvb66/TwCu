@@ -235,8 +235,13 @@
       "wall": "Mur"
     },
     "optimizer": {
-      "title": "🤖 Kalkulator Najszybszej Akademii",
-      "desc": "Oblicza kolejność budowy, która najszybciej pozwala zbudować akademię (pierwszego szlachcica), na podstawie szybkości świata, współczynnika produkcji i obecnych poziomów budynków. Sam równoważy inwestycje w kopalnie, magazyn i farmę.",
+      "title": "🤖 Kalkulator Najszybszej Kolejki",
+      "modeAcademy": "Akademia (pierwszy szlachcic)",
+      "modeFull": "Wszystkie budynki",
+      "modeRes": "Surowce 30/30/30",
+      "descAcademy": "Oblicza kolejność budowy, która najszybciej pozwala zbudować akademię (pierwszego szlachcica), na podstawie szybkości świata, współczynnika produkcji i obecnych poziomów budynków. Sam równoważy inwestycje w kopalnie, magazyn i farmę.",
+      "descFull": "Oblicza kolejność budowy, która w najkrótszym czasie doprowadzi wszystkie budynki wioski (bez kościoła i wieży strażniczej) do maksymalnego poziomu. Sam równoważy inwestycje w kopalnie, magazyn i zagrodę.",
+      "descRes": "Oblicza kolejność budowy, która w najkrótszym czasie doprowadzi tartak, cegielnię i hutę żelaza do poziomu 30. Sam dodaje potrzebne poziomy ratusza, magazynu i zagrody.",
       "button": "⚡ Oblicz kolejkę",
       "calculating": "Obliczanie... krok",
       "deep": "Głębokie wyszukiwanie",
@@ -246,8 +251,8 @@
       "apply": "✅ Zastosuj do kolejki",
       "discard": "Anuluj",
       "overwriteWarn": "Zastosowanie zastąpi twoją obecną kolejkę budowy.",
-      "noSolution": "❌ Nie znaleziono kolejki prowadzącej do akademii przy tych poziomach początkowych. Sprawdź poziomy budynków.",
-      "alreadyDone": "✅ Ta wioska spełnia już wszystkie wymagania akademii.",
+      "noSolution": "❌ Przy tych poziomach początkowych nie znaleziono kolejki osiągającej cel. Sprawdź poziomy budynków.",
+      "alreadyDone": "✅ W tej wiosce wszystko, co potrzebne do tego celu, jest już gotowe.",
       "failed": "❌ Wystąpił błąd podczas obliczeń."
     }
   },

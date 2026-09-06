@@ -235,8 +235,13 @@
       "wall": "Sur"
     },
     "optimizer": {
-      "title": "🤖 En Hızlı Akademi Hesaplayıcı",
-      "desc": "Girdiğiniz dünya hızı, üretim faktörü ve mevcut bina seviyelerine göre akademiye (ilk soylu) en kısa sürede ulaştıran inşaat sırasını hesaplar. Ocak, depo ve çiftlik yatırımlarını kendisi dengeler.",
+      "title": "🤖 En Hızlı Kuyruk Hesaplayıcı",
+      "modeAcademy": "Akademi (İlk Soylu)",
+      "modeFull": "Tüm Binalar",
+      "modeRes": "Hammadde 30/30/30",
+      "descAcademy": "Girdiğiniz dünya hızı, üretim faktörü ve mevcut bina seviyelerine göre akademiye (ilk soylu) en kısa sürede ulaştıran inşaat sırasını hesaplar. Ocak, depo ve çiftlik yatırımlarını kendisi dengeler.",
+      "descFull": "Köydeki bütün binaları (kilise ve gözetleme kulesi hariç) en kısa sürede maksimum seviyeye çıkaran inşaat sırasını hesaplar. Ocak, depo ve çiftlik yatırımlarını kendisi dengeler.",
+      "descRes": "Odun, kil ve demir ocaklarını en kısa sürede 30. seviyeye çıkaran inşaat sırasını hesaplar. Gereken ana bina, depo ve çiftlik seviyelerini kendisi ekler.",
       "button": "⚡ Kuyruğu Hesapla",
       "calculating": "Hesaplanıyor... adım",
       "deep": "Detaylı arama",
@@ -246,8 +251,8 @@
       "apply": "✅ Kuyruğa Uygula",
       "discard": "Vazgeç",
       "overwriteWarn": "Uygularsanız mevcut inşaat kuyruğunuz bu sonuçla değiştirilir.",
-      "noSolution": "❌ Bu başlangıç seviyeleriyle akademiye ulaşan bir kuyruk bulunamadı. Bina seviyelerini kontrol edin.",
-      "alreadyDone": "✅ Bu köyde akademi için gereken her şey zaten hazır.",
+      "noSolution": "❌ Bu başlangıç seviyeleriyle hedefe ulaşan bir kuyruk bulunamadı. Bina seviyelerini kontrol edin.",
+      "alreadyDone": "✅ Bu köyde hedef için gereken her şey zaten hazır.",
       "failed": "❌ Hesaplama sırasında bir hata oluştu."
     }
   },

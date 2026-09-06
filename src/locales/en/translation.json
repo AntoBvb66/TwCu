@@ -235,8 +235,13 @@
       "wall": "Wall"
     },
     "optimizer": {
-      "title": "🤖 Fastest Academy Calculator",
-      "desc": "Calculates the build order that reaches the academy (first noble) in the shortest time, based on your world speed, resource production factor and current building levels. It balances mine, warehouse and farm investments on its own.",
+      "title": "🤖 Fastest Queue Calculator",
+      "modeAcademy": "Academy (First Noble)",
+      "modeFull": "All Buildings",
+      "modeRes": "Resources 30/30/30",
+      "descAcademy": "Calculates the build order that reaches the academy (first noble) in the shortest time, based on your world speed, resource production factor and current building levels. It balances mine, warehouse and farm investments on its own.",
+      "descFull": "Calculates the build order that takes every building in the village (church and watchtower excluded) to its maximum level in the shortest time. It balances the pit, warehouse and farm investments by itself.",
+      "descRes": "Calculates the build order that takes the timber camp, clay pit and iron mine to level 30 in the shortest time. It adds the required headquarters, warehouse and farm levels by itself.",
       "button": "⚡ Calculate Queue",
       "calculating": "Calculating... step",
       "deep": "Deep search",
@@ -246,8 +251,8 @@
       "apply": "✅ Apply to Queue",
       "discard": "Discard",
       "overwriteWarn": "Applying this will replace your current build queue.",
-      "noSolution": "❌ No queue reaching the academy was found with these starting levels. Please check your building levels.",
-      "alreadyDone": "✅ This village already has everything required for the academy.",
+      "noSolution": "❌ No queue reaching the target was found with these starting levels. Please check the building levels.",
+      "alreadyDone": "✅ Everything needed for this target is already built in this village.",
       "failed": "❌ An error occurred during the calculation."
     }
   },

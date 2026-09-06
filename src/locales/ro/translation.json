@@ -235,8 +235,13 @@
       "wall": "Zid"
     },
     "optimizer": {
-      "title": "🤖 Calculator Academie Cea Mai Rapidă",
-      "desc": "Calculează ordinea de construcție care ajunge la academie (primul nobil) în cel mai scurt timp, în funcție de viteza lumii, factorul de producție și nivelurile actuale ale clădirilor. Echilibrează singur investițiile în mine, depozit și fermă.",
+      "title": "🤖 Calculator Coadă Cea Mai Rapidă",
+      "modeAcademy": "Academie (primul nobil)",
+      "modeFull": "Toate clădirile",
+      "modeRes": "Resurse 30/30/30",
+      "descAcademy": "Calculează ordinea de construcție care ajunge la academie (primul nobil) în cel mai scurt timp, în funcție de viteza lumii, factorul de producție și nivelurile actuale ale clădirilor. Echilibrează singur investițiile în mine, depozit și fermă.",
+      "descFull": "Calculează ordinea de construcție care duce toate clădirile satului (fără biserică și turn de veghe) la nivelul maxim în cel mai scurt timp. Echilibrează singur investițiile în mine, depozit și fermă.",
+      "descRes": "Calculează ordinea de construcție care duce tabăra de lemn, groapa de lut și mina de fier la nivelul 30 în cel mai scurt timp. Adaugă singur nivelurile necesare de clădire principală, depozit și fermă.",
       "button": "⚡ Calculează coada",
       "calculating": "Se calculează... pasul",
       "deep": "Căutare aprofundată",
@@ -246,8 +251,8 @@
       "apply": "✅ Aplică la coadă",
       "discard": "Renunță",
       "overwriteWarn": "Aplicarea va înlocui coada ta de construcție actuală.",
-      "noSolution": "❌ Nu s-a găsit nicio coadă care să ajungă la academie cu aceste niveluri inițiale. Verifică nivelurile clădirilor.",
-      "alreadyDone": "✅ Acest sat îndeplinește deja tot ce este necesar pentru academie.",
+      "noSolution": "❌ Cu aceste niveluri inițiale nu a fost găsită nicio coadă care să atingă obiectivul. Verifică nivelurile clădirilor.",
+      "alreadyDone": "✅ În acest sat există deja tot ce este necesar pentru acest obiectiv.",
       "failed": "❌ A apărut o eroare în timpul calculului."
     }
   },

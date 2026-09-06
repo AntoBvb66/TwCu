@@ -235,8 +235,13 @@
       "wall": "Muro"
     },
     "optimizer": {
-      "title": "🤖 Calcolatore Accademia Più Veloce",
-      "desc": "Calcola l'ordine di costruzione che raggiunge l'accademia (primo nobile) nel minor tempo, in base alla velocità del mondo, al fattore di produzione e ai livelli attuali degli edifici. Bilancia da solo gli investimenti in miniere, magazzino e fattoria.",
+      "title": "🤖 Calcolatore Coda Più Veloce",
+      "modeAcademy": "Accademia (primo nobile)",
+      "modeFull": "Tutti gli edifici",
+      "modeRes": "Risorse 30/30/30",
+      "descAcademy": "Calcola l'ordine di costruzione che raggiunge l'accademia (primo nobile) nel minor tempo, in base alla velocità del mondo, al fattore di produzione e ai livelli attuali degli edifici. Bilancia da solo gli investimenti in miniere, magazzino e fattoria.",
+      "descFull": "Calcola l'ordine di costruzione che porta tutti gli edifici del villaggio (chiesa e torre di guardia escluse) al livello massimo nel minor tempo. Bilancia da solo gli investimenti in miniere, magazzino e fattoria.",
+      "descRes": "Calcola l'ordine di costruzione che porta boscaiolo, fossa d'argilla e miniera di ferro al livello 30 nel minor tempo. Aggiunge da solo i livelli necessari di edificio principale, magazzino e fattoria.",
       "button": "⚡ Calcola coda",
       "calculating": "Calcolo... passo",
       "deep": "Ricerca approfondita",
@@ -246,8 +251,8 @@
       "apply": "✅ Applica alla coda",
       "discard": "Annulla",
       "overwriteWarn": "Applicando sostituirai la tua coda di costruzione attuale.",
-      "noSolution": "❌ Nessuna coda che raggiunge l'accademia trovata con questi livelli iniziali. Controlla i livelli dei tuoi edifici.",
-      "alreadyDone": "✅ Questo villaggio soddisfa già tutti i requisiti per l'accademia.",
+      "noSolution": "❌ Con questi livelli iniziali non è stata trovata nessuna coda che raggiunga l'obiettivo. Controlla i livelli degli edifici.",
+      "alreadyDone": "✅ In questo villaggio c'è già tutto il necessario per questo obiettivo.",
       "failed": "❌ Si è verificato un errore durante il calcolo."
     }
   },

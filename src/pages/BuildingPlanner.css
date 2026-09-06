@@ -277,6 +277,21 @@
 .bp-optimizer-title { font-weight: bold; color: var(--gold); font-size: 15px; }
 .bp-optimizer-desc { font-size: 12px; opacity: 0.8; margin-top: 3px; max-width: 620px; line-height: 1.45; }
 
+/* Hedef secici: akademi / tum binalar / hammadde */
+.bp-optimizer-modes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+
+.bp-optimizer-mode {
+    padding: 4px 10px; font-size: 12px; font-family: inherit; cursor: pointer;
+    background: var(--ink-850); border: 1px solid var(--line-2);
+    border-radius: var(--r-sm); color: inherit;
+}
+.bp-optimizer-mode:hover:not(:disabled) { border-color: var(--gold); }
+.bp-optimizer-mode.active {
+    background: var(--gold); border-color: var(--gold);
+    color: var(--ink-900); font-weight: bold;
+}
+.bp-optimizer-mode:disabled { cursor: default; opacity: 0.6; }
+
 .bp-optimizer-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
 .bp-optimizer-deep {

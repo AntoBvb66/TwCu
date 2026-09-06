@@ -235,8 +235,13 @@
       "wall": "Múr"
     },
     "optimizer": {
-      "title": "🤖 Kalkulačka Najrýchlejšej Akadémie",
-      "desc": "Vypočíta poradie stavby, ktoré najrýchlejšie dovedie k akadémii (prvému šľachticovi), podľa rýchlosti sveta, faktora produkcie a súčasných úrovní budov. Investície do baní, skladu a farmy vyvažuje sama.",
+      "title": "🤖 Kalkulačka Najrýchlejšieho Frontu",
+      "modeAcademy": "Akadémia (prvý šľachtic)",
+      "modeFull": "Všetky budovy",
+      "modeRes": "Suroviny 30/30/30",
+      "descAcademy": "Vypočíta poradie stavby, ktoré najrýchlejšie dovedie k akadémii (prvému šľachticovi), podľa rýchlosti sveta, faktora produkcie a súčasných úrovní budov. Investície do baní, skladu a farmy vyvažuje sama.",
+      "descFull": "Vypočíta poradie stavby, ktoré v najkratšom čase dovedie všetky budovy dediny (bez kostola a strážnej veže) na maximálnu úroveň. Investície do baní, skladu a farmy si vyváži sama.",
+      "descRes": "Vypočíta poradie stavby, ktoré v najkratšom čase dovedie drevorubača, hlinisko a železnú baňu na úroveň 30. Potrebné úrovne hlavnej budovy, skladu a farmy si doplní sama.",
       "button": "⚡ Vypočítať front",
       "calculating": "Počítam... krok",
       "deep": "Hlboké hľadanie",
@@ -246,8 +251,8 @@
       "apply": "✅ Použiť na front",
       "discard": "Zrušiť",
       "overwriteWarn": "Použitím nahradíte svoj súčasný front stavieb.",
-      "noSolution": "❌ S týmito počiatočnými úrovňami sa nenašiel žiadny front k akadémii. Skontrolujte úrovne budov.",
-      "alreadyDone": "✅ Táto dedina už spĺňa všetko potrebné pre akadémiu.",
+      "noSolution": "❌ S týmito počiatočnými úrovňami sa nenašiel žiadny front vedúci k cieľu. Skontroluj úrovne budov.",
+      "alreadyDone": "✅ V tejto dedine je už všetko potrebné pre tento cieľ hotové.",
       "failed": "❌ Počas výpočtu došlo k chybe."
     }
   },

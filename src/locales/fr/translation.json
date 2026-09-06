@@ -235,8 +235,13 @@
       "wall": "Mur"
     },
     "optimizer": {
-      "title": "🤖 Calculateur d'Académie la Plus Rapide",
-      "desc": "Calcule l'ordre de construction qui atteint l'académie (premier noble) le plus rapidement, selon votre vitesse de monde, le facteur de production et vos niveaux de bâtiments actuels. Les investissements en mines, entrepôt et ferme sont équilibrés automatiquement.",
+      "title": "🤖 Calculateur de File la Plus Rapide",
+      "modeAcademy": "Académie (premier noble)",
+      "modeFull": "Tous les bâtiments",
+      "modeRes": "Ressources 30/30/30",
+      "descAcademy": "Calcule l'ordre de construction qui atteint l'académie (premier noble) le plus rapidement, selon votre vitesse de monde, le facteur de production et vos niveaux de bâtiments actuels. Les investissements en mines, entrepôt et ferme sont équilibrés automatiquement.",
+      "descFull": "Calcule l'ordre de construction qui amène tous les bâtiments du village (église et tour de guet exclues) au niveau maximum le plus vite possible. Il équilibre lui-même les investissements en mines, entrepôt et ferme.",
+      "descRes": "Calcule l'ordre de construction qui amène le camp de bûcherons, la carrière d'argile et la mine de fer au niveau 30 le plus vite possible. Il ajoute lui-même les niveaux nécessaires de quartier général, d'entrepôt et de ferme.",
       "button": "⚡ Calculer la file",
       "calculating": "Calcul... étape",
       "deep": "Recherche approfondie",
@@ -246,8 +251,8 @@
       "apply": "✅ Appliquer à la file",
       "discard": "Annuler",
       "overwriteWarn": "Appliquer remplacera votre file de construction actuelle.",
-      "noSolution": "❌ Aucune file atteignant l'académie n'a été trouvée avec ces niveaux de départ. Vérifiez vos niveaux de bâtiments.",
-      "alreadyDone": "✅ Ce village remplit déjà toutes les conditions pour l'académie.",
+      "noSolution": "❌ Aucune file atteignant l'objectif n'a été trouvée avec ces niveaux de départ. Vérifiez les niveaux des bâtiments.",
+      "alreadyDone": "✅ Dans ce village, tout ce qu'il faut pour cet objectif est déjà construit.",
       "failed": "❌ Une erreur s'est produite pendant le calcul."
     }
   },

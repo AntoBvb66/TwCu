@@ -235,8 +235,13 @@
       "wall": "Muur"
     },
     "optimizer": {
-      "title": "🤖 Snelste Academie Calculator",
-      "desc": "Berekent de bouwvolgorde die de academie (eerste adelman) in de kortste tijd bereikt, op basis van je wereldsnelheid, grondstoffenfactor en huidige gebouwniveaus. Investeringen in mijnen, pakhuis en boerderij worden zelf afgewogen.",
+      "title": "🤖 Snelste Wachtrij Calculator",
+      "modeAcademy": "Academie (eerste edelman)",
+      "modeFull": "Alle gebouwen",
+      "modeRes": "Grondstoffen 30/30/30",
+      "descAcademy": "Berekent de bouwvolgorde die de academie (eerste adelman) in de kortste tijd bereikt, op basis van je wereldsnelheid, grondstoffenfactor en huidige gebouwniveaus. Investeringen in mijnen, pakhuis en boerderij worden zelf afgewogen.",
+      "descFull": "Berekent de bouwvolgorde die alle gebouwen in het dorp (kerk en wachttoren uitgezonderd) in de kortste tijd naar het maximale niveau brengt. De investeringen in grondstofgebouwen, pakhuis en boerderij weegt hij zelf af.",
+      "descRes": "Berekent de bouwvolgorde die houthakker, kleigroeve en ijzermijn in de kortste tijd naar niveau 30 brengt. De benodigde niveaus van hoofdgebouw, pakhuis en boerderij voegt hij zelf toe.",
       "button": "⚡ Wachtrij berekenen",
       "calculating": "Berekenen... stap",
       "deep": "Diepe zoekopdracht",
@@ -246,8 +251,8 @@
       "apply": "✅ Toepassen op wachtrij",
       "discard": "Annuleren",
       "overwriteWarn": "Toepassen vervangt je huidige bouwwachtrij.",
-      "noSolution": "❌ Met deze startniveaus is geen wachtrij naar de academie gevonden. Controleer je gebouwniveaus.",
-      "alreadyDone": "✅ Dit dorp heeft al alles wat nodig is voor de academie.",
+      "noSolution": "❌ Met deze startniveaus is geen wachtrij naar het doel gevonden. Controleer de gebouwniveaus.",
+      "alreadyDone": "✅ In dit dorp is alles voor dit doel al aanwezig.",
       "failed": "❌ Er is een fout opgetreden tijdens de berekening."
     }
   },

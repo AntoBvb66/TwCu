@@ -235,8 +235,13 @@
       "wall": "Zid"
     },
     "optimizer": {
-      "title": "🤖 Kalkulator najhitrejše akademije",
-      "desc": "Izračuna vrstni red gradnje, ki najhitreje pripelje do akademije (prvega plemiča), glede na hitrost sveta, faktor proizvodnje in trenutne stopnje zgradb. Vlaganja v rudnike, skladišče in kmetijo uravnoteži sam.",
+      "title": "🤖 Kalkulator najhitrejše vrste",
+      "modeAcademy": "Akademija (prvi plemič)",
+      "modeFull": "Vse zgradbe",
+      "modeRes": "Surovine 30/30/30",
+      "descAcademy": "Izračuna vrstni red gradnje, ki najhitreje pripelje do akademije (prvega plemiča), glede na hitrost sveta, faktor proizvodnje in trenutne stopnje zgradb. Vlaganja v rudnike, skladišče in kmetijo uravnoteži sam.",
+      "descFull": "Izračuna vrstni red gradnje, ki v najkrajšem času dvigne vse zgradbe v vasi (brez cerkve in opazovalnega stolpa) na najvišjo stopnjo. Vlaganja v rudnike, skladišče in kmetijo uravnoteži samo.",
+      "descRes": "Izračuna vrstni red gradnje, ki v najkrajšem času dvigne drvarja, glinokop in rudnik železa na stopnjo 30. Potrebne stopnje glavne stavbe, skladišča in kmetije doda samo.",
       "button": "⚡ Izračunaj vrsto",
       "calculating": "Računam... korak",
       "deep": "Poglobljeno iskanje",
@@ -246,8 +251,8 @@
       "apply": "✅ Uporabi za vrsto",
       "discard": "Prekliči",
       "overwriteWarn": "Uporaba bo zamenjala tvojo trenutno gradbeno vrsto.",
-      "noSolution": "❌ S temi začetnimi stopnjami ni bilo mogoče najti vrste do akademije. Preveri stopnje zgradb.",
-      "alreadyDone": "✅ Ta vas že izpolnjuje vse pogoje za akademijo.",
+      "noSolution": "❌ S temi začetnimi stopnjami ni bilo najdene vrste, ki bi dosegla cilj. Preveri stopnje zgradb.",
+      "alreadyDone": "✅ V tej vasi je že vse, kar je potrebno za ta cilj.",
       "failed": "❌ Med izračunom je prišlo do napake."
     }
   },

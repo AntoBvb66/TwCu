@@ -235,8 +235,13 @@
       "wall": "Mur"
     },
     "optimizer": {
-      "title": "🤖 Raskeste Akademi-kalkulator",
-      "desc": "Beregner byggerekkefølgen som når akademiet (første adelsmann) på kortest tid, basert på verdenshastighet, produksjonsfaktor og nåværende bygningsnivåer. Investeringer i gruver, lager og gård avveies automatisk.",
+      "title": "🤖 Raskeste Kø-kalkulator",
+      "modeAcademy": "Akademi (første adelsmann)",
+      "modeFull": "Alle bygninger",
+      "modeRes": "Ressurser 30/30/30",
+      "descAcademy": "Beregner byggerekkefølgen som når akademiet (første adelsmann) på kortest tid, basert på verdenshastighet, produksjonsfaktor og nåværende bygningsnivåer. Investeringer i gruver, lager og gård avveies automatisk.",
+      "descFull": "Beregner byggerekkefølgen som får alle bygningene i landsbyen (unntatt kirke og vakttårn) opp på maksimalt nivå på kortest mulig tid. Den avveier selv investeringene i gruver, lager og gård.",
+      "descRes": "Beregner byggerekkefølgen som får tømmerhogger, leirgrop og jerngruve opp på nivå 30 på kortest mulig tid. Den legger selv til de nødvendige nivåene av hovedbygning, lager og gård.",
       "button": "⚡ Beregn kø",
       "calculating": "Beregner... steg",
       "deep": "Dypt søk",
@@ -246,8 +251,8 @@
       "apply": "✅ Bruk på kø",
       "discard": "Avbryt",
       "overwriteWarn": "Å bruke dette erstatter din nåværende byggekø.",
-      "noSolution": "❌ Fant ingen kø til akademiet med disse startnivåene. Sjekk bygningsnivåene dine.",
-      "alreadyDone": "✅ Denne landsbyen har allerede alt som kreves for akademiet.",
+      "noSolution": "❌ Det ble ikke funnet noen kø til målet med disse startnivåene. Sjekk bygningsnivåene.",
+      "alreadyDone": "✅ I denne landsbyen er alt til dette målet allerede på plass.",
       "failed": "❌ Det oppsto en feil under beregningen."
     }
   },

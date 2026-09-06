@@ -1,5 +1,5 @@
 // Tribal Wars oyun verisi ve ortak hesap fonksiyonlari.
-// BuildingPlanner.jsx ve academyOptimizer.js ayni sayilari kullansin diye buraya cikarildi.
+// BuildingPlanner.jsx ve queueOptimizer.js ayni sayilari kullansin diye buraya cikarildi.
 
 const buildTimes = {
     1:  ['0:00:07','0:00:14','0:00:45','0:00:45','0:15:00','5:40:00','0:01:39','9:23:20','0:00:45','0:00:09','0:00:11','0:00:20','0:00:07','0:00:07','0:00:08','0:00:09','0:00:08','0:00:14','8:20:00','0:00:01','0:00:27'],

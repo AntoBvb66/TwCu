@@ -9,7 +9,15 @@ import {
     timeToSeconds, calc, getFarmCapacity, getWareCapacity, getProduction, getTotalPop, getTotalPts,
     getBaseLevels, getDefaultStartLevels, buildStartupQueue, buildAccountManagerCode
 } from '../utils/twBuildingData';
-import { optimizeToAcademy } from '../utils/academyOptimizer';
+import { optimizeQueue } from '../utils/queueOptimizer';
+
+// Optimizasyon hedefleri. Her biri icin ceviri anahtarlari
+// buildingPlanner.optimizer.mode<Ad> ve .desc<Ad> seklinde.
+const OPTIMIZE_MODES = [
+    { id: 'academy', key: 'Academy' },
+    { id: 'full', key: 'Full' },
+    { id: 'res', key: 'Res' }
+];
 
 // formatClock artık çeviri fonksiyonunu (t) alıyor
 function formatClock(seconds, t) {
@@ -61,12 +69,15 @@ const BuildingPlanner = () => {
     // Hesap Yoneticisi sablonuna verilecek isim
     const [amName, setAmName] = useState(() => storage.get('bp_am_name', 'TW Cu'));
 
-    // Akademi optimizasyonu: hesap durumu ve onay bekleyen sonuc
+    // Kuyruk optimizasyonu: hedef, hesap durumu ve onay bekleyen sonuc
+    const [optimizeMode, setOptimizeMode] = useState(() => storage.get('bp_opt_mode', 'academy'));
     const [optimizing, setOptimizing] = useState(false);
     const [optimizeProgress, setOptimizeProgress] = useState(0);
+    const [optimizeTotal, setOptimizeTotal] = useState(0);
     const [optimizeResult, setOptimizeResult] = useState(null);
     const [optimizeError, setOptimizeError] = useState(null);
     const [deepSearch, setDeepSearch] = useState(false);
+    const activeMode = OPTIMIZE_MODES.find(m => m.id === optimizeMode) || OPTIMIZE_MODES[0];
 
     useEffect(() => {
         storage.set('bp_ws', worldSpeed);
@@ -76,7 +87,8 @@ const BuildingPlanner = () => {
         storage.set('bp_cols', visibleCols);
         storage.set('bp_export_start', includeStartLevels);
         storage.set('bp_am_name', amName);
-    }, [worldSpeed, mineSpeed, startLevels, queue, visibleCols, includeStartLevels, amName]);
+        storage.set('bp_opt_mode', optimizeMode);
+    }, [worldSpeed, mineSpeed, startLevels, queue, visibleCols, includeStartLevels, amName, optimizeMode]);
 
     const handleLevelChange = (key, val) => {
         let parsed = parseInt(val) || 0;
@@ -158,8 +170,9 @@ const BuildingPlanner = () => {
         
         return queue.map((bldgId, index) => {
             let data = db[bldgId];
-            let targetLvl = simLevels[bldgId] + 1;
-            if(targetLvl > data.max) targetLvl = data.max;
+            // Bina zaten maksimumdaysa satir yine cizilir ama insaat yapilmaz.
+            let atMax = simLevels[bldgId] >= data.max;
+            let targetLvl = atMax ? data.max : simLevels[bldgId] + 1;
 
             let reqW = calc(data.wB, data.wF, targetLvl);
             let reqC = calc(data.cB, data.cF, targetLvl);
@@ -214,9 +227,11 @@ const BuildingPlanner = () => {
             let hqMod = hqModifiers[hqLvlForMod] || 1.0;
             let timeStr = buildTimes[targetLvl] ? buildTimes[targetLvl][data.timeIdx] : null;
             let baseSec = timeToSeconds(timeStr);
-            let buildTime = Math.round((baseSec * hqMod) / worldSpeed);
+            // Hizli dunyalarda ucuz seviyeler saniyenin altina duser; oyunda da
+            // en az 1 saniye surer. Yuvarlanip 0 olursa "maks. seviye" sanilirdi.
+            let buildTime = Math.max(1, Math.round((baseSec * hqMod) / worldSpeed));
 
-            if(!timeStr || buildTime === 0) { descArr.push(t('buildingPlanner.status.maxLevel')); isWarning = true; buildTime = 0; }
+            if(atMax || !timeStr) { descArr.push(t('buildingPlanner.status.maxLevel')); isWarning = true; buildTime = 0; }
 
             let endTime = startTime + buildTime;
 
@@ -244,21 +259,30 @@ const BuildingPlanner = () => {
         });
     }, [worldSpeed, mineSpeed, startLevels, queue, t]);
 
-    // Mevcut baslangic seviyelerinden hedefe en hizli ulasan kuyrugu hesaplar.
+    // Secili hedef degisince onceki hesabin sonucu artik gecerli degil.
+    const changeOptimizeMode = (mode) => {
+        if (optimizing || mode === optimizeMode) return;
+        setOptimizeMode(mode);
+        setOptimizeResult(null);
+        setOptimizeError(null);
+    };
+
+    // Mevcut baslangic seviyelerinden secili hedefe en hizli ulasan kuyrugu hesaplar.
     // Sonuc dogrudan uygulanmaz; kullanici onizleyip "Uygula" derse kuyruga yazilir.
     const handleOptimize = async () => {
         setOptimizing(true);
         setOptimizeError(null);
         setOptimizeResult(null);
         setOptimizeProgress(0);
+        setOptimizeTotal(0);
 
         // Arayuzun "hesaplaniyor" durumunu boyayabilmesi icin bir kare bekle.
         await new Promise(resolve => setTimeout(resolve, 30));
 
         try {
-            const result = await optimizeToAcademy(
-                { startLevels, worldSpeed, mineSpeed, beamWidth: deepSearch ? 900 : 300 },
-                depth => setOptimizeProgress(depth)
+            const result = await optimizeQueue(
+                { startLevels, worldSpeed, mineSpeed, mode: optimizeMode, deep: deepSearch },
+                (depth, _best, total) => { setOptimizeProgress(depth); setOptimizeTotal(total); }
             );
             if (!result) {
                 setOptimizeError(t('buildingPlanner.optimizer.noSolution'));
@@ -401,7 +425,16 @@ const BuildingPlanner = () => {
                     <div className="bp-optimizer-head">
                         <div>
                             <div className="bp-optimizer-title">{t('buildingPlanner.optimizer.title')}</div>
-                            <div className="bp-optimizer-desc">{t('buildingPlanner.optimizer.desc')}</div>
+                            <div className="bp-optimizer-modes">
+                                {OPTIMIZE_MODES.map(mode => (
+                                    <button key={mode.id} type="button" disabled={optimizing}
+                                        className={`bp-optimizer-mode${optimizeMode === mode.id ? ' active' : ''}`}
+                                        onClick={() => changeOptimizeMode(mode.id)}>
+                                        {t(`buildingPlanner.optimizer.mode${mode.key}`)}
+                                    </button>
+                                ))}
+                            </div>
+                            <div className="bp-optimizer-desc">{t(`buildingPlanner.optimizer.desc${activeMode.key}`)}</div>
                         </div>
                         <div className="bp-optimizer-actions">
                             <label className="bp-optimizer-deep" title={t('buildingPlanner.optimizer.deepHint')}>
@@ -411,7 +444,7 @@ const BuildingPlanner = () => {
                             </label>
                             <button onClick={handleOptimize} disabled={optimizing} className="bp-btn-action">
                                 {optimizing
-                                    ? `${t('buildingPlanner.optimizer.calculating')} ${optimizeProgress}`
+                                    ? `${t('buildingPlanner.optimizer.calculating')} ${optimizeProgress}${optimizeTotal ? `/${optimizeTotal}` : ''}`
                                     : t('buildingPlanner.optimizer.button')}
                             </button>
                         </div>

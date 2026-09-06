@@ -235,8 +235,13 @@
       "wall": "Ѕид"
     },
     "optimizer": {
-      "title": "🤖 Leggyorsabb Akadémia Kalkulátor",
-      "desc": "Kiszámolja azt az építési sorrendet, amellyel a legrövidebb idő alatt éred el az akadémiát (első nemest) — a világsebesség, a nyersanyag-termelési szorzó és a jelenlegi épületszintek alapján. A bányákba, raktárba és tanyába való befektetést magától egyensúlyozza.",
+      "title": "🤖 Leggyorsabb Sor Kalkulátor",
+      "modeAcademy": "Akadémia (első nemes)",
+      "modeFull": "Összes épület",
+      "modeRes": "Nyersanyagok 30/30/30",
+      "descAcademy": "Kiszámolja azt az építési sorrendet, amellyel a legrövidebb idő alatt éred el az akadémiát (első nemest) — a világsebesség, a nyersanyag-termelési szorzó és a jelenlegi épületszintek alapján. A bányákba, raktárba és tanyába való befektetést magától egyensúlyozza.",
+      "descFull": "Kiszámolja azt az építési sorrendet, amely a lehető legrövidebb idő alatt viszi maximális szintre a falu összes épületét (a templom és az őrtorony kivételével). A bányákba, raktárba és tanyába való befektetést maga egyensúlyozza ki.",
+      "descRes": "Kiszámolja azt az építési sorrendet, amely a lehető legrövidebb idő alatt viszi 30. szintre a favágót, az agyagbányát és a vasbányát. A szükséges főépület-, raktár- és tanyaszinteket maga adja hozzá.",
       "button": "⚡ Sor kiszámítása",
       "calculating": "Számolás... lépés",
       "deep": "Mély keresés",
@@ -246,8 +251,8 @@
       "apply": "✅ Alkalmazás a sorra",
       "discard": "Elvetés",
       "overwriteWarn": "Az alkalmazás felülírja a jelenlegi építési sorodat.",
-      "noSolution": "❌ Ezekkel a kezdőszintekkel nem található az akadémiához vezető sor. Ellenőrizd az épületszinteket.",
-      "alreadyDone": "✅ Ez a falu már mindent teljesít az akadémiához.",
+      "noSolution": "❌ Ezekkel a kezdőszintekkel nem található a célhoz vezető sor. Ellenőrizd az épületszinteket.",
+      "alreadyDone": "✅ Ebben a faluban már minden megvan ehhez a célhoz.",
       "failed": "❌ Hiba történt a számítás során."
     }
   },

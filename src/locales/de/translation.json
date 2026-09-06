@@ -235,8 +235,13 @@
       "wall": "Wall"
     },
     "optimizer": {
-      "title": "🤖 Schnellster-Akademie-Rechner",
-      "desc": "Berechnet die Baureihenfolge, die die Akademie (erster Adliger) in kürzester Zeit erreicht — auf Basis deiner Weltgeschwindigkeit, des Rohstofffaktors und der aktuellen Gebäudestufen. Investitionen in Minen, Speicher und Bauernhof werden selbst ausbalanciert.",
+      "title": "🤖 Schnellste-Warteschlange-Rechner",
+      "modeAcademy": "Akademie (erster Adliger)",
+      "modeFull": "Alle Gebäude",
+      "modeRes": "Rohstoffe 30/30/30",
+      "descAcademy": "Berechnet die Baureihenfolge, die die Akademie (erster Adliger) in kürzester Zeit erreicht — auf Basis deiner Weltgeschwindigkeit, des Rohstofffaktors und der aktuellen Gebäudestufen. Investitionen in Minen, Speicher und Bauernhof werden selbst ausbalanciert.",
+      "descFull": "Berechnet die Baureihenfolge, die alle Gebäude im Dorf (ohne Kirche und Wachturm) in kürzester Zeit auf die Maximalstufe bringt. Investitionen in Rohstoffgebäude, Speicher und Bauernhof wägt er selbst ab.",
+      "descRes": "Berechnet die Baureihenfolge, die Holzfäller, Lehmgrube und Eisenmine in kürzester Zeit auf Stufe 30 bringt. Die nötigen Stufen von Hauptgebäude, Speicher und Bauernhof fügt er selbst hinzu.",
       "button": "⚡ Warteschlange berechnen",
       "calculating": "Berechne... Schritt",
       "deep": "Tiefensuche",
@@ -246,8 +251,8 @@
       "apply": "✅ In Warteschlange übernehmen",
       "discard": "Verwerfen",
       "overwriteWarn": "Beim Übernehmen wird deine aktuelle Bauschleife ersetzt.",
-      "noSolution": "❌ Mit diesen Startstufen wurde keine Warteschlange zur Akademie gefunden. Bitte prüfe deine Gebäudestufen.",
-      "alreadyDone": "✅ Dieses Dorf erfüllt bereits alle Voraussetzungen für die Akademie.",
+      "noSolution": "❌ Mit diesen Startstufen wurde keine Warteschlange zum Ziel gefunden. Bitte prüfe die Gebäudestufen.",
+      "alreadyDone": "✅ In diesem Dorf ist bereits alles für dieses Ziel vorhanden.",
       "failed": "❌ Bei der Berechnung ist ein Fehler aufgetreten."
     }
   },
