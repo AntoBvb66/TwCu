@@ -174,7 +174,8 @@ const languages = [
   { code: 'se', label: 'Svenska' },
   { code: 'ch', label: 'Schweizerdeutsch' },
   { code: 'th', label: 'ไทย' },
-  { code: 'ua', label: 'Українська' }
+  { code: 'ua', label: 'Українська' },
+  { code: 'ar', label: 'العربية' }
 ];
 
 const createEmptyConfig = () => ({

@@ -4,7 +4,7 @@ import { initReactI18next } from 'react-i18next';
 // ---------------------------------------------------------------------------
 // DİL YÜKLEME
 //
-// Önceden 24 dil dosyasının tamamı ana pakete gömülüyordu (~1 MB). Artık
+// Önceden dil dosyalarının tamamı ana pakete gömülüyordu (~1 MB). Artık
 // sadece kullanılan dil indiriliyor, diğerleri ihtiyaç anında yükleniyor.
 // Vite bu glob'u derleme sırasında ayrı parçalara böler.
 // ---------------------------------------------------------------------------
@@ -14,6 +14,7 @@ const localeLoaders = import.meta.glob('./locales/*/translation.json');
 export const SUPPORTED_LANGUAGES = [
     'tr', 'en', 'hr', 'cz', 'dk', 'nl', 'fr', 'de', 'gr', 'hu', 'it', 'no',
     'pl', 'br', 'pt', 'ro', 'ru', 'sk', 'si', 'es', 'se', 'ch', 'th', 'ua',
+    'ar',
 ];
 
 const loadLocale = async (lng) => {
@@ -21,6 +22,18 @@ const loadLocale = async (lng) => {
     if (!loader) return null;
     const mod = await loader();
     return mod.default || mod;
+};
+
+/** Sağdan sola yazılan diller. */
+const RTL_LANGUAGES = ['ar'];
+
+/** i18next kodundan HTML `lang` özniteliğinin değerini üretir. */
+const htmlLang = (lng) => (lng === 'br' ? 'pt' : lng);
+
+/** <html> üzerindeki `lang` ve `dir` özniteliklerini dile göre ayarlar. */
+const applyDocumentLanguage = (lng) => {
+    document.documentElement.lang = htmlLang(lng);
+    document.documentElement.dir = RTL_LANGUAGES.includes(lng) ? 'rtl' : 'ltr';
 };
 
 /** Bir dili (ve gerekiyorsa yedek dili) yükleyip i18next'e ekler. */
@@ -45,7 +58,7 @@ export const ensureLanguage = async (lng) => {
 export const changeAppLanguage = async (lng) => {
     const resolved = await ensureLanguage(lng);
     localStorage.setItem('appLanguage', resolved);
-    document.documentElement.lang = resolved === 'br' ? 'pt' : resolved;
+    applyDocumentLanguage(resolved);
     return i18n.changeLanguage(resolved);
 };
 
@@ -71,7 +84,7 @@ const detectLanguage = () => {
 
 const initialLanguage = detectLanguage();
 
-document.documentElement.lang = initialLanguage === 'br' ? 'pt' : initialLanguage;
+applyDocumentLanguage(initialLanguage);
 
 i18n
     .use(initReactI18next)

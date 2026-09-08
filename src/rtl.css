@@ -1,0 +1,87 @@
+/* =========================================================================
+   SAĞDAN SOLA (RTL) DÜZELTMELERİ — Arapça
+   i18n.js dili değiştirdiğinde <html> üzerine dir="rtl" yazar. Tarayıcı
+   metin akışını ve flex/grid sırasını kendisi çevirir; burada yalnızca
+   sabit yön içeren (left/right, margin-left, translateX) kurallar
+   aynalanır. Yeni bir yön bağımlı kural eklerken buraya da bakılmalı.
+   ========================================================================= */
+
+/* --- KENAR ÇUBUĞU --- */
+
+[dir='rtl'] .sidebar {
+    border-right: none;
+    border-left: 1px solid var(--line);
+}
+
+/* İnce altın parıltı panelin dış kenarında kalmalı */
+[dir='rtl'] .sidebar::after {
+    right: auto;
+    left: 0;
+}
+
+[dir='rtl'] .collapse-btn {
+    right: auto;
+    left: 12px;
+}
+
+/* Dar moddaki buton zaten ortalanıyor (left:0; right:0; margin:0 auto) */
+[dir='rtl'] .sidebar.collapsed .collapse-btn {
+    right: 0;
+    left: 0;
+}
+
+[dir='rtl'] .lang-dropdown-item {
+    text-align: right;
+}
+
+/* Aktif menü göstergesi: çubuk artık sağ kenarda */
+[dir='rtl'] .menu-link::before {
+    left: auto;
+    right: -10px;
+    border-radius: 3px 0 0 3px;
+}
+
+[dir='rtl'] .sidebar.collapsed .menu-link::before {
+    left: auto;
+    right: -8px;
+}
+
+/* --- MOBİL ÇEKMECE --- */
+
+@media (max-width: 768px) {
+    [dir='rtl'] .sidebar {
+        left: auto;
+        right: 0;
+        transform: translateX(100%);
+        box-shadow: -20px 0 60px rgba(0, 0, 0, 0.8);
+    }
+
+    [dir='rtl'] .sidebar.open {
+        transform: translateX(0);
+    }
+
+    [dir='rtl'] .mobile-topbar .logo {
+        margin-left: 0;
+        margin-right: 6px;
+    }
+}
+
+/* --- ANA SAYFA KARTLARI --- */
+
+[dir='rtl'] .home-card::before {
+    left: auto;
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+[dir='rtl'] .home-card-arrow {
+    margin-left: 0;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 8px;
+    transform: scaleX(-1);
+}
+
+[dir='rtl'] .home-card:hover .home-card-arrow {
+    transform: scaleX(-1) translateX(4px);
+}

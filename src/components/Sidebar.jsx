@@ -67,7 +67,8 @@ const languages = [
     { code: 'se', flag: 'se', label: 'SE' }, // İsveççe
     { code: 'ch', flag: 'ch', label: 'CH' }, // İsviçre Almancası
     { code: 'th', flag: 'th', label: 'TH' }, // Tayca
-    { code: 'ua', flag: 'ua', label: 'UA' }  // Ukraynaca
+    { code: 'ua', flag: 'ua', label: 'UA' }, // Ukraynaca
+    { code: 'ar', flag: 'sa', label: 'AR' }  // Arapça (sağdan sola)
 ];
 
     const currentLang = languages.find(l => l.code === i18n.language) || languages[0];
