@@ -140,7 +140,8 @@
       "copyBoard": "Kopiér til udklipsholder",
       "close": "Luk",
       "delete": "Slet",
-      "amCode": "🏛️ Kontostyringskode"
+      "amCode": "🏛️ Kontostyringskode",
+      "amImport": "🏛️ Indlæs kontostyringskode"
     },
     "modal": {
       "importTitle": "📥 Indsæt byggekøen kopieret fra spillet",
@@ -156,7 +157,13 @@
       "includeStartHint": "Tilføjer øverst i outputtet, ét niveau ad gangen, de opgraderinger der bringer en tom landsby op til dine startniveauer.",
       "amTitle": "🏛️ Kontostyring skabelonkode",
       "amName": "Skabelonnavn:",
-      "amHint": "Indsæt denne kode i det userscript, der importerer kontostyringsskabeloner. Da niveauerne der er absolutte, medtages dine startniveauer altid i koden."
+      "amHint": "Indsæt denne kode i det userscript, der importerer kontostyringsskabeloner. Da niveauerne der er absolutte, medtages dine startniveauer altid i koden.",
+      "amImportTitle": "🏛️ Indsæt skabelonkoden fra kontostyringen",
+      "amImportHint": "Niveauerne i koden er absolutte. Den del, dine startniveauer allerede dækker, fjernes, og de resterende ordrer indlæses i køen.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ {{count}} ordrer indlæst i køen. Skabelon: {{name}}",
+      "amImportSkipped": "⚠️ {{count}} ordrer blev sprunget over, da de overstiger maksniveauet.",
+      "amImportError": "❌ Koden kunne ikke læses. Tjek din skabelonkode fra kontostyringen."
     },
     "levelsTitle": "🏠 Startniveauer for bygninger (Skjul / Vis)",
     "analysis": {

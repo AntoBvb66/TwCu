@@ -140,7 +140,8 @@
       "copyBoard": "Copia negli Appunti",
       "close": "Chiudi",
       "delete": "Elimina",
-      "amCode": "🏛️ Codice gestore account"
+      "amCode": "🏛️ Codice gestore account",
+      "amImport": "🏛️ Carica codice gestore account"
     },
     "modal": {
       "importTitle": "📥 Incolla la Coda Costruzioni Copiata dal Gioco",
@@ -156,7 +157,13 @@
       "includeStartHint": "Aggiunge all'inizio dell'output, livello per livello, le costruzioni che portano un villaggio vuoto ai tuoi livelli iniziali.",
       "amTitle": "🏛️ Codice modello gestore account",
       "amName": "Nome del modello:",
-      "amHint": "Incolla questo codice nello userscript che importa i modelli del gestore account. Poiché lì i livelli sono assoluti, i tuoi livelli iniziali sono sempre inclusi nel codice."
+      "amHint": "Incolla questo codice nello userscript che importa i modelli del gestore account. Poiché lì i livelli sono assoluti, i tuoi livelli iniziali sono sempre inclusi nel codice.",
+      "amImportTitle": "🏛️ Incolla il codice modello del gestore account",
+      "amImportHint": "I livelli nel codice sono assoluti. La parte già coperta dai tuoi livelli iniziali viene rimossa e gli ordini restanti vengono caricati nella coda.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ {{count}} ordini caricati nella coda. Modello: {{name}}",
+      "amImportSkipped": "⚠️ {{count}} ordini sono stati saltati perché superano il livello massimo.",
+      "amImportError": "❌ Impossibile decodificare il codice. Controlla il codice modello del gestore account."
     },
     "levelsTitle": "🏠 Livelli Edifici Iniziali (Nascondi / Mostra)",
     "analysis": {

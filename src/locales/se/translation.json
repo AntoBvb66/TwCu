@@ -140,7 +140,8 @@
       "copyBoard": "Kopiera till Urklipp",
       "close": "Stäng",
       "delete": "Radera",
-      "amCode": "🏛️ Kontohanterarkod"
+      "amCode": "🏛️ Kontohanterarkod",
+      "amImport": "🏛️ Ladda kontohanterarkod"
     },
     "modal": {
       "importTitle": "📥 Klistra in Byggkön Kopierad från Spelet",
@@ -156,7 +157,13 @@
       "includeStartHint": "Lägger till högst upp i utmatningen, en nivå i taget, de utbyggnader som tar en tom by upp till dina startnivåer.",
       "amTitle": "🏛️ Kontohanterarens mallkod",
       "amName": "Mallnamn:",
-      "amHint": "Klistra in den här koden i det userscript som importerar kontohanterarens mallar. Eftersom nivåerna där är absoluta inkluderas dina startnivåer alltid i koden."
+      "amHint": "Klistra in den här koden i det userscript som importerar kontohanterarens mallar. Eftersom nivåerna där är absoluta inkluderas dina startnivåer alltid i koden.",
+      "amImportTitle": "🏛️ Klistra in kontohanterarens mallkod",
+      "amImportHint": "Nivåerna i koden är absoluta. Den del som dina startnivåer redan täcker tas bort och resterande order laddas in i kön.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ {{count}} order inlästa i kön. Mall: {{name}}",
+      "amImportSkipped": "⚠️ {{count}} order hoppades över eftersom de överstiger maxnivån.",
+      "amImportError": "❌ Koden kunde inte avkodas. Kontrollera kontohanterarens mallkod."
     },
     "levelsTitle": "🏠 Startbyggnadsnivåer (Dölj / Visa)",
     "analysis": {

@@ -140,7 +140,8 @@
       "copyBoard": "Copiar al Portapapeles",
       "close": "Cerrar",
       "delete": "Eliminar",
-      "amCode": "🏛️ Código del gestor de cuenta"
+      "amCode": "🏛️ Código del gestor de cuenta",
+      "amImport": "🏛️ Cargar código del gestor de cuenta"
     },
     "modal": {
       "importTitle": "📥 Pega la Cola de Construcción Copiada del Juego",
@@ -156,7 +157,13 @@
       "includeStartHint": "Añade al principio de la salida, nivel a nivel, las mejoras que llevan una aldea vacía hasta tus niveles iniciales.",
       "amTitle": "🏛️ Código de plantilla del gestor de cuenta",
       "amName": "Nombre de la plantilla:",
-      "amHint": "Pega este código en el userscript que importa plantillas del gestor de cuenta. Como allí los niveles son absolutos, tus niveles iniciales siempre se incluyen en el código."
+      "amHint": "Pega este código en el userscript que importa plantillas del gestor de cuenta. Como allí los niveles son absolutos, tus niveles iniciales siempre se incluyen en el código.",
+      "amImportTitle": "🏛️ Pega el código de plantilla del gestor de cuenta",
+      "amImportHint": "Los niveles del código son absolutos. La parte que ya cubren tus niveles iniciales se elimina y las órdenes restantes se cargan en la cola.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ {{count}} órdenes cargadas en la cola. Plantilla: {{name}}",
+      "amImportSkipped": "⚠️ Se omitieron {{count}} órdenes por superar el nivel máximo.",
+      "amImportError": "❌ No se pudo decodificar el código. Comprueba tu código de plantilla del gestor de cuenta."
     },
     "levelsTitle": "🏠 Niveles de Edificios Iniciales (Ocultar / Mostrar)",
     "analysis": {

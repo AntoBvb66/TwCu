@@ -140,7 +140,8 @@
       "copyBoard": "Copiar para Área de Transferência",
       "close": "Fechar",
       "delete": "Eliminar",
-      "amCode": "🏛️ Código do gestor de conta"
+      "amCode": "🏛️ Código do gestor de conta",
+      "amImport": "🏛️ Carregar código do gestor de conta"
     },
     "modal": {
       "importTitle": "📥 Cole a Fila de Construção Copiada do Jogo",
@@ -156,7 +157,13 @@
       "includeStartHint": "Adiciona no início da saída, nível a nível, as construções que levam uma aldeia vazia até aos teus níveis iniciais.",
       "amTitle": "🏛️ Código de modelo do gestor de conta",
       "amName": "Nome do modelo:",
-      "amHint": "Cola este código no userscript que importa modelos do gestor de conta. Como os níveis aí são absolutos, os teus níveis iniciais são sempre incluídos no código."
+      "amHint": "Cola este código no userscript que importa modelos do gestor de conta. Como os níveis aí são absolutos, os teus níveis iniciais são sempre incluídos no código.",
+      "amImportTitle": "🏛️ Cole o código de modelo do gestor de conta",
+      "amImportHint": "Os níveis do código são absolutos. A parte já coberta pelos seus níveis iniciais é removida e as ordens restantes são carregadas na fila.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ {{count}} ordens carregadas na fila. Modelo: {{name}}",
+      "amImportSkipped": "⚠️ {{count}} ordens foram ignoradas por excederem o nível máximo.",
+      "amImportError": "❌ Não foi possível descodificar o código. Verifique o seu código de modelo do gestor de conta."
     },
     "levelsTitle": "🏠 Níveis de Edifícios Iniciais (Ocultar / Mostrar)",
     "analysis": {

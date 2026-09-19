@@ -140,7 +140,8 @@
       "copyBoard": "Kopiuj do schowka",
       "close": "Zamknij",
       "delete": "Usuń",
-      "amCode": "🏛️ Kod menedżera konta"
+      "amCode": "🏛️ Kod menedżera konta",
+      "amImport": "🏛️ Wczytaj kod menedżera konta"
     },
     "modal": {
       "importTitle": "📥 Wklej kolejkę budowy skopiowaną z gry",
@@ -156,7 +157,13 @@
       "includeStartHint": "Na początku wyniku dodaje, poziom po poziomie, rozbudowy prowadzące pustą wioskę do Twoich poziomów początkowych.",
       "amTitle": "🏛️ Kod szablonu menedżera konta",
       "amName": "Nazwa szablonu:",
-      "amHint": "Wklej ten kod do skryptu użytkownika importującego szablony menedżera konta. Ponieważ poziomy są tam bezwzględne, Twoje początkowe poziomy budynków są zawsze zawarte w kodzie."
+      "amHint": "Wklej ten kod do skryptu użytkownika importującego szablony menedżera konta. Ponieważ poziomy są tam bezwzględne, Twoje początkowe poziomy budynków są zawsze zawarte w kodzie.",
+      "amImportTitle": "🏛️ Wklej kod szablonu menedżera konta",
+      "amImportHint": "Poziomy w kodzie są bezwzględne. Część pokryta przez Twoje poziomy początkowe zostaje usunięta, a pozostałe rozkazy trafiają do kolejki.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ Wczytano {{count}} rozkazów do kolejki. Szablon: {{name}}",
+      "amImportSkipped": "⚠️ Pominięto {{count}} rozkazów, ponieważ przekraczają maksymalny poziom.",
+      "amImportError": "❌ Nie udało się odczytać kodu. Sprawdź kod szablonu menedżera konta."
     },
     "levelsTitle": "🏠 Początkowe poziomy budynków (Ukryj / Pokaż)",
     "analysis": {

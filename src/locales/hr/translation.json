@@ -140,7 +140,8 @@
       "copyBoard": "Kopiraj u međuspremnik",
       "close": "Zatvori",
       "delete": "Izbriši",
-      "amCode": "🏛️ Kod upravitelja računa"
+      "amCode": "🏛️ Kod upravitelja računa",
+      "amImport": "🏛️ Učitaj kod upravitelja računa"
     },
     "modal": {
       "importTitle": "📥 Zalijepi red gradnje kopiran iz igre",
@@ -156,7 +157,13 @@
       "includeStartHint": "Na početak ispisa dodaje, razinu po razinu, gradnje koje prazno selo dovode do tvojih početnih razina.",
       "amTitle": "🏛️ Kod predloška upravitelja računa",
       "amName": "Naziv predloška:",
-      "amHint": "Zalijepi ovaj kod u korisničku skriptu koja uvozi predloške upravitelja računa. Budući da su razine ondje apsolutne, tvoje početne razine zgrada uvijek su uključene u kod."
+      "amHint": "Zalijepi ovaj kod u korisničku skriptu koja uvozi predloške upravitelja računa. Budući da su razine ondje apsolutne, tvoje početne razine zgrada uvijek su uključene u kod.",
+      "amImportTitle": "🏛️ Zalijepite kod predloška upravitelja računa",
+      "amImportHint": "Razine u kodu su apsolutne. Dio koji vaše početne razine već pokrivaju se uklanja, a preostale naredbe učitavaju se u red.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ U red je učitano {{count}} naredbi. Predložak: {{name}}",
+      "amImportSkipped": "⚠️ {{count}} naredbi je preskočeno jer prelaze maksimalnu razinu.",
+      "amImportError": "❌ Kod nije moguće dekodirati. Provjerite kod predloška upravitelja računa."
     },
     "levelsTitle": "🏠 Početne razine zgrada (Sakrij / Prikaži)",
     "analysis": {

@@ -140,7 +140,8 @@
       "copyBoard": "Copiază în Clipboard",
       "close": "Închide",
       "delete": "Șterge",
-      "amCode": "🏛️ Cod manager de cont"
+      "amCode": "🏛️ Cod manager de cont",
+      "amImport": "🏛️ Încarcă codul managerului de cont"
     },
     "modal": {
       "importTitle": "📥 LiPește Coada de Construcții Copiată din Joc",
@@ -156,7 +157,13 @@
       "includeStartHint": "Adaugă la începutul rezultatului, nivel cu nivel, construcțiile care duc un sat gol la nivelurile tale inițiale.",
       "amTitle": "🏛️ Cod șablon manager de cont",
       "amName": "Numele șablonului:",
-      "amHint": "Lipește acest cod în userscriptul care importă șabloane din managerul de cont. Deoarece acolo nivelurile sunt absolute, nivelurile tale inițiale sunt întotdeauna incluse în cod."
+      "amHint": "Lipește acest cod în userscriptul care importă șabloane din managerul de cont. Deoarece acolo nivelurile sunt absolute, nivelurile tale inițiale sunt întotdeauna incluse în cod.",
+      "amImportTitle": "🏛️ Lipeşte codul de şablon al managerului de cont",
+      "amImportHint": "Nivelurile din cod sunt absolute. Partea acoperită deja de nivelurile tale iniţiale este eliminată, iar restul comenzilor sunt încărcate în coadă.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ {{count}} comenzi încărcate în coadă. Şablon: {{name}}",
+      "amImportSkipped": "⚠️ {{count}} comenzi au fost omise deoarece depăşesc nivelul maxim.",
+      "amImportError": "❌ Codul nu a putut fi decodat. Verifică codul de şablon al managerului de cont."
     },
     "levelsTitle": "🏠 Nivelurile Inițiale ale Clădirilor (Ascunde / Afișează)",
     "analysis": {

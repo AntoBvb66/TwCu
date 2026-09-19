@@ -140,7 +140,8 @@
       "copyBoard": "Kopier til utklippstavle",
       "close": "Lukk",
       "delete": "Slett",
-      "amCode": "🏛️ Kontobehandler-kode"
+      "amCode": "🏛️ Kontobehandler-kode",
+      "amImport": "🏛️ Last inn kontobehandler-kode"
     },
     "modal": {
       "importTitle": "📥 Lim inn byggekø kopiert fra spillet",
@@ -156,7 +157,13 @@
       "includeStartHint": "Legger til øverst i utdataene, ett nivå om gangen, oppgraderingene som tar en tom landsby opp til startnivåene dine.",
       "amTitle": "🏛️ Kontobehandler malkode",
       "amName": "Malnavn:",
-      "amHint": "Lim denne koden inn i userscriptet som importerer kontobehandler-maler. Siden nivåene der er absolutte, tas startnivåene dine alltid med i koden."
+      "amHint": "Lim denne koden inn i userscriptet som importerer kontobehandler-maler. Siden nivåene der er absolutte, tas startnivåene dine alltid med i koden.",
+      "amImportTitle": "🏛️ Lim inn malkoden fra kontobehandleren",
+      "amImportHint": "Nivåene i koden er absolutte. Delen som startnivåene dine allerede dekker fjernes, og resten av ordrene lastes inn i køen.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ {{count}} ordrer lastet inn i køen. Mal: {{name}}",
+      "amImportSkipped": "⚠️ {{count}} ordrer ble hoppet over fordi de overstiger maksnivået.",
+      "amImportError": "❌ Koden kunne ikke leses. Sjekk malkoden fra kontobehandleren."
     },
     "levelsTitle": "🏠 Startnivåer for bygninger (Skjul / Vis)",
     "analysis": {

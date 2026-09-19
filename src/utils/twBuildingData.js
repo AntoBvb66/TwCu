@@ -207,6 +207,10 @@ const AM_BUILDING_IDS = {
     wood: 12, clay: 13, iron: 14, farm: 15, ware: 16, hiding: 17, wall: 18
 };
 
+// Bina id -> anahtar. parseAccountManagerCode icin AM_BUILDING_IDS'in tersi.
+const AM_IDS_TO_BUILDING = {};
+for (const key in AM_BUILDING_IDS) AM_IDS_TO_BUILDING[AM_BUILDING_IDS[key]] = key;
+
 function bytesToBase64(bytes) {
     let binary = '';
     for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
@@ -235,4 +239,63 @@ function buildAccountManagerCode(queueIds, templateName, options) {
     return bytesToBase64(bytes);
 }
 
-export { buildTimes, hqModifiers, db, icons, dictionary, timeToSeconds, calc, getFarmCapacity, getWareCapacity, getProduction, getTotalPop, getTotalPts, BASE_LEVELS, getBaseLevels, DEFAULT_START_LEVELS, getDefaultStartLevels, buildStartupQueue, AM_BUILDING_IDS, buildAccountManagerCode };
+function base64ToBytes(b64) {
+    const binary = atob(b64.replace(/\s+/g, ''));
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    return bytes;
+}
+
+/**
+ * Hesap Yoneticisi sablon kodunu cozer; buildAccountManagerCode'un tersi.
+ * Donen kuyruk mutlaktir: her eleman tek seviye ve her bina 1'den baslar.
+ * Tavani asan emirler (ornegin ocak 31) oyunda da calismadigi icin atlanir.
+ *
+ * @param {string} code base64 sablon kodu
+ * @returns {{queue: string[], templateName: string, farmPriority: number,
+ *            autoDemolish: boolean, skipped: number} | null}
+ */
+function parseAccountManagerCode(code) {
+    if (typeof code !== 'string' || !code.trim()) return null;
+
+    let bytes;
+    try { bytes = base64ToBytes(code.trim()); } catch (err) { return null; }
+    // En az uzunluk (2) + bir emir (2) + iki bayrak (2) olmali.
+    if (bytes.length < 6) return null;
+
+    const len = bytes[0] | (bytes[1] << 8);
+    if (len === 0 || len % 2 !== 0 || 2 + len + 2 > bytes.length) return null;
+
+    const levels = {};
+    const queue = [];
+    let skipped = 0;
+
+    for (let i = 2; i < 2 + len; i += 2) {
+        const key = AM_IDS_TO_BUILDING[bytes[i]];
+        const count = bytes[i + 1];
+        if (!key || !db[key] || count < 1) { skipped += count || 1; continue; }
+        for (let n = 0; n < count; n++) {
+            const next = (levels[key] || 0) + 1;
+            if (next > db[key].max) { skipped++; continue; }
+            levels[key] = next;
+            queue.push(key);
+        }
+    }
+    if (queue.length === 0) return null;
+
+    let templateName = '';
+    if (bytes.length > 4 + len) {
+        const parts = new TextDecoder().decode(bytes.slice(4 + len)).split(AM_SEPARATOR);
+        if (parts.length > 1) templateName = parts[1].trim();
+    }
+
+    return {
+        queue,
+        templateName,
+        farmPriority: bytes[2 + len],
+        autoDemolish: bytes[3 + len] === 1,
+        skipped
+    };
+}
+
+export { buildTimes, hqModifiers, db, icons, dictionary, timeToSeconds, calc, getFarmCapacity, getWareCapacity, getProduction, getTotalPop, getTotalPts, BASE_LEVELS, getBaseLevels, DEFAULT_START_LEVELS, getDefaultStartLevels, buildStartupQueue, AM_BUILDING_IDS, buildAccountManagerCode, parseAccountManagerCode };

@@ -7,7 +7,8 @@ import './BuildingPlanner.css';
 import {
     buildTimes, hqModifiers, db, icons, dictionary,
     timeToSeconds, calc, getFarmCapacity, getWareCapacity, getProduction, getTotalPop, getTotalPts,
-    getBaseLevels, getDefaultStartLevels, buildStartupQueue, buildAccountManagerCode
+    getBaseLevels, getDefaultStartLevels, buildStartupQueue, buildAccountManagerCode,
+    parseAccountManagerCode
 } from '../utils/twBuildingData';
 import { optimizeQueue } from '../utils/queueOptimizer';
 
@@ -375,6 +376,39 @@ const BuildingPlanner = () => {
         setTemplateText(buildAmCode(name));
     };
 
+    const handleOpenAmImport = () => {
+        setTemplateMode('amimport'); setTemplateText(''); setShowTemplateModal(true);
+    };
+
+    // Hesap Yoneticisi kodundaki seviyeler mutlaktir; kod her binayi 1. seviyeden
+    // sayar. Planlayicinin kuyrugu ise baslangic seviyelerinin uzerine bindigi
+    // icin koyde zaten hazir olan seviyeler ayiklanir, kalani kuyruk olur.
+    const handleAmImportSubmit = () => {
+        const parsed = parseAccountManagerCode(templateText);
+        if (!parsed) { alert(t('buildingPlanner.modal.amImportError')); return; }
+
+        const seen = {};
+        const importedQueue = [];
+        parsed.queue.forEach(id => {
+            seen[id] = (seen[id] || 0) + 1;
+            if (seen[id] > (startLevels[id] || 0)) importedQueue.push(id);
+        });
+
+        if (importedQueue.length === 0) { alert(t('buildingPlanner.modal.amImportError')); return; }
+
+        setQueue(importedQueue);
+        if (parsed.templateName) setAmName(parsed.templateName);
+        setShowTemplateModal(false);
+
+        let msg = t('buildingPlanner.modal.amImportSuccess')
+            .replace('{{count}}', importedQueue.length)
+            .replace('{{name}}', parsed.templateName || '-');
+        if (parsed.skipped > 0) {
+            msg += '\n' + t('buildingPlanner.modal.amImportSkipped').replace('{{count}}', parsed.skipped);
+        }
+        alert(msg);
+    };
+
     const handleImportSubmit = () => {
         const lines = templateText.split('\n');
         const importedQueue = [];
@@ -416,6 +450,7 @@ const BuildingPlanner = () => {
                     <div style={{marginLeft: 'auto'}}>
                         <button onClick={handleOpenImport} className="bp-btn-secondary">{t('buildingPlanner.btn.import')}</button>
                         <button onClick={handleOpenExport} className="bp-btn-secondary">{t('buildingPlanner.btn.export')}</button>
+                        <button onClick={handleOpenAmImport} className="bp-btn-secondary">{t('buildingPlanner.btn.amImport')}</button>
                         <button onClick={handleOpenAmCode} className="bp-btn-secondary" style={{marginRight: '15px'}}>{t('buildingPlanner.btn.amCode')}</button>
                         <button onClick={() => setQueue([])} className="bp-btn-clear">{t('buildingPlanner.btn.clear')}</button>
                     </div>
@@ -491,7 +526,11 @@ const BuildingPlanner = () => {
                             {templateMode === 'import' && t('buildingPlanner.modal.importTitle')}
                             {templateMode === 'export' && t('buildingPlanner.modal.exportTitle')}
                             {templateMode === 'amcode' && t('buildingPlanner.modal.amTitle')}
+                            {templateMode === 'amimport' && t('buildingPlanner.modal.amImportTitle')}
                         </h3>
+                        {templateMode === 'amimport' && (
+                            <div className="bp-am-hint">{t('buildingPlanner.modal.amImportHint')}</div>
+                        )}
                         {templateMode === 'amcode' && (
                             <>
                                 <div className="bp-am-hint">{t('buildingPlanner.modal.amHint')}</div>
@@ -513,12 +552,17 @@ const BuildingPlanner = () => {
                             className="bp-template-textarea" 
                             value={templateText} 
                             onChange={e => setTemplateText(e.target.value)}
-                            placeholder={templateMode === 'import' ? t('buildingPlanner.modal.importPlaceholder') : ""}
-                            readOnly={templateMode !== 'import'}
+                            placeholder={
+                                templateMode === 'import' ? t('buildingPlanner.modal.importPlaceholder')
+                                : templateMode === 'amimport' ? t('buildingPlanner.modal.amImportPlaceholder')
+                                : ""
+                            }
+                            readOnly={templateMode !== 'import' && templateMode !== 'amimport'}
                         />
                         <div>
                             {templateMode === 'import' && <button onClick={handleImportSubmit} className="bp-btn-action">{t('buildingPlanner.btn.addQueue')}</button>}
-                            {templateMode !== 'import' && <button onClick={() => { navigator.clipboard.writeText(templateText); alert(t('buildingPlanner.modal.copied')); }} className="bp-btn-action">{t('buildingPlanner.btn.copyBoard')}</button>}
+                            {templateMode === 'amimport' && <button onClick={handleAmImportSubmit} className="bp-btn-action">{t('buildingPlanner.btn.addQueue')}</button>}
+                            {(templateMode === 'export' || templateMode === 'amcode') && <button onClick={() => { navigator.clipboard.writeText(templateText); alert(t('buildingPlanner.modal.copied')); }} className="bp-btn-action">{t('buildingPlanner.btn.copyBoard')}</button>}
                             <button onClick={() => setShowTemplateModal(false)} className="bp-btn-secondary" style={{background: 'var(--danger-solid)'}}>{t('buildingPlanner.btn.close')}</button>
                         </div>
                     </div>

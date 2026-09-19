@@ -140,7 +140,8 @@
       "copyBoard": "Kopírovať do schránky",
       "close": "Zatvoriť",
       "delete": "Odstrániť",
-      "amCode": "🏛️ Kód správcu účtu"
+      "amCode": "🏛️ Kód správcu účtu",
+      "amImport": "🏛️ Načítať kód správcu účtu"
     },
     "modal": {
       "importTitle": "📥 Vložte frontu budovania skopírovanú zo hry",
@@ -156,7 +157,13 @@
       "includeStartHint": "Na začiatok výstupu pridá po jednej úrovni stavby, ktoré dovedú prázdnu dedinu na vaše počiatočné úrovne.",
       "amTitle": "🏛️ Kód šablóny správcu účtu",
       "amName": "Názov šablóny:",
-      "amHint": "Vložte tento kód do používateľského skriptu, ktorý importuje šablóny správcu účtu. Keďže úrovne sú tam absolútne, vaše počiatočné úrovne budov sú v kóde vždy zahrnuté."
+      "amHint": "Vložte tento kód do používateľského skriptu, ktorý importuje šablóny správcu účtu. Keďže úrovne sú tam absolútne, vaše počiatočné úrovne budov sú v kóde vždy zahrnuté.",
+      "amImportTitle": "🏛️ Vložte kód šablóny správcu účtu",
+      "amImportHint": "Úrovne v kóde sú absolútne. Časť pokrytá vašimi počiatočnými úrovňami sa odstráni a zvyšné príkazy sa načítajú do frontu.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ Do frontu sa načítalo {{count}} príkazov. Šablóna: {{name}}",
+      "amImportSkipped": "⚠️ {{count}} príkazov bolo preskočených, pretože prekračujú maximálnu úroveň.",
+      "amImportError": "❌ Kód sa nepodarilo dekódovať. Skontrolujte kód šablóny správcu účtu."
     },
     "levelsTitle": "🏠 Počiatočné úrovne budov (Skryť / Zobraziť)",
     "analysis": {

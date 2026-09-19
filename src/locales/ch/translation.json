@@ -140,7 +140,8 @@
       "copyBoard": "I d Zwischenablage kopiere",
       "close": "Schliesse",
       "delete": "Lösche",
-      "amCode": "🏛️ Kontoverwaltigs-Code"
+      "amCode": "🏛️ Kontoverwaltigs-Code",
+      "amImport": "🏛️ Kontoverwaltigs-Code lade"
     },
     "modal": {
       "importTitle": "📥 Füeg d kopierti Bau-Queue vom Spiel ii",
@@ -156,7 +157,13 @@
       "includeStartHint": "Fuegt d Usbaue, wo es läärs Dorf uf dini Startstufe bringed, Stuef für Stuef am Afang vo de Usgab i.",
       "amTitle": "🏛️ Kontoverwaltig Vorlage-Code",
       "amName": "Vorlage-Name:",
-      "amHint": "Setz de Code i s Userscript i, wo Kontoverwaltigs-Vorlage importiert. Wil d Stufe i de Kontoverwaltig absolut sind, werded dini Start-Gebäudestufe immer mitgrächnet."
+      "amHint": "Setz de Code i s Userscript i, wo Kontoverwaltigs-Vorlage importiert. Wil d Stufe i de Kontoverwaltig absolut sind, werded dini Start-Gebäudestufe immer mitgrächnet.",
+      "amImportTitle": "🏛️ Füeg de Vorlage-Code vo de Kontoverwaltig ii",
+      "amImportHint": "D’Stufe im Code sind absolut. De Teil, wo dini Startstufe scho abdecked, wird ewegglah; di restleche Befehl chömed i d’Warteschlange.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ {{count}} Befehl i d’Warteschlange glade. Vorlag: {{name}}",
+      "amImportSkipped": "⚠️ {{count}} Befehl sind übersprunge worde, wil si über de Maximalstufe sind.",
+      "amImportError": "❌ De Code het nöd chöne gläse werde. Bitte prüef de Vorlage-Code vo de Kontoverwaltig."
     },
     "levelsTitle": "🏠 Aktuelli Gebäude-Level (Zeig / Versteck)",
     "analysis": {

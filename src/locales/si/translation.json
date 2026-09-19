@@ -140,7 +140,8 @@
       "copyBoard": "Kopiraj v odložišče",
       "close": "Zapri",
       "delete": "Izbriši",
-      "amCode": "🏛️ Koda upravitelja računa"
+      "amCode": "🏛️ Koda upravitelja računa",
+      "amImport": "🏛️ Naloži kodo upravitelja računa"
     },
     "modal": {
       "importTitle": "📥 Prilepite vrsto gradnje, kopirano iz igre",
@@ -156,7 +157,13 @@
       "includeStartHint": "Na začetek izpisa doda po eno stopnjo gradnje, ki prazno vas pripeljejo do vaših začetnih stopenj.",
       "amTitle": "🏛️ Koda predloge upravitelja računa",
       "amName": "Ime predloge:",
-      "amHint": "To kodo prilepite v uporabniško skripto, ki uvaža predloge upravitelja računa. Ker so stopnje tam absolutne, so vaše začetne stopnje zgradb vedno vključene v kodo."
+      "amHint": "To kodo prilepite v uporabniško skripto, ki uvaža predloge upravitelja računa. Ker so stopnje tam absolutne, so vaše začetne stopnje zgradb vedno vključene v kodo.",
+      "amImportTitle": "🏛️ Prilepite kodo predloge upravitelja računa",
+      "amImportHint": "Ravni v kodi so absolutne. Del, ki ga vaše začetne ravni že pokrivajo, se odstrani, preostali ukazi pa se naložijo v vrsto.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ V vrsto je naloženih {{count}} ukazov. Predloga: {{name}}",
+      "amImportSkipped": "⚠️ {{count}} ukazov je bilo preskočenih, ker presegajo najvišjo raven.",
+      "amImportError": "❌ Kode ni bilo mogoče dekodirati. Preverite kodo predloge upravitelja računa."
     },
     "levelsTitle": "🏠 Začetne stopnje stavb (Skrij / Pokaži)",
     "analysis": {

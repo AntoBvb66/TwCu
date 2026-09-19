@@ -140,7 +140,8 @@
       "copyBoard": "Panoya Kopyala",
       "close": "Kapat",
       "delete": "Sil",
-      "amCode": "🏛️ Hesap Yöneticisi Kodu"
+      "amCode": "🏛️ Hesap Yöneticisi Kodu",
+      "amImport": "🏛️ Hesap Yöneticisi Kodu Yükle"
     },
     "modal": {
       "importTitle": "📥 Oyundan Kopyalanan İnşa kuyruğu listesini yapıştırın",
@@ -156,7 +157,13 @@
       "includeStartHint": "Boş köyden girdiğiniz başlangıç seviyelerine ulaşan inşaatlar, tek tek çıktının başına eklenir.",
       "amTitle": "🏛️ Hesap Yöneticisi Şablon Kodu",
       "amName": "Şablon adı:",
-      "amHint": "Bu kodu, Hesap Yöneticisi şablonlarını içe aktaran kullanıcı scriptine yapıştırın. Hesap Yöneticisi'ndeki seviyeler mutlak olduğu için başlangıç bina seviyeleriniz koda her zaman dahil edilir."
+      "amHint": "Bu kodu, Hesap Yöneticisi şablonlarını içe aktaran kullanıcı scriptine yapıştırın. Hesap Yöneticisi'ndeki seviyeler mutlak olduğu için başlangıç bina seviyeleriniz koda her zaman dahil edilir.",
+      "amImportTitle": "🏛️ Hesap Yöneticisi Şablon Kodunu Yapıştırın",
+      "amImportHint": "Koddaki seviyeler mutlaktır. Başlangıç bina seviyelerinizin zaten kapsadığı kısım çıkarılır, kalan emirler kuyruğa yüklenir.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ {{count}} emir kuyruğa yüklendi. Şablon: {{name}}",
+      "amImportSkipped": "⚠️ {{count}} emir maksimum seviyenin üstünde olduğu için atlandı.",
+      "amImportError": "❌ Kod çözülemedi. Hesap Yöneticisi şablon kodunu kontrol edin."
     },
     "levelsTitle": "🏠 Başlangıç Bina Seviyeleri (Gizle / Göster)",
     "analysis": {

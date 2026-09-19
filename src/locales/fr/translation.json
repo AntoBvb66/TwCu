@@ -140,7 +140,8 @@
       "copyBoard": "Copier dans le Presse-Papiers",
       "close": "Fermer",
       "delete": "Supprimer",
-      "amCode": "🏛️ Code du gestionnaire de compte"
+      "amCode": "🏛️ Code du gestionnaire de compte",
+      "amImport": "🏛️ Charger le code du gestionnaire de compte"
     },
     "modal": {
       "importTitle": "📥 Collez la File d'Attente de Construction Copiée du Jeu",
@@ -156,7 +157,13 @@
       "includeStartHint": "Ajoute en tête de la sortie, niveau par niveau, les constructions qui amènent un village vide à vos niveaux de départ.",
       "amTitle": "🏛️ Code de modèle du gestionnaire de compte",
       "amName": "Nom du modèle :",
-      "amHint": "Collez ce code dans le script utilisateur qui importe les modèles du gestionnaire de compte. Les niveaux y étant absolus, vos niveaux de départ sont toujours inclus dans le code."
+      "amHint": "Collez ce code dans le script utilisateur qui importe les modèles du gestionnaire de compte. Les niveaux y étant absolus, vos niveaux de départ sont toujours inclus dans le code.",
+      "amImportTitle": "🏛️ Collez le code de modèle du gestionnaire de compte",
+      "amImportHint": "Les niveaux du code sont absolus. La partie déjà couverte par vos niveaux de départ est retirée et les ordres restants sont chargés dans la file d’attente.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ {{count}} ordres chargés dans la file d’attente. Modèle : {{name}}",
+      "amImportSkipped": "⚠️ {{count}} ordres ont été ignorés car ils dépassent le niveau maximum.",
+      "amImportError": "❌ Impossible de décoder le code. Veuillez vérifier votre code de modèle du gestionnaire de compte."
     },
     "levelsTitle": "🏠 Niveaux de Bâtiments de Départ (Masquer / Afficher)",
     "analysis": {

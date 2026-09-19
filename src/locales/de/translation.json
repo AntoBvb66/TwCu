@@ -140,7 +140,8 @@
       "copyBoard": "In die Zwischenablage kopieren",
       "close": "Schließen",
       "delete": "Löschen",
-      "amCode": "🏛️ Kontenverwaltungs-Code"
+      "amCode": "🏛️ Kontenverwaltungs-Code",
+      "amImport": "🏛️ Kontenverwaltungs-Code laden"
     },
     "modal": {
       "importTitle": "📥 Füge die aus dem Spiel kopierte Bauwarteschlange ein",
@@ -156,7 +157,13 @@
       "includeStartHint": "Fügt die Ausbauten, die ein leeres Dorf auf deine Startstufen bringen, Stufe für Stufe am Anfang der Ausgabe ein.",
       "amTitle": "🏛️ Kontenverwaltung Vorlagen-Code",
       "amName": "Vorlagenname:",
-      "amHint": "Füge diesen Code in das Userscript ein, das Kontenverwaltungs-Vorlagen importiert. Da die Stufen in der Kontenverwaltung absolut sind, werden deine Start-Gebäudestufen immer mit eingerechnet."
+      "amHint": "Füge diesen Code in das Userscript ein, das Kontenverwaltungs-Vorlagen importiert. Da die Stufen in der Kontenverwaltung absolut sind, werden deine Start-Gebäudestufen immer mit eingerechnet.",
+      "amImportTitle": "🏛️ Füge den Vorlagencode der Kontenverwaltung ein",
+      "amImportHint": "Die Stufen im Code sind absolut. Der Teil, den deine Startstufen bereits abdecken, wird entfernt; die restlichen Befehle werden in die Warteschlange geladen.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ {{count}} Befehle in die Warteschlange geladen. Vorlage: {{name}}",
+      "amImportSkipped": "⚠️ {{count}} Befehle wurden übersprungen, da sie die Maximalstufe überschreiten.",
+      "amImportError": "❌ Der Code konnte nicht gelesen werden. Bitte überprüfe den Vorlagencode der Kontenverwaltung."
     },
     "levelsTitle": "🏠 Anfangsgebäude-Level (Verstecken / Anzeigen)",
     "analysis": {

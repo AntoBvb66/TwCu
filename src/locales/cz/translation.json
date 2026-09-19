@@ -140,7 +140,8 @@
       "copyBoard": "Kopírovat do schránky",
       "close": "Zavřít",
       "delete": "Smazat",
-      "amCode": "🏛️ Kód správce účtu"
+      "amCode": "🏛️ Kód správce účtu",
+      "amImport": "🏛️ Načíst kód správce účtu"
     },
     "modal": {
       "importTitle": "📥 Vložte frontu budov zkopírovanou ze hry",
@@ -156,7 +157,13 @@
       "includeStartHint": "Na začátek výstupu přidá po jedné úrovni stavby, které dovedou prázdnou vesnici na vaše počáteční úrovně.",
       "amTitle": "🏛️ Kód šablony správce účtu",
       "amName": "Název šablony:",
-      "amHint": "Vložte tento kód do uživatelského skriptu, který importuje šablony správce účtu. Protože úrovně jsou tam absolutní, vaše počáteční úrovně budov jsou v kódu vždy zahrnuty."
+      "amHint": "Vložte tento kód do uživatelského skriptu, který importuje šablony správce účtu. Protože úrovně jsou tam absolutní, vaše počáteční úrovně budov jsou v kódu vždy zahrnuty.",
+      "amImportTitle": "🏛️ Vložte kód šablony správce účtu",
+      "amImportHint": "Úrovně v kódu jsou absolutní. Část pokrytá vašimi počátečními úrovněmi se odstraní a zbývající příkazy se načtou do fronty.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ Do fronty načteno {{count}} příkazů. Šablona: {{name}}",
+      "amImportSkipped": "⚠️ {{count}} příkazů bylo přeskočeno, protože překračují maximální úroveň.",
+      "amImportError": "❌ Kód se nepodařilo dekódovat. Zkontrolujte kód šablony správce účtu."
     },
     "levelsTitle": "🏠 Počáteční úrovně budov (skrýt / zobrazit)",
     "analysis": {

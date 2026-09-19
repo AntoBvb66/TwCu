@@ -140,7 +140,8 @@
       "copyBoard": "Kopiëren naar Klembord",
       "close": "Sluiten",
       "delete": "Verwijderen",
-      "amCode": "🏛️ Accountmanager-code"
+      "amCode": "🏛️ Accountmanager-code",
+      "amImport": "🏛️ Accountmanager-code laden"
     },
     "modal": {
       "importTitle": "📥 Plak de Gebouw Wachtrij Gekopieerd van het Spel",
@@ -156,7 +157,13 @@
       "includeStartHint": "Voegt de upgrades die een leeg dorp naar je startniveaus brengen stap voor stap bovenaan de uitvoer toe.",
       "amTitle": "🏛️ Accountmanager sjablooncode",
       "amName": "Sjabloonnaam:",
-      "amHint": "Plak deze code in het userscript dat Accountmanager-sjablonen importeert. Omdat de niveaus in de Accountmanager absoluut zijn, worden je startniveaus altijd meegenomen."
+      "amHint": "Plak deze code in het userscript dat Accountmanager-sjablonen importeert. Omdat de niveaus in de Accountmanager absoluut zijn, worden je startniveaus altijd meegenomen.",
+      "amImportTitle": "🏛️ Plak de sjablooncode van de accountmanager",
+      "amImportHint": "De niveaus in de code zijn absoluut. Het deel dat je startniveaus al dekken wordt verwijderd en de overige orders worden in de wachtrij geladen.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ {{count}} orders in de wachtrij geladen. Sjabloon: {{name}}",
+      "amImportSkipped": "⚠️ {{count}} orders zijn overgeslagen omdat ze het maximale niveau overschrijden.",
+      "amImportError": "❌ De code kon niet gelezen worden. Controleer je sjablooncode van de accountmanager."
     },
     "levelsTitle": "🏠 Start Gebouw Niveaus (Verbergen / Tonen)",
     "analysis": {

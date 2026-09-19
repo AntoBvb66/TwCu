@@ -140,7 +140,8 @@
       "copyBoard": "Копирај во табла",
       "close": "Затвори",
       "delete": "Избриши",
-      "amCode": "🏛️ Fiókkezelő kód"
+      "amCode": "🏛️ Fiókkezelő kód",
+      "amImport": "🏛️ Fiókkezelő kód betöltése"
     },
     "modal": {
       "importTitle": "📥 Залепете го редот за градење копиран од играта",
@@ -156,7 +157,13 @@
       "includeStartHint": "A kimenet elejére szintenként hozzáadja azokat az építéseket, amelyek egy üres falut a kezdő szintjeidre visznek.",
       "amTitle": "🏛️ Fiókkezelő sablonkód",
       "amName": "Sablon neve:",
-      "amHint": "Illeszd be ezt a kódot a fiókkezelő sablonjait importáló userscriptbe. Mivel ott a szintek abszolútak, a kezdő épületszintjeid mindig benne vannak a kódban."
+      "amHint": "Illeszd be ezt a kódot a fiókkezelő sablonjait importáló userscriptbe. Mivel ott a szintek abszolútak, a kezdő épületszintjeid mindig benne vannak a kódban.",
+      "amImportTitle": "🏛️ Illeszd be a fiókkezelő sablonkódját",
+      "amImportHint": "A kódban a szintek abszolútak. A kezdő épületszintjeid által már lefedett rész kimarad, a többi parancs pedig bekerül a sorba.",
+      "amImportPlaceholder": "IgEPARABAAEJAQ0BDAEMAQ0BDQENAQ4BDAEMAQ0B...",
+      "amImportSuccess": "✅ {{count}} parancs betöltve a sorba. Sablon: {{name}}",
+      "amImportSkipped": "⚠️ {{count}} parancs kimaradt, mert meghaladja a maximális szintet.",
+      "amImportError": "❌ A kódot nem sikerült beolvasni. Ellenőrizd a fiókkezelő sablonkódját."
     },
     "levelsTitle": "🏠 Почетни нивоа на згради (Сокриј / Покажи)",
     "analysis": {
