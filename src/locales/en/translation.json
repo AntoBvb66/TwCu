@@ -1129,6 +1129,19 @@
       "show": "Show",
       "hide": "Hide"
     },
+    "periodicReports": {
+      "title": "Periodic Summary Reports",
+      "description": "For every player and tribe in your target list: how many villages were taken and from whom, how many were lost and to whom — summarized and sent to Telegram. Leave off if you don't want them.",
+      "hourlyReport": "Hourly Summary",
+      "hourlyReportDesc": "Every hour · gains, barbarian, losses, from/to whom · only sent if something happened",
+      "dailyReport": "Daily Report",
+      "dailyReportDesc": "Every night 00:00 · hour-by-hour chart, top members, biggest village, tribe joins/leaves, vs. yesterday",
+      "weeklyReport": "Weekly Report",
+      "weeklyReportDesc": "Every Monday 00:00 · day-by-day chart, vs. last week",
+      "worldOverview": "World Overview",
+      "worldOverviewDesc": "Adds the top conquering tribes and players of the world to daily and weekly reports",
+      "noTargetsWarning": "Summaries are built for the players and tribes in your target list — add at least one target below."
+    },
     "fullTracking": {
       "title": "Instant Full Tracking",
       "description": "Track all village conquests across the entire world in real time.",

@@ -150,6 +150,16 @@ const initialFilters = {
   tribeLog: false
 };
 
+// Periyodik özetler isteğe bağlı: kişi açmazsa bot hiçbir özet göndermez
+const defaultPeriodicReports = {
+  hourlyReport: false,
+  dailyReport: false,
+  weeklyReport: false,
+  worldOverview: true
+};
+
+const periodicReportKeys = ['hourlyReport', 'dailyReport', 'weeklyReport', 'worldOverview'];
+
 const languages = [
   { code: 'tr', label: 'Türkçe' },
   { code: 'en', label: 'English' },
@@ -191,6 +201,9 @@ const createEmptyConfig = () => ({
   // Kıta ve Full Takip
   selectedContinents: '',        // "1,2,15" gibi virgülle ayrılmış
   fullTracking: false,
+
+  // Saatlik / günlük / haftalık özet raporları
+  periodicReports: { ...defaultPeriodicReports },
 
 });
 
@@ -560,7 +573,10 @@ const validateAndAddHighlight = async (cIndex, config) => {
 
     // ── Global takip ayarları ──
     continent_tracking: config.selectedContinents || '',
-    full_tracking: config.fullTracking || false
+    full_tracking: config.fullTracking || false,
+
+    // ── Periyodik özetler (bot: hourlyReport / dailyReport / weeklyReport / worldOverview) ──
+    periodic_reports: { ...defaultPeriodicReports, ...(config.periodicReports || {}) }
 
   });
 
@@ -1034,6 +1050,47 @@ const validateAndAddHighlight = async (cIndex, config) => {
                     )}
                   </div>
                 </div>
+
+                {/* === PERİYODİK ÖZET RAPORLARI === */}
+                {(() => {
+                  // Eski kayıtlarda periodicReports yok: varsayılanla tamamla
+                  const pr = { ...defaultPeriodicReports, ...(config.periodicReports || {}) };
+                  const anyOn = pr.hourlyReport || pr.dailyReport || pr.weeklyReport;
+                  return (
+                    <div className="section-block">
+                      <h3 className="section-title" style={{ marginBottom: '8px' }}>{t('periodicReports.title')}</h3>
+                      <p style={{ fontSize: '13px', color: 'var(--text-2)', margin: '0 0 16px 0' }}>
+                        {t('periodicReports.description')}
+                      </p>
+
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        {periodicReportKeys.map(key => {
+                          const disabled = key === 'worldOverview' && !pr.dailyReport && !pr.weeklyReport;
+                          return (
+                            <label key={key} className="modern-toggle" style={{ opacity: disabled ? 0.5 : 1 }}>
+                              <input
+                                type="checkbox"
+                                checked={!!pr[key]}
+                                onChange={(e) => updateConfig(cIndex, 'periodicReports', null, { ...pr, [key]: e.target.checked })}
+                              />
+                              <div className="toggle-slider"></div>
+                              <span className="toggle-label">
+                                {t(`periodicReports.${key}`)}
+                                <small style={{ display: 'block', color: 'var(--text-3)' }}>{t(`periodicReports.${key}Desc`)}</small>
+                              </span>
+                            </label>
+                          );
+                        })}
+                      </div>
+
+                      {anyOn && config.entities.length === 0 && (
+                        <small style={{ display: 'block', marginTop: '12px', color: 'var(--danger)' }}>
+                          {t('periodicReports.noTargetsWarning')}
+                        </small>
+                      )}
+                    </div>
+                  );
+                })()}
 
                 {/* === YENİ: FULL TAKİP & KITA TAKİBİ BİRLEŞİK BLOK === */}
                 <div className="section-block" style={{ border: '1px solid #ff4d4d', backgroundColor: 'rgba(255, 77, 77, 0.05)' }}>

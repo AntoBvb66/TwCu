@@ -1129,6 +1129,19 @@
       "show": "Göster",
       "hide": "Gizle"
     },
+    "periodicReports": {
+      "title": "Periyodik Özet Raporları",
+      "description": "Takip listendeki her oyuncu ve klan için kaç köy alındığı, kimden alındığı, kaç köy kaybedildiği ve kime kaybedildiği özetlenip Telegram'a gönderilir. İstemiyorsan kapalı bırak.",
+      "hourlyReport": "Saatlik Özet",
+      "hourlyReportDesc": "Her saat başı · fetih, barbar, kayıp, kimden/kime · sadece hareket varsa gönderilir",
+      "dailyReport": "Günlük Rapor",
+      "dailyReportDesc": "Her gece 00:00 · saat saat grafik, en çok alan üyeler, en büyük köy, klan giriş/çıkış, düne göre kıyas",
+      "weeklyReport": "Haftalık Rapor",
+      "weeklyReportDesc": "Her pazartesi 00:00 · gün gün grafik, geçen haftaya göre kıyas",
+      "worldOverview": "Dünya Geneli",
+      "worldOverviewDesc": "Günlük ve haftalık raporun altına dünyada en çok köy alan klanlar ve oyuncular eklenir",
+      "noTargetsWarning": "Özetler takip listendeki oyuncu ve klanlar için hazırlanır — aşağıdan en az bir hedef ekle."
+    },
     "fullTracking": {
       "title": "Anlık Full Takip",
       "description": "Dünya genelindeki tüm köy alımlarını anlık takip et.",
