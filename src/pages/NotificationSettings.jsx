@@ -155,10 +155,70 @@ const defaultPeriodicReports = {
   hourlyReport: false,
   dailyReport: false,
   weeklyReport: false,
-  worldOverview: true
+  worldOverview: true,
+  dailyTime: '00:00',   // günlük rapor bu saatte gelir, son 24 saati kapsar
+  weeklyDay: 0,         // 0 = Pazartesi … 6 = Pazar
+  weeklyTime: '00:00'   // haftalık rapor seçilen gün bu saatte gelir, son 7 günü kapsar
 };
 
 const periodicReportKeys = ['hourlyReport', 'dailyReport', 'weeklyReport', 'worldOverview'];
+
+const scheduleRowStyle = { display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px', margin: '-4px 0 4px 52px' };
+
+// Bot saatleri bu saat dilimine göre yorumlar
+const browserTimeZone = () => {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Istanbul';
+  } catch {
+    return 'Europe/Istanbul';
+  }
+};
+
+// Tüm IANA saat dilimleri (eski tarayıcıda kısa liste); seçili olan listede yoksa eklenir
+const fallbackTimeZones = [
+  'UTC', 'Europe/Istanbul', 'Europe/London', 'Europe/Lisbon', 'Europe/Berlin', 'Europe/Paris',
+  'Europe/Amsterdam', 'Europe/Rome', 'Europe/Madrid', 'Europe/Warsaw', 'Europe/Prague', 'Europe/Budapest',
+  'Europe/Bucharest', 'Europe/Athens', 'Europe/Kyiv', 'Europe/Moscow', 'Asia/Dubai', 'Asia/Riyadh',
+  'Asia/Bangkok', 'America/Sao_Paulo', 'America/New_York', 'America/Chicago', 'America/Los_Angeles'
+];
+
+const timeZoneList = (selected) => {
+  let list;
+  try {
+    list = Intl.supportedValuesOf('timeZone');
+  } catch {
+    list = fallbackTimeZones;
+  }
+  if (!list.includes('UTC')) list = ['UTC', ...list];
+  return selected && !list.includes(selected) ? [selected, ...list] : list;
+};
+
+// "Europe/Istanbul (UTC+03:00)" — şu anki fark (yaz saati dahil)
+const timeZoneLabel = (tz) => {
+  try {
+    const part = new Intl.DateTimeFormat('en', { timeZone: tz, timeZoneName: 'longOffset' })
+      .formatToParts(new Date()).find(p => p.type === 'timeZoneName');
+    const offset = (part?.value || 'GMT').replace('GMT', 'UTC');
+    return `${tz.replace(/_/g, ' ')} (${offset === 'UTC' ? 'UTC+00:00' : offset})`;
+  } catch {
+    return tz;
+  }
+};
+
+// Panel dil kodları → Intl yerel ayarı (gün adları için)
+const intlLocales = { cz: 'cs', dk: 'da', gr: 'el', br: 'pt-BR', se: 'sv', si: 'sl', ch: 'de-CH', ua: 'uk' };
+
+// Pazartesiden başlayarak 7 gün adı (1 Ocak 2024 Pazartesi)
+const weekdayNames = (lang) => {
+  const code = (lang || 'tr').split('-')[0];
+  let fmt;
+  try {
+    fmt = new Intl.DateTimeFormat(intlLocales[code] || code, { weekday: 'long', timeZone: 'UTC' });
+  } catch {
+    fmt = new Intl.DateTimeFormat('en', { weekday: 'long', timeZone: 'UTC' });
+  }
+  return Array.from({ length: 7 }, (_, i) => fmt.format(new Date(Date.UTC(2024, 0, 1 + i))));
+};
 
 const languages = [
   { code: 'tr', label: 'Türkçe' },
@@ -210,7 +270,7 @@ const createEmptyConfig = () => ({
 const NotificationSettings = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'notificationSettings' });
   // Sayfa dışı (genel) anahtarlar için ön eksiz çevirici
-  const { t: tGlobal } = useTranslation();
+  const { t: tGlobal, i18n } = useTranslation();
 
   // Filtre tanımlamaları çeviriye erişebilmek için bileşen içine alındı
   const filterDefinitions = {
@@ -576,7 +636,12 @@ const validateAndAddHighlight = async (cIndex, config) => {
     full_tracking: config.fullTracking || false,
 
     // ── Periyodik özetler (bot: hourlyReport / dailyReport / weeklyReport / worldOverview) ──
-    periodic_reports: { ...defaultPeriodicReports, ...(config.periodicReports || {}) }
+    // Saat dilimi seçilmediyse tarayıcınınki (bot saatleri buna göre yorumlar, yaz saatini kendisi hesaplar)
+    periodic_reports: {
+      ...defaultPeriodicReports,
+      ...(config.periodicReports || {}),
+      timezone: config.periodicReports?.timezone || browserTimeZone()
+    }
 
   });
 
@@ -1080,8 +1145,59 @@ const validateAndAddHighlight = async (cIndex, config) => {
                               </span>
                             </label>
                           );
+                        }).flatMap((toggle, i) => {
+                          // Günlük: saat · Haftalık: gün + saat (açıkken)
+                          const key = periodicReportKeys[i];
+                          const setPr = (alan, deger) => updateConfig(cIndex, 'periodicReports', null, { ...pr, [alan]: deger });
+                          if (key === 'dailyReport' && pr.dailyReport) {
+                            return [toggle, (
+                              <div key="dailySchedule" style={scheduleRowStyle}>
+                                <label style={{ fontSize: '13px', color: 'var(--text-2)' }}>{t('periodicReports.sendAt')}</label>
+                                <input type="time" className="twcu-input" style={{ width: '120px' }}
+                                  value={pr.dailyTime || '00:00'}
+                                  onChange={(e) => setPr('dailyTime', e.target.value || '00:00')} />
+                              </div>
+                            )];
+                          }
+                          if (key === 'weeklyReport' && pr.weeklyReport) {
+                            return [toggle, (
+                              <div key="weeklySchedule" style={scheduleRowStyle}>
+                                <label style={{ fontSize: '13px', color: 'var(--text-2)' }}>{t('periodicReports.sendDay')}</label>
+                                <select className="twcu-input" style={{ width: '160px', cursor: 'pointer' }}
+                                  value={Number(pr.weeklyDay) || 0}
+                                  onChange={(e) => setPr('weeklyDay', Number(e.target.value))}>
+                                  {weekdayNames(i18n.language).map((ad, gun) => (
+                                    <option key={gun} value={gun}>{ad}</option>
+                                  ))}
+                                </select>
+                                <label style={{ fontSize: '13px', color: 'var(--text-2)' }}>{t('periodicReports.sendAt')}</label>
+                                <input type="time" className="twcu-input" style={{ width: '120px' }}
+                                  value={pr.weeklyTime || '00:00'}
+                                  onChange={(e) => setPr('weeklyTime', e.target.value || '00:00')} />
+                              </div>
+                            )];
+                          }
+                          return [toggle];
                         })}
                       </div>
+
+                      {(pr.dailyReport || pr.weeklyReport) && (
+                        <div style={{ marginTop: '12px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+                            <label style={{ fontSize: '13px', color: 'var(--text-2)' }}>{t('periodicReports.timezone')}</label>
+                            <select className="twcu-input" style={{ width: '260px', cursor: 'pointer' }}
+                              value={pr.timezone || browserTimeZone()}
+                              onChange={(e) => updateConfig(cIndex, 'periodicReports', null, { ...pr, timezone: e.target.value })}>
+                              {timeZoneList(pr.timezone || browserTimeZone()).map(tz => (
+                                <option key={tz} value={tz}>{timeZoneLabel(tz)}</option>
+                              ))}
+                            </select>
+                          </div>
+                          <small style={{ display: 'block', marginTop: '8px', color: 'var(--text-3)' }}>
+                            {t('periodicReports.timezoneNote', { tz: pr.timezone || browserTimeZone() })}
+                          </small>
+                        </div>
+                      )}
 
                       {anyOn && config.entities.length === 0 && (
                         <small style={{ display: 'block', marginTop: '12px', color: 'var(--danger)' }}>

@@ -1135,11 +1135,15 @@
       "hourlyReport": "Hourly Summary",
       "hourlyReportDesc": "Every hour · gains, barbarian, losses, from/to whom · only sent if something happened",
       "dailyReport": "Daily Report",
-      "dailyReportDesc": "Every night 00:00 · hour-by-hour chart, top members, biggest village, tribe joins/leaves, vs. yesterday",
+      "dailyReportDesc": "At the time you choose · last 24 hours · hour-by-hour chart, top members, biggest village, tribe joins/leaves, vs. previous day",
       "weeklyReport": "Weekly Report",
-      "weeklyReportDesc": "Every Monday 00:00 · day-by-day chart, vs. last week",
+      "weeklyReportDesc": "On the day and time you choose · last 7 days · day-by-day chart, vs. previous week",
       "worldOverview": "World Overview",
       "worldOverviewDesc": "Adds the top conquering tribes and players of the world to daily and weekly reports",
+      "sendAt": "Send time",
+      "sendDay": "Day",
+      "timezoneNote": "Times are in the selected time zone ({{tz}}) — detected from your browser, change it if wrong. Daylight saving time is handled automatically. The report arrives ~2 min after the chosen time; after a change, the first report comes at the next chosen time.",
+      "timezone": "Time zone",
       "noTargetsWarning": "Summaries are built for the players and tribes in your target list — add at least one target below."
     },
     "fullTracking": {

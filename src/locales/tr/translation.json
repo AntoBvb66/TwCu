@@ -1135,11 +1135,15 @@
       "hourlyReport": "Saatlik Özet",
       "hourlyReportDesc": "Her saat başı · fetih, barbar, kayıp, kimden/kime · sadece hareket varsa gönderilir",
       "dailyReport": "Günlük Rapor",
-      "dailyReportDesc": "Her gece 00:00 · saat saat grafik, en çok alan üyeler, en büyük köy, klan giriş/çıkış, düne göre kıyas",
+      "dailyReportDesc": "Seçtiğin saatte · son 24 saat · saat saat grafik, en çok alan üyeler, en büyük köy, klan giriş/çıkış, önceki güne göre kıyas",
       "weeklyReport": "Haftalık Rapor",
-      "weeklyReportDesc": "Her pazartesi 00:00 · gün gün grafik, geçen haftaya göre kıyas",
+      "weeklyReportDesc": "Seçtiğin gün ve saatte · son 7 gün · gün gün grafik, önceki haftaya göre kıyas",
       "worldOverview": "Dünya Geneli",
       "worldOverviewDesc": "Günlük ve haftalık raporun altına dünyada en çok köy alan klanlar ve oyuncular eklenir",
+      "sendAt": "Gönderim saati",
+      "sendDay": "Gün",
+      "timezoneNote": "Saatler seçili saat diliminde ({{tz}}) — tarayıcından otomatik alındı, farklıysa değiştir. Yaz/kış saati otomatik hesaplanır. Rapor seçtiğin saatten ~2 dk sonra gelir; ayarı değiştirdiysen ilk rapor bir sonraki seçili saatte gelir.",
+      "timezone": "Saat dilimi",
       "noTargetsWarning": "Özetler takip listendeki oyuncu ve klanlar için hazırlanır — aşağıdan en az bir hedef ekle."
     },
     "fullTracking": {
