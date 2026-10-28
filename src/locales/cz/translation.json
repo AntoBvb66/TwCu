@@ -141,7 +141,8 @@
       "close": "Zavřít",
       "delete": "Smazat",
       "amCode": "🏛️ Kód správce účtu",
-      "amImport": "🏛️ Načíst kód správce účtu"
+      "amImport": "🏛️ Načíst kód správce účtu",
+      "bot": "🔄 Výměna s Br Botem"
     },
     "modal": {
       "importTitle": "📥 Vložte frontu budov zkopírovanou ze hry",
@@ -179,7 +180,9 @@
       "waitingFor": "Čekání",
       "waitingSuffix": "na suroviny.",
       "missing": "Chybějící množství",
-      "perfect": "🎉 Skvělé! Ve frontě není čekání na suroviny. Stavba bude pokračovat nepřerušovaně."
+      "perfect": "🎉 Skvělé! Ve frontě není čekání na suroviny. Stavba bude pokračovat nepřerušovaně.",
+      "army": "⚔️ Vojsko na konci fronty:",
+      "armyIdle": "⚠️ {{pct}} % podílu vojska přišlo vniveč: Kasárna/Stáj nestíhaly nebo byla Farma plná. Postavte je dřív nebo použijte režim Eko + Vojsko."
     },
     "summary": {
       "title": "Souhrn fronty (klikněte na budovy pro přidání)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 Kalkulačka Nejrychlejší Fronty",
-      "modeAcademy": "Akademie (první šlechtic)",
+      "modeAcademy": "Akademie",
       "modeFull": "Všechny budovy",
       "modeRes": "Suroviny 30/30/30",
       "descAcademy": "Vypočítá pořadí stavby, které nejrychleji dovede k akademii (prvnímu šlechtici), podle rychlosti světa, faktoru produkce a současných úrovní budov. Investice do dolů, skladu a farmy vyvažuje sama.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Použitím nahradíte svou současnou frontu staveb.",
       "noSolution": "❌ S těmito počátečními úrovněmi nebyla nalezena žádná fronta vedoucí k cíli. Zkontroluj úrovně budov.",
       "alreadyDone": "✅ V této vesnici už je vše potřebné pro tento cíl hotové.",
-      "failed": "❌ Během výpočtu došlo k chybě."
+      "failed": "❌ Během výpočtu došlo k chybě.",
+      "modeNoble": "První šlechtic",
+      "descNoble": "Kromě akademie čeká i na připravené náklady prvního šlechtice (1 zlatá mince + šlechtic: celkem 68 000 dřeva, 80 000 hlíny, 75 000 železa; potřebuje Sklad 20). Staví více dolů než režim Akademie, protože se tyto suroviny musí nastřádat i po dokončení akademie.",
+      "modeMilitary": "Eko + Vojsko",
+      "descMilitary": "Zvedá doly na 30 a Kasárna/Stáj/Kováře na maximum, zatímco {{share}} % příjmu jde od začátku do konce na vojsko. Každá hodina, kdy výroba vojska stojí, se počítá stejně špatně jako hodina zpoždění stavby; proto Kasárna, Stáj a Farma rostou spolu s příjmem a žádná fronta nestojí.",
+      "modeFeed": "Zásobovaná vesnice",
+      "descFeed": "Předpokládá, že suroviny přichází z jiných vesnic (nastavení zásobování; prázdné = neomezeně), a dokončí všechny budovy co nejrychleji. Velitelství, Sklad a Farma jdou první, doly nakonec: šablona pro vesnice, které rychle rostou díky zásobování.",
+      "modeCustom": "Vlastní cíl",
+      "descCustom": "Spočítá pořadí, které nejrychleji dosáhne cílových úrovní zadaných níže. Požadavky (např. Kasárna 5, Kovář 5 a Velitelství 10 pro Stáj) se přidají samy; Velitelství, Sklad, Farma a doly jsou volné jako pomocníci.",
+      "customTitle": "🎯 Cílové úrovně",
+      "customReset": "Smazat cíle",
+      "customEmpty": "❌ Zadejte alespoň u jedné budovy cíl vyšší než počáteční úroveň.",
+      "polishing": "Vylepšuje se... kolo",
+      "buildTime": "🏗️ Stavba:",
+      "bankTime": "🪙 spoření mince + šlechtice:",
+      "armyTitle": "⚔️ Armáda na konci stavby:",
+      "armyUse": "využito {{pct}} % podílu vojska"
+    },
+    "levelsReset": "↺ Obnovit výchozí",
+    "levelsResetHint": "Vrátí úrovně nové vesnice: Velitelství, Farma, Sklad a Shromaždiště 1, vše ostatní 0.",
+    "levelsResetConfirm": "Vrátit počáteční úrovně budov na úrovně nové vesnice? (Velitelství, Farma, Sklad, Shromaždiště 1; vše ostatní 0)",
+    "econ": {
+      "feed": "Zásobování (za hodinu, od každé):",
+      "feedHint": "Dřevo, hlína a železo, které do této vesnice každou hodinu přichází z jiných vesnic (od každé suroviny). Tabulka i kalkulačka fronty je přičtou k příjmu.",
+      "feedUnlimited": "Neomezeně",
+      "feedUnlimitedHint": "Na suroviny se nikdy nečeká; platí jen limity skladu a farmy.",
+      "troops": "Výroba vojska (% příjmu):",
+      "troopsHint": "Tento podíl příjmu jde od začátku do konce na vojsko (0 = vypnuto). Na budovy zbude méně a vojsko zabírá místo na farmě.",
+      "profileOff": "Útok (sekerník + lehká kavalerie + beranidlo)",
+      "profileDef": "Obrana (kopiník + šermíř + těžká kavalerie)"
+    },
+    "bot": {
+      "title": "🔄 Výměna s Builderem Br Botu",
+      "hint": "Přenáší fronty mezi Builderem Br Botu (obrazovka velitelství) a tímto plánovačem. V Br Botu Import and export > 'Open in TwCu' pošle sem frontu, skutečné úrovně budov vesnice a rychlost světa; frontu spočítanou zde pošlete zpět tlačítkem 'Poslat do vesnice'.",
+      "importTitle": "📥 Převzít z Br Botu",
+      "importPlaceholder": "Vložte kód TWCU1... zkopírovaný z Br Botu nebo obsah souboru modelů Br Botu (construction_models.json)",
+      "decode": "Přečíst kód",
+      "invalid": "❌ Kód se nepodařilo přečíst. Vložte kód TWCU1 zkopírovaný z Br Botu nebo obsah souboru modelů.",
+      "preview": "Přijatá šablona: {{name}} ({{count}} kroků)",
+      "village": "Vesnice: {{name}} {{coord}}",
+      "applyLevels": "Převzít počáteční úrovně z vesnice",
+      "applySpeed": "Převzít rychlost světa ({{speed}})",
+      "applyMine": "Převzít faktor produkce (≈{{factor}}, odhad z produkce vesnice)",
+      "applyQueue": "Načíst frontu ({{count}} kroků)",
+      "pickModel": "Model:",
+      "apply": "✅ Použít",
+      "applied": "✅ Šablona Br Botu načtena.",
+      "skipped": "⚠️ {{count}} kroků přeskočeno: neznámá budova nebo nad maximální úrovní.",
+      "exportTitle": "📤 Poslat do Br Botu",
+      "exportHint": "V Br Botu vložte kód do Builder > Import and export a klikněte na 'Import into the queue'. Počáteční úrovně jsou v kódu; úrovně, které vesnice už má, se přeskočí.",
+      "name": "Název šablony:",
+      "copy": "📋 Kopírovat kód",
+      "sendBack": "🎮 Poslat do vesnice",
+      "sendBackHint": "Otevře v nové kartě velitelství vesnice, která kód poslala; fronta dorazí do Builderu Br Botu sama."
     }
   },
   "buildingTimes": {

@@ -141,7 +141,8 @@
       "close": "Zatvori",
       "delete": "Izbriši",
       "amCode": "🏛️ Kod upravitelja računa",
-      "amImport": "🏛️ Učitaj kod upravitelja računa"
+      "amImport": "🏛️ Učitaj kod upravitelja računa",
+      "bot": "🔄 Razmjena s Br Botom"
     },
     "modal": {
       "importTitle": "📥 Zalijepi red gradnje kopiran iz igre",
@@ -179,7 +180,9 @@
       "waitingFor": "Čeka",
       "waitingSuffix": "za resurse.",
       "missing": "Nedostajuće količine",
-      "perfect": "🎉 Odlično! U ovom redu nema vremena čekanja resursa. Gradnje će se nastaviti neprekidno."
+      "perfect": "🎉 Odlično! U ovom redu nema vremena čekanja resursa. Gradnje će se nastaviti neprekidno.",
+      "army": "⚔️ Vojska na kraju reda:",
+      "armyIdle": "⚠️ Propalo je {{pct}} % udjela vojske: Barake/Štala nisu stizale ili je Farma bila puna. Izgradite ih ranije ili koristite način Eko + Vojska."
     },
     "summary": {
       "title": "Sažetak reda (Kliknite zgrade za dodavanje)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 Kalkulator najbržeg reda",
-      "modeAcademy": "Akademija (prvi plemić)",
+      "modeAcademy": "Akademija",
       "modeFull": "Sve zgrade",
       "modeRes": "Sirovine 30/30/30",
       "descAcademy": "Računa redoslijed gradnje koji najbrže dovodi do akademije (prvog plemića), na temelju brzine svijeta, faktora proizvodnje i trenutnih razina zgrada. Ulaganja u rudnike, skladište i farmu uravnotežuje sam.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Primjena će zamijeniti tvoj trenutni red gradnje.",
       "noSolution": "❌ S ovim početnim razinama nije pronađen red koji doseže cilj. Provjeri razine zgrada.",
       "alreadyDone": "✅ U ovom selu već postoji sve što je potrebno za ovaj cilj.",
-      "failed": "❌ Došlo je do pogreške tijekom izračuna."
+      "failed": "❌ Došlo je do pogreške tijekom izračuna.",
+      "modeNoble": "Prvi plemić",
+      "descNoble": "Osim akademije čeka i da trošak prvog plemića bude spreman (1 zlatnik + plemić: ukupno 68.000 drva, 80.000 gline, 75.000 željeza; treba Skladište 20). Gradi više rudnika od načina Akademija jer se te sirovine moraju skupiti i nakon akademije.",
+      "modeMilitary": "Eko + Vojska",
+      "descMilitary": "Diže rudnike na 30 i Barake/Štalu/Kovačnicu na maksimum dok {{share}} % prihoda ide na vojsku od početka do kraja. Svaki sat u kojem proizvodnja vojske stoji računa se loše kao sat kašnjenja gradnje; zato Barake, Štala i Farma rastu s prihodom i nijedan red ne stoji.",
+      "modeFeed": "Opskrbljeno selo",
+      "descFeed": "Pretpostavlja da sirovine stižu iz drugih sela (postavka opskrbe; prazno = neograničeno) i dovršava sve zgrade što prije. Glavni štab, Skladište i Farma idu prvi, rudnici na kraju: predložak za sela koja brzo rastu opskrbom.",
+      "modeCustom": "Vlastiti cilj",
+      "descCustom": "Računa redoslijed koji najbrže dostiže ciljne razine koje upišete ispod. Preduvjeti (npr. Barake 5, Kovačnica 5 i Glavni štab 10 za Štalu) dodaju se sami; Glavni štab, Skladište, Farma i rudnici slobodni su kao pomoćnici.",
+      "customTitle": "🎯 Ciljne razine",
+      "customReset": "Obriši ciljeve",
+      "customEmpty": "❌ Upišite barem jednoj zgradi cilj iznad početne razine.",
+      "polishing": "Doradba... krug",
+      "buildTime": "🏗️ Gradnja:",
+      "bankTime": "🪙 štednja za zlatnik + plemića:",
+      "armyTitle": "⚔️ Vojska na kraju gradnje:",
+      "armyUse": "iskorišteno {{pct}} % udjela vojske"
+    },
+    "levelsReset": "↺ Vrati zadano",
+    "levelsResetHint": "Vraća razine novog sela: Glavni štab, Farma, Skladište i Mjesto okupljanja 1, sve ostalo 0.",
+    "levelsResetConfirm": "Vratiti početne razine zgrada na razine novog sela? (Glavni štab, Farma, Skladište, Mjesto okupljanja 1; sve ostalo 0)",
+    "econ": {
+      "feed": "Opskrba (po satu, svake):",
+      "feedHint": "Drvo, glina i željezo koji svaki sat stižu u ovo selo iz drugih sela (svake sirovine). Tablica i kalkulator reda dodaju ih prihodu.",
+      "feedUnlimited": "Neograničeno",
+      "feedUnlimitedHint": "Nikad se ne čeka na sirovine; vrijede samo ograničenja skladišta i farme.",
+      "troops": "Proizvodnja vojske (% prihoda):",
+      "troopsHint": "Ovaj udio prihoda ide na vojsku od početka do kraja (0 = isključeno). Za zgrade ostaje manje, a vojska zauzima mjesto na farmi.",
+      "profileOff": "Napad (sjekiraš + laka konjica + ovan)",
+      "profileDef": "Obrana (kopljanik + mačevalac + teška konjica)"
+    },
+    "bot": {
+      "title": "🔄 Razmjena s Builderom Br Bota",
+      "hint": "Prenosi redove između Buildera Br Bota (zaslon glavnog štaba) i ovog planera. U Br Botu Import and export > 'Open in TwCu' šalje ovamo red, stvarne razine zgrada sela i brzinu svijeta; red izračunat ovdje vraćate gumbom 'Pošalji u selo'.",
+      "importTitle": "📥 Preuzmi iz Br Bota",
+      "importPlaceholder": "Zalijepite kod TWCU1... kopiran iz Br Bota ili sadržaj datoteke modela Br Bota (construction_models.json)",
+      "decode": "Pročitaj kod",
+      "invalid": "❌ Kod se nije mogao pročitati. Zalijepite kod TWCU1 kopiran iz Br Bota ili sadržaj datoteke modela.",
+      "preview": "Primljeni predložak: {{name}} ({{count}} koraka)",
+      "village": "Selo: {{name}} {{coord}}",
+      "applyLevels": "Preuzmi početne razine iz sela",
+      "applySpeed": "Preuzmi brzinu svijeta ({{speed}})",
+      "applyMine": "Preuzmi faktor proizvodnje (≈{{factor}}, procjena iz proizvodnje sela)",
+      "applyQueue": "Učitaj red ({{count}} koraka)",
+      "pickModel": "Model:",
+      "apply": "✅ Primijeni",
+      "applied": "✅ Predložak Br Bota učitan.",
+      "skipped": "⚠️ Preskočeno {{count}} koraka: nepoznata zgrada ili iznad najviše razine.",
+      "exportTitle": "📤 Pošalji u Br Bot",
+      "exportHint": "U Br Botu zalijepite kod u Builder > Import and export i kliknite 'Import into the queue'. Početne razine su u kodu; razine koje selo već ima preskaču se.",
+      "name": "Naziv predloška:",
+      "copy": "📋 Kopiraj kod",
+      "sendBack": "🎮 Pošalji u selo",
+      "sendBackHint": "U novoj kartici otvara glavni štab sela koje je poslalo kod; red sam stiže u Builder Br Bota."
     }
   },
   "buildingTimes": {

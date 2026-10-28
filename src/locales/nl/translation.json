@@ -141,7 +141,8 @@
       "close": "Sluiten",
       "delete": "Verwijderen",
       "amCode": "🏛️ Accountmanager-code",
-      "amImport": "🏛️ Accountmanager-code laden"
+      "amImport": "🏛️ Accountmanager-code laden",
+      "bot": "🔄 Uitwisselen met Br Bot"
     },
     "modal": {
       "importTitle": "📥 Plak de Gebouw Wachtrij Gekopieerd van het Spel",
@@ -179,7 +180,9 @@
       "waitingFor": "Wachten",
       "waitingSuffix": "voor hulpbronnen.",
       "missing": "Ontbrekende hoeveelheden",
-      "perfect": "🎉 Geweldig! Er is geen hulpbron wachttijd in deze wachtrij. Constructies zullen ononderbroken doorgaan."
+      "perfect": "🎉 Geweldig! Er is geen hulpbron wachttijd in deze wachtrij. Constructies zullen ononderbroken doorgaan.",
+      "army": "⚔️ Troepen aan het einde van de wachtrij:",
+      "armyIdle": "⚠️ {{pct}}% van het troepenaandeel ging verloren: Barakken/Stal konden het niet bijhouden of de Boerderij zat vol. Bouw ze eerder of gebruik de modus Eco + Troepen."
     },
     "summary": {
       "title": "Wachtrij Samenvatting (Klik Gebouwen om Toe te Voegen)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 Snelste Wachtrij Calculator",
-      "modeAcademy": "Academie (eerste edelman)",
+      "modeAcademy": "Academie",
       "modeFull": "Alle gebouwen",
       "modeRes": "Grondstoffen 30/30/30",
       "descAcademy": "Berekent de bouwvolgorde die de academie (eerste adelman) in de kortste tijd bereikt, op basis van je wereldsnelheid, grondstoffenfactor en huidige gebouwniveaus. Investeringen in mijnen, pakhuis en boerderij worden zelf afgewogen.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Toepassen vervangt je huidige bouwwachtrij.",
       "noSolution": "❌ Met deze startniveaus is geen wachtrij naar het doel gevonden. Controleer de gebouwniveaus.",
       "alreadyDone": "✅ In dit dorp is alles voor dit doel al aanwezig.",
-      "failed": "❌ Er is een fout opgetreden tijdens de berekening."
+      "failed": "❌ Er is een fout opgetreden tijdens de berekening.",
+      "modeNoble": "Eerste edelman",
+      "descNoble": "Wacht naast de academie ook tot de kosten van de eerste edelman klaarliggen (1 gouden munt + de edelman: samen 68.000 hout, 80.000 leem, 75.000 ijzer; vereist Opslagplaats 20). Bouwt meer mijnen dan de Academie-modus, omdat die grondstoffen na de academie nog moeten worden gespaard.",
+      "modeMilitary": "Eco + Troepen",
+      "descMilitary": "Brengt de mijnen naar 30 en Barakken/Stal/Smederij naar het maximum terwijl {{share}}% van het inkomen van begin tot eind naar troepen gaat. Elk uur dat de troepenproductie stilstaat telt even zwaar als een uur bouwvertraging; daarom groeien Barakken, Stal en Boerderij mee met het inkomen en staat geen enkele wachtrij stil.",
+      "modeFeed": "Bevoorraad dorp",
+      "descFeed": "Gaat ervan uit dat grondstoffen uit andere dorpen komen (instelling bevoorrading; leeg = onbeperkt) en maakt alle gebouwen zo snel mogelijk af. Eerst Hoofdkwartier, Opslagplaats en Boerderij, de mijnen als laatste: een sjabloon voor dorpen die je snel laat groeien door ze te bevoorraden.",
+      "modeCustom": "Eigen doel",
+      "descCustom": "Berekent de volgorde die de hieronder ingevulde doelniveaus het snelst haalt. Vereisten (bv. Barakken 5, Smederij 5 en Hoofdkwartier 10 voor de Stal) komen er vanzelf bij; Hoofdkwartier, Opslagplaats, Boerderij en mijnen zijn vrij als hulp.",
+      "customTitle": "🎯 Doelniveaus",
+      "customReset": "Doelen wissen",
+      "customEmpty": "❌ Vul bij minstens één gebouw een doel boven het startniveau in.",
+      "polishing": "Verfijnen... ronde",
+      "buildTime": "🏗️ Bouw:",
+      "bankTime": "🪙 sparen voor munt + edelman:",
+      "armyTitle": "⚔️ Leger aan het einde van de bouw:",
+      "armyUse": "{{pct}}% van het troepenaandeel gebruikt"
+    },
+    "levelsReset": "↺ Standaard herstellen",
+    "levelsResetHint": "Gaat terug naar de niveaus van een nieuw dorp: Hoofdkwartier, Boerderij, Opslagplaats en Verzamelplaats 1, de rest 0.",
+    "levelsResetConfirm": "De startniveaus van de gebouwen terugzetten naar die van een nieuw dorp? (Hoofdkwartier, Boerderij, Opslagplaats, Verzamelplaats 1; de rest 0)",
+    "econ": {
+      "feed": "Bevoorrading (per uur, elk):",
+      "feedHint": "Hout, leem en ijzer die elk uur vanuit andere dorpen in dit dorp aankomen (elk). De tabel en de wachtrijcalculator tellen ze bij het inkomen op.",
+      "feedUnlimited": "Onbeperkt",
+      "feedUnlimitedHint": "Wacht nooit op grondstoffen; alleen de grenzen van opslagplaats en boerderij blijven gelden.",
+      "troops": "Troepenproductie (% van inkomen):",
+      "troopsHint": "Dit deel van het inkomen gaat van begin tot eind naar troepen (0 = uit). Er blijft minder over voor gebouwen en de troepen nemen plaats in de boerderij.",
+      "profileOff": "Aanval (bijlstrijder + lichte cavalerie + ram)",
+      "profileDef": "Verdediging (speervechter + zwaardvechter + zware cavalerie)"
+    },
+    "bot": {
+      "title": "🔄 Uitwisselen met de Br Bot Builder",
+      "hint": "Verplaatst wachtrijen tussen de Builder van Br Bot (hoofdkwartierscherm) en deze planner. In Br Bot stuurt Import and export > 'Open in TwCu' de wachtrij, de echte gebouwniveaus van het dorp en de wereldsnelheid hierheen; de wachtrij die je hier berekent stuur je terug met 'Naar het dorp sturen'.",
+      "importTitle": "📥 Ophalen uit Br Bot",
+      "importPlaceholder": "Plak de TWCU1...-code gekopieerd uit Br Bot of de inhoud van het modelbestand van Br Bot (construction_models.json)",
+      "decode": "Code lezen",
+      "invalid": "❌ De code kon niet worden gelezen. Plak de TWCU1-code uit Br Bot of de inhoud van het modelbestand.",
+      "preview": "Ontvangen sjabloon: {{name}} ({{count}} stappen)",
+      "village": "Dorp: {{name}} {{coord}}",
+      "applyLevels": "Startniveaus uit het dorp overnemen",
+      "applySpeed": "Wereldsnelheid overnemen ({{speed}})",
+      "applyMine": "Productiefactor overnemen (≈{{factor}}, geschat uit de productie van het dorp)",
+      "applyQueue": "Wachtrij laden ({{count}} stappen)",
+      "pickModel": "Model:",
+      "apply": "✅ Toepassen",
+      "applied": "✅ Br Bot-sjabloon geladen.",
+      "skipped": "⚠️ {{count}} stappen overgeslagen: onbekend gebouw of boven het maximumniveau.",
+      "exportTitle": "📤 Naar Br Bot sturen",
+      "exportHint": "Plak de code in Br Bot bij Builder > Import and export en klik op 'Import into the queue'. De startniveaus zitten in de code; niveaus die het dorp al heeft worden overgeslagen.",
+      "name": "Sjabloonnaam:",
+      "copy": "📋 Code kopiëren",
+      "sendBack": "🎮 Naar het dorp sturen",
+      "sendBackHint": "Opent in een nieuw tabblad het hoofdkwartier van het dorp dat de code stuurde; de wachtrij komt vanzelf in de Br Bot Builder aan."
     }
   },
   "buildingTimes": {

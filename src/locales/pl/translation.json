@@ -141,7 +141,8 @@
       "close": "Zamknij",
       "delete": "Usuń",
       "amCode": "🏛️ Kod menedżera konta",
-      "amImport": "🏛️ Wczytaj kod menedżera konta"
+      "amImport": "🏛️ Wczytaj kod menedżera konta",
+      "bot": "🔄 Wymiana z Br Botem"
     },
     "modal": {
       "importTitle": "📥 Wklej kolejkę budowy skopiowaną z gry",
@@ -179,7 +180,9 @@
       "waitingFor": "Oczekiwanie",
       "waitingSuffix": "na zasoby.",
       "missing": "Brakujące ilości",
-      "perfect": "🎉 Świetnie! W tej kolejce nie ma czasu oczekiwania na zasoby. Budowy będą kontynuowane bez przerwy."
+      "perfect": "🎉 Świetnie! W tej kolejce nie ma czasu oczekiwania na zasoby. Budowy będą kontynuowane bez przerwy.",
+      "army": "⚔️ Wojsko na końcu kolejki:",
+      "armyIdle": "⚠️ Zmarnowano {{pct}}% udziału wojska: Koszary/Stajnia nie nadążały albo Farma była pełna. Zbuduj je wcześniej lub użyj trybu Eko + Wojsko."
     },
     "summary": {
       "title": "Podsumowanie kolejki (Kliknij budynki, aby dodać)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 Kalkulator Najszybszej Kolejki",
-      "modeAcademy": "Akademia (pierwszy szlachcic)",
+      "modeAcademy": "Akademia",
       "modeFull": "Wszystkie budynki",
       "modeRes": "Surowce 30/30/30",
       "descAcademy": "Oblicza kolejność budowy, która najszybciej pozwala zbudować akademię (pierwszego szlachcica), na podstawie szybkości świata, współczynnika produkcji i obecnych poziomów budynków. Sam równoważy inwestycje w kopalnie, magazyn i farmę.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Zastosowanie zastąpi twoją obecną kolejkę budowy.",
       "noSolution": "❌ Przy tych poziomach początkowych nie znaleziono kolejki osiągającej cel. Sprawdź poziomy budynków.",
       "alreadyDone": "✅ W tej wiosce wszystko, co potrzebne do tego celu, jest już gotowe.",
-      "failed": "❌ Wystąpił błąd podczas obliczeń."
+      "failed": "❌ Wystąpił błąd podczas obliczeń.",
+      "modeNoble": "Pierwszy szlachcic",
+      "descNoble": "Oprócz akademii czeka też, aż koszt pierwszego szlachcica będzie gotowy (1 złota moneta + szlachcic: razem 68 000 drewna, 80 000 gliny, 75 000 żelaza; wymaga Magazynu 20). Buduje więcej kopalń niż tryb Akademia, bo te surowce muszą się jeszcze uzbierać po akademii.",
+      "modeMilitary": "Eko + Wojsko",
+      "descMilitary": "Podnosi kopalnie do 30, a Koszary/Stajnię/Kuźnię do maksimum, podczas gdy {{share}}% dochodu od początku do końca idzie na wojsko. Każda godzina przestoju produkcji wojska liczy się tak źle jak godzina opóźnienia budowy; dlatego Koszary, Stajnia i Farma rosną razem z dochodem i żadna kolejka nie stoi.",
+      "modeFeed": "Zaopatrywana wioska",
+      "descFeed": "Zakłada, że surowce przychodzą z innych wiosek (ustawienie dostaw; puste = bez limitu) i kończy wszystkie budynki jak najszybciej. Najpierw Kwatera główna, Magazyn i Farma, kopalnie na końcu: szablon dla wiosek rozwijanych szybko przez zaopatrzenie.",
+      "modeCustom": "Własny cel",
+      "descCustom": "Oblicza kolejność, która najszybciej osiąga wpisane poniżej poziomy docelowe. Wymagania (np. Koszary 5, Kuźnia 5 i Kwatera główna 10 dla Stajni) dodają się same; Kwatera główna, Magazyn, Farma i kopalnie są wolne jako pomocnicy.",
+      "customTitle": "🎯 Poziomy docelowe",
+      "customReset": "Wyczyść cele",
+      "customEmpty": "❌ Wpisz przynajmniej dla jednego budynku cel powyżej poziomu początkowego.",
+      "polishing": "Dopracowywanie... runda",
+      "buildTime": "🏗️ Budowa:",
+      "bankTime": "🪙 zbieranie na monetę + szlachcica:",
+      "armyTitle": "⚔️ Armia po zakończeniu budowy:",
+      "armyUse": "wykorzystano {{pct}}% udziału wojska"
+    },
+    "levelsReset": "↺ Przywróć domyślne",
+    "levelsResetHint": "Wraca do poziomów nowej wioski: Kwatera główna, Farma, Magazyn i Miejsce zbiórki 1, reszta 0.",
+    "levelsResetConfirm": "Przywrócić początkowe poziomy budynków do poziomów nowej wioski? (Kwatera główna, Farma, Magazyn, Miejsce zbiórki 1; reszta 0)",
+    "econ": {
+      "feed": "Dostawy (na godzinę, każdego):",
+      "feedHint": "Drewno, glina i żelazo, które co godzinę trafiają do tej wioski z innych wiosek (każdego surowca). Tabela i kalkulator kolejki doliczają je do dochodu.",
+      "feedUnlimited": "Bez limitu",
+      "feedUnlimitedHint": "Nigdy nie czeka na surowce; obowiązują tylko limity magazynu i farmy.",
+      "troops": "Produkcja wojska (% dochodu):",
+      "troopsHint": "Ta część dochodu od początku do końca idzie na wojsko (0 = wyłączone). Na budynki zostaje mniej, a wojsko zajmuje miejsce w farmie.",
+      "profileOff": "Atak (topornik + lekka kawaleria + taran)",
+      "profileDef": "Obrona (pikinier + miecznik + ciężka kawaleria)"
+    },
+    "bot": {
+      "title": "🔄 Wymiana z Builderem Br Bota",
+      "hint": "Przenosi kolejki między Builderem Br Bota (ekran kwatery głównej) a tym planerem. W Br Bocie Import and export > 'Open in TwCu' wysyła tu kolejkę, prawdziwe poziomy budynków wioski i prędkość świata; kolejkę obliczoną tutaj odsyłasz przyciskiem 'Wyślij do wioski'.",
+      "importTitle": "📥 Pobierz z Br Bota",
+      "importPlaceholder": "Wklej kod TWCU1... skopiowany z Br Bota albo zawartość pliku modeli Br Bota (construction_models.json)",
+      "decode": "Odczytaj kod",
+      "invalid": "❌ Nie udało się odczytać kodu. Wklej kod TWCU1 skopiowany z Br Bota albo zawartość pliku modeli.",
+      "preview": "Otrzymany szablon: {{name}} ({{count}} kroków)",
+      "village": "Wioska: {{name}} {{coord}}",
+      "applyLevels": "Weź poziomy początkowe z wioski",
+      "applySpeed": "Weź prędkość świata ({{speed}})",
+      "applyMine": "Weź współczynnik produkcji (≈{{factor}}, oszacowany z produkcji wioski)",
+      "applyQueue": "Wczytaj kolejkę ({{count}} kroków)",
+      "pickModel": "Model:",
+      "apply": "✅ Zastosuj",
+      "applied": "✅ Szablon Br Bota wczytany.",
+      "skipped": "⚠️ Pominięto {{count}} kroków: nieznany budynek lub powyżej maksymalnego poziomu.",
+      "exportTitle": "📤 Wyślij do Br Bota",
+      "exportHint": "W Br Bocie wklej kod w Builder > Import and export i kliknij 'Import into the queue'. Poziomy początkowe są w kodzie; poziomy, które wioska już ma, są pomijane.",
+      "name": "Nazwa szablonu:",
+      "copy": "📋 Kopiuj kod",
+      "sendBack": "🎮 Wyślij do wioski",
+      "sendBackHint": "Otwiera w nowej karcie kwaterę główną wioski, która wysłała kod; kolejka sama trafia do Buildera Br Bota."
     }
   },
   "buildingTimes": {

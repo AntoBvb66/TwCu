@@ -1,24 +1,48 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next'; // YENİ: Çeviri motoru eklendi
+import { useSearchParams } from 'react-router-dom';
 import { bumpStat } from '../utils/twApi';
 import storage from '../utils/storage';
 import './BuildingPlanner.css';
 
 import {
-    buildTimes, hqModifiers, db, icons, dictionary,
-    timeToSeconds, calc, getFarmCapacity, getWareCapacity, getProduction, getTotalPop, getTotalPts,
+    db, icons, dictionary, getTotalPts,
     getBaseLevels, getDefaultStartLevels, buildStartupQueue, buildAccountManagerCode,
     parseAccountManagerCode
 } from '../utils/twBuildingData';
-import { optimizeQueue } from '../utils/queueOptimizer';
+import { optimizeQueue, DEFAULT_TROOP_SHARE } from '../utils/queueOptimizer';
+import { makeSimContext, simulateRows } from '../utils/villageSim';
+import {
+    buildBotCode, parseBotInput, stripStartLevels, estimateMineSpeed, botReturnLink
+} from '../utils/botBridge';
 
 // Optimizasyon hedefleri. Her biri icin ceviri anahtarlari
 // buildingPlanner.optimizer.mode<Ad> ve .desc<Ad> seklinde.
 const OPTIMIZE_MODES = [
     { id: 'academy', key: 'Academy' },
+    { id: 'noble', key: 'Noble' },
     { id: 'full', key: 'Full' },
-    { id: 'res', key: 'Res' }
+    { id: 'res', key: 'Res' },
+    { id: 'military', key: 'Military' },
+    { id: 'feed', key: 'Feed' },
+    { id: 'custom', key: 'Custom' }
 ];
+
+// Asker profilleri: kisla/ahir/atolyede basilan nufus -> birlik sayisi.
+// Savunmada kislanin nufusu mizrak ve kilic arasinda esit paylasilir.
+const ARMY_UNITS = {
+    off: [['axe', 0, 1], ['lc', 1, 4], ['ram', 2, 5]],
+    def: [['spear', 0, 2], ['sword', 0, 2], ['hc', 1, 6]]
+};
+
+function armyText(army, profile, t) {
+    if (!army) return '';
+    return (ARMY_UNITS[profile] || ARMY_UNITS.off)
+        .map(([unit, fac, div]) => [unit, Math.floor(army[fac] / div)])
+        .filter(([, count]) => count > 0)
+        .map(([unit, count]) => `${count.toLocaleString()} ${t(`unitCalculator.units.${unit}`)}`)
+        .join(' · ');
+}
 
 // formatClock artık çeviri fonksiyonunu (t) alıyor
 function formatClock(seconds, t) {
@@ -47,7 +71,14 @@ const BuildingPlanner = () => {
 
     const [worldSpeed, setWorldSpeed] = useState(() => storage.get('bp_ws', 5.0));
     const [mineSpeed, setMineSpeed] = useState(() => storage.get('bp_ms', 1.5));
-    
+
+    // Koy ekonomisi: baska koylerden gelen saatlik hammadde (her biri) ve
+    // gelirin askere ayrilan payi. Hem tablo hem optimizasyon bunlari kullanir.
+    const [feed, setFeed] = useState(() => storage.get('bp_feed', 0));
+    const [feedUnlimited, setFeedUnlimited] = useState(() => storage.get('bp_feed_inf', false));
+    const [troopShare, setTroopShare] = useState(() => storage.get('bp_troop_share', 0));
+    const [troopProfile, setTroopProfile] = useState(() => storage.get('bp_troop_profile', 'off'));
+
     const defaultLevels = getDefaultStartLevels();
     const [startLevels, setStartLevels] = useState(() => storage.get('bp_levels', defaultLevels));
     
@@ -75,10 +106,25 @@ const BuildingPlanner = () => {
     const [optimizing, setOptimizing] = useState(false);
     const [optimizeProgress, setOptimizeProgress] = useState(0);
     const [optimizeTotal, setOptimizeTotal] = useState(0);
+    const [optimizePhase, setOptimizePhase] = useState('search');
     const [optimizeResult, setOptimizeResult] = useState(null);
     const [optimizeError, setOptimizeError] = useState(null);
     const [deepSearch, setDeepSearch] = useState(false);
+    // Ozel hedef modunda kullanicinin girdigi hedef seviyeler.
+    const [customGoal, setCustomGoal] = useState(() => storage.get('bp_custom_goal', {}));
     const activeMode = OPTIMIZE_MODES.find(m => m.id === optimizeMode) || OPTIMIZE_MODES[0];
+
+    // Br Bot al-ver: gelen kodun onizlemesi, uygulanacak parcalar, gonderilecek
+    // sablonun adi ve kod Br Bot'tan geldiyse koye geri donus adresi.
+    const [botInput, setBotInput] = useState('');
+    const [botPreview, setBotPreview] = useState(null);
+    const [botModelIdx, setBotModelIdx] = useState(0);
+    const [botApply, setBotApply] = useState({ levels: true, speed: true, mine: true, queue: true });
+    const [botMsg, setBotMsg] = useState(null);
+    const [botName, setBotName] = useState(() => storage.get('bp_bot_name', 'TW Cu'));
+    const [botReturn, setBotReturn] = useState(() => storage.get('bp_bot_return', null));
+    const [searchParams, setSearchParams] = useSearchParams();
+    const botAreaRef = useRef(null);
 
     useEffect(() => {
         storage.set('bp_ws', worldSpeed);
@@ -89,7 +135,15 @@ const BuildingPlanner = () => {
         storage.set('bp_export_start', includeStartLevels);
         storage.set('bp_am_name', amName);
         storage.set('bp_opt_mode', optimizeMode);
-    }, [worldSpeed, mineSpeed, startLevels, queue, visibleCols, includeStartLevels, amName, optimizeMode]);
+        storage.set('bp_feed', feed);
+        storage.set('bp_feed_inf', feedUnlimited);
+        storage.set('bp_troop_share', troopShare);
+        storage.set('bp_troop_profile', troopProfile);
+        storage.set('bp_custom_goal', customGoal);
+        storage.set('bp_bot_name', botName);
+        storage.set('bp_bot_return', botReturn);
+    }, [worldSpeed, mineSpeed, startLevels, queue, visibleCols, includeStartLevels, amName, optimizeMode,
+        feed, feedUnlimited, troopShare, troopProfile, customGoal, botName, botReturn]);
 
     const handleLevelChange = (key, val) => {
         let parsed = parseInt(val) || 0;
@@ -97,6 +151,28 @@ const BuildingPlanner = () => {
         if (parsed > db[key].max) parsed = db[key].max;
         setStartLevels(prev => ({ ...prev, [key]: parsed }));
     };
+
+    // Baslangic seviyelerini yeni bir koyun seviyelerine dondurur: ana bina,
+    // ciftlik, depo ve ictima meydani 1, digerleri 0.
+    const resetStartLevels = () => {
+        if (!window.confirm(t('buildingPlanner.levelsResetConfirm'))) return;
+        setStartLevels(getDefaultStartLevels());
+    };
+
+    const handleGoalChange = (key, val) => {
+        let parsed = parseInt(val) || 0;
+        if (parsed < 0) parsed = 0;
+        if (parsed > db[key].max) parsed = db[key].max;
+        setCustomGoal(prev => ({ ...prev, [key]: parsed }));
+        setOptimizeResult(null);
+    };
+
+    // Simulasyon ayarlari: tablo ve optimizasyon ayni ekonomiyle calissin.
+    const econSettings = useMemo(() => ({
+        feed: feed > 0 ? { w: feed, c: feed, i: feed } : null,
+        feedUnlimited,
+        troops: troopShare > 0 ? { share: troopShare, profile: troopProfile } : null
+    }), [feed, feedUnlimited, troopShare, troopProfile]);
 
     const toggleColumn = (idx) => { setVisibleCols(prev => ({ ...prev, [idx]: !prev[idx] })); };
     const changeQueueItem = (index, newId) => { const newQ = [...queue]; newQ[index] = newId; setQueue(newQ); };
@@ -163,127 +239,64 @@ const BuildingPlanner = () => {
         return levels;
     }, [startLevels, queue]);
 
+    // Kuyrugun satir satir simulasyonu. Hesap villageSim.js'te; optimizasyon da
+    // ayni fizigi kullandigi icin bulunan sure tabloda birebir gorunur.
     const simulationRows = useMemo(() => {
-        let resSpeed = worldSpeed * mineSpeed;
-        let simLevels = { ...startLevels };
-        let res = { w: 500, c: 500, i: 400 }; 
-        let currentTimeSec = 0;
-        
-        return queue.map((bldgId, index) => {
-            let data = db[bldgId];
-            // Bina zaten maksimumdaysa satir yine cizilir ama insaat yapilmaz.
-            let atMax = simLevels[bldgId] >= data.max;
-            let targetLvl = atMax ? data.max : simLevels[bldgId] + 1;
-
-            let reqW = calc(data.wB, data.wF, targetLvl);
-            let reqC = calc(data.cB, data.cF, targetLvl);
-            let reqI = calc(data.iB, data.iF, targetLvl);
-            let rateW = getProduction(simLevels.wood, resSpeed) / 3600;
-            let rateC = getProduction(simLevels.clay, resSpeed) / 3600;
-            let rateI = getProduction(simLevels.iron, resSpeed) / 3600;
-            let wareCap = getWareCapacity(simLevels.ware);
-
-            let descArr = [];
-            let isWarning = false;
-
-            if(reqW > wareCap || reqC > wareCap || reqI > wareCap) { descArr.push(t('buildingPlanner.status.storageLimit')); isWarning = true; }
-            
-            let missing = [];
-            for (let r in data.req) { if (simLevels[r] < data.req[r]) missing.push(`${t('buildingPlanner.buildings.' + r)}(${data.req[r]})`); }
-            if(missing.length > 0) { descArr.push(`${t('buildingPlanner.status.requirement')}: ${missing.join(", ")}`); isWarning = true; }
-
-            let storedW = Math.floor(res.w); let storedC = Math.floor(res.c); let storedI = Math.floor(res.i);
-
-            let waitW = reqW > res.w ? (reqW - res.w) / rateW : 0;
-            let waitC = reqC > res.c ? (reqC - res.c) / rateC : 0;
-            let waitI = reqI > res.i ? (reqI - res.i) / rateI : 0;
-            let maxWait = Math.max(0, waitW, waitC, waitI);
-            
-            let missingWood = reqW > storedW ? Math.ceil(reqW - storedW) : 0;
-            let missingClay = reqC > storedC ? Math.ceil(reqC - storedC) : 0;
-            let missingIron = reqI > storedI ? Math.ceil(reqI - storedI) : 0;
-            
-            if(reqW > wareCap) waitW = Infinity;
-            if(reqC > wareCap) waitC = Infinity;
-            if(reqI > wareCap) waitI = Infinity;
-
-            if(maxWait > 0 && isFinite(maxWait)) {
-                res.w = Math.min(wareCap, res.w + (maxWait * rateW));
-                res.c = Math.min(wareCap, res.c + (maxWait * rateC));
-                res.i = Math.min(wareCap, res.i + (maxWait * rateI));
-                descArr.push(t('buildingPlanner.status.waitingRes'));
+        const ctx = makeSimContext({ worldSpeed, mineSpeed, ...econSettings });
+        return simulateRows(queue, startLevels, ctx).map(row => {
+            const descArr = [];
+            if (row.warn.storage) descArr.push(t('buildingPlanner.status.storageLimit'));
+            if (row.warn.missing.length > 0) {
+                const missing = row.warn.missing.map(([key, lvl]) => `${t('buildingPlanner.buildings.' + key)}(${lvl})`);
+                descArr.push(`${t('buildingPlanner.status.requirement')}: ${missing.join(", ")}`);
             }
-
-            let futurePop = getTotalPop(simLevels) + (calc(data.pB, data.pF, targetLvl) - calc(data.pB, data.pF, simLevels[bldgId]));
-            let farmLimit = getFarmCapacity(simLevels.farm);
-            if(futurePop > farmLimit) { descArr.push(t('buildingPlanner.status.farmLimit')); isWarning = true; }
-
-            let startTime = currentTimeSec + (isFinite(maxWait) ? maxWait : 0);
-            if(isFinite(maxWait) && !isWarning) { res.w -= reqW; res.c -= reqC; res.i -= reqI; }
-
-            let hqLvlForMod = simLevels.hq || 1;
-            if (hqLvlForMod > 30) hqLvlForMod = 30;
-            if (hqLvlForMod < 1) hqLvlForMod = 1;
-            
-            let hqMod = hqModifiers[hqLvlForMod] || 1.0;
-            let timeStr = buildTimes[targetLvl] ? buildTimes[targetLvl][data.timeIdx] : null;
-            let baseSec = timeToSeconds(timeStr);
-            // Hizli dunyalarda ucuz seviyeler saniyenin altina duser; oyunda da
-            // en az 1 saniye surer. Yuvarlanip 0 olursa "maks. seviye" sanilirdi.
-            let buildTime = Math.max(1, Math.round((baseSec * hqMod) / worldSpeed));
-
-            if(atMax || !timeStr) { descArr.push(t('buildingPlanner.status.maxLevel')); isWarning = true; buildTime = 0; }
-
-            let endTime = startTime + buildTime;
-
-            if(isFinite(maxWait) && !isWarning) {
-                res.w = Math.min(wareCap, res.w + (buildTime * rateW));
-                res.c = Math.min(wareCap, res.c + (buildTime * rateC));
-                res.i = Math.min(wareCap, res.i + (buildTime * rateI));
-                simLevels[bldgId] = targetLvl; 
-            }
-
-            currentTimeSec = isFinite(maxWait) && !isWarning ? endTime : startTime;
-
-            let totalPop = getTotalPop(simLevels);
-            let availPop = Math.max(0, farmLimit - totalPop);
-            let maxStored = Math.max(storedW, storedC, storedI);
-            let availWare = Math.max(0, wareCap - maxStored);
-
-            return {
-                index, bldgId, targetLvl, maxWait, buildTime, startTime, endTime, 
-                pts: getTotalPts(simLevels), reqW, reqC, reqI, waitW, waitC, waitI,
-                storedW, storedC, storedI, rateW, rateC, rateI, availPop, farmLimit,
-                availWare, wareCap, descArr, isWarning,
-                missingWood, missingClay, missingIron
-            };
+            if (row.warn.waiting) descArr.push(t('buildingPlanner.status.waitingRes'));
+            if (row.warn.farm) descArr.push(t('buildingPlanner.status.farmLimit'));
+            if (row.warn.max) descArr.push(t('buildingPlanner.status.maxLevel'));
+            return { ...row, descArr };
         });
-    }, [worldSpeed, mineSpeed, startLevels, queue, t]);
+    }, [worldSpeed, mineSpeed, econSettings, startLevels, queue, t]);
 
-    // Secili hedef degisince onceki hesabin sonucu artik gecerli degil.
+    // Secili hedef degisince onceki hesabin sonucu artik gecerli degil. Asker
+    // modu asker uretimi, beslemeli koy modu besleme olmadan anlamsiz; ayar
+    // kapaliysa varsayilanla acilir (ayarlar gorunur oldugu icin kullanici degistirebilir).
     const changeOptimizeMode = (mode) => {
         if (optimizing || mode === optimizeMode) return;
         setOptimizeMode(mode);
         setOptimizeResult(null);
         setOptimizeError(null);
+        if (mode === 'military' && !(troopShare > 0)) setTroopShare(DEFAULT_TROOP_SHARE);
+        if (mode === 'feed' && !(feed > 0) && !feedUnlimited) setFeedUnlimited(true);
     };
+
+    // Ozel hedefte baslangic seviyelerini asan en az bir hedef olmali.
+    const customGoalActive = Object.keys(db).some(key => (customGoal[key] || 0) > (startLevels[key] || 0));
 
     // Mevcut baslangic seviyelerinden secili hedefe en hizli ulasan kuyrugu hesaplar.
     // Sonuc dogrudan uygulanmaz; kullanici onizleyip "Uygula" derse kuyruga yazilir.
     const handleOptimize = async () => {
+        if (optimizeMode === 'custom' && !customGoalActive) {
+            setOptimizeError(t('buildingPlanner.optimizer.customEmpty'));
+            return;
+        }
         setOptimizing(true);
         setOptimizeError(null);
         setOptimizeResult(null);
         setOptimizeProgress(0);
         setOptimizeTotal(0);
+        setOptimizePhase('search');
 
         // Arayuzun "hesaplaniyor" durumunu boyayabilmesi icin bir kare bekle.
         await new Promise(resolve => setTimeout(resolve, 30));
 
         try {
             const result = await optimizeQueue(
-                { startLevels, worldSpeed, mineSpeed, mode: optimizeMode, deep: deepSearch },
-                (depth, _best, total) => { setOptimizeProgress(depth); setOptimizeTotal(total); }
+                {
+                    startLevels, worldSpeed, mineSpeed, mode: optimizeMode, deep: deepSearch,
+                    ...econSettings,
+                    goal: optimizeMode === 'custom' ? customGoal : undefined
+                },
+                (progress, total, phase) => { setOptimizeProgress(progress); setOptimizeTotal(total); setOptimizePhase(phase); }
             );
             if (!result) {
                 setOptimizeError(t('buildingPlanner.optimizer.noSolution'));
@@ -434,8 +447,95 @@ const BuildingPlanner = () => {
         }
     };
 
+    // --- Br Bot al-ver ---------------------------------------------------------
+
+    // Br Bot'a gidecek kod: baslangic seviyeleri + kuyruk, bos koyden mutlak model.
+    // Br Bot koyde zaten olan seviyeleri kendisi atlar.
+    const botCode = useMemo(
+        () => buildBotCode({ name: botName, steps: [...buildStartupQueue(startLevels), ...queue] }),
+        [botName, startLevels, queue]
+    );
+
+    const handleOpenBot = () => {
+        setTemplateMode('bot');
+        setBotMsg(null);
+        setShowTemplateModal(true);
+    };
+
+    // Yapistirilan (ya da adresten gelen) kodu cozup onizlemeye koyar.
+    const previewBotInput = (text) => {
+        const parsed = parseBotInput(text);
+        if (!parsed) {
+            setBotPreview(null);
+            setBotMsg({ ok: false, text: t('buildingPlanner.bot.invalid') });
+            return false;
+        }
+        setBotPreview(parsed);
+        setBotModelIdx(0);
+        setBotApply({ levels: true, speed: true, mine: true, queue: true });
+        setBotMsg(null);
+        return true;
+    };
+
+    const botMineGuess = botPreview
+        ? estimateMineSpeed(botPreview.prodPerHour, botPreview.villageLevels, botPreview.worldSpeed)
+        : null;
+
+    const applyBotPreview = () => {
+        const p = botPreview;
+        if (!p) return;
+        const model = p.models[botModelIdx] || p;
+
+        let levels = startLevels;
+        if (p.villageLevels && botApply.levels) {
+            levels = p.villageLevels;
+            setStartLevels(levels);
+        }
+        if (p.worldSpeed && botApply.speed) setWorldSpeed(p.worldSpeed);
+        if (botMineGuess && botApply.mine) setMineSpeed(botMineGuess);
+        if (botApply.queue) setQueue(stripStartLevels(model.steps, levels));
+        if (model.name) setBotName(model.name);
+        if (p.returnUrl) setBotReturn({ url: p.returnUrl, name: p.villageName, coord: p.villageCoord });
+
+        setOptimizeResult(null);
+        setBotPreview(null);
+        setBotInput('');
+        let text = t('buildingPlanner.bot.applied');
+        if (model.skipped > 0) text += ' ' + t('buildingPlanner.bot.skipped').replace('{{count}}', model.skipped);
+        setBotMsg({ ok: true, text });
+    };
+
+    const sendBotBack = () => {
+        if (!botReturn) return;
+        window.open(botReturnLink(botReturn.url, botCode), '_blank', 'noopener');
+    };
+
+    // Br Bot "TwCu'da ac" dediginde kod adresle gelir (#/building-planner?bot=...).
+    // Onizleme acilir; kullanici onaylamadan hicbir sey degismez. Kod adresten
+    // silinir ki sayfa yenilenince tekrar sorulmasin.
+    useEffect(() => {
+        const incoming = searchParams.get('bot');
+        if (!incoming) return;
+        setTemplateMode('bot');
+        setShowTemplateModal(true);
+        setBotInput(incoming);
+        previewBotInput(incoming);
+        const rest = new URLSearchParams(searchParams);
+        rest.delete('bot');
+        setSearchParams(rest, { replace: true });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchParams]);
+
+    // Al-ver paneli optimizasyon kutusunun altinda acilir; ekranda gorunsun.
+    useEffect(() => {
+        if (showTemplateModal && templateMode === 'bot' && botAreaRef.current) {
+            botAreaRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [showTemplateModal, templateMode]);
+
+    const lastRow = simulationRows.length > 0 ? simulationRows[simulationRows.length - 1] : null;
     const totalBuildTimeOnly = simulationRows.reduce((acc, row) => acc + row.buildTime, 0);
-    const totalTimeWithWait = simulationRows.length > 0 ? simulationRows[simulationRows.length - 1].endTime : 0;
+    const totalTimeWithWait = lastRow ? lastRow.endTime : 0;
     const bottlenecks = simulationRows.filter(row => row.maxWait > 0 && isFinite(row.maxWait));
 
     return (
@@ -451,11 +551,34 @@ const BuildingPlanner = () => {
                         <button onClick={handleOpenImport} className="bp-btn-secondary">{t('buildingPlanner.btn.import')}</button>
                         <button onClick={handleOpenExport} className="bp-btn-secondary">{t('buildingPlanner.btn.export')}</button>
                         <button onClick={handleOpenAmImport} className="bp-btn-secondary">{t('buildingPlanner.btn.amImport')}</button>
-                        <button onClick={handleOpenAmCode} className="bp-btn-secondary" style={{marginRight: '15px'}}>{t('buildingPlanner.btn.amCode')}</button>
+                        <button onClick={handleOpenAmCode} className="bp-btn-secondary">{t('buildingPlanner.btn.amCode')}</button>
+                        <button onClick={handleOpenBot} className="bp-btn-secondary" style={{marginRight: '15px'}}>{t('buildingPlanner.btn.bot')}</button>
                         <button onClick={() => setQueue([])} className="bp-btn-clear">{t('buildingPlanner.btn.clear')}</button>
                     </div>
                 </div>
-                
+
+                <div className="bp-settings-grid bp-econ-grid">
+                    <div title={t('buildingPlanner.econ.feedHint')}>
+                        {t('buildingPlanner.econ.feed')}
+                        <input type="number" value={feed} step="500" min="0" disabled={feedUnlimited}
+                            onChange={e => setFeed(Math.max(0, parseInt(e.target.value) || 0))} />
+                        <label className="bp-econ-check" title={t('buildingPlanner.econ.feedUnlimitedHint')}>
+                            <input type="checkbox" checked={feedUnlimited} onChange={e => setFeedUnlimited(e.target.checked)} />
+                            {t('buildingPlanner.econ.feedUnlimited')}
+                        </label>
+                    </div>
+                    <div title={t('buildingPlanner.econ.troopsHint')}>
+                        {t('buildingPlanner.econ.troops')}
+                        <input type="number" value={troopShare} step="5" min="0" max="90"
+                            onChange={e => setTroopShare(Math.min(90, Math.max(0, parseInt(e.target.value) || 0)))} />
+                        <select className="bp-econ-select" value={troopProfile} disabled={!(troopShare > 0)}
+                            onChange={e => setTroopProfile(e.target.value)}>
+                            <option value="off">{t('buildingPlanner.econ.profileOff')}</option>
+                            <option value="def">{t('buildingPlanner.econ.profileDef')}</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div className="bp-optimizer">
                     <div className="bp-optimizer-head">
                         <div>
@@ -469,7 +592,9 @@ const BuildingPlanner = () => {
                                     </button>
                                 ))}
                             </div>
-                            <div className="bp-optimizer-desc">{t(`buildingPlanner.optimizer.desc${activeMode.key}`)}</div>
+                            <div className="bp-optimizer-desc">
+                                {t(`buildingPlanner.optimizer.desc${activeMode.key}`).replace('{{share}}', troopShare || DEFAULT_TROOP_SHARE)}
+                            </div>
                         </div>
                         <div className="bp-optimizer-actions">
                             <label className="bp-optimizer-deep" title={t('buildingPlanner.optimizer.deepHint')}>
@@ -478,12 +603,34 @@ const BuildingPlanner = () => {
                                 {t('buildingPlanner.optimizer.deep')}
                             </label>
                             <button onClick={handleOptimize} disabled={optimizing} className="bp-btn-action">
-                                {optimizing
-                                    ? `${t('buildingPlanner.optimizer.calculating')} ${optimizeProgress}${optimizeTotal ? `/${optimizeTotal}` : ''}`
-                                    : t('buildingPlanner.optimizer.button')}
+                                {!optimizing ? t('buildingPlanner.optimizer.button')
+                                    : optimizePhase === 'polish'
+                                        ? `${t('buildingPlanner.optimizer.polishing')} ${optimizeProgress}`
+                                        : `${t('buildingPlanner.optimizer.calculating')} ${optimizeProgress}${optimizeTotal ? `/${optimizeTotal}` : ''}`}
                             </button>
                         </div>
                     </div>
+
+                    {optimizeMode === 'custom' && (
+                        <div className="bp-goal-editor">
+                            <div className="bp-goal-head">
+                                <span>{t('buildingPlanner.optimizer.customTitle')}</span>
+                                <button type="button" className="bp-btn-secondary bp-btn-small" disabled={optimizing}
+                                    onClick={() => { setCustomGoal({}); setOptimizeResult(null); }}>
+                                    {t('buildingPlanner.optimizer.customReset')}
+                                </button>
+                            </div>
+                            <div className="bp-building-inputs">
+                                {Object.entries(db).map(([key, b]) => (
+                                    <div key={key} className={`bp-input-group${(customGoal[key] || 0) > (startLevels[key] || 0) ? ' bp-goal-set' : ''}`}>
+                                        <span>{t(`buildingPlanner.buildings.${key}`)}</span>
+                                        <input type="number" value={customGoal[key] || 0} min="0" max={b.max} disabled={optimizing}
+                                            onChange={e => handleGoalChange(key, e.target.value)} />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
 
                     {optimizeError && <div className="bp-optimizer-error">{optimizeError}</div>}
 
@@ -494,7 +641,27 @@ const BuildingPlanner = () => {
                                     {t('buildingPlanner.optimizer.totalTime')} {formatClock(optimizeResult.seconds, t)}
                                 </span>
                                 <span>{t('buildingPlanner.optimizer.stepCount').replace('{{count}}', optimizeResult.queue.length)}</span>
+                                {optimizeResult.extraSeconds > 0 && (
+                                    <span className="bp-optimizer-split">
+                                        {t('buildingPlanner.optimizer.buildTime')} {formatClock(optimizeResult.buildSeconds, t)}
+                                        {' + '}{t('buildingPlanner.optimizer.bankTime')} {formatClock(optimizeResult.extraSeconds, t)}
+                                    </span>
+                                )}
                             </div>
+
+                            {optimizeResult.army && optimizeResult.army.pop >= 1 && (
+                                <div className="bp-optimizer-army">
+                                    {t('buildingPlanner.optimizer.armyTitle')}{' '}
+                                    <b>{armyText(optimizeResult.army.byFacility, optimizeResult.army.profile, t)}</b>
+                                    {' '}({Math.round(optimizeResult.army.pop).toLocaleString()} {t('buildingPlanner.columns.pop')})
+                                    {optimizeResult.army.budget > 0 && (
+                                        <span className="bp-optimizer-army-use">
+                                            {' — '}{t('buildingPlanner.optimizer.armyUse').replace('{{pct}}',
+                                                Math.round(100 * optimizeResult.army.spent / optimizeResult.army.budget))}
+                                        </span>
+                                    )}
+                                </div>
+                            )}
 
                             <div className="bp-optimizer-chips">
                                 {optimizeSummary.map(item => (
@@ -520,7 +687,108 @@ const BuildingPlanner = () => {
                     )}
                 </div>
 
-                {showTemplateModal && (
+                {showTemplateModal && templateMode === 'bot' && (
+                    <div className="bp-template-area" ref={botAreaRef}>
+                        <h3 style={{marginTop: 0, color: 'var(--gold)'}}>{t('buildingPlanner.bot.title')}</h3>
+                        <div className="bp-am-hint">{t('buildingPlanner.bot.hint')}</div>
+
+                        <div className="bp-bot-grid">
+                            <div className="bp-bot-col">
+                                <h4>{t('buildingPlanner.bot.importTitle')}</h4>
+                                <textarea className="bp-template-textarea bp-bot-textarea" value={botInput}
+                                    onChange={e => setBotInput(e.target.value)}
+                                    placeholder={t('buildingPlanner.bot.importPlaceholder')} />
+                                <button onClick={() => previewBotInput(botInput)} className="bp-btn-action">
+                                    {t('buildingPlanner.bot.decode')}
+                                </button>
+
+                                {botPreview && (() => {
+                                    const model = botPreview.models[botModelIdx] || botPreview;
+                                    const baseLevels = botPreview.villageLevels && botApply.levels ? botPreview.villageLevels : startLevels;
+                                    const queueCount = stripStartLevels(model.steps, baseLevels).length;
+                                    const toggle = (key) => setBotApply(prev => ({ ...prev, [key]: !prev[key] }));
+                                    return (
+                                        <div className="bp-bot-preview">
+                                            {botPreview.models.length > 1 && (
+                                                <label className="bp-am-name">
+                                                    {t('buildingPlanner.bot.pickModel')}
+                                                    <select className="bp-econ-select" value={botModelIdx}
+                                                        onChange={e => setBotModelIdx(parseInt(e.target.value) || 0)}>
+                                                        {botPreview.models.map((m, i) => (
+                                                            <option key={i} value={i}>{m.name || '-'} ({m.steps.length})</option>
+                                                        ))}
+                                                    </select>
+                                                </label>
+                                            )}
+                                            <div className="bp-bot-title">
+                                                {t('buildingPlanner.bot.preview').replace('{{name}}', model.name || '-').replace('{{count}}', model.steps.length)}
+                                            </div>
+                                            {botPreview.villageName && (
+                                                <div className="bp-bot-village">
+                                                    {t('buildingPlanner.bot.village').replace('{{name}}', botPreview.villageName).replace('{{coord}}', botPreview.villageCoord)}
+                                                </div>
+                                            )}
+                                            {botPreview.villageLevels && (
+                                                <label className="bp-export-opt">
+                                                    <input type="checkbox" checked={botApply.levels} onChange={() => toggle('levels')} />
+                                                    {t('buildingPlanner.bot.applyLevels')}
+                                                </label>
+                                            )}
+                                            {botPreview.worldSpeed && (
+                                                <label className="bp-export-opt">
+                                                    <input type="checkbox" checked={botApply.speed} onChange={() => toggle('speed')} />
+                                                    {t('buildingPlanner.bot.applySpeed').replace('{{speed}}', botPreview.worldSpeed)}
+                                                </label>
+                                            )}
+                                            {botMineGuess && (
+                                                <label className="bp-export-opt">
+                                                    <input type="checkbox" checked={botApply.mine} onChange={() => toggle('mine')} />
+                                                    {t('buildingPlanner.bot.applyMine').replace('{{factor}}', botMineGuess)}
+                                                </label>
+                                            )}
+                                            <label className="bp-export-opt">
+                                                <input type="checkbox" checked={botApply.queue} onChange={() => toggle('queue')} />
+                                                {t('buildingPlanner.bot.applyQueue').replace('{{count}}', queueCount)}
+                                            </label>
+                                            <div>
+                                                <button onClick={applyBotPreview} className="bp-btn-action">{t('buildingPlanner.bot.apply')}</button>
+                                            </div>
+                                        </div>
+                                    );
+                                })()}
+                            </div>
+
+                            <div className="bp-bot-col">
+                                <h4>{t('buildingPlanner.bot.exportTitle')}</h4>
+                                <div className="bp-am-hint">{t('buildingPlanner.bot.exportHint')}</div>
+                                <label className="bp-am-name">
+                                    {t('buildingPlanner.bot.name')}
+                                    <input type="text" value={botName} maxLength={40} onChange={e => setBotName(e.target.value)} />
+                                </label>
+                                <textarea className="bp-template-textarea bp-bot-textarea" value={botCode} readOnly
+                                    onFocus={e => e.target.select()} />
+                                <button className="bp-btn-action" onClick={() => {
+                                    navigator.clipboard.writeText(botCode);
+                                    setBotMsg({ ok: true, text: t('buildingPlanner.modal.copied') });
+                                }}>
+                                    {t('buildingPlanner.bot.copy')}
+                                </button>
+                                {botReturn && (
+                                    <button className="bp-btn-secondary" onClick={sendBotBack} title={t('buildingPlanner.bot.sendBackHint')}>
+                                        {t('buildingPlanner.bot.sendBack')}{botReturn.name ? ` — ${botReturn.name}` : ''}
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+
+                        {botMsg && <div className={`bp-bot-msg${botMsg.ok ? ' ok' : ''}`}>{botMsg.text}</div>}
+                        <div>
+                            <button onClick={() => setShowTemplateModal(false)} className="bp-btn-secondary" style={{background: 'var(--danger-solid)'}}>{t('buildingPlanner.btn.close')}</button>
+                        </div>
+                    </div>
+                )}
+
+                {showTemplateModal && templateMode !== 'bot' && (
                     <div className="bp-template-area">
                         <h3 style={{marginTop: 0, color: 'var(--gold)'}}>
                             {templateMode === 'import' && t('buildingPlanner.modal.importTitle')}
@@ -580,6 +848,12 @@ const BuildingPlanner = () => {
                             </div>
                         ))}
                     </div>
+                    <div className="bp-levels-actions">
+                        <button type="button" className="bp-btn-secondary bp-btn-small" onClick={resetStartLevels}
+                            title={t('buildingPlanner.levelsResetHint')}>
+                            {t('buildingPlanner.levelsReset')}
+                        </button>
+                    </div>
                 </details>
             </div>
 
@@ -593,6 +867,22 @@ const BuildingPlanner = () => {
                             <div style={{color: 'var(--danger)'}}>{t('buildingPlanner.analysis.withWait')} {formatClock(totalTimeWithWait, t)}</div>
                             <div style={{color: 'var(--success)'}}>{t('buildingPlanner.analysis.withoutWait')} {formatClock(totalBuildTimeOnly, t)}</div>
                         </div>
+
+                        {troopShare > 0 && lastRow && (
+                            <div className="bp-analysis-army">
+                                <div>
+                                    {t('buildingPlanner.analysis.army')}{' '}
+                                    <b>{armyText(lastRow.armyByFacility, troopProfile, t) || '0'}</b>
+                                    {' '}({Math.round(lastRow.army).toLocaleString()} {t('buildingPlanner.columns.pop')})
+                                </div>
+                                {lastRow.troopBudget > 0 && lastRow.troopSpent < lastRow.troopBudget * 0.95 && (
+                                    <div className="bp-analysis-army-idle">
+                                        {t('buildingPlanner.analysis.armyIdle').replace('{{pct}}',
+                                            Math.round(100 * (1 - lastRow.troopSpent / lastRow.troopBudget)))}
+                                    </div>
+                                )}
+                            </div>
+                        )}
 
                         {bottlenecks.length > 0 ? (
                             <div style={{fontSize: '13px'}}>

@@ -141,7 +141,8 @@
       "close": "Stäng",
       "delete": "Radera",
       "amCode": "🏛️ Kontohanterarkod",
-      "amImport": "🏛️ Ladda kontohanterarkod"
+      "amImport": "🏛️ Ladda kontohanterarkod",
+      "bot": "🔄 Utbyte med Br Bot"
     },
     "modal": {
       "importTitle": "📥 Klistra in Byggkön Kopierad från Spelet",
@@ -179,7 +180,9 @@
       "waitingFor": "Väntar",
       "waitingSuffix": "på resurser.",
       "missing": "Saknade mängder",
-      "perfect": "🎉 Bra! Det finns ingen resursväntetid i denna kö. Konstruktionerna kommer att fortsätta utan avbrott."
+      "perfect": "🎉 Bra! Det finns ingen resursväntetid i denna kö. Konstruktionerna kommer att fortsätta utan avbrott.",
+      "army": "⚔️ Trupper i slutet av kön:",
+      "armyIdle": "⚠️ {{pct}} % av truppandelen gick förlorad: Baracker/Stall hann inte med eller Gården var full. Bygg dem tidigare eller använd läget Eko + Trupper."
     },
     "summary": {
       "title": "Kösammanfattning (Klicka Byggnader för att Lägga Till)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 Snabbaste Kö-kalkylatorn",
-      "modeAcademy": "Akademi (första adelsmannen)",
+      "modeAcademy": "Akademi",
       "modeFull": "Alla byggnader",
       "modeRes": "Resurser 30/30/30",
       "descAcademy": "Beräknar byggordningen som når akademin (första adelsmannen) på kortast tid, utifrån världshastighet, produktionsfaktor och nuvarande byggnadsnivåer. Investeringar i gruvor, lager och bondgård vägs av automatiskt.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Att tillämpa detta ersätter din nuvarande byggkö.",
       "noSolution": "❌ Ingen kö som når målet hittades med dessa startnivåer. Kontrollera byggnadsnivåerna.",
       "alreadyDone": "✅ I den här byn finns redan allt som behövs för det här målet.",
-      "failed": "❌ Ett fel uppstod under beräkningen."
+      "failed": "❌ Ett fel uppstod under beräkningen.",
+      "modeNoble": "Första adelsmannen",
+      "descNoble": "Utöver akademin väntar den också tills kostnaden för den första adelsmannen är klar (1 guldmynt + adelsmannen: totalt 68 000 trä, 80 000 lera, 75 000 järn; kräver Magasin 20). Bygger fler gruvor än Akademi-läget, eftersom resurserna ska samlas ihop även efter akademin.",
+      "modeMilitary": "Eko + Trupper",
+      "descMilitary": "Tar gruvorna till 30 och Baracker/Stall/Smedja till max medan {{share}} % av inkomsten går till trupper från början till slut. Varje timme truppproduktionen står still räknas lika illa som en timmes byggförsening; därför växer Baracker, Stall och Gård med inkomsten och ingen kö står still.",
+      "modeFeed": "Försörjd by",
+      "descFeed": "Antar att resurserna kommer från andra byar (försörjningsinställning; tom = obegränsat) och gör klart alla byggnader så fort som möjligt. Huvudkontor, Magasin och Gård först, gruvorna sist: en mall för byar som ska växa snabbt genom försörjning.",
+      "modeCustom": "Eget mål",
+      "descCustom": "Beräknar den ordning som snabbast når målnivåerna du anger nedan. Krav (t.ex. Baracker 5, Smedja 5 och Huvudkontor 10 för Stallet) läggs till automatiskt; Huvudkontor, Magasin, Gård och gruvor är fria som hjälpare.",
+      "customTitle": "🎯 Målnivåer",
+      "customReset": "Rensa mål",
+      "customEmpty": "❌ Ange ett mål över startnivån för minst en byggnad.",
+      "polishing": "Finslipar... runda",
+      "buildTime": "🏗️ Bygge:",
+      "bankTime": "🪙 sparande till mynt + adelsman:",
+      "armyTitle": "⚔️ Armé när bygget är klart:",
+      "armyUse": "{{pct}} % av truppandelen använd"
+    },
+    "levelsReset": "↺ Återställ standard",
+    "levelsResetHint": "Går tillbaka till en ny bys nivåer: Huvudkontor, Gård, Magasin och Samlingsplats 1, allt annat 0.",
+    "levelsResetConfirm": "Återställa byggnadernas startnivåer till en ny bys? (Huvudkontor, Gård, Magasin, Samlingsplats 1; allt annat 0)",
+    "econ": {
+      "feed": "Försörjning (per timme, varje):",
+      "feedHint": "Trä, lera och järn som varje timme kommer till den här byn från andra byar (varje). Tabellen och kö-kalkylatorn lägger det till inkomsten.",
+      "feedUnlimited": "Obegränsat",
+      "feedUnlimitedHint": "Väntar aldrig på resurser; bara gränserna för magasin och gård gäller.",
+      "troops": "Truppproduktion (% av inkomsten):",
+      "troopsHint": "Den här andelen av inkomsten går till trupper från början till slut (0 = av). Det blir mindre kvar till byggnader och trupperna tar plats på gården.",
+      "profileOff": "Anfall (yxkämpe + lätt kavalleri + murbräcka)",
+      "profileDef": "Försvar (spjutbärare + svärdskämpe + tungt kavalleri)"
+    },
+    "bot": {
+      "title": "🔄 Utbyte med Br Bots Builder",
+      "hint": "Flyttar köer mellan Br Bots Builder (huvudkontorsskärmen) och den här planeraren. I Br Bot skickar Import and export > 'Open in TwCu' kön, byns verkliga byggnadsnivåer och världshastigheten hit; kön du räknar fram här skickar du tillbaka med 'Skicka till byn'.",
+      "importTitle": "📥 Hämta från Br Bot",
+      "importPlaceholder": "Klistra in TWCU1...-koden kopierad från Br Bot eller innehållet i Br Bots modellfil (construction_models.json)",
+      "decode": "Läs kod",
+      "invalid": "❌ Koden kunde inte läsas. Klistra in TWCU1-koden från Br Bot eller innehållet i modellfilen.",
+      "preview": "Mottagen mall: {{name}} ({{count}} steg)",
+      "village": "By: {{name}} {{coord}}",
+      "applyLevels": "Använd byns nivåer som startnivåer",
+      "applySpeed": "Använd världshastigheten ({{speed}})",
+      "applyMine": "Använd produktionsfaktorn (≈{{factor}}, uppskattad från byns produktion)",
+      "applyQueue": "Läs in kön ({{count}} steg)",
+      "pickModel": "Modell:",
+      "apply": "✅ Verkställ",
+      "applied": "✅ Br Bot-mallen har lästs in.",
+      "skipped": "⚠️ {{count}} steg hoppades över: okänd byggnad eller över maxnivån.",
+      "exportTitle": "📤 Skicka till Br Bot",
+      "exportHint": "Klistra in koden i Br Bot under Builder > Import and export och tryck 'Import into the queue'. Startnivåerna finns i koden; nivåer byn redan har hoppas över.",
+      "name": "Mallnamn:",
+      "copy": "📋 Kopiera kod",
+      "sendBack": "🎮 Skicka till byn",
+      "sendBackHint": "Öppnar huvudkontoret i byn som skickade koden i en ny flik; kön hamnar av sig själv i Br Bots Builder."
     }
   },
   "buildingTimes": {

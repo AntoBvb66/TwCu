@@ -141,7 +141,8 @@
       "close": "Cerrar",
       "delete": "Eliminar",
       "amCode": "🏛️ Código del gestor de cuenta",
-      "amImport": "🏛️ Cargar código del gestor de cuenta"
+      "amImport": "🏛️ Cargar código del gestor de cuenta",
+      "bot": "🔄 Intercambio con Br Bot"
     },
     "modal": {
       "importTitle": "📥 Pega la Cola de Construcción Copiada del Juego",
@@ -179,7 +180,9 @@
       "waitingFor": "Esperando",
       "waitingSuffix": "por recursos.",
       "missing": "Cantidades faltantes",
-      "perfect": "🎉 ¡Genial! No hay tiempo de espera de recursos en esta cola. Las construcciones continuarán sin interrupciones."
+      "perfect": "🎉 ¡Genial! No hay tiempo de espera de recursos en esta cola. Las construcciones continuarán sin interrupciones.",
+      "army": "⚔️ Tropas al final de la cola:",
+      "armyIdle": "⚠️ Se perdió el {{pct}} % de la parte de tropas: Cuarteles/Establos no dieron abasto o la Granja se llenó. Constrúyelos antes o usa el modo Eco + Tropas."
     },
     "summary": {
       "title": "Resumen de Cola (Haz clic en Edificios para Añadir)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 Calculadora de Cola Más Rápida",
-      "modeAcademy": "Academia (primer noble)",
+      "modeAcademy": "Academia",
       "modeFull": "Todos los edificios",
       "modeRes": "Recursos 30/30/30",
       "descAcademy": "Calcula el orden de construcción que alcanza la academia (primer noble) en el menor tiempo, según la velocidad del mundo, el factor de producción y los niveles actuales de tus edificios. Equilibra por sí sola las inversiones en minas, almacén y granja.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Al aplicarlo se reemplazará tu cola de construcción actual.",
       "noSolution": "❌ No se ha encontrado ninguna cola que alcance el objetivo con estos niveles iniciales. Revisa los niveles de los edificios.",
       "alreadyDone": "✅ En esta aldea ya está todo lo necesario para este objetivo.",
-      "failed": "❌ Se produjo un error durante el cálculo."
+      "failed": "❌ Se produjo un error durante el cálculo.",
+      "modeNoble": "Primer Noble",
+      "descNoble": "Además de la academia, espera a que esté listo el coste del primer noble (1 moneda de oro + el noble: 68.000 de madera, 80.000 de barro, 75.000 de hierro en total; requiere Almacén 20). Construye más minas que el modo Academia, porque esos recursos aún deben acumularse tras la academia.",
+      "modeMilitary": "Eco + Tropas",
+      "descMilitary": "Lleva las minas a 30 y Cuarteles/Establos/Herrería al máximo mientras el {{share}} % de los ingresos va a tropas de principio a fin. Cada hora con la producción de tropas parada cuenta tan mal como una hora de retraso en la construcción; por eso Cuarteles, Establos y Granja crecen con los ingresos y ninguna cola se queda parada.",
+      "modeFeed": "Aldea abastecida",
+      "descFeed": "Supone que los recursos llegan de otras aldeas (ajuste de recursos recibidos; ilimitado si está vacío) y termina todos los edificios lo antes posible. Cuartel General, Almacén y Granja primero, las minas al final: una plantilla para aldeas que crecen rápido abasteciéndolas.",
+      "modeCustom": "Objetivo propio",
+      "descCustom": "Calcula el orden que alcanza antes los niveles objetivo que introduzcas abajo. Los requisitos (p. ej. Cuarteles 5, Herrería 5 y Cuartel General 10 para los Establos) se añaden solos; Cuartel General, Almacén, Granja y minas quedan libres como ayuda.",
+      "customTitle": "🎯 Niveles objetivo",
+      "customReset": "Borrar objetivos",
+      "customEmpty": "❌ Introduce un objetivo superior al nivel inicial en al menos un edificio.",
+      "polishing": "Afinando... ronda",
+      "buildTime": "🏗️ Construcción:",
+      "bankTime": "🪙 ahorro de moneda + noble:",
+      "armyTitle": "⚔️ Ejército al terminar la construcción:",
+      "armyUse": "{{pct}} % de la parte de tropas usada"
+    },
+    "levelsReset": "↺ Restablecer valores",
+    "levelsResetHint": "Vuelve a los niveles de una aldea nueva: Cuartel General, Granja, Almacén y Plaza de Reunión 1, el resto 0.",
+    "levelsResetConfirm": "¿Volver los niveles iniciales de los edificios a los de una aldea nueva? (Cuartel General, Granja, Almacén, Plaza de Reunión 1; el resto 0)",
+    "econ": {
+      "feed": "Recursos recibidos (por hora, cada uno):",
+      "feedHint": "Madera, barro y hierro que llegan a esta aldea desde otras aldeas cada hora (cada uno). La tabla y la calculadora de cola los suman a los ingresos.",
+      "feedUnlimited": "Ilimitado",
+      "feedUnlimitedHint": "Nunca espera recursos; solo siguen vigentes los límites del almacén y la granja.",
+      "troops": "Producción de tropas (% de ingresos):",
+      "troopsHint": "Esta parte de los ingresos va a tropas de principio a fin (0 = apagado). Queda menos para los edificios y las tropas ocupan sitio en la granja.",
+      "profileOff": "Ataque (luchador con hacha + caballería ligera + ariete)",
+      "profileDef": "Defensa (lancero + espadachín + caballería pesada)"
+    },
+    "bot": {
+      "title": "🔄 Intercambio con el Builder de Br Bot",
+      "hint": "Mueve colas entre el Builder de Br Bot (pantalla del cuartel general) y este planificador. En Br Bot, Import and export > 'Open in TwCu' envía aquí la cola, los niveles reales de la aldea y la velocidad del mundo; la cola que calcules aquí vuelve con 'Enviar a la aldea'.",
+      "importTitle": "📥 Traer de Br Bot",
+      "importPlaceholder": "Pega el código TWCU1... copiado de Br Bot o el contenido del archivo de modelos de Br Bot (construction_models.json)",
+      "decode": "Leer código",
+      "invalid": "❌ No se pudo leer el código. Pega el código TWCU1 copiado de Br Bot o el contenido del archivo de modelos.",
+      "preview": "Plantilla recibida: {{name}} ({{count}} pasos)",
+      "village": "Aldea: {{name}} {{coord}}",
+      "applyLevels": "Usar los niveles de la aldea como iniciales",
+      "applySpeed": "Usar la velocidad del mundo ({{speed}})",
+      "applyMine": "Usar el factor de producción (≈{{factor}}, estimado por la producción de la aldea)",
+      "applyQueue": "Cargar la cola ({{count}} pasos)",
+      "pickModel": "Modelo:",
+      "apply": "✅ Aplicar",
+      "applied": "✅ Plantilla de Br Bot cargada.",
+      "skipped": "⚠️ Se omitieron {{count}} pasos: edificio desconocido o por encima del nivel máximo.",
+      "exportTitle": "📤 Enviar a Br Bot",
+      "exportHint": "En Br Bot, pega el código en Builder > Import and export y pulsa 'Import into the queue'. Los niveles iniciales van en el código; los niveles que la aldea ya tiene se omiten.",
+      "name": "Nombre de la plantilla:",
+      "copy": "📋 Copiar código",
+      "sendBack": "🎮 Enviar a la aldea",
+      "sendBackHint": "Abre en una pestaña nueva el cuartel general de la aldea que envió el código; la cola llega sola al Builder de Br Bot."
     }
   },
   "buildingTimes": {

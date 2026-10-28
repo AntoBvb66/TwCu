@@ -141,7 +141,8 @@
       "close": "Schließen",
       "delete": "Löschen",
       "amCode": "🏛️ Kontenverwaltungs-Code",
-      "amImport": "🏛️ Kontenverwaltungs-Code laden"
+      "amImport": "🏛️ Kontenverwaltungs-Code laden",
+      "bot": "🔄 Austausch mit Br Bot"
     },
     "modal": {
       "importTitle": "📥 Füge die aus dem Spiel kopierte Bauwarteschlange ein",
@@ -179,7 +180,9 @@
       "waitingFor": "Warten auf",
       "waitingSuffix": "Ressourcen.",
       "missing": "Fehlende Mengen",
-      "perfect": "🎉 Super! In dieser Warteschlange gibt es keine Ressourcenwartezeit. Die Bauvorhaben laufen ohne Unterbrechung weiter."
+      "perfect": "🎉 Super! In dieser Warteschlange gibt es keine Ressourcenwartezeit. Die Bauvorhaben laufen ohne Unterbrechung weiter.",
+      "army": "⚔️ Truppen am Ende der Warteschlange:",
+      "armyIdle": "⚠️ {{pct}}% des Truppenanteils gingen verloren: Kaserne/Stall kamen nicht nach oder die Farm war voll. Baue sie früher oder nutze den Modus Eco + Truppen."
     },
     "summary": {
       "title": "Warteschlangenübersicht (Gebäude zum Hinzufügen anklicken)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 Schnellste-Warteschlange-Rechner",
-      "modeAcademy": "Akademie (erster Adliger)",
+      "modeAcademy": "Akademie",
       "modeFull": "Alle Gebäude",
       "modeRes": "Rohstoffe 30/30/30",
       "descAcademy": "Berechnet die Baureihenfolge, die die Akademie (erster Adliger) in kürzester Zeit erreicht — auf Basis deiner Weltgeschwindigkeit, des Rohstofffaktors und der aktuellen Gebäudestufen. Investitionen in Minen, Speicher und Bauernhof werden selbst ausbalanciert.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Beim Übernehmen wird deine aktuelle Bauschleife ersetzt.",
       "noSolution": "❌ Mit diesen Startstufen wurde keine Warteschlange zum Ziel gefunden. Bitte prüfe die Gebäudestufen.",
       "alreadyDone": "✅ In diesem Dorf ist bereits alles für dieses Ziel vorhanden.",
-      "failed": "❌ Bei der Berechnung ist ein Fehler aufgetreten."
+      "failed": "❌ Bei der Berechnung ist ein Fehler aufgetreten.",
+      "modeNoble": "Erster Adliger",
+      "descNoble": "Wartet neben der Akademie auch, bis die Kosten des ersten Adligen bereitliegen (1 Goldmünze + der Adlige: insgesamt 68.000 Holz, 80.000 Lehm, 75.000 Eisen; braucht Speicher 20). Baut mehr Minen als der Akademie-Modus, weil diese Rohstoffe nach der Akademie noch angespart werden müssen.",
+      "modeMilitary": "Eco + Truppen",
+      "descMilitary": "Bringt die Minen auf 30 und Kaserne/Stall/Schmiede auf das Maximum, während {{share}}% des Einkommens von Anfang bis Ende in Truppen gehen. Jede Stunde Stillstand in der Truppenproduktion zählt so schlecht wie eine Stunde Bauverzögerung; deshalb wachsen Kaserne, Stall und Farm mit dem Einkommen und keine der beiden Warteschlangen steht still.",
+      "modeFeed": "Beliefertes Dorf",
+      "descFeed": "Nimmt an, dass Rohstoffe aus anderen Dörfern kommen (Einstellung Zulieferung; leer = unbegrenzt) und stellt alle Gebäude so schnell wie möglich fertig. Hauptquartier, Speicher und Farm zuerst, die Minen zuletzt: eine Vorlage für Dörfer, die durch Beliefern schnell wachsen sollen.",
+      "modeCustom": "Eigenes Ziel",
+      "descCustom": "Berechnet die Reihenfolge, die die unten eingegebenen Zielstufen am schnellsten erreicht. Voraussetzungen (z. B. Kaserne 5, Schmiede 5 und Hauptquartier 10 für den Stall) kommen automatisch dazu; Hauptquartier, Speicher, Farm und Minen sind als Helfer frei.",
+      "customTitle": "🎯 Zielstufen",
+      "customReset": "Ziele leeren",
+      "customEmpty": "❌ Gib bei mindestens einem Gebäude ein Ziel über der Startstufe ein.",
+      "polishing": "Wird verfeinert... Runde",
+      "buildTime": "🏗️ Bau:",
+      "bankTime": "🪙 Münze + Adligen ansparen:",
+      "armyTitle": "⚔️ Armee bei Bauende:",
+      "armyUse": "{{pct}}% des Truppenanteils genutzt"
+    },
+    "levelsReset": "↺ Auf Standard zurücksetzen",
+    "levelsResetHint": "Setzt auf die Stufen eines neuen Dorfes zurück: Hauptquartier, Farm, Speicher und Versammlungsplatz 1, alles andere 0.",
+    "levelsResetConfirm": "Startstufen der Gebäude auf ein neues Dorf zurücksetzen? (Hauptquartier, Farm, Speicher, Versammlungsplatz 1; alles andere 0)",
+    "econ": {
+      "feed": "Zulieferung (pro Stunde, je Rohstoff):",
+      "feedHint": "Holz, Lehm und Eisen, die stündlich aus anderen Dörfern in dieses Dorf kommen (je Rohstoff). Tabelle und Warteschlangen-Rechner zählen sie zum Einkommen.",
+      "feedUnlimited": "Unbegrenzt",
+      "feedUnlimitedHint": "Es wird nie auf Rohstoffe gewartet; nur Speicher- und Farmgrenze gelten noch.",
+      "troops": "Truppenproduktion (% des Einkommens):",
+      "troopsHint": "Dieser Anteil des Einkommens geht von Anfang bis Ende in Truppen (0 = aus). Für Gebäude bleibt weniger, und die Truppen belegen Platz in der Farm.",
+      "profileOff": "Angriff (Axtkämpfer + Leichte Kavallerie + Rammbock)",
+      "profileDef": "Verteidigung (Speerträger + Schwertkämpfer + Schwere Kavallerie)"
+    },
+    "bot": {
+      "title": "🔄 Austausch mit dem Br Bot Builder",
+      "hint": "Verschiebt Warteschlangen zwischen dem Builder von Br Bot (Hauptquartier-Bildschirm) und diesem Planer. In Br Bot schickt Import and export > 'Open in TwCu' die Warteschlange, die echten Gebäudestufen des Dorfes und die Weltgeschwindigkeit hierher; die hier berechnete Warteschlange schickst du mit 'An das Dorf senden' zurück.",
+      "importTitle": "📥 Von Br Bot holen",
+      "importPlaceholder": "Füge den aus Br Bot kopierten TWCU1...-Code oder den Inhalt der Br-Bot-Modelldatei (construction_models.json) ein",
+      "decode": "Code lesen",
+      "invalid": "❌ Der Code konnte nicht gelesen werden. Füge den aus Br Bot kopierten TWCU1-Code oder den Inhalt der Modelldatei ein.",
+      "preview": "Empfangene Vorlage: {{name}} ({{count}} Schritte)",
+      "village": "Dorf: {{name}} {{coord}}",
+      "applyLevels": "Startstufen aus dem Dorf übernehmen",
+      "applySpeed": "Weltgeschwindigkeit übernehmen ({{speed}})",
+      "applyMine": "Produktionsfaktor übernehmen (≈{{factor}}, aus der Produktion des Dorfes geschätzt)",
+      "applyQueue": "Warteschlange laden ({{count}} Schritte)",
+      "pickModel": "Modell:",
+      "apply": "✅ Übernehmen",
+      "applied": "✅ Br-Bot-Vorlage geladen.",
+      "skipped": "⚠️ {{count}} Schritte übersprungen: unbekanntes Gebäude oder über der Höchststufe.",
+      "exportTitle": "📤 An Br Bot senden",
+      "exportHint": "Füge den Code in Br Bot unter Builder > Import and export ein und klicke 'Import into the queue'. Die Startstufen sind im Code enthalten; Stufen, die das Dorf schon hat, werden übersprungen.",
+      "name": "Vorlagenname:",
+      "copy": "📋 Code kopieren",
+      "sendBack": "🎮 An das Dorf senden",
+      "sendBackHint": "Öffnet das Hauptquartier des Dorfes, das den Code geschickt hat, in einem neuen Tab; die Warteschlange landet von selbst im Br Bot Builder."
     }
   },
   "buildingTimes": {

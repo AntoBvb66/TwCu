@@ -141,7 +141,8 @@
       "close": "Lukk",
       "delete": "Slett",
       "amCode": "🏛️ Kontobehandler-kode",
-      "amImport": "🏛️ Last inn kontobehandler-kode"
+      "amImport": "🏛️ Last inn kontobehandler-kode",
+      "bot": "🔄 Utveksling med Br Bot"
     },
     "modal": {
       "importTitle": "📥 Lim inn byggekø kopiert fra spillet",
@@ -179,7 +180,9 @@
       "waitingFor": "Venter",
       "waitingSuffix": "på ressurser.",
       "missing": "Mangler beløp",
-      "perfect": "🎉 Flott! Det er ingen ventetid på ressurser i denne køen. Konstruksjonene vil fortsette uavbrutt."
+      "perfect": "🎉 Flott! Det er ingen ventetid på ressurser i denne køen. Konstruksjonene vil fortsette uavbrutt.",
+      "army": "⚔️ Tropper ved slutten av køen:",
+      "armyIdle": "⚠️ {{pct}} % av troppeandelen gikk tapt: Barakker/Stall klarte ikke å holde følge, eller Gården var full. Bygg dem tidligere eller bruk modusen Øko + Tropper."
     },
     "summary": {
       "title": "Køoppsummering (klikk på bygninger for å legge til)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 Raskeste Kø-kalkulator",
-      "modeAcademy": "Akademi (første adelsmann)",
+      "modeAcademy": "Akademi",
       "modeFull": "Alle bygninger",
       "modeRes": "Ressurser 30/30/30",
       "descAcademy": "Beregner byggerekkefølgen som når akademiet (første adelsmann) på kortest tid, basert på verdenshastighet, produksjonsfaktor og nåværende bygningsnivåer. Investeringer i gruver, lager og gård avveies automatisk.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Å bruke dette erstatter din nåværende byggekø.",
       "noSolution": "❌ Det ble ikke funnet noen kø til målet med disse startnivåene. Sjekk bygningsnivåene.",
       "alreadyDone": "✅ I denne landsbyen er alt til dette målet allerede på plass.",
-      "failed": "❌ Det oppsto en feil under beregningen."
+      "failed": "❌ Det oppsto en feil under beregningen.",
+      "modeNoble": "Første adelsmann",
+      "descNoble": "I tillegg til akademiet venter den til kostnaden for den første adelsmannen er klar (1 gullmynt + adelsmannen: til sammen 68 000 tre, 80 000 leire, 75 000 jern; krever Lager 20). Bygger flere gruver enn Akademi-modusen, fordi disse ressursene fortsatt må spares opp etter akademiet.",
+      "modeMilitary": "Øko + Tropper",
+      "descMilitary": "Tar gruvene til 30 og Barakker/Stall/Smie til maks mens {{share}} % av inntekten går til tropper fra start til slutt. Hver time troppeproduksjonen står stille teller like ille som en time byggeforsinkelse; derfor vokser Barakker, Stall og Gård med inntekten, og ingen kø står stille.",
+      "modeFeed": "Forsynt landsby",
+      "descFeed": "Antar at ressursene kommer fra andre landsbyer (forsyningsinnstilling; tom = ubegrenset) og fullfører alle bygninger så fort som mulig. Hovedkvarter, Lager og Gård først, gruvene til slutt: en mal for landsbyer du får til å vokse raskt med forsyning.",
+      "modeCustom": "Eget mål",
+      "descCustom": "Beregner rekkefølgen som raskest når målnivåene du skriver inn nedenfor. Krav (f.eks. Barakker 5, Smie 5 og Hovedkvarter 10 for Stallen) legges til automatisk; Hovedkvarter, Lager, Gård og gruver er frie som hjelpere.",
+      "customTitle": "🎯 Målnivåer",
+      "customReset": "Tøm mål",
+      "customEmpty": "❌ Skriv inn et mål over startnivået for minst én bygning.",
+      "polishing": "Finpusser... runde",
+      "buildTime": "🏗️ Bygging:",
+      "bankTime": "🪙 sparing til mynt + adelsmann:",
+      "armyTitle": "⚔️ Hær når byggingen er ferdig:",
+      "armyUse": "{{pct}} % av troppeandelen brukt"
+    },
+    "levelsReset": "↺ Tilbakestill til standard",
+    "levelsResetHint": "Går tilbake til nivåene i en ny landsby: Hovedkvarter, Gård, Lager og Samleplass 1, alt annet 0.",
+    "levelsResetConfirm": "Tilbakestille startnivåene for bygningene til en ny landsbys? (Hovedkvarter, Gård, Lager, Samleplass 1; alt annet 0)",
+    "econ": {
+      "feed": "Forsyning (per time, hver):",
+      "feedHint": "Tre, leire og jern som hver time kommer til denne landsbyen fra andre landsbyer (hver). Tabellen og kø-kalkulatoren legger det til inntekten.",
+      "feedUnlimited": "Ubegrenset",
+      "feedUnlimitedHint": "Venter aldri på ressurser; bare grensene for lager og gård gjelder.",
+      "troops": "Troppeproduksjon (% av inntekten):",
+      "troopsHint": "Denne andelen av inntekten går til tropper fra start til slutt (0 = av). Det blir mindre igjen til bygninger, og troppene tar plass på gården.",
+      "profileOff": "Angrep (øksekriger + lett kavaleri + rambukk)",
+      "profileDef": "Forsvar (spydkriger + sverdkjemper + tungt kavaleri)"
+    },
+    "bot": {
+      "title": "🔄 Utveksling med Br Bots Builder",
+      "hint": "Flytter køer mellom Br Bots Builder (hovedkvarter-skjermen) og denne planleggeren. I Br Bot sender Import and export > 'Open in TwCu' køen, landsbyens faktiske bygningsnivåer og verdenshastigheten hit; køen du beregner her, sender du tilbake med 'Send til landsbyen'.",
+      "importTitle": "📥 Hent fra Br Bot",
+      "importPlaceholder": "Lim inn TWCU1...-koden kopiert fra Br Bot eller innholdet i Br Bots modellfil (construction_models.json)",
+      "decode": "Les kode",
+      "invalid": "❌ Koden kunne ikke leses. Lim inn TWCU1-koden kopiert fra Br Bot eller innholdet i modellfilen.",
+      "preview": "Mottatt mal: {{name}} ({{count}} trinn)",
+      "village": "Landsby: {{name}} {{coord}}",
+      "applyLevels": "Bruk landsbyens nivåer som startnivåer",
+      "applySpeed": "Bruk verdenshastigheten ({{speed}})",
+      "applyMine": "Bruk produksjonsfaktoren (≈{{factor}}, anslått ut fra landsbyens produksjon)",
+      "applyQueue": "Last inn køen ({{count}} trinn)",
+      "pickModel": "Modell:",
+      "apply": "✅ Bruk",
+      "applied": "✅ Br Bot-mal lastet inn.",
+      "skipped": "⚠️ {{count}} trinn hoppet over: ukjent bygning eller over maksnivået.",
+      "exportTitle": "📤 Send til Br Bot",
+      "exportHint": "Lim inn koden i Br Bot under Builder > Import and export og trykk 'Import into the queue'. Startnivåene er med i koden; nivåer landsbyen allerede har, hoppes over.",
+      "name": "Malnavn:",
+      "copy": "📋 Kopier kode",
+      "sendBack": "🎮 Send til landsbyen",
+      "sendBackHint": "Åpner hovedkvarteret i landsbyen som sendte koden i en ny fane; køen kommer av seg selv inn i Br Bots Builder."
     }
   },
   "buildingTimes": {

@@ -141,7 +141,8 @@
       "close": "Schliesse",
       "delete": "Lösche",
       "amCode": "🏛️ Kontoverwaltigs-Code",
-      "amImport": "🏛️ Kontoverwaltigs-Code lade"
+      "amImport": "🏛️ Kontoverwaltigs-Code lade",
+      "bot": "🔄 Uustusch mit Br Bot"
     },
     "modal": {
       "importTitle": "📥 Füeg d kopierti Bau-Queue vom Spiel ii",
@@ -179,7 +180,9 @@
       "waitingFor": "Wart uf",
       "waitingSuffix": "für Ressource.",
       "missing": "Fehlendi Beträg",
-      "perfect": "🎉 Super! Es git kei Ressource-Wartziit i dere Queue. D Bau werde ohni Unterbruch wiitergehn."
+      "perfect": "🎉 Super! Es git kei Ressource-Wartziit i dere Queue. D Bau werde ohni Unterbruch wiitergehn.",
+      "army": "⚔️ Truppe am Änd vo de Warteschlange:",
+      "armyIdle": "⚠️ {{pct}}% vom Truppeaateil sind verlore gange: Kasern/Stall sind nöd nachecho oder d Farm isch voll gsi. Bau si früener oder nimm de Modus Eco + Truppe."
     },
     "summary": {
       "title": "Queue-Zusammenfassung (Klick Gebäude zum Zuefüege)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 Schnellschti-Warteschlange-Rächner",
-      "modeAcademy": "Akademie (erschte Adlige)",
+      "modeAcademy": "Akademie",
       "modeFull": "Alli Gebäude",
       "modeRes": "Rohstoff 30/30/30",
       "descAcademy": "Rächnet d Bauriehefolg us, wo d Akademie (erschte Adlige) am schnellschte erreicht — uf Basis vo dinere Wältgschwindigkeit, em Rohstofffaktor und de aktuelle Gebäudestufe. Investitione i Mine, Speicher und Burehof wärde selber uusbalanciert.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Bim Übernäh wird dini aktuelli Bauschleife ersetzt.",
       "noSolution": "❌ Mit dene Startstufe isch kei Warteschlange zum Ziel gfunde worde. Bitte prüef d Gebäudestufe.",
       "alreadyDone": "✅ I dem Dorf isch scho alles für das Ziel vorhande.",
-      "failed": "❌ Bi de Berächnig isch en Fähler ufträte."
+      "failed": "❌ Bi de Berächnig isch en Fähler ufträte.",
+      "modeNoble": "Erschte Adlige",
+      "descNoble": "Wartet näbed de Akademie au, bis d Choste vom erschte Adlige parat sind (1 Goldmünze + de Adlig: total 68'000 Holz, 80'000 Lehm, 75'000 Ise; bruucht Speicher 20). Baut meh Mine als de Akademie-Modus, will die Rohstoff nach de Akademie no aagspart wärde müend.",
+      "modeMilitary": "Eco + Truppe",
+      "descMilitary": "Bringt d Mine uf 30 und Kasern/Stall/Schmied ufs Maximum, während {{share}}% vom Iikomme vo Afang bis Änd i Truppe gönd. Jedi Stund Stillstand i de Truppeproduktion zellt so schlächt wie e Stund Bouverzögerig; drum wachsed Kasern, Stall und Farm mit em Iikomme und kei Warteschlange staht still.",
+      "modeFeed": "Beliferets Dorf",
+      "descFeed": "Nimmt aa, dass d Rohstoff us andere Dörfer chömed (Iistellig Liferig; leer = unbegränzt) und baut alli Gebäude so schnäll wie möglich fertig. Hauptquartier, Speicher und Farm zersch, d Mine zletscht: e Vorlag für Dörfer, wo mer mit Belifere schnäll wachse laht.",
+      "modeCustom": "Eiges Ziel",
+      "descCustom": "Rächnet d Reihefolg, wo d Zielstufe vo une am schnällste erreicht. Vorussetzige (z. B. Kasern 5, Schmied 5 und Hauptquartier 10 für de Stall) chömed automatisch dezue; Hauptquartier, Speicher, Farm und Mine sind als Hälfer frei.",
+      "customTitle": "🎯 Zielstufe",
+      "customReset": "Ziel lösche",
+      "customEmpty": "❌ Gib bi mindestens eim Gebäude es Ziel über de Startstufe ii.",
+      "polishing": "Wird verfiineret... Rundi",
+      "buildTime": "🏗️ Bou:",
+      "bankTime": "🪙 Münze + Adlige aaspare:",
+      "armyTitle": "⚔️ Armee am Bou-Änd:",
+      "armyUse": "{{pct}}% vom Truppeaateil bruucht"
+    },
+    "levelsReset": "↺ Uf Standard zrüggsetze",
+    "levelsResetHint": "Setzt uf d Stufe vomene nöie Dorf zrugg: Hauptquartier, Farm, Speicher und Sammelplatz 1, alles anderi 0.",
+    "levelsResetConfirm": "D Startstufe vo de Gebäude uf es nöis Dorf zrüggsetze? (Hauptquartier, Farm, Speicher, Sammelplatz 1; alles anderi 0)",
+    "econ": {
+      "feed": "Liferig (pro Stund, je Rohstoff):",
+      "feedHint": "Holz, Lehm und Ise, wo jedi Stund us andere Dörfer i das Dorf chömed (je Rohstoff). Tabelle und Warteschlange-Rächner zelled si zum Iikomme.",
+      "feedUnlimited": "Unbegränzt",
+      "feedUnlimitedHint": "Es wird nie uf Rohstoff gwartet; nur d Speicher- und Farmgränze gälted no.",
+      "troops": "Truppeproduktion (% vom Iikomme):",
+      "troopsHint": "De Aateil vom Iikomme gaht vo Afang bis Änd i Truppe (0 = uus). Für Gebäude blibt weniger, und d Truppe bruuched Platz i de Farm.",
+      "profileOff": "Agriff (Axtkämpfer + Liechti Kavallerie + Rammbock)",
+      "profileDef": "Verteidigung (Speerträger + Schwertkämpfer + Schwäri Kavallerie)"
+    },
+    "bot": {
+      "title": "🔄 Uustusch mit em Br Bot Builder",
+      "hint": "Verschiebt Warteschlange zwüsched em Builder vo Br Bot (Hauptquartier-Bildschirm) und dem Planer. I Br Bot schickt Import and export > 'Open in TwCu' d Warteschlange, di ächte Gebäudestufe vom Dorf und d Wältgschwindigkeit dahere; d Warteschlange, wo du da rächnisch, schicksch mit 'Is Dorf schicke' zrugg.",
+      "importTitle": "📥 Vo Br Bot hole",
+      "importPlaceholder": "Füeg de us Br Bot kopiert TWCU1...-Code oder de Inhalt vo de Br-Bot-Modelldatei (construction_models.json) ii",
+      "decode": "Code läse",
+      "invalid": "❌ De Code het nöd chönne gläse wärde. Füeg de us Br Bot kopiert TWCU1-Code oder de Inhalt vo de Modelldatei ii.",
+      "preview": "Empfangeni Vorlag: {{name}} ({{count}} Schritt)",
+      "village": "Dorf: {{name}} {{coord}}",
+      "applyLevels": "Startstufe vom Dorf übernäh",
+      "applySpeed": "Wältgschwindigkeit übernäh ({{speed}})",
+      "applyMine": "Produktionsfaktor übernäh (≈{{factor}}, us de Produktion vom Dorf gschätzt)",
+      "applyQueue": "Warteschlange lade ({{count}} Schritt)",
+      "pickModel": "Modell:",
+      "apply": "✅ Übernäh",
+      "applied": "✅ Br-Bot-Vorlag glade.",
+      "skipped": "⚠️ {{count}} Schritt übersprunge: unbekannts Gebäude oder über de Höchststufe.",
+      "exportTitle": "📤 Zu Br Bot schicke",
+      "exportHint": "Füeg de Code i Br Bot under Builder > Import and export ii und drück 'Import into the queue'. D Startstufe sind im Code drin; Stufe, wo s Dorf scho het, wärded übersprunge.",
+      "name": "Vorlagename:",
+      "copy": "📋 Code kopiere",
+      "sendBack": "🎮 Is Dorf schicke",
+      "sendBackHint": "Öffnet s Hauptquartier vom Dorf, wo de Code gschickt het, imene nöie Tab; d Warteschlange landet vo sälber im Br Bot Builder."
     }
   },
   "buildingTimes": {

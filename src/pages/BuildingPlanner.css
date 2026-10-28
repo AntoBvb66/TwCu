@@ -359,3 +359,85 @@
     border-radius: var(--r-sm); background: var(--ink-900); color: var(--gold);
 }
 .bp-am-name input:focus { outline: none; border-color: var(--gold); }
+
+/* --- KÖY EKONOMİSİ (besleme ve asker payı) --- */
+.bp-econ-grid { padding-top: 12px; border-top: 1px dashed var(--line); }
+.bp-econ-grid input[type="number"]:disabled { opacity: 0.45; }
+.bp-econ-check {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-weight: normal; cursor: pointer; white-space: nowrap;
+}
+.bp-econ-check input { width: auto; padding: 0; cursor: pointer; }
+.bp-econ-select {
+    padding: 6px; max-width: 260px;
+    background: var(--ink-850); color: var(--gold);
+    border: 1px solid var(--line-2); border-radius: var(--r-sm);
+    font-family: inherit; font-size: 12px;
+}
+.bp-econ-select:disabled { opacity: 0.45; }
+
+.bp-btn-small { padding: 6px 10px; font-size: 12px; }
+
+/* --- BAŞLANGIÇ SEVİYELERİ: SIFIRLA --- */
+.bp-levels-actions { display: flex; justify-content: flex-end; margin-top: 12px; }
+
+/* --- ÖZEL HEDEF --- */
+.bp-goal-editor {
+    margin-top: 12px; padding-top: 12px;
+    border-top: 1px dashed var(--line-2);
+}
+.bp-goal-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    margin-bottom: 10px; font-weight: bold; color: var(--gold);
+}
+.bp-goal-set { border-color: var(--gold); color: var(--gold); }
+
+/* --- OPTİMİZASYON SONUCU: SÜRE DAĞILIMI VE ORDU --- */
+.bp-optimizer-split { font-weight: normal; opacity: 0.85; }
+.bp-optimizer-army {
+    font-size: 13px; margin-bottom: 10px; padding: 8px 10px; line-height: 1.5;
+    background: var(--ink-850); border: 1px solid var(--line-2); border-radius: var(--r-sm);
+}
+.bp-optimizer-army b { color: var(--gold); }
+.bp-optimizer-army-use { opacity: 0.8; }
+
+/* --- BR BOT AL-VER --- */
+.bp-bot-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 12px;
+}
+.bp-bot-col {
+    display: flex; flex-direction: column; gap: 8px; min-width: 0;
+    padding: 12px; background: var(--ink-900);
+    border: 1px solid var(--line); border-radius: var(--r-sm);
+}
+.bp-bot-col h4 { margin: 0; color: var(--gold); }
+.bp-bot-col .bp-btn-action, .bp-bot-col .bp-btn-secondary { align-self: flex-start; }
+.bp-bot-col .bp-am-name, .bp-bot-col .bp-am-hint { margin-bottom: 0; }
+.bp-bot-textarea { height: 90px; margin-bottom: 0; word-break: break-all; }
+.bp-bot-preview {
+    display: flex; flex-direction: column; gap: 6px;
+    padding-top: 10px; border-top: 1px dashed var(--line-2);
+}
+.bp-bot-preview .bp-export-opt { margin-bottom: 0; color: var(--text); }
+.bp-bot-title { font-weight: bold; color: var(--gold); }
+.bp-bot-village { font-size: 13px; opacity: 0.85; }
+.bp-bot-msg {
+    margin-bottom: 12px; padding: 8px 10px; font-size: 13px;
+    border: 1px solid var(--danger-solid); border-radius: var(--r-sm); color: var(--danger);
+}
+.bp-bot-msg.ok { border-color: var(--success); color: var(--success); }
+
+/* --- ANALİZ: ASKER --- */
+.bp-analysis-army {
+    margin-bottom: 15px; padding: 10px; font-size: 13px; line-height: 1.5;
+    background: var(--ink-850); border: 1px solid var(--line-2); border-radius: 4px;
+}
+.bp-analysis-army b { color: var(--gold); }
+.bp-analysis-army-idle { color: var(--danger); margin-top: 4px; }
+
+@media (max-width: 768px) {
+    .bp-bot-grid { grid-template-columns: 1fr; }
+    .bp-econ-grid div { flex-wrap: wrap; }
+    .bp-econ-select { max-width: none; flex: 1 1 100%; }
+    .bp-bot-col .bp-btn-action, .bp-bot-col .bp-btn-secondary { align-self: stretch; }
+}

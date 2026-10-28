@@ -141,7 +141,8 @@
       "close": "Fechar",
       "delete": "Excluir",
       "amCode": "🏛️ Código do gerenciador de conta",
-      "amImport": "🏛️ Carregar código do gerenciador de conta"
+      "amImport": "🏛️ Carregar código do gerenciador de conta",
+      "bot": "🔄 Troca com o Br Bot"
     },
     "modal": {
       "importTitle": "📥 Cole a Fila de Construção Copiada do Jogo",
@@ -179,7 +180,9 @@
       "waitingFor": "Esperando",
       "waitingSuffix": "por recursos.",
       "missing": "Quantidades em falta",
-      "perfect": "🎉 Ótimo! Não há tempo de espera por recursos nesta fila. As construções continuarão sem interrupções."
+      "perfect": "🎉 Ótimo! Não há tempo de espera por recursos nesta fila. As construções continuarão sem interrupções.",
+      "army": "⚔️ Tropas no fim da fila:",
+      "armyIdle": "⚠️ {{pct}}% da parte das tropas foi perdida: Quartel/Estábulo não acompanharam ou a Fazenda encheu. Construa-os antes ou use o modo Eco + Tropas."
     },
     "summary": {
       "title": "Resumo da Fila (Clique nas Construções para Adicionar)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 Calculadora da Fila Mais Rápida",
-      "modeAcademy": "Academia (primeiro nobre)",
+      "modeAcademy": "Academia",
       "modeFull": "Todos os edifícios",
       "modeRes": "Recursos 30/30/30",
       "descAcademy": "Calcula a ordem de construção que alcança a academia (primeiro nobre) no menor tempo, com base na velocidade do mundo, no fator de produção e nos níveis atuais dos edifícios. Equilibra sozinha os investimentos em minas, armazém e fazenda.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Ao aplicar, sua fila de construção atual será substituída.",
       "noSolution": "❌ Nenhuma fila que alcance o objetivo foi encontrada com esses níveis iniciais. Verifique os níveis dos edifícios.",
       "alreadyDone": "✅ Nesta aldeia já existe tudo o que é necessário para este objetivo.",
-      "failed": "❌ Ocorreu um erro durante o cálculo."
+      "failed": "❌ Ocorreu um erro durante o cálculo.",
+      "modeNoble": "Primeiro Nobre",
+      "descNoble": "Além da academia, espera também o custo do primeiro nobre ficar pronto (1 moeda de ouro + o nobre: 68.000 madeira, 80.000 argila, 75.000 ferro no total; exige Armazém 20). Constrói mais minas que o modo Academia, porque esses recursos ainda precisam se acumular depois da academia.",
+      "modeMilitary": "Eco + Tropas",
+      "descMilitary": "Leva as minas a 30 e Quartel/Estábulo/Ferreiro ao máximo enquanto {{share}}% da renda vai para tropas do começo ao fim. Cada hora com a produção de tropas parada conta tão mal quanto uma hora de atraso na construção; por isso Quartel, Estábulo e Fazenda crescem junto com a renda e nenhuma fila fica parada.",
+      "modeFeed": "Aldeia Abastecida",
+      "descFeed": "Supõe que os recursos chegam de outras aldeias (ajuste de recursos recebidos; ilimitado se vazio) e termina todos os edifícios o mais rápido possível. Quartel General, Armazém e Fazenda vêm primeiro, as minas por último: modelo para aldeias que você cresce rápido abastecendo.",
+      "modeCustom": "Alvo Personalizado",
+      "descCustom": "Calcula a ordem que chega mais rápido aos níveis-alvo que você digitar abaixo. Os requisitos (ex.: Quartel 5, Ferreiro 5 e Quartel General 10 para o Estábulo) entram sozinhos; Quartel General, Armazém, Fazenda e minas ficam livres como ajudantes.",
+      "customTitle": "🎯 Níveis-alvo",
+      "customReset": "Limpar alvos",
+      "customEmpty": "❌ Digite um alvo acima do nível inicial em pelo menos um edifício.",
+      "polishing": "Refinando... rodada",
+      "buildTime": "🏗️ Construção:",
+      "bankTime": "🪙 juntar moeda + nobre:",
+      "armyTitle": "⚔️ Exército ao fim da construção:",
+      "armyUse": "{{pct}}% da parte das tropas usada"
+    },
+    "levelsReset": "↺ Voltar ao padrão",
+    "levelsResetHint": "Volta aos níveis de uma aldeia nova: Quartel General, Fazenda, Armazém e Ponto de Reunião 1, o resto 0.",
+    "levelsResetConfirm": "Voltar os níveis iniciais dos edifícios aos de uma aldeia nova? (Quartel General, Fazenda, Armazém, Ponto de Reunião 1; o resto 0)",
+    "econ": {
+      "feed": "Recursos recebidos (por hora, cada):",
+      "feedHint": "Madeira, argila e ferro que chegam a esta aldeia de outras aldeias por hora (cada). A tabela e a calculadora de fila somam isso à renda.",
+      "feedUnlimited": "Ilimitado",
+      "feedUnlimitedHint": "Nunca espera por recursos; só valem os limites do armazém e da fazenda.",
+      "troops": "Produção de tropas (% da renda):",
+      "troopsHint": "Esta parte da renda vai para tropas do começo ao fim (0 = desligado). Sobra menos renda para os edifícios, e as tropas ocupam espaço na fazenda.",
+      "profileOff": "Ataque (bárbaro + cavalaria leve + aríete)",
+      "profileDef": "Defesa (lanceiro + espadachim + cavalaria pesada)"
+    },
+    "bot": {
+      "title": "🔄 Troca com o Construtor do Br Bot",
+      "hint": "Leva filas entre o Construtor do Br Bot (tela do edifício principal) e este planejador. No Br Bot, Importar e exportar > 'Abrir no TwCu' manda para cá a fila, os níveis reais da aldeia e a velocidade do mundo; a fila que você calcular aqui volta com 'Enviar para a aldeia'.",
+      "importTitle": "📥 Trazer do Br Bot",
+      "importPlaceholder": "Cole o código TWCU1... copiado do Br Bot ou o conteúdo do arquivo de modelos do Br Bot (construction_models.json)",
+      "decode": "Ler código",
+      "invalid": "❌ Não foi possível ler o código. Cole o código TWCU1 copiado do Br Bot ou o conteúdo do arquivo de modelos.",
+      "preview": "Modelo recebido: {{name}} ({{count}} etapas)",
+      "village": "Aldeia: {{name}} {{coord}}",
+      "applyLevels": "Usar os níveis da aldeia como iniciais",
+      "applySpeed": "Usar a velocidade do mundo ({{speed}})",
+      "applyMine": "Usar o fator de produção (≈{{factor}}, estimado pela produção da aldeia)",
+      "applyQueue": "Carregar a fila ({{count}} etapas)",
+      "pickModel": "Modelo:",
+      "apply": "✅ Aplicar",
+      "applied": "✅ Modelo do Br Bot carregado.",
+      "skipped": "⚠️ {{count}} etapas foram puladas: edifício desconhecido ou acima do nível máximo.",
+      "exportTitle": "📤 Enviar para o Br Bot",
+      "exportHint": "No Br Bot, cole o código em Construtor > Importar e exportar e clique em 'Importar para a fila'. Os níveis iniciais estão no código; níveis que a aldeia já tem são pulados.",
+      "name": "Nome do modelo:",
+      "copy": "📋 Copiar código",
+      "sendBack": "🎮 Enviar para a aldeia",
+      "sendBackHint": "Abre numa nova aba o edifício principal da aldeia que mandou o código; a fila chega sozinha ao Construtor do Br Bot."
     }
   },
   "buildingTimes": {

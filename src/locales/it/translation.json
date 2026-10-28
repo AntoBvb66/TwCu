@@ -141,7 +141,8 @@
       "close": "Chiudi",
       "delete": "Elimina",
       "amCode": "🏛️ Codice gestore account",
-      "amImport": "🏛️ Carica codice gestore account"
+      "amImport": "🏛️ Carica codice gestore account",
+      "bot": "🔄 Scambio con Br Bot"
     },
     "modal": {
       "importTitle": "📥 Incolla la Coda Costruzioni Copiata dal Gioco",
@@ -179,7 +180,9 @@
       "waitingFor": "In Attesa",
       "waitingSuffix": "per risorse.",
       "missing": "Quantità Mancanti",
-      "perfect": "🎉 Ottimo! Non c'è tempo di attesa per le risorse in questa coda. Le costruzioni continueranno senza interruzioni."
+      "perfect": "🎉 Ottimo! Non c'è tempo di attesa per le risorse in questa coda. Le costruzioni continueranno senza interruzioni.",
+      "army": "⚔️ Truppe a fine coda:",
+      "armyIdle": "⚠️ È andato perso il {{pct}}% della quota truppe: Caserma/Stalla non stavano al passo o la Fattoria era piena. Costruiscile prima o usa la modalità Eco + Truppe."
     },
     "summary": {
       "title": "Riepilogo Coda (Clicca Edifici per Aggiungere)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 Calcolatore Coda Più Veloce",
-      "modeAcademy": "Accademia (primo nobile)",
+      "modeAcademy": "Accademia",
       "modeFull": "Tutti gli edifici",
       "modeRes": "Risorse 30/30/30",
       "descAcademy": "Calcola l'ordine di costruzione che raggiunge l'accademia (primo nobile) nel minor tempo, in base alla velocità del mondo, al fattore di produzione e ai livelli attuali degli edifici. Bilancia da solo gli investimenti in miniere, magazzino e fattoria.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Applicando sostituirai la tua coda di costruzione attuale.",
       "noSolution": "❌ Con questi livelli iniziali non è stata trovata nessuna coda che raggiunga l'obiettivo. Controlla i livelli degli edifici.",
       "alreadyDone": "✅ In questo villaggio c'è già tutto il necessario per questo obiettivo.",
-      "failed": "❌ Si è verificato un errore durante il calcolo."
+      "failed": "❌ Si è verificato un errore durante il calcolo.",
+      "modeNoble": "Primo nobile",
+      "descNoble": "Oltre all'accademia aspetta anche che il costo del primo nobile sia pronto (1 moneta d'oro + il nobile: in totale 68.000 legno, 80.000 argilla, 75.000 ferro; serve Magazzino 20). Costruisce più miniere della modalità Accademia, perché queste risorse devono ancora accumularsi dopo l'accademia.",
+      "modeMilitary": "Eco + Truppe",
+      "descMilitary": "Porta le miniere a 30 e Caserma/Stalla/Fucina al massimo mentre il {{share}}% del reddito va alle truppe dall'inizio alla fine. Ogni ora con la produzione di truppe ferma conta male quanto un'ora di ritardo nella costruzione; per questo Caserma, Stalla e Fattoria crescono con il reddito e nessuna coda resta ferma.",
+      "modeFeed": "Villaggio rifornito",
+      "descFeed": "Presume che le risorse arrivino da altri villaggi (impostazione rifornimenti; vuoto = illimitati) e completa tutti gli edifici il prima possibile. Prima Quartier Generale, Magazzino e Fattoria, le miniere alla fine: un modello per villaggi da far crescere in fretta rifornendoli.",
+      "modeCustom": "Obiettivo personalizzato",
+      "descCustom": "Calcola l'ordine che raggiunge prima i livelli obiettivo inseriti qui sotto. I requisiti (es. Caserma 5, Fucina 5 e Quartier Generale 10 per la Stalla) si aggiungono da soli; Quartier Generale, Magazzino, Fattoria e miniere restano liberi come aiuto.",
+      "customTitle": "🎯 Livelli obiettivo",
+      "customReset": "Cancella obiettivi",
+      "customEmpty": "❌ Inserisci per almeno un edificio un obiettivo sopra il livello iniziale.",
+      "polishing": "Rifinitura... giro",
+      "buildTime": "🏗️ Costruzione:",
+      "bankTime": "🪙 risparmio moneta + nobile:",
+      "armyTitle": "⚔️ Esercito a fine costruzione:",
+      "armyUse": "usato il {{pct}}% della quota truppe"
+    },
+    "levelsReset": "↺ Ripristina predefiniti",
+    "levelsResetHint": "Torna ai livelli di un villaggio nuovo: Quartier Generale, Fattoria, Magazzino e Punto di Raduno 1, tutto il resto 0.",
+    "levelsResetConfirm": "Riportare i livelli iniziali degli edifici a quelli di un villaggio nuovo? (Quartier Generale, Fattoria, Magazzino, Punto di Raduno 1; tutto il resto 0)",
+    "econ": {
+      "feed": "Rifornimenti (all'ora, ciascuno):",
+      "feedHint": "Legno, argilla e ferro che arrivano ogni ora in questo villaggio da altri villaggi (ciascuno). La tabella e il calcolatore della coda li sommano al reddito.",
+      "feedUnlimited": "Illimitati",
+      "feedUnlimitedHint": "Non aspetta mai le risorse; valgono solo i limiti di magazzino e fattoria.",
+      "troops": "Produzione truppe (% del reddito):",
+      "troopsHint": "Questa quota del reddito va alle truppe dall'inizio alla fine (0 = spento). Agli edifici resta meno e le truppe occupano spazio nella fattoria.",
+      "profileOff": "Attacco (guerriero con ascia + cavalleria leggera + ariete)",
+      "profileDef": "Difesa (lanciere + spadaccino + cavalleria pesante)"
+    },
+    "bot": {
+      "title": "🔄 Scambio con il Builder di Br Bot",
+      "hint": "Sposta le code tra il Builder di Br Bot (schermata del quartier generale) e questo pianificatore. In Br Bot, Import and export > 'Open in TwCu' invia qui la coda, i livelli reali del villaggio e la velocità del mondo; la coda calcolata qui torna indietro con 'Invia al villaggio'.",
+      "importTitle": "📥 Prendi da Br Bot",
+      "importPlaceholder": "Incolla il codice TWCU1... copiato da Br Bot o il contenuto del file modelli di Br Bot (construction_models.json)",
+      "decode": "Leggi codice",
+      "invalid": "❌ Impossibile leggere il codice. Incolla il codice TWCU1 copiato da Br Bot o il contenuto del file modelli.",
+      "preview": "Modello ricevuto: {{name}} ({{count}} passi)",
+      "village": "Villaggio: {{name}} {{coord}}",
+      "applyLevels": "Usa i livelli del villaggio come iniziali",
+      "applySpeed": "Usa la velocità del mondo ({{speed}})",
+      "applyMine": "Usa il fattore di produzione (≈{{factor}}, stimato dalla produzione del villaggio)",
+      "applyQueue": "Carica la coda ({{count}} passi)",
+      "pickModel": "Modello:",
+      "apply": "✅ Applica",
+      "applied": "✅ Modello di Br Bot caricato.",
+      "skipped": "⚠️ {{count}} passi saltati: edificio sconosciuto o sopra il livello massimo.",
+      "exportTitle": "📤 Invia a Br Bot",
+      "exportHint": "In Br Bot incolla il codice in Builder > Import and export e premi 'Import into the queue'. I livelli iniziali sono nel codice; i livelli che il villaggio ha già vengono saltati.",
+      "name": "Nome del modello:",
+      "copy": "📋 Copia codice",
+      "sendBack": "🎮 Invia al villaggio",
+      "sendBackHint": "Apre in una nuova scheda il quartier generale del villaggio che ha inviato il codice; la coda arriva da sola nel Builder di Br Bot."
     }
   },
   "buildingTimes": {

@@ -141,7 +141,8 @@
       "close": "Fermer",
       "delete": "Supprimer",
       "amCode": "🏛️ Code du gestionnaire de compte",
-      "amImport": "🏛️ Charger le code du gestionnaire de compte"
+      "amImport": "🏛️ Charger le code du gestionnaire de compte",
+      "bot": "🔄 Échange avec Br Bot"
     },
     "modal": {
       "importTitle": "📥 Collez la File d'Attente de Construction Copiée du Jeu",
@@ -179,7 +180,9 @@
       "waitingFor": "En Attente",
       "waitingSuffix": "pour les ressources.",
       "missing": "Montants manquants",
-      "perfect": "🎉 Parfait ! Il n'y a pas de temps d'attente de ressources dans cette file d'attente. Les constructions continueront sans interruption."
+      "perfect": "🎉 Parfait ! Il n'y a pas de temps d'attente de ressources dans cette file d'attente. Les constructions continueront sans interruption.",
+      "army": "⚔️ Troupes à la fin de la file :",
+      "armyIdle": "⚠️ {{pct}} % de la part des troupes a été perdue : Caserne/Écurie n'ont pas suivi ou la Ferme était pleine. Construisez-les plus tôt ou utilisez le mode Éco + Troupes."
     },
     "summary": {
       "title": "Résumé de File d'Attente (Cliquez sur les Bâtiments pour Ajouter)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 Calculateur de File la Plus Rapide",
-      "modeAcademy": "Académie (premier noble)",
+      "modeAcademy": "Académie",
       "modeFull": "Tous les bâtiments",
       "modeRes": "Ressources 30/30/30",
       "descAcademy": "Calcule l'ordre de construction qui atteint l'académie (premier noble) le plus rapidement, selon votre vitesse de monde, le facteur de production et vos niveaux de bâtiments actuels. Les investissements en mines, entrepôt et ferme sont équilibrés automatiquement.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Appliquer remplacera votre file de construction actuelle.",
       "noSolution": "❌ Aucune file atteignant l'objectif n'a été trouvée avec ces niveaux de départ. Vérifiez les niveaux des bâtiments.",
       "alreadyDone": "✅ Dans ce village, tout ce qu'il faut pour cet objectif est déjà construit.",
-      "failed": "❌ Une erreur s'est produite pendant le calcul."
+      "failed": "❌ Une erreur s'est produite pendant le calcul.",
+      "modeNoble": "Premier Noble",
+      "descNoble": "En plus de l'académie, attend aussi que le coût du premier noble soit prêt (1 pièce d'or + le noble : 68 000 bois, 80 000 argile, 75 000 fer au total ; Entrepôt 20 requis). Construit plus de mines que le mode Académie, car ces ressources doivent encore s'accumuler après l'académie.",
+      "modeMilitary": "Éco + Troupes",
+      "descMilitary": "Monte les mines à 30 et Caserne/Écurie/Forge au maximum pendant que {{share}} % du revenu va aux troupes du début à la fin. Chaque heure d'arrêt de la production de troupes compte aussi mal qu'une heure de retard de construction ; Caserne, Écurie et Ferme grandissent donc avec le revenu et aucune file ne reste vide.",
+      "modeFeed": "Village ravitaillé",
+      "descFeed": "Suppose que les ressources arrivent d'autres villages (réglage de ravitaillement ; illimité si vide) et termine tous les bâtiments au plus vite. Quartier Général, Entrepôt et Ferme d'abord, les mines à la fin : un modèle pour les villages qu'on fait grandir vite en les ravitaillant.",
+      "modeCustom": "Objectif personnalisé",
+      "descCustom": "Calcule l'ordre qui atteint le plus vite les niveaux cibles saisis ci-dessous. Les prérequis (ex. Caserne 5, Forge 5 et Quartier Général 10 pour l'Écurie) s'ajoutent tout seuls ; Quartier Général, Entrepôt, Ferme et mines restent libres comme aides.",
+      "customTitle": "🎯 Niveaux cibles",
+      "customReset": "Effacer les objectifs",
+      "customEmpty": "❌ Saisissez un objectif supérieur au niveau de départ pour au moins un bâtiment.",
+      "polishing": "Affinage... tour",
+      "buildTime": "🏗️ Construction :",
+      "bankTime": "🪙 épargne pièce + noble :",
+      "armyTitle": "⚔️ Armée à la fin de la construction :",
+      "armyUse": "{{pct}} % de la part des troupes utilisée"
+    },
+    "levelsReset": "↺ Rétablir par défaut",
+    "levelsResetHint": "Revient aux niveaux d'un nouveau village : Quartier Général, Ferme, Entrepôt et Place de Ralliement 1, tout le reste 0.",
+    "levelsResetConfirm": "Remettre les niveaux de départ des bâtiments à ceux d'un nouveau village ? (Quartier Général, Ferme, Entrepôt, Place de Ralliement 1 ; tout le reste 0)",
+    "econ": {
+      "feed": "Ravitaillement (par heure, chacun) :",
+      "feedHint": "Bois, argile et fer envoyés chaque heure à ce village depuis d'autres villages (chacun). Le tableau et le calculateur de file les ajoutent au revenu.",
+      "feedUnlimited": "Illimité",
+      "feedUnlimitedHint": "N'attend jamais les ressources ; seules les limites de l'entrepôt et de la ferme s'appliquent.",
+      "troops": "Production de troupes (% du revenu) :",
+      "troopsHint": "Cette part du revenu va aux troupes du début à la fin (0 = désactivé). Il reste moins de revenu pour les bâtiments et les troupes occupent de la place dans la ferme.",
+      "profileOff": "Attaque (guerrier à la hache + cavalerie légère + bélier)",
+      "profileDef": "Défense (lancier + porte-épée + cavalerie lourde)"
+    },
+    "bot": {
+      "title": "🔄 Échange avec le Builder de Br Bot",
+      "hint": "Transfère les files entre le Builder de Br Bot (écran du quartier général) et ce planificateur. Dans Br Bot, Import and export > 'Open in TwCu' envoie ici la file, les vrais niveaux du village et la vitesse du monde ; renvoyez la file calculée ici avec 'Envoyer au village'.",
+      "importTitle": "📥 Récupérer depuis Br Bot",
+      "importPlaceholder": "Collez le code TWCU1... copié depuis Br Bot ou le contenu du fichier de modèles de Br Bot (construction_models.json)",
+      "decode": "Lire le code",
+      "invalid": "❌ Impossible de lire le code. Collez le code TWCU1 copié depuis Br Bot ou le contenu du fichier de modèles.",
+      "preview": "Modèle reçu : {{name}} ({{count}} étapes)",
+      "village": "Village : {{name}} {{coord}}",
+      "applyLevels": "Reprendre les niveaux du village comme niveaux de départ",
+      "applySpeed": "Reprendre la vitesse du monde ({{speed}})",
+      "applyMine": "Reprendre le facteur de production (≈{{factor}}, estimé d'après la production du village)",
+      "applyQueue": "Charger la file ({{count}} étapes)",
+      "pickModel": "Modèle :",
+      "apply": "✅ Appliquer",
+      "applied": "✅ Modèle Br Bot chargé.",
+      "skipped": "⚠️ {{count}} étapes ignorées : bâtiment inconnu ou au-dessus du niveau maximum.",
+      "exportTitle": "📤 Envoyer à Br Bot",
+      "exportHint": "Dans Br Bot, collez le code dans Builder > Import and export puis cliquez sur 'Import into the queue'. Les niveaux de départ sont inclus dans le code ; les niveaux que le village possède déjà sont ignorés.",
+      "name": "Nom du modèle :",
+      "copy": "📋 Copier le code",
+      "sendBack": "🎮 Envoyer au village",
+      "sendBackHint": "Ouvre dans un nouvel onglet le quartier général du village qui a envoyé le code ; la file arrive d'elle-même dans le Builder de Br Bot."
     }
   },
   "buildingTimes": {

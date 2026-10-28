@@ -141,7 +141,8 @@
       "close": "Zatvoriť",
       "delete": "Odstrániť",
       "amCode": "🏛️ Kód správcu účtu",
-      "amImport": "🏛️ Načítať kód správcu účtu"
+      "amImport": "🏛️ Načítať kód správcu účtu",
+      "bot": "🔄 Výmena s Br Botom"
     },
     "modal": {
       "importTitle": "📥 Vložte frontu budovania skopírovanú zo hry",
@@ -179,7 +180,9 @@
       "waitingFor": "Čakanie",
       "waitingSuffix": "na zdroje.",
       "missing": "Chýbajúce množstvá",
-      "perfect": "🎉 Skvelé! V tejto fronte nie je čas čakania na zdroje. Stavby budú pokračovať bez prerušenia."
+      "perfect": "🎉 Skvelé! V tejto fronte nie je čas čakania na zdroje. Stavby budú pokračovať bez prerušenia.",
+      "army": "⚔️ Vojsko na konci frontu:",
+      "armyIdle": "⚠️ {{pct}} % podielu vojska prišlo nazmar: Kasárne/Stajňa nestíhali alebo bola Farma plná. Postavte ich skôr alebo použite režim Eko + Vojsko."
     },
     "summary": {
       "title": "Zhrnutie fronty (Kliknite na budovy na pridanie)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 Kalkulačka Najrýchlejšieho Frontu",
-      "modeAcademy": "Akadémia (prvý šľachtic)",
+      "modeAcademy": "Akadémia",
       "modeFull": "Všetky budovy",
       "modeRes": "Suroviny 30/30/30",
       "descAcademy": "Vypočíta poradie stavby, ktoré najrýchlejšie dovedie k akadémii (prvému šľachticovi), podľa rýchlosti sveta, faktora produkcie a súčasných úrovní budov. Investície do baní, skladu a farmy vyvažuje sama.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Použitím nahradíte svoj súčasný front stavieb.",
       "noSolution": "❌ S týmito počiatočnými úrovňami sa nenašiel žiadny front vedúci k cieľu. Skontroluj úrovne budov.",
       "alreadyDone": "✅ V tejto dedine je už všetko potrebné pre tento cieľ hotové.",
-      "failed": "❌ Počas výpočtu došlo k chybe."
+      "failed": "❌ Počas výpočtu došlo k chybe.",
+      "modeNoble": "Prvý šľachtic",
+      "descNoble": "Okrem akadémie čaká aj na pripravené náklady prvého šľachtica (1 zlatá minca + šľachtic: spolu 68 000 dreva, 80 000 hliny, 75 000 železa; treba Sklad 20). Stavia viac baní ako režim Akadémia, lebo tieto suroviny sa musia nazbierať aj po akadémii.",
+      "modeMilitary": "Eko + Vojsko",
+      "descMilitary": "Dvíha bane na 30 a Kasárne/Stajňu/Kováčsku dielňu na maximum, kým {{share}} % príjmu ide od začiatku do konca na vojsko. Každá hodina, keď výroba vojska stojí, sa počíta rovnako zle ako hodina meškania stavby; preto Kasárne, Stajňa a Farma rastú spolu s príjmom a žiadny front nestojí.",
+      "modeFeed": "Zásobovaná dedina",
+      "descFeed": "Predpokladá, že suroviny prichádzajú z iných dedín (nastavenie zásobovania; prázdne = neobmedzene), a dokončí všetky budovy čo najrýchlejšie. Najprv Sídlo, Sklad a Farma, bane nakoniec: šablóna pre dediny, ktoré rýchlo rastú vďaka zásobovaniu.",
+      "modeCustom": "Vlastný cieľ",
+      "descCustom": "Vypočíta poradie, ktoré najrýchlejšie dosiahne cieľové úrovne zadané nižšie. Požiadavky (napr. Kasárne 5, Kováčska dielňa 5 a Sídlo 10 pre Stajňu) sa pridajú samé; Sídlo, Sklad, Farma a bane sú voľné ako pomocníci.",
+      "customTitle": "🎯 Cieľové úrovne",
+      "customReset": "Vymazať ciele",
+      "customEmpty": "❌ Zadajte aspoň pri jednej budove cieľ vyšší ako počiatočná úroveň.",
+      "polishing": "Vylepšuje sa... kolo",
+      "buildTime": "🏗️ Stavba:",
+      "bankTime": "🪙 sporenie na mincu + šľachtica:",
+      "armyTitle": "⚔️ Armáda na konci stavby:",
+      "armyUse": "využité {{pct}} % podielu vojska"
+    },
+    "levelsReset": "↺ Obnoviť predvolené",
+    "levelsResetHint": "Vráti úrovne novej dediny: Sídlo, Farma, Sklad a Zhromažďovacie miesto 1, všetko ostatné 0.",
+    "levelsResetConfirm": "Vrátiť počiatočné úrovne budov na úrovne novej dediny? (Sídlo, Farma, Sklad, Zhromažďovacie miesto 1; všetko ostatné 0)",
+    "econ": {
+      "feed": "Zásobovanie (za hodinu, z každej):",
+      "feedHint": "Drevo, hlina a železo, ktoré do tejto dediny každú hodinu prichádzajú z iných dedín (z každej suroviny). Tabuľka aj kalkulačka frontu ich pripočítajú k príjmu.",
+      "feedUnlimited": "Neobmedzene",
+      "feedUnlimitedHint": "Na suroviny sa nikdy nečaká; platia len limity skladu a farmy.",
+      "troops": "Výroba vojska (% príjmu):",
+      "troopsHint": "Tento podiel príjmu ide od začiatku do konca na vojsko (0 = vypnuté). Na budovy zostane menej a vojsko zaberá miesto na farme.",
+      "profileOff": "Útok (sekerník + ľahká jazda + baranidlo)",
+      "profileDef": "Obrana (kopijník + šermiar + ťažká jazda)"
+    },
+    "bot": {
+      "title": "🔄 Výmena s Builderom Br Bota",
+      "hint": "Prenáša fronty medzi Builderom Br Bota (obrazovka sídla) a týmto plánovačom. V Br Bote Import and export > 'Open in TwCu' pošle sem front, skutočné úrovne budov dediny a rýchlosť sveta; front vypočítaný tu pošlete späť tlačidlom 'Poslať do dediny'.",
+      "importTitle": "📥 Prevziať z Br Bota",
+      "importPlaceholder": "Vložte kód TWCU1... skopírovaný z Br Bota alebo obsah súboru modelov Br Bota (construction_models.json)",
+      "decode": "Prečítať kód",
+      "invalid": "❌ Kód sa nepodarilo prečítať. Vložte kód TWCU1 z Br Bota alebo obsah súboru modelov.",
+      "preview": "Prijatá šablóna: {{name}} ({{count}} krokov)",
+      "village": "Dedina: {{name}} {{coord}}",
+      "applyLevels": "Prevziať počiatočné úrovne z dediny",
+      "applySpeed": "Prevziať rýchlosť sveta ({{speed}})",
+      "applyMine": "Prevziať faktor produkcie (≈{{factor}}, odhad z produkcie dediny)",
+      "applyQueue": "Načítať front ({{count}} krokov)",
+      "pickModel": "Model:",
+      "apply": "✅ Použiť",
+      "applied": "✅ Šablóna Br Bota načítaná.",
+      "skipped": "⚠️ Preskočených krokov: {{count}} (neznáma budova alebo nad maximálnou úrovňou).",
+      "exportTitle": "📤 Poslať do Br Bota",
+      "exportHint": "V Br Bote vložte kód do Builder > Import and export a kliknite na 'Import into the queue'. Počiatočné úrovne sú v kóde; úrovne, ktoré dedina už má, sa preskočia.",
+      "name": "Názov šablóny:",
+      "copy": "📋 Kopírovať kód",
+      "sendBack": "🎮 Poslať do dediny",
+      "sendBackHint": "Otvorí na novej karte sídlo dediny, ktorá kód poslala; front sám dorazí do Buildera Br Bota."
     }
   },
   "buildingTimes": {

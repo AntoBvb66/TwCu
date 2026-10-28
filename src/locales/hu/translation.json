@@ -141,7 +141,8 @@
       "close": "Затвори",
       "delete": "Избриши",
       "amCode": "🏛️ Fiókkezelő kód",
-      "amImport": "🏛️ Fiókkezelő kód betöltése"
+      "amImport": "🏛️ Fiókkezelő kód betöltése",
+      "bot": "🔄 Csere a Br Bottal"
     },
     "modal": {
       "importTitle": "📥 Залепете го редот за градење копиран од играта",
@@ -179,7 +180,9 @@
       "waitingFor": "Чека",
       "waitingSuffix": "за ресурси.",
       "missing": "Недостасувачки износи",
-      "perfect": "🎉 Одлично! Нема време на чекање на ресурси во овој ред. Градењата ќе продолжат непрекинато."
+      "perfect": "🎉 Одлично! Нема време на чекање на ресурси во овој ред. Градењата ќе продолжат непрекинато.",
+      "army": "⚔️ Egységek a sor végén:",
+      "armyIdle": "⚠️ Az egységrész {{pct}}%-a elveszett: a Barakk/Istálló nem győzte, vagy a Tanya megtelt. Építsd őket korábban, vagy használd a Gazdaság + Egységek módot."
     },
     "summary": {
       "title": "Резиме на редот (Кликнете на згради за да додадете)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 Leggyorsabb Sor Kalkulátor",
-      "modeAcademy": "Akadémia (első nemes)",
+      "modeAcademy": "Akadémia",
       "modeFull": "Összes épület",
       "modeRes": "Nyersanyagok 30/30/30",
       "descAcademy": "Kiszámolja azt az építési sorrendet, amellyel a legrövidebb idő alatt éred el az akadémiát (első nemest) — a világsebesség, a nyersanyag-termelési szorzó és a jelenlegi épületszintek alapján. A bányákba, raktárba és tanyába való befektetést magától egyensúlyozza.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Az alkalmazás felülírja a jelenlegi építési sorodat.",
       "noSolution": "❌ Ezekkel a kezdőszintekkel nem található a célhoz vezető sor. Ellenőrizd az épületszinteket.",
       "alreadyDone": "✅ Ebben a faluban már minden megvan ehhez a célhoz.",
-      "failed": "❌ Hiba történt a számítás során."
+      "failed": "❌ Hiba történt a számítás során.",
+      "modeNoble": "Első nemes",
+      "descNoble": "Az akadémián túl azt is kivárja, hogy az első nemes költsége meglegyen (1 aranyérme + a nemes: összesen 68 000 fa, 80 000 agyag, 75 000 vas; Raktár 20 kell). Több bányát épít, mint az Akadémia mód, mert ezeknek a nyersanyagoknak az akadémia után is össze kell gyűlniük.",
+      "modeMilitary": "Gazdaság + Egységek",
+      "descMilitary": "A bányákat 30-ra, a Barakkot/Istállót/Kovácsműhelyt maximumra viszi, miközben a bevétel {{share}}%-a az elejétől a végéig egységekre megy. Minden óra, amikor az egységgyártás áll, olyan rossz, mint egy óra építési késés; ezért a Barakk, az Istálló és a Tanya a bevétellel együtt nő, és egyik sor sem áll.",
+      "modeFeed": "Ellátott falu",
+      "descFeed": "Feltételezi, hogy a nyersanyag más falvakból jön (utánpótlás beállítás; üresen korlátlan), és minden épületet a lehető leggyorsabban befejez. Előbb Főhadiszállás, Raktár és Tanya, a bányák a végén: sablon azokhoz a falvakhoz, amelyeket ellátással gyorsan fejlesztesz.",
+      "modeCustom": "Saját cél",
+      "descCustom": "Kiszámolja azt a sorrendet, amely a lent megadott célszinteket a leggyorsabban eléri. A feltételek (pl. Barakk 5, Kovácsműhely 5 és Főhadiszállás 10 az Istállóhoz) maguktól bekerülnek; Főhadiszállás, Raktár, Tanya és bányák segítőként szabadon használhatók.",
+      "customTitle": "🎯 Célszintek",
+      "customReset": "Célok törlése",
+      "customEmpty": "❌ Legalább egy épületnél adj meg a kezdőszintnél magasabb célt.",
+      "polishing": "Finomítás... kör",
+      "buildTime": "🏗️ Építés:",
+      "bankTime": "🪙 gyűjtés érmére + nemesre:",
+      "armyTitle": "⚔️ Sereg az építés végén:",
+      "armyUse": "az egységrész {{pct}}%-a felhasználva"
+    },
+    "levelsReset": "↺ Alapértékek visszaállítása",
+    "levelsResetHint": "Visszaáll egy új falu szintjeire: Főhadiszállás, Tanya, Raktár és Gyülekezőhely 1, minden más 0.",
+    "levelsResetConfirm": "Visszaállítod az épületek kezdőszintjeit egy új faluéra? (Főhadiszállás, Tanya, Raktár, Gyülekezőhely 1; minden más 0)",
+    "econ": {
+      "feed": "Utánpótlás (óránként, mindegyikből):",
+      "feedHint": "Más falvakból óránként ebbe a faluba érkező fa, agyag és vas (mindegyikből). A táblázat és a sor-kalkulátor hozzáadja a bevételhez.",
+      "feedUnlimited": "Korlátlan",
+      "feedUnlimitedHint": "Soha nem vár nyersanyagra; csak a raktár és a tanya korlátja érvényes.",
+      "troops": "Egységgyártás (a bevétel %-a):",
+      "troopsHint": "A bevétel ekkora része az elejétől a végéig egységekre megy (0 = ki). Kevesebb marad az épületekre, és az egységek helyet foglalnak a tanyán.",
+      "profileOff": "Támadás (bárdos + könnyűlovas + faltörő kos)",
+      "profileDef": "Védekezés (lándzsás + kardforgató + nehézlovas)"
+    },
+    "bot": {
+      "title": "🔄 Csere a Br Bot Builderrel",
+      "hint": "Sorokat visz át a Br Bot Buildere (főhadiszállás képernyő) és e tervező között. A Br Botban az Import and export > 'Open in TwCu' ide küldi a sort, a falu valós épületszintjeit és a világsebességet; az itt kiszámolt sort a 'Küldés a faluba' gombbal küldöd vissza.",
+      "importTitle": "📥 Átvétel a Br Botból",
+      "importPlaceholder": "Illeszd be a Br Botból másolt TWCU1... kódot vagy a Br Bot modellfájljának (construction_models.json) tartalmát",
+      "decode": "Kód beolvasása",
+      "invalid": "❌ A kód nem olvasható. Illeszd be a Br Botból másolt TWCU1 kódot vagy a modellfájl tartalmát.",
+      "preview": "Beérkezett sablon: {{name}} ({{count}} lépés)",
+      "village": "Falu: {{name}} {{coord}}",
+      "applyLevels": "Kezdőszintek átvétele a faluból",
+      "applySpeed": "Világsebesség átvétele ({{speed}})",
+      "applyMine": "Termelési szorzó átvétele (≈{{factor}}, a falu termeléséből becsülve)",
+      "applyQueue": "Sor betöltése ({{count}} lépés)",
+      "pickModel": "Modell:",
+      "apply": "✅ Alkalmaz",
+      "applied": "✅ Br Bot sablon betöltve.",
+      "skipped": "⚠️ {{count}} lépés kimaradt: ismeretlen épület vagy a maximális szint felett.",
+      "exportTitle": "📤 Küldés a Br Botba",
+      "exportHint": "A Br Botban illeszd be a kódot a Builder > Import and export mezőbe, és nyomd meg az 'Import into the queue' gombot. A kezdőszintek benne vannak a kódban; a faluban már meglévő szinteket kihagyja.",
+      "name": "Sablon neve:",
+      "copy": "📋 Kód másolása",
+      "sendBack": "🎮 Küldés a faluba",
+      "sendBackHint": "Új lapon megnyitja a kódot küldő falu főhadiszállását; a sor magától megérkezik a Br Bot Builderbe."
     }
   },
   "buildingTimes": {

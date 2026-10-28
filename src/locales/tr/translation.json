@@ -141,7 +141,8 @@
       "close": "Kapat",
       "delete": "Sil",
       "amCode": "🏛️ Hesap Yöneticisi Kodu",
-      "amImport": "🏛️ Hesap Yöneticisi Kodu Yükle"
+      "amImport": "🏛️ Hesap Yöneticisi Kodu Yükle",
+      "bot": "🔄 Br Bot ile Al-Ver"
     },
     "modal": {
       "importTitle": "📥 Oyundan Kopyalanan İnşa kuyruğu listesini yapıştırın",
@@ -179,7 +180,9 @@
       "waitingFor": "Hammadde için",
       "waitingSuffix": "bekleniyor.",
       "missing": "Eksik miktarlar",
-      "perfect": "🎉 Harika! Bu kuyrukta hiçbir hammadde bekleme süresi yok. İnşaatlar kesintisiz devam edecek."
+      "perfect": "🎉 Harika! Bu kuyrukta hiçbir hammadde bekleme süresi yok. İnşaatlar kesintisiz devam edecek.",
+      "army": "⚔️ Kuyruk sonunda asker:",
+      "armyIdle": "⚠️ Asker payının %{{pct}} kadarı boşa gitti: Kışla/Ahır yetişmedi ya da Çiftlik doldu. Bu binaları erkene alın ya da Eko + Asker modunu kullanın."
     },
     "summary": {
       "title": "Kuyruk Özeti (Binaları Tıklayarak Ekle)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 En Hızlı Kuyruk Hesaplayıcı",
-      "modeAcademy": "Akademi (İlk Soylu)",
+      "modeAcademy": "Akademi",
       "modeFull": "Tüm Binalar",
       "modeRes": "Hammadde 30/30/30",
       "descAcademy": "Girdiğiniz dünya hızı, üretim faktörü ve mevcut bina seviyelerine göre akademiye (ilk soylu) en kısa sürede ulaştıran inşaat sırasını hesaplar. Ocak, depo ve çiftlik yatırımlarını kendisi dengeler.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Uygularsanız mevcut inşaat kuyruğunuz bu sonuçla değiştirilir.",
       "noSolution": "❌ Bu başlangıç seviyeleriyle hedefe ulaşan bir kuyruk bulunamadı. Bina seviyelerini kontrol edin.",
       "alreadyDone": "✅ Bu köyde hedef için gereken her şey zaten hazır.",
-      "failed": "❌ Hesaplama sırasında bir hata oluştu."
+      "failed": "❌ Hesaplama sırasında bir hata oluştu.",
+      "modeNoble": "İlk Soylu",
+      "descNoble": "Akademiye ek olarak ilk soylunun masrafı da (1 altın para + soylu birimi: toplam 68.000 odun, 80.000 kil, 75.000 demir; Depo 20 gerekir) hazır olana kadarki en kısa yolu hesaplar. Akademi bittikten sonra bu hammaddenin birikmesi gerektiği için Akademi modundan daha fazla ocak kurar.",
+      "modeMilitary": "Eko + Asker",
+      "descMilitary": "Ocakları 30'a, Kışla/Ahır/Demirci'yi en üst seviyeye çıkarırken gelirin %{{share}} payı baştan sona askere gider. Asker üretiminin durduğu her saat inşaatın bir saat gecikmesi kadar kötü sayılır; bu yüzden Kışla, Ahır ve Çiftlik gelirle birlikte büyür, iki kuyruk da hiç boş kalmaz.",
+      "modeFeed": "Beslemeli Köy",
+      "descFeed": "Hammaddenin başka köylerden geldiğini varsayar (besleme ayarı; boşsa sınırsız) ve tüm binaları en kısa sürede bitirir. Ana Bina, Depo ve Çiftlik öne alınır, ocaklar sona kalır: dışarıdan beslenip hızla büyütülecek köyler için şablon.",
+      "modeCustom": "Özel Hedef",
+      "descCustom": "Aşağıya girdiğiniz hedef seviyelere en kısa sürede ulaştıran sırayı hesaplar. Ön koşullar (ör. Ahır için Kışla 5, Demirci 5, Ana Bina 10) kendiliğinden eklenir; Ana Bina, Depo, Çiftlik ve ocaklar yardımcı olarak serbesttir.",
+      "customTitle": "🎯 Hedef seviyeler",
+      "customReset": "Hedefleri temizle",
+      "customEmpty": "❌ En az bir binaya başlangıç seviyesinden yüksek bir hedef girin.",
+      "polishing": "İyileştiriliyor... tur",
+      "buildTime": "🏗️ İnşaat:",
+      "bankTime": "🪙 altın para + soylu birikimi:",
+      "armyTitle": "⚔️ İnşaat bitince ordu:",
+      "armyUse": "asker payının %{{pct}} kadarı kullanıldı"
+    },
+    "levelsReset": "↺ Varsayılana sıfırla",
+    "levelsResetHint": "Yeni bir köyün seviyelerine döner: Ana Bina, Çiftlik, Depo ve İçtima Meydanı 1, diğerleri 0.",
+    "levelsResetConfirm": "Başlangıç bina seviyeleri yeni köy seviyelerine dönsün mü? (Ana Bina, Çiftlik, Depo, İçtima Meydanı 1; diğerleri 0)",
+    "econ": {
+      "feed": "Besleme (saatlik, her biri):",
+      "feedHint": "Başka köylerden bu köye saatte gelen odun, kil ve demir (her biri için). Tablo ve kuyruk hesaplayıcı bunu gelire ekler.",
+      "feedUnlimited": "Sınırsız",
+      "feedUnlimitedHint": "Hammadde hiç beklenmez; yalnızca depo ve çiftlik sınırı geçerli kalır.",
+      "troops": "Asker üretimi (gelirin %):",
+      "troopsHint": "Gelirin bu payı baştan sona askere gider (0 = kapalı). İnşaata kalan gelir azalır, askerin nüfusu çiftlikte yer kaplar.",
+      "profileOff": "Saldırı (baltacı + hafif atlı + şahmerdan)",
+      "profileDef": "Savunma (mızrakçı + kılıç ustası + ağır atlı)"
+    },
+    "bot": {
+      "title": "🔄 Br Bot İnşaatçı ile Al-Ver",
+      "hint": "Br Bot'un İnşaatçı'sı (ana bina ekranı) ile bu planlayıcı arasında kuyruk taşır. Br Bot'ta İçe ve dışa aktar > 'TwCu'da aç' deyince kuyruk, köyün gerçek bina seviyeleri ve dünya hızı buraya gelir; burada hesapladığınız kuyruğu 'Köye gönder' ile geri yollarsınız.",
+      "importTitle": "📥 Br Bot'tan al",
+      "importPlaceholder": "Br Bot'tan kopyalanan TWCU1... kodunu ya da Br Bot'un model dosyasının (construction_models.json) içeriğini yapıştırın",
+      "decode": "Kodu çöz",
+      "invalid": "❌ Kod çözülemedi. Br Bot'tan kopyalanan TWCU1 kodunu ya da model dosyasının içeriğini yapıştırın.",
+      "preview": "Gelen şablon: {{name}} ({{count}} adım)",
+      "village": "Köy: {{name}} {{coord}}",
+      "applyLevels": "Başlangıç seviyelerini köyden al",
+      "applySpeed": "Dünya hızını al ({{speed}})",
+      "applyMine": "Üretim faktörünü al (≈{{factor}}, köyün üretiminden tahmin)",
+      "applyQueue": "Kuyruğu yükle ({{count}} adım)",
+      "pickModel": "Model:",
+      "apply": "✅ Uygula",
+      "applied": "✅ Br Bot şablonu yüklendi.",
+      "skipped": "⚠️ {{count}} adım tanınmadı ya da maksimum seviyeyi aştığı için atlandı.",
+      "exportTitle": "📤 Br Bot'a gönder",
+      "exportHint": "Kodu Br Bot'ta İnşaatçı > İçe ve dışa aktar kutusuna yapıştırıp 'Kuyruğa aktar' deyin. Başlangıç seviyeleri koda dahildir; köyde zaten olan seviyeler atlanır.",
+      "name": "Şablon adı:",
+      "copy": "📋 Kodu kopyala",
+      "sendBack": "🎮 Köye gönder",
+      "sendBackHint": "Kodu gönderen köyün ana bina sayfası yeni sekmede açılır; kuyruk Br Bot İnşaatçı'ya kendiliğinden gelir."
     }
   },
   "buildingTimes": {

@@ -141,7 +141,8 @@
       "close": "Închide",
       "delete": "Șterge",
       "amCode": "🏛️ Cod manager de cont",
-      "amImport": "🏛️ Încarcă codul managerului de cont"
+      "amImport": "🏛️ Încarcă codul managerului de cont",
+      "bot": "🔄 Schimb cu Br Bot"
     },
     "modal": {
       "importTitle": "📥 LiPește Coada de Construcții Copiată din Joc",
@@ -179,7 +180,9 @@
       "waitingFor": "Așteaptă",
       "waitingSuffix": "resurse.",
       "missing": "Cantități lipsă",
-      "perfect": "🎉 Grozav! Nu există timp de așteptare pentru resurse în această coadă. Construcțiile vor continua neîntrerupt."
+      "perfect": "🎉 Grozav! Nu există timp de așteptare pentru resurse în această coadă. Construcțiile vor continua neîntrerupt.",
+      "army": "⚔️ Trupe la sfârșitul cozii:",
+      "armyIdle": "⚠️ S-a pierdut {{pct}}% din partea pentru trupe: Hanul/Ecuria nu au ținut pasul sau Ferma era plină. Construiește-le mai devreme sau folosește modul Eco + Trupe."
     },
     "summary": {
       "title": "Sumar Coada (Clic pe Clădiri pentru a Adăuga)",
@@ -243,7 +246,7 @@
     },
     "optimizer": {
       "title": "🤖 Calculator Coadă Cea Mai Rapidă",
-      "modeAcademy": "Academie (primul nobil)",
+      "modeAcademy": "Academie",
       "modeFull": "Toate clădirile",
       "modeRes": "Resurse 30/30/30",
       "descAcademy": "Calculează ordinea de construcție care ajunge la academie (primul nobil) în cel mai scurt timp, în funcție de viteza lumii, factorul de producție și nivelurile actuale ale clădirilor. Echilibrează singur investițiile în mine, depozit și fermă.",
@@ -260,7 +263,60 @@
       "overwriteWarn": "Aplicarea va înlocui coada ta de construcție actuală.",
       "noSolution": "❌ Cu aceste niveluri inițiale nu a fost găsită nicio coadă care să atingă obiectivul. Verifică nivelurile clădirilor.",
       "alreadyDone": "✅ În acest sat există deja tot ce este necesar pentru acest obiectiv.",
-      "failed": "❌ A apărut o eroare în timpul calculului."
+      "failed": "❌ A apărut o eroare în timpul calculului.",
+      "modeNoble": "Primul nobil",
+      "descNoble": "Pe lângă academie, așteaptă și ca prețul primului nobil să fie gata (1 monedă de aur + nobilul: în total 68.000 lemn, 80.000 argilă, 75.000 fier; cere Depozit 20). Construiește mai multe mine decât modul Academie, pentru că aceste resurse trebuie strânse și după academie.",
+      "modeMilitary": "Eco + Trupe",
+      "descMilitary": "Duce minele la 30 și Han/Ecurie/Fierărie la maxim, în timp ce {{share}}% din venit merge la trupe de la început până la sfârșit. Fiecare oră în care producția de trupe stă pe loc contează la fel de rău ca o oră de întârziere a construcției; de aceea Hanul, Ecuria și Ferma cresc odată cu venitul și nicio coadă nu stă goală.",
+      "modeFeed": "Sat aprovizionat",
+      "descFeed": "Presupune că resursele vin din alte sate (setarea aprovizionare; gol = nelimitat) și termină toate clădirile cât mai repede. Întâi Sediu, Depozit și Fermă, minele la final: un șablon pentru satele crescute rapid prin aprovizionare.",
+      "modeCustom": "Țintă proprie",
+      "descCustom": "Calculează ordinea care atinge cel mai repede nivelurile țintă introduse mai jos. Cerințele (ex. Han 5, Fierărie 5 și Sediu 10 pentru Ecurie) se adaugă singure; Sediul, Depozitul, Ferma și minele sunt libere ca ajutoare.",
+      "customTitle": "🎯 Niveluri țintă",
+      "customReset": "Șterge țintele",
+      "customEmpty": "❌ Introdu pentru cel puțin o clădire o țintă peste nivelul inițial.",
+      "polishing": "Se rafinează... runda",
+      "buildTime": "🏗️ Construcție:",
+      "bankTime": "🪙 economisire monedă + nobil:",
+      "armyTitle": "⚔️ Armata la finalul construcției:",
+      "armyUse": "folosit {{pct}}% din partea pentru trupe"
+    },
+    "levelsReset": "↺ Revino la implicit",
+    "levelsResetHint": "Revine la nivelurile unui sat nou: Sediu, Fermă, Depozit și Punct de Adunare 1, restul 0.",
+    "levelsResetConfirm": "Readuci nivelurile inițiale ale clădirilor la cele ale unui sat nou? (Sediu, Fermă, Depozit, Punct de Adunare 1; restul 0)",
+    "econ": {
+      "feed": "Aprovizionare (pe oră, fiecare):",
+      "feedHint": "Lemn, argilă și fier care sosesc în acest sat din alte sate în fiecare oră (fiecare). Tabelul și calculatorul de coadă le adaugă la venit.",
+      "feedUnlimited": "Nelimitat",
+      "feedUnlimitedHint": "Nu așteaptă niciodată resurse; rămân valabile doar limitele depozitului și fermei.",
+      "troops": "Producție de trupe (% din venit):",
+      "troopsHint": "Această parte din venit merge la trupe de la început până la sfârșit (0 = oprit). Rămâne mai puțin pentru clădiri, iar trupele ocupă loc în fermă.",
+      "profileOff": "Atac (luptător cu topor + cavalerie ușoară + berbec)",
+      "profileDef": "Apărare (lăncier + spadasin + cavalerie grea)"
+    },
+    "bot": {
+      "title": "🔄 Schimb cu Builderul Br Bot",
+      "hint": "Mută cozi între Builderul Br Bot (ecranul sediului) și acest planificator. În Br Bot, Import and export > 'Open in TwCu' trimite aici coada, nivelurile reale ale satului și viteza lumii; coada calculată aici o trimiți înapoi cu 'Trimite în sat'.",
+      "importTitle": "📥 Preia din Br Bot",
+      "importPlaceholder": "Lipește codul TWCU1... copiat din Br Bot sau conținutul fișierului de modele Br Bot (construction_models.json)",
+      "decode": "Citește codul",
+      "invalid": "❌ Codul nu a putut fi citit. Lipește codul TWCU1 copiat din Br Bot sau conținutul fișierului de modele.",
+      "preview": "Șablon primit: {{name}} ({{count}} pași)",
+      "village": "Sat: {{name}} {{coord}}",
+      "applyLevels": "Preia nivelurile inițiale din sat",
+      "applySpeed": "Preia viteza lumii ({{speed}})",
+      "applyMine": "Preia factorul de producție (≈{{factor}}, estimat din producția satului)",
+      "applyQueue": "Încarcă coada ({{count}} pași)",
+      "pickModel": "Model:",
+      "apply": "✅ Aplică",
+      "applied": "✅ Șablonul Br Bot a fost încărcat.",
+      "skipped": "⚠️ {{count}} pași omiși: clădire necunoscută sau peste nivelul maxim.",
+      "exportTitle": "📤 Trimite la Br Bot",
+      "exportHint": "În Br Bot lipește codul în Builder > Import and export și apasă 'Import into the queue'. Nivelurile inițiale sunt în cod; nivelurile pe care satul le are deja sunt omise.",
+      "name": "Numele șablonului:",
+      "copy": "📋 Copiază codul",
+      "sendBack": "🎮 Trimite în sat",
+      "sendBackHint": "Deschide într-o filă nouă sediul satului care a trimis codul; coada ajunge singură în Builderul Br Bot."
     }
   },
   "buildingTimes": {

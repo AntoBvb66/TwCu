@@ -198,11 +198,13 @@ function buildStartupQueue(startLevels) {
 // uzunlugu imis.)
 const AM_SEPARATOR = String.fromCodePoint(0x100000);
 
-// Bina sirasi. 0-3 ve 7-18 gercek kodla dogrulandi; 4/5/6 (kiliseler ve kule)
-// buildTimes sutun sirasindan geliyor, kiliseli olmayan dunyalarda kullanilmaz.
+// Bina sirasi = oyunun bina sirasi (main, barracks, stable, garage, church,
+// church_f, watchtower, snob, ...). 0-3 ve 7-18 gercek kodla dogrulandi; 4/5/6
+// (kiliseler ve kule) Br Bot'un sablon okuyucusuyla ayni siraya kondu, kiliseli
+// olmayan dunyalarda kullanilmaz.
 const AM_BUILDING_IDS = {
     hq: 0, barracks: 1, stable: 2, workshop: 3,
-    first_church: 4, church: 5, watchtower: 6,
+    church: 4, first_church: 5, watchtower: 6,
     academy: 7, smithy: 8, rally: 9, statue: 10, market: 11,
     wood: 12, clay: 13, iron: 14, farm: 15, ware: 16, hiding: 17, wall: 18
 };
