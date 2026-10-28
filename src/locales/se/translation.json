@@ -142,7 +142,7 @@
       "delete": "Radera",
       "amCode": "🏛️ Kontohanterarkod",
       "amImport": "🏛️ Ladda kontohanterarkod",
-      "bot": "🔄 Utbyte med Br Bot"
+      "bot": "🔄 Utbyte med TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Klistra in Byggkön Kopierad från Spelet",
@@ -295,12 +295,12 @@
       "profileDef": "Försvar (spjutbärare + svärdskämpe + tungt kavalleri)"
     },
     "bot": {
-      "title": "🔄 Utbyte med Br Bots Builder",
-      "hint": "Flyttar köer mellan Br Bots Builder (huvudkontorsskärmen) och den här planeraren. I Br Bot skickar Import and export > 'Open in TwCu' kön, byns verkliga byggnadsnivåer och världshastigheten hit; kön du räknar fram här skickar du tillbaka med 'Skicka till byn'.",
-      "importTitle": "📥 Hämta från Br Bot",
-      "importPlaceholder": "Klistra in TWCU1...-koden kopierad från Br Bot eller innehållet i Br Bots modellfil (construction_models.json)",
+      "title": "🔄 Utbyte med TwCu Script Builder",
+      "hint": "Flyttar köer mellan TwCu Script Builder (huvudkontorsskärmen) och den här planeraren. I TwCu Script skickar Import and export > 'Open in TwCu' kön, byns verkliga byggnadsnivåer och världshastigheten hit; kön du räknar fram här skickar du tillbaka med 'Skicka till byn'.",
+      "importTitle": "📥 Hämta från TwCu Script",
+      "importPlaceholder": "Klistra in TWCU1...-koden kopierad från TwCu Script eller innehållet i TwCu Script modellfil (construction_models.json)",
       "decode": "Läs kod",
-      "invalid": "❌ Koden kunde inte läsas. Klistra in TWCU1-koden från Br Bot eller innehållet i modellfilen.",
+      "invalid": "❌ Koden kunde inte läsas. Klistra in TWCU1-koden från TwCu Script eller innehållet i modellfilen.",
       "preview": "Mottagen mall: {{name}} ({{count}} steg)",
       "village": "By: {{name}} {{coord}}",
       "applyLevels": "Använd byns nivåer som startnivåer",
@@ -309,14 +309,14 @@
       "applyQueue": "Läs in kön ({{count}} steg)",
       "pickModel": "Modell:",
       "apply": "✅ Verkställ",
-      "applied": "✅ Br Bot-mallen har lästs in.",
+      "applied": "✅ TwCu Script-mallen har lästs in.",
       "skipped": "⚠️ {{count}} steg hoppades över: okänd byggnad eller över maxnivån.",
-      "exportTitle": "📤 Skicka till Br Bot",
-      "exportHint": "Klistra in koden i Br Bot under Builder > Import and export och tryck 'Import into the queue'. Startnivåerna finns i koden; nivåer byn redan har hoppas över.",
+      "exportTitle": "📤 Skicka till TwCu Script",
+      "exportHint": "Klistra in koden i TwCu Script under Builder > Import and export och tryck 'Import into the queue'. Startnivåerna finns i koden; nivåer byn redan har hoppas över.",
       "name": "Mallnamn:",
       "copy": "📋 Kopiera kod",
       "sendBack": "🎮 Skicka till byn",
-      "sendBackHint": "Öppnar huvudkontoret i byn som skickade koden i en ny flik; kön hamnar av sig själv i Br Bots Builder."
+      "sendBackHint": "Öppnar huvudkontoret i byn som skickade koden i en ny flik; kön hamnar av sig själv i TwCu Script Builder."
     }
   },
   "buildingTimes": {

@@ -142,7 +142,7 @@
       "delete": "Lösche",
       "amCode": "🏛️ Kontoverwaltigs-Code",
       "amImport": "🏛️ Kontoverwaltigs-Code lade",
-      "bot": "🔄 Uustusch mit Br Bot"
+      "bot": "🔄 Uustusch mit TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Füeg d kopierti Bau-Queue vom Spiel ii",
@@ -295,12 +295,12 @@
       "profileDef": "Verteidigung (Speerträger + Schwertkämpfer + Schwäri Kavallerie)"
     },
     "bot": {
-      "title": "🔄 Uustusch mit em Br Bot Builder",
-      "hint": "Verschiebt Warteschlange zwüsched em Builder vo Br Bot (Hauptquartier-Bildschirm) und dem Planer. I Br Bot schickt Import and export > 'Open in TwCu' d Warteschlange, di ächte Gebäudestufe vom Dorf und d Wältgschwindigkeit dahere; d Warteschlange, wo du da rächnisch, schicksch mit 'Is Dorf schicke' zrugg.",
-      "importTitle": "📥 Vo Br Bot hole",
-      "importPlaceholder": "Füeg de us Br Bot kopiert TWCU1...-Code oder de Inhalt vo de Br-Bot-Modelldatei (construction_models.json) ii",
+      "title": "🔄 Uustusch mit em TwCu Script Builder",
+      "hint": "Verschiebt Warteschlange zwüsched em Builder vo TwCu Script (Hauptquartier-Bildschirm) und dem Planer. I TwCu Script schickt Import and export > 'Open in TwCu' d Warteschlange, di ächte Gebäudestufe vom Dorf und d Wältgschwindigkeit dahere; d Warteschlange, wo du da rächnisch, schicksch mit 'Is Dorf schicke' zrugg.",
+      "importTitle": "📥 Vo TwCu Script hole",
+      "importPlaceholder": "Füeg de us TwCu Script kopiert TWCU1...-Code oder de Inhalt vo de TwCu Script-Modelldatei (construction_models.json) ii",
       "decode": "Code läse",
-      "invalid": "❌ De Code het nöd chönne gläse wärde. Füeg de us Br Bot kopiert TWCU1-Code oder de Inhalt vo de Modelldatei ii.",
+      "invalid": "❌ De Code het nöd chönne gläse wärde. Füeg de us TwCu Script kopiert TWCU1-Code oder de Inhalt vo de Modelldatei ii.",
       "preview": "Empfangeni Vorlag: {{name}} ({{count}} Schritt)",
       "village": "Dorf: {{name}} {{coord}}",
       "applyLevels": "Startstufe vom Dorf übernäh",
@@ -309,14 +309,14 @@
       "applyQueue": "Warteschlange lade ({{count}} Schritt)",
       "pickModel": "Modell:",
       "apply": "✅ Übernäh",
-      "applied": "✅ Br-Bot-Vorlag glade.",
+      "applied": "✅ TwCu Script-Vorlag glade.",
       "skipped": "⚠️ {{count}} Schritt übersprunge: unbekannts Gebäude oder über de Höchststufe.",
-      "exportTitle": "📤 Zu Br Bot schicke",
-      "exportHint": "Füeg de Code i Br Bot under Builder > Import and export ii und drück 'Import into the queue'. D Startstufe sind im Code drin; Stufe, wo s Dorf scho het, wärded übersprunge.",
+      "exportTitle": "📤 Zu TwCu Script schicke",
+      "exportHint": "Füeg de Code i TwCu Script under Builder > Import and export ii und drück 'Import into the queue'. D Startstufe sind im Code drin; Stufe, wo s Dorf scho het, wärded übersprunge.",
       "name": "Vorlagename:",
       "copy": "📋 Code kopiere",
       "sendBack": "🎮 Is Dorf schicke",
-      "sendBackHint": "Öffnet s Hauptquartier vom Dorf, wo de Code gschickt het, imene nöie Tab; d Warteschlange landet vo sälber im Br Bot Builder."
+      "sendBackHint": "Öffnet s Hauptquartier vom Dorf, wo de Code gschickt het, imene nöie Tab; d Warteschlange landet vo sälber im TwCu Script Builder."
     }
   },
   "buildingTimes": {

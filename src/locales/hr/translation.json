@@ -142,7 +142,7 @@
       "delete": "Izbriši",
       "amCode": "🏛️ Kod upravitelja računa",
       "amImport": "🏛️ Učitaj kod upravitelja računa",
-      "bot": "🔄 Razmjena s Br Botom"
+      "bot": "🔄 Razmjena s TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Zalijepi red gradnje kopiran iz igre",
@@ -295,12 +295,12 @@
       "profileDef": "Obrana (kopljanik + mačevalac + teška konjica)"
     },
     "bot": {
-      "title": "🔄 Razmjena s Builderom Br Bota",
-      "hint": "Prenosi redove između Buildera Br Bota (zaslon glavnog štaba) i ovog planera. U Br Botu Import and export > 'Open in TwCu' šalje ovamo red, stvarne razine zgrada sela i brzinu svijeta; red izračunat ovdje vraćate gumbom 'Pošalji u selo'.",
-      "importTitle": "📥 Preuzmi iz Br Bota",
-      "importPlaceholder": "Zalijepite kod TWCU1... kopiran iz Br Bota ili sadržaj datoteke modela Br Bota (construction_models.json)",
+      "title": "🔄 Razmjena s Builderom TwCu Script",
+      "hint": "Prenosi redove između Buildera TwCu Script (zaslon glavnog štaba) i ovog planera. U TwCu Script Import and export > 'Open in TwCu' šalje ovamo red, stvarne razine zgrada sela i brzinu svijeta; red izračunat ovdje vraćate gumbom 'Pošalji u selo'.",
+      "importTitle": "📥 Preuzmi iz TwCu Script",
+      "importPlaceholder": "Zalijepite kod TWCU1... kopiran iz TwCu Script ili sadržaj datoteke modela TwCu Script (construction_models.json)",
       "decode": "Pročitaj kod",
-      "invalid": "❌ Kod se nije mogao pročitati. Zalijepite kod TWCU1 kopiran iz Br Bota ili sadržaj datoteke modela.",
+      "invalid": "❌ Kod se nije mogao pročitati. Zalijepite kod TWCU1 kopiran iz TwCu Script ili sadržaj datoteke modela.",
       "preview": "Primljeni predložak: {{name}} ({{count}} koraka)",
       "village": "Selo: {{name}} {{coord}}",
       "applyLevels": "Preuzmi početne razine iz sela",
@@ -309,14 +309,14 @@
       "applyQueue": "Učitaj red ({{count}} koraka)",
       "pickModel": "Model:",
       "apply": "✅ Primijeni",
-      "applied": "✅ Predložak Br Bota učitan.",
+      "applied": "✅ Predložak TwCu Script učitan.",
       "skipped": "⚠️ Preskočeno {{count}} koraka: nepoznata zgrada ili iznad najviše razine.",
-      "exportTitle": "📤 Pošalji u Br Bot",
-      "exportHint": "U Br Botu zalijepite kod u Builder > Import and export i kliknite 'Import into the queue'. Početne razine su u kodu; razine koje selo već ima preskaču se.",
+      "exportTitle": "📤 Pošalji u TwCu Script",
+      "exportHint": "U TwCu Script zalijepite kod u Builder > Import and export i kliknite 'Import into the queue'. Početne razine su u kodu; razine koje selo već ima preskaču se.",
       "name": "Naziv predloška:",
       "copy": "📋 Kopiraj kod",
       "sendBack": "🎮 Pošalji u selo",
-      "sendBackHint": "U novoj kartici otvara glavni štab sela koje je poslalo kod; red sam stiže u Builder Br Bota."
+      "sendBackHint": "U novoj kartici otvara glavni štab sela koje je poslalo kod; red sam stiže u Builder TwCu Script."
     }
   },
   "buildingTimes": {

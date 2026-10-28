@@ -142,7 +142,7 @@
       "delete": "Usuń",
       "amCode": "🏛️ Kod menedżera konta",
       "amImport": "🏛️ Wczytaj kod menedżera konta",
-      "bot": "🔄 Wymiana z Br Botem"
+      "bot": "🔄 Wymiana z TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Wklej kolejkę budowy skopiowaną z gry",
@@ -295,12 +295,12 @@
       "profileDef": "Obrona (pikinier + miecznik + ciężka kawaleria)"
     },
     "bot": {
-      "title": "🔄 Wymiana z Builderem Br Bota",
-      "hint": "Przenosi kolejki między Builderem Br Bota (ekran kwatery głównej) a tym planerem. W Br Bocie Import and export > 'Open in TwCu' wysyła tu kolejkę, prawdziwe poziomy budynków wioski i prędkość świata; kolejkę obliczoną tutaj odsyłasz przyciskiem 'Wyślij do wioski'.",
-      "importTitle": "📥 Pobierz z Br Bota",
-      "importPlaceholder": "Wklej kod TWCU1... skopiowany z Br Bota albo zawartość pliku modeli Br Bota (construction_models.json)",
+      "title": "🔄 Wymiana z Builderem TwCu Script",
+      "hint": "Przenosi kolejki między Builderem TwCu Script (ekran kwatery głównej) a tym planerem. W Br Bocie Import and export > 'Open in TwCu' wysyła tu kolejkę, prawdziwe poziomy budynków wioski i prędkość świata; kolejkę obliczoną tutaj odsyłasz przyciskiem 'Wyślij do wioski'.",
+      "importTitle": "📥 Pobierz z TwCu Script",
+      "importPlaceholder": "Wklej kod TWCU1... skopiowany z TwCu Script albo zawartość pliku modeli TwCu Script (construction_models.json)",
       "decode": "Odczytaj kod",
-      "invalid": "❌ Nie udało się odczytać kodu. Wklej kod TWCU1 skopiowany z Br Bota albo zawartość pliku modeli.",
+      "invalid": "❌ Nie udało się odczytać kodu. Wklej kod TWCU1 skopiowany z TwCu Script albo zawartość pliku modeli.",
       "preview": "Otrzymany szablon: {{name}} ({{count}} kroków)",
       "village": "Wioska: {{name}} {{coord}}",
       "applyLevels": "Weź poziomy początkowe z wioski",
@@ -309,14 +309,14 @@
       "applyQueue": "Wczytaj kolejkę ({{count}} kroków)",
       "pickModel": "Model:",
       "apply": "✅ Zastosuj",
-      "applied": "✅ Szablon Br Bota wczytany.",
+      "applied": "✅ Szablon TwCu Script wczytany.",
       "skipped": "⚠️ Pominięto {{count}} kroków: nieznany budynek lub powyżej maksymalnego poziomu.",
-      "exportTitle": "📤 Wyślij do Br Bota",
+      "exportTitle": "📤 Wyślij do TwCu Script",
       "exportHint": "W Br Bocie wklej kod w Builder > Import and export i kliknij 'Import into the queue'. Poziomy początkowe są w kodzie; poziomy, które wioska już ma, są pomijane.",
       "name": "Nazwa szablonu:",
       "copy": "📋 Kopiuj kod",
       "sendBack": "🎮 Wyślij do wioski",
-      "sendBackHint": "Otwiera w nowej karcie kwaterę główną wioski, która wysłała kod; kolejka sama trafia do Buildera Br Bota."
+      "sendBackHint": "Otwiera w nowej karcie kwaterę główną wioski, która wysłała kod; kolejka sama trafia do Buildera TwCu Script."
     }
   },
   "buildingTimes": {

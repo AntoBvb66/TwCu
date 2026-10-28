@@ -142,7 +142,7 @@
       "delete": "Видалити",
       "amCode": "🏛️ Код менеджера акаунта",
       "amImport": "🏛️ Завантажити код менеджера акаунта",
-      "bot": "🔄 Обмін з Br Bot"
+      "bot": "🔄 Обмін з TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Вставте Чергу Будівництва, Скопійовану з Гри",
@@ -295,12 +295,12 @@
       "profileDef": "Захист (списник + мечник + важка кавалерія)"
     },
     "bot": {
-      "title": "🔄 Обмін з Builder у Br Bot",
-      "hint": "Переносить черги між Builder у Br Bot (екран штабу) і цим планувальником. У Br Bot Import and export > 'Open in TwCu' надсилає сюди чергу, справжні рівні будівель села та швидкість світу; чергу, обчислену тут, надішліть назад кнопкою 'Надіслати в село'.",
-      "importTitle": "📥 Взяти з Br Bot",
-      "importPlaceholder": "Вставте код TWCU1..., скопійований з Br Bot, або вміст файлу моделей Br Bot (construction_models.json)",
+      "title": "🔄 Обмін з Builder у TwCu Script",
+      "hint": "Переносить черги між Builder у TwCu Script (екран штабу) і цим планувальником. У TwCu Script Import and export > 'Open in TwCu' надсилає сюди чергу, справжні рівні будівель села та швидкість світу; чергу, обчислену тут, надішліть назад кнопкою 'Надіслати в село'.",
+      "importTitle": "📥 Взяти з TwCu Script",
+      "importPlaceholder": "Вставте код TWCU1..., скопійований з TwCu Script, або вміст файлу моделей TwCu Script (construction_models.json)",
       "decode": "Прочитати код",
-      "invalid": "❌ Не вдалося прочитати код. Вставте код TWCU1 з Br Bot або вміст файлу моделей.",
+      "invalid": "❌ Не вдалося прочитати код. Вставте код TWCU1 з TwCu Script або вміст файлу моделей.",
       "preview": "Отриманий шаблон: {{name}} ({{count}} кроків)",
       "village": "Село: {{name}} {{coord}}",
       "applyLevels": "Взяти початкові рівні із села",
@@ -309,14 +309,14 @@
       "applyQueue": "Завантажити чергу ({{count}} кроків)",
       "pickModel": "Модель:",
       "apply": "✅ Застосувати",
-      "applied": "✅ Шаблон Br Bot завантажено.",
+      "applied": "✅ Шаблон TwCu Script завантажено.",
       "skipped": "⚠️ Пропущено кроків: {{count}} (невідома будівля або вище максимального рівня).",
-      "exportTitle": "📤 Надіслати в Br Bot",
-      "exportHint": "У Br Bot вставте код у Builder > Import and export і натисніть 'Import into the queue'. Початкові рівні є в коді; рівні, які вже є в селі, пропускаються.",
+      "exportTitle": "📤 Надіслати в TwCu Script",
+      "exportHint": "У TwCu Script вставте код у Builder > Import and export і натисніть 'Import into the queue'. Початкові рівні є в коді; рівні, які вже є в селі, пропускаються.",
       "name": "Назва шаблону:",
       "copy": "📋 Копіювати код",
       "sendBack": "🎮 Надіслати в село",
-      "sendBackHint": "Відкриває в новій вкладці штаб села, що надіслало код; черга сама потрапляє в Builder Br Bot."
+      "sendBackHint": "Відкриває в новій вкладці штаб села, що надіслало код; черга сама потрапляє в Builder TwCu Script."
     }
   },
   "buildingTimes": {

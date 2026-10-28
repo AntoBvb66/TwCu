@@ -142,7 +142,7 @@
       "delete": "Delete",
       "amCode": "🏛️ Account Manager Code",
       "amImport": "🏛️ Load Account Manager Code",
-      "bot": "🔄 Br Bot Exchange"
+      "bot": "🔄 TwCu Script Exchange"
     },
     "modal": {
       "importTitle": "📥 Paste the Building Queue Copied from the Game",
@@ -295,12 +295,12 @@
       "profileDef": "Defense (spear fighter + swordsman + heavy cavalry)"
     },
     "bot": {
-      "title": "🔄 Exchange with the Br Bot Builder",
-      "hint": "Moves queues between Br Bot's Builder (headquarters screen) and this planner. In Br Bot, Import and export > 'Open in TwCu' sends the queue, the village's real building levels and the world speed here; send the queue you calculate here back with 'Send to village'.",
-      "importTitle": "📥 Take from Br Bot",
-      "importPlaceholder": "Paste the TWCU1... code copied from Br Bot, or the content of Br Bot's model file (construction_models.json)",
+      "title": "🔄 Exchange with the TwCu Script Builder",
+      "hint": "Moves queues between TwCu Script Builder (headquarters screen) and this planner. In TwCu Script, Import and export > 'Open in TwCu' sends the queue, the village's real building levels and the world speed here; send the queue you calculate here back with 'Send to village'.",
+      "importTitle": "📥 Take from TwCu Script",
+      "importPlaceholder": "Paste the TWCU1... code copied from TwCu Script, or the content of TwCu Script model file (construction_models.json)",
       "decode": "Decode",
-      "invalid": "❌ The code could not be read. Paste the TWCU1 code copied from Br Bot or the content of its model file.",
+      "invalid": "❌ The code could not be read. Paste the TWCU1 code copied from TwCu Script or the content of its model file.",
       "preview": "Incoming template: {{name}} ({{count}} steps)",
       "village": "Village: {{name}} {{coord}}",
       "applyLevels": "Take the starting levels from the village",
@@ -309,14 +309,14 @@
       "applyQueue": "Load the queue ({{count}} steps)",
       "pickModel": "Model:",
       "apply": "✅ Apply",
-      "applied": "✅ Br Bot template loaded.",
+      "applied": "✅ TwCu Script template loaded.",
       "skipped": "⚠️ {{count}} steps were skipped: unknown building or above the maximum level.",
-      "exportTitle": "📤 Send to Br Bot",
-      "exportHint": "In Br Bot, paste the code into Builder > Import and export and press 'Import into the queue'. The starting levels are included in the code; levels the village already has are skipped.",
+      "exportTitle": "📤 Send to TwCu Script",
+      "exportHint": "In TwCu Script, paste the code into Builder > Import and export and press 'Import into the queue'. The starting levels are included in the code; levels the village already has are skipped.",
       "name": "Template name:",
       "copy": "📋 Copy code",
       "sendBack": "🎮 Send to village",
-      "sendBackHint": "Opens the headquarters page of the village that sent the code in a new tab; the queue lands in the Br Bot Builder by itself."
+      "sendBackHint": "Opens the headquarters page of the village that sent the code in a new tab; the queue lands in the TwCu Script Builder by itself."
     }
   },
   "buildingTimes": {

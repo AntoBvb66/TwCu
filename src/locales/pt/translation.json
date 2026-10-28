@@ -142,7 +142,7 @@
       "delete": "Eliminar",
       "amCode": "🏛️ Código do gestor de conta",
       "amImport": "🏛️ Carregar código do gestor de conta",
-      "bot": "🔄 Troca com o Br Bot"
+      "bot": "🔄 Troca com o TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Cole a Fila de Construção Copiada do Jogo",
@@ -295,12 +295,12 @@
       "profileDef": "Defesa (lanceiro + espadachim + cavalaria pesada)"
     },
     "bot": {
-      "title": "🔄 Troca com o Construtor do Br Bot",
-      "hint": "Leva filas entre o Construtor do Br Bot (ecrã do edifício principal) e este planeador. No Br Bot, Importar e exportar > 'Abrir no TwCu' envia para aqui a fila, os níveis reais da aldeia e a velocidade do mundo; a fila que calcular aqui volta com 'Enviar para a aldeia'.",
-      "importTitle": "📥 Trazer do Br Bot",
-      "importPlaceholder": "Cole o código TWCU1... copiado do Br Bot ou o conteúdo do ficheiro de modelos do Br Bot (construction_models.json)",
+      "title": "🔄 Troca com o Construtor do TwCu Script",
+      "hint": "Leva filas entre o Construtor do TwCu Script (ecrã do edifício principal) e este planeador. No TwCu Script, Importar e exportar > 'Abrir no TwCu' envia para aqui a fila, os níveis reais da aldeia e a velocidade do mundo; a fila que calcular aqui volta com 'Enviar para a aldeia'.",
+      "importTitle": "📥 Trazer do TwCu Script",
+      "importPlaceholder": "Cole o código TWCU1... copiado do TwCu Script ou o conteúdo do ficheiro de modelos do TwCu Script (construction_models.json)",
       "decode": "Ler código",
-      "invalid": "❌ Não foi possível ler o código. Cole o código TWCU1 copiado do Br Bot ou o conteúdo do ficheiro de modelos.",
+      "invalid": "❌ Não foi possível ler o código. Cole o código TWCU1 copiado do TwCu Script ou o conteúdo do ficheiro de modelos.",
       "preview": "Modelo recebido: {{name}} ({{count}} etapas)",
       "village": "Aldeia: {{name}} {{coord}}",
       "applyLevels": "Usar os níveis da aldeia como iniciais",
@@ -309,14 +309,14 @@
       "applyQueue": "Carregar a fila ({{count}} etapas)",
       "pickModel": "Modelo:",
       "apply": "✅ Aplicar",
-      "applied": "✅ Modelo do Br Bot carregado.",
+      "applied": "✅ Modelo do TwCu Script carregado.",
       "skipped": "⚠️ {{count}} etapas foram ignoradas: edifício desconhecido ou acima do nível máximo.",
-      "exportTitle": "📤 Enviar para o Br Bot",
-      "exportHint": "No Br Bot, cole o código em Construtor > Importar e exportar e clique em 'Importar para a fila'. Os níveis iniciais estão no código; os níveis que a aldeia já tem são ignorados.",
+      "exportTitle": "📤 Enviar para o TwCu Script",
+      "exportHint": "No TwCu Script, cole o código em Construtor > Importar e exportar e clique em 'Importar para a fila'. Os níveis iniciais estão no código; os níveis que a aldeia já tem são ignorados.",
       "name": "Nome do modelo:",
       "copy": "📋 Copiar código",
       "sendBack": "🎮 Enviar para a aldeia",
-      "sendBackHint": "Abre num novo separador o edifício principal da aldeia que enviou o código; a fila chega sozinha ao Construtor do Br Bot."
+      "sendBackHint": "Abre num novo separador o edifício principal da aldeia que enviou o código; a fila chega sozinha ao Construtor do TwCu Script."
     }
   },
   "buildingTimes": {

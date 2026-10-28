@@ -142,7 +142,7 @@
       "delete": "Elimina",
       "amCode": "🏛️ Codice gestore account",
       "amImport": "🏛️ Carica codice gestore account",
-      "bot": "🔄 Scambio con Br Bot"
+      "bot": "🔄 Scambio con TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Incolla la Coda Costruzioni Copiata dal Gioco",
@@ -295,12 +295,12 @@
       "profileDef": "Difesa (lanciere + spadaccino + cavalleria pesante)"
     },
     "bot": {
-      "title": "🔄 Scambio con il Builder di Br Bot",
-      "hint": "Sposta le code tra il Builder di Br Bot (schermata del quartier generale) e questo pianificatore. In Br Bot, Import and export > 'Open in TwCu' invia qui la coda, i livelli reali del villaggio e la velocità del mondo; la coda calcolata qui torna indietro con 'Invia al villaggio'.",
-      "importTitle": "📥 Prendi da Br Bot",
-      "importPlaceholder": "Incolla il codice TWCU1... copiato da Br Bot o il contenuto del file modelli di Br Bot (construction_models.json)",
+      "title": "🔄 Scambio con il Builder di TwCu Script",
+      "hint": "Sposta le code tra il Builder di TwCu Script (schermata del quartier generale) e questo pianificatore. In TwCu Script, Import and export > 'Open in TwCu' invia qui la coda, i livelli reali del villaggio e la velocità del mondo; la coda calcolata qui torna indietro con 'Invia al villaggio'.",
+      "importTitle": "📥 Prendi da TwCu Script",
+      "importPlaceholder": "Incolla il codice TWCU1... copiato da TwCu Script o il contenuto del file modelli di TwCu Script (construction_models.json)",
       "decode": "Leggi codice",
-      "invalid": "❌ Impossibile leggere il codice. Incolla il codice TWCU1 copiato da Br Bot o il contenuto del file modelli.",
+      "invalid": "❌ Impossibile leggere il codice. Incolla il codice TWCU1 copiato da TwCu Script o il contenuto del file modelli.",
       "preview": "Modello ricevuto: {{name}} ({{count}} passi)",
       "village": "Villaggio: {{name}} {{coord}}",
       "applyLevels": "Usa i livelli del villaggio come iniziali",
@@ -309,14 +309,14 @@
       "applyQueue": "Carica la coda ({{count}} passi)",
       "pickModel": "Modello:",
       "apply": "✅ Applica",
-      "applied": "✅ Modello di Br Bot caricato.",
+      "applied": "✅ Modello di TwCu Script caricato.",
       "skipped": "⚠️ {{count}} passi saltati: edificio sconosciuto o sopra il livello massimo.",
-      "exportTitle": "📤 Invia a Br Bot",
-      "exportHint": "In Br Bot incolla il codice in Builder > Import and export e premi 'Import into the queue'. I livelli iniziali sono nel codice; i livelli che il villaggio ha già vengono saltati.",
+      "exportTitle": "📤 Invia a TwCu Script",
+      "exportHint": "In TwCu Script incolla il codice in Builder > Import and export e premi 'Import into the queue'. I livelli iniziali sono nel codice; i livelli che il villaggio ha già vengono saltati.",
       "name": "Nome del modello:",
       "copy": "📋 Copia codice",
       "sendBack": "🎮 Invia al villaggio",
-      "sendBackHint": "Apre in una nuova scheda il quartier generale del villaggio che ha inviato il codice; la coda arriva da sola nel Builder di Br Bot."
+      "sendBackHint": "Apre in una nuova scheda il quartier generale del villaggio che ha inviato il codice; la coda arriva da sola nel Builder di TwCu Script."
     }
   },
   "buildingTimes": {

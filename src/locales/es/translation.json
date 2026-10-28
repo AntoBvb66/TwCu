@@ -142,7 +142,7 @@
       "delete": "Eliminar",
       "amCode": "🏛️ Código del gestor de cuenta",
       "amImport": "🏛️ Cargar código del gestor de cuenta",
-      "bot": "🔄 Intercambio con Br Bot"
+      "bot": "🔄 Intercambio con TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Pega la Cola de Construcción Copiada del Juego",
@@ -295,12 +295,12 @@
       "profileDef": "Defensa (lancero + espadachín + caballería pesada)"
     },
     "bot": {
-      "title": "🔄 Intercambio con el Builder de Br Bot",
-      "hint": "Mueve colas entre el Builder de Br Bot (pantalla del cuartel general) y este planificador. En Br Bot, Import and export > 'Open in TwCu' envía aquí la cola, los niveles reales de la aldea y la velocidad del mundo; la cola que calcules aquí vuelve con 'Enviar a la aldea'.",
-      "importTitle": "📥 Traer de Br Bot",
-      "importPlaceholder": "Pega el código TWCU1... copiado de Br Bot o el contenido del archivo de modelos de Br Bot (construction_models.json)",
+      "title": "🔄 Intercambio con el Builder de TwCu Script",
+      "hint": "Mueve colas entre el Builder de TwCu Script (pantalla del cuartel general) y este planificador. En TwCu Script, Import and export > 'Open in TwCu' envía aquí la cola, los niveles reales de la aldea y la velocidad del mundo; la cola que calcules aquí vuelve con 'Enviar a la aldea'.",
+      "importTitle": "📥 Traer de TwCu Script",
+      "importPlaceholder": "Pega el código TWCU1... copiado de TwCu Script o el contenido del archivo de modelos de TwCu Script (construction_models.json)",
       "decode": "Leer código",
-      "invalid": "❌ No se pudo leer el código. Pega el código TWCU1 copiado de Br Bot o el contenido del archivo de modelos.",
+      "invalid": "❌ No se pudo leer el código. Pega el código TWCU1 copiado de TwCu Script o el contenido del archivo de modelos.",
       "preview": "Plantilla recibida: {{name}} ({{count}} pasos)",
       "village": "Aldea: {{name}} {{coord}}",
       "applyLevels": "Usar los niveles de la aldea como iniciales",
@@ -309,14 +309,14 @@
       "applyQueue": "Cargar la cola ({{count}} pasos)",
       "pickModel": "Modelo:",
       "apply": "✅ Aplicar",
-      "applied": "✅ Plantilla de Br Bot cargada.",
+      "applied": "✅ Plantilla de TwCu Script cargada.",
       "skipped": "⚠️ Se omitieron {{count}} pasos: edificio desconocido o por encima del nivel máximo.",
-      "exportTitle": "📤 Enviar a Br Bot",
-      "exportHint": "En Br Bot, pega el código en Builder > Import and export y pulsa 'Import into the queue'. Los niveles iniciales van en el código; los niveles que la aldea ya tiene se omiten.",
+      "exportTitle": "📤 Enviar a TwCu Script",
+      "exportHint": "En TwCu Script, pega el código en Builder > Import and export y pulsa 'Import into the queue'. Los niveles iniciales van en el código; los niveles que la aldea ya tiene se omiten.",
       "name": "Nombre de la plantilla:",
       "copy": "📋 Copiar código",
       "sendBack": "🎮 Enviar a la aldea",
-      "sendBackHint": "Abre en una pestaña nueva el cuartel general de la aldea que envió el código; la cola llega sola al Builder de Br Bot."
+      "sendBackHint": "Abre en una pestaña nueva el cuartel general de la aldea que envió el código; la cola llega sola al Builder de TwCu Script."
     }
   },
   "buildingTimes": {

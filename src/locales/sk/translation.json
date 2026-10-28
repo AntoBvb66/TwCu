@@ -142,7 +142,7 @@
       "delete": "Odstrániť",
       "amCode": "🏛️ Kód správcu účtu",
       "amImport": "🏛️ Načítať kód správcu účtu",
-      "bot": "🔄 Výmena s Br Botom"
+      "bot": "🔄 Výmena s TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Vložte frontu budovania skopírovanú zo hry",
@@ -295,12 +295,12 @@
       "profileDef": "Obrana (kopijník + šermiar + ťažká jazda)"
     },
     "bot": {
-      "title": "🔄 Výmena s Builderom Br Bota",
-      "hint": "Prenáša fronty medzi Builderom Br Bota (obrazovka sídla) a týmto plánovačom. V Br Bote Import and export > 'Open in TwCu' pošle sem front, skutočné úrovne budov dediny a rýchlosť sveta; front vypočítaný tu pošlete späť tlačidlom 'Poslať do dediny'.",
-      "importTitle": "📥 Prevziať z Br Bota",
-      "importPlaceholder": "Vložte kód TWCU1... skopírovaný z Br Bota alebo obsah súboru modelov Br Bota (construction_models.json)",
+      "title": "🔄 Výmena s Builderom TwCu Script",
+      "hint": "Prenáša fronty medzi Builderom TwCu Script (obrazovka sídla) a týmto plánovačom. V TwCu Script Import and export > 'Open in TwCu' pošle sem front, skutočné úrovne budov dediny a rýchlosť sveta; front vypočítaný tu pošlete späť tlačidlom 'Poslať do dediny'.",
+      "importTitle": "📥 Prevziať z TwCu Script",
+      "importPlaceholder": "Vložte kód TWCU1... skopírovaný z TwCu Script alebo obsah súboru modelov TwCu Script (construction_models.json)",
       "decode": "Prečítať kód",
-      "invalid": "❌ Kód sa nepodarilo prečítať. Vložte kód TWCU1 z Br Bota alebo obsah súboru modelov.",
+      "invalid": "❌ Kód sa nepodarilo prečítať. Vložte kód TWCU1 z TwCu Script alebo obsah súboru modelov.",
       "preview": "Prijatá šablóna: {{name}} ({{count}} krokov)",
       "village": "Dedina: {{name}} {{coord}}",
       "applyLevels": "Prevziať počiatočné úrovne z dediny",
@@ -309,14 +309,14 @@
       "applyQueue": "Načítať front ({{count}} krokov)",
       "pickModel": "Model:",
       "apply": "✅ Použiť",
-      "applied": "✅ Šablóna Br Bota načítaná.",
+      "applied": "✅ Šablóna TwCu Script načítaná.",
       "skipped": "⚠️ Preskočených krokov: {{count}} (neznáma budova alebo nad maximálnou úrovňou).",
-      "exportTitle": "📤 Poslať do Br Bota",
-      "exportHint": "V Br Bote vložte kód do Builder > Import and export a kliknite na 'Import into the queue'. Počiatočné úrovne sú v kóde; úrovne, ktoré dedina už má, sa preskočia.",
+      "exportTitle": "📤 Poslať do TwCu Script",
+      "exportHint": "V TwCu Script vložte kód do Builder > Import and export a kliknite na 'Import into the queue'. Počiatočné úrovne sú v kóde; úrovne, ktoré dedina už má, sa preskočia.",
       "name": "Názov šablóny:",
       "copy": "📋 Kopírovať kód",
       "sendBack": "🎮 Poslať do dediny",
-      "sendBackHint": "Otvorí na novej karte sídlo dediny, ktorá kód poslala; front sám dorazí do Buildera Br Bota."
+      "sendBackHint": "Otvorí na novej karte sídlo dediny, ktorá kód poslala; front sám dorazí do Buildera TwCu Script."
     }
   },
   "buildingTimes": {

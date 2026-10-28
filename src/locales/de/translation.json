@@ -142,7 +142,7 @@
       "delete": "Löschen",
       "amCode": "🏛️ Kontenverwaltungs-Code",
       "amImport": "🏛️ Kontenverwaltungs-Code laden",
-      "bot": "🔄 Austausch mit Br Bot"
+      "bot": "🔄 Austausch mit TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Füge die aus dem Spiel kopierte Bauwarteschlange ein",
@@ -295,12 +295,12 @@
       "profileDef": "Verteidigung (Speerträger + Schwertkämpfer + Schwere Kavallerie)"
     },
     "bot": {
-      "title": "🔄 Austausch mit dem Br Bot Builder",
-      "hint": "Verschiebt Warteschlangen zwischen dem Builder von Br Bot (Hauptquartier-Bildschirm) und diesem Planer. In Br Bot schickt Import and export > 'Open in TwCu' die Warteschlange, die echten Gebäudestufen des Dorfes und die Weltgeschwindigkeit hierher; die hier berechnete Warteschlange schickst du mit 'An das Dorf senden' zurück.",
-      "importTitle": "📥 Von Br Bot holen",
-      "importPlaceholder": "Füge den aus Br Bot kopierten TWCU1...-Code oder den Inhalt der Br-Bot-Modelldatei (construction_models.json) ein",
+      "title": "🔄 Austausch mit dem TwCu Script Builder",
+      "hint": "Verschiebt Warteschlangen zwischen dem Builder von TwCu Script (Hauptquartier-Bildschirm) und diesem Planer. In TwCu Script schickt Import and export > 'Open in TwCu' die Warteschlange, die echten Gebäudestufen des Dorfes und die Weltgeschwindigkeit hierher; die hier berechnete Warteschlange schickst du mit 'An das Dorf senden' zurück.",
+      "importTitle": "📥 Von TwCu Script holen",
+      "importPlaceholder": "Füge den aus TwCu Script kopierten TWCU1...-Code oder den Inhalt der TwCu Script-Modelldatei (construction_models.json) ein",
       "decode": "Code lesen",
-      "invalid": "❌ Der Code konnte nicht gelesen werden. Füge den aus Br Bot kopierten TWCU1-Code oder den Inhalt der Modelldatei ein.",
+      "invalid": "❌ Der Code konnte nicht gelesen werden. Füge den aus TwCu Script kopierten TWCU1-Code oder den Inhalt der Modelldatei ein.",
       "preview": "Empfangene Vorlage: {{name}} ({{count}} Schritte)",
       "village": "Dorf: {{name}} {{coord}}",
       "applyLevels": "Startstufen aus dem Dorf übernehmen",
@@ -309,14 +309,14 @@
       "applyQueue": "Warteschlange laden ({{count}} Schritte)",
       "pickModel": "Modell:",
       "apply": "✅ Übernehmen",
-      "applied": "✅ Br-Bot-Vorlage geladen.",
+      "applied": "✅ TwCu Script-Vorlage geladen.",
       "skipped": "⚠️ {{count}} Schritte übersprungen: unbekanntes Gebäude oder über der Höchststufe.",
-      "exportTitle": "📤 An Br Bot senden",
-      "exportHint": "Füge den Code in Br Bot unter Builder > Import and export ein und klicke 'Import into the queue'. Die Startstufen sind im Code enthalten; Stufen, die das Dorf schon hat, werden übersprungen.",
+      "exportTitle": "📤 An TwCu Script senden",
+      "exportHint": "Füge den Code in TwCu Script unter Builder > Import and export ein und klicke 'Import into the queue'. Die Startstufen sind im Code enthalten; Stufen, die das Dorf schon hat, werden übersprungen.",
       "name": "Vorlagenname:",
       "copy": "📋 Code kopieren",
       "sendBack": "🎮 An das Dorf senden",
-      "sendBackHint": "Öffnet das Hauptquartier des Dorfes, das den Code geschickt hat, in einem neuen Tab; die Warteschlange landet von selbst im Br Bot Builder."
+      "sendBackHint": "Öffnet das Hauptquartier des Dorfes, das den Code geschickt hat, in einem neuen Tab; die Warteschlange landet von selbst im TwCu Script Builder."
     }
   },
   "buildingTimes": {

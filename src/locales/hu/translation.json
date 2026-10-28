@@ -142,7 +142,7 @@
       "delete": "Избриши",
       "amCode": "🏛️ Fiókkezelő kód",
       "amImport": "🏛️ Fiókkezelő kód betöltése",
-      "bot": "🔄 Csere a Br Bottal"
+      "bot": "🔄 Csere a TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Залепете го редот за градење копиран од играта",
@@ -295,12 +295,12 @@
       "profileDef": "Védekezés (lándzsás + kardforgató + nehézlovas)"
     },
     "bot": {
-      "title": "🔄 Csere a Br Bot Builderrel",
-      "hint": "Sorokat visz át a Br Bot Buildere (főhadiszállás képernyő) és e tervező között. A Br Botban az Import and export > 'Open in TwCu' ide küldi a sort, a falu valós épületszintjeit és a világsebességet; az itt kiszámolt sort a 'Küldés a faluba' gombbal küldöd vissza.",
-      "importTitle": "📥 Átvétel a Br Botból",
-      "importPlaceholder": "Illeszd be a Br Botból másolt TWCU1... kódot vagy a Br Bot modellfájljának (construction_models.json) tartalmát",
+      "title": "🔄 Csere a TwCu Script Builderrel",
+      "hint": "Sorokat visz át a TwCu Script Buildere (főhadiszállás képernyő) és e tervező között. A TwCu Script az Import and export > 'Open in TwCu' ide küldi a sort, a falu valós épületszintjeit és a világsebességet; az itt kiszámolt sort a 'Küldés a faluba' gombbal küldöd vissza.",
+      "importTitle": "📥 Átvétel a TwCu Script",
+      "importPlaceholder": "Illeszd be a TwCu Script másolt TWCU1... kódot vagy a TwCu Script modellfájljának (construction_models.json) tartalmát",
       "decode": "Kód beolvasása",
-      "invalid": "❌ A kód nem olvasható. Illeszd be a Br Botból másolt TWCU1 kódot vagy a modellfájl tartalmát.",
+      "invalid": "❌ A kód nem olvasható. Illeszd be a TwCu Script másolt TWCU1 kódot vagy a modellfájl tartalmát.",
       "preview": "Beérkezett sablon: {{name}} ({{count}} lépés)",
       "village": "Falu: {{name}} {{coord}}",
       "applyLevels": "Kezdőszintek átvétele a faluból",
@@ -309,14 +309,14 @@
       "applyQueue": "Sor betöltése ({{count}} lépés)",
       "pickModel": "Modell:",
       "apply": "✅ Alkalmaz",
-      "applied": "✅ Br Bot sablon betöltve.",
+      "applied": "✅ TwCu Script sablon betöltve.",
       "skipped": "⚠️ {{count}} lépés kimaradt: ismeretlen épület vagy a maximális szint felett.",
-      "exportTitle": "📤 Küldés a Br Botba",
-      "exportHint": "A Br Botban illeszd be a kódot a Builder > Import and export mezőbe, és nyomd meg az 'Import into the queue' gombot. A kezdőszintek benne vannak a kódban; a faluban már meglévő szinteket kihagyja.",
+      "exportTitle": "📤 Küldés a TwCu Script",
+      "exportHint": "A TwCu Script illeszd be a kódot a Builder > Import and export mezőbe, és nyomd meg az 'Import into the queue' gombot. A kezdőszintek benne vannak a kódban; a faluban már meglévő szinteket kihagyja.",
       "name": "Sablon neve:",
       "copy": "📋 Kód másolása",
       "sendBack": "🎮 Küldés a faluba",
-      "sendBackHint": "Új lapon megnyitja a kódot küldő falu főhadiszállását; a sor magától megérkezik a Br Bot Builderbe."
+      "sendBackHint": "Új lapon megnyitja a kódot küldő falu főhadiszállását; a sor magától megérkezik a TwCu Script Builderbe."
     }
   },
   "buildingTimes": {

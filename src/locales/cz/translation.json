@@ -142,7 +142,7 @@
       "delete": "Smazat",
       "amCode": "🏛️ Kód správce účtu",
       "amImport": "🏛️ Načíst kód správce účtu",
-      "bot": "🔄 Výměna s Br Botem"
+      "bot": "🔄 Výměna s TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Vložte frontu budov zkopírovanou ze hry",
@@ -295,12 +295,12 @@
       "profileDef": "Obrana (kopiník + šermíř + těžká kavalerie)"
     },
     "bot": {
-      "title": "🔄 Výměna s Builderem Br Botu",
-      "hint": "Přenáší fronty mezi Builderem Br Botu (obrazovka velitelství) a tímto plánovačem. V Br Botu Import and export > 'Open in TwCu' pošle sem frontu, skutečné úrovně budov vesnice a rychlost světa; frontu spočítanou zde pošlete zpět tlačítkem 'Poslat do vesnice'.",
-      "importTitle": "📥 Převzít z Br Botu",
-      "importPlaceholder": "Vložte kód TWCU1... zkopírovaný z Br Botu nebo obsah souboru modelů Br Botu (construction_models.json)",
+      "title": "🔄 Výměna s Builderem TwCu Script",
+      "hint": "Přenáší fronty mezi Builderem TwCu Script (obrazovka velitelství) a tímto plánovačem. V TwCu Script Import and export > 'Open in TwCu' pošle sem frontu, skutečné úrovně budov vesnice a rychlost světa; frontu spočítanou zde pošlete zpět tlačítkem 'Poslat do vesnice'.",
+      "importTitle": "📥 Převzít z TwCu Script",
+      "importPlaceholder": "Vložte kód TWCU1... zkopírovaný z TwCu Script nebo obsah souboru modelů TwCu Script (construction_models.json)",
       "decode": "Přečíst kód",
-      "invalid": "❌ Kód se nepodařilo přečíst. Vložte kód TWCU1 zkopírovaný z Br Botu nebo obsah souboru modelů.",
+      "invalid": "❌ Kód se nepodařilo přečíst. Vložte kód TWCU1 zkopírovaný z TwCu Script nebo obsah souboru modelů.",
       "preview": "Přijatá šablona: {{name}} ({{count}} kroků)",
       "village": "Vesnice: {{name}} {{coord}}",
       "applyLevels": "Převzít počáteční úrovně z vesnice",
@@ -309,14 +309,14 @@
       "applyQueue": "Načíst frontu ({{count}} kroků)",
       "pickModel": "Model:",
       "apply": "✅ Použít",
-      "applied": "✅ Šablona Br Botu načtena.",
+      "applied": "✅ Šablona TwCu Script načtena.",
       "skipped": "⚠️ {{count}} kroků přeskočeno: neznámá budova nebo nad maximální úrovní.",
-      "exportTitle": "📤 Poslat do Br Botu",
-      "exportHint": "V Br Botu vložte kód do Builder > Import and export a klikněte na 'Import into the queue'. Počáteční úrovně jsou v kódu; úrovně, které vesnice už má, se přeskočí.",
+      "exportTitle": "📤 Poslat do TwCu Script",
+      "exportHint": "V TwCu Script vložte kód do Builder > Import and export a klikněte na 'Import into the queue'. Počáteční úrovně jsou v kódu; úrovně, které vesnice už má, se přeskočí.",
       "name": "Název šablony:",
       "copy": "📋 Kopírovat kód",
       "sendBack": "🎮 Poslat do vesnice",
-      "sendBackHint": "Otevře v nové kartě velitelství vesnice, která kód poslala; fronta dorazí do Builderu Br Botu sama."
+      "sendBackHint": "Otevře v nové kartě velitelství vesnice, která kód poslala; fronta dorazí do Builderu TwCu Script sama."
     }
   },
   "buildingTimes": {

@@ -142,7 +142,7 @@
       "delete": "Verwijderen",
       "amCode": "🏛️ Accountmanager-code",
       "amImport": "🏛️ Accountmanager-code laden",
-      "bot": "🔄 Uitwisselen met Br Bot"
+      "bot": "🔄 Uitwisselen met TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Plak de Gebouw Wachtrij Gekopieerd van het Spel",
@@ -295,12 +295,12 @@
       "profileDef": "Verdediging (speervechter + zwaardvechter + zware cavalerie)"
     },
     "bot": {
-      "title": "🔄 Uitwisselen met de Br Bot Builder",
-      "hint": "Verplaatst wachtrijen tussen de Builder van Br Bot (hoofdkwartierscherm) en deze planner. In Br Bot stuurt Import and export > 'Open in TwCu' de wachtrij, de echte gebouwniveaus van het dorp en de wereldsnelheid hierheen; de wachtrij die je hier berekent stuur je terug met 'Naar het dorp sturen'.",
-      "importTitle": "📥 Ophalen uit Br Bot",
-      "importPlaceholder": "Plak de TWCU1...-code gekopieerd uit Br Bot of de inhoud van het modelbestand van Br Bot (construction_models.json)",
+      "title": "🔄 Uitwisselen met de TwCu Script Builder",
+      "hint": "Verplaatst wachtrijen tussen de Builder van TwCu Script (hoofdkwartierscherm) en deze planner. In TwCu Script stuurt Import and export > 'Open in TwCu' de wachtrij, de echte gebouwniveaus van het dorp en de wereldsnelheid hierheen; de wachtrij die je hier berekent stuur je terug met 'Naar het dorp sturen'.",
+      "importTitle": "📥 Ophalen uit TwCu Script",
+      "importPlaceholder": "Plak de TWCU1...-code gekopieerd uit TwCu Script of de inhoud van het modelbestand van TwCu Script (construction_models.json)",
       "decode": "Code lezen",
-      "invalid": "❌ De code kon niet worden gelezen. Plak de TWCU1-code uit Br Bot of de inhoud van het modelbestand.",
+      "invalid": "❌ De code kon niet worden gelezen. Plak de TWCU1-code uit TwCu Script of de inhoud van het modelbestand.",
       "preview": "Ontvangen sjabloon: {{name}} ({{count}} stappen)",
       "village": "Dorp: {{name}} {{coord}}",
       "applyLevels": "Startniveaus uit het dorp overnemen",
@@ -309,14 +309,14 @@
       "applyQueue": "Wachtrij laden ({{count}} stappen)",
       "pickModel": "Model:",
       "apply": "✅ Toepassen",
-      "applied": "✅ Br Bot-sjabloon geladen.",
+      "applied": "✅ TwCu Script-sjabloon geladen.",
       "skipped": "⚠️ {{count}} stappen overgeslagen: onbekend gebouw of boven het maximumniveau.",
-      "exportTitle": "📤 Naar Br Bot sturen",
-      "exportHint": "Plak de code in Br Bot bij Builder > Import and export en klik op 'Import into the queue'. De startniveaus zitten in de code; niveaus die het dorp al heeft worden overgeslagen.",
+      "exportTitle": "📤 Naar TwCu Script sturen",
+      "exportHint": "Plak de code in TwCu Script bij Builder > Import and export en klik op 'Import into the queue'. De startniveaus zitten in de code; niveaus die het dorp al heeft worden overgeslagen.",
       "name": "Sjabloonnaam:",
       "copy": "📋 Code kopiëren",
       "sendBack": "🎮 Naar het dorp sturen",
-      "sendBackHint": "Opent in een nieuw tabblad het hoofdkwartier van het dorp dat de code stuurde; de wachtrij komt vanzelf in de Br Bot Builder aan."
+      "sendBackHint": "Opent in een nieuw tabblad het hoofdkwartier van het dorp dat de code stuurde; de wachtrij komt vanzelf in de TwCu Script Builder aan."
     }
   },
   "buildingTimes": {

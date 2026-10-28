@@ -142,7 +142,7 @@
       "delete": "ลบ",
       "amCode": "🏛️ รหัสตัวจัดการบัญชี",
       "amImport": "🏛️ โหลดรหัสตัวจัดการบัญชี",
-      "bot": "🔄 แลกเปลี่ยนกับ Br Bot"
+      "bot": "🔄 แลกเปลี่ยนกับ TwCu Script"
     },
     "modal": {
       "importTitle": "📥 วางคิวอาคารที่คัดลอกจากเกม",
@@ -295,12 +295,12 @@
       "profileDef": "ป้องกัน (ทหารหอก + ทหารดาบ + ทหารม้าหนัก)"
     },
     "bot": {
-      "title": "🔄 แลกเปลี่ยนกับ Builder ของ Br Bot",
-      "hint": "ย้ายคิวระหว่าง Builder ของ Br Bot (หน้าที่ทำการหมู่บ้าน) กับตัววางแผนนี้ ใน Br Bot กด Import and export > 'Open in TwCu' จะส่งคิว ระดับอาคารจริงของหมู่บ้าน และความเร็วโลกมาที่นี่ ส่วนคิวที่คำนวณที่นี่ส่งกลับด้วย 'ส่งไปหมู่บ้าน'",
-      "importTitle": "📥 รับจาก Br Bot",
-      "importPlaceholder": "วางรหัส TWCU1... ที่คัดลอกจาก Br Bot หรือเนื้อหาไฟล์โมเดลของ Br Bot (construction_models.json)",
+      "title": "🔄 แลกเปลี่ยนกับ Builder ของ TwCu Script",
+      "hint": "ย้ายคิวระหว่าง Builder ของ TwCu Script (หน้าที่ทำการหมู่บ้าน) กับตัววางแผนนี้ ใน TwCu Script กด Import and export > 'Open in TwCu' จะส่งคิว ระดับอาคารจริงของหมู่บ้าน และความเร็วโลกมาที่นี่ ส่วนคิวที่คำนวณที่นี่ส่งกลับด้วย 'ส่งไปหมู่บ้าน'",
+      "importTitle": "📥 รับจาก TwCu Script",
+      "importPlaceholder": "วางรหัส TWCU1... ที่คัดลอกจาก TwCu Script หรือเนื้อหาไฟล์โมเดลของ TwCu Script (construction_models.json)",
       "decode": "อ่านรหัส",
-      "invalid": "❌ อ่านรหัสไม่ได้ วางรหัส TWCU1 ที่คัดลอกจาก Br Bot หรือเนื้อหาไฟล์โมเดล",
+      "invalid": "❌ อ่านรหัสไม่ได้ วางรหัส TWCU1 ที่คัดลอกจาก TwCu Script หรือเนื้อหาไฟล์โมเดล",
       "preview": "แม่แบบที่ได้รับ: {{name}} ({{count}} ขั้น)",
       "village": "หมู่บ้าน: {{name}} {{coord}}",
       "applyLevels": "ใช้ระดับของหมู่บ้านเป็นระดับเริ่มต้น",
@@ -309,14 +309,14 @@
       "applyQueue": "โหลดคิว ({{count}} ขั้น)",
       "pickModel": "โมเดล:",
       "apply": "✅ นำไปใช้",
-      "applied": "✅ โหลดแม่แบบ Br Bot แล้ว",
+      "applied": "✅ โหลดแม่แบบ TwCu Script แล้ว",
       "skipped": "⚠️ ข้าม {{count}} ขั้น: ไม่รู้จักอาคารหรือเกินระดับสูงสุด",
-      "exportTitle": "📤 ส่งไป Br Bot",
-      "exportHint": "ใน Br Bot วางรหัสใน Builder > Import and export แล้วกด 'Import into the queue' ระดับเริ่มต้นรวมอยู่ในรหัส ระดับที่หมู่บ้านมีอยู่แล้วจะถูกข้าม",
+      "exportTitle": "📤 ส่งไป TwCu Script",
+      "exportHint": "ใน TwCu Script วางรหัสใน Builder > Import and export แล้วกด 'Import into the queue' ระดับเริ่มต้นรวมอยู่ในรหัส ระดับที่หมู่บ้านมีอยู่แล้วจะถูกข้าม",
       "name": "ชื่อแม่แบบ:",
       "copy": "📋 คัดลอกรหัส",
       "sendBack": "🎮 ส่งไปหมู่บ้าน",
-      "sendBackHint": "เปิดหน้าที่ทำการของหมู่บ้านที่ส่งรหัสมาในแท็บใหม่ คิวจะเข้า Builder ของ Br Bot เอง"
+      "sendBackHint": "เปิดหน้าที่ทำการของหมู่บ้านที่ส่งรหัสมาในแท็บใหม่ คิวจะเข้า Builder ของ TwCu Script เอง"
     }
   },
   "buildingTimes": {

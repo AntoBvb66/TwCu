@@ -142,7 +142,7 @@
       "delete": "Supprimer",
       "amCode": "🏛️ Code du gestionnaire de compte",
       "amImport": "🏛️ Charger le code du gestionnaire de compte",
-      "bot": "🔄 Échange avec Br Bot"
+      "bot": "🔄 Échange avec TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Collez la File d'Attente de Construction Copiée du Jeu",
@@ -295,12 +295,12 @@
       "profileDef": "Défense (lancier + porte-épée + cavalerie lourde)"
     },
     "bot": {
-      "title": "🔄 Échange avec le Builder de Br Bot",
-      "hint": "Transfère les files entre le Builder de Br Bot (écran du quartier général) et ce planificateur. Dans Br Bot, Import and export > 'Open in TwCu' envoie ici la file, les vrais niveaux du village et la vitesse du monde ; renvoyez la file calculée ici avec 'Envoyer au village'.",
-      "importTitle": "📥 Récupérer depuis Br Bot",
-      "importPlaceholder": "Collez le code TWCU1... copié depuis Br Bot ou le contenu du fichier de modèles de Br Bot (construction_models.json)",
+      "title": "🔄 Échange avec le Builder de TwCu Script",
+      "hint": "Transfère les files entre le Builder de TwCu Script (écran du quartier général) et ce planificateur. Dans TwCu Script, Import and export > 'Open in TwCu' envoie ici la file, les vrais niveaux du village et la vitesse du monde ; renvoyez la file calculée ici avec 'Envoyer au village'.",
+      "importTitle": "📥 Récupérer depuis TwCu Script",
+      "importPlaceholder": "Collez le code TWCU1... copié depuis TwCu Script ou le contenu du fichier de modèles de TwCu Script (construction_models.json)",
       "decode": "Lire le code",
-      "invalid": "❌ Impossible de lire le code. Collez le code TWCU1 copié depuis Br Bot ou le contenu du fichier de modèles.",
+      "invalid": "❌ Impossible de lire le code. Collez le code TWCU1 copié depuis TwCu Script ou le contenu du fichier de modèles.",
       "preview": "Modèle reçu : {{name}} ({{count}} étapes)",
       "village": "Village : {{name}} {{coord}}",
       "applyLevels": "Reprendre les niveaux du village comme niveaux de départ",
@@ -309,14 +309,14 @@
       "applyQueue": "Charger la file ({{count}} étapes)",
       "pickModel": "Modèle :",
       "apply": "✅ Appliquer",
-      "applied": "✅ Modèle Br Bot chargé.",
+      "applied": "✅ Modèle TwCu Script chargé.",
       "skipped": "⚠️ {{count}} étapes ignorées : bâtiment inconnu ou au-dessus du niveau maximum.",
-      "exportTitle": "📤 Envoyer à Br Bot",
-      "exportHint": "Dans Br Bot, collez le code dans Builder > Import and export puis cliquez sur 'Import into the queue'. Les niveaux de départ sont inclus dans le code ; les niveaux que le village possède déjà sont ignorés.",
+      "exportTitle": "📤 Envoyer à TwCu Script",
+      "exportHint": "Dans TwCu Script, collez le code dans Builder > Import and export puis cliquez sur 'Import into the queue'. Les niveaux de départ sont inclus dans le code ; les niveaux que le village possède déjà sont ignorés.",
       "name": "Nom du modèle :",
       "copy": "📋 Copier le code",
       "sendBack": "🎮 Envoyer au village",
-      "sendBackHint": "Ouvre dans un nouvel onglet le quartier général du village qui a envoyé le code ; la file arrive d'elle-même dans le Builder de Br Bot."
+      "sendBackHint": "Ouvre dans un nouvel onglet le quartier général du village qui a envoyé le code ; la file arrive d'elle-même dans le Builder de TwCu Script."
     }
   },
   "buildingTimes": {

@@ -142,7 +142,7 @@
       "delete": "Sil",
       "amCode": "🏛️ Hesap Yöneticisi Kodu",
       "amImport": "🏛️ Hesap Yöneticisi Kodu Yükle",
-      "bot": "🔄 Br Bot ile Al-Ver"
+      "bot": "🔄 Özel İşlem Al-Ver"
     },
     "modal": {
       "importTitle": "📥 Oyundan Kopyalanan İnşa kuyruğu listesini yapıştırın",
@@ -295,12 +295,12 @@
       "profileDef": "Savunma (mızrakçı + kılıç ustası + ağır atlı)"
     },
     "bot": {
-      "title": "🔄 Br Bot İnşaatçı ile Al-Ver",
-      "hint": "Br Bot'un İnşaatçı'sı (ana bina ekranı) ile bu planlayıcı arasında kuyruk taşır. Br Bot'ta İçe ve dışa aktar > 'TwCu'da aç' deyince kuyruk, köyün gerçek bina seviyeleri ve dünya hızı buraya gelir; burada hesapladığınız kuyruğu 'Köye gönder' ile geri yollarsınız.",
-      "importTitle": "📥 Br Bot'tan al",
-      "importPlaceholder": "Br Bot'tan kopyalanan TWCU1... kodunu ya da Br Bot'un model dosyasının (construction_models.json) içeriğini yapıştırın",
+      "title": "🔄 Özel İşlem Al-Ver",
+      "hint": "Oyundaki İnşaatçı (ana bina ekranı) ile bu planlayıcı arasında kuyruk taşır. İnşaatçı'da İçe ve dışa aktar > 'TwCu'da aç' deyince kuyruk, köyün gerçek bina seviyeleri ve dünya hızı buraya gelir; burada hesapladığınız kuyruğu 'Köye gönder' ile geri yollarsınız.",
+      "importTitle": "📥 İnşaatçı'dan al",
+      "importPlaceholder": "İnşaatçı'dan kopyalanan TWCU1... kodunu ya da model dosyasının (construction_models.json) içeriğini yapıştırın",
       "decode": "Kodu çöz",
-      "invalid": "❌ Kod çözülemedi. Br Bot'tan kopyalanan TWCU1 kodunu ya da model dosyasının içeriğini yapıştırın.",
+      "invalid": "❌ Kod çözülemedi. İnşaatçı'dan kopyalanan TWCU1 kodunu ya da model dosyasının içeriğini yapıştırın.",
       "preview": "Gelen şablon: {{name}} ({{count}} adım)",
       "village": "Köy: {{name}} {{coord}}",
       "applyLevels": "Başlangıç seviyelerini köyden al",
@@ -309,14 +309,14 @@
       "applyQueue": "Kuyruğu yükle ({{count}} adım)",
       "pickModel": "Model:",
       "apply": "✅ Uygula",
-      "applied": "✅ Br Bot şablonu yüklendi.",
+      "applied": "✅ Şablon yüklendi.",
       "skipped": "⚠️ {{count}} adım tanınmadı ya da maksimum seviyeyi aştığı için atlandı.",
-      "exportTitle": "📤 Br Bot'a gönder",
-      "exportHint": "Kodu Br Bot'ta İnşaatçı > İçe ve dışa aktar kutusuna yapıştırıp 'Kuyruğa aktar' deyin. Başlangıç seviyeleri koda dahildir; köyde zaten olan seviyeler atlanır.",
+      "exportTitle": "📤 İnşaatçı'ya gönder",
+      "exportHint": "Kodu İnşaatçı > İçe ve dışa aktar kutusuna yapıştırıp 'Kuyruğa aktar' deyin. Başlangıç seviyeleri koda dahildir; köyde zaten olan seviyeler atlanır.",
       "name": "Şablon adı:",
       "copy": "📋 Kodu kopyala",
       "sendBack": "🎮 Köye gönder",
-      "sendBackHint": "Kodu gönderen köyün ana bina sayfası yeni sekmede açılır; kuyruk Br Bot İnşaatçı'ya kendiliğinden gelir."
+      "sendBackHint": "Kodu gönderen köyün ana bina sayfası yeni sekmede açılır; kuyruk İnşaatçı'ya kendiliğinden gelir."
     }
   },
   "buildingTimes": {

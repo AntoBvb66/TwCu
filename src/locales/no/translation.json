@@ -142,7 +142,7 @@
       "delete": "Slett",
       "amCode": "🏛️ Kontobehandler-kode",
       "amImport": "🏛️ Last inn kontobehandler-kode",
-      "bot": "🔄 Utveksling med Br Bot"
+      "bot": "🔄 Utveksling med TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Lim inn byggekø kopiert fra spillet",
@@ -295,12 +295,12 @@
       "profileDef": "Forsvar (spydkriger + sverdkjemper + tungt kavaleri)"
     },
     "bot": {
-      "title": "🔄 Utveksling med Br Bots Builder",
-      "hint": "Flytter køer mellom Br Bots Builder (hovedkvarter-skjermen) og denne planleggeren. I Br Bot sender Import and export > 'Open in TwCu' køen, landsbyens faktiske bygningsnivåer og verdenshastigheten hit; køen du beregner her, sender du tilbake med 'Send til landsbyen'.",
-      "importTitle": "📥 Hent fra Br Bot",
-      "importPlaceholder": "Lim inn TWCU1...-koden kopiert fra Br Bot eller innholdet i Br Bots modellfil (construction_models.json)",
+      "title": "🔄 Utveksling med TwCu Script Builder",
+      "hint": "Flytter køer mellom TwCu Script Builder (hovedkvarter-skjermen) og denne planleggeren. I TwCu Script sender Import and export > 'Open in TwCu' køen, landsbyens faktiske bygningsnivåer og verdenshastigheten hit; køen du beregner her, sender du tilbake med 'Send til landsbyen'.",
+      "importTitle": "📥 Hent fra TwCu Script",
+      "importPlaceholder": "Lim inn TWCU1...-koden kopiert fra TwCu Script eller innholdet i TwCu Script modellfil (construction_models.json)",
       "decode": "Les kode",
-      "invalid": "❌ Koden kunne ikke leses. Lim inn TWCU1-koden kopiert fra Br Bot eller innholdet i modellfilen.",
+      "invalid": "❌ Koden kunne ikke leses. Lim inn TWCU1-koden kopiert fra TwCu Script eller innholdet i modellfilen.",
       "preview": "Mottatt mal: {{name}} ({{count}} trinn)",
       "village": "Landsby: {{name}} {{coord}}",
       "applyLevels": "Bruk landsbyens nivåer som startnivåer",
@@ -309,14 +309,14 @@
       "applyQueue": "Last inn køen ({{count}} trinn)",
       "pickModel": "Modell:",
       "apply": "✅ Bruk",
-      "applied": "✅ Br Bot-mal lastet inn.",
+      "applied": "✅ TwCu Script-mal lastet inn.",
       "skipped": "⚠️ {{count}} trinn hoppet over: ukjent bygning eller over maksnivået.",
-      "exportTitle": "📤 Send til Br Bot",
-      "exportHint": "Lim inn koden i Br Bot under Builder > Import and export og trykk 'Import into the queue'. Startnivåene er med i koden; nivåer landsbyen allerede har, hoppes over.",
+      "exportTitle": "📤 Send til TwCu Script",
+      "exportHint": "Lim inn koden i TwCu Script under Builder > Import and export og trykk 'Import into the queue'. Startnivåene er med i koden; nivåer landsbyen allerede har, hoppes over.",
       "name": "Malnavn:",
       "copy": "📋 Kopier kode",
       "sendBack": "🎮 Send til landsbyen",
-      "sendBackHint": "Åpner hovedkvarteret i landsbyen som sendte koden i en ny fane; køen kommer av seg selv inn i Br Bots Builder."
+      "sendBackHint": "Åpner hovedkvarteret i landsbyen som sendte koden i en ny fane; køen kommer av seg selv inn i TwCu Script Builder."
     }
   },
   "buildingTimes": {

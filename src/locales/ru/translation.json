@@ -142,7 +142,7 @@
       "delete": "Удалить",
       "amCode": "🏛️ Код менеджера аккаунта",
       "amImport": "🏛️ Загрузить код менеджера аккаунта",
-      "bot": "🔄 Обмен с Br Bot"
+      "bot": "🔄 Обмен с TwCu Script"
     },
     "modal": {
       "importTitle": "📥 Вставьте очередь строительства, скопированную из игры",
@@ -295,12 +295,12 @@
       "profileDef": "Защита (копейщик + мечник + тяжёлая кавалерия)"
     },
     "bot": {
-      "title": "🔄 Обмен с Builder в Br Bot",
-      "hint": "Переносит очереди между Builder в Br Bot (экран штаба) и этим планировщиком. В Br Bot Import and export > 'Open in TwCu' отправляет сюда очередь, реальные уровни зданий деревни и скорость мира; очередь, рассчитанную здесь, отправьте обратно кнопкой 'Отправить в деревню'.",
-      "importTitle": "📥 Взять из Br Bot",
-      "importPlaceholder": "Вставьте код TWCU1..., скопированный из Br Bot, или содержимое файла моделей Br Bot (construction_models.json)",
+      "title": "🔄 Обмен с Builder в TwCu Script",
+      "hint": "Переносит очереди между Builder в TwCu Script (экран штаба) и этим планировщиком. В TwCu Script Import and export > 'Open in TwCu' отправляет сюда очередь, реальные уровни зданий деревни и скорость мира; очередь, рассчитанную здесь, отправьте обратно кнопкой 'Отправить в деревню'.",
+      "importTitle": "📥 Взять из TwCu Script",
+      "importPlaceholder": "Вставьте код TWCU1..., скопированный из TwCu Script, или содержимое файла моделей TwCu Script (construction_models.json)",
       "decode": "Прочитать код",
-      "invalid": "❌ Не удалось прочитать код. Вставьте код TWCU1 из Br Bot или содержимое файла моделей.",
+      "invalid": "❌ Не удалось прочитать код. Вставьте код TWCU1 из TwCu Script или содержимое файла моделей.",
       "preview": "Полученный шаблон: {{name}} ({{count}} шагов)",
       "village": "Деревня: {{name}} {{coord}}",
       "applyLevels": "Взять начальные уровни из деревни",
@@ -309,14 +309,14 @@
       "applyQueue": "Загрузить очередь ({{count}} шагов)",
       "pickModel": "Модель:",
       "apply": "✅ Применить",
-      "applied": "✅ Шаблон Br Bot загружен.",
+      "applied": "✅ Шаблон TwCu Script загружен.",
       "skipped": "⚠️ Пропущено шагов: {{count}} (неизвестное здание или выше максимального уровня).",
-      "exportTitle": "📤 Отправить в Br Bot",
-      "exportHint": "В Br Bot вставьте код в Builder > Import and export и нажмите 'Import into the queue'. Начальные уровни есть в коде; уровни, которые уже есть в деревне, пропускаются.",
+      "exportTitle": "📤 Отправить в TwCu Script",
+      "exportHint": "В TwCu Script вставьте код в Builder > Import and export и нажмите 'Import into the queue'. Начальные уровни есть в коде; уровни, которые уже есть в деревне, пропускаются.",
       "name": "Название шаблона:",
       "copy": "📋 Копировать код",
       "sendBack": "🎮 Отправить в деревню",
-      "sendBackHint": "Открывает в новой вкладке штаб деревни, приславшей код; очередь сама попадает в Builder Br Bot."
+      "sendBackHint": "Открывает в новой вкладке штаб деревни, приславшей код; очередь сама попадает в Builder TwCu Script."
     }
   },
   "buildingTimes": {
